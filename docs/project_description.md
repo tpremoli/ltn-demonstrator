@@ -14,7 +14,7 @@ The project is required to present an agent-based simulation model for an LTN sc
 
 ## Initial Requirements
 
-The initial requirements for this project should produce a rudimentary representation of key mechanics of a traffic simulator. In this sense, the initial requirements can be considered a minimum viable product (MVP). This should be produced with the intention back up a informed LTN scheme that is aimed at reducing the negative impacts of traffic on the surrounding residents. The simulation should have clearly visualised roads and agents in its environment. The affect of changes on the environment interacted by the user should be seen. When a simulation has been completed, statistics should be produced to represent key metrics derived from the project aim. Graphical output should further visualise these statistics for the user. The interactivity and visualisation of the simulation should be a creative educational tool for the users who come by the project at RAMM as well as serving to clearly convey information to users at Exeter City Council that will be able to produce presentable findings to members of the council and the public for decision making purposes.
+The initial requirements for this project should produce a rudimentary representation of key mechanics of a traffic simulator. In this sense, the initial requirements can be considered a minimum viable product (MVP). The simulation should have clearly visualised roads and agents in its environment.  When a simulation has been completed, statistics should be produced to represent key metrics derived from the project aim accompanied by clear graphical representation of results to the user. These results should visualise the changes the user makes through interacting with the simulation environment. The interactivity and visualisation of the simulation should be a creative educational tool for the users who come by the project at RAMM as well as serving to clearly convey information to users at Exeter City Council that will be able to produce presentable findings to members of the council and the public for decision making purposes.
 
 ### Representation of Agents
 
@@ -35,7 +35,7 @@ SUCCESS CRITERIA
 
 ### Stochastic Spawning of Agents
 
-Agents should spawn at a random point on the map and should be assigned a random point on the map to travel to. In the future, the project will introduce weighted probabilities for certain locations (such as shops and offices) to influence the agent's travel decisions. However, for the MVP, this is considered a secondary requirement and is not a priority at this stage. Therefore a random spawn and destination assignment is necessary. Following the initial requirements, a successful prototype would mean that in each run the agent would spawn at a random position on a random road on the map.
+Agents should spawn at a random point on the map and should be assigned a random point on the map to travel to. In the future, the project should introduce weighted probabilities for certain locations (such as shops and offices) to influence the agent's travel decisions. However, for the MVP, this is considered a secondary requirement and is not a priority at this stage. Therefore a random spawn and destination assignment is necessary. Following the initial requirements, a successful prototype would mean that in each run the agent would spawn at a random position on a random road on the map.
 
 SUCCESS CRITERIA
 
@@ -69,6 +69,8 @@ SUCCESS CRITERIA
  - [ ] Users should be able to unblock road sections.
 
  - [ ] Blocked road sections should not be usable by agents.
+       
+ - [ ] Accessible method for the user to interact with the block/unblock road function.
 
 ### Simple Map
 
