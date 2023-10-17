@@ -14,7 +14,7 @@ The project is required to present an agent-based simulation model for an LTN sc
 
 ## Initial Requirements
 
-The initial requirements for this project should produce a rudimentary representation of key mechanics of a traffic simulator. This should be produced with the intention back up a informed LTN scheme that is aimed at reducing the negative impacts of traffic on the surrounding residents. The simulation should have clearly visualised roads and agents in its environment. The affect of changes on the environment interacted by the user should be seen. When a simulation has been completed, statistics should be produced to represent key metrics derived from the project aim. Graphical output should further visualise these statistics for the user. The interactivity and visualisation of the simulation should be a creative educational tool for the users who come by the project at RAMM as well as serving to clearly convey information to users at Exeter City Council that will be able to produce presentable findings to members of the council and the public for decision making purposes.
+The initial requirements for this project should produce a rudimentary representation of key mechanics of a traffic simulator. In this sense, the initial requirements can be considered a minimum viable product (MVP). This should be produced with the intention back up a informed LTN scheme that is aimed at reducing the negative impacts of traffic on the surrounding residents. The simulation should have clearly visualised roads and agents in its environment. The affect of changes on the environment interacted by the user should be seen. When a simulation has been completed, statistics should be produced to represent key metrics derived from the project aim. Graphical output should further visualise these statistics for the user. The interactivity and visualisation of the simulation should be a creative educational tool for the users who come by the project at RAMM as well as serving to clearly convey information to users at Exeter City Council that will be able to produce presentable findings to members of the council and the public for decision making purposes.
 
 ### Representation of Agents
 
@@ -35,7 +35,7 @@ SUCCESS CRITERIA
 
 ### Stochastic Spawning of Agents
 
-Agents should spawn at a random point on the map and should be assigned a random point on the map to travel to. Due to the simplicity of the initially required map, there are no areas of interest for the agent to have a weighted probability to travel to. Therefore a random spawn and destination assignment is necessary. Following the initial requirements, a successful prototype would mean that in each run the agent would spawn at a random position on a random road on the map.
+Agents should spawn at a random point on the map and should be assigned a random point on the map to travel to. In the future, the project will introduce weighted probabilities for certain locations (such as shops and offices) to influence the agent's travel decisions. However, for the MVP, this is considered a secondary requirement and is not a priority at this stage. Therefore a random spawn and destination assignment is necessary. Following the initial requirements, a successful prototype would mean that in each run the agent would spawn at a random position on a random road on the map.
 
 SUCCESS CRITERIA
 
@@ -60,7 +60,7 @@ SUCCESS CRITERIA
 
 ### User Interaction
 
-When agents can spawn randomly and pathfind effectively, the user should be able to block off roads of their choice, preventing agents from using the road sections that have been blocked. The user should also be able to unblock roads, such that they can test the simulation with different configurations. This could be done by just disabling an entire road section for now.
+When agents can spawn randomly and pathfind effectively, the user should be able to block off roads of their choice, preventing agents from using the road sections that have been blocked. The user should also be able to unblock roads, such that they can test the simulation with different configurations. This could be done by just disabling an entire road section for now. This would be done before a simulation run starts, not during a run.
 
 SUCCESS CRITERIA   
 
