@@ -96,7 +96,6 @@ SUCCESS CRITERIA
 
  - [ ] The map should be as small as possible while fulfilling all other criteria.
 
-INCLUDE DRAWN UP MAP CONCEPT
 
 ### Production of Statistical Results
 
@@ -104,7 +103,7 @@ Statistical results from the simulation should show some key representations of 
 
 Due to the nature of the initial requirements of the model, the complexity of the statistics available are low. Travel time of the agent from source to destination can be measured with a system clock. From agent travel times, total and average air pollution can be derived using sourced statistics. Travel restrictions of residents can also be inferred from the number of times the simulation was forced to respawn an agent due to pathfinding failure.
 
-The system should also have an option for the simulation to be run without any visualisation of the road and instantaneously give statistical and graphical results over multiple runs. This is beneficial for any user testing the system's simulation results. Conversely, the simulation should be able to run a slow version where the agent travels at a speed where they are visible and trackable to the user so the process can be viewed in real time. This will be useful both for manual error checking and as a basis for future visualisation.
+The simulation should visualise agent traveling at a speed where they are visible and trackable to the user so the process can be viewed in real time. This will be useful both for manual error checking and as a basis for future visualisation and user understanding. 
 
 SUCCESS CRITERIA
 
@@ -112,6 +111,7 @@ SUCCESS CRITERIA
 
  - [ ] The simulation should calculate some more complex statistics, such as pollution.
 
- - [ ] The simulation should have an option to run quickly without visualisation.
+ - [ ] The simulation should visualise traffic moving on the map during simulation runtime.
 
- - [ ] The simulation should have an option to run slowly for visualisation purposes.
+ - [ ] The simulation should produce visual graphical media such as a line or scatter graph.
+ - [ ] 
