@@ -109,9 +109,7 @@ SUCCESS CRITERIA
 
  - [ ] The simulation should collect key information as it runs.
 
- - [ ] The simulation should calculate some more complex statistics, such as pollution.
+ - [ ] The simulation should calculate statistical data, which can be visualised in a graph.
 
  - [ ] The simulation should visualise traffic moving on the map during simulation runtime.
-
- - [ ] The simulation should produce visual graphical media such as a line or scatter graph.
- - [ ] 
+       
