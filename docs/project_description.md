@@ -103,7 +103,7 @@ Statistical results from the simulation should show some key representations of 
 
 Due to the nature of the initial requirements of the model, the complexity of the statistics available are low. Travel time of the agent from source to destination can be measured with a system clock. From agent travel times, total and average air pollution can be derived using sourced statistics. Travel restrictions of residents can also be inferred from the number of times the simulation was forced to respawn an agent due to pathfinding failure.
 
-The simulation should visualise agent traveling at a speed where they are visible and trackable to the user so the process can be viewed in real time. This will be useful both for manual error checking and as a basis for future visualisation and user understanding. 
+The simulation should visualise an agent travelling at a speed where they are visible and trackable to the user so the process can be viewed in real time. This will be useful both for manual error checking and as a basis for future visualisation and user understanding. 
 
 SUCCESS CRITERIA
 
