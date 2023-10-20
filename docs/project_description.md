@@ -14,7 +14,7 @@ The project is required to present an agent-based simulation model for an LTN sc
 
 ## Initial Requirements
 
-The initial requirements for this project should produce a rudimentary representation of key mechanics of a traffic simulator. In this sense, the initial requirements can be considered a minimum viable product (MVP). The simulation should have clearly visualised roads and agents in its environment.  When a simulation has been completed, statistics should be produced to represent key metrics derived from the project aim accompanied by clear graphical representation of results to the user. These results should visualise the changes the user makes through interacting with the simulation environment. The interactivity and visualisation of the simulation should be a creative educational tool for the users who come by the project at RAMM as well as serving to clearly convey information to users at Exeter City Council that will be able to produce presentable findings to members of the council and the public for decision making purposes.
+The initial requirements for this project should produce a rudimentary representation of key mechanics of a traffic simulator. These requirements are constructed to satisfy the key objectives of the client's expectations of a educational and analytical agent-based modelling and simulation tool. In this sense, the initial requirements can be considered a minimum viable product (MVP). The simulation should have clearly visualised roads and agents in its environment.  When a simulation has been completed, statistics should be produced to represent key metrics derived from the project aim accompanied by clear graphical representation of results to the user. These results should visualise the changes the user makes through interacting with the simulation environment. The interactivity and visualisation of the simulation should be a creative educational tool for the users who come by the project at RAMM as well as serving to clearly convey information to users at Exeter City Council that will be able to produce presentable findings to members of the council and the public for decision making purposes.
 
 ### Representation of Agents
 
@@ -96,7 +96,6 @@ SUCCESS CRITERIA
 
  - [ ] The map should be as small as possible while fulfilling all other criteria.
 
-INCLUDE DRAWN UP MAP CONCEPT
 
 ### Production of Statistical Results
 
@@ -104,14 +103,13 @@ Statistical results from the simulation should show some key representations of 
 
 Due to the nature of the initial requirements of the model, the complexity of the statistics available are low. Travel time of the agent from source to destination can be measured with a system clock. From agent travel times, total and average air pollution can be derived using sourced statistics. Travel restrictions of residents can also be inferred from the number of times the simulation was forced to respawn an agent due to pathfinding failure.
 
-The system should also have an option for the simulation to be run without any visualisation of the road and instantaneously give statistical and graphical results over multiple runs. This is beneficial for any user testing the system's simulation results. Conversely, the simulation should be able to run a slow version where the agent travels at a speed where they are visible and trackable to the user so the process can be viewed in real time. This will be useful both for manual error checking and as a basis for future visualisation.
+The simulation should visualise an agent travelling at a speed where they are visible and trackable to the user so the process can be viewed in real time. This will be useful both for manual error checking and as a basis for future visualisation and user understanding. 
 
 SUCCESS CRITERIA
 
  - [ ] The simulation should collect key information as it runs.
 
- - [ ] The simulation should calculate some more complex statistics, such as pollution.
+ - [ ] The simulation should calculate statistical data, which can be visualised in a graph.
 
- - [ ] The simulation should have an option to run quickly without visualisation.
-
- - [ ] The simulation should have an option to run slowly for visualisation purposes.
+ - [ ] The simulation should visualise traffic moving on the map during simulation runtime.
+       
