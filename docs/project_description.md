@@ -2,19 +2,19 @@
 
 ## Project Description
 
-An agent-based model simulates individual or collective entities (or agents) in order to understand the nature of a system that governs its statistical outcomes.
+Low Traffic Neighbourhood (LTN) schemes are being introduced by the government all across the UK to tackle quality of life factors in certain areas, including air pollution and traffic congestion. These schemes put restrictions of travel on motor users via the use of barriers, planters and bollards without obstructing pedestrian or cyclists right of way. LTN schemes are a temporary measure that have the potential to be made permanent given a beneficial implementation.
 
-Low Traffic Neighbourhood schemes are being introduced by the government all across the UK to tackle quality of life factors in certain areas, including air pollution and traffic congestion. These schemes put restriction(s) of travel on motor users via the use of barriers, planters and bollards without obstructing pedestrian or cyclists right of way. LTN schemes are a temporary measure that have the potential to be made permanent given a beneficial implementation.
+This project aims to design a user-friendly software demonstrator for an LTN agent-based modelling simulation.
 
-This project aims to design a user-friendly software demonstrator for a Low Traffic Neighbourhood (LTN) agent-based modelling simulation.
+An agent-based model simulates individual or collective entities (or agents), usually used in order to understand the nature of a system and its statistical outcomes.
 
-The simulation will be designed for the Royal Albert Memorial Museum (RAMM) as an educational exhibit to be displayed in summer 2024. One of the goals of this is to tackle a heated debate concerning the active traffic control trial in Heavitree through both education and interaction.  The simulation will also be designed with the Exeter City Council in mind as an analytical tool, to this end it should be accurate and produce insight on some metrics key to a successful LTN scheme.
-
-The project is required to present an agent-based simulation model for an LTN scenario that can be presented as an educational and analytical tool through the use of adjustable parameters to manipulate the resulting state of the model to allow the user to understand concepts of LTNs and their local area.
+The simulation will be produced for Diogo Pachego for both educational and analytical uses. Educationally, the simulation will be designed with the Royal Albert Memorial Museum (RAMM) in mind, as an educational exhibit to be displayed in summer 2024. One of the goals of this is to tackle a heated debate concerning the active traffic control trial in Heavitree through both education and interaction. The simulation will also be designed with the Exeter City Council in mind as an analytical tool, to this end it should be accurate and produce insight on some metrics key to a successful LTN scheme.
 
 ## Initial Requirements
 
-The initial requirements for this project should produce a rudimentary representation of key mechanics of a traffic simulator. These requirements are constructed to satisfy the key objectives of the client's expectations of a educational and analytical agent-based modelling and simulation tool. In this sense, the initial requirements can be considered a minimum viable product (MVP). The simulation should have clearly visualised roads and agents in its environment.  When a simulation has been completed, statistics should be produced to represent key metrics derived from the project aim accompanied by clear graphical representation of results to the user. These results should visualise the changes the user makes through interacting with the simulation environment. The interactivity and visualisation of the simulation should be a creative educational tool for the users who come by the project at RAMM as well as serving to clearly convey information to users at Exeter City Council that will be able to produce presentable findings to members of the council and the public for decision making purposes.
+The project is required to present an agent-based simulation model for an LTN scheme that can be presented as an educational and analytical tool. It should do this through the use of adjustable parameters to manipulate the resulting state of the model, allowing users to understand concepts of LTNs and their local area. The interactivity and visualisation of the simulation should be an educational tool for the users who interact with the project at RAMM as well as serving to clearly convey information to users at Exeter City Council that will be able to produce presentable findings to members of the council and the public for decision making purposes.
+
+The minimum viable product (MVP) for this project should produce a rudimentary representation of key mechanics of a traffic simulator. These requirements are constructed to satisfy the key objectives of the client's expectations of a educational and analytical agent-based modelling and simulation tool. The simulation should have clearly visualised roads and agents in its environment. When a simulation has been run, statistics should be produced to represent key metrics derived from the project aim, accompanied by clear graphical representation of results to the user. These results should visualise the changes the user makes through interacting with the simulation environment.
 
 ### Representation of Agents
 
@@ -25,7 +25,7 @@ All car agents should follow the same rules of the road and have the same behavi
  - cars cannot leave roads
  - cars have a fixed speed
 
-SUCCESS CRITERIA 
+### Success Criteria
 
  - [ ] Car agents should be visually distinct from the road and environment.
 
@@ -37,7 +37,7 @@ SUCCESS CRITERIA
 
 Agents should spawn at a random point on the map and should be assigned a random point on the map to travel to. In the future, the project should introduce weighted probabilities for certain locations (such as shops and offices) to influence the agent's travel decisions. However, for the MVP, this is considered a secondary requirement and is not a priority at this stage. Therefore a random spawn and destination assignment is necessary. Following the initial requirements, a successful prototype would mean that in each run the agent would spawn at a random position on a random road on the map.
 
-SUCCESS CRITERIA
+### Success Criteria
 
  - [ ] Car agents should spawn in a random location.
 
@@ -48,7 +48,7 @@ SUCCESS CRITERIA
 Once a source and destination point have been generated by the simulation, a path-finding algorithm should calculate, from the map, the shortest possible path from source to destination points. 
 If an agent is to spawn to an area of the map where the path is not possible, the agent should respawn using the agent spawning algorithm. When an agent despawns, whether it reached it destination or not should be added to a traffic restriction figure that should be calculated as a sum through the entirety of a traffic simulation.
     
-SUCCESS CRITERIA
+### Success Criteria
 
  - [ ] The pathfinding algorithm should be able to generate the shortest path between two points.
  
@@ -62,7 +62,7 @@ SUCCESS CRITERIA
 
 When agents can spawn randomly and pathfind effectively, the user should be able to block off roads of their choice, preventing agents from using the road sections that have been blocked. The user should also be able to unblock roads, such that they can test the simulation with different configurations. This could be done by just disabling an entire road section for now. This would be done before a simulation run starts, not during a run.
 
-SUCCESS CRITERIA   
+### Success Criteria 
 
  - [ ] Users should be able to block road sections.
 
@@ -78,7 +78,7 @@ The initial requirements for the road map should facilitate all aforementioned i
 
 The roads should be arranged to have one T junction (two roads meet at a right angle), one cross junction (two roads intersect each other) and at least one one way road (a car can only enter at one end, exit at the other, and travels in one direction). This will give a diversity of travel situations for an agent navigating the map from source to destination.
 
-SUCCESS CRITERIA
+### Success Criteria
 
  - [ ] The map should have a functional and visible representation of roads.
 
@@ -105,7 +105,7 @@ Due to the nature of the initial requirements of the model, the complexity of th
 
 The simulation should visualise an agent travelling at a speed where they are visible and trackable to the user so the process can be viewed in real time. This will be useful both for manual error checking and as a basis for future visualisation and user understanding. 
 
-SUCCESS CRITERIA
+### Success Criteria
 
  - [ ] The simulation should collect key information as it runs.
 
