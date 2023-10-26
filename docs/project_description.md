@@ -78,6 +78,8 @@ The initial requirements for the road map should facilitate all aforementioned i
 
 The roads should be arranged to have one T junction (two roads meet at a right angle), one cross junction (two roads intersect each other) and at least one one way road (a car can only enter at one end, exit at the other, and travels in one direction). This will give a diversity of travel situations for an agent navigating the map from source to destination.
 
+Some of the criteria was informed from a UK government road safety website [^1].
+
 ### Success Criteria
 
  - [ ] The map should have a functional and visible representation of roads.
@@ -113,3 +115,4 @@ The simulation should visualise an agent travelling at a speed where they are vi
 
  - [ ] The simulation should visualise traffic moving on the map during simulation runtime.
        
+[^1]: [Car Driving: Junctions - Safe Driving for Life](https://www.safedrivingforlife.info/advice/car-driving/develop-practical-driving-skills/car-driving-junctions/) (Accessed on October 26, 2023)
