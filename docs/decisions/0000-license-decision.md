@@ -70,3 +70,33 @@ project.
 product.
 - Bad, because there others could potentially redistribute the work and sell
 it for a profit.
+
+## Options
+
+### Public domain
+
+ By placing the IP in the public domain, the team will relinquish all ownership
+ and copyright rights. Others can modify, use and distribute the product without
+ restriction. This option may not be possible under all legal jurisdictions.
+ 
+ ### Proprietary licence
+ 
+ This allows the team to retain control over how our software is used and
+ distributed. It will not be accessible without a purchased licence.
+ 
+ ### MIT licence
+ 
+ This is a permissive open-source license that allows users to do almost
+ anything with our code as long as they include our original copyright notice.
+ 
+ ### GPL
+ 
+ The GPL is a copyleft license that requires any modified versions of our
+ software to also be open-source and released under the same license. The GNU
+ Lesser General Public License (LGPL) is a more permissive variation of the GPL.
+ 
+ ### Creative Commons
+ 
+ These licenses are often used for non-software works, such as creative content,
+ but can be adapted for software. They provide various levels of permissions and
+ restrictions.
