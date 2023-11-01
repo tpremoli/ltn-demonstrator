@@ -18,12 +18,12 @@ The minimum viable product (MVP) for this project should produce a rudimentary r
 
 ### Representation of Agents
 
-All car agents should follow the same rules of the road and have the same behaviour. They should be easily distinguishable from other objects in the environment (the road and other agents). Cars follow traffic rules on the road, therefore to behave as law-abiding road users in the simulation. The initial basic rules of the road include the following:
+All car agents should follow the same rules of the road and have the same behaviour. They should be easily distinguishable from other objects in the environment (the road and other agents). Cars follow traffic rules on the road, therefore to behave as law-abiding road users in the simulation. As the initial minimum requirement will operate with only one single agent there will be no consideration of traffic. The initial basic rules of the road include the following:
  - a one way road means one direction always
  - cars can only drive on on the right hand lane of any two lane road
  - cars cannot U-turn on roads
  - cars cannot leave roads
- - cars have a fixed speed
+ - cars travel at a fixed maximum speed when moving with no traffic
 
 ### Success Criteria
 
@@ -50,13 +50,15 @@ If an agent is to spawn to an area of the map where the path is not possible, th
     
 ### Success Criteria
 
- - [ ] The pathfinding algorithm should be able to generate the shortest path between two points.
- 
- - [ ] The pathfinding algorithm should follow all established rules of the road.
- 
- - [ ] The pathfinding algorithm should be able to determine whether a path is possible or not.
- 
- - [ ] Information from the pathfinding algorithm should be stored for statistical use.
+- [ ] The pathfinding algorithm should be able to generate the fastest path between two points.
+  - [ ] The fastest path is based on a Dijkstra-based[^2] shortest path algorithm.
+  - [ ] There is no traffic in the prototype, therefore the car travels at its maximum speed whilst moving.
+
+- [ ] The pathfinding algorithm should follow all established rules of the road.
+
+- [ ] The pathfinding algorithm should be able to determine whether a path is possible or not.
+
+- [ ] Information from the pathfinding algorithm should be stored for statistical use.
 
 ### User Interaction
 
@@ -116,3 +118,4 @@ The simulation should visualise an agent travelling at a speed where they are vi
  - [ ] The simulation should visualise traffic moving on the map during simulation runtime.
        
 [^1]: [Car Driving: Junctions - Safe Driving for Life](https://www.safedrivingforlife.info/advice/car-driving/develop-practical-driving-skills/car-driving-junctions/) (Accessed on October 26, 2023)
+[^2]: Dijkstra, E. W. (1959). A note on two problems in connexion with graphs. Numerische Mathematik, 1(1), 269-271.
