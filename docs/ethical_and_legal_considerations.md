@@ -1,4 +1,4 @@
-LTN simulation and statistical modelling
+LTN simulation and statistical modelling\
 Date: October 2023
 ## Introduction:
 Ethical and legal considerations are vital for this project as it models Low Traffic Neighbourhoods (LTN's) and influences urban planning decisions. They ensure fairness, transparency, and community consent, while also guarding against legal complications. These considerations help maintain credibility and build trust within the communities the project impacts.  
