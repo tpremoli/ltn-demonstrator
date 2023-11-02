@@ -1,4 +1,4 @@
-### Issue Compilation
+# Issue Compilation
 This file serves as a compilation of the initial requirements for the project, all the information found here can also be found in the issues on the github.
 
 ## Representation of Agents
