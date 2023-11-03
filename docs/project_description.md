@@ -10,6 +10,10 @@ An agent-based model simulates individual or collective entities (or agents), us
 
 The simulation will be produced for Diogo Pachego for both educational and analytical uses. Educationally, the simulation will be designed with the Royal Albert Memorial Museum (RAMM) in mind, as an educational exhibit to be displayed in summer 2024. One of the goals of this is to tackle a heated debate concerning the active traffic control trial in Heavitree through both education and interaction. The simulation will also be designed with the Exeter City Council in mind as an analytical tool, to this end it should be accurate and produce insight on some metrics key to a successful LTN scheme.
 
+## Project Management Method
+
+Our project team will be managed in an agile approach, following a weekly planning, executing, evaluating cycle. The project team will hold weekly meetings covering set objectives from the Kanban Board for the present week's cycle. The objectives for a given cycle will be chosen and taken ownership of based on the Kanban board constructed according to the high level project plan. This methodology promotes continuous collaboration and improvement within the group where communication is frequent, keeping a tight loop of feedback.
+
 ## Initial Requirements
 
 The project is required to present an agent-based simulation model for an LTN scheme that can be presented as an educational and analytical tool. It should do this through the use of adjustable parameters to manipulate the resulting state of the model, allowing users to understand concepts of LTNs and their local area. The interactivity and visualisation of the simulation should be an educational tool for the users who interact with the project at RAMM as well as serving to clearly convey information to users at Exeter City Council that will be able to produce presentable findings to members of the council and the public for decision making purposes.
