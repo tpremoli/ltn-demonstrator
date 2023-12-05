@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-In our increasingly urbanised society,the organisation of neighbourhood design becomes increasingly important. The layouts and permitted uses of our spaces can influence our daily lives in a number of different ways, such as where and how we socialise, our navigation tendencies, along with quality of life indicators such as pollution concentration and the noise levels.
+In our increasingly urbanised society, the organisation of neighbourhood design becomes increasingly important. The layouts and permitted uses of our spaces can influence our daily lives in a number of different ways, such as where and how we socialise, our navigation tendencies, along with quality of life indicators such as pollution concentration and the noise levels.
 
 LTNs (Low Traffic Neighbourhoods), designed to reduce traffic, involves blocking off vehicular access on certain roads, and to prioritise pedestrians and cyclists. Another goal of these neighbourhoods is to improve quality of life indicators; increasing the resident's daily exercise, and diverting heavy traffic to arterial roads. 
 
