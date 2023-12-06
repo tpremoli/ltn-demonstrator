@@ -9,6 +9,9 @@ public class Building : MonoBehaviour
     private readonly int occupantMax; // Maximum number of occupants
     private Dictionary<string, float> destinationWeights; // Distribution for destination types
 
+    private readonly float spawnProbability = 0.1f; // Spawn rate of vehicles
+    private readonly float timeBetweenSpawns = 1f; // The time between spawn attempts
+
     // Public attributes
     public List<Vehicle> VehicleList; // List of vehicles at the building
     public int OccupantCount;         // Number of occupants in the building
@@ -30,13 +33,22 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Using time-based spawning
+        if (Time.time >= nextSpawnTime)
+        {
+            // Spawn a vehicle, with higher probability as the number of occupants 
+            if (Random.value < spawnProbability)
+            {
+                SpawnVehicle();
+            }
+            nextSpawnTime = Time.time + timeBetweenSpawns;
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Random.seed = 42; // Set seed for random number generator
     }
 
     // Spawn method
