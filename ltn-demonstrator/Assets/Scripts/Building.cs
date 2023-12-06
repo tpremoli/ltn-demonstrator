@@ -14,15 +14,56 @@ public class Building : MonoBehaviour
     public int OccupantCount;         // Number of occupants in the building
     public Edge edgeLocation;         // Edge where the building is located
 
-    // Start is called before the first frame update
-    void Start()
+    // Some more attributes - not sure if needed, but seemed useful
+    public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
+    public readonly string buildingType;    // the type of the building (i.e "residence", "office", "restaurant", etc. would be an enum)
+
+    // Constructor to initialize immutable values 
+    public Building(int vehicleMax, int occupantMax)
     {
-        
+        this.vehicleMax = vehicleMax;
+        this.occupantMax = occupantMax;
+        VehicleList = new List<Vehicle>();
+        destinationWeights = new Dictionary<string, float>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Spawn method
+    public void Spawn(Vehicle vehicle)
+    {
+        // Generate a path and set up so that vehicle can complete journey
+        // Insert vehicle to the edge queue
+        // ...
+    }
+
+
+    // getters and setters
+    // Get the maximum number of vehicles
+    public int GetVehicleMax()
+    {
+        return vehicleMax;
+    }
+
+    // Get the maximum number of occupants
+    public int GetOccupantMax()
+    {
+        return occupantMax;
+    }
+
+    // Get the number of occupants
+    public int GetOccupantCount()
+    {
+        return OccupantCount;
     }
 }
