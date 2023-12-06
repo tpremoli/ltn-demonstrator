@@ -33,14 +33,17 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Using time-based spawning
-        if (Time.time >= nextSpawnTime)
+        // Using time-based spawning- there is a spawnProbability chance of spawning a 
+        // vehicle every timeBetweenSpawns seconds. Only spawn if the maximum number of
+        // vehicles has not been reached.
+        if (VehicleList.Count < vehicleMax && Time.time >= nextSpawnTime)
         {
-            // Spawn a vehicle, with higher probability as the number of occupants 
+            // Spawn a vehicle, if the random number is less than the spawn probability
             if (Random.value < spawnProbability)
             {
                 SpawnVehicle();
             }
+            // Set the next spawn time
             nextSpawnTime = Time.time + timeBetweenSpawns;
         }
     }
@@ -52,7 +55,7 @@ public class Building : MonoBehaviour
     }
 
     // Spawn method
-    public void Spawn(Vehicle vehicle)
+    public void SpawnVehicle()
     {
         // Generate a path and set up so that vehicle can complete journey
         // Insert vehicle to the edge queue
