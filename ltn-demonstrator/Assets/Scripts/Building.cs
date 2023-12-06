@@ -2,12 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This is here for future expansion, but is not currently used
+public enum BuildingType
+{
+    Residence,
+    Office,
+    Restaurant,
+    Shop
+}
+
 public class Building : MonoBehaviour
 {
     // Private attributes
     private readonly int vehicleMax;
     private readonly int occupantMax;
-    private Dictionary<string, float> destinationWeights; // Distribution for destination types
+    private Dictionary<BuildingType, float> destinationWeights; // Distribution for destination types
 
     // the spawn probability should be based on the building type and maximum number of occupants.
     // as it stands, it is a constant value, but it should be a function/enum of the building type
@@ -22,15 +31,17 @@ public class Building : MonoBehaviour
 
     // Some more attributes - not sure if needed, but seemed useful
     public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
-    public readonly string buildingType;    // the type of the building (i.e "residence", "office", "restaurant", etc. would be an enum)
+    public readonly BuildingType buildingType;// the type of the building (i.e "residence", "office", "restaurant", etc. would be an enum)
 
-    // Constructor to initialize immutable values 
-    public Building(int vehicleMax, int occupantMax)
+    // Constructor 
+    public Building(int vehicleMax, int occupantMax, Edge edgeLocation)
     {
         this.vehicleMax = vehicleMax;
         this.occupantMax = occupantMax;
-        VehicleList = new List<Vehicle>();
-        destinationWeights = new Dictionary<string, float>();
+        this.edgeLocation = edgeLocation;
+        this.occupantCount = 0;
+        this.VehicleList = new List<Vehicle>();
+        this.destinationWeights = new Dictionary<string, float>();
     }
 
     // Update is called once per frame
@@ -63,12 +74,15 @@ public class Building : MonoBehaviour
         // first, pick the vehicle randomly from the list
         //var rngIndex = Random.Range(0, TravellerList.Count);
         //Traveller traveller = TravellerList[rngIndex];
-        
 
+        // Load the vehicle prefab
+        GameObject vehicle = Resources.Load("Vehicles/Car_3_Blue");
 
+        // Traveller doesn't have a constructor yet
+        Traveller newTraveller = new Traveller()
+        newTraveller.currentEdge = this.edgeLocation;
+        newTraveller.modeOfTransport = ModeOfTransport.Car;
 
-
-        GameObject vehicle = Instantiate(Resources.Load("Prefabs/Vehicle")) as GameObject;
     }
 
 
