@@ -5,16 +5,19 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
     // Private attributes
-    private readonly int vehicleMax;  // Maximum number of vehicles
-    private readonly int occupantMax; // Maximum number of occupants
+    private readonly int vehicleMax;
+    private readonly int occupantMax;
     private Dictionary<string, float> destinationWeights; // Distribution for destination types
 
-    private readonly float spawnProbability = 0.1f; // Spawn rate of vehicles
+    // the spawn probability should be based on the building type and maximum number of occupants.
+    // as it stands, it is a constant value, but it should be a function/enum of the building type
+    private readonly float spawnProbability = 0.1f;
+
     private readonly float timeBetweenSpawns = 1f; // The time between spawn attempts
 
     // Public attributes
-    public List<Vehicle> VehicleList; // List of vehicles at the building
-    public int OccupantCount;         // Number of occupants in the building
+    public List<Vehicle> VehicleList; // List of vehicles at the building.
+    public int occupantCount;
     public Edge edgeLocation;         // Edge where the building is located
 
     // Some more attributes - not sure if needed, but seemed useful
@@ -41,7 +44,7 @@ public class Building : MonoBehaviour
             // Spawn a vehicle, if the random number is less than the spawn probability
             if (Random.value < spawnProbability)
             {
-                SpawnVehicle();
+                SpawnTraveller();
             }
             // Set the next spawn time
             nextSpawnTime = Time.time + timeBetweenSpawns;
@@ -55,11 +58,17 @@ public class Building : MonoBehaviour
     }
 
     // Spawn method
-    public void SpawnVehicle()
+    public void SpawnTraveller()
     {
-        // Generate a path and set up so that vehicle can complete journey
-        // Insert vehicle to the edge queue
-        // ...
+        // first, pick the vehicle randomly from the list
+        //var rngIndex = Random.Range(0, TravellerList.Count);
+        //Traveller traveller = TravellerList[rngIndex];
+        
+
+
+
+
+        GameObject vehicle = Instantiate(Resources.Load("Prefabs/Vehicle")) as GameObject;
     }
 
 
