@@ -71,20 +71,37 @@ public class Building : MonoBehaviour
     // Spawn method
     public void SpawnTraveller()
     {
-        // first, pick the vehicle randomly from the list
-        //var rngIndex = Random.Range(0, TravellerList.Count);
-        //Traveller traveller = TravellerList[rngIndex];
+        // initial traveller properties
+        Edge startingEdge = edgeLocation; 
 
-        // Load the vehicle prefab
-        GameObject vehicle = Resources.Load("Vehicles/Car_3_Blue");
+        // We need a prefab for the traveller. This is a template from which we can create new travellers.
+        // The prefab should have a Traveller component attached to it.
+        GameObject newTravellerObj = Instantiate(travellerPrefab, startingEdge.transform.position);
 
-        // Traveller doesn't have a constructor yet
-        Traveller newTraveller = new Traveller()
-        newTraveller.currentEdge = this.edgeLocation;
-        newTraveller.modeOfTransport = ModeOfTransport.Car;
+        // Get the Traveller component from the instantiated object
+        Traveller newTraveller = newTravellerObj.GetComponent<Traveller>();
 
+        // Initialize the traveller's properties
+        InitializeTraveller(newTraveller, startingEdge, startingPosition);
+
+        // Subscribe the new traveller to the starting edge
+        startingEdge.Subscribe(newTraveller);
     }
 
+    private void InitializeTraveller(Traveller traveller, Edge startingEdge)
+    {
+        // Set the starting edge and position
+        traveller.currentEdge = startingEdge;
+        traveller.positionOnEdge = 0f;
+
+        // Set other initial properties as needed, for example:
+        traveller.currentVelocity = 0;
+        traveller.modeOfTransport = ModeOfTransport.Car; // TODO: this is a placeholder
+        traveller.H = Edge.H; // Set H from Edge class
+
+        // Position the traveller GameObject on the edge
+        traveller.transform.position = startingEdge.GetPointOnEdge(traveller.positionOnEdge);
+    }
 
     // getters and setters
     // Get the maximum number of vehicles
