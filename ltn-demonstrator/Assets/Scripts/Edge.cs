@@ -61,13 +61,18 @@ public class Edge : MonoBehaviour
     }
 
     // Public method to calculate deltaD
-    public void calculateDeltaD(Traveller agent, float agentVelocity, float timeStep, float agentH)
+    public void calculateDeltaD(Traveller agent)
     {
         // Ensure currentEdge is not null
         if (this != null)
         {
+            // getting agent parameters
+            float agentVelocity = agent.currentVelocity;
+            float timeStep = agent.timeStep;
+            float H = agent.H;
+
             // Calculate deltaD based on the given formula
-            deltaD = (agentVelocity * (timeStep)) / (this.length * agentH);
+            deltaD = (agentVelocity * (timeStep)) / (this.length * H);
 
             // Optional: You can limit deltaD to maxVelocity if needed
             deltaD = Mathf.Clamp(deltaD, 0f, maxVelocity);
@@ -88,7 +93,7 @@ public class Edge : MonoBehaviour
     }
 
     // Public method to calculate deltaD^(-1)
-    public float translateFromTrueToDeltaD(float desiredSpeed, float edgeLength)
+    public float translateFromTrueToDeltaD(float desiredSpeed, float edgeLength, float timeStep)
     {
         // Calculate deltaD^(-1) based on the given formula
         return (desiredSpeed * edgeLength * H) / timeStep; // TimeStep = 1 frame over frames per sec
@@ -155,7 +160,9 @@ public class Edge : MonoBehaviour
         // MOVE CALLS TO EDGE CLASS ***
         // Update code here
         // Calculate deltaD and update the position
-        CalculateDeltaD();
+
+        // Needs to be called for each agent. Pass the agents as parameters
+        // calculateDeltaD();
 
         // Update the total distance moved
         totalDistanceMoved += Mathf.Abs(deltaD);
