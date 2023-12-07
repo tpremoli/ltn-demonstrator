@@ -69,7 +69,7 @@ public class Building : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Random.seed = 42; // Set seed for random number generator
+        Random.InitState(42); // Set seed for random number generator
     }
 
     // Spawn method
