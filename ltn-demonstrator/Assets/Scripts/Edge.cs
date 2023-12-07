@@ -147,6 +147,13 @@ public class Edge : MonoBehaviour
         vehiclesOnRoad.Remove(traveller);
     }
 
+    public Vector3 getPointOnEdge(float positionOnEdge)
+    {
+        // Calculate the point on the edge based on the given formula
+        // return (1 - positionOnEdge) * origin + positionOnEdge * destination;
+        return (1 - positionOnEdge) * origin.transform.position + positionOnEdge * destination.transform.position;
+    }
+
     // "Spawn child rectangle on simulation start" functionality
     void Start()
     {
@@ -190,6 +197,7 @@ public class Edge : MonoBehaviour
             Debug.LogError("Origin or Destination is not assigned.");
         }
     }
+
 
 }
 

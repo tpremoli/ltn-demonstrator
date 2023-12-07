@@ -88,7 +88,7 @@ public class Building : MonoBehaviour
         InitializeTravellerFromThisBuilding(newTraveller, startingEdge);
 
         // Subscribe the new traveller to the starting edge
-        startingEdge.Subscribe(newTraveller);
+        startingEdge.subscribe(newTraveller);
     }
 
     private void InitializeTravellerFromThisBuilding(Traveller traveller, Edge startingEdge)
@@ -103,7 +103,7 @@ public class Building : MonoBehaviour
         traveller.H = Edge.H; // Set H from Edge class
 
         // Position the traveller GameObject on the edge
-        traveller.transform.position = startingEdge.GetPointOnEdge(traveller.positionOnEdge);
+        traveller.transform.position = startingEdge.getPointOnEdge(traveller.positionOnEdge);
     }
 
     // getters and setters
