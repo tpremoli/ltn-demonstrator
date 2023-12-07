@@ -165,7 +165,8 @@ public class Edge : MonoBehaviour
         // calculateDeltaD();
 
         // Update the total distance moved
-        totalDistanceMoved += Mathf.Abs(deltaD);
+        // Again, needs to be called for each agent. Pass the agents as parameters
+        // totalDistanceMoved += Mathf.Abs(deltaD);
     }
 
     // Spawn visualisation of the agent
