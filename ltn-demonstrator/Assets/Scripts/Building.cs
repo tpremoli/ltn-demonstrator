@@ -79,7 +79,8 @@ public class Building : MonoBehaviour
 
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
         // The prefab should have a Traveller component attached to it.
-        GameObject newTravellerObj = Instantiate(travellerPrefab);
+        GameObject travellerPrefab = Resources.Load<GameObject>("Prefabs/Traveller");
+        GameObject newTravellerObj = Instantiate(travellerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
         // Get the Traveller component from the instantiated object
         Traveller newTraveller = newTravellerObj.GetComponent<Traveller>();
