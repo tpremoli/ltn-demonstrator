@@ -57,7 +57,7 @@ public class Traveller : MonoBehaviour
     void Start()
     {
         // *NOT IN THE CORRECT POSITION* - Visualize the agent on an edge
-        currentEdge.Start()
+        currentEdge.Start();
         // Assuming you have a Graph class to represent your graph structure
         Graph graph = GetYourGraph();
 
