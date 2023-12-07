@@ -4,8 +4,8 @@ public class pathFunctionality
     public path edge[];
     public startTick float;
     public endTick float;
-    public terminalBuilding &Building;
-    public startBuilding &Building;
+    public startBuilding Building;
+    public terminalBuilding Building;
     public traveller Traveller;
 
     public DestinationDistance float
@@ -23,7 +23,14 @@ public class pathFunctionality
         Edge endEdge = terminalBuilding.getEdgeLocation();
         // these two lines above use getEdgeLocation(), this might be just edgeLocation(), change it if it is
         List<Edge> generatedPath = new List<Edge> { startEdge, endEdge };
-        self.path = generatedPath
+        self.path = generatedPath;
+        self.startTick = null; // replace null with current unity tick
+        self.startBuilding = startBuilding;
+        self.terminalBuilding = terminalBuilding;
+        self.traveller = traveller;
+        
+        return self;
+        
         // This code is supposed to create pointers to start and end Edges,
         // then put them in a list of pointers to edges
         // then set the sel.path to that path
@@ -31,6 +38,6 @@ public class pathFunctionality
 
     public void endPath
     {
-        endTick = null; // replace null with current tick
+        self.endTick = null; // replace null with current unity tick
     }
 }
