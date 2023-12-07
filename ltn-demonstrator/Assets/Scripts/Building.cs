@@ -75,21 +75,23 @@ public class Building : MonoBehaviour
     // Spawn method
     public void SpawnTraveller()
     {
+        Edge startingEdge = this.edge;
+
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
         // The prefab should have a Traveller component attached to it.
-        GameObject newTravellerObj = Instantiate(travellerPrefab, startingEdge.transform.position);
+        GameObject newTravellerObj = Instantiate(travellerPrefab);
 
         // Get the Traveller component from the instantiated object
         Traveller newTraveller = newTravellerObj.GetComponent<Traveller>();
 
         // Initialize the traveller's properties
-        InitializeTravellerFromThisBuilding(newTraveller);
+        InitializeTravellerFromThisBuilding(newTraveller, startingEdge);
 
         // Subscribe the new traveller to the starting edge
         startingEdge.Subscribe(newTraveller);
     }
 
-    private void InitializeTravellerFromThisBuilding(Traveller traveller)
+    private void InitializeTravellerFromThisBuilding(Traveller traveller, Edge startingEdge)
     {
         // Set the starting edge and position
         traveller.currentEdge = this.edge;
@@ -97,7 +99,7 @@ public class Building : MonoBehaviour
 
         // Set other initial properties as needed, for example:
         traveller.currentVelocity = 0;
-        traveller.modeOfTransport = ModeOfTransport.Car; // TODO: this is a placeholder
+        // traveller.modeOfTransport = ModeOfTransport.Car; // TODO: this is a placeholder
         traveller.H = Edge.H; // Set H from Edge class
 
         // Position the traveller GameObject on the edge
@@ -120,6 +122,6 @@ public class Building : MonoBehaviour
     // Get the number of occupants
     public int GetOccupantCount()
     {
-        return OccupantCount;
+        return occupantCount;
     }
 }
