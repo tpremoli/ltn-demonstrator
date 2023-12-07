@@ -7,7 +7,7 @@ public class Edge : MonoBehaviour
     private JunctionNode origin;
     private JunctionNode destination;
     private float deltaD;
-    private float length;
+    public float length;
     private readonly float maxVelocity = float.MaxValue;
     private static float h = 1.0f; // Initial value for H
     public ModeOfTransport modeOfTransport;
