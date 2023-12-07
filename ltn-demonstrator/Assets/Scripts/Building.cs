@@ -106,6 +106,11 @@ public class Building : MonoBehaviour
         traveller.transform.position = startingEdge.getPointOnEdge(traveller.positionOnEdge);
     }
 
+    public Vector3 getEdgeLocation()
+    {
+        return edge.getPointOnEdge(positionOnEdge);
+    }
+
     // getters and setters
     // Get the maximum number of vehicles
     public int GetVehicleMax()

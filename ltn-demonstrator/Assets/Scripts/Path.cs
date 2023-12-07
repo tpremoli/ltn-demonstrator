@@ -22,27 +22,24 @@ public class Path : MonoBehaviour
         destinationDistance = value;
     }
 
-    public void GeneratePath(Building startBuilding, Building terminalBuilding, Traveller traveller)
-    {
-        Edge startEdge = startBuilding.getEdgeLocation();
-        Edge endEdge = terminalBuilding.getEdgeLocation();
-        // these two lines above use getEdgeLocation(), this might be just edgeLocation(), change it if it is
+    public Path(Building startBuilding, Building terminalBuilding, Traveller traveller){
+        // These just get the edges that the buildings are on, however, the offsets should also be taken into account.
+        // Buildings have a .getEdgeLocation() method that returns the offset along the edge that the building is on.
+        // However this is not currently implemented, as it hasn't been implemented in the edge class yet.
+        Edge startEdge = startBuilding.edge;
+        Edge endEdge = terminalBuilding.edge;
+
         List<Edge> generatedPath = new List<Edge> { startEdge, endEdge };
-        self.path = generatedPath;
-        self.startTick = null; // replace null with current unity tick
-        self.startBuilding = startBuilding;
-        self.terminalBuilding = terminalBuilding;
-        self.traveller = traveller;
-        
-        return self;
-        
-        // This code is supposed to create pointers to start and end Edges,
-        // then put them in a list of pointers to edges
-        // then set the sel.path to that path
+
+        this.path = generatedPath;
+        this.startTick = 0; // replace null with current unity tick
+        this.startBuilding = startBuilding;
+        this.terminalBuilding = terminalBuilding;
+        this.traveller = traveller;
     }
 
     public void endPath()
     {
-        self.endTick = null; // replace null with current unity tick
+        this.endTick = 0; // replace null with current unity tick
     }
 }
