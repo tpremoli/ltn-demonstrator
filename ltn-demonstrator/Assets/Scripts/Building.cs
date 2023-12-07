@@ -14,14 +14,14 @@ public enum BuildingType
 public class Building : MonoBehaviour
 {
     // Private attributes
-    private readonly int vehicleMax;
-    private readonly int occupantMax;
+    private int vehicleMax;
+    private int occupantMax;
     private Dictionary<BuildingType, float> destinationWeights; // Distribution for destination types
 
     // the spawn probability should be based on the building type and maximum number of occupants.
     // as it stands, it is a constant value, but it should be a function/enum of the building type
-    private readonly float spawnProbability = 0.2f;
-    private readonly float timeBetweenSpawns = 1f; // The time between spawn attempts
+    private float spawnProbability;
+    private float timeBetweenSpawns; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
 
     // Public attributes
@@ -34,19 +34,28 @@ public class Building : MonoBehaviour
     public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
     public readonly BuildingType buildingType;// the type of the building (i.e "residence", "office", "restaurant", etc. would be an enum)
 
-    // Constructor 
-    public Building(int vehicleMax, int occupantMax, Edge edge, float edgeLocation)
-    {
-        this.vehicleMax = vehicleMax;
-        this.occupantMax = occupantMax;
-        this.edge = edge;
-        this.positionOnEdge = edgeLocation;
+    // Start is called before the first frame update. We use these to initialize the building.
+    void Start(){
+        Random.InitState(42); // Set seed for random number generator
+        this.vehicleMax = 2;
+        this.occupantMax = 5;
 
-        this.occupantCount = 0;
+        this.spawnProbability = 0.1f;
+        this.timeBetweenSpawns = 1f;
+        this.nextSpawnTime = 0f;
+
+        // Assign these in the editor
+        // this.edge = edge;
+        // this.positionOnEdge = edgeLocation;
+
         // this.VehicleList = new List<Vehicle>();
+        this.occupantCount = 0;
         this.destinationWeights = new Dictionary<BuildingType, float>();
         this.nextSpawnTime = Time.time + timeBetweenSpawns;
+
+        Debug.Log("Building Instantiated");
     }
+
 
     // Update is called once per frame
     void Update()
@@ -65,13 +74,6 @@ public class Building : MonoBehaviour
             nextSpawnTime = Time.time + timeBetweenSpawns;
         }
 
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Random.InitState(42); // Set seed for random number generator
-        Debug.Log("Building Instantiated");
     }
 
     // Spawn method
