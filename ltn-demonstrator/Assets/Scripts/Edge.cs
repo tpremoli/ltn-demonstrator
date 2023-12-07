@@ -180,87 +180,87 @@ public class Edge : MonoBehaviour
         }
     }
 
-    public enum ModeOfTransport
+}
+
+public enum ModeOfTransport
+{
+    Pedestrian,
+    Bicycle,
+    Car,
+    Van,
+    Truck,
+    Bus
+}
+
+public class ModeOfTransportEnum
+{
+    private ModeOfTransport mode;
+
+    public ModeOfTransportEnum(ModeOfTransport mode)
     {
-        Pedestrian,
-        Bicycle,
-        Car,
-        Van,
-        Truck,
-        Bus
+        this.mode = mode;
     }
 
-    public class ModeOfTransportEnum
+    public float MaxVelocity()
     {
-        private ModeOfTransport mode;
-
-        public ModeOfTransportEnum(ModeOfTransport mode)
+        switch (mode)
         {
-            this.mode = mode;
+            case ModeOfTransport.Pedestrian:
+                return 5.0f;
+            case ModeOfTransport.Bicycle:
+                return 15.0f;
+            case ModeOfTransport.Car:
+                return 120.0f;
+            case ModeOfTransport.Van:
+                return 80.0f;
+            case ModeOfTransport.Truck:
+                return 60.0f;
+            case ModeOfTransport.Bus:
+                return 50.0f;
+            default:
+                return 0.0f;
         }
+    }
 
-        public float MaxVelocity()
+    public int MaxPassengers()
+    {
+        switch (mode)
         {
-            switch (mode)
-            {
-                case ModeOfTransport.Pedestrian:
-                    return 5.0f;
-                case ModeOfTransport.Bicycle:
-                    return 15.0f;
-                case ModeOfTransport.Car:
-                    return 120.0f;
-                case ModeOfTransport.Van:
-                    return 80.0f;
-                case ModeOfTransport.Truck:
-                    return 60.0f;
-                case ModeOfTransport.Bus:
-                    return 50.0f;
-                default:
-                    return 0.0f;
-            }
+            case ModeOfTransport.Pedestrian:
+                return 1;
+            case ModeOfTransport.Bicycle:
+                return 1;
+            case ModeOfTransport.Car:
+                return 5;
+            case ModeOfTransport.Van:
+                return 8;
+            case ModeOfTransport.Truck:
+                return 2;
+            case ModeOfTransport.Bus:
+                return 30;
+            default:
+                return 0;
         }
+    }
 
-        public int MaxPassengers()
+    public int WeightClass()
+    {
+        switch (mode)
         {
-            switch (mode)
-            {
-                case ModeOfTransport.Pedestrian:
-                    return 1;
-                case ModeOfTransport.Bicycle:
-                    return 1;
-                case ModeOfTransport.Car:
-                    return 5;
-                case ModeOfTransport.Van:
-                    return 8;
-                case ModeOfTransport.Truck:
-                    return 2;
-                case ModeOfTransport.Bus:
-                    return 30;
-                default:
-                    return 0;
-            }
-        }
-
-        public int WeightClass()
-        {
-            switch (mode)
-            {
-                case ModeOfTransport.Pedestrian:
-                    return 1;
-                case ModeOfTransport.Bicycle:
-                    return 1;
-                case ModeOfTransport.Car:
-                    return 5;
-                case ModeOfTransport.Van:
-                    return 8;
-                case ModeOfTransport.Truck:
-                    return 2;
-                case ModeOfTransport.Bus:
-                    return 30;
-                default:
-                    return 0;
-            }
+            case ModeOfTransport.Pedestrian:
+                return 1;
+            case ModeOfTransport.Bicycle:
+                return 1;
+            case ModeOfTransport.Car:
+                return 5;
+            case ModeOfTransport.Van:
+                return 8;
+            case ModeOfTransport.Truck:
+                return 2;
+            case ModeOfTransport.Bus:
+                return 30;
+            default:
+                return 0;
         }
     }
 }
-
