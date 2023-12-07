@@ -28,6 +28,7 @@ public class Building : MonoBehaviour
     public List<Vehicle> VehicleList; // List of vehicles at the building.
     public int occupantCount;
     public Edge edgeLocation;         // Edge where the building is located
+    // how far down edge building is located
 
     // Some more attributes - not sure if needed, but seemed useful
     public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
@@ -92,7 +93,7 @@ public class Building : MonoBehaviour
     {
         // Set the starting edge and position
         traveller.currentEdge = startingEdge;
-        traveller.positionOnEdge = 0f;
+        traveller.positionOnEdge = 0f; // TODO: change this to the positiononedge
 
         // Set other initial properties as needed, for example:
         traveller.currentVelocity = 0;
