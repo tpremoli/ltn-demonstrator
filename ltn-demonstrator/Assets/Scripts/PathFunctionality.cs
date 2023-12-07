@@ -1,14 +1,18 @@
-public class pathFunctionality
-{
-    private destinationDistance float;
-    public path edge[];
-    public startTick float;
-    public endTick float;
-    public startBuilding Building;
-    public terminalBuilding Building;
-    public traveller Traveller;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-    public DestinationDistance float
+public class PathFunctionality
+{
+    private float destinationDistance;
+    public List<Edge> path;
+    public float startTick;
+    public float endTick;
+    public Building startBuilding;
+    public Building terminalBuilding;
+    public Traveller traveller;
+
+    public float DestinationDistance()
     {
         get { return destinationDistance; }
         private set { destinationDistance = value; }
@@ -36,7 +40,7 @@ public class pathFunctionality
         // then set the sel.path to that path
     }
 
-    public void endPath
+    public void endPath()
     {
         self.endTick = null; // replace null with current unity tick
     }
