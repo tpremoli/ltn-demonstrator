@@ -61,25 +61,25 @@ public class Edge : MonoBehaviour
     }
 
     // Public method to calculate deltaD
-    public void CalculateDeltaD()
+    public void calculateDeltaD(Traveller agent, float agentVelocity, float timeStep, float agentH)
     {
         // Ensure currentEdge is not null
         if (this != null)
         {
             // Calculate deltaD based on the given formula
-            deltaD = (currentVelocity * (timeStep)) / (currentEdge.length * H);
+            deltaD = (agentVelocity * (timeStep)) / (this.length * agentH);
 
             // Optional: You can limit deltaD to maxVelocity if needed
             deltaD = Mathf.Clamp(deltaD, 0f, maxVelocity);
 
             // Update the positionOnEdge based on the calculated deltaD
-            positionOnEdge += deltaD;
+            agent.positionOnEdge += deltaD;
 
             // If the traveller has moved beyond the current edge, update the current edge and reset positionOnEdge
-            if (positionOnEdge > currentEdge.length)
+            if (agent.positionOnEdge > this.length)
             {
                 // Move to the next edge
-                MoveToNextEdge();
+                agent.moveToNextEdge();
             }
         } else
         {
@@ -88,14 +88,14 @@ public class Edge : MonoBehaviour
     }
 
     // Public method to calculate deltaD^(-1)
-    public float TranslateFromTrueToDeltaD(float desiredSpeed, float edgeLength)
+    public float translateFromTrueToDeltaD(float desiredSpeed, float edgeLength)
     {
         // Calculate deltaD^(-1) based on the given formula
         return (desiredSpeed * edgeLength * H) / timeStep; // TimeStep = 1 frame over frames per sec
     }
 
     // New public methods for edge space translation
-    public float UnityToEdgeSpace(float d)
+    public float unityToEdgeSpace(float d)
     {
         if (length != 0)
         {
@@ -108,7 +108,7 @@ public class Edge : MonoBehaviour
         }
     }
 
-    public float EdgeSpaceToUnity(float d)
+    public float edgeSpaceToUnity(float d)
     {
         if (length != 0)
         {
@@ -121,23 +121,23 @@ public class Edge : MonoBehaviour
         }
     }
 
-    public float UnityToReal(float d)
+    public float unityToReal(float d)
     {
         return d * H;
     }
 
-    public float RealToUnity(float d)
+    public float realToUnity(float d)
     {
         return d / H;
     }
 
     // Public behavior
-    public void Subscribe(Traveller traveller)
+    public void subscribe(Traveller traveller)
     {
         vehiclesOnRoad.Add(traveller);
     }
 
-    public void Unsubscribe(Traveller traveller)
+    public void unsubscribe(Traveller traveller)
     {
         vehiclesOnRoad.Remove(traveller);
     }
@@ -145,8 +145,8 @@ public class Edge : MonoBehaviour
     // "Spawn child rectangle on simulation start" functionality
     void Start()
     {
-        SpawnChildRectangle();
-        CalculateRoadLength();
+        spawnChildRectangle();
+        calculateRoadLength();
     }
 
     // "OnUpdate" functionality
@@ -162,7 +162,7 @@ public class Edge : MonoBehaviour
     }
 
     // Spawn visualisation of the agent
-    private void SpawnChildRectangle()
+    private void spawnChildRectangle()
     {
         GameObject childRectangle = GameObject.CreatePrimitive(PrimitiveType.Cube);
         childRectangle.transform.SetParent(transform);
@@ -170,7 +170,7 @@ public class Edge : MonoBehaviour
     }
 
     // Road length calculation functionality
-    private void CalculateRoadLength()
+    private void calculateRoadLength()
     {
         if (origin != null && destination != null)
         {
