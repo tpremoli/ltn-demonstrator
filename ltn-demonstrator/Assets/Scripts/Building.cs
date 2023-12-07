@@ -21,11 +21,11 @@ public class Building : MonoBehaviour
     // the spawn probability should be based on the building type and maximum number of occupants.
     // as it stands, it is a constant value, but it should be a function/enum of the building type
     private readonly float spawnProbability = 0.1f;
-
     private readonly float timeBetweenSpawns = 1f; // The time between spawn attempts
+    private float nextSpawnTime; // The time of the next spawn attempt
 
     // Public attributes
-    public List<Vehicle> VehicleList; // List of vehicles at the building.
+    // public List<Vehicle> VehicleList; // List of vehicles at the building.
     public int occupantCount;
     public Edge edge;               // Edge where the building is located
     public float positionOnEdge;    // how far down the edge our building is located
@@ -43,8 +43,9 @@ public class Building : MonoBehaviour
         this.positionOnEdge = edgeLocation;
 
         this.occupantCount = 0;
-        this.VehicleList = new List<Vehicle>();
+        // this.VehicleList = new List<Vehicle>();
         this.destinationWeights = new Dictionary<BuildingType, float>();
+        this.nextSpawnTime = Time.time + timeBetweenSpawns;
     }
 
     // Update is called once per frame
@@ -53,7 +54,7 @@ public class Building : MonoBehaviour
         // Using time-based spawning- there is a spawnProbability chance of spawning a 
         // vehicle every timeBetweenSpawns seconds. Only spawn if the maximum number of
         // vehicles has not been reached.
-        if (VehicleList.Count < vehicleMax && Time.time >= nextSpawnTime)
+        if (Time.time >= nextSpawnTime) // && VehicleList.Count < vehicleMax  
         {
             // Spawn a vehicle, if the random number is less than the spawn probability
             if (Random.value < spawnProbability)
