@@ -27,22 +27,24 @@ public class Building : MonoBehaviour
     // Public attributes
     public List<Vehicle> VehicleList; // List of vehicles at the building.
     public int occupantCount;
-    public Edge edgeLocation;         // Edge where the building is located
-    // how far down edge building is located
+    public Edge edge;               // Edge where the building is located
+    public float positionOnEdge;    // how far down the edge our building is located
 
     // Some more attributes - not sure if needed, but seemed useful
     public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
     public readonly BuildingType buildingType;// the type of the building (i.e "residence", "office", "restaurant", etc. would be an enum)
 
     // Constructor 
-    public Building(int vehicleMax, int occupantMax, Edge edgeLocation)
+    public Building(int vehicleMax, int occupantMax, Edge edge, float edgeLocation)
     {
         this.vehicleMax = vehicleMax;
         this.occupantMax = occupantMax;
-        this.edgeLocation = edgeLocation;
+        this.edge = edge;
+        this.positionOnEdge = edgeLocation;
+
         this.occupantCount = 0;
         this.VehicleList = new List<Vehicle>();
-        this.destinationWeights = new Dictionary<string, float>();
+        this.destinationWeights = new Dictionary<BuildingType, float>();
     }
 
     // Update is called once per frame
@@ -72,9 +74,6 @@ public class Building : MonoBehaviour
     // Spawn method
     public void SpawnTraveller()
     {
-        // initial traveller properties
-        Edge startingEdge = edgeLocation; 
-
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
         // The prefab should have a Traveller component attached to it.
         GameObject newTravellerObj = Instantiate(travellerPrefab, startingEdge.transform.position);
@@ -83,17 +82,17 @@ public class Building : MonoBehaviour
         Traveller newTraveller = newTravellerObj.GetComponent<Traveller>();
 
         // Initialize the traveller's properties
-        InitializeTraveller(newTraveller, startingEdge, startingPosition);
+        InitializeTravellerFromThisBuilding(newTraveller);
 
         // Subscribe the new traveller to the starting edge
         startingEdge.Subscribe(newTraveller);
     }
 
-    private void InitializeTraveller(Traveller traveller, Edge startingEdge)
+    private void InitializeTravellerFromThisBuilding(Traveller traveller)
     {
         // Set the starting edge and position
-        traveller.currentEdge = startingEdge;
-        traveller.positionOnEdge = 0f; // TODO: change this to the positiononedge
+        traveller.currentEdge = this.edge;
+        traveller.positionOnEdge = this.positionOnEdge;
 
         // Set other initial properties as needed, for example:
         traveller.currentVelocity = 0;
