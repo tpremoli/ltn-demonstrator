@@ -149,7 +149,13 @@ public class Edge : MonoBehaviour
     // "OnUpdate" functionality
     void Update()
     {
-        // Your onUpdate logic here
+        // MOVE CALLS TO EDGE CLASS ***
+        // Update code here
+        // Calculate deltaD and update the position
+        CalculateDeltaD();
+
+        // Update the total distance moved
+        totalDistanceMoved += Mathf.Abs(deltaD);
     }
 
     // Spawn visualisation of the agent
@@ -257,3 +263,4 @@ public class Edge : MonoBehaviour
         }
     }
 }
+
