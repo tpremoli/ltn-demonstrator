@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7212972715497463605}
   - component: {fileID: 2653955470418976253}
   - component: {fileID: 4734526643224146897}
-  - component: {fileID: -255949881081237884}
+  - component: {fileID: 5583662921222238272}
   m_Layer: 0
   m_Name: Traveller
   m_TagString: Untagged
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-255949881081237884
+--- !u!114 &5583662921222238272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
