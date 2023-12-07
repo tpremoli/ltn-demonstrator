@@ -6,12 +6,12 @@ public class Traveller : MonoBehaviour
 {
     // Private attributes
     private float totalDistanceMoved;
-    private float positionOnEdge;
     private Path currentPath;
 
 
     // Public attributes
     public Edge currentEdge; 
+    public float positionOnEdge;
     public float currentVelocity; 
     public float maxVelocity; // will be assigned according to agent category enum (EdgeFunctionality)
     public int noOfPassengers; 
