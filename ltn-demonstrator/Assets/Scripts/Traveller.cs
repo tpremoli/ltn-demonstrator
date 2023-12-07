@@ -2,31 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ModeOfTransport
-{
-    Walker,
-    Bicycle,
-    Car,
-    Van,
-    Truck,
-    Bus
-}
-
 public class Traveller : MonoBehaviour
 {
     // Private attributes
-    private float deltaD;
     private float totalDistanceMoved;
     private float positionOnEdge;
     private Path currentPath;
-    private List<Path> previousPaths = new List<Path>();
+
 
     // Public attributes
-    public Edge currentEdge; // Add semicolon here
-    public float currentVelocity; // Add semicolon here
-    public float maxVelocity; // Add semicolon here
-    public int noOfPassengers; // Add semicolon here
-    public ModeOfTransport modeOfTransport; // Add semicolon here
+    public Edge currentEdge; 
+    public float currentVelocity; 
+    public float maxVelocity; // will be assigned according to agent category enum (EdgeFunctionality)
+    public int noOfPassengers; 
+    
 
     // Public variable for timeStep
     public float timeStep = 1f / 60f; // Assuming 60 frames per second
@@ -36,7 +25,8 @@ public class Traveller : MonoBehaviour
     // set a loop that travels the traveller 
     // let the length of edge = e
     // e * H = length of edge in km
-    public float H; // Add semicolon here
+
+    public float H; 
 
     // Assuming rateOfEmission is defined somewhere
     private float rateOfEmission;
@@ -45,30 +35,6 @@ public class Traveller : MonoBehaviour
     {
         // Calculate emissions using the rateOfEmission attribute and totalDistanceMoved
         return rateOfEmission * totalDistanceMoved;
-    }
-
-    // Public method to calculate deltaD
-    public void CalculateDeltaD()
-    {
-        // Ensure currentEdge is not null
-        if (currentEdge != null)
-        {
-            // Calculate deltaD based on the given formula
-            deltaD = (currentVelocity * (timeStep)) / (currentEdge.length * H);
-
-            // Optional: You can limit deltaD to maxVelocity if needed
-            deltaD = Mathf.Clamp(deltaD, 0f, maxVelocity);
-
-            // Update the positionOnEdge based on the calculated deltaD
-            positionOnEdge += deltaD;
-
-            // If the traveller has moved beyond the current edge, update the current edge and reset positionOnEdge
-            if (positionOnEdge > currentEdge.length)
-            {
-                // Move to the next edge
-                MoveToNextEdge();
-            }
-        }
     }
 
     // Method to move to the next edge in the path
@@ -80,30 +46,18 @@ public class Traveller : MonoBehaviour
         // but edge will calculate deltaD
     }
 
-    // Public method to calculate deltaD^(-1)
-    public float TranslateFromTrueToDeltaD(float desiredSpeed, float edgeLength)
-    {
-        // Calculate deltaD^(-1) based on the given formula
-        return (desiredSpeed * edgeLength * H) / timeStep; // TimeStep = 1 frame over frames per sec
-    }
 
     // Update is called once per frame
     void Update()
     {
-        // MOVE CALLS TO EDGE CLASS ***
-        // Update code here
-        // Calculate deltaD and update the position
-        CalculateDeltaD();
 
-        // Update the total distance moved
-        totalDistanceMoved += Mathf.Abs(deltaD);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         // *NOT IN THE CORRECT POSITION* - Visualize the agent on an edge
-
+        currentEdge.Start()
         // Assuming you have a Graph class to represent your graph structure
         Graph graph = GetYourGraph();
 
