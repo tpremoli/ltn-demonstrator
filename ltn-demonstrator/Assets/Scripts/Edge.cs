@@ -64,7 +64,7 @@ public class Edge : MonoBehaviour
     public void CalculateDeltaD()
     {
         // Ensure currentEdge is not null
-        if (currentEdge != null)
+        if (this != null)
         {
             // Calculate deltaD based on the given formula
             deltaD = (currentVelocity * (timeStep)) / (currentEdge.length * H);
@@ -81,6 +81,9 @@ public class Edge : MonoBehaviour
                 // Move to the next edge
                 MoveToNextEdge();
             }
+        } else
+        {
+            Debug.LogError("Current edge is null.");
         }
     }
 
