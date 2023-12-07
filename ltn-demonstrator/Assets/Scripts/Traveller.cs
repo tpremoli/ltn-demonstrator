@@ -31,14 +31,14 @@ public class Traveller : MonoBehaviour
     // Assuming rateOfEmission is defined somewhere
     private float rateOfEmission;
 
-    public float CalculateEmissions()
+    public float calculateEmissions()
     {
         // Calculate emissions using the rateOfEmission attribute and totalDistanceMoved
         return rateOfEmission * totalDistanceMoved;
     }
 
     // Method to move to the next edge in the path
-    private void MoveToNextEdge()
+    public void moveToNextEdge()
     {
         // Your existing logic for moving to the next edge
         // traveller pointer to say what edge it's on
@@ -79,7 +79,7 @@ public class Traveller : MonoBehaviour
     }
 
     // Public method to de-spawn the traveler at the destination
-    public void DeSpawnAtDestination()
+    public void despawnAtDestination()
     {
         // Perform any cleanup or de-spawning logic
 
