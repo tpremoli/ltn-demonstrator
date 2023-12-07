@@ -56,26 +56,38 @@ public class Traveller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+// The lines related to spawning the traveller at the starting point are commented out
+// as we don't have a specific graph implementation. Beyond that, some parts of this
+// are currently handled in Building.cs, but we can move them here if needed.
+
+
+        // 
         // *NOT IN THE CORRECT POSITION* - Visualize the agent on an edge
-        currentEdge.Start();
+        // currentEdge.Start();
         // Assuming you have a Graph class to represent your graph structure
-        Graph graph = GetYourGraph();
+
+        // We don't have a graph class yet
+        // Graph graph = GetYourGraph();
 
         // Assuming you have a method to get the starting edge and position
-        Edge startingEdge = graph.GetStartingEdge();
-        float startingPosition = graph.GetStartingPositionOnEdge();
+        // Edge startingEdge = graph.GetStartingEdge();
+        // float startingPosition = graph.GetStartingPositionOnEdge();
 
         // Spawn the traveler at the starting point
-        SpawnAtStartingPoint(startingEdge, startingPosition);
+        // spawnAtStartingPoint(startingEdge, startingPosition);
 
         // Call the Start method of the associated Edge
-        startingEdge.Start();
+        // startingEdge.Start();
 
         // Save starting point to respawn-return later?
-        currentEdge = startingEdge;
-        positionOnEdge = Mathf.Clamp(startingPosition, 0f, startingEdge.length);
-        transform.position = startingEdge.GetPointOnEdge(positionOnEdge);
+        // currentEdge = startingEdge;
+        // positionOnEdge = Mathf.Clamp(startingPosition, 0f, startingEdge.length);
+        // transform.position = startingEdge.getPointOnEdge(positionOnEdge);
         // then run update routing
+    }
+
+    public void spawnAtStartingPoint(Edge startingEdge, float startingPosition){
+
     }
 
     // Public method to de-spawn the traveler at the destination
