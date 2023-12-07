@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathFunctionality
+public class Path : MonoBehaviour
 {
     private float destinationDistance;
     public List<Edge> path;
@@ -12,14 +12,15 @@ public class PathFunctionality
     public Building terminalBuilding;
     public Traveller traveller;
 
-    public float DestinationDistance()
+    public float getDestinationDistance()
     {
-        get { return destinationDistance; }
-        private set { destinationDistance = value; }
+        return destinationDistance;
     }
 
-    //public float DestinationDistance { get; set; }
-    // This line might be a better getter / setter, not sure 
+    public void setDestinationDistance(float value)
+    {
+        destinationDistance = value;
+    }
 
     public void GeneratePath(Building startBuilding, Building terminalBuilding, Traveller traveller)
     {
