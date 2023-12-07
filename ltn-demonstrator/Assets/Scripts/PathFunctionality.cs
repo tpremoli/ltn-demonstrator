@@ -19,8 +19,9 @@ public class pathFunctionality
 
     public void GeneratePath(Building startBuilding, Building terminalBuilding, Traveller traveller)
     {
-        Edge startEdge = &startBuilding.getEdgeLocation();
-        Edge endEdge = &terminalBuilding.getEdgeLocation();
+        &Edge startEdge = &startBuilding.getEdgeLocation();
+        &Edge endEdge = &terminalBuilding.getEdgeLocation();
+        // these two lines above seem wrong to me, I dont know how to do pointers properly in c#
         List<&Edge> generatedPath = new List<&Edge> { startEdge, endEdge };
         self.path = generatedPath
         // This code is supposed to create pointers to start and end Edges,
