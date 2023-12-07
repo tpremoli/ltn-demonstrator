@@ -84,6 +84,7 @@ public class Traveller : MonoBehaviour
         // positionOnEdge = Mathf.Clamp(startingPosition, 0f, startingEdge.length);
         // transform.position = startingEdge.getPointOnEdge(positionOnEdge);
         // then run update routing
+        Debug.Log("Traveller Instantiated");
     }
 
     public void spawnAtStartingPoint(Edge startingEdge, float startingPosition){

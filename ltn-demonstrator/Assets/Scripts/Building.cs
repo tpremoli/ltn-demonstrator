@@ -20,7 +20,7 @@ public class Building : MonoBehaviour
 
     // the spawn probability should be based on the building type and maximum number of occupants.
     // as it stands, it is a constant value, but it should be a function/enum of the building type
-    private readonly float spawnProbability = 0.1f;
+    private readonly float spawnProbability = 0.2f;
     private readonly float timeBetweenSpawns = 1f; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
 
@@ -64,12 +64,14 @@ public class Building : MonoBehaviour
             // Set the next spawn time
             nextSpawnTime = Time.time + timeBetweenSpawns;
         }
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
         Random.InitState(42); // Set seed for random number generator
+        Debug.Log("Building Instantiated");
     }
 
     // Spawn method
