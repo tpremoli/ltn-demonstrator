@@ -68,6 +68,7 @@ public class Building : MonoBehaviour
             // Spawn a vehicle, if the random number is less than the spawn probability
             if (Random.value < spawnProbability)
             {
+                Debug.Log("Spawning traveller");
                 SpawnTraveller();
             }
             // Set the next spawn time
@@ -83,7 +84,7 @@ public class Building : MonoBehaviour
 
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
         // The prefab should have a Traveller component attached to it.
-        GameObject travellerPrefab = Resources.Load<GameObject>("Prefabs/Traveller");
+        GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject newTravellerObj = Instantiate(travellerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
         // Get the Traveller component from the instantiated object
