@@ -88,6 +88,7 @@ public class Edge : MonoBehaviour
             }
         } else
         {
+            // Returns error if null value given
             Debug.LogError("Current edge is null.");
         }
     }
@@ -100,9 +101,11 @@ public class Edge : MonoBehaviour
     }
 
     // New public methods for edge space translation
+    // to ensure meaningful behaviour for agents navigate 
+    //the graph an arbitrary number greater than 0 should be returned
     public float unityToEdgeSpace(float d)
     {
-        if (length != 0)
+        if (length > 0)
         {
             return d / length;
         }
@@ -115,7 +118,7 @@ public class Edge : MonoBehaviour
 
     public float edgeSpaceToUnity(float d)
     {
-        if (length != 0)
+        if (length > 0)
         {
             return d * length;
         }
