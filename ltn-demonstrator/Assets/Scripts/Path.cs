@@ -36,6 +36,11 @@ public class Path : MonoBehaviour
         this.startBuilding = startBuilding;
         this.terminalBuilding = terminalBuilding;
         this.traveller = traveller;
+
+        // Subscribe the traveler to the starting edge
+        startEdge.SubscribeTraveller(traveller);
+        // Pass the generated path to the traveler
+        traveller.spawnAtStartingPoint(this);
     }
 
     public void endPath()
