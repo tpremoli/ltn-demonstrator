@@ -38,9 +38,9 @@ public class Path : MonoBehaviour
         this.traveller = traveller;
 
         // Subscribe the traveler to the starting edge
-        startEdge.SubscribeTraveller(traveller);
+        startEdge.subscribe(traveller);
         // Pass the generated path to the traveler
-        traveller.spawnAtStartingPoint(this);
+        // traveller.spawnAtStartingPoint(this);
     }
 
     public void endPath()
