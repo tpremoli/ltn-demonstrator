@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "ltn-demonstrator.sln"
+    "dotnet.defaultSolution": "ltn-demonstrator.sln",
+    "git.openRepositoryInParentFolders": "always",
 }
