@@ -32,6 +32,7 @@ public class WaypointEditor : Editor
         GameObject newWaypoint = Instantiate(newWaypointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         
         newWaypoint.transform.position = waypoint.transform.position; // Adjust as needed
+        newWaypoint.name = "Waypoint (" + graphGameObject.transform.childCount + ")";
 
         // these getcomponents are messy and should be refactored
         waypoint.AddAdjacentWaypoint(newWaypoint.GetComponent<Waypoint>());

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class Waypoint : MonoBehaviour
 {
-    [Range(0f, 2f)]
     public List<Waypoint> adjacentWaypoints; // Manually set in the editor
 
     private void OnDrawGizmos()
