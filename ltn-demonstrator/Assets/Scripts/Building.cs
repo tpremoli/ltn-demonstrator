@@ -14,14 +14,15 @@ public enum BuildingType
 public class Building : MonoBehaviour
 {
     // Private attributes
-    private int vehicleMax;
-    private int occupantMax;
+    [SerializeField] private int vehicleMax;
+    [SerializeField] private int occupantMax;
+    [SerializeField] private Graph graph;
     private Dictionary<BuildingType, float> destinationWeights; // Distribution for destination types
 
     // the spawn probability should be based on the building type and maximum number of occupants.
     // as it stands, it is a constant value, but it should be a function/enum of the building type
-    private float spawnProbability;
-    private float timeBetweenSpawns; // The time between spawn attempts
+    [Range(0f, 1f)] [SerializeField] private float spawnProbability;
+    [Range(1, 600)] [SerializeField] private float timeBetweenSpawns; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
 
     // Public attributes
@@ -56,6 +57,13 @@ public class Building : MonoBehaviour
         Debug.Log("Building Instantiated");
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color  = Color.green;
+        Vector3 buildingPosition = this.transform.position;
+        Vector3 closestPoint = graph.GetClosestPointToBuilding(this.gameObject);
+        Gizmos.DrawLine(buildingPosition, closestPoint);
+    }
 
     // Update is called once per frame
     void Update()
