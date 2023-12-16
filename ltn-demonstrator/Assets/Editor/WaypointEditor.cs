@@ -13,14 +13,7 @@ public class WaypointEditor : Editor
     {
         waypoint = (Waypoint) target;
         graphGameObject = (GameObject) waypoint.transform.parent.gameObject;
-        SceneView.duringSceneGui += OnSceneGUI;
     }
-
-    private void OnDisable()
-    {
-        SceneView.duringSceneGui -= OnSceneGUI;
-    }
-
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -33,26 +26,13 @@ public class WaypointEditor : Editor
         }
     }
 
-    void OnSceneGUI(SceneView sceneView)
-    {
-        Event e = Event.current;
-
-        if (waypoint != null)
-        {
-            Handles.color = Color.yellow;
-            Handles.DrawWireCube(waypoint.transform.position, new Vector3(selectionRadius, selectionRadius, selectionRadius));
-        }
-
-        sceneView.Repaint();
-    }
-
     void CreateAdjacentWaypoint()
     {
         GameObject newWaypointPrefab = Resources.Load<GameObject>("Waypoint");
         GameObject newWaypoint = Instantiate(newWaypointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         
-        newWaypoint.transform.position = waypoint.transform.position + Vector3.right; // Adjust as needed
-        
+        newWaypoint.transform.position = waypoint.transform.position; // Adjust as needed
+
         // these getcomponents are messy and should be refactored
         waypoint.AddAdjacentWaypoint(newWaypoint.GetComponent<Waypoint>());
 
