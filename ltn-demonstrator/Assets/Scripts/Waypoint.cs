@@ -3,10 +3,18 @@ using System.Collections.Generic;
 
 public class Waypoint : MonoBehaviour
 {
-    public List<Waypoint> adjacentWaypoints;
-    public float adjacencyThreshold = 5f; // Adjust this value as needed
+    public List<Waypoint> adjacentWaypoints; // Manually set in the editor
 
-    void Start()
+    public void AddAdjacentWaypoint(Waypoint newAdjacent)
     {
+        if (!adjacentWaypoints.Contains(newAdjacent))
+        {
+            adjacentWaypoints.Add(newAdjacent);
+        }
+
+        if (!newAdjacent.adjacentWaypoints.Contains(this))
+        {
+            newAdjacent.adjacentWaypoints.Add(this);
+        }
     }
 }
