@@ -38,7 +38,7 @@ public class Traveller : MonoBehaviour
         return rateOfEmission * totalDistanceMoved;
     }
 
-        public void calculateDeltaD(Traveller agent)
+    public void calculateDeltaD(Traveller agent)
     {
         // Ensure currentEdge is not null
         if (this != null)
@@ -49,7 +49,7 @@ public class Traveller : MonoBehaviour
             float H = agent.H;
 
             // Calculate deltaD based on the given formula
-            deltaD = (agentVelocity * (timeStep)) / (this.length * H);
+            deltaD = (agentVelocity * (timeStep)) / (this.currentEdge.length * H);
 
             // Optional: You can limit deltaD to maxVelocity if needed
             deltaD = Mathf.Clamp(deltaD, 0f, maxVelocity);
@@ -58,10 +58,10 @@ public class Traveller : MonoBehaviour
             agent.positionOnEdge += deltaD;
 
             // If the traveller has moved beyond the current edge, update the current edge and reset positionOnEdge
-            if (agent.positionOnEdge > this.length)
+            if (agent.positionOnEdge > this.currentEdge.length)
             {
                 // Move to the next edge
-                agent.moveToNextEdge();
+                agent.MoveToNextEdge();
             }
         } else
         {
@@ -81,9 +81,9 @@ public class Traveller : MonoBehaviour
     //the graph an arbitrary number greater than 0 should be returned
     public float unityToEdgeSpace(float d)
     {
-        if (length > 0)
+        if (this.currentEdge.length > 0)
         {
-            return d / length;
+            return d / this.currentEdge.length;
         }
         else
         {
@@ -94,9 +94,9 @@ public class Traveller : MonoBehaviour
 
     public float edgeSpaceToUnity(float d)
     {
-        if (length > 0)
+        if (this.currentEdge.length > 0)
         {
-            return d * length;
+            return d * this.currentEdge.length;
         }
         else
         {
@@ -121,7 +121,7 @@ public class Traveller : MonoBehaviour
         if (currentIndex < currentPath.path.Count - 1)
         {
             Edge nextEdge = currentPath.path[currentIndex + 1];
-            nextEdge.SubscribeTraveller(this);
+            nextEdge.subscribe(this);
         }
         else
         {
@@ -171,16 +171,16 @@ public class Traveller : MonoBehaviour
         // then run update routing
 
         // Assuming you have a method to get the starting edge and position
-        Edge startingEdge = currentPath.path[0];
-        float startingPosition = 0f; // You may need to adjust this based on your requirements
-        startingEdge.SubscribeTraveller(this);
+        // Edge startingEdge = currentPath.path[0];
+        // float startingPosition = 0f; // You may need to adjust this based on your requirements
+        // startingEdge.subscribe(this);
         Debug.Log("Traveller Instantiated");
 
     }
 
     public void spawnAtStartingPoint(Edge startingEdge, float startingPosition){
         // Store the current path reference
-        currentPath = path;
+        // currentPath = path;
     }
 
     // Public method to de-spawn the traveler at the destination
