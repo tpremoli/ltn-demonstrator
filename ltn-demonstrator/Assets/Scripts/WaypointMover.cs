@@ -23,7 +23,7 @@ public class WaypointMover : MonoBehaviour
     
     void Update() {
         transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.position, speed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, currentWaypoint.position) < distanceLimit) {
+        if (Vector3.Distance(transform.position, currentWaypoint.position) < distanceThreshold) {
             currentWaypoint = waypoints.GetNextWaypoint(currentWaypoint);
         }
     }
