@@ -8,18 +8,5 @@ public class Waypoint : MonoBehaviour
 
     void Start()
     {
-        FindAdjacentWaypoints();
-    }
-
-    void FindAdjacentWaypoints()
-    {
-        adjacentWaypoints = new List<Waypoint>();
-        foreach (Waypoint other in FindObjectsOfType<Waypoint>())
-        {
-            if (other != this && Vector3.Distance(transform.position, other.transform.position) <= adjacencyThreshold)
-            {
-                adjacentWaypoints.Add(other);
-            }
-        }
     }
 }

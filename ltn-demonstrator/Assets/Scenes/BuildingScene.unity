@@ -555,7 +555,7 @@ GameObject:
   - component: {fileID: 980923535}
   - component: {fileID: 980923534}
   m_Layer: 0
-  m_Name: Waypoints
+  m_Name: Graph
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
