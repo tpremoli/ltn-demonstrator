@@ -78,7 +78,6 @@ public class Graph : MonoBehaviour
 
     private void Start()
     {
-        this.edges = new List<Edge>();
     }
 
     private void DrawEdgeGizmos()
