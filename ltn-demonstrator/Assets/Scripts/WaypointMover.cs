@@ -13,7 +13,7 @@ public class WaypointMover : MonoBehaviour
 
     void Start()
     {
-        Waypoint startingPoint = GameObject.Find("Waypoint (8)").GetComponent<Waypoint>();
+        Waypoint startingPoint = GameObject.Find("Waypoint (10)").GetComponent<Waypoint>();
         Waypoint endPoint = GameObject.Find("Waypoint (14)").GetComponent<Waypoint>();
 
         // Initialize the path with the starting waypoint

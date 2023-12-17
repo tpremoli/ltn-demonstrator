@@ -53,6 +53,7 @@ public class WaypointPath
     public WaypointPath(Waypoint startingPoint, Waypoint endPoint)
     {
         this.path = BFS(startingPoint, endPoint);
+        
     }
 
     // Enqueue all adjacent waypoints of the given waypoint
@@ -78,12 +79,13 @@ public class WaypointPath
     // Get the next waypoint in the BFS traversal
     public Waypoint GetNextWaypoint()
     {
-        if (waypointQueue.Count == 0)
+        if (path == null || path.Count == 0)
         {
-            Debug.LogWarning("No more waypoints in the path.");
+            Debug.LogWarning("Path is null or empty.");
             return null;
         }
-
-        return waypointQueue.Dequeue();
+        Waypoint nextWaypoint = path[0];
+        path.RemoveAt(0);
+        return nextWaypoint;
     }
 }

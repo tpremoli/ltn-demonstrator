@@ -85,31 +85,33 @@ public class Building : MonoBehaviour
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
         // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
-        GameObject newTravellerObj = Instantiate(travellerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject newTravellerObj = Instantiate(travellerPrefab, this.transform.position, Quaternion.identity);
 
         // Get the Traveller component from the instantiated object
         Traveller newTraveller = newTravellerObj.GetComponent<Traveller>();
 
         // Initialize the traveller's properties
-        InitializeTravellerFromThisBuilding(newTraveller, startingEdge);
+        // InitializeTravellerFromThisBuilding(newTraveller, startingEdge);
 
         // Subscribe the new traveller to the starting edge
         startingEdge.subscribe(newTraveller);
     }
 
-    private void InitializeTravellerFromThisBuilding(Traveller traveller, Edge startingEdge)
+    private void InitializeTravellerFromThisBuilding(Traveller traveller)
     {
+        // traveller.transform.position = this.transform.position;
+
         // Set the starting edge and position
-        traveller.currentEdge = this.edge;
-        traveller.positionOnEdge = this.positionOnEdge;
+        // traveller.currentEdge = this.edge;
+        // traveller.positionOnEdge = this.positionOnEdge;
 
         // Set other initial properties as needed, for example:
-        traveller.currentVelocity = 0;
+        // traveller.currentVelocity = 0;
         // traveller.modeOfTransport = ModeOfTransport.Car; // TODO: this is a placeholder
-        traveller.H = Edge.H; // Set H from Edge class
+        // traveller.H = Edge.H; // Set H from Edge class
 
         // Position the traveller GameObject on the edge
-        traveller.transform.position = startingEdge.getPointOnEdge(traveller.positionOnEdge);
+        // traveller.transform.position = startingEdge.getPointOnEdge(traveller.positionOnEdge);
     }
 
     public Vector3 getEdgeLocation()
