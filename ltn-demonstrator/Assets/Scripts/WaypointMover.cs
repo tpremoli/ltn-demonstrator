@@ -11,10 +11,12 @@ public class WaypointMover : MonoBehaviour
     private WaypointPath path;           // Instance of the pathfinding class
     private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
 
+
+
     void Start()
     {
         // The building spawns the Mover, so Mover is at the Building position
-        Waypoint startingPoint = FindClosestWaypoint(closestPointOnEdge.transform.position);
+        Waypoint startingPoint = FindClosestWaypoint(this.transform.position);
         Waypoint endPoint = RandEndNode(startingPoint);
 
         // Initialize the path with the starting waypoint
@@ -22,9 +24,6 @@ public class WaypointMover : MonoBehaviour
 
         // Get the first waypoint in the path and set the initial position
         currentWaypoint = path.GetNextWaypoint();
-
-        // Set the initial position based on the closestPointOnEdge
-        transform.position = closestPointOnEdge.transform.position;
     }
 
 
