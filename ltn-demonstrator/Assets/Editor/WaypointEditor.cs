@@ -11,9 +11,14 @@ public class WaypointEditor : Editor
 
     private void OnEnable()
     {
+        if (target == null)
+        {
+            return;
+        }
         waypoint = (Waypoint) target;
         graphGameObject = (GameObject) waypoint.transform.parent.gameObject;
     }
+
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();

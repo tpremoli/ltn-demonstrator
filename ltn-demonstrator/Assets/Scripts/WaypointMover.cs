@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class WaypointMover : MonoBehaviour
 {
-    [SerializeField] private Waypoint startingWaypoint;  // Initial waypoint to start the movement
-    [SerializeField] private float speed = 5f;           // Movement speed
-    [SerializeField] private float distanceThreshold = 0.1f;  // Distance threshold to consider reaching a waypoint
+    // attributes from the Traveller class
+    private float totalDistanceMoved;
+    private float positionOnEdge;
+    private float currentVelocity; 
+    private float maxVelocity; // will be assigned according to agent category enum (EdgeFunctionality)
+    private int noOfPassengers; 
+    private float rateOfEmission;
+
+    // attributes from the WaypointMover class
+    [SerializeField] private Waypoint startingWaypoint;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float distanceThreshold = 0.1f;
 
     private WaypointPath path;           // Instance of the pathfinding class
     private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
@@ -24,6 +33,8 @@ public class WaypointMover : MonoBehaviour
 
         // Get the first waypoint in the path and set the initial position
         currentWaypoint = path.GetNextWaypoint();
+        transform.position = currentWaypoint.transform.position;
+        Debug.Log("Traveller Instantiated");
     }
 
 
@@ -69,6 +80,10 @@ public class WaypointMover : MonoBehaviour
         return randomWaypoint;
     }
 
-
+    public float calculateEmissions()
+    {
+        // Calculate emissions using the rateOfEmission attribute and totalDistanceMoved
+        return rateOfEmission * totalDistanceMoved;
+    }
 
 }
