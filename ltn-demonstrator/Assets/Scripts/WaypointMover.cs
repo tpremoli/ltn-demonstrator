@@ -13,6 +13,8 @@ public class WaypointMover : MonoBehaviour
 
     void Start()
     {
+        GameObject.Find("Graph").GetComponent<Graph>();
+
         Waypoint startingPoint = GameObject.Find("Waypoint (10)").GetComponent<Waypoint>();
         Waypoint endPoint = GameObject.Find("Waypoint (14)").GetComponent<Waypoint>();
 
@@ -21,7 +23,7 @@ public class WaypointMover : MonoBehaviour
         
         // Get the first waypoint in the path and set the initial position
         currentWaypoint = path.GetNextWaypoint();
-        transform.position = currentWaypoint.transform.position;
+        // transform.position = currentWaypoint.transform.position;
     }
 
     void Update()

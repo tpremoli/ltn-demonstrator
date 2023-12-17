@@ -95,15 +95,13 @@ public class Building : MonoBehaviour
     // Spawn method
     public void SpawnTraveller()
     {
+        Vector3 positionOnEdge = closestPointOnEdge;
         // Edge startingEdge = this.edge;
-
-        // We need a prefab for the traveller. This is a template from which we can create new travellers.
-        // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
-        GameObject newTravellerObj = Instantiate(travellerPrefab, this.transform.position, Quaternion.identity);
+        GameObject newTravellerObj = Instantiate(travellerPrefab, positionOnEdge, Quaternion.identity);
 
         // Get the Traveller component from the instantiated object
-        Traveller newTraveller = newTravellerObj.GetComponent<Traveller>();
+        // Traveller newTraveller = newTravellerObj.GetComponent<Traveller>();
 
         // Initialize the traveller's properties
         // InitializeTravellerFromThisBuilding(newTraveller, startingEdge);
