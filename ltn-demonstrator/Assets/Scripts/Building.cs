@@ -14,21 +14,24 @@ public enum BuildingType
 public class Building : MonoBehaviour
 {
     // Private attributes
-    private int vehicleMax;
-    private int occupantMax;
+    [SerializeField] private int vehicleMax;
+    [SerializeField] private int occupantMax;
+    [SerializeField] private Graph graph;
     private Dictionary<BuildingType, float> destinationWeights; // Distribution for destination types
 
     // the spawn probability should be based on the building type and maximum number of occupants.
     // as it stands, it is a constant value, but it should be a function/enum of the building type
-    private float spawnProbability;
-    private float timeBetweenSpawns; // The time between spawn attempts
+    [Range(0f, 1f)] [SerializeField] private float spawnProbability;
+    [Range(1, 600)] [SerializeField] private float timeBetweenSpawns; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
+
+    private Vector3 closestPointOnEdge;
 
     // Public attributes
     // public List<Vehicle> VehicleList; // List of vehicles at the building.
-    public int occupantCount;
-    public Edge edge;               // Edge where the building is located
-    public float positionOnEdge;    // how far down the edge our building is located
+    // public int occupantCount;
+    // public Edge edge;               // Edge where the building is located
+    // public float positionOnEdge;    // how far down the edge our building is located
 
     // Some more attributes - not sure if needed, but seemed useful
     public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
@@ -49,13 +52,22 @@ public class Building : MonoBehaviour
         // this.positionOnEdge = edgeLocation;
 
         // this.VehicleList = new List<Vehicle>();
-        this.occupantCount = 0;
+        // this.occupantCount = 0;
         this.destinationWeights = new Dictionary<BuildingType, float>();
         this.nextSpawnTime = Time.time + timeBetweenSpawns;
+
+        this.closestPointOnEdge = graph.GetClosestPointToBuilding(this.gameObject);
 
         Debug.Log("Building Instantiated");
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color  = Color.green;
+        if (Application.IsPlaying(this)){
+            Gizmos.DrawLine(this.transform.position, closestPointOnEdge);
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -80,7 +92,7 @@ public class Building : MonoBehaviour
     // Spawn method
     public void SpawnTraveller()
     {
-        Edge startingEdge = this.edge;
+        // Edge startingEdge = this.edge;
 
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
         // The prefab should have a Traveller component attached to it.
@@ -94,7 +106,7 @@ public class Building : MonoBehaviour
         // InitializeTravellerFromThisBuilding(newTraveller, startingEdge);
 
         // Subscribe the new traveller to the starting edge
-        startingEdge.subscribe(newTraveller);
+        // startingEdge.subscribe(newTraveller);
     }
 
     private void InitializeTravellerFromThisBuilding(Traveller traveller)
@@ -114,10 +126,10 @@ public class Building : MonoBehaviour
         // traveller.transform.position = startingEdge.getPointOnEdge(traveller.positionOnEdge);
     }
 
-    public Vector3 getEdgeLocation()
-    {
-        return edge.getPointOnEdge(positionOnEdge);
-    }
+    // public Vector3 getEdgeLocation()
+    // {
+    //     return edge.getPointOnEdge(positionOnEdge);
+    // }
 
     // getters and setters
     // Get the maximum number of vehicles
@@ -132,9 +144,4 @@ public class Building : MonoBehaviour
         return occupantMax;
     }
 
-    // Get the number of occupants
-    public int GetOccupantCount()
-    {
-        return occupantCount;
-    }
 }
