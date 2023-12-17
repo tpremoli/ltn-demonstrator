@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class EdgeLoader
 {
+    [MenuItem("Tools/Reload Edges")]
     [InitializeOnLoadMethod]
     public static void LoadEdges()
     {

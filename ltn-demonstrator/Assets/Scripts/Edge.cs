@@ -30,18 +30,15 @@ public class Edge
         Vector3 endpoint = endWaypoint.transform.position;
         Vector3 direction = endpoint - startpoint;
         
-        // Reverse the direction vector
-        Vector3 reversedDirection = -direction;
-        
         // Make the arrows shorter by 20%
-        float shortenedMagnitude = reversedDirection.magnitude * 0.8f;
-        Vector3 shortenedDirection = reversedDirection.normalized * shortenedMagnitude;
+        float shortenedMagnitude = direction.magnitude * 0.7f;
+        Vector3 shortenedDirection = direction.normalized * shortenedMagnitude;
         
         // Calculate the middle position
         Vector3 middlePosition = startpoint + direction * 0.5f - shortenedDirection * 0.5f;
         
         // Shift the middle position slightly to the left
-        Vector3 shiftedMiddlePosition = middlePosition - Vector3.Cross(direction, Vector3.up).normalized * 0.5f;
+        Vector3 shiftedMiddlePosition = middlePosition + Vector3.Cross(direction, Vector3.up).normalized * 0.6f;
         
         // Draw the arrow with the shifted middle position and shortened direction
         DrawArrow.ForGizmo(shiftedMiddlePosition, shortenedDirection, Color.green, 1f, 30f);
