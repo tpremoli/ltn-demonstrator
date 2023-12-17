@@ -3,24 +3,43 @@ using System.Collections.Generic;
 
 public class WaypointPath
 {
-    private Waypoint currentWaypoint;
+    private Queue<Waypoint> waypointQueue;
 
     public WaypointPath(Waypoint startingPoint)
     {
-        currentWaypoint = startingPoint;
+        waypointQueue = new Queue<Waypoint>();
+        EnqueueAdjacentWaypoints(startingPoint);
     }
 
+    // Enqueue all adjacent waypoints of the given waypoint
+    private void EnqueueAdjacentWaypoints(Waypoint waypoint)
+    /*
+    adjacentWaypoints list from the Waypoint class used
+    BFS traversal in the WaypointPath class follows
+    connections specified in the Waypoint class
+    */
+    {
+        if (waypoint == null || waypoint.adjacentWaypoints.Count == 0)
+        {
+            Debug.LogWarning("Waypoint is null or has no adjacent waypoints.");
+            return;
+        }
+
+        foreach (Waypoint adjacent in waypoint.adjacentWaypoints)
+        {
+            waypointQueue.Enqueue(adjacent);
+        }
+    }
+
+    // Get the next waypoint in the BFS traversal
     public Waypoint GetNextWaypoint()
     {
-        if (currentWaypoint == null || currentWaypoint.adjacentWaypoints.Count == 0)
+        if (waypointQueue.Count == 0)
         {
-            Debug.LogWarning("Current waypoint is null or has no adjacent waypoints.");
+            Debug.LogWarning("No more waypoints in the path.");
             return null;
         }
 
-        // For simplicity, just get the next waypoint in the list.
-        // This logic can be expanded to more complex pathfinding algorithms.
-        currentWaypoint = currentWaypoint.adjacentWaypoints[0]; // Simple example, replace with actual pathfinding logic
-        return currentWaypoint;
+        return waypointQueue.Dequeue();
     }
 }
