@@ -33,6 +33,8 @@ public class Building : MonoBehaviour
 
     // Start is called before the first frame update. We use these to initialize the building.
     void Start(){
+        this.graph = GameObject.Find("Graph").GetComponent<Graph>();
+
         Random.InitState(42); // Set seed for random number generator
         this.vehicleMax = 2;
         this.occupantMax = 5;
