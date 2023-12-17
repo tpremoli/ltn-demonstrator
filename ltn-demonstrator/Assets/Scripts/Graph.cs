@@ -86,8 +86,14 @@ public class Graph : MonoBehaviour
             foreach (Waypoint adjacentWaypoint in waypoint.adjacentWaypoints)
             {
                 float distance = CalculateDistance(waypoint, adjacentWaypoint);
-                Edge edge = new Edge(waypoint, adjacentWaypoint, distance);
-                this.edges.Add(edge);
+                // instantiate edge as empty game object
+                GameObject edgeObject = new GameObject("Edge");
+                // add edge component to edge object
+                Edge edge = edgeObject.AddComponent<Edge>();
+                // initialize edge
+                edge.Initialize(waypoint, adjacentWaypoint);
+                // add edge to list of edges
+                edges.Add(edge);
             }
         }
         Debug.Log("Calculated " + edges.Count + " edges.");

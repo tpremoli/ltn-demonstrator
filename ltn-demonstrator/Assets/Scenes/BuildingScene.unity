@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointSize: 1
+  edges: []
 --- !u!4 &980923535
 Transform:
   m_ObjectHideFlags: 0
@@ -927,6 +928,8 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 323980831}
   - {fileID: 1337136929}
+  - {fileID: 933875184}
+  - {fileID: 1554001491}
 --- !u!4 &1182403299
 Transform:
   m_ObjectHideFlags: 0
@@ -972,7 +975,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentWaypoints:
-  - {fileID: 1657811266}
   - {fileID: 1657811266}
   - {fileID: 7151152}
   - {fileID: 2139437643}
