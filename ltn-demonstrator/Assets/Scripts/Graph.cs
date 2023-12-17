@@ -79,24 +79,6 @@ public class Graph : MonoBehaviour
     private void Start()
     {
         this.edges = new List<Edge>();
-        CalculateEdges();
-    }
-
-    private void CalculateEdges()
-    {
-        Waypoint[] waypoints = Object.FindObjectsOfType<Waypoint>();
-
-        foreach (Waypoint waypoint in waypoints)
-        {
-            foreach (Waypoint adjacentWaypoint in waypoint.adjacentWaypoints)
-            {
-                float distance = CalculateDistance(waypoint, adjacentWaypoint);
-                // instantiate edge as empty game object
-                Edge edge = new Edge(waypoint, adjacentWaypoint);
-                edges.Add(edge);
-            }
-        }
-        Debug.Log("Calculated " + edges.Count + " edges.");
     }
 
     private void DrawEdgeGizmos()

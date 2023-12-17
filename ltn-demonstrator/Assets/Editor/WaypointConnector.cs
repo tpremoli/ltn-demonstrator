@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
+// TODO: make this  into a few different tools.
+// this would allow us to have one way roads, and two way roads. To be seen in the future.
 public class WaypointConnector : EditorWindow
 {
     [MenuItem("Tools/Connect Waypoints")]
