@@ -13,16 +13,40 @@ public class WaypointMover : MonoBehaviour
 
     void Start()
     {
-    // The building spawns the Mover so Mover is at Building position
-    Waypoint startingPoint = FindClosestWaypoint();
-    Waypoint endPoint = RandEndNode(startingPoint);
+        // The building spawns the Mover, so Mover is at the Building position
+        Waypoint startingPoint = FindClosestWaypoint(closestPointOnEdge.transform.position);
+        Waypoint endPoint = RandEndNode(startingPoint);
 
-    // Initialize the path with the starting waypoint
-    path = new WaypointPath(startingPoint, endPoint);
+        // Initialize the path with the starting waypoint
+        path = new WaypointPath(startingPoint, endPoint);
 
-    // Get the first waypoint in the path and set the initial position
-    currentWaypoint = path.GetNextWaypoint();
-    transform.position = currentWaypoint.transform.position;
+        // Get the first waypoint in the path and set the initial position
+        currentWaypoint = path.GetNextWaypoint();
+
+        // Set the initial position based on the closestPointOnEdge
+        transform.position = closestPointOnEdge.transform.position;
+    }
+
+
+    Waypoint FindClosestWaypoint(Vector3 position)
+    {
+        Waypoint closestWaypoint = null;
+        float closestDistance = float.MaxValue;
+
+        // Iterate through all waypoints
+        foreach (Waypoint waypoint in path.path)
+        {
+            float distance = Vector3.Distance(position, waypoint.transform.position);
+            
+            // Update the closest waypoint if a closer one is found
+            if (distance < closestDistance)
+            {
+                closestWaypoint = waypoint;
+                closestDistance = distance;
+            }
+        }
+
+        return closestWaypoint;
     }
 
     Waypoint RandEndNode(Waypoint startingPoint)
