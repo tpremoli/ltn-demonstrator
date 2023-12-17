@@ -16,7 +16,7 @@ public class Building : MonoBehaviour
     // Private attributes
     [SerializeField] private int vehicleMax;
     [SerializeField] private int occupantMax;
-    [SerializeField] private Graph graph;
+    private Graph graph;
     private Dictionary<BuildingType, float> destinationWeights; // Distribution for destination types
 
     // the spawn probability should be based on the building type and maximum number of occupants.
@@ -40,6 +40,9 @@ public class Building : MonoBehaviour
     // Start is called before the first frame update. We use these to initialize the building.
     void Start(){
         Random.InitState(42); // Set seed for random number generator
+
+        this.graph = GameObject.Find("Graph").GetComponent<Graph>();
+
         this.vehicleMax = 2;
         this.occupantMax = 5;
 
