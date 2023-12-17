@@ -26,19 +26,19 @@ public class Path : MonoBehaviour
         // These just get the edges that the buildings are on, however, the offsets should also be taken into account.
         // Buildings have a .getEdgeLocation() method that returns the offset along the edge that the building is on.
         // However this is not currently implemented, as it hasn't been implemented in the edge class yet.
-        Edge startEdge = startBuilding.edge;
-        Edge endEdge = terminalBuilding.edge;
+        // Edge startEdge = startBuilding.edge;
+        // Edge endEdge = terminalBuilding.edge;
 
-        List<Edge> generatedPath = new List<Edge> { startEdge, endEdge };
+        // List<Edge> generatedPath = new List<Edge> { startEdge, endEdge };
 
-        this.path = generatedPath;
+        // this.path = generatedPath;
         this.startTick = 0; // replace null with current unity tick
         this.startBuilding = startBuilding;
         this.terminalBuilding = terminalBuilding;
         this.traveller = traveller;
 
         // Subscribe the traveler to the starting edge
-        startEdge.subscribe(traveller);
+        // startEdge.subscribe(traveller);
         // Pass the generated path to the traveler
         // traveller.spawnAtStartingPoint(this);
     }
