@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -6,6 +7,13 @@ public class Graph : MonoBehaviour
     // private waypointsize with getter
     [Range(0f, 2f)] [SerializeField] private float waypointSize = 0.5f;
     [SerializeField] public List<Edge> edges;
+
+    public List<Waypoint> waypoints;
+
+    void Start()
+    {
+        waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
+    }
 
     public float WaypointSize
     {
