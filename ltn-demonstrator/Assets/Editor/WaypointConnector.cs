@@ -31,6 +31,28 @@ public class WaypointConnector : EditorWindow
             EditorUtility.SetDirty(waypoint);
         }
 
+        // Remove duplicate adjacent waypoints
+        foreach (Waypoint waypoint in allWaypoints)
+        {
+            RemoveDuplicateAdjacentWaypoints(waypoint);
+        }
+
         Debug.Log("Waypoints connections updated.");
+    }
+
+    private static void RemoveDuplicateAdjacentWaypoints(Waypoint waypoint)
+    {
+        if (waypoint.adjacentWaypoints == null)
+            return;
+
+        for (int i = waypoint.adjacentWaypoints.Count - 1; i >= 0; i--)
+        {
+            Waypoint adjacentWaypoint = waypoint.adjacentWaypoints[i];
+
+            if (adjacentWaypoint == null || waypoint.adjacentWaypoints.FindAll(x => x == adjacentWaypoint).Count > 1)
+            {
+                waypoint.adjacentWaypoints.RemoveAt(i);
+            }
+        }
     }
 }
