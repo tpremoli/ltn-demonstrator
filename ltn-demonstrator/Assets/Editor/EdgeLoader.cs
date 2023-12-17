@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class EdgeLoader
 {
     [InitializeOnLoadMethod]
-    static void LoadEdges()
+    public static void LoadEdges()
     {
         Graph graph = Object.FindObjectOfType<Graph>();
         graph.edges = new List<Edge>();
