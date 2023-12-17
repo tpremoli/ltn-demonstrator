@@ -5,10 +5,54 @@ public class WaypointPath
 {
     private Queue<Waypoint> waypointQueue;
 
-    public WaypointPath(Waypoint startingPoint)
+    public List<Waypoint> path;
+
+    public List<Waypoint> BFS(Waypoint startpoint, Waypoint endpoint)
     {
-        waypointQueue = new Queue<Waypoint>();
-        EnqueueAdjacentWaypoints(startingPoint);
+        List<Waypoint> path = new List<Waypoint>();
+        Queue<Waypoint> queue = new Queue<Waypoint>();
+        Dictionary<Waypoint, Waypoint> cameFrom = new Dictionary<Waypoint, Waypoint>();
+        Dictionary<Waypoint, int> costSoFar = new Dictionary<Waypoint, int>();
+
+        queue.Enqueue(startpoint);
+        cameFrom[startpoint] = null;
+        costSoFar[startpoint] = 0;
+
+        while (queue.Count > 0)
+        {
+            Waypoint current = queue.Dequeue();
+
+            if (current == endpoint)
+            {
+                break;
+            }
+
+            foreach (Waypoint next in current.adjacentWaypoints)
+            {
+                int newCost = costSoFar[current] + 1;
+                if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next])
+                {
+                    costSoFar[next] = newCost;
+                    queue.Enqueue(next);
+                    cameFrom[next] = current;
+                }
+            }
+        }
+
+        Waypoint currentWaypoint = endpoint;
+        while (currentWaypoint != startpoint)
+        {
+            path.Add(currentWaypoint);
+            currentWaypoint = cameFrom[currentWaypoint];
+        }
+
+        path.Reverse();
+        return path;
+    }
+
+    public WaypointPath(Waypoint startingPoint, Waypoint endPoint)
+    {
+        this.path = BFS(startingPoint, endPoint);
     }
 
     // Enqueue all adjacent waypoints of the given waypoint

@@ -13,8 +13,11 @@ public class WaypointMover : MonoBehaviour
 
     void Start()
     {
+        Waypoint startingPoint = GameObject.Find("Waypoint (8)").GetComponent<Waypoint>();
+        Waypoint endPoint = GameObject.Find("Waypoint (14)").GetComponent<Waypoint>();
+
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(startingWaypoint);
+        path = new WaypointPath(startingPoint, endPoint);
         
         // Get the first waypoint in the path and set the initial position
         currentWaypoint = path.GetNextWaypoint();
@@ -34,5 +37,28 @@ public class WaypointMover : MonoBehaviour
             // If the threshold is met, get the next waypoint in the path
             currentWaypoint = path.GetNextWaypoint();
         }
+
     }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.magenta;
+
+        List<Waypoint> waypoints = path.path;
+
+        if (path != null)
+        {
+            foreach (Waypoint waypoint in waypoints)
+            {
+                Gizmos.DrawSphere(waypoint.transform.position, 1f);
+            }
+
+            // also draw the lines between the waypoints
+            for (int i = 0; i < waypoints.Count - 1; i++)
+            {
+                Gizmos.DrawLine(waypoints[i].transform.position, waypoints[i + 1].transform.position);
+            }
+        }
+    }
+
+
 }
