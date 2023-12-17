@@ -13,54 +13,39 @@ public class WaypointMover : MonoBehaviour
 
     void Start()
     {
-        GameObject.Find("Graph").GetComponent<Graph>();
+    // The building spawns the Mover so Mover is at Building position
+    Waypoint startingPoint = FindClosestWaypoint();
+    Waypoint endPoint = RandEndNode(startingPoint);
 
-        Waypoint startingPoint = GameObject.Find("Waypoint (10)").GetComponent<Waypoint>();
-        Waypoint endPoint = GameObject.Find("Waypoint (14)").GetComponent<Waypoint>();
+    // Initialize the path with the starting waypoint
+    path = new WaypointPath(startingPoint, endPoint);
 
-        // Initialize the path with the starting waypoint
-        path = new WaypointPath(startingPoint, endPoint);
-        
-        // Get the first waypoint in the path and set the initial position
-        currentWaypoint = path.GetNextWaypoint();
-        // transform.position = currentWaypoint.transform.position;
+    // Get the first waypoint in the path and set the initial position
+    currentWaypoint = path.GetNextWaypoint();
+    transform.position = currentWaypoint.transform.position;
     }
 
-    void Update()
+    Waypoint RandEndNode(Waypoint startingPoint)
     {
-        if (currentWaypoint == null) return;  // Stop if there's no current waypoint
-
-        // Move towards the current waypoint using linear interpolation
-        transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.transform.position, speed * Time.deltaTime);
-
-        // Check if the distance to the current waypoint is below the threshold
-        if (Vector3.Distance(transform.position, currentWaypoint.transform.position) < distanceThreshold)
-        {
-            // If the threshold is met, get the next waypoint in the path
-            currentWaypoint = path.GetNextWaypoint();
-        }
-
-    }
-
-    private void OnDrawGizmos() {
-        Gizmos.color = Color.magenta;
-
+        // Access the list of waypoints from the path
         List<Waypoint> waypoints = path.path;
 
-        if (path != null)
+        if (waypoints == null || waypoints.Count <= 1)
         {
-            foreach (Waypoint waypoint in waypoints)
-            {
-                Gizmos.DrawSphere(waypoint.transform.position, 1f);
-            }
-
-            // also draw the lines between the waypoints
-            for (int i = 0; i < waypoints.Count - 1; i++)
-            {
-                Gizmos.DrawLine(waypoints[i].transform.position, waypoints[i + 1].transform.position);
-            }
+            Debug.LogError("Not enough waypoints for random selection.");
+            return null;
         }
+
+        // Generate a list of waypoints excluding the starting point
+        List<Waypoint> availableWaypoints = new List<Waypoint>(waypoints);
+        availableWaypoints.Remove(startingPoint);
+
+        // Select a random waypoint from the available list
+        Waypoint randomWaypoint = availableWaypoints[Random.Range(0, availableWaypoints.Count)];
+
+        return randomWaypoint;
     }
+
 
 
 }
