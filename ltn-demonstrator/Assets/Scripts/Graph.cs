@@ -12,6 +12,11 @@ public class Graph : MonoBehaviour
         get { return waypointSize; }
     }
 
+    private void OnDrawGizmos()
+    {
+        DrawEdgeGizmos();
+    }
+
     public float CalculateDistance(Waypoint a, Waypoint b)
     {
         return Vector3.Distance(a.transform.position, b.transform.position);
@@ -87,15 +92,18 @@ public class Graph : MonoBehaviour
             {
                 float distance = CalculateDistance(waypoint, adjacentWaypoint);
                 // instantiate edge as empty game object
-                GameObject edgeObject = new GameObject("Edge");
-                // add edge component to edge object
-                Edge edge = edgeObject.AddComponent<Edge>();
-                // initialize edge
-                edge.Initialize(waypoint, adjacentWaypoint);
-                // add edge to list of edges
+                Edge edge = new Edge(waypoint, adjacentWaypoint);
                 edges.Add(edge);
             }
         }
         Debug.Log("Calculated " + edges.Count + " edges.");
+    }
+
+    private void DrawEdgeGizmos()
+    {
+        foreach (Edge edge in edges)
+        {
+            edge.DrawGizmo();
+        }
     }
 }

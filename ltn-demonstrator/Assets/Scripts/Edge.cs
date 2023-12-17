@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Edge : MonoBehaviour
+public class Edge
 {
     [SerializeField]
     private Waypoint startWaypoint;
@@ -16,14 +16,14 @@ public class Edge : MonoBehaviour
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public float Distance { get { return distance; } }
 
-    public void Initialize(Waypoint startWaypoint, Waypoint endWaypoint)
+    public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.startWaypoint = startWaypoint;
         this.endWaypoint = endWaypoint;
         this.distance = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
     }
 
-    private void OnDrawGizmos()
+    public void DrawGizmo()
     {
         // Draw arrow pointing in the edge's direction
         Vector3 startpoint = startWaypoint.transform.position;
