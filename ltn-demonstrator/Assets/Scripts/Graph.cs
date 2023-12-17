@@ -1,10 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Graph : MonoBehaviour
 {
     // private waypointsize with getter
-    [Range(0f, 2f)]
-    [SerializeField] private float waypointSize = 0.5f;
+    [Range(0f, 2f)] [SerializeField] private float waypointSize = 0.5f;
+    [SerializeField] public List<Edge> edges;
 
     public float WaypointSize
     {
@@ -70,4 +71,25 @@ public class Graph : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        this.edges = new List<Edge>();
+        CalculateEdges();
+    }
+
+    private void CalculateEdges()
+    {
+        Waypoint[] waypoints = Object.FindObjectsOfType<Waypoint>();
+
+        foreach (Waypoint waypoint in waypoints)
+        {
+            foreach (Waypoint adjacentWaypoint in waypoint.adjacentWaypoints)
+            {
+                float distance = CalculateDistance(waypoint, adjacentWaypoint);
+                Edge edge = new Edge(waypoint, adjacentWaypoint, distance);
+                this.edges.Add(edge);
+            }
+        }
+        Debug.Log("Calculated " + edges.Count + " edges.");
+    }
 }
