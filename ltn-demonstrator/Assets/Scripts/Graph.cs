@@ -4,8 +4,15 @@ using UnityEngine;
 public class Graph : MonoBehaviour
 {
     // private waypointsize with getter
-    [Range(0f, 2f)]
-    [SerializeField] private float waypointSize = 0.5f;
+    [Range(0f, 2f)] [SerializeField] private float waypointSize = 0.5f;
+    [SerializeField] public List<Edge> edges;
+
+    public List<Waypoint> waypoints;
+
+    void Start()
+    {
+        waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
+    }
 
     public List<Waypoint> waypoints;
 
@@ -17,6 +24,11 @@ public class Graph : MonoBehaviour
     public float WaypointSize
     {
         get { return waypointSize; }
+    }
+
+    private void OnDrawGizmos()
+    {
+        DrawEdgeGizmos();
     }
 
     public float CalculateDistance(Waypoint a, Waypoint b)
@@ -32,50 +44,62 @@ public class Graph : MonoBehaviour
     public Vector3 GetClosestPointToBuilding(GameObject building)
     {
         Vector3 buildingPosition = building.transform.position;
-        Waypoint[] waypoints = FindObjectsOfType<Waypoint>();
 
         float minDistance = float.MaxValue;
         Vector3 closestPoint = Vector3.zero;
 
-        foreach (Waypoint waypoint in waypoints)
+        foreach (Edge edge in edges)
         {
-            foreach (Waypoint adjacentWaypoint in waypoint.adjacentWaypoints)
-            {
-                Vector3 pointOnEdge = GetClosestPointOnEdge(waypoint.transform.position, adjacentWaypoint.transform.position, buildingPosition);
-                float distance = Vector3.Distance(buildingPosition, pointOnEdge);
+            Vector3 point = edge.GetClosestPoint(buildingPosition);
+            float distance = Vector3.Distance(point, buildingPosition);
 
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    closestPoint = pointOnEdge;
-                }
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestPoint = point;
             }
         }
 
         return closestPoint;
     }
 
-    private Vector3 GetClosestPointOnEdge(Vector3 pointA, Vector3 pointB, Vector3 targetPoint)
+    private void DrawEdgeGizmos()
     {
-        Vector3 edgeDirection = pointB - pointA;
-        float edgeLength = edgeDirection.magnitude;
-        edgeDirection.Normalize();
-
-        Vector3 targetDirection = targetPoint - pointA;
-        float projection = Vector3.Dot(targetDirection, edgeDirection);
-
-        if (projection <= 0f)
+        foreach (Edge edge in edges)
         {
-            return pointA;
-        }
-        else if (projection >= edgeLength)
-        {
-            return pointB;
-        }
-        else
-        {
-            return pointA + edgeDirection * projection;
+            edge.DrawGizmo();
         }
     }
 
+    public Edge getEdge(Waypoint a, Waypoint b)
+    {
+        foreach (Edge edge in edges)
+        {
+            if (edge.StartWaypoint == a && edge.EndWaypoint == b)
+            {
+                return edge;
+            }
+        }
+
+        return null;
+    }
+
+    public Edge getClosetEdge(Vector3 position)
+    {
+        Edge closestEdge = null;
+        float minDistance = float.MaxValue;
+
+        foreach (Edge edge in edges)
+        {
+            float distance = edge.DistanceToEdge(position);
+
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestEdge = edge;
+            }
+        }
+
+        return closestEdge;
+    }
 }

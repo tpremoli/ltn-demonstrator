@@ -41,6 +41,8 @@ public class WaypointEditor : Editor
 
         // these getcomponents are messy and should be refactored
         waypoint.AddAdjacentWaypoint(newWaypoint.GetComponent<Waypoint>());
+        // this makes sure the edge loader is up to date
+        EdgeLoader.LoadEdges();
 
         // add the new waypoint to the graph
         newWaypoint.transform.parent = graphGameObject.transform; 

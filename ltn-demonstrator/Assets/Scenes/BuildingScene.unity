@@ -681,6 +681,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointSize: 1
+  edges:
+  - startWaypoint: {fileID: 7151152}
+    endWaypoint: {fileID: 1282025173}
+    distance: 18.771559
+  - startWaypoint: {fileID: 287776538}
+    endWaypoint: {fileID: 2139437643}
+    distance: 13.548891
+  - startWaypoint: {fileID: 295516699}
+    endWaypoint: {fileID: 1657811266}
+    distance: 16.970562
+  - startWaypoint: {fileID: 295516699}
+    endWaypoint: {fileID: 1045232312}
+    distance: 20.663494
+  - startWaypoint: {fileID: 323980831}
+    endWaypoint: {fileID: 894784524}
+    distance: 14.314085
+  - startWaypoint: {fileID: 323980831}
+    endWaypoint: {fileID: 1182403298}
+    distance: 14.99333
+  - startWaypoint: {fileID: 323980831}
+    endWaypoint: {fileID: 704311189}
+    distance: 20.148697
+  - startWaypoint: {fileID: 704311189}
+    endWaypoint: {fileID: 323980831}
+    distance: 20.148697
+  - startWaypoint: {fileID: 894784524}
+    endWaypoint: {fileID: 1657811266}
+    distance: 15.471426
+  - startWaypoint: {fileID: 894784524}
+    endWaypoint: {fileID: 323980831}
+    distance: 14.314085
+  - startWaypoint: {fileID: 933875184}
+    endWaypoint: {fileID: 1657811266}
+    distance: 15.901258
+  - startWaypoint: {fileID: 933875184}
+    endWaypoint: {fileID: 1182403298}
+    distance: 17.400288
+  - startWaypoint: {fileID: 1045232312}
+    endWaypoint: {fileID: 295516699}
+    distance: 20.663494
+  - startWaypoint: {fileID: 1141344552}
+    endWaypoint: {fileID: 1554001491}
+    distance: 13.74809
+  - startWaypoint: {fileID: 1182403298}
+    endWaypoint: {fileID: 323980831}
+    distance: 14.99333
+  - startWaypoint: {fileID: 1182403298}
+    endWaypoint: {fileID: 1337136929}
+    distance: 22.67532
+  - startWaypoint: {fileID: 1182403298}
+    endWaypoint: {fileID: 933875184}
+    distance: 17.400288
+  - startWaypoint: {fileID: 1182403298}
+    endWaypoint: {fileID: 1554001491}
+    distance: 19.60408
+  - startWaypoint: {fileID: 1282025173}
+    endWaypoint: {fileID: 1657811266}
+    distance: 13.7663145
+  - startWaypoint: {fileID: 1282025173}
+    endWaypoint: {fileID: 7151152}
+    distance: 18.771559
+  - startWaypoint: {fileID: 1282025173}
+    endWaypoint: {fileID: 2139437643}
+    distance: 14.234567
+  - startWaypoint: {fileID: 1337136929}
+    endWaypoint: {fileID: 1182403298}
+    distance: 22.67532
+  - startWaypoint: {fileID: 1554001491}
+    endWaypoint: {fileID: 2139437643}
+    distance: 16.966513
+  - startWaypoint: {fileID: 1554001491}
+    endWaypoint: {fileID: 1182403298}
+    distance: 19.60408
+  - startWaypoint: {fileID: 1554001491}
+    endWaypoint: {fileID: 1141344552}
+    distance: 13.74809
+  - startWaypoint: {fileID: 1657811266}
+    endWaypoint: {fileID: 933875184}
+    distance: 15.901258
+  - startWaypoint: {fileID: 1657811266}
+    endWaypoint: {fileID: 295516699}
+    distance: 16.970562
+  - startWaypoint: {fileID: 1657811266}
+    endWaypoint: {fileID: 894784524}
+    distance: 15.471426
+  - startWaypoint: {fileID: 1657811266}
+    endWaypoint: {fileID: 1282025173}
+    distance: 13.7663145
+  - startWaypoint: {fileID: 2139437643}
+    endWaypoint: {fileID: 1282025173}
+    distance: 14.234567
+  - startWaypoint: {fileID: 2139437643}
+    endWaypoint: {fileID: 1554001491}
+    distance: 16.966513
+  - startWaypoint: {fileID: 2139437643}
+    endWaypoint: {fileID: 287776538}
+    distance: 13.548891
 --- !u!4 &980923535
 Transform:
   m_ObjectHideFlags: 0
@@ -927,6 +1024,8 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 323980831}
   - {fileID: 1337136929}
+  - {fileID: 933875184}
+  - {fileID: 1554001491}
 --- !u!4 &1182403299
 Transform:
   m_ObjectHideFlags: 0
@@ -972,7 +1071,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentWaypoints:
-  - {fileID: 1657811266}
   - {fileID: 1657811266}
   - {fileID: 7151152}
   - {fileID: 2139437643}
@@ -1022,6 +1120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentWaypoints:
   - {fileID: 1182403298}
+  - {fileID: 704311189}
 --- !u!4 &1337136930
 Transform:
   m_ObjectHideFlags: 0

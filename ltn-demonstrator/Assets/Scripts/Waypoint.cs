@@ -4,7 +4,11 @@ using System.Collections.Generic;
 
 public class Waypoint : MonoBehaviour
 {
-    public List<Waypoint> adjacentWaypoints; // Manually set in the editor
+    // TODO: This is the "adjacent" waypoints, which signifies the mutual connection between two waypoints.
+    // We can add a second list of "connections" which are one-way connections, and use that to create one 
+    // way streets.
+    // As it is, all adjacent waypoints are two-way connections.
+    public List<Waypoint> adjacentWaypoints; 
 
     private void OnDrawGizmos()
     {

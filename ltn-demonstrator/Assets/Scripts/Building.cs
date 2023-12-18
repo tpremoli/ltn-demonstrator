@@ -25,6 +25,7 @@ public class Building : MonoBehaviour
     [Range(1, 600)] [SerializeField] private float timeBetweenSpawns; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
 
+    private Edge closestEdge;
     private Vector3 closestPointOnEdge;
 
     // Some more attributes - not sure if needed, but seemed useful
@@ -49,7 +50,8 @@ public class Building : MonoBehaviour
         this.destinationWeights = new Dictionary<BuildingType, float>();
         this.nextSpawnTime = Time.time + timeBetweenSpawns;
 
-        this.closestPointOnEdge = graph.GetClosestPointToBuilding(this.gameObject);
+        this.closestEdge = graph.getClosetEdge(this.transform.position);
+        this.closestPointOnEdge = closestEdge.GetClosestPoint(this.transform.position);
 
         Debug.Log("Building Instantiated");
     }
