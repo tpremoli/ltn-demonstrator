@@ -27,6 +27,12 @@ public class WaypointPath
 
     public List<Waypoint> Dijkstra()
     {
+        // Special case: start and end are on the same edge
+        if (startEdge.isSameEdge(endEdge))
+        {
+            return new List<Waypoint>();
+        }
+
         Dictionary<Waypoint, float> dist = new Dictionary<Waypoint, float>();
         Dictionary<Waypoint, Waypoint> prev = new Dictionary<Waypoint, Waypoint>();
         Dictionary<Waypoint, float> mostRecentDistances = new Dictionary<Waypoint, float>();

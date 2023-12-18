@@ -104,4 +104,9 @@ public class Edge
         return randomPointOnEdge;
     }
 
+    public bool isSameEdge(Edge otherEdge)
+    {
+        return (this.startWaypoint == otherEdge.startWaypoint && this.endWaypoint == otherEdge.endWaypoint) ||
+               (this.startWaypoint == otherEdge.endWaypoint && this.endWaypoint == otherEdge.startWaypoint);
+    }
 }
