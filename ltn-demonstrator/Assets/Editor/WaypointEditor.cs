@@ -27,15 +27,27 @@ public class WaypointEditor : Editor
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Connection Type:");
+
         bool isSingleConnection = GUILayout.Toggle(false, "Single", "Button");
-        bool isBidirectional = GUILayout.Toggle(true, "Bidirectional", "Button");
+        bool isBidirectional = GUILayout.Toggle(false, "Bidirectional", "Button");
+
         GUILayout.EndHorizontal();
 
         if (GUILayout.Button("Create Adjacent Waypoint"))
         {
-            CreateAdjacentWaypoint(isSingleConnection);
+            // Ensure only one connection type is selected
+            if (isSingleConnection)
+            {
+                CreateAdjacentWaypoint(true);
+            }
+            else if (isBidirectional)
+            {
+                CreateAdjacentWaypoint(false);
+            }
         }
     }
+
+
 
     void CreateAdjacentWaypoint(bool isSingleConnection)
     {
