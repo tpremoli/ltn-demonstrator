@@ -27,18 +27,6 @@ public class WaypointConnector : EditorWindow
             }
         }
 
-        // Remove duplicate adjacent waypoints
-        foreach (Waypoint waypoint in allWaypoints)
-        {
-            RemoveDuplicateAdjacentWaypoints(waypoint);
-        }
-
-        // Remove self connectionss
-        foreach (Waypoint waypoint in allWaypoints)
-        {
-            RemoveSelfConnections(waypoint);
-        }
-
         // Mark all modified objects as dirty so the changes are saved
         foreach (Waypoint waypoint in allWaypoints)
         {
@@ -49,6 +37,21 @@ public class WaypointConnector : EditorWindow
         EdgeLoader.LoadEdges();
 
         Debug.Log("Waypoints connections updated.");
+    }
+
+    [MenuItem("Tools/Remove Duplicate Adjacent Waypoints")]
+    private static void RemoveDuplicateAdjacentWaypoints(){
+        Waypoint[] allWaypoints = FindObjectsOfType<Waypoint>();
+        foreach (Waypoint waypoint in allWaypoints)
+        {
+            RemoveDuplicateAdjacentWaypoints(waypoint);
+        }
+        foreach (Waypoint waypoint in allWaypoints)
+        {
+            EditorUtility.SetDirty(waypoint);
+        }
+        EdgeLoader.LoadEdges();
+        Debug.Log("Duplicate adjacent waypoints removed.");
     }
 
     private static void RemoveDuplicateAdjacentWaypoints(Waypoint waypoint)
@@ -66,6 +69,22 @@ public class WaypointConnector : EditorWindow
             }
         }
     }
+
+    [MenuItem("Tools/Remove Self-connected Adjacent Waypoints")]
+    private static void RemoveSelfConnections(){
+        Waypoint[] allWaypoints = FindObjectsOfType<Waypoint>();
+        foreach (Waypoint waypoint in allWaypoints)
+        {
+            RemoveSelfConnections(waypoint);
+        }
+        foreach (Waypoint waypoint in allWaypoints)
+        {
+            EditorUtility.SetDirty(waypoint);
+        }
+        EdgeLoader.LoadEdges();
+        Debug.Log("Waypoint self connections removed.");
+    }
+
 
     private static void RemoveSelfConnections(Waypoint waypoint)
     {
