@@ -25,8 +25,8 @@ public class WaypointPath
 
         if (PathExists()){
             this.path = Dijkstra();
-        }else{
-            Debug.LogWarning("No path exists");
+        } else {
+            this.path = null;
         }
     }
 
