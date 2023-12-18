@@ -19,65 +19,54 @@ public class WaypointMover : MonoBehaviour
 
     private WaypointPath path;           // Instance of the pathfinding class
     private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
-
+    private Graph graph;                 // Instance of the graph class
 
 
     void Start()
     {
+        this.graph = GameObject.Find("Graph").GetComponent<Graph>();
+
         // The building spawns the Mover, so Mover is at the Building position
-        Waypoint startingPoint = FindClosestWaypoint(this.transform.position);
-        Waypoint endPoint = RandEndNode(startingPoint);
+        Edge endEdge = graph.edges[Random.Range(0, graph.edges.Count)];
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(startingPoint, endPoint);
+        path = new WaypointPath(this.transform.position, endEdge.GetRandomPointOnEdge());
 
         // Get the first waypoint in the path and set the initial position
         currentWaypoint = path.GetNextWaypoint();
-        transform.position = currentWaypoint.transform.position;
         Debug.Log("Traveller Instantiated");
     }
 
-
-    Waypoint FindClosestWaypoint(Vector3 position)
+    void Update()
     {
-        Waypoint closestWaypoint = null;
-        float closestDistance = float.MaxValue;
-
-        // Iterate through all waypoints
-        foreach (Waypoint waypoint in path.path)
-        {
-            float distance = Vector3.Distance(position, waypoint.transform.position);
-            
-            // Update the closest waypoint if a closer one is found
-            if (distance < closestDistance)
+        // if no waypoint to move to, go to the position along the edge
+        if (currentWaypoint == null){
+            // Move towards the current waypoint using linear interpolation
+            transform.position = Vector3.MoveTowards(transform.position, path.destinationPos, speed * Time.deltaTime); 
+            if (Vector3.Distance(transform.position, path.destinationPos) < distanceThreshold)
             {
-                closestWaypoint = waypoint;
-                closestDistance = distance;
+                // if we're close enough to the destination, destroy the object
+                arriveToDestination();
+            }
+
+        } else {
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.transform.position, speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, currentWaypoint.transform.position) < distanceThreshold)
+            {
+                // If the threshold is met, get the next waypoint in the path
+                currentWaypoint = path.GetNextWaypoint();
             }
         }
 
-        return closestWaypoint;
+        // Move towards the current waypoint using linear interpolation
+
+        // Check if the distance to the current waypoint is below the threshold
+
     }
 
-    Waypoint RandEndNode(Waypoint startingPoint)
+    public void arriveToDestination()
     {
-        // Access the list of waypoints from the path
-        List<Waypoint> waypoints = path.path;
-
-        if (waypoints == null || waypoints.Count <= 1)
-        {
-            Debug.LogError("Not enough waypoints for random selection.");
-            return null;
-        }
-
-        // Generate a list of waypoints excluding the starting point
-        List<Waypoint> availableWaypoints = new List<Waypoint>(waypoints);
-        availableWaypoints.Remove(startingPoint);
-
-        // Select a random waypoint from the available list
-        Waypoint randomWaypoint = availableWaypoints[Random.Range(0, availableWaypoints.Count)];
-
-        return randomWaypoint;
+        Destroy(this.gameObject);
     }
 
     public float calculateEmissions()
