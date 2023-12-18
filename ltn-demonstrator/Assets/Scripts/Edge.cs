@@ -57,11 +57,17 @@ public class Edge
     }
 
     public float DistanceToEdge(Vector3 position){
+        Vector3 closestPoint = this.GetClosestPoint(position);
+        return Vector3.Distance(position, closestPoint);
+    }
+
+    public Vector3 GetClosestPoint(Vector3 point)
+    {
         Vector3 start = startWaypoint.transform.position;
         Vector3 end = endWaypoint.transform.position;
 
         Vector3 edgeDirection = end - start;
-        Vector3 pointDirection = position - start;
+        Vector3 pointDirection = point - start;
 
         float edgeLength = edgeDirection.magnitude;
         edgeDirection.Normalize();
@@ -70,17 +76,16 @@ public class Edge
 
         if (dotProduct <= 0)
         {
-            return Vector3.Distance(position, start);
+            return start;
         }
         else if (dotProduct >= edgeLength)
         {
-            return Vector3.Distance(position, end);
+            return end;
         }
         else
         {
             Vector3 closestPointOnEdge = start + edgeDirection * dotProduct;
-            return Vector3.Distance(position, closestPointOnEdge);
+            return closestPointOnEdge;
         }
     }
-
 }
