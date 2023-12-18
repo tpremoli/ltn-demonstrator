@@ -27,59 +27,73 @@ public class WaypointPath
 
     public List<Waypoint> Dijkstra()
     {
-        // Special case: start and end are on the same edge
+        // Check if start and end are on the same edge to handle this special case
         if (startEdge.isSameEdge(endEdge))
         {
+            // Return an empty path if starting and ending on the same edge
             return new List<Waypoint>();
         }
 
+        // Initialize dictionaries to store distances, previous waypoints, and the most recent distances
         Dictionary<Waypoint, float> dist = new Dictionary<Waypoint, float>();
         Dictionary<Waypoint, Waypoint> prev = new Dictionary<Waypoint, Waypoint>();
         Dictionary<Waypoint, float> mostRecentDistances = new Dictionary<Waypoint, float>();
 
+        // Set initial distances to all waypoints as infinite and previous waypoints as null
         foreach (Waypoint waypoint in graph.waypoints)
         {
             dist[waypoint] = float.MaxValue;
             prev[waypoint] = null;
         }
 
+        // Initialize the distances for the start waypoints on the start edge
         dist[startEdge.StartWaypoint] = Vector3.Distance(startEdge.StartWaypoint.transform.position, beginningPos);
         dist[startEdge.EndWaypoint] = Vector3.Distance(startEdge.EndWaypoint.transform.position, beginningPos);
 
+        // Priority queue to manage waypoints based on their current shortest distance
         PriorityQueue<Waypoint, float> queue = new PriorityQueue<Waypoint, float>();
 
+        // Enqueue the start waypoints and update their most recent distances
         queue.Enqueue(startEdge.StartWaypoint, dist[startEdge.StartWaypoint]);
         mostRecentDistances[startEdge.StartWaypoint] = dist[startEdge.StartWaypoint];
 
         queue.Enqueue(startEdge.EndWaypoint, dist[startEdge.EndWaypoint]);
         mostRecentDistances[startEdge.EndWaypoint] = dist[startEdge.EndWaypoint];
 
+        // Process each waypoint in the queue
         while (queue.Count > 0)
         {
             Waypoint current = queue.Dequeue();
 
+            // Skip processing if the current distance is not the most recent
             if (mostRecentDistances[current] != dist[current])
             {
                 continue;
             }
 
-            // Explore adjacent waypoints
+            // Explore all adjacent waypoints of the current waypoint
             foreach (Waypoint neighbor in current.adjacentWaypoints)
             {
+                // Calculate the alternative distance to this neighbor
                 float alt = dist[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
+
+                // If the alternative distance is shorter, update the distance and previous waypoint
                 if (alt < dist[neighbor])
                 {
                     dist[neighbor] = alt;
                     prev[neighbor] = current;
+
+                    // Enqueue the neighbor with the updated distance
                     queue.Enqueue(neighbor, alt);
-                    mostRecentDistances[neighbor] = alt;
+                    mostRecentDistances[neighbor] = alt; // Update the most recent distance
                 }
             }
         }
 
+        // Construct the shortest path using the previous waypoints from the end edge
         return ConstructPath(prev, endEdge);
     }
-
+    
     private List<Waypoint> ConstructPath(Dictionary<Waypoint, Waypoint> prev, Edge endEdge)
     {
         List<Waypoint> path = new List<Waypoint>();
