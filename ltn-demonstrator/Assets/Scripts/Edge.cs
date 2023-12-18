@@ -89,4 +89,19 @@ public class Edge
         }
     }
 
+    public Vector3 GetRandomPointOnEdge()
+    {
+        Vector3 start = startWaypoint.transform.position;
+        Vector3 end = endWaypoint.transform.position;
+
+        Vector3 edgeDirection = end - start;
+        float edgeLength = edgeDirection.magnitude;
+        edgeDirection.Normalize();
+
+        float randomDistance = Random.Range(0f, edgeLength);
+        Vector3 randomPointOnEdge = start + edgeDirection * randomDistance;
+
+        return randomPointOnEdge;
+    }
+
 }

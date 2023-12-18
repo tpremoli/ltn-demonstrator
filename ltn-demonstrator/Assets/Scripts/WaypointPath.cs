@@ -1,79 +1,99 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Utils;
 
 public class WaypointPath
 {
-    private Queue<Waypoint> waypointQueue;
-
     public List<Waypoint> path;
+    private Graph graph;
 
-    public List<Waypoint> BFS(Waypoint startpoint, Waypoint endpoint)
+    public Vector3 beginningPos;
+    public Vector3 destinationPos;
+
+    public Edge startEdge;
+    public Edge endEdge;
+
+    public WaypointPath(Vector3 beginningPos, Vector3 destinationPos)
     {
-        List<Waypoint> path = new List<Waypoint>();
-        Queue<Waypoint> queue = new Queue<Waypoint>();
-        Dictionary<Waypoint, Waypoint> cameFrom = new Dictionary<Waypoint, Waypoint>();
-        Dictionary<Waypoint, int> costSoFar = new Dictionary<Waypoint, int>();
+        this.graph = GameObject.Find("Graph").GetComponent<Graph>();
+        this.beginningPos = beginningPos;
+        this.destinationPos = destinationPos;
 
-        queue.Enqueue(startpoint);
-        cameFrom[startpoint] = null;
-        costSoFar[startpoint] = 0;
+        this.startEdge = graph.getClosetEdge(beginningPos);
+        this.endEdge = graph.getClosetEdge(destinationPos);
+
+        this.path = Dijkstra();
+    }
+
+
+    public List<Waypoint> Dijkstra()
+    {
+        // Initialize distance dictionary and previous waypoint dictionary
+        Dictionary<Waypoint, float> dist = new Dictionary<Waypoint, float>();
+        Dictionary<Waypoint, Waypoint> prev = new Dictionary<Waypoint, Waypoint>();
+
+        // Initialize all distances as infinity and prev as null
+        foreach (Waypoint waypoint in graph.waypoints)
+        {
+            dist[waypoint] = float.MaxValue;
+            prev[waypoint] = null;
+        }
+
+        // Setup start distances based on the edge proximity
+        dist[startEdge.StartWaypoint] = Vector3.Distance(startEdge.StartWaypoint.transform.position, beginningPos);
+        dist[startEdge.EndWaypoint] = Vector3.Distance(startEdge.EndWaypoint.transform.position, beginningPos);
+
+        // Queue to select the waypoint with the smallest distance
+        Queue<Waypoint> queue = new Queue<Waypoint>();
+        queue.Enqueue(startEdge.StartWaypoint);
+        queue.Enqueue(startEdge.EndWaypoint);
 
         while (queue.Count > 0)
         {
             Waypoint current = queue.Dequeue();
 
-            if (current == endpoint)
+            if (current == endEdge.StartWaypoint || current == endEdge.EndWaypoint)
             {
                 break;
             }
 
-            foreach (Waypoint next in current.adjacentWaypoints)
+            // Explore adjacent waypoints
+            foreach (Waypoint neighbor in current.adjacentWaypoints)
             {
-                int newCost = costSoFar[current] + 1;
-                if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next])
+                float alt = dist[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
+                if (alt < dist[neighbor])
                 {
-                    costSoFar[next] = newCost;
-                    queue.Enqueue(next);
-                    cameFrom[next] = current;
+                    dist[neighbor] = alt;
+                    prev[neighbor] = current;
+                    queue.Enqueue(neighbor);  // Re-enqueue with updated distance
                 }
             }
         }
 
-        Waypoint currentWaypoint = endpoint;
-        while (currentWaypoint != startpoint)
+        // Construct the shortest path
+        return ConstructPath(prev, endEdge);
+    }
+
+    private List<Waypoint> ConstructPath(Dictionary<Waypoint, Waypoint> prev, Edge endEdge)
+    {
+        List<Waypoint> path = new List<Waypoint>();
+        Waypoint current = endEdge.StartWaypoint;
+
+        // Choose the end waypoint based on which is closer to the destination position
+        if (Vector3.Distance(endEdge.EndWaypoint.transform.position, destinationPos) < Vector3.Distance(endEdge.StartWaypoint.transform.position, destinationPos))
         {
-            path.Add(currentWaypoint);
-            currentWaypoint = cameFrom[currentWaypoint];
+            current = endEdge.EndWaypoint;
+        }
+
+        // Trace back the path using the prev dictionary
+        while (current != null)
+        {
+            path.Add(current);
+            current = prev[current];
         }
 
         path.Reverse();
         return path;
-    }
-
-    public WaypointPath(Waypoint startingPoint, Waypoint endPoint)
-    {
-        this.path = BFS(startingPoint, endPoint);
-        
-    }
-
-    // Enqueue all adjacent waypoints of the given waypoint
-    private void EnqueueAdjacentWaypoints(Waypoint waypoint)
-    /*
-    adjacentWaypoints list from the Waypoint class used
-    BFS traversal in the WaypointPath class follows
-    connections specified in the Waypoint class
-    */
-    {
-        if (waypoint == null || waypoint.adjacentWaypoints.Count == 0)
-        {
-            Debug.LogWarning("Waypoint is null or has no adjacent waypoints.");
-            return;
-        }
-
-        foreach (Waypoint adjacent in waypoint.adjacentWaypoints)
-        {
-            waypointQueue.Enqueue(adjacent);
-        }
     }
 
     // Get the next waypoint in the BFS traversal
