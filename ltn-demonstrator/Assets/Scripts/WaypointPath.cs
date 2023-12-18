@@ -174,6 +174,11 @@ public class WaypointPath
         path.RemoveAt(0);
         return nextWaypoint;
     }
+
+    /// <summary>
+    /// This method checks if a path exists between the start and end positions.
+    /// </summary>
+    /// <returns></returns>
     public bool PathExists()
     {
         Waypoint nearestStartWaypoint = ClosestWaypointOnEdge(startEdge, beginningPos);
