@@ -21,8 +21,8 @@ public class Building : MonoBehaviour
 
     // the spawn probability should be based on the building type and maximum number of occupants.
     // as it stands, it is a constant value, but it should be a function/enum of the building type
-    [Range(0f, 1f)] [SerializeField] private float spawnProbability;
-    [Range(1, 600)] [SerializeField] private float timeBetweenSpawns; // The time between spawn attempts
+    [Range(0f, 1f)] [SerializeField] private float spawnProbability = 0.1f;
+    [Range(1, 600)] [SerializeField] private float timeBetweenSpawns = 1; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
 
     private Edge closestEdge;
@@ -34,17 +34,14 @@ public class Building : MonoBehaviour
 
     // Start is called before the first frame update. We use these to initialize the building.
     void Start(){
+        Random.InitState(42); // Set seed for random number generator
+
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        Random.InitState(42); // Set seed for random number generator
-        this.vehicleMax = 2;
-        this.occupantMax = 5;
-
+        // I don't want to hardcode these values, but I'm not sure how to do it otherwise.
+        // if this is removed, the building will spam vehicles
+        this.timeBetweenSpawns = 1;
         this.spawnProbability = 0.1f;
-        this.timeBetweenSpawns = 1f;
-        this.nextSpawnTime = 0f;
-
-        this.destinationWeights = new Dictionary<BuildingType, float>();
         this.nextSpawnTime = Time.time + timeBetweenSpawns;
 
         this.closestEdge = graph.getClosetEdge(this.transform.position);
@@ -89,6 +86,11 @@ public class Building : MonoBehaviour
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnEdge, Quaternion.identity);
     }
+
+    // public Vector3 getEdgeLocation()
+    // {
+    //     return edge.getPointOnEdge(positionOnEdge);
+    // }
 
     // getters and setters
     // Get the maximum number of vehicles

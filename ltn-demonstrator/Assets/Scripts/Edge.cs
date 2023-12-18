@@ -88,4 +88,25 @@ public class Edge
             return closestPointOnEdge;
         }
     }
+
+    public Vector3 GetRandomPointOnEdge()
+    {
+        Vector3 start = startWaypoint.transform.position;
+        Vector3 end = endWaypoint.transform.position;
+
+        Vector3 edgeDirection = end - start;
+        float edgeLength = edgeDirection.magnitude;
+        edgeDirection.Normalize();
+
+        float randomDistance = Random.Range(0f, edgeLength);
+        Vector3 randomPointOnEdge = start + edgeDirection * randomDistance;
+
+        return randomPointOnEdge;
+    }
+
+    public bool isSameEdge(Edge otherEdge)
+    {
+        return (this.startWaypoint == otherEdge.startWaypoint && this.endWaypoint == otherEdge.endWaypoint) ||
+               (this.startWaypoint == otherEdge.endWaypoint && this.endWaypoint == otherEdge.startWaypoint);
+    }
 }
