@@ -51,6 +51,11 @@ public class Waypoint : MonoBehaviour
 
     public void AddAdjacentWaypoint(Waypoint newAdjacent)
     {
+        if (adjacentWaypoints == null)
+        {
+            adjacentWaypoints = new List<Waypoint>();
+        }
+
         if (!adjacentWaypoints.Contains(newAdjacent))
         {
             adjacentWaypoints.Add(newAdjacent);
