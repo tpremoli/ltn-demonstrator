@@ -10,7 +10,7 @@ public class EdgeLoader
     {
         Graph graph = GameObject.Find("Graph").GetComponent<Graph>();
         graph.edges = new List<Edge>();
-        
+
         if (graph == null)
         {
             Debug.LogError("No graph found in scene.");

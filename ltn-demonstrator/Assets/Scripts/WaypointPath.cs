@@ -22,7 +22,12 @@ public class WaypointPath
         this.startEdge = graph.getClosetEdge(beginningPos);
         this.endEdge = graph.getClosetEdge(destinationPos);
 
-        this.path = Dijkstra();
+
+        if (PathExists()){
+            this.path = Dijkstra();
+        } else {
+            this.path = null;
+        }
     }
 
     public List<Waypoint> Dijkstra()
@@ -90,30 +95,33 @@ public class WaypointPath
             }
         }
 
-        // Construct the shortest path using the previous waypoints from the end edge
+        // If a path exists, construct the path
         return ConstructPath(prev, endEdge);
     }
 
     private List<Waypoint> ConstructPath(Dictionary<Waypoint, Waypoint> prev, Edge endEdge)
     {
         List<Waypoint> path = new List<Waypoint>();
-        Waypoint current = null;
 
         // Determine the endpoint that leads most directly to the destination
-        Waypoint closerEndpoint = Vector3.Distance(endEdge.EndWaypoint.transform.position, destinationPos) < 
-                                Vector3.Distance(endEdge.StartWaypoint.transform.position, destinationPos) 
-                                ? endEdge.EndWaypoint : endEdge.StartWaypoint;
+        Waypoint closerEndpoint = ClosestWaypointOnEdge(endEdge, destinationPos);
 
-        // Construct the path from the closer endpoint
-        current = closerEndpoint;
-
-        while (current != null && prev.ContainsKey(current))
-        {
-            path.Add(current);
-            current = prev[current];
+        // Check if a path exists to the closer endpoint
+        if (!prev.ContainsKey(closerEndpoint))
+        {   
+            Debug.LogWarning("No path exists to the closer endpoint");
+            return null; // or any other appropriate response
         }
 
-        path.Reverse();
+        // If a path exists, construct the path from the closer endpoint
+        Waypoint current = closerEndpoint;
+        while (current != null)
+        {
+            path.Add(current);
+            current = prev.ContainsKey(current) ? prev[current] : null;
+        }
+
+        path.Reverse(); // Reverse the path to start from the beginning
 
         // Refine the path to avoid overshooting
         if (path.Count >= 2)
@@ -140,8 +148,14 @@ public class WaypointPath
 
         return distanceToLast + distanceToSecondLast <= totalDistance + 0.1f; // Add a small tolerance
     }
+
     private Waypoint ClosestWaypointOnEdge(Edge edge, Vector3 position)
     {
+        if (!edge.isPointOnEdge(position))
+        {
+            Debug.Log("Position is not on edge");
+            return null;
+        }
         // Determine the closest waypoint on the given edge
         float startDist = Vector3.Distance(position, edge.StartWaypoint.transform.position);
         float endDist = Vector3.Distance(position, edge.EndWaypoint.transform.position);
@@ -153,11 +167,73 @@ public class WaypointPath
     {
         if (path == null || path.Count == 0)
         {
-            Debug.Log("Finished path, moving to checkpoint now.");
+            Debug.Log("Finished path, moving to destination point now.");
             return null;
         }
         Waypoint nextWaypoint = path[0];
         path.RemoveAt(0);
         return nextWaypoint;
+    }
+
+    /// <summary>
+    /// This method checks if a path exists between the start and end positions.
+    /// </summary>
+    /// <returns></returns>
+    public bool PathExists()
+    {
+        Waypoint nearestStartWaypoint = ClosestWaypointOnEdge(startEdge, beginningPos);
+        Waypoint nearestEndWaypoint = ClosestWaypointOnEdge(endEdge, destinationPos);
+
+        // Initialize dictionaries for distances and previous waypoints
+        Dictionary<Waypoint, float> dist = new Dictionary<Waypoint, float>();
+        Dictionary<Waypoint, Waypoint> prev = new Dictionary<Waypoint, Waypoint>();
+
+        // Set initial distances to all waypoints as infinite and previous waypoints as null
+        foreach (Waypoint waypoint in graph.waypoints)
+        {
+            dist[waypoint] = float.MaxValue;
+            prev[waypoint] = null;
+        }
+
+        // Set the distance for the start waypoint to zero
+        dist[nearestStartWaypoint] = 0;
+
+        // Priority queue to manage waypoints based on their current shortest distance
+        PriorityQueue<Waypoint, float> queue = new PriorityQueue<Waypoint, float>();
+
+        // Enqueue the start waypoint
+        queue.Enqueue(nearestStartWaypoint, dist[nearestStartWaypoint]);
+
+        // Process each waypoint in the queue
+        while (queue.Count > 0)
+        {
+            Waypoint current = queue.Dequeue();
+
+            // If the current waypoint is the end waypoint, return true indicating a path exists
+            if (current == nearestEndWaypoint)
+            {
+                return true;
+            }
+
+            // Explore all adjacent waypoints of the current waypoint
+            foreach ( Waypoint neighbor in current.adjacentWaypoints)
+            {
+                // Calculate the alternative distance to this neighbor
+                float alt = dist[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
+
+                // If the alternative distance is shorter, update the distance and previous waypoint
+                if (alt < dist[neighbor])
+                {
+                    dist[neighbor] = alt;
+                    prev[neighbor] = current;
+
+                    // Enqueue the neighbor with the updated distance
+                    queue.Enqueue(neighbor, alt);
+                }
+            }
+        }
+
+        // If the loop completes without finding the end waypoint, return false indicating no path exists
+        return false;
     }
 }

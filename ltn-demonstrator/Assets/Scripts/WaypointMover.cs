@@ -32,6 +32,14 @@ public class WaypointMover : MonoBehaviour
         // Initialize the path with the starting waypoint
         path = new WaypointPath(this.transform.position, endEdge.GetRandomPointOnEdge());
 
+        if (path.path == null)
+        {
+            // if no path is found, destroy the object.
+            // Later on, we should change this so that the traveller changes their mode of transport
+            Debug.LogWarning("Path doesn't exist for Traveller" + this.gameObject.name+". Destroying object.");
+            Destroy(this.gameObject);
+        }
+
         // Get the first waypoint in the path and set the initial position
         currentWaypoint = path.GetNextWaypoint();
         Debug.Log("Traveller Instantiated");
