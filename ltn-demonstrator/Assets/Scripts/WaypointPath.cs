@@ -25,7 +25,6 @@ public class WaypointPath
         this.path = Dijkstra();
     }
 
-
     public List<Waypoint> Dijkstra()
     {
         Dictionary<Waypoint, float> dist = new Dictionary<Waypoint, float>();
@@ -80,18 +79,14 @@ public class WaypointPath
         List<Waypoint> path = new List<Waypoint>();
         Waypoint current = null;
 
-        // Choose the endpoint based on proximity to destinationPos
-        if (Vector3.Distance(endEdge.EndWaypoint.transform.position, destinationPos) < 
-            Vector3.Distance(endEdge.StartWaypoint.transform.position, destinationPos))
-        {
-            current = endEdge.EndWaypoint;
-        }
-        else
-        {
-            current = endEdge.StartWaypoint;
-        }
+        // Determine the endpoint that leads most directly to the destination
+        Waypoint closerEndpoint = Vector3.Distance(endEdge.EndWaypoint.transform.position, destinationPos) < 
+                                Vector3.Distance(endEdge.StartWaypoint.transform.position, destinationPos) 
+                                ? endEdge.EndWaypoint : endEdge.StartWaypoint;
 
-        // Trace back the path using the prev dictionary
+        // Construct the path from the closer endpoint
+        current = closerEndpoint;
+
         while (current != null && prev.ContainsKey(current))
         {
             path.Add(current);
@@ -99,9 +94,33 @@ public class WaypointPath
         }
 
         path.Reverse();
+
+        // Refine the path to avoid overshooting
+        if (path.Count >= 2)
+        {
+            // Check if the destination is between the last two waypoints in the path
+            Waypoint lastWaypoint = path[path.Count - 1];
+            Waypoint secondLastWaypoint = path[path.Count - 2];
+
+            if (IsDestinationBetween(destinationPos, lastWaypoint.transform.position, secondLastWaypoint.transform.position))
+            {
+                path.RemoveAt(path.Count - 1); // Remove the last waypoint if it overshoots the destination
+            }
+        }
+
         return path;
-    }    
-        private Waypoint ClosestWaypointOnEdge(Edge edge, Vector3 position)
+    }
+
+    // Helper method to determine if the destination is between two waypoints
+    private bool IsDestinationBetween(Vector3 destination, Vector3 last, Vector3 secondLast)
+    {
+        float totalDistance = Vector3.Distance(last, secondLast);
+        float distanceToLast = Vector3.Distance(destination, last);
+        float distanceToSecondLast = Vector3.Distance(destination, secondLast);
+
+        return distanceToLast + distanceToSecondLast <= totalDistance + 0.1f; // Add a small tolerance
+    }
+    private Waypoint ClosestWaypointOnEdge(Edge edge, Vector3 position)
     {
         // Determine the closest waypoint on the given edge
         float startDist = Vector3.Distance(position, edge.StartWaypoint.transform.position);

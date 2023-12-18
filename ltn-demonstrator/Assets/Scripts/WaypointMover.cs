@@ -78,9 +78,16 @@ public class WaypointMover : MonoBehaviour
 
             // draw the path
             Gizmos.color = Color.yellow;
-            for (int i = 0; i < path.path.Count - 1; i++)
+            for (int i = 0; i < path.path.Count; i++)
             {
-                Gizmos.DrawLine(path.path[i].transform.position, path.path[i + 1].transform.position);
+                Gizmos.DrawSphere(path.path[i].transform.position, 1f);
+
+            }
+
+            if (currentWaypoint != null)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(currentWaypoint.transform.position, 1f);
             }
         }
     }
