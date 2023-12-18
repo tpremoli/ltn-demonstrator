@@ -57,11 +57,6 @@ public class WaypointMover : MonoBehaviour
                 currentWaypoint = path.GetNextWaypoint();
             }
         }
-
-        // Move towards the current waypoint using linear interpolation
-
-        // Check if the distance to the current waypoint is below the threshold
-
     }
 
     public void arriveToDestination()
@@ -73,6 +68,21 @@ public class WaypointMover : MonoBehaviour
     {
         // Calculate emissions using the rateOfEmission attribute and totalDistanceMoved
         return rateOfEmission * totalDistanceMoved;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color  = Color.magenta;
+        if (Application.IsPlaying(this)){
+            Gizmos.DrawWireSphere(path.destinationPos, 1f);
+
+            // draw the path
+            Gizmos.color = Color.yellow;
+            for (int i = 0; i < path.path.Count - 1; i++)
+            {
+                Gizmos.DrawLine(path.path[i].transform.position, path.path[i + 1].transform.position);
+            }
+        }
     }
 
 }
