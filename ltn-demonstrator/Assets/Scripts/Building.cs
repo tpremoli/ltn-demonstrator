@@ -16,7 +16,7 @@ public class Building : MonoBehaviour
     // Private attributes
     [SerializeField] private int vehicleMax;
     [SerializeField] private int occupantMax;
-    [SerializeField] private Graph graph;
+    private Graph graph;
     private Dictionary<BuildingType, float> destinationWeights; // Distribution for destination types
 
     // the spawn probability should be based on the building type and maximum number of occupants.
@@ -25,6 +25,7 @@ public class Building : MonoBehaviour
     [Range(1, 600)] [SerializeField] private float timeBetweenSpawns; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
 
+    private Edge closestEdge;
     private Vector3 closestPointOnEdge;
 
     // Some more attributes - not sure if needed, but seemed useful
@@ -46,7 +47,8 @@ public class Building : MonoBehaviour
         this.destinationWeights = new Dictionary<BuildingType, float>();
         this.nextSpawnTime = Time.time + timeBetweenSpawns;
 
-        this.closestPointOnEdge = graph.GetClosestPointToBuilding(this.gameObject);
+        this.closestEdge = graph.getClosetEdge(this.transform.position);
+        this.closestPointOnEdge = closestEdge.GetClosestPoint(this.transform.position);
 
         Debug.Log("Building Instantiated");
     }
@@ -85,7 +87,7 @@ public class Building : MonoBehaviour
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
         // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
-        GameObject newTravellerObj = Instantiate(travellerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnEdge, Quaternion.identity);
     }
 
     // getters and setters
