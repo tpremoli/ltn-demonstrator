@@ -15,13 +15,6 @@ public class Graph : MonoBehaviour
         waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
     }
 
-    public List<Waypoint> waypoints;
-
-    void Start()
-    {
-        waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
-    }
-
     public float WaypointSize
     {
         get { return waypointSize; }
