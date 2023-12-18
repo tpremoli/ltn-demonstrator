@@ -16,11 +16,28 @@ public class Edge
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public float Distance { get { return distance; } }
 
+    /// <summary>
+    /// Barrier stores if there's a barrier in the path of the edge
+    /// isBarricated is true if there is a barrier in the path of the edge
+    /// barricadeLocation is the z position of the barrier in the path of the edge. -1 if there is no barrier
+    /// </summary>
+    public bool isBarricated;
+    public float barrierLocation;
+    public Barrier barrier;
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.startWaypoint = startWaypoint;
         this.endWaypoint = endWaypoint;
         this.distance = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
+
+        this.barrier = getBarrierInPath();
+        this.isBarricated = barrier != null;
+        this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
+
+        if (this.isBarricated)
+        {
+            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
+        }
     }
 
     public void DrawGizmo()
@@ -108,5 +125,46 @@ public class Edge
     {
         return (this.startWaypoint == otherEdge.startWaypoint && this.endWaypoint == otherEdge.endWaypoint) ||
                (this.startWaypoint == otherEdge.endWaypoint && this.endWaypoint == otherEdge.startWaypoint);
+    }
+
+    public float convertToPositionAlongEdge(Vector3 point)
+    {
+        Vector3 start = startWaypoint.transform.position;
+        Vector3 end = endWaypoint.transform.position;
+
+        Vector3 edgeDirection = end - start;
+        Vector3 pointDirection = point - start;
+
+        float edgeLength = edgeDirection.magnitude;
+        edgeDirection.Normalize();
+
+        float dotProduct = Vector3.Dot(pointDirection, edgeDirection);
+
+        if (dotProduct <= 0)
+        {
+            return 0f;
+        }
+        else if (dotProduct >= edgeLength)
+        {
+            return 1f;
+        }
+        else
+        {
+            return dotProduct / edgeLength;
+        }
+    }
+
+    public Barrier getBarrierInPath()
+    {
+        // we go through the Barrier and check if the edge intersects with any of them
+        Barrier[] allBarriers = GameObject.FindObjectsOfType<Barrier>();
+        for (int i = 0; i < allBarriers.Length; i++)
+        {
+            if (allBarriers[i].isPointInBarrier(this.GetClosestPoint(allBarriers[i].transform.position)))
+            {
+                return allBarriers[i];
+            }
+        }
+        return null;
     }
 }
