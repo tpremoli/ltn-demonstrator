@@ -30,7 +30,6 @@ public class Graph : MonoBehaviour
     public Vector3 GetClosestPointToBuilding(GameObject building)
     {
         Vector3 buildingPosition = building.transform.position;
-        Waypoint[] waypoints = FindObjectsOfType<Waypoint>();
 
         float minDistance = float.MaxValue;
         Vector3 closestPoint = Vector3.zero;
@@ -76,15 +75,43 @@ public class Graph : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-    }
-
     private void DrawEdgeGizmos()
     {
         foreach (Edge edge in edges)
         {
             edge.DrawGizmo();
         }
+    }
+
+    public Edge getEdge(Waypoint a, Waypoint b)
+    {
+        foreach (Edge edge in edges)
+        {
+            if (edge.StartWaypoint == a && edge.EndWaypoint == b)
+            {
+                return edge;
+            }
+        }
+
+        return null;
+    }
+
+    public Edge getClosetEdge(Vector3 position)
+    {
+        Edge closestEdge = null;
+        float minDistance = float.MaxValue;
+
+        foreach (Edge edge in edges)
+        {
+            float distance = edge.DistanceToEdge(position);
+
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestEdge = edge;
+            }
+        }
+
+        return closestEdge;
     }
 }

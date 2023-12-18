@@ -53,6 +53,34 @@ public class Edge
         float distanceFromEnd = Vector3.Distance(point, end);
         float edgeLength = Vector3.Distance(start, end);
 
-        return distanceFromStart + distanceFromEnd <= edgeLength + 0.1f;
+        return distanceFromStart + distanceFromEnd <= edgeLength + 0.2f;
     }
+
+    public float DistanceToEdge(Vector3 position){
+        Vector3 start = startWaypoint.transform.position;
+        Vector3 end = endWaypoint.transform.position;
+
+        Vector3 edgeDirection = end - start;
+        Vector3 pointDirection = position - start;
+
+        float edgeLength = edgeDirection.magnitude;
+        edgeDirection.Normalize();
+
+        float dotProduct = Vector3.Dot(pointDirection, edgeDirection);
+
+        if (dotProduct <= 0)
+        {
+            return Vector3.Distance(position, start);
+        }
+        else if (dotProduct >= edgeLength)
+        {
+            return Vector3.Distance(position, end);
+        }
+        else
+        {
+            Vector3 closestPointOnEdge = start + edgeDirection * dotProduct;
+            return Vector3.Distance(position, closestPointOnEdge);
+        }
+    }
+
 }
