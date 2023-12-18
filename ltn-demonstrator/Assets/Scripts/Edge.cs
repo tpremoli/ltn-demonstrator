@@ -88,4 +88,5 @@ public class Edge
             return closestPointOnEdge;
         }
     }
+
 }
