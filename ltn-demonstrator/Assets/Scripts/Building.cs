@@ -47,7 +47,8 @@ public class Building : MonoBehaviour
         this.destinationWeights = new Dictionary<BuildingType, float>();
         this.nextSpawnTime = Time.time + timeBetweenSpawns;
 
-        this.closestPointOnEdge = graph.GetClosestPointToBuilding(this.gameObject);
+        this.closestEdge = graph.getClosetEdge(this.transform.position);
+        this.closestPointOnEdge = closestEdge.GetClosestPoint(this.transform.position);
 
         Debug.Log("Building Instantiated");
     }
