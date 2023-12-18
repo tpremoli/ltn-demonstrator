@@ -9,6 +9,8 @@ public class Graph : MonoBehaviour
 
     public List<Waypoint> waypoints;
 
+    [SerializeField] private bool drawEdgeGizmos = true;
+
     void Start()
     {
         waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
@@ -21,9 +23,12 @@ public class Graph : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        DrawEdgeGizmos();
+        if (drawEdgeGizmos) // Check if drawing of edge gizmos is enabled
+        {
+            DrawEdgeGizmos();
+        }
     }
-
+    
     public float CalculateDistance(Waypoint a, Waypoint b)
     {
         return Vector3.Distance(a.transform.position, b.transform.position);

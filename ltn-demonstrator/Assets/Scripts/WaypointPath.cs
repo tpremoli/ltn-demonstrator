@@ -93,7 +93,7 @@ public class WaypointPath
         // Construct the shortest path using the previous waypoints from the end edge
         return ConstructPath(prev, endEdge);
     }
-    
+
     private List<Waypoint> ConstructPath(Dictionary<Waypoint, Waypoint> prev, Edge endEdge)
     {
         List<Waypoint> path = new List<Waypoint>();
@@ -153,7 +153,7 @@ public class WaypointPath
     {
         if (path == null || path.Count == 0)
         {
-            Debug.LogWarning("Path is null or empty.");
+            Debug.Log("Finished path, moving to checkpoint now.");
             return null;
         }
         Waypoint nextWaypoint = path[0];
