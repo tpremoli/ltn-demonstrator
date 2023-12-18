@@ -9,6 +9,10 @@ public class WaypointEditor : Editor
     GameObject graphGameObject;
     const float selectionRadius = 2f; // Adjust the radius as needed for your scene scale
 
+    // Adding fields to store the state of the toggles
+    private bool isSingleConnection = false;
+    private bool isBidirectional = true;
+
     private void OnEnable()
     {
         if (target == null)
@@ -28,26 +32,36 @@ public class WaypointEditor : Editor
         GUILayout.BeginHorizontal();
         GUILayout.Label("Connection Type:");
 
-        bool isSingleConnection = GUILayout.Toggle(false, "Single", "Button");
-        bool isBidirectional = GUILayout.Toggle(false, "Bidirectional", "Button");
+        EditorGUI.BeginChangeCheck();
+
+        isSingleConnection = GUILayout.Toggle(isSingleConnection, "Single", "Button");
+        if (GUI.changed)
+        {
+            isBidirectional = false;
+            GUI.changed = false; // Reset the GUI.changed state
+        }
+
+        isBidirectional = GUILayout.Toggle(isBidirectional, "Bidirectional", "Button");
+        if (GUI.changed)
+        {
+            isSingleConnection = false;
+        }
+
+        EditorGUI.EndChangeCheck();
 
         GUILayout.EndHorizontal();
 
+        // Enable the button only if one of the toggles is true
+        GUI.enabled = isSingleConnection || isBidirectional;
+
         if (GUILayout.Button("Create Adjacent Waypoint"))
         {
-            // Ensure only one connection type is selected
-            if (isSingleConnection)
-            {
-                CreateAdjacentWaypoint(true);
-            }
-            else if (isBidirectional)
-            {
-                CreateAdjacentWaypoint(false);
-            }
+            CreateAdjacentWaypoint(isSingleConnection);
         }
+
+        // Restore GUI.enabled state to true for any other GUI elements that may follow
+        GUI.enabled = true;
     }
-
-
 
     void CreateAdjacentWaypoint(bool isSingleConnection)
     {
