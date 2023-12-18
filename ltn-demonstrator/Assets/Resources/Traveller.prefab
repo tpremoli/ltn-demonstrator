@@ -119,5 +119,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingWaypoint: {fileID: 0}
-  speed: 17.7
+  speed: 7.3
   distanceThreshold: 0.1

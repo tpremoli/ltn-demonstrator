@@ -72,24 +72,40 @@ public class WaypointMover : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color  = Color.magenta;
-        if (Application.IsPlaying(this)){
+        if (Application.isPlaying)
+        {
+            // Draw the destination sphere
+            Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(path.destinationPos, 1f);
-
-            // draw the path
-            Gizmos.color = Color.yellow;
-            for (int i = 0; i < path.path.Count; i++)
-            {
-                Gizmos.DrawSphere(path.path[i].transform.position, 1f);
-
-            }
-
             if (currentWaypoint != null)
             {
-                Gizmos.color = Color.red;
+                // Draw the current waypoint sphere
                 Gizmos.DrawSphere(currentWaypoint.transform.position, 1f);
             }
+
+            // Draw the path from the agent's current position
+            Gizmos.color = Color.yellow;
+
+            Vector3 startPosition = currentWaypoint != null ? currentWaypoint.transform.position : transform.position; // Use agent's position if currentWaypoint is null
+
+            if (path.path.Count > 0)
+            {
+                // Iterate through the remaining waypoints
+                foreach (var waypoint in path.path)
+                {
+                    // Draw sphere for each waypoint
+                    Gizmos.DrawSphere(waypoint.transform.position, 1f);
+
+                    // Draw arrow from the start position to the current waypoint
+                    DrawArrow.ForGizmo(startPosition + Vector3.up, (waypoint.transform.position - startPosition) + Vector3.up, Color.yellow, 1f);
+
+                    // Update start position
+                    startPosition = waypoint.transform.position;
+                }
+            }
+
+            // Always draw arrow to the destination from the current position or last waypoint
+            DrawArrow.ForGizmo(startPosition + Vector3.up, (path.destinationPos - startPosition) + Vector3.up, Color.yellow, 1f);
         }
     }
-
 }
