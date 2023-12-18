@@ -25,13 +25,19 @@ public class WaypointEditor : Editor
 
         EditorGUILayout.LabelField("Selected Waypoint: " + waypoint.name);
 
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Connection Type:");
+        bool isSingleConnection = GUILayout.Toggle(false, "Single", "Button");
+        bool isBidirectional = GUILayout.Toggle(true, "Bidirectional", "Button");
+        GUILayout.EndHorizontal();
+
         if (GUILayout.Button("Create Adjacent Waypoint"))
         {
-            CreateAdjacentWaypoint();
+            CreateAdjacentWaypoint(isSingleConnection);
         }
     }
 
-    void CreateAdjacentWaypoint()
+    void CreateAdjacentWaypoint(bool isSingleConnection)
     {
         GameObject newWaypointPrefab = Resources.Load<GameObject>("Waypoint");
         GameObject newWaypoint = Instantiate(newWaypointPrefab, new Vector3(0, 0, 0), Quaternion.identity);
@@ -39,15 +45,19 @@ public class WaypointEditor : Editor
         newWaypoint.transform.position = waypoint.transform.position; // Adjust as needed
         newWaypoint.name = "Waypoint (" + graphGameObject.transform.childCount + ")";
 
-        // these getcomponents are messy and should be refactored
-        waypoint.AddAdjacentWaypoint(newWaypoint.GetComponent<Waypoint>());
-        // this makes sure the edge loader is up to date
+        // Get the Waypoint component from the new waypoint
+        Waypoint newWaypointComponent = newWaypoint.GetComponent<Waypoint>();
+
+        // Add the adjacent waypoint with specified edge type
+        waypoint.AddAdjacentWaypoint(newWaypointComponent, isSingleConnection);
+
+        // Update the edge loader
         EdgeLoader.LoadEdges();
 
-        // add the new waypoint to the graph
-        newWaypoint.transform.parent = graphGameObject.transform; 
+        // Add the new waypoint to the graph
+        newWaypoint.transform.parent = graphGameObject.transform;
 
-        // make the new waypoint the selected waypoint
+        // Make the new waypoint the selected waypoint
         Selection.activeGameObject = newWaypoint;
     }
 }
