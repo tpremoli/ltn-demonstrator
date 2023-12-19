@@ -37,6 +37,7 @@ public class WaypointMover : MonoBehaviour
             // if no path is found, destroy the object.
             // Later on, we should change this so that the traveller changes their mode of transport
             Debug.LogWarning("Path doesn't exist for Traveller" + this.gameObject.name+". Destroying object.");
+            Debug.LogWarning("endedge start: " + endEdge.StartWaypoint.name + " endedge end: " + endEdge.EndWaypoint.name);
             Destroy(this.gameObject);
         }
 
