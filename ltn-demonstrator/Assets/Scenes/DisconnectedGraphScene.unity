@@ -297,7 +297,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentWaypoints:
-  - {fileID: 1135262645}
   - {fileID: 1621896607}
   - {fileID: 267373688}
 --- !u!4 &237945075
@@ -453,56 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentWaypoints:
-  - {fileID: 1657811266}
   - {fileID: 1045232312}
---- !u!1 &323980829
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 323980830}
-  - component: {fileID: 323980831}
-  m_Layer: 0
-  m_Name: Waypoint (9)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &323980830
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323980829}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.6, y: 0.5, z: 23.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 980923535}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &323980831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323980829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  adjacentWaypoints:
-  - {fileID: 894784524}
-  - {fileID: 1182403298}
-  - {fileID: 704311189}
 --- !u!1001 &386361424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -856,7 +806,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentWaypoints:
-  - {fileID: 323980831}
   - {fileID: 1337136929}
   - {fileID: 1432129731}
 --- !u!4 &704311190
@@ -1136,8 +1085,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentWaypoints:
-  - {fileID: 1657811266}
-  - {fileID: 323980831}
   - {fileID: 804240333}
 --- !u!1001 &933875182
 PrefabInstance:
@@ -1189,16 +1136,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4435411355569339599, guid: fc6163aa25dbd9b40b4a39b27084f711, type: 3}
       propertyPath: adjacentWaypoints.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4435411355569339599, guid: fc6163aa25dbd9b40b4a39b27084f711, type: 3}
       propertyPath: adjacentWaypoints.Array.data[0]
       value: 
-      objectReference: {fileID: 1657811266}
+      objectReference: {fileID: 0}
     - target: {fileID: 4435411355569339599, guid: fc6163aa25dbd9b40b4a39b27084f711, type: 3}
       propertyPath: adjacentWaypoints.Array.data[1]
       value: 
-      objectReference: {fileID: 1182403298}
+      objectReference: {fileID: 0}
     - target: {fileID: 8989495088713997394, guid: fc6163aa25dbd9b40b4a39b27084f711, type: 3}
       propertyPath: m_Name
       value: Waypoint (7)
@@ -1213,17 +1160,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4057100712623571992, guid: fc6163aa25dbd9b40b4a39b27084f711, type: 3}
   m_PrefabInstance: {fileID: 933875182}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &933875184 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4435411355569339599, guid: fc6163aa25dbd9b40b4a39b27084f711, type: 3}
-  m_PrefabInstance: {fileID: 933875182}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &980923533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,312 +1195,194 @@ MonoBehaviour:
     endWaypoint: {fileID: 1282025173}
     distance: 23.644012
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 237945074}
-    endWaypoint: {fileID: 1135262645}
-    distance: 21.561539
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 237945074}
     endWaypoint: {fileID: 1621896607}
     distance: 17.788197
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 237945074}
     endWaypoint: {fileID: 267373688}
     distance: 22.634048
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 267373688}
     endWaypoint: {fileID: 237945074}
     distance: 22.634048
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 287776538}
     endWaypoint: {fileID: 2139437643}
     distance: 13.548891
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 287776538}
     endWaypoint: {fileID: 679679345}
     distance: 22.572992
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 295516699}
-    endWaypoint: {fileID: 1657811266}
-    distance: 14.057737
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 295516699}
     endWaypoint: {fileID: 1045232312}
     distance: 10.004499
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 323980831}
-    endWaypoint: {fileID: 894784524}
-    distance: 13.200379
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 323980831}
-    endWaypoint: {fileID: 1182403298}
-    distance: 14.99333
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 323980831}
-    endWaypoint: {fileID: 704311189}
-    distance: 20.148697
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 420393254}
     endWaypoint: {fileID: 1045232312}
     distance: 42.035458
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 679679345}
     endWaypoint: {fileID: 287776538}
     distance: 22.572992
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 679679345}
     endWaypoint: {fileID: 1621896607}
     distance: 18.263077
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 704311189}
-    endWaypoint: {fileID: 323980831}
-    distance: 20.148697
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 704311189}
     endWaypoint: {fileID: 1337136929}
     distance: 24.106846
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 704311189}
     endWaypoint: {fileID: 1432129731}
     distance: 9.602551
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 804240333}
     endWaypoint: {fileID: 894784524}
     distance: 12.605372
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 804240333}
     endWaypoint: {fileID: 2075552309}
     distance: 21.818787
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 873497516}
     endWaypoint: {fileID: 1045232312}
     distance: 34.81738
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 894784524}
-    endWaypoint: {fileID: 1657811266}
-    distance: 13.594484
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 894784524}
-    endWaypoint: {fileID: 323980831}
-    distance: 13.200379
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 894784524}
     endWaypoint: {fileID: 804240333}
     distance: 12.605372
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 933875184}
-    endWaypoint: {fileID: 1657811266}
-    distance: 15.901258
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 933875184}
-    endWaypoint: {fileID: 1182403298}
-    distance: 17.400288
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1045232312}
     endWaypoint: {fileID: 295516699}
     distance: 10.004499
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1045232312}
     endWaypoint: {fileID: 873497516}
     distance: 34.81738
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1045232312}
     endWaypoint: {fileID: 420393254}
     distance: 42.035458
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1052146371}
-    endWaypoint: {fileID: 1135262645}
-    distance: 37.399597
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1135262645}
-    endWaypoint: {fileID: 1141344552}
-    distance: 21.50372
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1135262645}
-    endWaypoint: {fileID: 237945074}
-    distance: 21.561539
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1135262645}
-    endWaypoint: {fileID: 1052146371}
-    distance: 37.399597
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1141344552}
-    endWaypoint: {fileID: 1554001491}
-    distance: 13.74809
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1141344552}
     endWaypoint: {fileID: 2061557820}
     distance: 24.3001
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1141344552}
-    endWaypoint: {fileID: 1135262645}
-    distance: 21.50372
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1182403298}
-    endWaypoint: {fileID: 323980831}
-    distance: 14.99333
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1182403298}
-    endWaypoint: {fileID: 1337136929}
-    distance: 22.67532
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1182403298}
-    endWaypoint: {fileID: 933875184}
-    distance: 17.400288
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1182403298}
-    endWaypoint: {fileID: 1554001491}
-    distance: 19.60408
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1247624961}
     endWaypoint: {fileID: 1337136929}
     distance: 35.514786
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1282025173}
-    endWaypoint: {fileID: 1657811266}
-    distance: 13.7663145
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1282025173}
     endWaypoint: {fileID: 7151152}
     distance: 23.644012
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1282025173}
     endWaypoint: {fileID: 2139437643}
     distance: 14.234567
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1337136929}
-    endWaypoint: {fileID: 1182403298}
-    distance: 22.67532
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1337136929}
     endWaypoint: {fileID: 704311189}
     distance: 24.106846
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1337136929}
     endWaypoint: {fileID: 1247624961}
     distance: 35.514786
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1432129731}
     endWaypoint: {fileID: 704311189}
     distance: 9.602551
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1554001491}
-    endWaypoint: {fileID: 2139437643}
-    distance: 16.966513
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1554001491}
-    endWaypoint: {fileID: 1182403298}
-    distance: 19.60408
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1554001491}
-    endWaypoint: {fileID: 1141344552}
-    distance: 13.74809
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1621896607}
     endWaypoint: {fileID: 237945074}
     distance: 17.788197
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1621896607}
     endWaypoint: {fileID: 679679345}
     distance: 18.263077
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1657811266}
-    endWaypoint: {fileID: 933875184}
-    distance: 15.901258
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1657811266}
-    endWaypoint: {fileID: 295516699}
-    distance: 14.057737
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1657811266}
-    endWaypoint: {fileID: 894784524}
-    distance: 13.594484
-    isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 1657811266}
-    endWaypoint: {fileID: 1282025173}
-    distance: 13.7663145
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2061557820}
     endWaypoint: {fileID: 1141344552}
     distance: 24.3001
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2075552309}
     endWaypoint: {fileID: 804240333}
     distance: 21.818787
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2139437643}
     endWaypoint: {fileID: 1282025173}
     distance: 14.234567
     isBarricated: 0
-    barricadeLocation: -1
-  - startWaypoint: {fileID: 2139437643}
-    endWaypoint: {fileID: 1554001491}
-    distance: 16.966513
-    isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2139437643}
     endWaypoint: {fileID: 287776538}
     distance: 13.548891
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   waypoints: []
   drawEdgeGizmos: 1
 --- !u!4 &980923535
@@ -1584,12 +1402,8 @@ Transform:
   - {fileID: 7151151}
   - {fileID: 1282025174}
   - {fileID: 894784523}
-  - {fileID: 323980830}
   - {fileID: 2139437642}
-  - {fileID: 1554001490}
-  - {fileID: 1657811267}
   - {fileID: 933875183}
-  - {fileID: 1182403299}
   - {fileID: 1045232313}
   - {fileID: 287776539}
   - {fileID: 1337136930}
@@ -1602,7 +1416,6 @@ Transform:
   - {fileID: 1247624962}
   - {fileID: 2061557821}
   - {fileID: 679679346}
-  - {fileID: 1135262646}
   - {fileID: 237945075}
   - {fileID: 1621896608}
   - {fileID: 1052146372}
@@ -1749,8 +1562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adjacentWaypoints:
-  - {fileID: 1135262645}
+  adjacentWaypoints: []
 --- !u!4 &1052146372
 Transform:
   m_ObjectHideFlags: 0
@@ -1761,54 +1573,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 79.1, y: 0.5, z: 52.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 980923535}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1135262644
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1135262646}
-  - component: {fileID: 1135262645}
-  m_Layer: 0
-  m_Name: Waypoint (22)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1135262645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135262644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  adjacentWaypoints:
-  - {fileID: 1141344552}
-  - {fileID: 237945074}
-  - {fileID: 1052146371}
---- !u!4 &1135262646
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135262644}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44.3, y: 0.5, z: 38.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1951,58 +1715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentWaypoints:
-  - {fileID: 1554001491}
   - {fileID: 2061557820}
-  - {fileID: 1135262645}
---- !u!1 &1182403297
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1182403299}
-  - component: {fileID: 1182403298}
-  m_Layer: 0
-  m_Name: Waypoint (9)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1182403298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182403297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  adjacentWaypoints:
-  - {fileID: 323980831}
-  - {fileID: 1337136929}
-  - {fileID: 933875184}
-  - {fileID: 1554001491}
---- !u!4 &1182403299
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182403297}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8, y: 0.5, z: 34.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 980923535}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1247624960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2079,7 +1792,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentWaypoints:
-  - {fileID: 1657811266}
   - {fileID: 7151152}
   - {fileID: 2139437643}
 --- !u!4 &1282025174
@@ -2127,7 +1839,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentWaypoints:
-  - {fileID: 1182403298}
   - {fileID: 704311189}
   - {fileID: 1247624961}
 --- !u!4 &1337136930
@@ -2191,54 +1902,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 980923535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1554001489
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1554001490}
-  - component: {fileID: 1554001491}
-  m_Layer: 0
-  m_Name: Waypoint (8)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1554001490
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554001489}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.8, y: 0.5, z: 33.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 980923535}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1554001491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554001489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  adjacentWaypoints:
-  - {fileID: 2139437643}
-  - {fileID: 1182403298}
-  - {fileID: 1141344552}
 --- !u!1 &1597052157
 GameObject:
   m_ObjectHideFlags: 0
@@ -2432,7 +2095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.236176
+      value: 10.9
       objectReference: {fileID: 0}
     - target: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2440,7 +2103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 30.304852
+      value: 34.2
       objectReference: {fileID: 0}
     - target: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2480,55 +2143,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
   m_PrefabInstance: {fileID: 1653868398}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1657811265
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1657811267}
-  - component: {fileID: 1657811266}
-  m_Layer: 0
-  m_Name: Waypoint (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1657811266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657811265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  adjacentWaypoints:
-  - {fileID: 933875184}
-  - {fileID: 295516699}
-  - {fileID: 894784524}
-  - {fileID: 1282025173}
---- !u!4 &1657811267
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657811265}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.7, y: 0.5, z: 9.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 980923535}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1798188799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2729,7 +2343,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentWaypoints:
   - {fileID: 1282025173}
-  - {fileID: 1554001491}
   - {fileID: 287776538}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
