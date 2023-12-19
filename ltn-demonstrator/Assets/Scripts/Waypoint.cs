@@ -70,6 +70,15 @@ public class Waypoint : MonoBehaviour
 
     public void AddAdjacentWaypoint(Waypoint newAdjacent, bool isSingleConnection = false)
     {
+        if (adjacentWaypoints == null)
+        {
+            adjacentWaypoints = new List<Waypoint>();
+        }
+        if (singleConnectionWaypoints == null)
+        {
+            singleConnectionWaypoints = new List<Waypoint>();
+        }
+
         if (isSingleConnection)
         {
             // Add to the single connection list without checking bidirectional
