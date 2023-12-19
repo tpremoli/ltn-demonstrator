@@ -47,18 +47,15 @@ public class WaypointPath
         }
 
         // Initialize the distances for the start waypoints on the start edge
-        dist[startEdge.StartWaypoint] = Vector3.Distance(startEdge.StartWaypoint.transform.position, beginningPos);
-        dist[startEdge.EndWaypoint] = Vector3.Distance(startEdge.EndWaypoint.transform.position, beginningPos);
+        EnqueueWaypointWithDistances(startEdge.StartWaypoint, dist, mostRecentDistances, beginningPos);
+        EnqueueWaypointWithDistances(startEdge.EndWaypoint, dist, mostRecentDistances, beginningPos);
 
         // Priority queue to manage waypoints based on their current shortest distance
         PriorityQueue<Waypoint, float> queue = new PriorityQueue<Waypoint, float>();
 
         // Enqueue the start waypoints and update their most recent distances
-        queue.Enqueue(startEdge.StartWaypoint, dist[startEdge.StartWaypoint]);
-        mostRecentDistances[startEdge.StartWaypoint] = dist[startEdge.StartWaypoint];
-
-        queue.Enqueue(startEdge.EndWaypoint, dist[startEdge.EndWaypoint]);
-        mostRecentDistances[startEdge.EndWaypoint] = dist[startEdge.EndWaypoint];
+        ExploreNeighbors(startEdge.StartWaypoint, dist, prev, queue, mostRecentDistances);
+        ExploreNeighbors(startEdge.EndWaypoint, dist, prev, queue, mostRecentDistances);
 
         // Process each waypoint in the queue
         while (queue.Count > 0)
@@ -71,27 +68,48 @@ public class WaypointPath
                 continue;
             }
 
-            // Explore all adjacent waypoints of the current waypoint
-            foreach (Waypoint neighbor in current.adjacentWaypoints)
-            {
-                // Calculate the alternative distance to this neighbor
-                float alt = dist[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
-
-                // If the alternative distance is shorter, update the distance and previous waypoint
-                if (alt < dist[neighbor])
-                {
-                    dist[neighbor] = alt;
-                    prev[neighbor] = current;
-
-                    // Enqueue the neighbor with the updated distance
-                    queue.Enqueue(neighbor, alt);
-                    mostRecentDistances[neighbor] = alt; // Update the most recent distance
-                }
-            }
+            // Explore all adjacent waypoints and single connection waypoints of the current waypoint
+            ExploreNeighbors(current, dist, prev, queue, mostRecentDistances);
         }
 
         // Construct the shortest path using the previous waypoints from the end edge
         return ConstructPath(prev, endEdge);
+    }
+
+    private void EnqueueWaypointWithDistances(Waypoint waypoint, Dictionary<Waypoint, float> dist, Dictionary<Waypoint, float> mostRecentDistances, Vector3 sourcePos)
+    {
+        dist[waypoint] = Vector3.Distance(waypoint.transform.position, sourcePos);
+        mostRecentDistances[waypoint] = dist[waypoint];
+    }
+
+    private void ExploreNeighbors(Waypoint current, Dictionary<Waypoint, float> dist, Dictionary<Waypoint, Waypoint> prev, PriorityQueue<Waypoint, float> queue, Dictionary<Waypoint, float> mostRecentDistances)
+    {
+        foreach (Waypoint neighbor in current.adjacentWaypoints)
+        {
+            ExploreNeighbor(current, neighbor, dist, prev, queue, mostRecentDistances);
+        }
+
+        foreach (Waypoint singleConnectionNeighbor in current.singleConnectionWaypoints)
+        {
+            ExploreNeighbor(current, singleConnectionNeighbor, dist, prev, queue, mostRecentDistances);
+        }
+    }
+
+    private void ExploreNeighbor(Waypoint current, Waypoint neighbor, Dictionary<Waypoint, float> dist, Dictionary<Waypoint, Waypoint> prev, PriorityQueue<Waypoint, float> queue, Dictionary<Waypoint, float> mostRecentDistances)
+    {
+        // Calculate the alternative distance to this neighbor
+        float alt = dist[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
+
+        // If the alternative distance is shorter, update the distance and previous waypoint
+        if (alt < dist[neighbor])
+        {
+            dist[neighbor] = alt;
+            prev[neighbor] = current;
+
+            // Enqueue the neighbor with the updated distance
+            queue.Enqueue(neighbor, alt);
+            mostRecentDistances[neighbor] = alt; // Update the most recent distance
+        }
     }
 
     private List<Waypoint> ConstructPath(Dictionary<Waypoint, Waypoint> prev, Edge endEdge)
@@ -100,8 +118,8 @@ public class WaypointPath
         Waypoint current = null;
 
         // Determine the endpoint that leads most directly to the destination
-        Waypoint closerEndpoint = Vector3.Distance(endEdge.EndWaypoint.transform.position, destinationPos) < 
-                                Vector3.Distance(endEdge.StartWaypoint.transform.position, destinationPos) 
+        Waypoint closerEndpoint = Vector3.Distance(endEdge.EndWaypoint.transform.position, destinationPos) <
+                                Vector3.Distance(endEdge.StartWaypoint.transform.position, destinationPos)
                                 ? endEdge.EndWaypoint : endEdge.StartWaypoint;
 
         // Construct the path from the closer endpoint
@@ -140,6 +158,7 @@ public class WaypointPath
 
         return distanceToLast + distanceToSecondLast <= totalDistance + 0.1f; // Add a small tolerance
     }
+
     private Waypoint ClosestWaypointOnEdge(Edge edge, Vector3 position)
     {
         // Determine the closest waypoint on the given edge
