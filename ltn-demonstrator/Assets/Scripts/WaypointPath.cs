@@ -86,16 +86,16 @@ public class WaypointPath
         }
         else
         {
+            // Initialize the distances for the start waypoints on the start edge
+            dist[startEdge.StartWaypoint] = Vector3.Distance(startEdge.StartWaypoint.transform.position, beginningPos);
+            dist[startEdge.EndWaypoint] = Vector3.Distance(startEdge.EndWaypoint.transform.position, beginningPos);
+
             // Enqueue the start waypoints and update their most recent distances
             queue.Enqueue(startEdge.StartWaypoint, dist[startEdge.StartWaypoint]);
             mostRecentDistances[startEdge.StartWaypoint] = dist[startEdge.StartWaypoint];
 
             queue.Enqueue(startEdge.EndWaypoint, dist[startEdge.EndWaypoint]);
             mostRecentDistances[startEdge.EndWaypoint] = dist[startEdge.EndWaypoint];
-
-            // Initialize the distances for the start waypoints on the start edge
-            dist[startEdge.StartWaypoint] = Vector3.Distance(startEdge.StartWaypoint.transform.position, beginningPos);
-            dist[startEdge.EndWaypoint] = Vector3.Distance(startEdge.EndWaypoint.transform.position, beginningPos);
         }
 
         // Process each waypoint in the queue
@@ -122,7 +122,6 @@ public class WaypointPath
                 }
 
                 float alt = dist[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
-
 
                 // If the alternative distance is shorter, update the distance and previous waypoint
                 if (alt < dist[neighbor])
