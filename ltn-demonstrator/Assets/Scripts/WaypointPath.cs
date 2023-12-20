@@ -45,7 +45,7 @@ public class WaypointPath
         // Check if start and end are on the same edge to handle this special case
         if (startEdge.isSameEdge(endEdge))
         {
-            if (startEdge.isBarricated && isDestinationCloserThanBarrier(beginningPos, destinationPos, startEdge))
+            if (startEdge.isBarricated && !startEdge.isBarrierBetween(beginningPos, destinationPos))
             {
                 // Barrier, but destination is before the barrier, return a direct path
                 return new List<Waypoint>();
@@ -78,7 +78,7 @@ public class WaypointPath
         if (startEdge.isBarricated)
         {
             // Only set distance for the waypoint on the same side of the barrier as beginningPos
-            Waypoint accessibleWaypoint = startEdge.getClosestWaypoint(beginningPos);
+            Waypoint accessibleWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos);
 
             dist[accessibleWaypoint] = Vector3.Distance(accessibleWaypoint.transform.position, beginningPos);
             queue.Enqueue(accessibleWaypoint, dist[accessibleWaypoint]);
@@ -116,7 +116,7 @@ public class WaypointPath
                 Edge connectingEdge = graph.GetEdge(current, neighbor);
 
                 // Calculate the alternative distance to this neighbor
-                if (!isDestinationCloserThanBarrier(current.transform.position, neighbor.transform.position, connectingEdge))
+                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
                 {
                     continue;
                 }
@@ -320,24 +320,10 @@ public class WaypointPath
             return true;
         }
     }
-    
-    public bool isDestinationCloserThanBarrier(Vector3 start, Vector3 destination, Edge edge)
+
+
+    public bool IsBarricadeBetweenWaypoints(Waypoint first, Waypoint second)
     {
-        if (!edge.isBarricated)
-        {
-            return true;
-        }
-
-        float distanceFromBarrier = Vector3.Distance(start, edge.barrier.transform.position);
-        float distanceFromDestination = Vector3.Distance(start, destination);
-        if (distanceFromDestination < distanceFromBarrier)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public bool IsBarricadeBetweenWaypoints(Waypoint first, Waypoint second){
         Edge edge = graph.GetEdge(first, second);
         return edge.isBarricated;
     }
