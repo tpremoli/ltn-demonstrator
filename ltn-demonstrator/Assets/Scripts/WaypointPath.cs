@@ -264,11 +264,13 @@ public class WaypointPath
             // Explore all adjacent waypoints of the current waypoint
             foreach (Waypoint neighbor in current.adjacentWaypoints)
             {
-                // first, we check if the edge is traversable.
+                // Get the edge connecting the current waypoint and its neighbor
                 Edge connectingEdge = graph.GetEdge(current, neighbor);
-                if (!IsEdgeTraversableThroughBarrier(connectingEdge))
+
+                // Check if the edge is traversable (i.e., no barrier between the waypoints)
+                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
                 {
-                    continue;
+                    continue; // Skip to the next neighbor if there is a barrier
                 }
 
                 // Calculate the alternative distance to this neighbor
@@ -290,43 +292,7 @@ public class WaypointPath
         return false;
     }
 
-    private bool IsDestinationBeforeBarrier(Vector3 destination, Edge edge)
-    {
-        // Convert the destination's position to a distance along the edge
-        float destinationPosition = edge.convertToPositionAlongEdge(destination);
 
-        // Check if the destination is before the barrier
-        return destinationPosition < edge.barrierLocation;
-    }
-
-    private bool IsEdgeTraversableThroughBarrier(Edge edge)
-    {
-        if (edge.isBarricated)
-        {
-            if (edge.isPointOnEdge(destinationPos))
-            {
-                // If the destination is on the edge, check if it is before the barrier
-                return !IsDestinationBeforeBarrier(destinationPos, edge);
-            }
-            else
-            {
-                // If the destination is not on the edge, check if the edge is traversable
-                return false;
-            }
-        }
-        else
-        {
-            // No barrier, so the edge is traversable
-            return true;
-        }
-    }
-
-
-    public bool IsBarricadeBetweenWaypoints(Waypoint first, Waypoint second)
-    {
-        Edge edge = graph.GetEdge(first, second);
-        return edge.isBarricated;
-    }
 }
 
 

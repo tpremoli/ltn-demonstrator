@@ -200,8 +200,8 @@ public class Edge
         float distanceToStart = Vector3.Distance(point, startWaypoint.transform.position);
         float distanceToEnd = Vector3.Distance(point, endWaypoint.transform.position);
 
-        Debug.LogWarning($"Distance to Start Waypoint: {distanceToStart}");
-        Debug.LogWarning($"Distance to End Waypoint: {distanceToEnd}");
+        // Debug.LogWarning($"Distance to Start Waypoint: {distanceToStart}");
+        // Debug.LogWarning($"Distance to End Waypoint: {distanceToEnd}");
 
         if (distanceToStart < distanceToEnd)
         {
@@ -231,7 +231,7 @@ public class Edge
         }
 
         // If both waypoints are blocked by a barrier, return null
-        Debug.LogWarning("No accessible waypoint found, returning null");
+        // Debug.LogWarning("No accessible waypoint found, returning null");
         return null;
     }
     
