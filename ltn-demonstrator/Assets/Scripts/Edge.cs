@@ -167,4 +167,25 @@ public class Edge
         }
         return null;
     }
+
+    public Waypoint getClosestWaypoint(Vector3 point)
+    {
+        if (!isPointOnEdge(point))
+        {
+            Debug.Log("Position is not on edge");
+            return null;
+        }
+
+        float distanceToStart = Vector3.Distance(point, startWaypoint.transform.position);
+        float distanceToEnd = Vector3.Distance(point, endWaypoint.transform.position);
+
+        if (distanceToStart < distanceToEnd)
+        {
+            return startWaypoint;
+        }
+        else
+        {
+            return endWaypoint;
+        }
+    }
 }
