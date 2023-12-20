@@ -100,4 +100,17 @@ public class Graph : MonoBehaviour
 
         return closestEdge;
     }
+
+    public Edge GetEdge(Waypoint startPoint, Waypoint endPoint)
+    {
+        foreach (Edge edge in edges)
+        {
+            if (edge.StartWaypoint == startPoint && edge.EndWaypoint == endPoint)
+            {
+                return edge;
+            }
+        }
+
+        return null;
+    }
 }

@@ -79,6 +79,13 @@ public class WaypointPath
             // Explore all adjacent waypoints of the current waypoint
             foreach (Waypoint neighbor in current.adjacentWaypoints)
             {
+                // first, we check if the edge is traversable.
+                Edge connectingEdge = graph.GetEdge(current, neighbor);
+                if (!IsEdgeTraversableThroughBarrier(connectingEdge))
+                {
+                    continue;
+                }
+
                 // Calculate the alternative distance to this neighbor
                 float alt = dist[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
 
@@ -218,6 +225,13 @@ public class WaypointPath
             // Explore all adjacent waypoints of the current waypoint
             foreach ( Waypoint neighbor in current.adjacentWaypoints)
             {
+                // first, we check if the edge is traversable.
+                Edge connectingEdge = graph.GetEdge(current, neighbor);
+                if (!IsEdgeTraversableThroughBarrier(connectingEdge))
+                {
+                    continue;
+                }
+
                 // Calculate the alternative distance to this neighbor
                 float alt = dist[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
 
@@ -236,4 +250,37 @@ public class WaypointPath
         // If the loop completes without finding the end waypoint, return false indicating no path exists
         return false;
     }
+
+    private bool IsDestinationBeforeBarrier(Vector3 destination, Edge edge)
+    {
+        // Convert the destination's position to a distance along the edge
+        float destinationPosition = edge.convertToPositionAlongEdge(destination);
+
+        // Check if the destination is before the barrier
+        return destinationPosition < edge.barrierLocation;
+    }
+
+    private bool IsEdgeTraversableThroughBarrier(Edge edge)
+    {
+        // Check if the edge is barricated
+        if (edge.isBarricated)
+        {
+            // If the destination is on this barricaded edge, check if it's before the barrier
+            if (edge == endEdge)
+            {
+                if (!IsDestinationBeforeBarrier(destinationPos, edge))
+                {
+                    return false;
+                }
+            } else
+            {
+                // For other barricaded edges, avoid using them altogether
+                return false;
+            }
+        }
+        // if not barricated, it's traversable
+        return true;
+    }
 }
+
+
