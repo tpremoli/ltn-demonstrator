@@ -12,7 +12,24 @@ public class Waypoint : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        float waypointSize = this.transform.parent.GetComponent<Graph>().WaypointSize;
+        float waypointSize = 1.0f; // Default waypoint size
+
+        if (this.transform.parent != null)
+        {
+            Graph graph = this.transform.parent.GetComponent<Graph>();
+            if (graph != null)
+            {
+                waypointSize = graph.WaypointSize;
+            }
+            else
+            {
+                Debug.LogError("Graph component not found in the parent.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Parent transform not found. Using default waypoint size.");
+        }
 
         // Draw the gizmo for this waypoint
         Gizmos.color = Color.blue;
@@ -38,6 +55,10 @@ public class Waypoint : MonoBehaviour
             }
         }
     }
+
+
+
+
 
     private void OnDrawGizmosSelected()
     {

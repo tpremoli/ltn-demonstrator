@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentWaypoints:
   - {fileID: 1282025173}
+  singleConnectionWaypoints: []
 --- !u!1001 &39311549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -235,6 +236,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
   m_PrefabInstance: {fileID: 39311549}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &39311551 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7563469548286501685, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+  m_PrefabInstance: {fileID: 39311549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22266116cd5fe9548847eab729e62476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &127275953
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +312,7 @@ MonoBehaviour:
   - {fileID: 1135262645}
   - {fileID: 1621896607}
   - {fileID: 267373688}
+  singleConnectionWaypoints: []
 --- !u!4 &237945075
 Transform:
   m_ObjectHideFlags: 0
@@ -346,6 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentWaypoints:
   - {fileID: 237945074}
+  singleConnectionWaypoints: []
 --- !u!4 &267373689
 Transform:
   m_ObjectHideFlags: 0
@@ -393,6 +407,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 2139437643}
   - {fileID: 679679345}
+  singleConnectionWaypoints: []
 --- !u!4 &287776539
 Transform:
   m_ObjectHideFlags: 0
@@ -455,6 +470,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 1657811266}
   - {fileID: 1045232312}
+  singleConnectionWaypoints: []
 --- !u!1 &323980829
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +519,7 @@ MonoBehaviour:
   - {fileID: 894784524}
   - {fileID: 1182403298}
   - {fileID: 704311189}
+  singleConnectionWaypoints: []
 --- !u!1001 &386361424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -596,6 +613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentWaypoints:
   - {fileID: 1045232312}
+  singleConnectionWaypoints: []
 --- !u!4 &420393255
 Transform:
   m_ObjectHideFlags: 0
@@ -749,6 +767,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 287776538}
   - {fileID: 1621896607}
+  singleConnectionWaypoints: []
 --- !u!4 &679679346
 Transform:
   m_ObjectHideFlags: 0
@@ -859,6 +878,7 @@ MonoBehaviour:
   - {fileID: 323980831}
   - {fileID: 1337136929}
   - {fileID: 1432129731}
+  singleConnectionWaypoints: []
 --- !u!4 &704311190
 Transform:
   m_ObjectHideFlags: 0
@@ -1030,6 +1050,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 894784524}
   - {fileID: 2075552309}
+  singleConnectionWaypoints: []
 --- !u!4 &804240334
 Transform:
   m_ObjectHideFlags: 0
@@ -1076,6 +1097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentWaypoints:
   - {fileID: 1045232312}
+  singleConnectionWaypoints: []
 --- !u!4 &873497517
 Transform:
   m_ObjectHideFlags: 0
@@ -1139,6 +1161,7 @@ MonoBehaviour:
   - {fileID: 1657811266}
   - {fileID: 323980831}
   - {fileID: 804240333}
+  singleConnectionWaypoints: []
 --- !u!1001 &933875182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1259,312 +1282,374 @@ MonoBehaviour:
     endWaypoint: {fileID: 1282025173}
     distance: 23.644012
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 237945074}
     endWaypoint: {fileID: 1135262645}
     distance: 21.561539
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 237945074}
     endWaypoint: {fileID: 1621896607}
     distance: 17.788197
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 237945074}
     endWaypoint: {fileID: 267373688}
     distance: 22.634048
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 267373688}
     endWaypoint: {fileID: 237945074}
     distance: 22.634048
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 287776538}
     endWaypoint: {fileID: 2139437643}
     distance: 13.548891
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 287776538}
     endWaypoint: {fileID: 679679345}
     distance: 22.572992
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 295516699}
     endWaypoint: {fileID: 1657811266}
     distance: 14.057737
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 295516699}
     endWaypoint: {fileID: 1045232312}
     distance: 10.004499
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 323980831}
     endWaypoint: {fileID: 894784524}
     distance: 13.200379
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 323980831}
     endWaypoint: {fileID: 1182403298}
     distance: 14.99333
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 323980831}
     endWaypoint: {fileID: 704311189}
     distance: 20.148697
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 420393254}
     endWaypoint: {fileID: 1045232312}
     distance: 42.035458
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 679679345}
     endWaypoint: {fileID: 287776538}
     distance: 22.572992
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 679679345}
     endWaypoint: {fileID: 1621896607}
     distance: 18.263077
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 704311189}
     endWaypoint: {fileID: 323980831}
     distance: 20.148697
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 704311189}
     endWaypoint: {fileID: 1337136929}
     distance: 24.106846
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 704311189}
     endWaypoint: {fileID: 1432129731}
     distance: 9.602551
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 804240333}
     endWaypoint: {fileID: 894784524}
     distance: 12.605372
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 804240333}
     endWaypoint: {fileID: 2075552309}
     distance: 21.818787
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 873497516}
     endWaypoint: {fileID: 1045232312}
     distance: 34.81738
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 894784524}
     endWaypoint: {fileID: 1657811266}
     distance: 13.594484
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 894784524}
     endWaypoint: {fileID: 323980831}
     distance: 13.200379
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 894784524}
     endWaypoint: {fileID: 804240333}
     distance: 12.605372
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 933875184}
     endWaypoint: {fileID: 1657811266}
     distance: 15.901258
-    isBarricated: 0
-    barricadeLocation: -1
+    isBarricated: 1
+    barrierLocation: 0.4958671
+    barrier: {fileID: 39311551}
   - startWaypoint: {fileID: 933875184}
     endWaypoint: {fileID: 1182403298}
     distance: 17.400288
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1045232312}
     endWaypoint: {fileID: 295516699}
     distance: 10.004499
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1045232312}
     endWaypoint: {fileID: 873497516}
     distance: 34.81738
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1045232312}
     endWaypoint: {fileID: 420393254}
     distance: 42.035458
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1052146371}
     endWaypoint: {fileID: 1135262645}
     distance: 37.399597
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1135262645}
     endWaypoint: {fileID: 1141344552}
     distance: 21.50372
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1135262645}
     endWaypoint: {fileID: 237945074}
     distance: 21.561539
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1135262645}
     endWaypoint: {fileID: 1052146371}
     distance: 37.399597
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1141344552}
     endWaypoint: {fileID: 1554001491}
     distance: 13.74809
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1141344552}
     endWaypoint: {fileID: 2061557820}
     distance: 24.3001
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1141344552}
     endWaypoint: {fileID: 1135262645}
     distance: 21.50372
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1182403298}
     endWaypoint: {fileID: 323980831}
     distance: 14.99333
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1182403298}
     endWaypoint: {fileID: 1337136929}
     distance: 22.67532
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1182403298}
     endWaypoint: {fileID: 933875184}
     distance: 17.400288
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1182403298}
     endWaypoint: {fileID: 1554001491}
     distance: 19.60408
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1247624961}
     endWaypoint: {fileID: 1337136929}
     distance: 35.514786
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1282025173}
     endWaypoint: {fileID: 1657811266}
     distance: 13.7663145
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1282025173}
     endWaypoint: {fileID: 7151152}
     distance: 23.644012
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1282025173}
     endWaypoint: {fileID: 2139437643}
     distance: 14.234567
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1337136929}
     endWaypoint: {fileID: 1182403298}
     distance: 22.67532
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1337136929}
     endWaypoint: {fileID: 704311189}
     distance: 24.106846
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1337136929}
     endWaypoint: {fileID: 1247624961}
     distance: 35.514786
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1432129731}
     endWaypoint: {fileID: 704311189}
     distance: 9.602551
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1554001491}
     endWaypoint: {fileID: 2139437643}
     distance: 16.966513
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1554001491}
     endWaypoint: {fileID: 1182403298}
     distance: 19.60408
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1554001491}
     endWaypoint: {fileID: 1141344552}
     distance: 13.74809
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1621896607}
     endWaypoint: {fileID: 237945074}
     distance: 17.788197
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1621896607}
     endWaypoint: {fileID: 679679345}
     distance: 18.263077
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1657811266}
     endWaypoint: {fileID: 933875184}
     distance: 15.901258
-    isBarricated: 0
-    barricadeLocation: -1
+    isBarricated: 1
+    barrierLocation: 0.50413287
+    barrier: {fileID: 39311551}
   - startWaypoint: {fileID: 1657811266}
     endWaypoint: {fileID: 295516699}
     distance: 14.057737
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1657811266}
     endWaypoint: {fileID: 894784524}
     distance: 13.594484
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1657811266}
     endWaypoint: {fileID: 1282025173}
     distance: 13.7663145
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2061557820}
     endWaypoint: {fileID: 1141344552}
     distance: 24.3001
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2075552309}
     endWaypoint: {fileID: 804240333}
     distance: 21.818787
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2139437643}
     endWaypoint: {fileID: 1282025173}
     distance: 14.234567
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2139437643}
     endWaypoint: {fileID: 1554001491}
     distance: 16.966513
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2139437643}
     endWaypoint: {fileID: 287776538}
     distance: 13.548891
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   waypoints: []
   drawEdgeGizmos: 1
 --- !u!4 &980923535
@@ -1705,6 +1790,7 @@ MonoBehaviour:
   - {fileID: 295516699}
   - {fileID: 873497516}
   - {fileID: 420393254}
+  singleConnectionWaypoints: []
 --- !u!4 &1045232313
 Transform:
   m_ObjectHideFlags: 0
@@ -1751,6 +1837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentWaypoints:
   - {fileID: 1135262645}
+  singleConnectionWaypoints: []
 --- !u!4 &1052146372
 Transform:
   m_ObjectHideFlags: 0
@@ -1799,6 +1886,7 @@ MonoBehaviour:
   - {fileID: 1141344552}
   - {fileID: 237945074}
   - {fileID: 1052146371}
+  singleConnectionWaypoints: []
 --- !u!4 &1135262646
 Transform:
   m_ObjectHideFlags: 0
@@ -1954,6 +2042,7 @@ MonoBehaviour:
   - {fileID: 1554001491}
   - {fileID: 2061557820}
   - {fileID: 1135262645}
+  singleConnectionWaypoints: []
 --- !u!1 &1182403297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1988,6 +2077,7 @@ MonoBehaviour:
   - {fileID: 1337136929}
   - {fileID: 933875184}
   - {fileID: 1554001491}
+  singleConnectionWaypoints: []
 --- !u!4 &1182403299
 Transform:
   m_ObjectHideFlags: 0
@@ -2034,6 +2124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentWaypoints:
   - {fileID: 1337136929}
+  singleConnectionWaypoints: []
 --- !u!4 &1247624962
 Transform:
   m_ObjectHideFlags: 0
@@ -2082,6 +2173,7 @@ MonoBehaviour:
   - {fileID: 1657811266}
   - {fileID: 7151152}
   - {fileID: 2139437643}
+  singleConnectionWaypoints: []
 --- !u!4 &1282025174
 Transform:
   m_ObjectHideFlags: 0
@@ -2130,6 +2222,7 @@ MonoBehaviour:
   - {fileID: 1182403298}
   - {fileID: 704311189}
   - {fileID: 1247624961}
+  singleConnectionWaypoints: []
 --- !u!4 &1337136930
 Transform:
   m_ObjectHideFlags: 0
@@ -2176,6 +2269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentWaypoints:
   - {fileID: 704311189}
+  singleConnectionWaypoints: []
 --- !u!4 &1432129732
 Transform:
   m_ObjectHideFlags: 0
@@ -2239,6 +2333,7 @@ MonoBehaviour:
   - {fileID: 2139437643}
   - {fileID: 1182403298}
   - {fileID: 1141344552}
+  singleConnectionWaypoints: []
 --- !u!1 &1597052157
 GameObject:
   m_ObjectHideFlags: 0
@@ -2403,6 +2498,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 237945074}
   - {fileID: 679679345}
+  singleConnectionWaypoints: []
 --- !u!4 &1621896608
 Transform:
   m_ObjectHideFlags: 0
@@ -2514,6 +2610,7 @@ MonoBehaviour:
   - {fileID: 295516699}
   - {fileID: 894784524}
   - {fileID: 1282025173}
+  singleConnectionWaypoints: []
 --- !u!4 &1657811267
 Transform:
   m_ObjectHideFlags: 0
@@ -2622,6 +2719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentWaypoints:
   - {fileID: 1141344552}
+  singleConnectionWaypoints: []
 --- !u!4 &2061557821
 Transform:
   m_ObjectHideFlags: 0
@@ -2668,6 +2766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentWaypoints:
   - {fileID: 804240333}
+  singleConnectionWaypoints: []
 --- !u!4 &2075552310
 Transform:
   m_ObjectHideFlags: 0
@@ -2731,6 +2830,7 @@ MonoBehaviour:
   - {fileID: 1282025173}
   - {fileID: 1554001491}
   - {fileID: 287776538}
+  singleConnectionWaypoints: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
