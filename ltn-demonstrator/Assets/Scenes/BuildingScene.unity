@@ -265,8 +265,72 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 39311550}
+  - {fileID: 642707563}
+  - {fileID: 1311412215}
+  - {fileID: 1468599085}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &127791667
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 127275954}
+    m_Modifications:
+    - target: {fileID: 211012215410212970, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_Name
+      value: Barrier (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3732383
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9060441
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.42318335
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 50.071
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
 --- !u!1 &237945073
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,7 +498,7 @@ Transform:
   m_GameObject: {fileID: 295516697}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.6, y: 0.5, z: -4.7}
+  m_LocalPosition: {x: -2.4, y: 0.5, z: -1.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -466,7 +530,7 @@ GameObject:
   - component: {fileID: 323980830}
   - component: {fileID: 323980831}
   m_Layer: 0
-  m_Name: Waypoint (9)
+  m_Name: Waypoint (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -480,8 +544,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323980829}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.6, y: 0.5, z: 23.7}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.600002, y: 0.5, z: 23.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -717,6 +781,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &642707563 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+  m_PrefabInstance: {fileID: 1440027330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &642707564 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7563469548286501685, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+  m_PrefabInstance: {fileID: 1440027330}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22266116cd5fe9548847eab729e62476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &679679344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,312 +1339,374 @@ MonoBehaviour:
     endWaypoint: {fileID: 1282025173}
     distance: 23.644012
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 237945074}
     endWaypoint: {fileID: 1135262645}
     distance: 21.561539
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 237945074}
     endWaypoint: {fileID: 1621896607}
     distance: 17.788197
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 237945074}
     endWaypoint: {fileID: 267373688}
     distance: 22.634048
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 267373688}
     endWaypoint: {fileID: 237945074}
     distance: 22.634048
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 287776538}
     endWaypoint: {fileID: 2139437643}
     distance: 13.548891
-    isBarricated: 0
-    barricadeLocation: -1
+    isBarricated: 1
+    barrierLocation: 0.47595245
+    barrier: {fileID: 1468599086}
   - startWaypoint: {fileID: 287776538}
     endWaypoint: {fileID: 679679345}
     distance: 22.572992
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 295516699}
     endWaypoint: {fileID: 1657811266}
-    distance: 14.057737
+    distance: 13.176494
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 295516699}
     endWaypoint: {fileID: 1045232312}
-    distance: 10.004499
-    isBarricated: 0
-    barricadeLocation: -1
+    distance: 16.86209
+    isBarricated: 1
+    barrierLocation: 0.4634804
+    barrier: {fileID: 642707564}
   - startWaypoint: {fileID: 323980831}
     endWaypoint: {fileID: 894784524}
     distance: 13.200379
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 323980831}
     endWaypoint: {fileID: 1182403298}
-    distance: 14.99333
-    isBarricated: 0
-    barricadeLocation: -1
+    distance: 14.993332
+    isBarricated: 1
+    barrierLocation: 0.4526635
+    barrier: {fileID: 1311412216}
   - startWaypoint: {fileID: 323980831}
     endWaypoint: {fileID: 704311189}
-    distance: 20.148697
+    distance: 20.148695
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 420393254}
     endWaypoint: {fileID: 1045232312}
-    distance: 42.035458
+    distance: 40.43983
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 679679345}
     endWaypoint: {fileID: 287776538}
     distance: 22.572992
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 679679345}
     endWaypoint: {fileID: 1621896607}
     distance: 18.263077
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 704311189}
     endWaypoint: {fileID: 323980831}
-    distance: 20.148697
+    distance: 20.148695
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 704311189}
     endWaypoint: {fileID: 1337136929}
     distance: 24.106846
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 704311189}
     endWaypoint: {fileID: 1432129731}
     distance: 9.602551
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 804240333}
     endWaypoint: {fileID: 894784524}
     distance: 12.605372
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 804240333}
     endWaypoint: {fileID: 2075552309}
     distance: 21.818787
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 873497516}
     endWaypoint: {fileID: 1045232312}
-    distance: 34.81738
+    distance: 37.336445
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 894784524}
     endWaypoint: {fileID: 1657811266}
     distance: 13.594484
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 894784524}
     endWaypoint: {fileID: 323980831}
     distance: 13.200379
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 894784524}
     endWaypoint: {fileID: 804240333}
     distance: 12.605372
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 933875184}
     endWaypoint: {fileID: 1657811266}
     distance: 15.901258
-    isBarricated: 0
-    barricadeLocation: -1
+    isBarricated: 1
+    barrierLocation: 0.4958671
+    barrier: {fileID: 1534109028}
   - startWaypoint: {fileID: 933875184}
     endWaypoint: {fileID: 1182403298}
     distance: 17.400288
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1045232312}
     endWaypoint: {fileID: 295516699}
-    distance: 10.004499
-    isBarricated: 0
-    barricadeLocation: -1
+    distance: 16.86209
+    isBarricated: 1
+    barrierLocation: 0.5365195
+    barrier: {fileID: 642707564}
   - startWaypoint: {fileID: 1045232312}
     endWaypoint: {fileID: 873497516}
-    distance: 34.81738
+    distance: 37.336445
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1045232312}
     endWaypoint: {fileID: 420393254}
-    distance: 42.035458
+    distance: 40.43983
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1052146371}
     endWaypoint: {fileID: 1135262645}
     distance: 37.399597
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1135262645}
     endWaypoint: {fileID: 1141344552}
     distance: 21.50372
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1135262645}
     endWaypoint: {fileID: 237945074}
     distance: 21.561539
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1135262645}
     endWaypoint: {fileID: 1052146371}
     distance: 37.399597
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1141344552}
     endWaypoint: {fileID: 1554001491}
     distance: 13.74809
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1141344552}
     endWaypoint: {fileID: 2061557820}
     distance: 24.3001
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1141344552}
     endWaypoint: {fileID: 1135262645}
     distance: 21.50372
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1182403298}
     endWaypoint: {fileID: 323980831}
-    distance: 14.99333
-    isBarricated: 0
-    barricadeLocation: -1
+    distance: 14.993332
+    isBarricated: 1
+    barrierLocation: 0.54733646
+    barrier: {fileID: 1311412216}
   - startWaypoint: {fileID: 1182403298}
     endWaypoint: {fileID: 1337136929}
     distance: 22.67532
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1182403298}
     endWaypoint: {fileID: 933875184}
     distance: 17.400288
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1182403298}
     endWaypoint: {fileID: 1554001491}
     distance: 19.60408
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1247624961}
     endWaypoint: {fileID: 1337136929}
     distance: 35.514786
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1282025173}
     endWaypoint: {fileID: 1657811266}
     distance: 13.7663145
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1282025173}
     endWaypoint: {fileID: 7151152}
     distance: 23.644012
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1282025173}
     endWaypoint: {fileID: 2139437643}
     distance: 14.234567
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1337136929}
     endWaypoint: {fileID: 1182403298}
     distance: 22.67532
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1337136929}
     endWaypoint: {fileID: 704311189}
     distance: 24.106846
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1337136929}
     endWaypoint: {fileID: 1247624961}
     distance: 35.514786
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1432129731}
     endWaypoint: {fileID: 704311189}
     distance: 9.602551
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1554001491}
     endWaypoint: {fileID: 2139437643}
     distance: 16.966513
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1554001491}
     endWaypoint: {fileID: 1182403298}
     distance: 19.60408
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1554001491}
     endWaypoint: {fileID: 1141344552}
     distance: 13.74809
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1621896607}
     endWaypoint: {fileID: 237945074}
     distance: 17.788197
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1621896607}
     endWaypoint: {fileID: 679679345}
     distance: 18.263077
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1657811266}
     endWaypoint: {fileID: 933875184}
     distance: 15.901258
-    isBarricated: 0
-    barricadeLocation: -1
+    isBarricated: 1
+    barrierLocation: 0.50413287
+    barrier: {fileID: 1534109028}
   - startWaypoint: {fileID: 1657811266}
     endWaypoint: {fileID: 295516699}
-    distance: 14.057737
+    distance: 13.176494
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1657811266}
     endWaypoint: {fileID: 894784524}
     distance: 13.594484
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1657811266}
     endWaypoint: {fileID: 1282025173}
     distance: 13.7663145
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2061557820}
     endWaypoint: {fileID: 1141344552}
     distance: 24.3001
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2075552309}
     endWaypoint: {fileID: 804240333}
     distance: 21.818787
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2139437643}
     endWaypoint: {fileID: 1282025173}
     distance: 14.234567
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2139437643}
     endWaypoint: {fileID: 1554001491}
     distance: 16.966513
     isBarricated: 0
-    barricadeLocation: -1
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 2139437643}
     endWaypoint: {fileID: 287776538}
     distance: 13.548891
-    isBarricated: 0
-    barricadeLocation: -1
+    isBarricated: 1
+    barrierLocation: 0.5240475
+    barrier: {fileID: 1468599086}
   waypoints: []
   drawEdgeGizmos: 1
 --- !u!4 &980923535
@@ -1584,11 +1726,10 @@ Transform:
   - {fileID: 7151151}
   - {fileID: 1282025174}
   - {fileID: 894784523}
-  - {fileID: 323980830}
   - {fileID: 2139437642}
-  - {fileID: 1554001490}
   - {fileID: 1657811267}
   - {fileID: 933875183}
+  - {fileID: 1554001490}
   - {fileID: 1182403299}
   - {fileID: 1045232313}
   - {fileID: 287776539}
@@ -1608,6 +1749,7 @@ Transform:
   - {fileID: 1052146372}
   - {fileID: 267373689}
   - {fileID: 420393255}
+  - {fileID: 323980830}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1041064119
@@ -1714,7 +1856,7 @@ Transform:
   m_GameObject: {fileID: 1045232311}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.9, y: 0.5, z: -14.7}
+  m_LocalPosition: {x: 4.9, y: 0.5, z: -17.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2097,6 +2239,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 980923535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1311412215 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+  m_PrefabInstance: {fileID: 127791667}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1311412216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7563469548286501685, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+  m_PrefabInstance: {fileID: 127791667}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22266116cd5fe9548847eab729e62476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1337136928
 GameObject:
   m_ObjectHideFlags: 0
@@ -2191,6 +2349,94 @@ Transform:
   m_Children: []
   m_Father: {fileID: 980923535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1440027330
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 127275954}
+    m_Modifications:
+    - target: {fileID: 211012215410212970, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_Name
+      value: Barrier (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3732383
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -25.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97953427
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.20127763
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -23.223
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+--- !u!4 &1468599085 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+  m_PrefabInstance: {fileID: 1801342111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1468599086 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7563469548286501685, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+  m_PrefabInstance: {fileID: 1801342111}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22266116cd5fe9548847eab729e62476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1534109028 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7563469548286501685, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+  m_PrefabInstance: {fileID: 39311549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22266116cd5fe9548847eab729e62476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1554001489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,7 +2789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.3452854
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2551,7 +2797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.237106
+      value: -17.03
       objectReference: {fileID: 0}
     - target: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2591,6 +2837,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
   m_PrefabInstance: {fileID: 1798188799}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1801342111
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 127275954}
+    m_Modifications:
+    - target: {fileID: 211012215410212970, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_Name
+      value: Barrier (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 26.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3732383
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7385354
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6742147
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 84.786
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
 --- !u!1 &2061557819
 GameObject:
   m_ObjectHideFlags: 0

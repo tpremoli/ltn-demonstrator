@@ -167,4 +167,96 @@ public class Edge
         }
         return null;
     }
+
+    public Waypoint getClosestWaypoint(Vector3 point)
+    {
+        if (!isPointOnEdge(point))
+        {
+            Debug.Log("Position is not on edge");
+            return null;
+        }
+
+        float distanceToStart = Vector3.Distance(point, startWaypoint.transform.position);
+        float distanceToEnd = Vector3.Distance(point, endWaypoint.transform.position);
+
+        if (distanceToStart < distanceToEnd)
+        {
+            return startWaypoint;
+        }
+        else
+        {
+            return endWaypoint;
+        }
+    }
+
+    /// <summary>
+    /// This method returns the closest waypoint that is not blocked by a barrier, given a point.
+    /// If both waypoints are blocked, it returns null.
+    /// </summary>
+    /// <param name="point">the point we want to check</param>
+    /// <returns></returns>
+    public Waypoint getClosestAccesibleWaypoint(Vector3 point)
+    {
+        float distanceToStart = Vector3.Distance(point, startWaypoint.transform.position);
+        float distanceToEnd = Vector3.Distance(point, endWaypoint.transform.position);
+
+        // Debug.LogWarning($"Distance to Start Waypoint: {distanceToStart}");
+        // Debug.LogWarning($"Distance to End Waypoint: {distanceToEnd}");
+
+        if (distanceToStart < distanceToEnd)
+        {
+            // If there is no barrier between the point and the start waypoint, return start waypoint
+            if (!isBarrierBetween(point, startWaypoint.transform.position))
+            {
+                return startWaypoint;
+            }
+            // Otherwise, check if the end waypoint is accessible
+            else if (!isBarrierBetween(point, endWaypoint.transform.position))
+            {
+                return endWaypoint;
+            }
+        }
+        else
+        {
+            // If there is no barrier between the point and the end waypoint, return end waypoint
+            if (!isBarrierBetween(point, endWaypoint.transform.position))
+            {
+                return endWaypoint;
+            }
+            // Otherwise, check if the start waypoint is accessible
+            else if (!isBarrierBetween(point, startWaypoint.transform.position))
+            {
+                return startWaypoint;
+            }
+        }
+
+        // If both waypoints are blocked by a barrier, return null
+        // Debug.LogWarning("No accessible waypoint found, returning null");
+        return null;
+    }
+    
+    /// <summary>
+    /// This checks if there is a barrier between a start point and an end point on the edge
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="destination"></param>
+    /// <returns></returns>
+    public bool isBarrierBetween(Vector3 start, Vector3 destination)
+    {
+        // Check if barricade is active
+        if (!isBarricated)
+        {
+            return false;
+        }
+
+        // Convert positions to distances along the edge
+        float startDistance = convertToPositionAlongEdge(start);
+        float destinationDistance = convertToPositionAlongEdge(destination);
+        float barrierDistance = convertToPositionAlongEdge(barrier.transform.position);
+
+        // Check if the barrier is between start and destination
+        // Assuming lower distance value is closer to the starting point of the edge
+        return barrierDistance > System.Math.Min(startDistance, destinationDistance) && 
+            barrierDistance < System.Math.Max(startDistance, destinationDistance);
+    }
 }

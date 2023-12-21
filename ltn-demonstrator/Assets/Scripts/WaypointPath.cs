@@ -23,20 +23,38 @@ public class WaypointPath
         this.endEdge = graph.getClosetEdge(destinationPos);
 
 
-        if (PathExists()){
+        if (PathExists())
+        {
             this.path = Dijkstra();
-        } else {
+        }
+        else
+        {
             this.path = null;
         }
     }
 
+
+    /// <summary>
+    /// This method uses Dijkstra's algorithm to find the shortest path between the start and end positions.
+    /// It returns a list of waypoints that represent the path. If the list is empty, the start and end are on the same edge.
+    /// If the list is null, no path exists between the start and end positions.
+    /// </summary>
+    /// <returns>A path from the start postiion to the end position</returns>
     public List<Waypoint> Dijkstra()
     {
         // Check if start and end are on the same edge to handle this special case
         if (startEdge.isSameEdge(endEdge))
         {
-            // Return an empty path if starting and ending on the same edge
-            return new List<Waypoint>();
+            if (startEdge.isBarricated && !startEdge.isBarrierBetween(beginningPos, destinationPos))
+            {
+                // Barrier, but destination is before the barrier, return a direct path
+                return new List<Waypoint>();
+            }
+            else if (!startEdge.isBarricated)
+            {
+                // No barrier, return a direct path
+                return new List<Waypoint>();
+            }
         }
 
         // Initialize dictionaries to store distances, previous waypoints, and the most recent distances
@@ -51,19 +69,34 @@ public class WaypointPath
             prev[waypoint] = null;
         }
 
-        // Initialize the distances for the start waypoints on the start edge
-        dist[startEdge.StartWaypoint] = Vector3.Distance(startEdge.StartWaypoint.transform.position, beginningPos);
-        dist[startEdge.EndWaypoint] = Vector3.Distance(startEdge.EndWaypoint.transform.position, beginningPos);
 
         // Priority queue to manage waypoints based on their current shortest distance
         PriorityQueue<Waypoint, float> queue = new PriorityQueue<Waypoint, float>();
 
-        // Enqueue the start waypoints and update their most recent distances
-        queue.Enqueue(startEdge.StartWaypoint, dist[startEdge.StartWaypoint]);
-        mostRecentDistances[startEdge.StartWaypoint] = dist[startEdge.StartWaypoint];
+        // Enqueue the accessible start waypoint with the shortest distance
+        // If the start edge is barricated, only enqueue the accessible waypoint
+        if (startEdge.isBarricated)
+        {
+            // Only set distance for the waypoint on the same side of the barrier as beginningPos
+            Waypoint accessibleWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos);
 
-        queue.Enqueue(startEdge.EndWaypoint, dist[startEdge.EndWaypoint]);
-        mostRecentDistances[startEdge.EndWaypoint] = dist[startEdge.EndWaypoint];
+            dist[accessibleWaypoint] = Vector3.Distance(accessibleWaypoint.transform.position, beginningPos);
+            queue.Enqueue(accessibleWaypoint, dist[accessibleWaypoint]);
+            mostRecentDistances[accessibleWaypoint] = dist[accessibleWaypoint];
+        }
+        else
+        {
+            // Initialize the distances for the start waypoints on the start edge
+            dist[startEdge.StartWaypoint] = Vector3.Distance(startEdge.StartWaypoint.transform.position, beginningPos);
+            dist[startEdge.EndWaypoint] = Vector3.Distance(startEdge.EndWaypoint.transform.position, beginningPos);
+
+            // Enqueue the start waypoints and update their most recent distances
+            queue.Enqueue(startEdge.StartWaypoint, dist[startEdge.StartWaypoint]);
+            mostRecentDistances[startEdge.StartWaypoint] = dist[startEdge.StartWaypoint];
+
+            queue.Enqueue(startEdge.EndWaypoint, dist[startEdge.EndWaypoint]);
+            mostRecentDistances[startEdge.EndWaypoint] = dist[startEdge.EndWaypoint];
+        }
 
         // Process each waypoint in the queue
         while (queue.Count > 0)
@@ -79,7 +112,15 @@ public class WaypointPath
             // Explore all adjacent waypoints of the current waypoint
             foreach (Waypoint neighbor in current.adjacentWaypoints)
             {
+                // first, we check if the edge is traversable.
+                Edge connectingEdge = graph.GetEdge(current, neighbor);
+
                 // Calculate the alternative distance to this neighbor
+                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
+                {
+                    continue;
+                }
+
                 float alt = dist[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
 
                 // If the alternative distance is shorter, update the distance and previous waypoint
@@ -96,10 +137,10 @@ public class WaypointPath
         }
 
         // If a path exists, construct the path
-        return ConstructPath(prev, endEdge);
+        return ConstructPath(prev);
     }
 
-    private List<Waypoint> ConstructPath(Dictionary<Waypoint, Waypoint> prev, Edge endEdge)
+    private List<Waypoint> ConstructPath(Dictionary<Waypoint, Waypoint> prev)
     {
         List<Waypoint> path = new List<Waypoint>();
 
@@ -108,10 +149,15 @@ public class WaypointPath
 
         // Check if a path exists to the closer endpoint
         if (!prev.ContainsKey(closerEndpoint))
-        {   
-            Debug.LogWarning("No path exists to the closer endpoint");
+        {
             return null; // or any other appropriate response
         }
+
+        // These are for debugging purposes- if you want to see the prev dict uncomment these
+        // foreach (var kvp in prev)
+        // {
+        //     Debug.LogWarning("Key: " + kvp.Key.name + ", Value: " + (kvp.Value != null ? kvp.Value.name : "null"));
+        // }
 
         // If a path exists, construct the path from the closer endpoint
         Waypoint current = closerEndpoint;
@@ -216,8 +262,17 @@ public class WaypointPath
             }
 
             // Explore all adjacent waypoints of the current waypoint
-            foreach ( Waypoint neighbor in current.adjacentWaypoints)
+            foreach (Waypoint neighbor in current.adjacentWaypoints)
             {
+                // Get the edge connecting the current waypoint and its neighbor
+                Edge connectingEdge = graph.GetEdge(current, neighbor);
+
+                // Check if the edge is traversable (i.e., no barrier between the waypoints)
+                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
+                {
+                    continue; // Skip to the next neighbor if there is a barrier
+                }
+
                 // Calculate the alternative distance to this neighbor
                 float alt = dist[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
 
@@ -236,4 +291,8 @@ public class WaypointPath
         // If the loop completes without finding the end waypoint, return false indicating no path exists
         return false;
     }
+
+
 }
+
+

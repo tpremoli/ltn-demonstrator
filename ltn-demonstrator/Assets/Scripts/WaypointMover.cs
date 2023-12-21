@@ -12,6 +12,14 @@ public class WaypointMover : MonoBehaviour
     private int noOfPassengers; 
     private float rateOfEmission;
 
+
+    // TODO: Need a way to notice if there is agents ahead of the current agent
+    // this can be done using a box collider in front of the agent, and checking if there is a collision
+    // if there is a collision, then the agent will slow down, and if there is no collision, then the agent will speed up.
+    // This will be done in the update function, and the agent will have a max velocity, and a min velocity.
+    // The agent will also have a current velocity, which will be updated in the update function.
+    // Beyond that, the collider of the agent itself will be used to check if there is a crash with another agent
+
     // attributes from the WaypointMover class
     [SerializeField] private Waypoint startingWaypoint;
     [SerializeField] private float speed = 5f;
