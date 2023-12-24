@@ -12,14 +12,6 @@ public class WaypointMover : MonoBehaviour
     private int noOfPassengers; 
     private float rateOfEmission;
 
-
-    // TODO: Need a way to notice if there is agents ahead of the current agent
-    // this can be done using a box collider in front of the agent, and checking if there is a collision
-    // if there is a collision, then the agent will slow down, and if there is no collision, then the agent will speed up.
-    // This will be done in the update function, and the agent will have a max velocity, and a min velocity.
-    // The agent will also have a current velocity, which will be updated in the update function.
-    // Beyond that, the collider of the agent itself will be used to check if there is a crash with another agent
-
     // attributes from the WaypointMover class
     [SerializeField] private Waypoint startingWaypoint;
     [SerializeField] private float speed = 5f;
@@ -45,35 +37,84 @@ public class WaypointMover : MonoBehaviour
             // if no path is found, destroy the object.
             // Later on, we should change this so that the traveller changes their mode of transport
             Debug.LogWarning("Path doesn't exist for Traveller" + this.gameObject.name+". Destroying object.");
+            Debug.LogWarning("endedge start: " + endEdge.StartWaypoint.name + " endedge end: " + endEdge.EndWaypoint.name);
             Destroy(this.gameObject);
         }
 
         // Get the first waypoint in the path and set the initial position
         currentWaypoint = path.GetNextWaypoint();
         Debug.Log("Traveller Instantiated");
+        DebugDrawPath();
+    }
+
+     void DebugDrawPath()
+    {
+        if (path != null && path.path != null && path.path.Count > 0)
+        {
+            Vector3[] pathPositions = new Vector3[path.path.Count + 1];
+            pathPositions[0] = transform.position;
+
+            for (int i = 0; i < path.path.Count; i++)
+            {
+                pathPositions[i + 1] = path.path[i].transform.position;
+            }
+
+            // Draw the path using Debug.DrawLine
+            for (int i = 0; i < pathPositions.Length - 1; i++)
+            {
+                Debug.DrawLine(pathPositions[i], pathPositions[i + 1], Color.yellow);
+            }
+        }
     }
 
     void Update()
     {
         // if no waypoint to move to, go to the position along the edge
-        if (currentWaypoint == null){
-            // Move towards the current waypoint using linear interpolation
-            transform.position = Vector3.MoveTowards(transform.position, path.destinationPos, speed * Time.deltaTime); 
+        if (currentWaypoint == null)
+        {
+            // Calculate the arrow direction from the current position to the destination
+            Vector3 arrowDirection = path.destinationPos - transform.position;
+
+            // Normalize the arrow direction to ensure consistent offset magnitude
+            arrowDirection.Normalize();
+
+            // Calculate the offset position based on the arrow direction
+            Vector3 offsetPosition = path.destinationPos - arrowDirection * 2f;
+
+            // Move towards the offset position
+            transform.position = Vector3.MoveTowards(transform.position, offsetPosition, speed * Time.deltaTime);
+
             if (Vector3.Distance(transform.position, path.destinationPos) < distanceThreshold)
             {
                 // if we're close enough to the destination, destroy the object
                 arriveToDestination();
             }
+        }
+        else
+        {
+            // Calculate the arrow direction from the current waypoint to the next waypoint
+            Vector3 arrowDirection = currentWaypoint.transform.position - transform.position;
 
-        } else {
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.transform.position, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, currentWaypoint.transform.position) < distanceThreshold)
+            // Normalize the arrow direction to ensure consistent offset magnitude
+            arrowDirection.Normalize();
+
+            // Calculate the offset position based on the arrow direction
+            Vector3 offsetPosition = currentWaypoint.transform.position - arrowDirection * 2f;
+
+            // Move towards the offset position
+            transform.position = Vector3.MoveTowards(transform.position, offsetPosition, speed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, offsetPosition) < distanceThreshold)
             {
                 // If the threshold is met, get the next waypoint in the path
                 currentWaypoint = path.GetNextWaypoint();
             }
         }
     }
+
+
+    
+
 
     public void arriveToDestination()
     {
