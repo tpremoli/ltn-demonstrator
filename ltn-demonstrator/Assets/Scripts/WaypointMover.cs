@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class WaypointMover : MonoBehaviour
 {
-    // attributes from the Traveller class
+    // Attributes from the Traveller class
     private float totalDistanceMoved;
     private float positionOnEdge;
-    private float currentVelocity; 
-    private float maxVelocity; // will be assigned according to agent category enum (EdgeFunctionality)
-    private int noOfPassengers; 
+    private float currentVelocity;
+    private float maxVelocity; // Will be assigned according to agent category enum (EdgeFunctionality)
+    private int noOfPassengers;
     private float rateOfEmission;
 
-    // attributes from the WaypointMover class
+    // Attributes from the WaypointMover class
     [SerializeField] private Waypoint startingWaypoint;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float distanceThreshold = 0.1f;
@@ -20,7 +20,6 @@ public class WaypointMover : MonoBehaviour
     private WaypointPath path;           // Instance of the pathfinding class
     private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
     private Graph graph;                 // Instance of the graph class
-
 
     void Start()
     {
@@ -30,14 +29,14 @@ public class WaypointMover : MonoBehaviour
         Edge endEdge = graph.edges[Random.Range(0, graph.edges.Count)];
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.transform.position, endEdge.GetRandomPointOnEdge());
+        path = new WaypointPath(this.transform.position, endEdge.GetRandomPointOnEdge(), this);
 
         if (path.path == null)
         {
-            // if no path is found, destroy the object.
+            // If no path is found, destroy the object.
             // Later on, we should change this so that the traveller changes their mode of transport
-            Debug.LogWarning("Path doesn't exist for Traveller" + this.gameObject.name+". Destroying object.");
-            Debug.LogWarning("endedge start: " + endEdge.StartWaypoint.name + " endedge end: " + endEdge.EndWaypoint.name);
+            Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
+            Debug.LogWarning("End edge start: " + endEdge.StartWaypoint.name + " End edge end: " + endEdge.EndWaypoint.name);
             Destroy(this.gameObject);
         }
 
@@ -47,7 +46,7 @@ public class WaypointMover : MonoBehaviour
         DebugDrawPath();
     }
 
-     void DebugDrawPath()
+    void DebugDrawPath()
     {
         if (path != null && path.path != null && path.path.Count > 0)
         {
@@ -69,13 +68,13 @@ public class WaypointMover : MonoBehaviour
 
     void Update()
     {
-        // if no waypoint to move to, go to the position along the edge
+        // If no waypoint to move to, go to the position along the edge
         if (currentWaypoint == null)
         {
             // Calculate the arrow direction from the current position to the destination
             Vector3 arrowDirection = path.destinationPos - transform.position;
 
-            // Normalize the arrow direction to ensure consistent offset magnitude
+            // Normalize the arrow direction to ensure a consistent offset magnitude
             arrowDirection.Normalize();
 
             // Calculate the offset position based on the arrow direction
@@ -86,7 +85,7 @@ public class WaypointMover : MonoBehaviour
 
             if (Vector3.Distance(transform.position, path.destinationPos) < distanceThreshold)
             {
-                // if we're close enough to the destination, destroy the object
+                // If we're close enough to the destination, destroy the object
                 arriveToDestination();
             }
         }
@@ -95,7 +94,7 @@ public class WaypointMover : MonoBehaviour
             // Calculate the arrow direction from the current waypoint to the next waypoint
             Vector3 arrowDirection = currentWaypoint.transform.position - transform.position;
 
-            // Normalize the arrow direction to ensure consistent offset magnitude
+            // Normalize the arrow direction to ensure a consistent offset magnitude
             arrowDirection.Normalize();
 
             // Calculate the offset position based on the arrow direction
@@ -111,10 +110,6 @@ public class WaypointMover : MonoBehaviour
             }
         }
     }
-
-
-    
-
 
     public void arriveToDestination()
     {
@@ -143,25 +138,25 @@ public class WaypointMover : MonoBehaviour
             // Draw the path from the agent's current position
             Gizmos.color = Color.yellow;
 
-            Vector3 startPosition = currentWaypoint != null ? currentWaypoint.transform.position : transform.position; // Use agent's position if currentWaypoint is null
+            Vector3 startPosition = currentWaypoint != null ? currentWaypoint.transform.position : transform.position; // Use the agent's position if the currentWaypoint is null
 
             if (path.path.Count > 0)
             {
                 // Iterate through the remaining waypoints
                 foreach (var waypoint in path.path)
                 {
-                    // Draw sphere for each waypoint
+                    // Draw a sphere for each waypoint
                     Gizmos.DrawSphere(waypoint.transform.position, 1f);
 
-                    // Draw arrow from the start position to the current waypoint
+                    // Draw an arrow from the start position to the current waypoint
                     DrawArrow.ForGizmo(startPosition + Vector3.up, (waypoint.transform.position - startPosition) + Vector3.up, Color.yellow, 1f);
 
-                    // Update start position
+                    // Update the start position
                     startPosition = waypoint.transform.position;
                 }
             }
 
-            // Always draw arrow to the destination from the current position or last waypoint
+            // Always draw an arrow to the destination from the current position or last waypoint
             DrawArrow.ForGizmo(startPosition + Vector3.up, (path.destinationPos - startPosition) + Vector3.up, Color.yellow, 1f);
         }
     }

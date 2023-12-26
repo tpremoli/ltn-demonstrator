@@ -6,6 +6,7 @@ public class WaypointPath
 {
     public List<Waypoint> path;
     private Graph graph;
+    private WaypointMover mover;
 
     public Vector3 beginningPos;
     public Vector3 destinationPos;
@@ -13,15 +14,15 @@ public class WaypointPath
     public Edge startEdge;
     public Edge endEdge;
 
-    public WaypointPath(Vector3 beginningPos, Vector3 destinationPos)
+    public WaypointPath(Vector3 beginningPos, Vector3 destinationPos, WaypointMover mover)
     {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
         this.beginningPos = beginningPos;
         this.destinationPos = destinationPos;
+        this.mover = mover;
 
         this.startEdge = graph.getClosetEdge(beginningPos);
         this.endEdge = graph.getClosetEdge(destinationPos);
-
 
         if (PathExists())
         {
@@ -33,13 +34,12 @@ public class WaypointPath
         }
     }
 
-
     /// <summary>
     /// This method uses Dijkstra's algorithm to find the shortest path between the start and end positions.
     /// It returns a list of waypoints that represent the path. If the list is empty, the start and end are on the same edge.
     /// If the list is null, no path exists between the start and end positions.
     /// </summary>
-    /// <returns>A path from the start postiion to the end position</returns>
+    /// <returns>A path from the start position to the end position</returns>
     public List<Waypoint> Dijkstra()
     {
         // Check if start and end are on the same edge to handle this special case
@@ -47,7 +47,7 @@ public class WaypointPath
         {
             if (startEdge.isBarricated && !startEdge.isBarrierBetween(beginningPos, destinationPos))
             {
-                // Barrier, but destination is before the barrier, return a direct path
+                // Barrier, but the destination is before the barrier, return a direct path
                 return new List<Waypoint>();
             }
             else if (!startEdge.isBarricated)
@@ -68,7 +68,6 @@ public class WaypointPath
             dist[waypoint] = float.MaxValue;
             prev[waypoint] = null;
         }
-
 
         // Priority queue to manage waypoints based on their current shortest distance
         PriorityQueue<Waypoint, float> queue = new PriorityQueue<Waypoint, float>();
@@ -153,12 +152,6 @@ public class WaypointPath
             return null; // or any other appropriate response
         }
 
-        // These are for debugging purposes- if you want to see the prev dict uncomment these
-        // foreach (var kvp in prev)
-        // {
-        //     Debug.LogWarning("Key: " + kvp.Key.name + ", Value: " + (kvp.Value != null ? kvp.Value.name : "null"));
-        // }
-
         // If a path exists, construct the path from the closer endpoint
         Waypoint current = closerEndpoint;
         while (current != null)
@@ -214,6 +207,7 @@ public class WaypointPath
         if (path == null || path.Count == 0)
         {
             Debug.Log("Finished path, moving to destination point now.");
+            mover.arriveToDestination(); // Call the arriveToDestination method from the WaypointMover
             return null;
         }
         Waypoint nextWaypoint = path[0];
