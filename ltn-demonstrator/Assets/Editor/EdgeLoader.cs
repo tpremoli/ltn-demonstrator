@@ -25,6 +25,7 @@ public class EdgeLoader
                 float distance = graph.CalculateDistance(waypoint, adjacentWaypoint);
                 // instantiate edge as empty game object
                 Edge edge = new Edge(waypoint, adjacentWaypoint);
+                //SHIFT EDGE???
                 graph.edges.Add(edge);
             }
         }

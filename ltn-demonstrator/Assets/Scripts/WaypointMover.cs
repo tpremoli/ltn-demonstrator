@@ -74,13 +74,14 @@ public class WaypointMover : MonoBehaviour
             // Calculate the arrow direction from the current position to the destination
             Vector3 arrowDirection = path.destinationPos - transform.position;
 
-            // Normalize the arrow direction to ensure a consistent offset magnitude
+            // Normalize the arrow direction to ensure consistent offset magnitude
             arrowDirection.Normalize();
 
             // Calculate the offset position based on the arrow direction
-            Vector3 offsetPosition = path.destinationPos - arrowDirection * 2f;
+            float offsetMagnitude = 2f; // Set your desired offset magnitude
+            Vector3 offsetPosition = path.destinationPos - arrowDirection * offsetMagnitude;
 
-            // Move towards the offset position
+            // Move towards the fixed offset position
             transform.position = Vector3.MoveTowards(transform.position, offsetPosition, speed * Time.deltaTime);
 
             if (Vector3.Distance(transform.position, path.destinationPos) < distanceThreshold)

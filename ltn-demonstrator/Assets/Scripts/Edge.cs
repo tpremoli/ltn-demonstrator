@@ -6,8 +6,11 @@ public class Edge
     [SerializeField]
     private Waypoint startWaypoint;
 
+    private Waypoint startWaypointLane;
+
     [SerializeField]
     private Waypoint endWaypoint;
+    private Waypoint endWaypointLane;
 
     [SerializeField]
     private float distance;

@@ -86,6 +86,13 @@ public class WaypointPath
         else
         {
             // Initialize the distances for the start waypoints on the start edge
+            /*
+
+
+            beginning
+
+
+            */
             dist[startEdge.StartWaypoint] = Vector3.Distance(startEdge.StartWaypoint.transform.position, beginningPos);
             dist[startEdge.EndWaypoint] = Vector3.Distance(startEdge.EndWaypoint.transform.position, beginningPos);
 
