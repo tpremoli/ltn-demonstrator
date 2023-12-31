@@ -946,7 +946,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136161524}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1136161526
 Camera:
   m_ObjectHideFlags: 0
@@ -1455,7 +1455,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2025576498}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: 82c58ccb248b0416797dcd3f8be2e082, type: 3}
+        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+        m_MethodName: set_name
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: UnPauseGame()
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2025576498
 MonoBehaviour:
   m_ObjectHideFlags: 0
