@@ -32,13 +32,11 @@ public class Building : MonoBehaviour
     public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
     public readonly BuildingType buildingType;// the type of the building (i.e "residence", "office", "restaurant", etc. would be an enum)
 
-    private bool isPaused = true;
-
     // Start is called before the first frame update. We use these to initialize the building.
     void Start(){
         
-        isPaused = true;
         Time.timeScale = 0f; // Game starts paused
+        
 
         Random.InitState(42); // Set seed for random number generator
 
