@@ -6,10 +6,10 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        isPaused = true;
-        Time.timeScale = 0f; // Game starts paused
-    }
+{
+    isPaused = true;
+    Time.timeScale = 0f; // Game starts paused
+}
 
 
     // Update is called once per frame
