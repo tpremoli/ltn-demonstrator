@@ -5,13 +5,13 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject PausePanel;
-    void Pause()
+    public void Pause()
     {
         PausePanel.SetActive(true);
         Time.timeScale = 0;  
     }
 
-    void Play()
+    public void Play()
     {
         PausePanel.SetActive(false);
         Time.timeScale = 1;
