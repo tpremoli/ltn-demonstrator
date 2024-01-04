@@ -58,6 +58,10 @@ public class Building : MonoBehaviour
         }
     }
 
+    public Vector3 GetClosestPointOnEdge() {
+        return closestPointOnEdge;
+    }
+
     // Update is called once per frame
     void Update()
     {

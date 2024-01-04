@@ -12,6 +12,8 @@ public class WaypointMover : MonoBehaviour
     private int noOfPassengers; 
     private float rateOfEmission;
 
+    private List<Building> buildings;
+
 
     // TODO: Need a way to notice if there is agents ahead of the current agent
     // this can be done using a box collider in front of the agent, and checking if there is a collision
@@ -28,17 +30,19 @@ public class WaypointMover : MonoBehaviour
     private WaypointPath path;           // Instance of the pathfinding class
     private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
     private Graph graph;                 // Instance of the graph class
-
-
+    
     void Start()
     {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
+        buildings = new List<Building>(FindObjectsOfType<Building>());
+        Building building = buildings[Random.Range(0, buildings.Count)];
+
         // The building spawns the Mover, so Mover is at the Building position
-        Edge endEdge = graph.edges[Random.Range(0, graph.edges.Count)];
+        //Edge endEdge = graph.edges[Random.Range(0, graph.edges.Count)];
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.transform.position, endEdge.GetRandomPointOnEdge());
+        path = new WaypointPath(this.transform.position, building.GetClosestPointOnEdge());
 
         if (path.path == null)
         {
