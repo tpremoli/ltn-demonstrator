@@ -38,6 +38,11 @@ public class WaypointMover : MonoBehaviour
         buildings = new List<Building>(FindObjectsOfType<Building>());
         Building building = buildings[Random.Range(0, buildings.Count)];
 
+        // Edge case where the chosen building is the same as the building the traveller spawned at.
+        if (this.transform.position == building.GetClosestPointOnEdge()) {
+            Building building = buildings[Random.Range(0, buildings.Count)];
+        }
+
         // The building spawns the Mover, so Mover is at the Building position
         //Edge endEdge = graph.edges[Random.Range(0, graph.edges.Count)];
 
