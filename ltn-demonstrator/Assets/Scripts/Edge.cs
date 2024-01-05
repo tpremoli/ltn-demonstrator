@@ -53,7 +53,7 @@ public class Edge
         // Make the arrows shorter by 20%
         float shortenedMagnitude = direction.magnitude * 0.7f;
         Vector3 shortenedDirection = direction.normalized * shortenedMagnitude;
-        
+
         // Calculate the middle position
         Vector3 middlePosition = startpoint + direction * 0.5f - shortenedDirection * 0.5f;
         
