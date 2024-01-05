@@ -42,7 +42,9 @@ public class DragAndDrop : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider != null)
+            if (hit.collider != null && (hit.collider.gameObject("Draggable") || 
+                hit.collider.gameObject.layer == LayerMask.NameToLayer("Draggable") || 
+                hit.collider.gameObject.GetComponent<IDrag>() != null))
             {
                 StartCoroutine(DragUpdate(hit.collider.gameObject));
             }
@@ -53,6 +55,8 @@ public class DragAndDrop : MonoBehaviour
     {
         float initialDistance = Vector3.Distance(clickedObject.transform.position, mainCamera.transform.position);
         clickedObject.TryGetComponent<Rigidbody>(out var rb);
+        clickedObject.TryGetComponent<IDrag>(out var IDragComponent);
+        IDragComponent?.onStartDrag();
         // while the mouse is pressed on the object
         while (mouseClick.ReadValue<float>() != 0)
         {
@@ -73,5 +77,6 @@ public class DragAndDrop : MonoBehaviour
                 yield return null;
             }
         }
+        IDragComponent?.onEndDrag();
     }
 }

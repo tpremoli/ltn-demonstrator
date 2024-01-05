@@ -774,6 +774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 419175198}
+  - component: {fileID: 419175199}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -796,6 +797,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &419175199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419175197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57372b0df9ef4e03a5bfbf28efa020f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseClick:
+    m_Name: Mouse Click
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f7c276de-ae9c-4c53-aca2-efc784c56391
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c1c3816e-c039-43fa-b771-195bdc779ce9
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Mouse Click
+      m_Flags: 0
+    m_Flags: 0
+  mouseDragPhysicsSpeed: 10
+  mouseDragSpeed: 0.1
 --- !u!1 &505179593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,17 +1279,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837424293}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &909597566 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7563469548286501685, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
-  m_PrefabInstance: {fileID: 39311549}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22266116cd5fe9548847eab729e62476, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &980923533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,43 +1309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointSize: 1
-  edges:
-  - startWaypoint: {fileID: 149555550}
-    endWaypoint: {fileID: 1248626347}
-    distance: 33.551826
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 149555550}
-    endWaypoint: {fileID: 1953294309}
-    distance: 40.295906
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1248626347}
-    endWaypoint: {fileID: 1953294309}
-    distance: 36.354435
-    isBarricated: 1
-    barrierLocation: 0.40587905
-    barrier: {fileID: 909597566}
-  - startWaypoint: {fileID: 1248626347}
-    endWaypoint: {fileID: 149555550}
-    distance: 33.551826
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1953294309}
-    endWaypoint: {fileID: 1248626347}
-    distance: 36.354435
-    isBarricated: 1
-    barrierLocation: 0.5941209
-    barrier: {fileID: 909597566}
-  - startWaypoint: {fileID: 1953294309}
-    endWaypoint: {fileID: 149555550}
-    distance: 40.295906
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+  edges: []
   waypoints: []
   drawEdgeGizmos: 1
 --- !u!4 &980923535
