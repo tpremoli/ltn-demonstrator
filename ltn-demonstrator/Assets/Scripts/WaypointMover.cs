@@ -108,20 +108,11 @@ public class WaypointMover : MonoBehaviour
         Vector3 leftVector = new Vector3(-nextMoveDirection.z, 0, nextMoveDirection.x);
         currentTargetPosition = nextPosition + leftVector * leftLaneOffset;
     }
+
     private void faceNextDestination()
-    {
-        Waypoint nextWaypoint = path.PeekNextWaypoint();
-        Vector3 nextDestination;
-        if (nextWaypoint == null)
-        {
-            // If the next waypoint is null, we face destination
-            nextDestination = path.destinationPos;
-        }
-        else
-        {
-            // Otherwise, we face the next waypoint
-            nextDestination = nextWaypoint.transform.position;
-        }
+    {   
+        // Calculate the next destination location (either the next waypoint or the destination)
+        Vector3 nextDestination = calcNextDestination();
 
         // Calculate the arrow direction from the current position to the next destination
         Vector3 arrowDirection = nextDestination - transform.position;
@@ -130,7 +121,7 @@ public class WaypointMover : MonoBehaviour
         arrowDirection.Normalize();
 
         // Calculate the offset position based on the arrow direction
-        Vector3 offsetPosition = nextDestination - arrowDirection * 2f;
+        Vector3 offsetPosition = nextDestination - arrowDirection * leftLaneOffset;
 
         // Rotate towards the offset position
         transform.LookAt(offsetPosition);
@@ -138,6 +129,7 @@ public class WaypointMover : MonoBehaviour
 
     private void faceNextDestinationInit()
     {
+        // this isn't a method as it's different to the above method
         Vector3 nextDestination;
         if (currentWaypoint == null)
         {
@@ -157,7 +149,7 @@ public class WaypointMover : MonoBehaviour
         arrowDirection.Normalize();
 
         // Calculate the offset position based on the arrow direction
-        Vector3 offsetPosition = nextDestination - arrowDirection * 2f;
+        Vector3 offsetPosition = nextDestination - arrowDirection * leftLaneOffset;
 
         // Rotate towards the offset position
         transform.LookAt(offsetPosition);
@@ -166,18 +158,9 @@ public class WaypointMover : MonoBehaviour
 
     private void moveToLeftLane()
     {
-        Waypoint nextWaypoint = path.PeekNextWaypoint();
-        Vector3 nextLocation;
-        if (nextWaypoint == null)
-        {
-            // If the next waypoint is null, we face destination
-            nextLocation = path.destinationPos;
-        }
-        else
-        {
-            // Otherwise, we face the next waypoint
-            nextLocation = nextWaypoint.transform.position;
-        }
+        // Calculate the next destination location (either the next waypoint or the destination)
+        Vector3 nextLocation = calcNextDestination();
+        
         // we want to offset the position to the left, to simulate the agent being on the left side of the road
         Vector3 nextMoveDirection = nextLocation - transform.position;
         nextMoveDirection.Normalize();
@@ -209,6 +192,22 @@ public class WaypointMover : MonoBehaviour
         // Set the new position to the left of the line between waypoints
         transform.position = transform.position + leftVector * leftLaneOffset;
     }
+    private Vector3 calcNextDestination(){
+        Waypoint nextWaypoint = path.PeekNextWaypoint();
+        Vector3 nextDestination;
+        if (nextWaypoint == null)
+        {
+            // If the next waypoint is null, we face destination
+            nextDestination = path.destinationPos;
+        }
+        else
+        {
+            // Otherwise, we face the next waypoint
+            nextDestination = nextWaypoint.transform.position;
+        }
+        return nextDestination;
+    }
+
 
     public void arriveToDestination()
     {
