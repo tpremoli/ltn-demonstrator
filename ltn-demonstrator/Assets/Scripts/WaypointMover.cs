@@ -13,6 +13,7 @@ public class WaypointMover : MonoBehaviour
     private float rateOfEmission;
 
     private List<Building> buildings;
+    private Building destinationBuilding;
 
 
     // TODO: Need a way to notice if there is agents ahead of the current agent
@@ -35,18 +36,8 @@ public class WaypointMover : MonoBehaviour
     {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        buildings = new List<Building>(FindObjectsOfType<Building>());
-        // Choose random destination building.
-        Building destinationBuilding = buildings[Random.Range(0, buildings.Count)];
-
-        // Edge case where the chosen building is the same as the building the traveller spawned at.
-        while (Vector3.Distance(this.transform.position, destinationBuilding.GetClosestPointOnEdge()) < distanceThreshold) {
-            // Choose new random destination building.
-            destinationBuilding = buildings[Random.Range(0, buildings.Count)];
-        }
-
-        // The building spawns the Mover, so Mover is at the Building position
-        //Edge endEdge = graph.edges[Random.Range(0, graph.edges.Count)];
+        // Choose a random destination building.
+        chooseDestinationBuilding();
 
         // Initialize the path with the starting waypoint
         path = new WaypointPath(this.transform.position, destinationBuilding.GetClosestPointOnEdge());
@@ -83,6 +74,21 @@ public class WaypointMover : MonoBehaviour
                 // If the threshold is met, get the next waypoint in the path
                 currentWaypoint = path.GetNextWaypoint();
             }
+        }
+    }
+
+    // Choose a random destination from the possible buildings in the grid.
+    public void chooseDestinationBuilding() {
+        // Get list of buildings.
+        // TODO: find a way to make this global so all movers can access this without having to call this function every time.
+        buildings = new List<Building>(FindObjectsOfType<Building>());
+        // Choose random destination building.
+        destinationBuilding = buildings[Random.Range(0, buildings.Count)];
+
+        // Edge case where the chosen building is the same as the building the traveller spawned at.
+        while (Vector3.Distance(this.transform.position, destinationBuilding.GetClosestPointOnEdge()) < distanceThreshold) {
+            // Choose new random destination building.
+            destinationBuilding = buildings[Random.Range(0, buildings.Count)];
         }
     }
 
