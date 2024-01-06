@@ -36,18 +36,20 @@ public class WaypointMover : MonoBehaviour
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
         buildings = new List<Building>(FindObjectsOfType<Building>());
-        Building building = buildings[Random.Range(0, buildings.Count)];
+        // Choose random destination building.
+        Building destinationBuilding = buildings[Random.Range(0, buildings.Count)];
 
         // Edge case where the chosen building is the same as the building the traveller spawned at.
-        if (this.transform.position == building.GetClosestPointOnEdge()) {
-            Building building = buildings[Random.Range(0, buildings.Count)];
+        while (Vector3.Distance(this.transform.position, destinationBuilding.GetClosestPointOnEdge()) < distanceThreshold) {
+            // Choose new random destination building.
+            destinationBuilding = buildings[Random.Range(0, buildings.Count)];
         }
 
         // The building spawns the Mover, so Mover is at the Building position
         //Edge endEdge = graph.edges[Random.Range(0, graph.edges.Count)];
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.transform.position, building.GetClosestPointOnEdge());
+        path = new WaypointPath(this.transform.position, destinationBuilding.GetClosestPointOnEdge());
 
         if (path.path == null)
         {
