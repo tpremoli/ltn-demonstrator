@@ -12,13 +12,13 @@ public class SphereScript : MonoBehaviour, IDrag
     }
 
     // Implement OnDragStart method from IDrag interface
-    public void OnDragStart()
+    public void onStartDrag()
     {
         rb.useGravity = false;
     }
 
     // Implement OnDragEnd method from IDrag interface
-    public void OnDragEnd()
+    public void onEndDrag()
     {
         rb.useGravity = true;
         rb.velocity = Vector3.zero;

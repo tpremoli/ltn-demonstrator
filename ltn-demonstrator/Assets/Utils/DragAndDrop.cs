@@ -42,7 +42,7 @@ public class DragAndDrop : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider != null && (hit.collider.gameObject("Draggable") || 
+            if (hit.collider != null && (hit.collider.gameObject.tag == "Draggable" || 
                 hit.collider.gameObject.layer == LayerMask.NameToLayer("Draggable") || 
                 hit.collider.gameObject.GetComponent<IDrag>() != null))
             {
