@@ -16,6 +16,7 @@ public class WaypointMover : MonoBehaviour
     [SerializeField] private Waypoint startingWaypoint;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float distanceThreshold = 0.1f;
+    [SerializeField] private float leftLaneOffset = 1f;
 
     private WaypointPath path;           // Instance of the pathfinding class
     private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
@@ -47,7 +48,9 @@ public class WaypointMover : MonoBehaviour
         if (currentWaypoint == null)
         {
             faceDestination(path.destinationPos);
-        } else{
+        }
+        else
+        {
             faceDestination(currentWaypoint.transform.position);
         }
 
@@ -113,12 +116,31 @@ public class WaypointMover : MonoBehaviour
             // Move towards the offset position
             transform.position = Vector3.MoveTowards(transform.position, offsetPosition, speed * Time.deltaTime);
 
+            // If the threshold is met, get the next waypoint in the path
             if (Vector3.Distance(transform.position, offsetPosition) < distanceThreshold)
             {
-                // If the threshold is met, get the next waypoint in the path
+                Waypoint nextWaypoint = path.PeekNextWaypoint();
+                Vector3 nextLocation;
+                if (nextWaypoint == null)
+                {
+                    // If the next waypoint is null, we face destination
+                    nextLocation = path.destinationPos;
+                }
+                else
+                {
+                    // Otherwise, we face the next waypoint
+                    nextLocation = nextWaypoint.transform.position;
+                }
+                // we want to offset the position to the left, to simulate the agent being on the left side of the road
+                Vector3 nextMoveDirection = nextLocation - transform.position;
+                nextMoveDirection.Normalize();
+                Vector3 leftVector = new Vector3(-nextMoveDirection.z, 0, nextMoveDirection.x);
+
+                // Set the new position to the left of the line between waypoints
+                transform.position = currentWaypoint.transform.position + leftVector * leftLaneOffset;
 
                 currentWaypoint = path.PopNextWaypoint();
-                faceDestination(currentWaypoint.transform.position);
+                faceDestination(currentWaypoint==null ? path.destinationPos : currentWaypoint.transform.position);
             }
         }
     }

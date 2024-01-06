@@ -221,6 +221,18 @@ public class WaypointPath
         return nextWaypoint;
     }
 
+    // Get the next waypoint in the traversal
+    public Waypoint PeekNextWaypoint()
+    {
+        if (path == null || path.Count == 0)
+        {
+            return null;
+        }
+        Waypoint nextWaypoint = path[0];
+        return nextWaypoint;
+    }
+
+
     /// <summary>
     /// This method checks if a path exists between the start and end positions.
     /// </summary>
