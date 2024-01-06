@@ -45,14 +45,8 @@ public class WaypointMover : MonoBehaviour
         currentWaypoint = path.PopNextWaypoint();
 
         // if the path is null, then the traveller is on the same edge as the destination
-        if (currentWaypoint == null)
-        {
-            faceDestination(path.destinationPos);
-        }
-        else
-        {
-            faceDestination(currentWaypoint.transform.position);
-        }
+        faceNextDestination();
+        // TODO: posittion to left lane + set destination to left of waypoint
 
         Debug.Log("Traveller Instantiated");
         DebugDrawPath();
@@ -119,16 +113,28 @@ public class WaypointMover : MonoBehaviour
             // If the threshold is met, get the next waypoint in the path
             if (Vector3.Distance(transform.position, offsetPosition) < distanceThreshold)
             {
-                Waypoint nextWaypoint = path.PeekNextWaypoint();
-                moveToLeftLane(nextWaypoint);
+                moveToLeftLane();
+                faceNextDestination();
                 currentWaypoint = path.PopNextWaypoint();
-                faceDestination(currentWaypoint == null ? path.destinationPos : currentWaypoint.transform.position);
             }
         }
     }
 
-    private void faceDestination(Vector3 nextDestination)
+    private void faceNextDestination()
     {
+        Waypoint nextWaypoint = path.PeekNextWaypoint();
+        Vector3 nextDestination;
+        if (nextWaypoint == null)
+        {
+            // If the next waypoint is null, we face destination
+            nextDestination = path.destinationPos;
+        }
+        else
+        {
+            // Otherwise, we face the next waypoint
+            nextDestination = nextWaypoint.transform.position;
+        }
+
         // Calculate the arrow direction from the current position to the next destination
         Vector3 arrowDirection = nextDestination - transform.position;
 
@@ -142,8 +148,9 @@ public class WaypointMover : MonoBehaviour
         transform.LookAt(offsetPosition);
     }
 
-    private void moveToLeftLane(Waypoint nextWaypoint)
+    private void moveToLeftLane()
     {
+        Waypoint nextWaypoint = path.PeekNextWaypoint();
         Vector3 nextLocation;
         if (nextWaypoint == null)
         {
