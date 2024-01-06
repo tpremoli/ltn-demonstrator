@@ -31,13 +31,13 @@ public class WaypointMover : MonoBehaviour
 
         // Choose a random destination building.
         chooseDestinationBuilding();
-        Edge endEdge = destinationBuilding.closestEdge;
 
         // Initialize the path with the starting waypoint
         path = new WaypointPath(this.transform.position, destinationBuilding.GetClosestPointOnEdge(), this);
 
         if (path.path == null)
         {
+            Edge endEdge = destinationBuilding.closestEdge;
             // If no path is found, destroy the object.
             // Later on, we should change this so that the traveller changes their mode of transport
             Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
