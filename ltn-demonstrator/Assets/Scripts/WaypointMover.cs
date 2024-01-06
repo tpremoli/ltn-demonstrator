@@ -12,7 +12,6 @@ public class WaypointMover : MonoBehaviour
     private int noOfPassengers; 
     private float rateOfEmission;
 
-    private List<Building> buildings;
     private Building destinationBuilding;
 
 
@@ -80,15 +79,13 @@ public class WaypointMover : MonoBehaviour
     // Choose a random destination from the possible buildings in the grid.
     public void chooseDestinationBuilding() {
         // Get list of buildings.
-        // TODO: find a way to make this global so all movers can access this without having to call this function every time.
-        buildings = new List<Building>(FindObjectsOfType<Building>());
         // Choose random destination building.
-        destinationBuilding = buildings[Random.Range(0, buildings.Count)];
+        destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
 
         // Edge case where the chosen building is the same as the building the traveller spawned at.
         while (Vector3.Distance(this.transform.position, destinationBuilding.GetClosestPointOnEdge()) < distanceThreshold) {
             // Choose new random destination building.
-            destinationBuilding = buildings[Random.Range(0, buildings.Count)];
+            destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
         }
     }
 

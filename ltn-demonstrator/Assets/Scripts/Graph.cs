@@ -7,6 +7,8 @@ public class Graph : MonoBehaviour
     [Range(0f, 2f)] [SerializeField] private float waypointSize = 0.5f;
     [SerializeField] public List<Edge> edges;
 
+    public List<Building> buildings;
+
     public List<Waypoint> waypoints;
 
     [SerializeField] private bool drawEdgeGizmos = true;
@@ -14,6 +16,7 @@ public class Graph : MonoBehaviour
     void Start()
     {
         waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
+        buildings = new List<Building>(FindObjectsOfType<Building>());
     }
 
     public float WaypointSize
