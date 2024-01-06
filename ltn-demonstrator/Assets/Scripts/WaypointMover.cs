@@ -120,27 +120,9 @@ public class WaypointMover : MonoBehaviour
             if (Vector3.Distance(transform.position, offsetPosition) < distanceThreshold)
             {
                 Waypoint nextWaypoint = path.PeekNextWaypoint();
-                Vector3 nextLocation;
-                if (nextWaypoint == null)
-                {
-                    // If the next waypoint is null, we face destination
-                    nextLocation = path.destinationPos;
-                }
-                else
-                {
-                    // Otherwise, we face the next waypoint
-                    nextLocation = nextWaypoint.transform.position;
-                }
-                // we want to offset the position to the left, to simulate the agent being on the left side of the road
-                Vector3 nextMoveDirection = nextLocation - transform.position;
-                nextMoveDirection.Normalize();
-                Vector3 leftVector = new Vector3(-nextMoveDirection.z, 0, nextMoveDirection.x);
-
-                // Set the new position to the left of the line between waypoints
-                transform.position = currentWaypoint.transform.position + leftVector * leftLaneOffset;
-
+                moveToLeftLane(nextWaypoint);
                 currentWaypoint = path.PopNextWaypoint();
-                faceDestination(currentWaypoint==null ? path.destinationPos : currentWaypoint.transform.position);
+                faceDestination(currentWaypoint == null ? path.destinationPos : currentWaypoint.transform.position);
             }
         }
     }
@@ -158,6 +140,28 @@ public class WaypointMover : MonoBehaviour
 
         // Rotate towards the offset position
         transform.LookAt(offsetPosition);
+    }
+
+    private void moveToLeftLane(Waypoint nextWaypoint)
+    {
+        Vector3 nextLocation;
+        if (nextWaypoint == null)
+        {
+            // If the next waypoint is null, we face destination
+            nextLocation = path.destinationPos;
+        }
+        else
+        {
+            // Otherwise, we face the next waypoint
+            nextLocation = nextWaypoint.transform.position;
+        }
+        // we want to offset the position to the left, to simulate the agent being on the left side of the road
+        Vector3 nextMoveDirection = nextLocation - transform.position;
+        nextMoveDirection.Normalize();
+        Vector3 leftVector = new Vector3(-nextMoveDirection.z, 0, nextMoveDirection.x);
+
+        // Set the new position to the left of the line between waypoints
+        transform.position = currentWaypoint.transform.position + leftVector * leftLaneOffset;
     }
 
     public void arriveToDestination()
