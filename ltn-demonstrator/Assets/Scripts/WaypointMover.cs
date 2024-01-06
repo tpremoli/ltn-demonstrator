@@ -4,31 +4,24 @@ using UnityEngine;
 
 public class WaypointMover : MonoBehaviour
 {
-    // attributes from the Traveller class
+    // Attributes from the Traveller class
     private float totalDistanceMoved;
     private float positionOnEdge;
-    private float currentVelocity; 
-    private float maxVelocity; // will be assigned according to agent category enum (EdgeFunctionality)
-    private int noOfPassengers; 
+    private float currentVelocity;
+    private float maxVelocity; // Will be assigned according to agent category enum (EdgeFunctionality)
+    private int noOfPassengers;
     private float rateOfEmission;
 
-
-    // TODO: Need a way to notice if there is agents ahead of the current agent
-    // this can be done using a box collider in front of the agent, and checking if there is a collision
-    // if there is a collision, then the agent will slow down, and if there is no collision, then the agent will speed up.
-    // This will be done in the update function, and the agent will have a max velocity, and a min velocity.
-    // The agent will also have a current velocity, which will be updated in the update function.
-    // Beyond that, the collider of the agent itself will be used to check if there is a crash with another agent
-
-    // attributes from the WaypointMover class
+    // Attributes from the WaypointMover class
     [SerializeField] private Waypoint startingWaypoint;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float distanceThreshold = 0.1f;
+    [SerializeField] private float leftLaneOffset = 1f;
 
     private WaypointPath path;           // Instance of the pathfinding class
     private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
+    private Vector3 currentTargetPosition;
     private Graph graph;                 // Instance of the graph class
-
 
     void Start()
     {
@@ -38,45 +31,190 @@ public class WaypointMover : MonoBehaviour
         Edge endEdge = graph.edges[Random.Range(0, graph.edges.Count)];
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.transform.position, endEdge.GetRandomPointOnEdge());
+        path = new WaypointPath(this.transform.position, endEdge.GetRandomPointOnEdge(), this);
 
         if (path.path == null)
         {
-            // if no path is found, destroy the object.
+            // If no path is found, destroy the object.
             // Later on, we should change this so that the traveller changes their mode of transport
-            Debug.LogWarning("Path doesn't exist for Traveller" + this.gameObject.name+". Destroying object.");
+            Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
+            Debug.LogWarning("End edge start: " + endEdge.StartWaypoint.name + " End edge end: " + endEdge.EndWaypoint.name);
             Destroy(this.gameObject);
         }
 
         // Get the first waypoint in the path and set the initial position
-        currentWaypoint = path.GetNextWaypoint();
+        currentWaypoint = path.PopNextWaypoint();
+        updateTargetPosition();
+
+        // We face the next destination (either the next waypoint or the destination)
+        faceNextDestinationInit();
+        moveToLeftLaneInit();
+
         Debug.Log("Traveller Instantiated");
+        DebugDrawPath();
     }
 
-    void Update()
+    void DebugDrawPath()
     {
-        // if no waypoint to move to, go to the position along the edge
-        if (currentWaypoint == null){
-            // Move towards the current waypoint using linear interpolation
-            transform.position = Vector3.MoveTowards(transform.position, path.destinationPos, speed * Time.deltaTime); 
-            if (Vector3.Distance(transform.position, path.destinationPos) < distanceThreshold)
+        if (path != null && path.path != null && path.path.Count > 0)
+        {
+            Vector3[] pathPositions = new Vector3[path.path.Count + 1];
+            pathPositions[0] = transform.position;
+
+            for (int i = 0; i < path.path.Count; i++)
             {
-                // if we're close enough to the destination, destroy the object
-                arriveToDestination();
+                pathPositions[i + 1] = path.path[i].transform.position;
             }
 
-        } else {
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.transform.position, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, currentWaypoint.transform.position) < distanceThreshold)
+            // Draw the path using Debug.DrawLine
+            for (int i = 0; i < pathPositions.Length - 1; i++)
             {
-                // If the threshold is met, get the next waypoint in the path
-                currentWaypoint = path.GetNextWaypoint();
+                Debug.DrawLine(pathPositions[i], pathPositions[i + 1], Color.yellow);
             }
         }
     }
 
+
+    void Update()
+    {
+        // Move towards the target position using linear interpolation
+        transform.position = Vector3.MoveTowards(transform.position, currentTargetPosition, speed * Time.deltaTime);
+
+        // Check the distance to the target position
+        if (Vector3.Distance(transform.position, currentTargetPosition) < distanceThreshold)
+        {
+            if (currentWaypoint != null)
+            {
+                // this change in transform position is kinda dirty, but it works.
+                // it essentially ensures all caluclations on direction & lanes are done relative to the original edges.
+                transform.position = currentWaypoint.transform.position;
+                faceNextDestination();
+                moveToLeftLane();
+                currentWaypoint = path.PopNextWaypoint();
+                updateTargetPosition();
+            }
+            else
+            {
+                // If we're close enough to the destination and there's no waypoint, destroy the object
+                arriveToDestination();
+                updateTargetPosition();
+            }
+        }
+    }
+
+    private void updateTargetPosition()
+    {
+        // converts the current target position to the left of the line between waypoints
+        Vector3 nextPosition =  currentWaypoint == null ? path.destinationPos : currentWaypoint.transform.position;
+        Vector3 nextMoveDirection = nextPosition - transform.position;
+        nextMoveDirection.Normalize();
+        Vector3 leftVector = new Vector3(-nextMoveDirection.z, 0, nextMoveDirection.x);
+        currentTargetPosition = nextPosition + leftVector * leftLaneOffset;
+    }
+
+    private void faceNextDestination()
+    {   
+        // Calculate the next destination location (either the next waypoint or the destination)
+        Vector3 nextDestination = calcNextDestination();
+
+        // Calculate the arrow direction from the current position to the next destination
+        Vector3 arrowDirection = nextDestination - transform.position;
+
+        // Normalize the arrow direction to ensure a consistent offset magnitude
+        arrowDirection.Normalize();
+
+        // Calculate the offset position based on the arrow direction
+        Vector3 offsetPosition = nextDestination - arrowDirection * leftLaneOffset;
+
+        // Rotate towards the offset position
+        transform.LookAt(offsetPosition);
+    }
+
+    private void faceNextDestinationInit()
+    {
+        // this isn't a method as it's different to the above method
+        Vector3 nextDestination;
+        if (currentWaypoint == null)
+        {
+            // If the next waypoint is null, we face destination
+            nextDestination = path.destinationPos;
+        }
+        else
+        {
+            // Otherwise, we face the next waypoint
+            nextDestination = currentWaypoint.transform.position;
+        }
+
+        // Calculate the arrow direction from the current position to the next destination
+        Vector3 arrowDirection = nextDestination - transform.position;
+
+        // Normalize the arrow direction to ensure a consistent offset magnitude
+        arrowDirection.Normalize();
+
+        // Calculate the offset position based on the arrow direction
+        Vector3 offsetPosition = nextDestination - arrowDirection * leftLaneOffset;
+
+        // Rotate towards the offset position
+        transform.LookAt(offsetPosition);
+    }
+
+
+    private void moveToLeftLane()
+    {
+        // Calculate the next destination location (either the next waypoint or the destination)
+        Vector3 nextLocation = calcNextDestination();
+        
+        // we want to offset the position to the left, to simulate the agent being on the left side of the road
+        Vector3 nextMoveDirection = nextLocation - transform.position;
+        nextMoveDirection.Normalize();
+        Vector3 leftVector = new Vector3(-nextMoveDirection.z, 0, nextMoveDirection.x);
+
+        // Set the new position to the left of the line between waypoints
+        transform.position = currentWaypoint.transform.position + leftVector * leftLaneOffset;
+    }
+
+    private void moveToLeftLaneInit()
+    {
+        Waypoint nextWaypoint = path.PeekNextWaypoint();
+        Vector3 nextLocation;
+        if (nextWaypoint == null)
+        {
+            // If the next waypoint is null, we face destination
+            nextLocation = path.destinationPos;
+        }
+        else
+        {
+            // Otherwise, we face the next waypoint
+            nextLocation = nextWaypoint.transform.position;
+        }
+        // we want to offset the position to the left, to simulate the agent being on the left side of the road
+        Vector3 nextMoveDirection = nextLocation - transform.position;
+        nextMoveDirection.Normalize();
+        Vector3 leftVector = new Vector3(-nextMoveDirection.z, 0, nextMoveDirection.x);
+
+        // Set the new position to the left of the line between waypoints
+        transform.position = transform.position + leftVector * leftLaneOffset;
+    }
+    private Vector3 calcNextDestination(){
+        Waypoint nextWaypoint = path.PeekNextWaypoint();
+        Vector3 nextDestination;
+        if (nextWaypoint == null)
+        {
+            // If the next waypoint is null, we face destination
+            nextDestination = path.destinationPos;
+        }
+        else
+        {
+            // Otherwise, we face the next waypoint
+            nextDestination = nextWaypoint.transform.position;
+        }
+        return nextDestination;
+    }
+
+
     public void arriveToDestination()
     {
+        Debug.Log("Arrived to destination. Destroying object.");
         Destroy(this.gameObject);
     }
 
@@ -102,25 +240,25 @@ public class WaypointMover : MonoBehaviour
             // Draw the path from the agent's current position
             Gizmos.color = Color.yellow;
 
-            Vector3 startPosition = currentWaypoint != null ? currentWaypoint.transform.position : transform.position; // Use agent's position if currentWaypoint is null
+            Vector3 startPosition = currentWaypoint != null ? currentWaypoint.transform.position : transform.position; // Use the agent's position if the currentWaypoint is null
 
             if (path.path.Count > 0)
             {
                 // Iterate through the remaining waypoints
                 foreach (var waypoint in path.path)
                 {
-                    // Draw sphere for each waypoint
+                    // Draw a sphere for each waypoint
                     Gizmos.DrawSphere(waypoint.transform.position, 1f);
 
-                    // Draw arrow from the start position to the current waypoint
+                    // Draw an arrow from the start position to the current waypoint
                     DrawArrow.ForGizmo(startPosition + Vector3.up, (waypoint.transform.position - startPosition) + Vector3.up, Color.yellow, 1f);
 
-                    // Update start position
+                    // Update the start position
                     startPosition = waypoint.transform.position;
                 }
             }
 
-            // Always draw arrow to the destination from the current position or last waypoint
+            // Always draw an arrow to the destination from the current position or last waypoint
             DrawArrow.ForGizmo(startPosition + Vector3.up, (path.destinationPos - startPosition) + Vector3.up, Color.yellow, 1f);
         }
     }
