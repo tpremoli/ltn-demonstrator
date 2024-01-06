@@ -12,6 +12,8 @@ public class WaypointMover : MonoBehaviour
     private int noOfPassengers;
     private float rateOfEmission;
 
+    private Building destinationBuilding;
+
     // Attributes from the WaypointMover class
     [SerializeField] private Waypoint startingWaypoint;
     [SerializeField] private float speed = 5f;
@@ -22,19 +24,20 @@ public class WaypointMover : MonoBehaviour
     private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
     private Vector3 currentTargetPosition;
     private Graph graph;                 // Instance of the graph class
-
+    
     void Start()
     {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        // The building spawns the Mover, so Mover is at the Building position
-        Edge endEdge = graph.edges[Random.Range(0, graph.edges.Count)];
+        // Choose a random destination building.
+        chooseDestinationBuilding();
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.transform.position, endEdge.GetRandomPointOnEdge(), this);
+        path = new WaypointPath(this.transform.position, destinationBuilding.GetClosestPointOnEdge(), this);
 
         if (path.path == null)
         {
+            Edge endEdge = destinationBuilding.closestEdge;
             // If no path is found, destroy the object.
             // Later on, we should change this so that the traveller changes their mode of transport
             Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
@@ -74,6 +77,18 @@ public class WaypointMover : MonoBehaviour
         }
     }
 
+    // Choose a random destination from the possible buildings in the grid.
+    public void chooseDestinationBuilding() {
+        // Get list of buildings.
+        // Choose random destination building.
+        destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
+
+        // Edge case where the chosen building is the same as the building the traveller spawned at.
+        while (Vector3.Distance(this.transform.position, destinationBuilding.GetClosestPointOnEdge()) < distanceThreshold) {
+            // Choose new random destination building.
+            destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
+        }
+    }
 
     void Update()
     {

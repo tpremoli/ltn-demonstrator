@@ -25,7 +25,7 @@ public class Building : MonoBehaviour
     [Range(1, 600)] [SerializeField] private float timeBetweenSpawns = 1; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
 
-    private Edge closestEdge;
+    public Edge closestEdge;
     private Vector3 closestPointOnEdge;
 
     // Some more attributes - not sure if needed, but seemed useful
@@ -54,6 +54,10 @@ public class Building : MonoBehaviour
         if (Application.IsPlaying(this)){
             Gizmos.DrawLine(this.transform.position, closestPointOnEdge);
         }
+    }
+
+    public Vector3 GetClosestPointOnEdge() {
+        return closestPointOnEdge;
     }
 
     // Update is called once per frame
