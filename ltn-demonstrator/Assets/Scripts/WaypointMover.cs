@@ -46,10 +46,9 @@ public class WaypointMover : MonoBehaviour
         currentWaypoint = path.PopNextWaypoint();
         updateTargetPosition();
 
-        // if the path is null, then the traveller is on the same edge as the destination
-        faceNextDestination();
+        // We face the next destination (either the next waypoint or the destination)
+        faceNextDestinationInit();
         moveToLeftLaneInit();
-        // TODO: posittion to left lane + set destination to left of waypoint
 
         Debug.Log("Traveller Instantiated");
         DebugDrawPath();
@@ -136,6 +135,34 @@ public class WaypointMover : MonoBehaviour
         // Rotate towards the offset position
         transform.LookAt(offsetPosition);
     }
+
+    private void faceNextDestinationInit()
+    {
+        Vector3 nextDestination;
+        if (currentWaypoint == null)
+        {
+            // If the next waypoint is null, we face destination
+            nextDestination = path.destinationPos;
+        }
+        else
+        {
+            // Otherwise, we face the next waypoint
+            nextDestination = currentWaypoint.transform.position;
+        }
+
+        // Calculate the arrow direction from the current position to the next destination
+        Vector3 arrowDirection = nextDestination - transform.position;
+
+        // Normalize the arrow direction to ensure a consistent offset magnitude
+        arrowDirection.Normalize();
+
+        // Calculate the offset position based on the arrow direction
+        Vector3 offsetPosition = nextDestination - arrowDirection * 2f;
+
+        // Rotate towards the offset position
+        transform.LookAt(offsetPosition);
+    }
+
 
     private void moveToLeftLane()
     {
