@@ -20,6 +20,7 @@ public class WaypointMover : MonoBehaviour
 
     private WaypointPath path;           // Instance of the pathfinding class
     private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
+    private Vector3 currentTargetPosition;
     private Graph graph;                 // Instance of the graph class
 
     void Start()
@@ -43,6 +44,7 @@ public class WaypointMover : MonoBehaviour
 
         // Get the first waypoint in the path and set the initial position
         currentWaypoint = path.PopNextWaypoint();
+        updateTargetPosition();
 
         // if the path is null, then the traveller is on the same edge as the destination
         faceNextDestination();
@@ -76,28 +78,37 @@ public class WaypointMover : MonoBehaviour
 
     void Update()
     {
-        // if no waypoint to move to, go to the position along the edge
-        if (currentWaypoint == null){
-            // Move towards the current waypoint using linear interpolation
-            transform.position = Vector3.MoveTowards(transform.position, path.destinationPos, speed * Time.deltaTime); 
-            if (Vector3.Distance(transform.position, path.destinationPos) < distanceThreshold)
-            {
-                // if we're close enough to the destination, destroy the object
-                arriveToDestination();
-            }
+        // Move towards the target position using linear interpolation
+        transform.position = Vector3.MoveTowards(transform.position, currentTargetPosition, speed * Time.deltaTime);
 
-        } else {
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.transform.position, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, currentWaypoint.transform.position) < distanceThreshold)
+        // Check the distance to the target position
+        if (Vector3.Distance(transform.position, currentTargetPosition) < distanceThreshold)
+        {
+            if (currentWaypoint != null)
             {
                 moveToLeftLane();
                 faceNextDestination();
                 currentWaypoint = path.PopNextWaypoint();
+                updateTargetPosition();
             }
-
+            else
+            {
+                // If we're close enough to the destination and there's no waypoint, destroy the object
+                arriveToDestination();
+                updateTargetPosition();
+            }
         }
     }
 
+    private void updateTargetPosition()
+    {
+        // converts the current target position to the left of the line between waypoints
+        Vector3 nextPosition =  currentWaypoint == null ? path.destinationPos : currentWaypoint.transform.position;
+        Vector3 nextMoveDirection = nextPosition - transform.position;
+        nextMoveDirection.Normalize();
+        Vector3 leftVector = new Vector3(-nextMoveDirection.z, 0, nextMoveDirection.x);
+        currentTargetPosition = nextPosition + leftVector * leftLaneOffset;
+    }
     private void faceNextDestination()
     {
         Waypoint nextWaypoint = path.PeekNextWaypoint();
