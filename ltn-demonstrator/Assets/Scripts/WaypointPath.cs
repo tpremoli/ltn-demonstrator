@@ -209,12 +209,11 @@ public class WaypointPath
     }
 
     // Get the next waypoint in the traversal
-    public Waypoint GetNextWaypoint()
+    public Waypoint PopNextWaypoint()
     {
         if (path == null || path.Count == 0)
         {
             Debug.Log("Finished path, moving to destination point now.");
-            // mover.arriveToDestination(); // Call the arriveToDestination method from the WaypointMover
             return null;
         }
         Waypoint nextWaypoint = path[0];

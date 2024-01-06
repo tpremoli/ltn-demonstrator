@@ -41,7 +41,16 @@ public class WaypointMover : MonoBehaviour
         }
 
         // Get the first waypoint in the path and set the initial position
-        currentWaypoint = path.GetNextWaypoint();
+        currentWaypoint = path.PopNextWaypoint();
+
+        // if the path is null, then the traveller is on the same edge as the destination
+        if (currentWaypoint == null)
+        {
+            faceDestination(path.destinationPos);
+        } else{
+            faceDestination(currentWaypoint.transform.position);
+        }
+
         Debug.Log("Traveller Instantiated");
         DebugDrawPath();
     }
@@ -84,7 +93,7 @@ public class WaypointMover : MonoBehaviour
             // Move towards the fixed offset position
             transform.position = Vector3.MoveTowards(transform.position, offsetPosition, speed * Time.deltaTime);
 
-            if (Vector3.Distance(transform.position, path.destinationPos) < distanceThreshold)
+            if (Vector3.Distance(transform.position, offsetPosition) < distanceThreshold)
             {
                 // If we're close enough to the destination, destroy the object
                 arriveToDestination();
@@ -107,13 +116,31 @@ public class WaypointMover : MonoBehaviour
             if (Vector3.Distance(transform.position, offsetPosition) < distanceThreshold)
             {
                 // If the threshold is met, get the next waypoint in the path
-                currentWaypoint = path.GetNextWaypoint();
+
+                currentWaypoint = path.PopNextWaypoint();
+                faceDestination(currentWaypoint.transform.position);
             }
         }
     }
 
+    private void faceDestination(Vector3 nextDestination)
+    {
+        // Calculate the arrow direction from the current position to the next destination
+        Vector3 arrowDirection = nextDestination - transform.position;
+
+        // Normalize the arrow direction to ensure a consistent offset magnitude
+        arrowDirection.Normalize();
+
+        // Calculate the offset position based on the arrow direction
+        Vector3 offsetPosition = nextDestination - arrowDirection * 2f;
+
+        // Rotate towards the offset position
+        transform.LookAt(offsetPosition);
+    }
+
     public void arriveToDestination()
     {
+        Debug.Log("Arrived to destination. Destroying object.");
         Destroy(this.gameObject);
     }
 

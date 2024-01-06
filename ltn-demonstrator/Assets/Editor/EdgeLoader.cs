@@ -8,7 +8,7 @@ public class EdgeLoader
     [InitializeOnLoadMethod]
     public static void LoadEdges()
     {
-        Graph graph = GameObject.Find("Graph").GetComponent<Graph>();
+        Graph graph = Object.FindFirstObjectByType<Graph>();
         graph.edges = new List<Edge>();
 
         if (graph == null)
