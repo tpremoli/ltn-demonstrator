@@ -85,8 +85,11 @@ public class WaypointMover : MonoBehaviour
         {
             if (currentWaypoint != null)
             {
-                moveToLeftLane();
+                // this change in transform position is kinda dirty, but it works.
+                // it essentially ensures all caluclations on direction & lanes are done relative to the original edges.
+                transform.position = currentWaypoint.transform.position;
                 faceNextDestination();
+                moveToLeftLane();
                 currentWaypoint = path.PopNextWaypoint();
                 updateTargetPosition();
             }
