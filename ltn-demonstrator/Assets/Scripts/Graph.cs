@@ -13,6 +13,8 @@ public class Graph : MonoBehaviour
 
     void Start()
     {
+        Random.InitState(42); // Set seed for random number generator
+
         waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
     }
 
