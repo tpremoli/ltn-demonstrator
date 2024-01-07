@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 207289636}
   - component: {fileID: 207289635}
   - component: {fileID: 207289634}
+  - component: {fileID: 207289637}
   m_Layer: 0
   m_Name: Bin
   m_TagString: Bin
@@ -262,7 +263,7 @@ Transform:
   m_GameObject: {fileID: 207289632}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.17265181, z: -0, w: 0.98498297}
-  m_LocalPosition: {x: 614, y: -36, z: 38}
+  m_LocalPosition: {x: 864, y: 44, z: 393}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -339,6 +340,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 207289632}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &207289637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207289632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7326d583455fb4e60b40283992438e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &323499147
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,6 +465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 329618008}
   - component: {fileID: 329618007}
+  - component: {fileID: 329618009}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -505,6 +519,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &329618009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329618006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db77eb431de10436da9b096b610d861d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spherePrefab: {fileID: 407133672}
 --- !u!1 &407133672
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,6 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db77eb431de10436da9b096b610d861d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spherePrefab: {fileID: 407133672}
 --- !u!1 &512688576
 GameObject:
   m_ObjectHideFlags: 0

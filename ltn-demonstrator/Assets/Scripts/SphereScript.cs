@@ -5,6 +5,7 @@ using UnityEngine;
 public class SphereScript : MonoBehaviour, IDrag
 {
     private Rigidbody rb;
+    public GameObject spherePrefab;
 
     void Awake()
     {
@@ -14,6 +15,14 @@ public class SphereScript : MonoBehaviour, IDrag
     // Implement OnDragStart method from IDrag interface
     public void onStartDrag()
     {
+        if (gameObject == null)
+        {
+            Debug.Log("The GameObject has been destroyed");
+        }
+        else
+        {
+            Debug.Log("The GameObject has not been destroyed");
+        }
         rb.useGravity = false;
     }
 

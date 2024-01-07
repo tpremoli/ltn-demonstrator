@@ -6,7 +6,7 @@ public class DestroyOnCollision : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Barricade"))
+        if (collision.collider.CompareTag("Barrier"))
         {
             Destroy(collision.gameObject);
         }

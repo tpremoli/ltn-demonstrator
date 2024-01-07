@@ -53,12 +53,17 @@ public class DragAndDrop : MonoBehaviour
 
     private IEnumerator DragUpdate(GameObject clickedObject)
     {
+        if (clickedObject == null)
+        {
+            yield break;
+        }
+
         float initialDistance = Vector3.Distance(clickedObject.transform.position, mainCamera.transform.position);
         clickedObject.TryGetComponent<Rigidbody>(out var rb);
         clickedObject.TryGetComponent<IDrag>(out var IDragComponent);
         IDragComponent?.onStartDrag();
         // while the mouse is pressed on the object
-        while (mouseClick.ReadValue<float>() != 0)
+        while (mouseClick.ReadValue<float>() != 0 && clickedObject != null)
         {
             // Take the mouse position to the camera and convert it to a ray
             Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -77,6 +82,9 @@ public class DragAndDrop : MonoBehaviour
                 yield return null;
             }
         }
-        IDragComponent?.onEndDrag();
+        if (clickedObject != null)
+        {
+            IDragComponent?.onEndDrag();
+        }
     }
 }
