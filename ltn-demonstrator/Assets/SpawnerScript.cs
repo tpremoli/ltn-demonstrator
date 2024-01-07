@@ -9,10 +9,9 @@ public class SpawnerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (GameObject.FindWithTag("Barrier") == null)
         {
             Instantiate(spherePrefab, transform.position, Quaternion.identity);
         }
-        
     }
 }
