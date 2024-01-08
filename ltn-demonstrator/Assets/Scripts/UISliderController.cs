@@ -15,6 +15,9 @@ public class UISliderController : MonoBehaviour
     {
         float localValue = value * maxSliderValue;
         sliderValueText.text = localValue.ToString();
+
+        // Change the time scale with the slider value
+        Time.timeScale = localValue;
     }
 
     
