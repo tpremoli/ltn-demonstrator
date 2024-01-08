@@ -19,6 +19,4 @@ public class UISliderController : MonoBehaviour
         // Change the time scale with the slider value
         Time.timeScale = localValue;
     }
-
-    
 }
