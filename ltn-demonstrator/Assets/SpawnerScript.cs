@@ -9,7 +9,7 @@ public class SpawnerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindWithTag("Barrier") == null)
+        if (GameObject.FindWithTag("Draggable") == null)
         {
             Instantiate(spherePrefab, transform.position, Quaternion.identity);
         }
