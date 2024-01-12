@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class Barrier : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public bool isPointInBarrier(Vector3 point)
     {
         Collider barrierCollider = GetComponent<Collider>();
@@ -27,4 +15,4 @@ public class Barrier : MonoBehaviour
         // Check if the point is within the barrier's collider
         return barrierCollider.bounds.Contains(point);
     }
-    }
+}
