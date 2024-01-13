@@ -17,8 +17,6 @@ public class Edge
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public float Distance { get { return length; } }
 
-    private static Material roadMaterial;
-
     /// <summary>
     /// Barrier stores if there's a barrier in the path of the edge
     /// isBarricated is true if there is a barrier in the path of the edge
@@ -36,9 +34,6 @@ public class Edge
         this.barrier = getBarrierInPath();
         this.isBarricated = barrier != null;
         this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
-
-        roadMaterial = new Material(Shader.Find("Standard")); // Create a new material
-        roadMaterial.color = Color.black; // Set the color of the material. Customize as needed.
 
         if (this.isBarricated)
         {

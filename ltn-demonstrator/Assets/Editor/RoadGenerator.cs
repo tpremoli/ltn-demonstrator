@@ -8,6 +8,8 @@ public class RoadLoader : EditorWindow
 
     private static Material dashMaterial;
 
+    private static Material curbMaterial;
+
     // Road width and height (thickness)
     static float roadWidth = 4.0f;
     static float roadHeight = 0.2f;
@@ -18,7 +20,12 @@ public class RoadLoader : EditorWindow
     static float dashInterval = 1.0f; // Interval between dashes
     static float noDashZoneRadius = 2.0f; // Distance from waypoints where no dashes should be created
 
+    // curb dimensions
+    static float curbWidth = 1f; // controlling how wide the curb is
+    static float curbHeight = 0.1f; // controlling how tall the curb is
+    static float curbVerticalOffset = -0.1f; // controlling how much the curb curves vertically
 
+    // Intersection shape
     static PrimitiveType intersectionShape = PrimitiveType.Cube;
 
 
@@ -46,6 +53,9 @@ public class RoadLoader : EditorWindow
 
         dashMaterial = new Material(Shader.Find("Standard"));
         dashMaterial.color = Color.white;
+
+        curbMaterial = new Material(Shader.Find("Standard"));
+        curbMaterial.color = Color.gray;
 
         // then create the roads
         generateRoadsFromEdges(graph, roadManager);
@@ -120,6 +130,7 @@ public class RoadLoader : EditorWindow
             roadObject.transform.parent = roadManager.transform;
 
             generateRoadMarkings(graph, roadManager, currentEdge, midPoint, direction, roadObject);
+            generateCurb(graph, roadManager, currentEdge, midPoint, direction, roadObject);
         }
     }
 
@@ -187,6 +198,36 @@ public class RoadLoader : EditorWindow
             dash.transform.position = dashPosition;
             dash.transform.rotation = roadObject.transform.rotation;
             dash.transform.parent = roadObject.transform;
+        }
+    }
+
+    private static void generateCurb(Graph graph, GameObject roadManager, Edge edge, Vector3 midPoint, Vector3 direction, GameObject roadObject)
+    {
+        // Create two curb objects, one for each side of the road
+        for (int i = 0; i < 2; i++)
+        {
+            GameObject curb = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            curb.name = "Curb";
+
+            // Scale the curb
+            curb.transform.localScale = new Vector3(curbWidth, curbHeight, Vector3.Distance(edge.startWaypoint.transform.position, edge.endWaypoint.transform.position));
+
+            // Position the curb
+            Vector3 offsetDirection = Vector3.Cross(direction, Vector3.up).normalized * (roadWidth / 2 + curbWidth / 2);
+            Vector3 curbPosition = midPoint + offsetDirection * (i == 0 ? 1 : -1);
+            curb.transform.position = curbPosition;
+
+            // Raise the curb above the road surface
+            curb.transform.position += new Vector3(0, curbVerticalOffset, 0);
+
+            // Rotate the curb to align with the road
+            curb.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+
+            // Apply material (assuming curbMaterial is predefined)
+            curb.GetComponent<MeshRenderer>().material = curbMaterial;
+
+            // Set the parent of the curb object to the roadManager
+            curb.transform.parent = roadManager.transform;
         }
     }
 }
