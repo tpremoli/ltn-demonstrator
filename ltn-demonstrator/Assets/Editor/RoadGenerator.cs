@@ -29,7 +29,7 @@ public class RoadLoader : EditorWindow
     static PrimitiveType intersectionShape = PrimitiveType.Cube;
 
 
-    [MenuItem("Tools/Load Road Objects")]
+    [MenuItem("Tools/Roads/Load Road Objects")]
     public static void LoadRoads()
     {
         // first reload the edges
@@ -65,7 +65,7 @@ public class RoadLoader : EditorWindow
         UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
     }
 
-    [MenuItem("Tools/Clear Road Objects")]
+    [MenuItem("Tools/Roads/Clear Road Objects")]
     public static void ClearRoads()
     {
         GameObject oldRoadManager = GameObject.Find("RoadGraphicsManager");

@@ -39,7 +39,7 @@ public class WaypointMover : MonoBehaviour
         chooseDestinationBuilding();
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.transform.position, destinationBuilding.GetClosestPointOnEdge(), this);
+        path = new WaypointPath(this.transform.position, destinationBuilding.closestPointOnEdge, this);
 
         if (path.path == null)
         {
@@ -90,7 +90,7 @@ public class WaypointMover : MonoBehaviour
         destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
 
         // Edge case where the chosen building is the same as the building the traveller spawned at.
-        while (Vector3.Distance(this.transform.position, destinationBuilding.GetClosestPointOnEdge()) < distanceThreshold) {
+        while (Vector3.Distance(this.transform.position, destinationBuilding.closestPointOnEdge) < distanceThreshold) {
             // Choose new random destination building.
             destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
         }
