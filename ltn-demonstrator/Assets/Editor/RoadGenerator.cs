@@ -9,6 +9,9 @@ public class RoadLoader : EditorWindow
     // Road width and height (thickness)
     static float roadWidth = 4.0f;
     static float roadHeight = 0.2f;
+    static float intersectionSize = 0.4f;
+
+    static PrimitiveType intersectionShape = PrimitiveType.Cube;
 
 
     [MenuItem("Tools/Load Road Objects")]
@@ -35,7 +38,7 @@ public class RoadLoader : EditorWindow
 
         // then create the roads
         generateRoadsFromEdges(graph, roadManager);
-        // generateIntersections(graph, roadManager);
+        generateIntersections(roadManager);
 
         // mark scene as dirty so it saves
         UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
@@ -86,6 +89,36 @@ public class RoadLoader : EditorWindow
 
             roadObject.transform.parent = roadManager.transform;
 
+        }
+    }
+
+    private static void generateIntersections(GameObject roadManager)
+    {
+        List<Waypoint> waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
+        foreach (Waypoint waypoint in waypoints)
+        {
+            // Check if the waypoint is an intersection (3 or more connected edges)
+            if (waypoint.adjacentWaypoints.Count >= 1)
+            {
+                // Instantiate a primitive cube to represent the intersection
+                GameObject intersectionObject = GameObject.CreatePrimitive(intersectionShape);
+                intersectionObject.name = "Intersection";
+
+                // Scale the cube to be slightly larger than the road width
+                float scale = roadWidth + intersectionSize; // intersectionSize adds extra width
+                intersectionObject.transform.localScale = new Vector3(scale, roadHeight, scale);
+
+                // Position the intersection object
+                Vector3 position = waypoint.transform.position;
+                intersectionObject.transform.position = position;
+                intersectionObject.transform.position -= new Vector3(0, roadHeight / 2, 0);
+
+                // Apply a material to the mesh renderer for visual appearance
+                intersectionObject.GetComponent<MeshRenderer>().material = roadMaterial;
+
+                // Set the parent of the intersection object to the roadManager
+                intersectionObject.transform.parent = roadManager.transform;
+            }
         }
     }
 }
