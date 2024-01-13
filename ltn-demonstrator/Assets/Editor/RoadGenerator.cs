@@ -6,6 +6,8 @@ public class RoadLoader : EditorWindow
 {
     private static Material roadMaterial;
 
+    private static Material dashMaterial;
+
     // Road width and height (thickness)
     static float roadWidth = 4.0f;
     static float roadHeight = 0.2f;
@@ -35,6 +37,9 @@ public class RoadLoader : EditorWindow
         // create a material for the roads
         roadMaterial = new Material(Shader.Find("Standard"));
         roadMaterial.color = Color.black;
+
+        dashMaterial = new Material(Shader.Find("Standard"));
+        dashMaterial.color = Color.white;
 
         // then create the roads
         generateRoadsFromEdges(graph, roadManager);
@@ -89,6 +94,7 @@ public class RoadLoader : EditorWindow
 
             roadObject.transform.parent = roadManager.transform;
 
+            generateRoadMarkings(graph, roadManager, length, midPoint, direction, roadObject);
         }
     }
 
@@ -119,6 +125,38 @@ public class RoadLoader : EditorWindow
                 // Set the parent of the intersection object to the roadManager
                 intersectionObject.transform.parent = roadManager.transform;
             }
+        }
+    }
+
+    private static void generateRoadMarkings(Graph graph, GameObject roadManager, float length, Vector3 midPoint, Vector3 direction, GameObject roadObject)
+    {
+        float dashSize = 1.0f; // Size of each dash
+        float dashInterval = 3.0f; // Interval between dashes
+        int dashCount = Mathf.FloorToInt(length / (dashSize + dashInterval)); // Calculate how many dashes fit in the road
+        float noDashZoneRadius = 2.0f; // Distance from waypoints where no dashes should be created
+
+        for (int i = 0; i < dashCount; i++)
+        {
+            // Calculate position for each dash
+            float dashPos = (i * (dashSize + dashInterval)) - (length / 2) + (dashSize / 2);
+
+            // Check if the dash is within the 'no-dash zone' of either waypoint
+            bool isNearStartPoint = Mathf.Abs(dashPos - (-length / 2)) < noDashZoneRadius;
+            bool isNearEndPoint = Mathf.Abs(dashPos - (length / 2)) < noDashZoneRadius;
+
+            if (isNearStartPoint || isNearEndPoint)
+            {
+                continue; // Skip creating the dash if it's too close to a waypoint
+            }
+
+            GameObject dash = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            dash.name = "Dash";
+            dash.transform.localScale = new Vector3(0.1f, 0.05f, dashSize); // Scale for the dash
+            dash.GetComponent<MeshRenderer>().material = dashMaterial; // Assign a white material
+
+            dash.transform.position = midPoint + (direction * dashPos);
+            dash.transform.rotation = roadObject.transform.rotation;
+            dash.transform.parent = roadObject.transform;
         }
     }
 }
