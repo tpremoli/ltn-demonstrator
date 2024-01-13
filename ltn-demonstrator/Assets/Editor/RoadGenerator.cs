@@ -119,7 +119,7 @@ public class RoadLoader : EditorWindow
 
             roadObject.transform.parent = roadManager.transform;
 
-            generateRoadMarkings(graph, roadManager, length, midPoint, direction, roadObject);
+            generateRoadMarkings(graph, roadManager, currentEdge, midPoint, direction, roadObject);
         }
     }
 
@@ -153,30 +153,38 @@ public class RoadLoader : EditorWindow
         }
     }
 
-    private static void generateRoadMarkings(Graph graph, GameObject roadManager, float length, Vector3 midPoint, Vector3 direction, GameObject roadObject)
+    private static void generateRoadMarkings(Graph graph, GameObject roadManager, Edge edge, Vector3 midPoint, Vector3 direction, GameObject roadObject)
     {
-        int dashCount = Mathf.FloorToInt(length / (dashSize + dashInterval)); // Calculate how many dashes fit in the road
+        int dashCount = Mathf.FloorToInt(edge.length / (dashSize + dashInterval)); // Calculate how many dashes fit in the road
+
+        // Calculate the total space occupied by dashes and intervals
+        float totalDashesLength = dashCount * dashSize + (dashCount - 1) * dashInterval;
+        float startLerp = (edge.length - totalDashesLength) / 2 / edge.length; // Starting point for lerp
+        float endLerp = 1 - startLerp; // Ending point for lerp
 
         for (int i = 0; i < dashCount; i++)
         {
-            // Calculate position for each dash
-            float dashPos = (i * (dashSize + dashInterval)) - (length / 2) + (dashSize / 2);
+            // Calculate the lerp factor for each dash
+            float lerpFactor = startLerp + (i * (dashSize + dashInterval) / edge.length);
 
             // Check if the dash is within the 'no-dash zone' of either waypoint
-            bool isNearStartPoint = Mathf.Abs(dashPos - (-length / 2)) < noDashZoneRadius;
-            bool isNearEndPoint = Mathf.Abs(dashPos - (length / 2)) < noDashZoneRadius;
+            bool isNearStartPoint = lerpFactor < (startLerp + noDashZoneRadius / edge.length);
+            bool isNearEndPoint = lerpFactor > (endLerp - noDashZoneRadius / edge.length);
 
             if (isNearStartPoint || isNearEndPoint)
             {
                 continue; // Skip creating the dash if it's too close to a waypoint
             }
 
+            // Calculate position for each dash using linear interpolation
+            Vector3 dashPosition = Vector3.Lerp(edge.startWaypoint.transform.position, edge.endWaypoint.transform.position, lerpFactor);
+
             GameObject dash = GameObject.CreatePrimitive(PrimitiveType.Cube);
             dash.name = "Dash";
             dash.transform.localScale = new Vector3(0.1f, 0.05f, dashSize); // Scale for the dash
             dash.GetComponent<MeshRenderer>().material = dashMaterial; // Assign a white material
 
-            dash.transform.position = midPoint + (direction * dashPos);
+            dash.transform.position = dashPosition;
             dash.transform.rotation = roadObject.transform.rotation;
             dash.transform.parent = roadObject.transform;
         }

@@ -4,21 +4,18 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Edge
 {
-    [SerializeField]
     public Waypoint startWaypoint;
 
     private Waypoint startWaypointLane;
 
-    [SerializeField]
     public Waypoint endWaypoint;
     private Waypoint endWaypointLane;
 
-    [SerializeField]
-    private float distance;
+    public float length;
 
     public Waypoint StartWaypoint { get { return startWaypoint; } }
     public Waypoint EndWaypoint { get { return endWaypoint; } }
-    public float Distance { get { return distance; } }
+    public float Distance { get { return length; } }
 
     private static Material roadMaterial;
 
@@ -34,7 +31,7 @@ public class Edge
     {
         this.startWaypoint = startWaypoint;
         this.endWaypoint = endWaypoint;
-        this.distance = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
+        this.length = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
 
         this.barrier = getBarrierInPath();
         this.isBarricated = barrier != null;
