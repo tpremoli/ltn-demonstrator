@@ -129,8 +129,8 @@ public class RoadLoader : EditorWindow
 
             roadObject.transform.parent = roadManager.transform;
 
-            generateRoadMarkings(graph, roadManager, currentEdge, midPoint, direction, roadObject);
-            generateCurb(graph, roadManager, currentEdge, midPoint, direction, roadObject);
+            generateRoadMarkings(currentEdge, roadObject);
+            generateCurb(roadObject, currentEdge, direction, midPoint);
         }
     }
 
@@ -160,11 +160,13 @@ public class RoadLoader : EditorWindow
 
                 // Set the parent of the intersection object to the roadManager
                 intersectionObject.transform.parent = roadManager.transform;
+
+                generateIntersectionCurb(waypoint, intersectionObject);
             }
         }
     }
 
-    private static void generateRoadMarkings(Graph graph, GameObject roadManager, Edge edge, Vector3 midPoint, Vector3 direction, GameObject roadObject)
+    private static void generateRoadMarkings(Edge edge, GameObject roadObject)
     {
         int dashCount = Mathf.FloorToInt(edge.length / (dashSize + dashInterval)); // Calculate how many dashes fit in the road
 
@@ -201,7 +203,7 @@ public class RoadLoader : EditorWindow
         }
     }
 
-    private static void generateCurb(Graph graph, GameObject roadManager, Edge edge, Vector3 midPoint, Vector3 direction, GameObject roadObject)
+    private static void generateCurb(GameObject roadSegment, Edge edge, Vector3 direction, Vector3 midPoint)
     {
         // Create two curb objects, one for each side of the road
         for (int i = 0; i < 2; i++)
@@ -227,7 +229,30 @@ public class RoadLoader : EditorWindow
             curb.GetComponent<MeshRenderer>().material = curbMaterial;
 
             // Set the parent of the curb object to the roadManager
-            curb.transform.parent = roadManager.transform;
+            curb.transform.parent = roadSegment.transform;
         }
+    }
+
+    private static void generateIntersectionCurb(Waypoint intersectionPoint, GameObject intersection)
+    {
+        // Define the size of the intersection curb
+        float intersectionCurbSize = roadWidth + 2 * curbWidth;
+
+        // Create a curb object for the intersection
+        GameObject intersectionCurb = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        intersectionCurb.name = "IntersectionCurb";
+
+        // Scale the curb to enclose the intersection
+        intersectionCurb.transform.localScale = new Vector3(intersectionCurbSize, curbHeight, intersectionCurbSize);
+
+        // Position the curb at the intersection
+        Vector3 position = intersectionPoint.transform.position;
+        intersectionCurb.transform.position = position + new Vector3(0, curbVerticalOffset, 0); // raising the curb above the road
+
+        // Apply material to the curb
+        intersectionCurb.GetComponent<MeshRenderer>().material = curbMaterial;
+
+        // Set the parent of the intersection curb to the roadManager
+        intersectionCurb.transform.parent = intersection.transform;
     }
 }
