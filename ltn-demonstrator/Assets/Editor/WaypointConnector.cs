@@ -6,7 +6,7 @@ using System.Collections.Generic;
 // this would allow us to have one way roads, and two way roads. To be seen in the future.
 public class WaypointConnector : EditorWindow
 {
-    [MenuItem("Tools/Connect Waypoints")]
+    [MenuItem("Tools/Connect Hanging Waypoints")]
     private static void ConnectAllWaypoints()
     {
         // Find all Waypoints in the scene

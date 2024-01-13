@@ -34,10 +34,10 @@ public class RoadLoader : EditorWindow
         roadMaterial.color = Color.black;
 
         // then create the roads
-        foreach (Edge edge in graph.edges)
-        {
-            generateRoadForEdge(edge, roadManager);
-        }
+        generateRoadsFromEdges(graph, roadManager);
+        // generateIntersections(graph, roadManager);
+
+        // mark scene as dirty so it saves
         UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
     }
 
@@ -52,36 +52,40 @@ public class RoadLoader : EditorWindow
         UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
     }
 
-    private static void generateRoadForEdge(Edge edge, GameObject roadManager)
+    private static void generateRoadsFromEdges(Graph graph, GameObject roadManager)
     {
-        Vector3 startPoint = edge.startWaypoint.transform.position;
-        Vector3 endPoint = edge.endWaypoint.transform.position;
+        foreach (Edge edge in graph.edges)
+        {
 
-        // Calculate direction and length of the road segment
-        Vector3 direction = (endPoint - startPoint).normalized;
-        float length = Vector3.Distance(startPoint, endPoint);
+            Vector3 startPoint = edge.startWaypoint.transform.position;
+            Vector3 endPoint = edge.endWaypoint.transform.position;
 
-        // Midpoint for positioning the road object
-        Vector3 midPoint = (startPoint + endPoint) / 2;
+            // Calculate direction and length of the road segment
+            Vector3 direction = (endPoint - startPoint).normalized;
+            float length = Vector3.Distance(startPoint, endPoint);
 
-        // Instantiate a primitive cube to represent the road
-        GameObject roadObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        roadObject.name = "RoadSegment";
+            // Midpoint for positioning the road object
+            Vector3 midPoint = (startPoint + endPoint) / 2;
 
-        // Scale the cube to match the road dimensions
-        roadObject.transform.localScale = new Vector3(roadWidth, roadHeight, length);
+            // Instantiate a primitive cube to represent the road
+            GameObject roadObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            roadObject.name = "RoadSegment";
 
-        // Position and rotate the road object
-        roadObject.transform.position = midPoint;
-        roadObject.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            // Scale the cube to match the road dimensions
+            roadObject.transform.localScale = new Vector3(roadWidth, roadHeight, length);
 
-        // Lower the road by half of its height to align it with the ground
-        roadObject.transform.position -= new Vector3(0, roadHeight / 2, 0);
+            // Position and rotate the road object
+            roadObject.transform.position = midPoint;
+            roadObject.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
 
-        // Apply a material to the mesh renderer for visual appearance
-        roadObject.GetComponent<MeshRenderer>().material = roadMaterial;
+            // Lower the road by half of its height to align it with the ground
+            roadObject.transform.position -= new Vector3(0, roadHeight / 2, 0);
 
-        roadObject.transform.parent = roadManager.transform;
+            // Apply a material to the mesh renderer for visual appearance
+            roadObject.GetComponent<MeshRenderer>().material = roadMaterial;
 
+            roadObject.transform.parent = roadManager.transform;
+
+        }
     }
 }
