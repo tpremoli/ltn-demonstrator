@@ -66,4 +66,15 @@ public class RoadLoader : EditorWindow
         }
         UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
     }
+
+    [MenuItem("Tools/Clear Road Objects")]
+    public static void ClearRoads()
+    {
+        GameObject oldRoadManager = GameObject.Find("RoadGraphicsManager");
+        if (oldRoadManager != null)
+        {
+            DestroyImmediate(oldRoadManager);
+        }
+        UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
+    }
 }
