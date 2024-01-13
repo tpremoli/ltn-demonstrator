@@ -8,7 +8,7 @@ public class EdgeLoader
     [InitializeOnLoadMethod]
     public static void LoadEdges()
     {
-        Graph graph = GameObject.Find("Graph").GetComponent<Graph>();
+        Graph graph = Object.FindFirstObjectByType<Graph>();
         graph.edges = new List<Edge>();
 
         if (graph == null)
@@ -25,6 +25,7 @@ public class EdgeLoader
                 float distance = graph.CalculateDistance(waypoint, adjacentWaypoint);
                 // instantiate edge as empty game object
                 Edge edge = new Edge(waypoint, adjacentWaypoint);
+                //SHIFT EDGE???
                 graph.edges.Add(edge);
             }
         }

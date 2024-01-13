@@ -25,7 +25,7 @@ public class Building : MonoBehaviour
     [Range(1, 600)] [SerializeField] private float timeBetweenSpawns = 1; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
 
-    private Edge closestEdge;
+    public Edge closestEdge;
     private Vector3 closestPointOnEdge;
 
     // Some more attributes - not sure if needed, but seemed useful
@@ -34,12 +34,6 @@ public class Building : MonoBehaviour
 
     // Start is called before the first frame update. We use these to initialize the building.
     void Start(){
-        
-        //Time.timeScale = 0f; // Game starts paused
-        
-
-        Random.InitState(42); // Set seed for random number generator
-
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
         // I don't want to hardcode these values, but I'm not sure how to do it otherwise.
@@ -60,6 +54,10 @@ public class Building : MonoBehaviour
         if (Application.IsPlaying(this)){
             Gizmos.DrawLine(this.transform.position, closestPointOnEdge);
         }
+    }
+
+    public Vector3 GetClosestPointOnEdge() {
+        return closestPointOnEdge;
     }
 
     // Update is called once per frame
