@@ -27,8 +27,6 @@ public class WaypointMover : MonoBehaviour
     [SerializeField] private float leftLaneOffset = 1f;
 
     private WaypointPath path;           // Instance of the pathfinding class
-    private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
-    private Vector3 currentTargetPosition;
     private Graph graph;                 // Instance of the graph class
     
     void Start()
@@ -64,7 +62,14 @@ public class WaypointMover : MonoBehaviour
         while (iter.MoveNext()) {
             old_wp = wp;
             wp = iter.Current;
-            this.pathEdges.Add(this.graph.getEdge(old_wp, wp));
+            Edge nextOne = this.graph.getEdge(old_wp, wp);
+            Debug.Log("Path from: "+old_wp.name+"  to: "+wp.name+"\nEdge: ");
+            if (nextOne==null){
+                Debug.LogError("There is no path connecting nodes.");
+            } else{
+                this.pathEdges.Add(nextOne);
+            }
+            
         }
         // Position the traveller on the current Edge
         this.currentEdge = this.pathEdges[0];
@@ -135,7 +140,7 @@ public class WaypointMover : MonoBehaviour
         while (true) {
             // Determine which Edge the Traveller ends up on, and how much movement it uses up in the process
             float TravelledOverEdges = 0;
-            Edge terminalEdge;
+            Edge terminalEdge = this.currentEdge;
 
             // Check whether proposed movement exceeds this edge
             if(proposedMovement>(this.currentEdge.Distance*(1-this.positionOnEdge))){
@@ -158,13 +163,12 @@ public class WaypointMover : MonoBehaviour
                     }
                 }
                 terminalEdge = iter.Current;
-            } else {
-                terminalEdge = this.currentEdge;
             }
             // Determine how much movement in Edge the Traveller has left upon entering the edge
             float TravelledInEdge = proposedMovement - TravelledOverEdges;
             // Check for collission at that point in the edge with every traveller present on the edge
             foreach(WaypointMover wp in terminalEdge.TravellersOnEdge){
+                if (wp==this) continue;
                 float wpPositionOnEdgeInReal = terminalEdge.DeltaDToRealDistance(wp.positionOnEdge);
                 // Check whether this' front would end up within the vehicle
                 if(TravelledInEdge < wpPositionOnEdgeInReal && TravelledInEdge > (wpPositionOnEdgeInReal-wp.length)){
@@ -219,21 +223,16 @@ public class WaypointMover : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (Application.isPlaying)
+        if (Application.isPlaying && !(path==null))
         {
             // Draw the destination sphere
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(path.destinationPos, 1f);
-            if (currentWaypoint != null)
-            {
-                // Draw the current waypoint sphere
-                Gizmos.DrawSphere(currentWaypoint.transform.position, 1f);
-            }
 
             // Draw the path from the agent's current position
             Gizmos.color = Color.yellow;
 
-            Vector3 startPosition = currentWaypoint != null ? currentWaypoint.transform.position : transform.position; // Use the agent's position if the currentWaypoint is null
+            Vector3 startPosition = transform.position; // Use the agent's position if the currentWaypoint is null
 
             if (path.path.Count > 0)
             {
