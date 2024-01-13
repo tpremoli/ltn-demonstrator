@@ -19,17 +19,6 @@ public class Graph : MonoBehaviour
 
         waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
         buildings = new List<Building>(FindObjectsOfType<Building>());
-
-        DrawAllRoads();
-    }
-
-    void DrawAllRoads()
-    {
-        // Assuming you have a way to iterate over all the edges in your network
-        foreach (var edge in edges)
-        {
-            edge.InstantiateRoad();    
-        }
     }
 
     public float WaypointSize
