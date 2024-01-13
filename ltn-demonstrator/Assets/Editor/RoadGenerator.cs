@@ -13,6 +13,12 @@ public class RoadLoader : EditorWindow
     static float roadHeight = 0.2f;
     static float intersectionSize = 0.4f;
 
+    // Road markings
+    static float dashSize = 0.75f; // Size of each dash
+    static float dashInterval = 1.0f; // Interval between dashes
+    static float noDashZoneRadius = 2.0f; // Distance from waypoints where no dashes should be created
+
+
     static PrimitiveType intersectionShape = PrimitiveType.Cube;
 
 
@@ -62,11 +68,30 @@ public class RoadLoader : EditorWindow
 
     private static void generateRoadsFromEdges(Graph graph, GameObject roadManager)
     {
-        foreach (Edge edge in graph.edges)
-        {
+        List<Edge> processedEdges = new List<Edge>();
 
-            Vector3 startPoint = edge.startWaypoint.transform.position;
-            Vector3 endPoint = edge.endWaypoint.transform.position;
+        foreach (Edge currentEdge in graph.edges)
+        {
+            // we first check if we have already processed this edge, as we don't want to draw it twice
+            bool isDuplicate = false;
+            foreach (Edge processedEdge in processedEdges)
+            {
+                if (currentEdge.isSameEdge(processedEdge))
+                {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (isDuplicate)
+            {
+                continue;
+            }
+
+            processedEdges.Add(currentEdge);
+
+            // then we start generating the road for the edge
+            Vector3 startPoint = currentEdge.startWaypoint.transform.position;
+            Vector3 endPoint = currentEdge.endWaypoint.transform.position;
 
             // Calculate direction and length of the road segment
             Vector3 direction = (endPoint - startPoint).normalized;
@@ -130,10 +155,7 @@ public class RoadLoader : EditorWindow
 
     private static void generateRoadMarkings(Graph graph, GameObject roadManager, float length, Vector3 midPoint, Vector3 direction, GameObject roadObject)
     {
-        float dashSize = 1.0f; // Size of each dash
-        float dashInterval = 3.0f; // Interval between dashes
         int dashCount = Mathf.FloorToInt(length / (dashSize + dashInterval)); // Calculate how many dashes fit in the road
-        float noDashZoneRadius = 2.0f; // Distance from waypoints where no dashes should be created
 
         for (int i = 0; i < dashCount; i++)
         {
