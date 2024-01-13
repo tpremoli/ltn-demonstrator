@@ -24,12 +24,18 @@ public class WaypointMover : MonoBehaviour
     private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
     private Vector3 currentTargetPosition;
     private Graph graph;                 // Instance of the graph class
+
+
+    // pick rnadom model and material
+    [SerializeField] public List<GameObject> vehiclePrefabs;
     
     void Start()
     {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        // Choose a random destination building.
+        // pick a random model and material
+        pickRandomModelAndMaterial();
+
         chooseDestinationBuilding();
 
         // Initialize the path with the starting waypoint
@@ -275,6 +281,36 @@ public class WaypointMover : MonoBehaviour
 
             // Always draw an arrow to the destination from the current position or last waypoint
             DrawArrow.ForGizmo(startPosition + Vector3.up, (path.destinationPos - startPosition) + Vector3.up, Color.yellow, 1f);
+        }
+    }
+
+    private void pickRandomModelAndMaterial(){
+        // Randomly select a model and material
+        GameObject selectedPrefab = vehiclePrefabs[Random.Range(0, vehiclePrefabs.Count-1)];
+
+        // Retrieve the MeshRenderer and MeshFilter of the selected prefab
+        MeshRenderer selectedMeshRenderer = selectedPrefab.GetComponent<MeshRenderer>();
+        MeshFilter selectedMeshFilter = selectedPrefab.GetComponent<MeshFilter>();
+
+        // Apply the mesh and material to the current GameObject
+        if (selectedMeshRenderer != null && selectedMeshFilter != null)
+        {
+            MeshRenderer thisMeshRenderer = GetComponent<MeshRenderer>();
+            MeshFilter thisMeshFilter = GetComponent<MeshFilter>();
+
+            if (thisMeshRenderer != null && thisMeshFilter != null)
+            {
+                thisMeshRenderer.material = selectedMeshRenderer.sharedMaterial;
+                thisMeshFilter.mesh = selectedMeshFilter.sharedMesh;
+            }
+            else
+            {
+                Debug.LogError("Current GameObject does not have MeshRenderer and/or MeshFilter.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Selected prefab does not have MeshRenderer and/or MeshFilter.");
         }
     }
 }
