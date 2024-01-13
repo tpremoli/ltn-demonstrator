@@ -16,6 +16,8 @@ public class DragAndDrop : MonoBehaviour
     private Camera mainCamera;
     private Vector3 velocity = Vector3.zero;
 
+
+
     private WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
     private void Awake()
@@ -82,9 +84,30 @@ public class DragAndDrop : MonoBehaviour
                 yield return null;
             }
         }
+        // If the clicked object is still not null
+        
+
         if (clickedObject != null)
         {
+            // Call the onEndDrag method of the IDrag component, if it exists
             IDragComponent?.onEndDrag();
+
+            // Store the position of the object when the mouse is released
+            Vector3 finalPosition = clickedObject.transform.position;
+            Debug.Log("The object was dropped at: " + finalPosition);
+
+            List<Edge> edges = Edge.allEdges; // Changed this line
+            for (int i = 0; i < edges.Count; i++) { // Changed this line
+                // get closest point on edge (where the barrier is located)
+                if (clickedObject.isPointInBarrier(edges[i].GetClosestPoint(finalPosition))) {
+                    edges[i].barricade = clickedObject;
+                    edges[i].isBarricated = true;
+                    edges[i].barricadeLocation = edges[i].convertToPositionAlongEdge(finalPosition);
+                }
+            }
         }
+
+        
+        
     }
 }

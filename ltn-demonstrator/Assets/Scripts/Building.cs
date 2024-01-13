@@ -35,7 +35,7 @@ public class Building : MonoBehaviour
     // Start is called before the first frame update. We use these to initialize the building.
     void Start(){
         
-        Time.timeScale = 0f; // Game starts paused
+        //Time.timeScale = 0f; // Game starts paused
         
 
         Random.InitState(42); // Set seed for random number generator
