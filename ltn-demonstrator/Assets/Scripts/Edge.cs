@@ -20,8 +20,7 @@ public class Edge
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public float Distance { get { return distance; } }
 
-    private static Material roadMaterial = new Material(Shader.Find("Standard"));
-    private static HashSet<string> createdRoads = new HashSet<string>();
+    private static Material roadMaterial;
 
     /// <summary>
     /// Barrier stores if there's a barrier in the path of the edge
@@ -41,6 +40,7 @@ public class Edge
         this.isBarricated = barrier != null;
         this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
 
+        roadMaterial = new Material(Shader.Find("Standard")); // Create a new material
         roadMaterial.color = Color.black; // Set the color of the material. Customize as needed.
 
         if (this.isBarricated)
@@ -74,60 +74,33 @@ public class Edge
         Vector3 startPoint = startWaypoint.transform.position;
         Vector3 endPoint = endWaypoint.transform.position;
 
-        // Road width
-        float roadWidth = 3.0f;
-
-        // Calculate direction vector for the road
+        // Calculate direction and length of the road segment
         Vector3 direction = (endPoint - startPoint).normalized;
+        float length = Vector3.Distance(startPoint, endPoint);
 
-        // Calculate a perpendicular vector for the road width
-        Vector3 perpendicular = Vector3.Cross(direction, Vector3.up).normalized * roadWidth;
+        // Road width and height (thickness)
+        float roadWidth = 3.0f;
+        float roadHeight = 0.2f;
 
         // Midpoint for positioning the road object
         Vector3 midPoint = (startPoint + endPoint) / 2;
 
-        // Define vertices for the road mesh
-        Vector3[] vertices = new Vector3[4];
-        vertices[0] = (startPoint - midPoint) - perpendicular / 2;
-        vertices[1] = (startPoint - midPoint) + perpendicular / 2;
-        vertices[2] = (endPoint - midPoint) - perpendicular / 2;
-        vertices[3] = (endPoint - midPoint) + perpendicular / 2;
+        // Instantiate a primitive cube to represent the road
+        GameObject roadObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        roadObject.name = "RoadSegment";
 
-        // Define triangles for the road mesh
-        int[] triangles = new int[] { 0, 1, 2, 2, 1, 3 };
+        // Scale the cube to match the road dimensions
+        roadObject.transform.localScale = new Vector3(roadWidth, roadHeight, length);
 
-        // Create the road mesh
-        Mesh roadMesh = new Mesh();
-        roadMesh.vertices = vertices;
-        roadMesh.triangles = triangles;
-
-        // Instantiate road GameObject with MeshFilter and MeshRenderer
-        GameObject roadObject = new GameObject("RoadSegment");
-        MeshFilter meshFilter = roadObject.AddComponent<MeshFilter>();
-        MeshRenderer meshRenderer = roadObject.AddComponent<MeshRenderer>();
-
-        // Set the mesh to the MeshFilter
-        meshFilter.mesh = roadMesh;
-
-        // Apply a material to the MeshRenderer
-        meshRenderer.material = roadMaterial;
-
-        // Position the road object
+        // Position and rotate the road object
         roadObject.transform.position = midPoint;
+        roadObject.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
 
-        // Calculate the rotation of the road segment
-        Quaternion roadRotation = Quaternion.LookRotation(direction, Vector3.up);
-        roadObject.transform.rotation = roadRotation;
+        // Lower the road by half of its height to align it with the ground
+        roadObject.transform.position -= new Vector3(0, roadHeight / 2, 0);
 
-        // Adjust the road segment to align correctly with the direction
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
-        {
-            // If the road is more horizontal, rotate around the up axis
-            roadObject.transform.Rotate(Vector3.up, 90f);
-        }
-
-        // Lower the road to avoid z-fighting with the ground
-        roadObject.transform.position -= new Vector3(0, 0.1f, 0);
+        // Apply a material to the mesh renderer for visual appearance
+        roadObject.GetComponent<MeshRenderer>().material = roadMaterial;
     }
 
     public bool isPointOnEdge(Vector3 point)
