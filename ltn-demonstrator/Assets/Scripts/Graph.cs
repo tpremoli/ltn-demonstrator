@@ -19,6 +19,17 @@ public class Graph : MonoBehaviour
 
         waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
         buildings = new List<Building>(FindObjectsOfType<Building>());
+
+        DrawAllRoads();
+    }
+
+    void DrawAllRoads()
+    {
+        // Assuming you have a way to iterate over all the edges in your network
+        foreach (var edge in edges)
+        {
+            edge.DrawRoad();    
+        }
     }
 
     public float WaypointSize
@@ -31,8 +42,10 @@ public class Graph : MonoBehaviour
         if (drawEdgeGizmos) // Check if drawing of edge gizmos is enabled
         {
             DrawEdgeGizmos();
+
         }
     }
+
     
     public float CalculateDistance(Waypoint a, Waypoint b)
     {

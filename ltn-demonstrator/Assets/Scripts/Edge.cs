@@ -19,6 +19,8 @@ public class Edge
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public float Distance { get { return distance; } }
 
+    private Material roadMaterial;
+
     /// <summary>
     /// Barrier stores if there's a barrier in the path of the edge
     /// isBarricated is true if there is a barrier in the path of the edge
@@ -41,6 +43,12 @@ public class Edge
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
         }
+
+        // Create a new material
+        roadMaterial = new Material(Shader.Find("Standard")); // Replace "Standard" with the name of the shader you want to use
+
+        // Configure the material properties
+        roadMaterial.color = Color.gray; // Set the color of the material. Customize as needed.
     }
 
     public void DrawGizmo()
@@ -62,6 +70,63 @@ public class Edge
         
         // Draw the arrow with the shifted middle position and shortened direction
         DrawArrow.ForGizmo(shiftedMiddlePosition, shortenedDirection, Color.green, 1f, 30f);
+    }
+
+    public void DrawRoad()
+    {
+        Vector3 startPoint = startWaypoint.transform.position;
+        Vector3 endPoint = endWaypoint.transform.position;
+
+        // Road width
+        float roadWidth = 3.0f;
+
+        // Calculate direction and perpendicular vector for road width
+        Vector3 direction = (endPoint - startPoint).normalized;
+        Vector3 perpendicular = Vector3.Cross(direction, Vector3.up).normalized * roadWidth;
+
+        // Midpoint for positioning the road object in global space
+        Vector3 midPoint = (startPoint + endPoint) / 2;
+
+        // Adjust vertices to be in local space relative to the midpoint
+        // Reversing the vertices order to flip the mesh
+        Vector3[] vertices = new Vector3[4];
+        vertices[0] = (startPoint - midPoint) - perpendicular / 2;
+        vertices[1] = (startPoint - midPoint) + perpendicular / 2;
+        vertices[2] = (endPoint - midPoint) - perpendicular / 2;
+        vertices[3] = (endPoint - midPoint) + perpendicular / 2;
+
+        // Determine the orientation of the road segment
+        bool isHorizontal = System.Math.Abs(direction.x) > System.Math.Abs(direction.z);
+
+        // Define triangles based on the orientation
+        int[] triangles = new int[] { 0, 1, 2, 2, 1, 3 };
+
+        // Create the mesh
+        Mesh roadMesh = new Mesh();
+        roadMesh.vertices = vertices;
+        roadMesh.triangles = triangles;
+
+        // Instantiate an empty GameObject and add MeshFilter and MeshRenderer
+        GameObject roadObject = new GameObject("RoadSegment");
+        MeshFilter meshFilter = roadObject.AddComponent<MeshFilter>();
+        MeshRenderer meshRenderer = roadObject.AddComponent<MeshRenderer>();
+
+        // Set the mesh to MeshFilter
+        meshFilter.mesh = roadMesh;
+
+        // Apply a material to the mesh renderer for visual appearance
+        if (roadMaterial != null)
+        {
+            meshRenderer.material = roadMaterial;
+        }
+
+        // Position and rotate the road object in global space
+        roadObject.transform.position = midPoint;
+        // Adjusting rotation - assuming your game's 'up' direction is Vector3.up
+        Vector3 rotation = isHorizontal ? perpendicular : direction;
+        roadObject.transform.rotation = Quaternion.LookRotation(rotation, Vector3.up);
+        // lower the road by 0.1f to avoid z-fighting with the ground
+        roadObject.transform.position -= new Vector3(0, 0.1f, 0);
     }
 
     public bool isPointOnEdge(Vector3 point)
