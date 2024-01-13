@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Edge
@@ -18,6 +19,7 @@ public class Edge
     public Waypoint StartWaypoint { get { return startWaypoint; } }
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public float Distance { get { return distance; } }
+    public List<WaypointMover> TravellersOnEdge;
 
     /// <summary>
     /// Barrier stores if there's a barrier in the path of the edge
@@ -33,6 +35,8 @@ public class Edge
         this.endWaypoint = endWaypoint;
         this.distance = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
 
+        this.TravellersOnEdge = new List<WaypointMover>();
+
         this.barrier = getBarrierInPath();
         this.isBarricated = barrier != null;
         this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
@@ -41,6 +45,18 @@ public class Edge
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
         }
+    }
+    public float RealDistanceToDeltaD(float len){
+        return len/this.distance;
+    }
+    public float DeltaDToRealDistance(float len){
+        return len*this.distance;
+    }
+    public void Subscribe(WaypointMover trav){
+        this.TravellersOnEdge.Add(trav);
+    }
+    public void Unsubscribe(WaypointMover trav){
+        this.TravellersOnEdge.Remove(trav);
     }
 
     public void DrawGizmo()
