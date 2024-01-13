@@ -28,7 +28,7 @@ public class Graph : MonoBehaviour
         // Assuming you have a way to iterate over all the edges in your network
         foreach (var edge in edges)
         {
-            edge.DrawRoad();    
+            edge.InstantiateRoad();    
         }
     }
 

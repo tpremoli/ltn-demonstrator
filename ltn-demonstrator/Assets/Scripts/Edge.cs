@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Edge
@@ -19,7 +20,8 @@ public class Edge
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public float Distance { get { return distance; } }
 
-    private Material roadMaterial;
+    private static Material roadMaterial = new Material(Shader.Find("Standard"));
+    private static HashSet<string> createdRoads = new HashSet<string>();
 
     /// <summary>
     /// Barrier stores if there's a barrier in the path of the edge
@@ -39,6 +41,8 @@ public class Edge
         this.isBarricated = barrier != null;
         this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
 
+        roadMaterial.color = Color.black; // Set the color of the material. Customize as needed.
+
         if (this.isBarricated)
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
@@ -51,22 +55,21 @@ public class Edge
         Vector3 startpoint = startWaypoint.transform.position;
         Vector3 endpoint = endWaypoint.transform.position;
         Vector3 direction = endpoint - startpoint;
-        
+
         // Make the arrows shorter by 20%
         float shortenedMagnitude = direction.magnitude * 0.7f;
         Vector3 shortenedDirection = direction.normalized * shortenedMagnitude;
 
         // Calculate the middle position
         Vector3 middlePosition = startpoint + direction * 0.5f - shortenedDirection * 0.5f;
-        
+
         // Shift the middle position slightly to the left
         Vector3 shiftedMiddlePosition = middlePosition + Vector3.Cross(direction, Vector3.up).normalized * 0.6f;
-        
+
         // Draw the arrow with the shifted middle position and shortened direction
         DrawArrow.ForGizmo(shiftedMiddlePosition, shortenedDirection, Color.green, 1f, 30f);
     }
-
-    public void DrawRoad()
+    public void InstantiateRoad()
     {
         Vector3 startPoint = startWaypoint.transform.position;
         Vector3 endPoint = endWaypoint.transform.position;
@@ -74,55 +77,56 @@ public class Edge
         // Road width
         float roadWidth = 3.0f;
 
-        // Calculate direction and perpendicular vector for road width
+        // Calculate direction vector for the road
         Vector3 direction = (endPoint - startPoint).normalized;
+
+        // Calculate a perpendicular vector for the road width
         Vector3 perpendicular = Vector3.Cross(direction, Vector3.up).normalized * roadWidth;
 
-        // Midpoint for positioning the road object in global space
+        // Midpoint for positioning the road object
         Vector3 midPoint = (startPoint + endPoint) / 2;
 
-        // Adjust vertices to be in local space relative to the midpoint
-        // Reversing the vertices order to flip the mesh
+        // Define vertices for the road mesh
         Vector3[] vertices = new Vector3[4];
         vertices[0] = (startPoint - midPoint) - perpendicular / 2;
         vertices[1] = (startPoint - midPoint) + perpendicular / 2;
         vertices[2] = (endPoint - midPoint) - perpendicular / 2;
         vertices[3] = (endPoint - midPoint) + perpendicular / 2;
 
-        // Determine the orientation of the road segment
-        bool isHorizontal = System.Math.Abs(direction.x) > System.Math.Abs(direction.z);
-
-        // Define triangles based on the orientation
+        // Define triangles for the road mesh
         int[] triangles = new int[] { 0, 1, 2, 2, 1, 3 };
 
-        // Create the mesh
+        // Create the road mesh
         Mesh roadMesh = new Mesh();
         roadMesh.vertices = vertices;
         roadMesh.triangles = triangles;
 
-        // Instantiate an empty GameObject and add MeshFilter and MeshRenderer
+        // Instantiate road GameObject with MeshFilter and MeshRenderer
         GameObject roadObject = new GameObject("RoadSegment");
         MeshFilter meshFilter = roadObject.AddComponent<MeshFilter>();
         MeshRenderer meshRenderer = roadObject.AddComponent<MeshRenderer>();
 
-        // Set the mesh to MeshFilter
+        // Set the mesh to the MeshFilter
         meshFilter.mesh = roadMesh;
 
-        // Create a new material
-        Material  roadMaterial = new Material(Shader.Find("Standard")); // Replace "Standard" with the name of the shader you want to use
-
-        // Configure the material properties
-        roadMaterial.color = Color.black; // Set the color of the material. Customize as needed.
-
-        // Apply a material to the mesh renderer for visual appearance
+        // Apply a material to the MeshRenderer
         meshRenderer.material = roadMaterial;
 
-        // Position and rotate the road object in global space
+        // Position the road object
         roadObject.transform.position = midPoint;
-        // Adjusting rotation - assuming your game's 'up' direction is Vector3.up
-        Vector3 rotation = isHorizontal ? perpendicular : direction;
-        roadObject.transform.rotation = Quaternion.LookRotation(rotation, Vector3.up);
-        // lower the road by 0.1f to avoid z-fighting with the ground
+
+        // Calculate the rotation of the road segment
+        Quaternion roadRotation = Quaternion.LookRotation(direction, Vector3.up);
+        roadObject.transform.rotation = roadRotation;
+
+        // Adjust the road segment to align correctly with the direction
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
+        {
+            // If the road is more horizontal, rotate around the up axis
+            roadObject.transform.Rotate(Vector3.up, 90f);
+        }
+
+        // Lower the road to avoid z-fighting with the ground
         roadObject.transform.position -= new Vector3(0, 0.1f, 0);
     }
 
@@ -138,7 +142,8 @@ public class Edge
         return distanceFromStart + distanceFromEnd <= edgeLength + 0.2f;
     }
 
-    public float DistanceToEdge(Vector3 position){
+    public float DistanceToEdge(Vector3 position)
+    {
         Vector3 closestPoint = this.GetClosestPoint(position);
         return Vector3.Distance(position, closestPoint);
     }
@@ -299,7 +304,7 @@ public class Edge
         // Debug.LogWarning("No accessible waypoint found, returning null");
         return null;
     }
-    
+
     /// <summary>
     /// This checks if there is a barrier between a start point and an end point on the edge
     /// </summary>
@@ -321,7 +326,7 @@ public class Edge
 
         // Check if the barrier is between start and destination
         // Assuming lower distance value is closer to the starting point of the edge
-        return barrierDistance > System.Math.Min(startDistance, destinationDistance) && 
+        return barrierDistance > System.Math.Min(startDistance, destinationDistance) &&
             barrierDistance < System.Math.Max(startDistance, destinationDistance);
     }
 }
