@@ -43,12 +43,6 @@ public class Edge
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
         }
-
-        // Create a new material
-        roadMaterial = new Material(Shader.Find("Standard")); // Replace "Standard" with the name of the shader you want to use
-
-        // Configure the material properties
-        roadMaterial.color = Color.gray; // Set the color of the material. Customize as needed.
     }
 
     public void DrawGizmo()
@@ -114,11 +108,14 @@ public class Edge
         // Set the mesh to MeshFilter
         meshFilter.mesh = roadMesh;
 
+        // Create a new material
+        Material  roadMaterial = new Material(Shader.Find("Standard")); // Replace "Standard" with the name of the shader you want to use
+
+        // Configure the material properties
+        roadMaterial.color = Color.black; // Set the color of the material. Customize as needed.
+
         // Apply a material to the mesh renderer for visual appearance
-        if (roadMaterial != null)
-        {
-            meshRenderer.material = roadMaterial;
-        }
+        meshRenderer.material = roadMaterial;
 
         // Position and rotate the road object in global space
         roadObject.transform.position = midPoint;
