@@ -6,6 +6,7 @@ public class EdgeLoader
 {
     [MenuItem("Tools/Reload Edges")]
     [InitializeOnLoadMethod]
+    [RuntimeInitializeOnLoadMethod]
     public static void LoadEdges()
     {
         Graph graph = Object.FindFirstObjectByType<Graph>();
