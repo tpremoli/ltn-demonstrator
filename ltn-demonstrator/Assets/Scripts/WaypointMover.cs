@@ -56,6 +56,7 @@ public class WaypointMover : MonoBehaviour
             Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
             Debug.LogWarning("End edge start: " + endEdge.StartWaypoint.name + " End edge end: " + endEdge.EndWaypoint.name);
             Destroy(this.gameObject);
+            return;
         }
         IEnumerator<Waypoint> iter = path.path.GetEnumerator();
         iter.MoveNext();
@@ -75,8 +76,20 @@ public class WaypointMover : MonoBehaviour
             }
             
         }
+        // Get starting location
+        Edge originEdge = graph.getClosetEdge(this.transform.position);
+        if(originEdge.EndWaypoint!=pathEdges[0].startWaypoint){
+            // If the edge does not end in the correct waypoint, look for counterpart
+            originEdge = graph.getEdge(originEdge.endWaypoint, originEdge.startWaypoint);
+            // If counterpart does not exist, terminate
+            //if (originEdge==null){
+            //    Destroy(this.gameObject);
+            //    return;
+            //}
+        }
+
         // Position the traveller on the current Edge
-        this.currentEdge = graph.getClosetEdge(this.transform.position);
+        this.currentEdge = originEdge;
         this.currentEdge.Subscribe(this);
         this.positionOnEdge = this.currentEdge.GetClosestPointAsFractionOfEdge(this.transform.position);
         // Obtain terminal location
