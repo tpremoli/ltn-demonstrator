@@ -27,7 +27,6 @@ public class WaypointMover : MonoBehaviour
     private WaypointPath path;           // Instance of the pathfinding class
     private Graph graph;                 // Instance of the graph class
 
-
     // pick rnadom model and material
     [SerializeField] public List<GameObject> vehiclePrefabs;
     
@@ -76,16 +75,31 @@ public class WaypointMover : MonoBehaviour
             }
             
         }
-        // Get starting location
+        // Get origin Edge
         Edge originEdge = graph.getClosetEdge(this.transform.position);
-        if(originEdge.EndWaypoint!=pathEdges[0].startWaypoint){
+        if(path.path.Count>0){
+            if(originEdge.EndWaypoint!=path.path[0]){
             // If the edge does not end in the correct waypoint, look for counterpart
             originEdge = graph.getEdge(originEdge.endWaypoint, originEdge.startWaypoint);
             // If counterpart does not exist, terminate
-            //if (originEdge==null){
-            //    Destroy(this.gameObject);
-            //    return;
-            //}
+            if (originEdge==null){
+                Destroy(this.gameObject);
+                return;
+            }
+        }
+        }
+        // Get Terminal Edge
+        Edge terminalEdge = destinationBuilding.closestEdge;
+        if(path.path.Count>0){
+            if(terminalEdge.StartWaypoint!=path.path[path.path.Count-1]){
+            // If the edge does not end in the correct waypoint, look for counterpart
+            terminalEdge = graph.getEdge(terminalEdge.endWaypoint, terminalEdge.startWaypoint);
+            // If counterpart does not exist, terminate
+            if (terminalEdge==null){
+                Destroy(this.gameObject);
+                return;
+            }
+        }
         }
 
         // Position the traveller on the current Edge
@@ -94,13 +108,15 @@ public class WaypointMover : MonoBehaviour
         this.positionOnEdge = this.currentEdge.GetClosestPointAsFractionOfEdge(this.transform.position);
         // Obtain terminal location
         Vector3 terminal = destinationBuilding.closestPointOnEdge;
-        Edge terminalEdge = destinationBuilding.closestEdge;
         this.pathEdges.Add(terminalEdge);
         this.terminalLength = terminalEdge.GetClosestPointAsFractionOfEdge(terminal);
 
         Debug.Log("Traveller Instantiated");
         // Rotate the Traveller to align with the current edge
         updateHeading();
+
+        // Set Traveller's size
+        renderer.bounds.size
 
         // DEBUG
         DebugDrawPath();
@@ -148,6 +164,7 @@ public class WaypointMover : MonoBehaviour
         // Calculate current velocity
         this.leftToMove = this.maxVelocity * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
         Move();
+        
     }
     void LateUpdate(){
         this.WaitingToMove = new List<WaypointMover>();
