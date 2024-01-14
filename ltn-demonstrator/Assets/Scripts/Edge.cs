@@ -124,6 +124,18 @@ public class Edge
             return closestPointOnEdge;
         }
     }
+    public float GetCosestPointAsFractionOfEdge(Vector3 point){
+        Vector3 start = startWaypoint.transform.position;
+        Vector3 end = endWaypoint.transform.position;
+
+        Vector3 edgeDirection = end - start;
+        Vector3 pointDirection = point - start;
+
+        float edgeLength = edgeDirection.magnitude;
+        edgeDirection.Normalize();
+
+        return Vector3.Dot(pointDirection, edgeDirection)/edgeLength;
+    }
 
     public Vector3 GetRandomPointOnEdge()
     {

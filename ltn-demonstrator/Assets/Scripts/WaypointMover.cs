@@ -16,13 +16,12 @@ public class WaypointMover : MonoBehaviour
     static float TIMESCALE = 1;
     private float leftToMove = 0;
     private float length = 0;
+    private float terminalLength;
     private Edge currentEdge;
     private List<WaypointMover> WaitingToMove;
     private List<Edge> pathEdges;
 
     // Attributes from the WaypointMover class
-    [SerializeField] private Waypoint startingWaypoint;
-    [SerializeField] private float speed = 5f;
     [SerializeField] private float distanceThreshold = 0.1f;
     [SerializeField] private float leftLaneOffset = 1f;
 
@@ -72,16 +71,20 @@ public class WaypointMover : MonoBehaviour
             
         }
         // Position the traveller on the current Edge
-        // TODO fix - the program crashes if the path.path contains only a single waypoint
-        this.currentEdge = this.pathEdges[0];
-        this.pathEdges.RemoveAt(0);
+        this.currentEdge = graph.getClosetEdge(this.transform.position);
         this.currentEdge.Subscribe(this);
-        this.positionOnEdge = 0;
+        this.positionOnEdge = this.currentEdge.GetCosestPointAsFractionOfEdge(this.transform.position);
+        // Obtain terminal location
+        Vector3 terminal = destinationBuilding.GetClosestPointOnEdge();
+        Edge terminalEdge = graph.getClosetEdge(terminal);
+        this.pathEdges.Add(terminalEdge);
+        this.terminalLength = terminalEdge.GetCosestPointAsFractionOfEdge(terminal);
 
         Debug.Log("Traveller Instantiated");
         DebugDrawPath();
     }
     private void registerForMove(WaypointMover trav){
+        // TODO add check that trav only gets added if it is not within the list already
         WaitingToMove.Add(trav);
     }
     void DebugDrawPath()
@@ -121,7 +124,7 @@ public class WaypointMover : MonoBehaviour
     void Update()
     {
         // Calculate current velocity
-        this.leftToMove = this.maxVelocity * TIMESCALE * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
+        this.leftToMove = this.maxVelocity * Time.timeScale * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
         Move();
     }
     void LateUpdate(){
@@ -129,16 +132,22 @@ public class WaypointMover : MonoBehaviour
         UpdatePosition();
     }
     void UpdatePosition(){
-        // Move the object's transform to edge_origin * (1-positionOnEdge) + edge_end * positionOnEdge
+        // Move the object's transform to:
+        // edge_origin * (1-positionOnEdge) + edge_end * positionOnEdge
         Vector3 newPosition = this.currentEdge.StartWaypoint.transform.position*(1-this.positionOnEdge) + this.currentEdge.EndWaypoint.transform.position*(this.positionOnEdge);
+        // Add offset to the new position to no be in the middle of the road
+        
+        newPosition = newPosition + this.leftLaneOffset;
+        // Update the object's position
         transform.position = newPosition;
     }
     private void Move(){
         // Check if Traveller has moved to the end of its edge
         float proposedMovement = this.leftToMove;
         // Check for collissions at the new location
-        proposal:
-        while (true) {
+        bool proposalAccepted = false;
+        while (!proposalAccepted) {
+            proposalAccepted = true;
             // Determine which Edge the Traveller ends up on, and how much movement it uses up in the process
             float TravelledOverEdges = 0;
             Edge terminalEdge = this.currentEdge;
@@ -173,21 +182,29 @@ public class WaypointMover : MonoBehaviour
                 float wpPositionOnEdgeInReal = terminalEdge.DeltaDToRealDistance(wp.positionOnEdge);
                 // Check whether this' front would end up within the vehicle
                 if(TravelledInEdge < wpPositionOnEdgeInReal && TravelledInEdge > (wpPositionOnEdgeInReal-wp.length)){
+                    // Collission occurred
+                    // Reduce proposed movement
                     proposedMovement-=TravelledInEdge-(wpPositionOnEdgeInReal-wp.length);
+                    // register for notification
                     wp.registerForMove(this);
-                    goto proposal;
+                    // and re-loop
+                    proposalAccepted = false;
+                    break;
                 }
                 // Check whether this' rear would end up within a vehilce
                 if((TravelledInEdge-this.length) < wpPositionOnEdgeInReal && (TravelledInEdge-this.length) > (wpPositionOnEdgeInReal-wp.length)){
+                    // Collission occurred
+                    // Reduce proposed movement
                     proposedMovement-=TravelledInEdge-(wpPositionOnEdgeInReal-wp.length);
+                    // register for notification
                     wp.registerForMove(this);
-                    goto proposal;
+                    // and re-loop
+                    proposalAccepted = false;
+                    break;
                 }
             }
             // No collission occurred, the proposed movement is accepted
-            goto accept;
         }
-        accept:
         // Beginning to carry out proposed movement
         this.leftToMove-=proposedMovement;
         // Keep switching edges until the proposed movement is insufficient to escape the edge
@@ -203,6 +220,11 @@ public class WaypointMover : MonoBehaviour
         }
         this.positionOnEdge+=this.currentEdge.RealDistanceToDeltaD(proposedMovement);
         // Proposed movement carried out
+
+        // Check for arriving to destination
+        if(this.pathEdges.Count==0&&this.positionOnEdge>=this.terminalLength){
+            arriveToDestination();
+        }
         
         // Call Move() on all Travellers waiting to Move
         foreach (WaypointMover trav in this.WaitingToMove){
