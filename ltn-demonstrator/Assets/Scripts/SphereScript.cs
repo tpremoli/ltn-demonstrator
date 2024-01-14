@@ -23,6 +23,11 @@ public class SphereScript : MonoBehaviour, IDrag
         {
             Debug.Log("The GameObject has not been destroyed");
         }
+        // If the GameObject has the "Draggable" tag, remove it
+        if (gameObject.tag == "Draggable")
+        {
+            gameObject.tag = "";
+        }
         rb.useGravity = false;
     }
 

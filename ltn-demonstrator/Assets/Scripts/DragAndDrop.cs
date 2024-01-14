@@ -92,9 +92,12 @@ public class DragAndDrop : MonoBehaviour
             // Call the onEndDrag method of the IDrag component, if it exists
             IDragComponent?.onEndDrag();
 
+            
             // Store the position of the object when the mouse is released
             Vector3 finalPosition = clickedObject.transform.position;
             Debug.Log("The object was dropped at: " + finalPosition);
+
+            /*
 
             List<Edge> edges = Edge.allEdges; // Changed this line
             for (int i = 0; i < edges.Count; i++) { // Changed this line
@@ -105,6 +108,8 @@ public class DragAndDrop : MonoBehaviour
                     edges[i].barricadeLocation = edges[i].convertToPositionAlongEdge(finalPosition);
                 }
             }
+            */
+            
         }
 
         
