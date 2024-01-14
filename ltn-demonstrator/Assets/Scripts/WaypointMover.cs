@@ -26,6 +26,10 @@ public class WaypointMover : MonoBehaviour
 
     private WaypointPath path;           // Instance of the pathfinding class
     private Graph graph;                 // Instance of the graph class
+
+
+    // pick rnadom model and material
+    [SerializeField] public List<GameObject> vehiclePrefabs;
     
     void Start()
     {
@@ -36,11 +40,13 @@ public class WaypointMover : MonoBehaviour
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        // Choose a random destination building.
+        // pick a random model and material
+        pickRandomModelAndMaterial();
+
         chooseDestinationBuilding();
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.transform.position, destinationBuilding.GetClosestPointOnEdge(), this);
+        path = new WaypointPath(this.transform.position, destinationBuilding.closestPointOnEdge, this);
 
         if (path.path == null)
         {
@@ -114,7 +120,7 @@ public class WaypointMover : MonoBehaviour
         destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
 
         // Edge case where the chosen building is the same as the building the traveller spawned at.
-        while (Vector3.Distance(this.transform.position, destinationBuilding.GetClosestPointOnEdge()) < distanceThreshold) {
+        while (Vector3.Distance(this.transform.position, destinationBuilding.closestPointOnEdge) < distanceThreshold) {
             // Choose new random destination building.
             destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
         }
@@ -273,6 +279,36 @@ public class WaypointMover : MonoBehaviour
 
             // Always draw an arrow to the destination from the current position or last waypoint
             DrawArrow.ForGizmo(startPosition + Vector3.up, (path.destinationPos - startPosition) + Vector3.up, Color.yellow, 1f);
+        }
+    }
+
+    private void pickRandomModelAndMaterial(){
+        // Randomly select a model and material
+        GameObject selectedPrefab = vehiclePrefabs[Random.Range(0, vehiclePrefabs.Count-1)];
+
+        // Retrieve the MeshRenderer and MeshFilter of the selected prefab
+        MeshRenderer selectedMeshRenderer = selectedPrefab.GetComponent<MeshRenderer>();
+        MeshFilter selectedMeshFilter = selectedPrefab.GetComponent<MeshFilter>();
+
+        // Apply the mesh and material to the current GameObject
+        if (selectedMeshRenderer != null && selectedMeshFilter != null)
+        {
+            MeshRenderer thisMeshRenderer = GetComponent<MeshRenderer>();
+            MeshFilter thisMeshFilter = GetComponent<MeshFilter>();
+
+            if (thisMeshRenderer != null && thisMeshFilter != null)
+            {
+                thisMeshRenderer.material = selectedMeshRenderer.sharedMaterial;
+                thisMeshFilter.mesh = selectedMeshFilter.sharedMesh;
+            }
+            else
+            {
+                Debug.LogError("Current GameObject does not have MeshRenderer and/or MeshFilter.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Selected prefab does not have MeshRenderer and/or MeshFilter.");
         }
     }
 }

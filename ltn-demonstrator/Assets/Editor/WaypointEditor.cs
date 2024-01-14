@@ -69,7 +69,7 @@ public class WaypointEditor : Editor
     /// This is necessary because when a waypoint is deleted, the adjacent waypoints are not updated.
     /// This can be called manually from the editor, or automatically when a waypoint is deleted.
     /// </summary>
-    [MenuItem("Tools/Prune Deleted Waypoints")] [InitializeOnLoadMethod]
+    [MenuItem("Tools/Waypoints/Prune Deleted Waypoints")] [InitializeOnLoadMethod]
     static void PruneDeletedWaypoints()
     {
         Waypoint[] allWaypoints = FindObjectsOfType<Waypoint>();
@@ -92,5 +92,4 @@ public class WaypointEditor : Editor
             EditorUtility.SetDirty(waypoint);
         }
     }
-    
 }

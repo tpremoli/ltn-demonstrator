@@ -26,7 +26,7 @@ public class Building : MonoBehaviour
     private float nextSpawnTime; // The time of the next spawn attempt
 
     public Edge closestEdge;
-    private Vector3 closestPointOnEdge;
+    public Vector3 closestPointOnEdge;
 
     // Some more attributes - not sure if needed, but seemed useful
     public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
@@ -56,7 +56,11 @@ public class Building : MonoBehaviour
         }
     }
 
-    public Vector3 GetClosestPointOnEdge() {
+    public Vector3 CalcClosestPointOnEdge() {
+        Graph tempGraph = GameObject.Find("Graph").GetComponent<Graph>();
+
+        Edge closestEdge = tempGraph.getClosetEdge(this.transform.position);
+        Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(this.transform.position);
         return closestPointOnEdge;
     }
 

@@ -4,22 +4,19 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Edge
 {
-    [SerializeField]
-    private Waypoint startWaypoint;
+    public Waypoint startWaypoint;
 
     private Waypoint startWaypointLane;
 
-    [SerializeField]
-    private Waypoint endWaypoint;
+    public Waypoint endWaypoint;
     private Waypoint endWaypointLane;
 
-    [SerializeField]
-    private float distance;
+    public float length;
 
     public Waypoint StartWaypoint { get { return startWaypoint; } }
     public Waypoint EndWaypoint { get { return endWaypoint; } }
-    public float Distance { get { return distance; } }
     public List<WaypointMover> TravellersOnEdge;
+    public float Distance { get { return length; } }
 
     /// <summary>
     /// Barrier stores if there's a barrier in the path of the edge
@@ -33,7 +30,7 @@ public class Edge
     {
         this.startWaypoint = startWaypoint;
         this.endWaypoint = endWaypoint;
-        this.distance = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
+        this.length = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
 
         this.TravellersOnEdge = new List<WaypointMover>();
 
@@ -65,17 +62,17 @@ public class Edge
         Vector3 startpoint = startWaypoint.transform.position;
         Vector3 endpoint = endWaypoint.transform.position;
         Vector3 direction = endpoint - startpoint;
-        
+
         // Make the arrows shorter by 20%
         float shortenedMagnitude = direction.magnitude * 0.7f;
         Vector3 shortenedDirection = direction.normalized * shortenedMagnitude;
 
         // Calculate the middle position
         Vector3 middlePosition = startpoint + direction * 0.5f - shortenedDirection * 0.5f;
-        
+
         // Shift the middle position slightly to the left
         Vector3 shiftedMiddlePosition = middlePosition + Vector3.Cross(direction, Vector3.up).normalized * 0.6f;
-        
+
         // Draw the arrow with the shifted middle position and shortened direction
         DrawArrow.ForGizmo(shiftedMiddlePosition, shortenedDirection, Color.green, 1f, 30f);
     }
@@ -92,7 +89,8 @@ public class Edge
         return distanceFromStart + distanceFromEnd <= edgeLength + 0.2f;
     }
 
-    public float DistanceToEdge(Vector3 position){
+    public float DistanceToEdge(Vector3 position)
+    {
         Vector3 closestPoint = this.GetClosestPoint(position);
         return Vector3.Distance(position, closestPoint);
     }
@@ -273,7 +271,7 @@ public class Edge
         // Debug.LogWarning("No accessible waypoint found, returning null");
         return null;
     }
-    
+
     /// <summary>
     /// This checks if there is a barrier between a start point and an end point on the edge
     /// </summary>
@@ -295,7 +293,7 @@ public class Edge
 
         // Check if the barrier is between start and destination
         // Assuming lower distance value is closer to the starting point of the edge
-        return barrierDistance > System.Math.Min(startDistance, destinationDistance) && 
+        return barrierDistance > System.Math.Min(startDistance, destinationDistance) &&
             barrierDistance < System.Math.Max(startDistance, destinationDistance);
     }
 }
