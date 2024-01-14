@@ -116,7 +116,11 @@ public class WaypointMover : MonoBehaviour
         updateHeading();
 
         // Set Traveller's size
-        renderer.bounds.size
+        //var r = GetComponent<Renderer>();
+        //if (r!=null){
+        //    var bounds = r.bounds;
+        //    this.length=Mathf.Max(Mathf.Max(bounds.size.x,bounds.size.y), bounds.size.z);
+        //}
 
         // DEBUG
         DebugDrawPath();
