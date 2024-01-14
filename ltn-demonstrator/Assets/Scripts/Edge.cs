@@ -5,8 +5,18 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Edge
 {
+<<<<<<< HEAD
+    public static List<Edge> allEdges = new List<Edge>();
+
+    public Edge() {
+        allEdges.Add(this);
+    }
+
     [SerializeField]
     private Waypoint startWaypoint;
+=======
+    public Waypoint startWaypoint;
+>>>>>>> b4c0466846ac0bff7fab3208952c3c197231c9d2
 
     private Waypoint startWaypointLane;
 
