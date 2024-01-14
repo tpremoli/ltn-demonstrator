@@ -125,7 +125,8 @@ MonoBehaviour:
   closestEdge:
     startWaypoint: {fileID: 0}
     endWaypoint: {fileID: 0}
-    distance: 0
+    length: 0
     isBarricated: 0
     barrierLocation: 0
     barrier: {fileID: 0}
+  closestPointOnEdge: {x: 0, y: 0, z: 0}
