@@ -72,6 +72,7 @@ public class WaypointMover : MonoBehaviour
             
         }
         // Position the traveller on the current Edge
+        // TODO fix - the program crashes if the path.path contains only a single waypoint
         this.currentEdge = this.pathEdges[0];
         this.pathEdges.RemoveAt(0);
         this.currentEdge.Subscribe(this);
@@ -182,9 +183,9 @@ public class WaypointMover : MonoBehaviour
                     wp.registerForMove(this);
                     goto proposal;
                 }
-                // No collission occurred, the proposed movement is accepted
-                goto accept;
             }
+            // No collission occurred, the proposed movement is accepted
+            goto accept;
         }
         accept:
         // Beginning to carry out proposed movement
