@@ -202,76 +202,77 @@ MonoBehaviour:
   edges:
   - startWaypoint: {fileID: 12395232}
     endWaypoint: {fileID: 994067226}
-    distance: 13.594484
+    length: 13.594484
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 467779932}
     endWaypoint: {fileID: 1384260981}
-    distance: 23.644012
+    length: 23.644012
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 784245901}
     endWaypoint: {fileID: 994067226}
-    distance: 15.901258
+    length: 15.901258
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 994067226}
     endWaypoint: {fileID: 784245901}
-    distance: 15.901258
+    length: 15.901258
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 994067226}
     endWaypoint: {fileID: 1076874518}
-    distance: 13.176494
+    length: 13.176494
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 994067226}
     endWaypoint: {fileID: 12395232}
-    distance: 13.594484
+    length: 13.594484
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 994067226}
     endWaypoint: {fileID: 1384260981}
-    distance: 13.7663145
+    length: 13.7663145
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 1076874518}
     endWaypoint: {fileID: 994067226}
-    distance: 13.176494
+    length: 13.176494
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 1384260981}
     endWaypoint: {fileID: 994067226}
-    distance: 13.7663145
+    length: 13.7663145
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 1384260981}
     endWaypoint: {fileID: 467779932}
-    distance: 23.644012
+    length: 23.644012
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 1384260981}
     endWaypoint: {fileID: 1820007765}
-    distance: 14.234567
+    length: 14.234567
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 1820007765}
     endWaypoint: {fileID: 1384260981}
-    distance: 14.234567
+    length: 14.234567
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
+  buildings: []
   waypoints: []
   drawEdgeGizmos: 1
 --- !u!4 &370089492
