@@ -78,14 +78,18 @@ public class WaypointMover : MonoBehaviour
         // Position the traveller on the current Edge
         this.currentEdge = graph.getClosetEdge(this.transform.position);
         this.currentEdge.Subscribe(this);
-        this.positionOnEdge = this.currentEdge.GetCosestPointAsFractionOfEdge(this.transform.position);
+        this.positionOnEdge = this.currentEdge.GetClosestPointAsFractionOfEdge(this.transform.position);
         // Obtain terminal location
-        Vector3 terminal = destinationBuilding.GetClosestPointOnEdge();
-        Edge terminalEdge = graph.getClosetEdge(terminal);
+        Vector3 terminal = destinationBuilding.closestPointOnEdge;
+        Edge terminalEdge = destinationBuilding.closestEdge;
         this.pathEdges.Add(terminalEdge);
-        this.terminalLength = terminalEdge.GetCosestPointAsFractionOfEdge(terminal);
+        this.terminalLength = terminalEdge.GetClosestPointAsFractionOfEdge(terminal);
 
         Debug.Log("Traveller Instantiated");
+        // Rotate the Traveller to align with the current edge
+        updateHeading();
+
+        // DEBUG
         DebugDrawPath();
     }
     private void registerForMove(WaypointMover trav){
@@ -144,6 +148,11 @@ public class WaypointMover : MonoBehaviour
         newPosition = newPosition + this.leftLaneOffset*Vector3.Cross(Vector3.up,this.currentEdge.GetDirection());
         // Update the object's position
         transform.position = newPosition;
+    }
+    private void updateHeading(){
+        Vector3 direction = this.currentEdge.GetDirection();
+        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+        transform.rotation = rotation;
     }
     private void Move(){
         // Check if Traveller has moved to the end of its edge
@@ -211,6 +220,7 @@ public class WaypointMover : MonoBehaviour
         }
         // Beginning to carry out proposed movement
         this.leftToMove-=proposedMovement;
+        bool escapedEdge = false;
         // Keep switching edges until the proposed movement is insufficient to escape the edge
         while(proposedMovement>(this.currentEdge.Distance*(1-this.positionOnEdge))){
             proposedMovement-=(this.currentEdge.Distance*(1-this.positionOnEdge));
@@ -221,9 +231,16 @@ public class WaypointMover : MonoBehaviour
             this.pathEdges.RemoveAt(0);
             this.currentEdge.Subscribe(this);
             this.positionOnEdge = 0;
+            // Set the variable
+            escapedEdge = true;
         }
         this.positionOnEdge+=this.currentEdge.RealDistanceToDeltaD(proposedMovement);
         // Proposed movement carried out
+
+        // Rotate the traveller if it changed an edge
+        if (escapedEdge){
+            updateHeading();
+        }
 
         // Check for arriving to destination
         if(this.pathEdges.Count==0&&this.positionOnEdge>=this.terminalLength){
@@ -256,10 +273,26 @@ public class WaypointMover : MonoBehaviour
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(path.destinationPos, 1f);
 
-            // Draw the path from the agent's current position
-            Gizmos.color = Color.yellow;
+            if (path.path.Count > 0)
+            {
+                // Iterate through the remaining waypoints
+                foreach (var waypoint in path.path)
+                {
+                    // Draw a sphere for each waypoint
+                    Gizmos.DrawSphere(waypoint.transform.position, 1f);
+                }
+            }
 
-            Vector3 startPosition = transform.position; // Use the agent's position if the currentWaypoint is null
+            // Draw the path from the agent's current position
+            tracePath(Color.yellow, 1f, 1f);
+        }
+    }
+    private void OnDrawGizmosSelected(){
+        if (Application.isPlaying && !(path==null))
+        {
+            // Draw the destination sphere
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(path.destinationPos, 1f);
 
             if (path.path.Count > 0)
             {
@@ -268,18 +301,36 @@ public class WaypointMover : MonoBehaviour
                 {
                     // Draw a sphere for each waypoint
                     Gizmos.DrawSphere(waypoint.transform.position, 1f);
-
-                    // Draw an arrow from the start position to the current waypoint
-                    DrawArrow.ForGizmo(startPosition + Vector3.up, (waypoint.transform.position - startPosition) + Vector3.up, Color.yellow, 1f);
-
-                    // Update the start position
-                    startPosition = waypoint.transform.position;
                 }
             }
 
-            // Always draw an arrow to the destination from the current position or last waypoint
-            DrawArrow.ForGizmo(startPosition + Vector3.up, (path.destinationPos - startPosition) + Vector3.up, Color.yellow, 1f);
+            // Draw the path from the agent's current position
+            tracePath(Color.red, 2f, 10f);
         }
+    }
+
+    private void tracePath(Color c, float height, float thickness){
+        // Draw the path from the agent's current position
+        Gizmos.color = c;
+        Vector3 startPosition = currentEdge.startWaypoint.transform.position + Vector3.up*height;
+        Vector3 endPosition = currentEdge.endWaypoint.transform.position + Vector3.up*height - startPosition;
+        DrawArrow.ForGizmo(startPosition, endPosition, c, thickness);
+
+        // Draw the path for intermediate segments
+        if (this.pathEdges.Count>1){
+            foreach (Edge edge in this.pathEdges.GetRange(0,this.pathEdges.Count-1)){
+            startPosition = edge.startWaypoint.transform.position + Vector3.up*height;
+            endPosition = edge.endWaypoint.transform.position + Vector3.up*height - startPosition;
+            DrawArrow.ForGizmo(startPosition, endPosition, c, thickness);
+        }
+        }
+
+        // Draw the final segment
+        Edge e = this.pathEdges[this.pathEdges.Count-1];
+        startPosition = e.startWaypoint.transform.position + Vector3.up*height;
+        endPosition = (e.endWaypoint.transform.position + Vector3.up*height - startPosition)*this.terminalLength;
+        DrawArrow.ForGizmo(startPosition, endPosition, c, thickness);
+
     }
 
     private void pickRandomModelAndMaterial(){

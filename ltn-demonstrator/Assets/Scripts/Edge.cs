@@ -44,10 +44,10 @@ public class Edge
         }
     }
     public float RealDistanceToDeltaD(float len){
-        return len/this.distance;
+        return len/this.length;
     }
     public float DeltaDToRealDistance(float len){
-        return len*this.distance;
+        return len*this.length;
     }
     public void Subscribe(WaypointMover trav){
         this.TravellersOnEdge.Add(trav);
@@ -130,7 +130,7 @@ public class Edge
             return closestPointOnEdge;
         }
     }
-    public float GetCosestPointAsFractionOfEdge(Vector3 point){
+    public float GetClosestPointAsFractionOfEdge(Vector3 point){
         Vector3 start = startWaypoint.transform.position;
         Vector3 end = endWaypoint.transform.position;
 
