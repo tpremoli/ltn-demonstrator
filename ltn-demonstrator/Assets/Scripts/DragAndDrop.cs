@@ -55,10 +55,12 @@ public class DragAndDrop : MonoBehaviour
 
     private IEnumerator DragUpdate(GameObject clickedObject)
     {
+        /*
         if (clickedObject == null)
         {
             yield break;
         }
+        */
 
         float initialDistance = Vector3.Distance(clickedObject.transform.position, mainCamera.transform.position);
         clickedObject.TryGetComponent<Rigidbody>(out var rb);
