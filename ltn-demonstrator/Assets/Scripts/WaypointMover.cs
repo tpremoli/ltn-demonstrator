@@ -13,7 +13,6 @@ public class WaypointMover : MonoBehaviour
     private float rateOfEmission;
     private Building destinationBuilding;
     // Movement controlling attributes
-    static float TIMESCALE = 1;
     private float leftToMove = 0;
     private float length = 0;
     private float terminalLength;
@@ -124,7 +123,7 @@ public class WaypointMover : MonoBehaviour
     void Update()
     {
         // Calculate current velocity
-        this.leftToMove = this.maxVelocity * Time.timeScale * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
+        this.leftToMove = this.maxVelocity * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
         Move();
     }
     void LateUpdate(){
@@ -136,8 +135,7 @@ public class WaypointMover : MonoBehaviour
         // edge_origin * (1-positionOnEdge) + edge_end * positionOnEdge
         Vector3 newPosition = this.currentEdge.StartWaypoint.transform.position*(1-this.positionOnEdge) + this.currentEdge.EndWaypoint.transform.position*(this.positionOnEdge);
         // Add offset to the new position to no be in the middle of the road
-        
-        newPosition = newPosition + this.leftLaneOffset;
+        newPosition = newPosition + this.leftLaneOffset*Vector3.Cross(Vector3.up,this.currentEdge.GetDirection());
         // Update the object's position
         transform.position = newPosition;
     }

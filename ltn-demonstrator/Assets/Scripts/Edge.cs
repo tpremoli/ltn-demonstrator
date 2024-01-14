@@ -96,6 +96,14 @@ public class Edge
         Vector3 closestPoint = this.GetClosestPoint(position);
         return Vector3.Distance(position, closestPoint);
     }
+    public Vector3 GetDirection(){
+        Vector3 start = startWaypoint.transform.position;
+        Vector3 end = endWaypoint.transform.position;
+
+        Vector3 edgeDirection = end - start;
+        edgeDirection.Normalize();
+        return edgeDirection;
+    }
 
     public Vector3 GetClosestPoint(Vector3 point)
     {
