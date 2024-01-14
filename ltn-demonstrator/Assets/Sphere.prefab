@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4293422610054443718}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Barrier
+  m_TagString: Draggable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

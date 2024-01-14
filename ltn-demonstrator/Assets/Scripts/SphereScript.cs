@@ -30,8 +30,9 @@ public class SphereScript : MonoBehaviour, IDrag
         {
             gameObject.tag = "";
         }
-        rb.useGravity = false;
         */
+        rb.useGravity = false;
+        
     }
 
     // Implement OnDragEnd method from IDrag interface

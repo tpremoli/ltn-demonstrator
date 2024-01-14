@@ -39,6 +39,7 @@ public class DragAndDrop : MonoBehaviour
 
     private void MousePressed(InputAction.CallbackContext context)
     {
+        Debug.Log("mouse pressed");
         // Take the mouse position to the camera and convert it to a ray
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
@@ -55,12 +56,12 @@ public class DragAndDrop : MonoBehaviour
 
     private IEnumerator DragUpdate(GameObject clickedObject)
     {
-        /*
+        
         if (clickedObject == null)
         {
             yield break;
         }
-        */
+        
 
         float initialDistance = Vector3.Distance(clickedObject.transform.position, mainCamera.transform.position);
         clickedObject.TryGetComponent<Rigidbody>(out var rb);
