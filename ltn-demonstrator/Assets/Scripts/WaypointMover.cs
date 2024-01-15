@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WaypointMover : MonoBehaviour
 {
+    // Attributes controlling the object state
+    bool initialised;
     // Attributes from the Traveller class
     private float totalDistanceMoved;
     //private float positionOnEdge;
@@ -44,12 +46,23 @@ public class WaypointMover : MonoBehaviour
     
     void Start()
     {
+        // Start by making the object unready
+        this.initialised = false;
+        gameObject.GetComponent<Renderer>().enabled = false;
         // Initialising object
         this.pathEdges = new List<Edge>();
         this.travsBlockedByThis = new List<WaypointMover>();
         this.travsBlockedByThisDEBUG = new List<WaypointMover>();
         this.travsBlockingThis = new List<WaypointMover>();
         this.travsBlockingThisDEBUG = new List<WaypointMover>();
+
+        // Set Traveller's size
+        var r = GetComponent<Collider>();
+        if (r!=null){
+            var bounds = r.bounds;
+            this.length=Mathf.Max(Mathf.Max(bounds.size.x,bounds.size.y), bounds.size.z);
+            this.hLen=length/2;
+        }
 
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
@@ -119,7 +132,7 @@ public class WaypointMover : MonoBehaviour
 
         // Position the traveller on the current Edge
         this.currentEdge = originEdge;
-        this.currentEdge.Subscribe(this);
+        //this.currentEdge.Subscribe(this); // Delegated to coroutine
         //this.positionOnEdge = this.currentEdge.GetClosestPointAsFractionOfEdge(this.transform.position);
         this.distanceAlongEdge = Vector3.Distance(
             this.currentEdge.startWaypoint.transform.position,
@@ -138,16 +151,58 @@ public class WaypointMover : MonoBehaviour
         // Rotate the Traveller to align with the current edge
         updateHeading();
 
-        // Set Traveller's size
-        var r = GetComponent<Collider>();
-        if (r!=null){
-            var bounds = r.bounds;
-            this.length=Mathf.Max(Mathf.Max(bounds.size.x,bounds.size.y), bounds.size.z);
-            this.hLen=length/2;
-        }
+        // Attempt to register the Traveller with road
+        StartCoroutine(startCoroutine());
 
         // DEBUG
         //DebugDrawPath();
+    }
+    private IEnumerator startCoroutine(){
+        //Calculating traveller's possition
+        float myFront=this.distanceAlongEdge+hLen;
+        float myRear=this.distanceAlongEdge-hLen;
+
+        bool collided = true;
+        while(collided){
+            collided = false;
+            // COLLISSION CHECK
+            // Check for collission at that point in the edge with every traveller present on the edge
+            foreach(WaypointMover wp in currentEdge.TravellersOnEdge){
+                if (wp==this) continue;
+                //Calculate position of other traveller on the edge in Real units
+                float wpPOEReal = wp.distanceAlongEdge;
+                //Calculate position of
+                float wpFront = wpPOEReal+wp.hLen+0.5f;
+                float wpRear = wpPOEReal-wp.hLen-0.5f;
+                
+                // Check whether this' front would end up within the vehicle
+                if(myFront<=wpFront&&myFront>=wpRear){
+                    // Collision occurred
+                    // re-loop
+                    collided = true;
+                    break;
+                }
+                
+                // Check whether this' rear would end up within a vehilce
+                if(myRear<=wpFront&&myRear>=wpRear){
+                    // Collission occurred
+
+                    // re-loop
+                    collided = true;
+                    break;
+                }
+            }
+            if(collided){
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+        
+        // Registering the traveller with edge and allowing movement
+        this.currentEdge.Subscribe(this);
+        this.initialised=true;
+        gameObject.GetComponent<Renderer>().enabled = true;
+
+        Debug.Log("Traveller initialised - safe travels!");
     }
     private void registerForMove(WaypointMover trav){
         // check that trav only gets added if it is not within the list already
@@ -214,21 +269,23 @@ public class WaypointMover : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        Vector3 positionAtTheStart = new Vector3(
-            this.transform.position.x,
-            this.transform.position.y,
-            this.transform.position.z
-        );
+    void Update() {
+        //Make sure the logic is only called if the Traveller was initialised
+        if(initialised){
+            Vector3 positionAtTheStart = new Vector3(
+                this.transform.position.x,
+                this.transform.position.y,
+                this.transform.position.z
+            );
 
-        // Calculate current velocity
-        this.leftToMove = this.maxVelocity * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
-        Move();
-        this.velocity=Vector3.Distance(positionAtTheStart,this.transform.position);
+            // Calculate distance covered between frames
+            this.leftToMove = this.maxVelocity * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
+            Move();
+            this.velocity=Vector3.Distance(positionAtTheStart,this.transform.position);
+        }
     }
     void LateUpdate(){
-        // Make backups for visualisation
+        // Make backups for debug visualisation
         foreach (WaypointMover trav in this.travsBlockedByThis){
             travsBlockedByThisDEBUG.Add(trav);
         }
@@ -239,7 +296,10 @@ public class WaypointMover : MonoBehaviour
         this.travsBlockedByThis = new List<WaypointMover>();
         this.travsBlockingThis = new List<WaypointMover>();
         this.CachedRejectedWaiting = new List<WaypointMover>();
-        UpdatePosition();
+
+        if(initialised){
+            UpdatePosition();
+        }
     }
     void UpdatePosition(){
         // ~~~~~
@@ -321,7 +381,7 @@ public class WaypointMover : MonoBehaviour
                 if(myFront<=wpFront&&myFront>=wpRear){
                     // Collision occurred
                     // Reduce proposed movement
-                    proposedMovement-=myFront-wpRear+0.0001f;
+                    proposedMovement-=myFront-wpRear+0.01f;
 
                     // register for notification
                     this.travsBlockingThis.Add(wp);
@@ -377,6 +437,7 @@ public class WaypointMover : MonoBehaviour
 
         // Check for arriving to destination
         if(this.pathEdges.Count==0&&this.distanceAlongEdge>=this.terminalLength){
+            this.currentEdge.Unsubscribe(this);
             arriveToDestination();
         }
         bool finished = false;
@@ -452,6 +513,7 @@ public class WaypointMover : MonoBehaviour
 
             // Draw arrow to vehicles collided with
             Gizmos.color=Color.magenta;
+            travsBlockingThisDEBUG.RemoveAll(item=>item==null);
             Vector3 startPosition = this.transform.position+Vector3.up*4;
             foreach (WaypointMover wp in travsBlockingThisDEBUG){
                 Vector3 endPosition = wp.transform.position+Vector3.up*4;//- startPosition
