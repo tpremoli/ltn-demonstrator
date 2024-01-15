@@ -104,8 +104,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.5923922, y: 2.2525814, z: 6.3996105}
+  m_Center: {x: 0.0034947195, y: 1.1063907, z: -0.2057463}
 --- !u!114 &-7686631778684168970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,8 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44b065cb513935409fd520c503ca1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingWaypoint: {fileID: 0}
-  speed: 5
   distanceThreshold: 0.1
   leftLaneOffset: 1
   vehiclePrefabs:

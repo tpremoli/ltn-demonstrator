@@ -13,6 +13,9 @@ public enum BuildingType
 
 public class Building : MonoBehaviour
 {
+    // DEBUG ATTRIBUUTES
+    private static bool ALLOW_SPAWNING = true;
+
     // Private attributes
     [SerializeField] private int vehicleMax;
     [SerializeField] private int occupantMax;
@@ -87,6 +90,7 @@ public class Building : MonoBehaviour
     // Spawn method
     public void SpawnTraveller()
     {
+        if(!ALLOW_SPAWNING) return;
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
         // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
