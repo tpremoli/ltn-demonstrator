@@ -43,16 +43,24 @@ public class Edge
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
         }
     }
-    public float RealDistanceToDeltaD(float len){
-        return len/this.length;
+
+    // converting between distance along edge and distance in world space
+    public float RealDistanceToDeltaD(float len)
+    {
+        return len / this.length;
     }
-    public float DeltaDToRealDistance(float len){
-        return len*this.length;
+    public float DeltaDToRealDistance(float len)
+    {
+        return len * this.length;
     }
-    public void Subscribe(WaypointMover trav){
+
+    // adds and removes travellers from the edge
+    public void Subscribe(WaypointMover trav)
+    {
         this.TravellersOnEdge.Add(trav);
     }
-    public void Unsubscribe(WaypointMover trav){
+    public void Unsubscribe(WaypointMover trav)
+    {
         this.TravellersOnEdge.Remove(trav);
     }
 
@@ -89,12 +97,16 @@ public class Edge
         return distanceFromStart + distanceFromEnd <= edgeLength + 0.2f;
     }
 
+    // returns the distance from the edge to a point
     public float DistanceToEdge(Vector3 position)
     {
         Vector3 closestPoint = this.GetClosestPoint(position);
         return Vector3.Distance(position, closestPoint);
     }
-    public Vector3 GetDirection(){
+
+    // returns the direction of the edge
+    public Vector3 GetDirection()
+    {
         Vector3 start = startWaypoint.transform.position;
         Vector3 end = endWaypoint.transform.position;
 
@@ -103,6 +115,7 @@ public class Edge
         return edgeDirection;
     }
 
+    // returns the closest point on the edge to a point
     public Vector3 GetClosestPoint(Vector3 point)
     {
         Vector3 start = startWaypoint.transform.position;
@@ -130,7 +143,10 @@ public class Edge
             return closestPointOnEdge;
         }
     }
-    public float GetClosestPointAsFractionOfEdge(Vector3 point){
+
+    // returns the closest point on the edge to a point, as a fraction of the edge
+    public float GetClosestPointAsFractionOfEdge(Vector3 point)
+    {
         Vector3 start = startWaypoint.transform.position;
         Vector3 end = endWaypoint.transform.position;
 
@@ -140,9 +156,10 @@ public class Edge
         float edgeLength = edgeDirection.magnitude;
         edgeDirection.Normalize();
 
-        return Vector3.Dot(pointDirection, edgeDirection)/edgeLength;
+        return Vector3.Dot(pointDirection, edgeDirection) / edgeLength;
     }
 
+    // returns a random point on the edge
     public Vector3 GetRandomPointOnEdge()
     {
         Vector3 start = startWaypoint.transform.position;
@@ -158,12 +175,14 @@ public class Edge
         return randomPointOnEdge;
     }
 
+    // checks if two edges are the same (i.e. have the same waypoints)
     public bool isSameEdge(Edge otherEdge)
     {
         return (this.startWaypoint == otherEdge.startWaypoint && this.endWaypoint == otherEdge.endWaypoint) ||
                (this.startWaypoint == otherEdge.endWaypoint && this.endWaypoint == otherEdge.startWaypoint);
     }
 
+    // returns the distance along the edge of a point
     public float convertToPositionAlongEdge(Vector3 point)
     {
         Vector3 start = startWaypoint.transform.position;
