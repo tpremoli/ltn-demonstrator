@@ -70,3 +70,6 @@
 # Temporary auto-generated Android Assets
 /ltn-demonstrator/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /ltn-demonstrator/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# VS files
+*.csproj
