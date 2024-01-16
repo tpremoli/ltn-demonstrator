@@ -557,8 +557,14 @@ public class WaypointMover : MonoBehaviour
     private void tracePath(Color c, float height, float thickness){
         // Draw the path from the agent's current position
         Gizmos.color = c;
-        Vector3 startPosition = currentEdge.startWaypoint.transform.position + Vector3.up*height;
-        Vector3 endPosition = currentEdge.endWaypoint.transform.position + Vector3.up*height - startPosition;
+        Vector3 startPosition = currentEdge.startWaypoint.transform.position + currentEdge.GetDirection()*this.distanceAlongEdge + Vector3.up*height;
+        Vector3 endPosition = Vector3.zero;
+        if(this.pathEdges.Count>0){
+            endPosition = currentEdge.endWaypoint.transform.position + Vector3.up*height - startPosition;
+        } else {
+            endPosition = currentEdge.GetDirection()*(this.terminalLength-this.distanceAlongEdge);
+        }
+        
         DrawArrow.ForGizmo(startPosition, endPosition, c, thickness);
 
         // Draw the path for intermediate segments
