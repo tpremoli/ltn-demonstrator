@@ -188,7 +188,7 @@ public class WaypointMover : MonoBehaviour
         updateHeading();
 
         // Attempt to register the Traveller with road
-        StartCoroutine(startCoroutine());
+        StartCoroutine(waitUntilSpawnable());
 
         // DEBUG
         //DebugDrawPath();
@@ -196,7 +196,7 @@ public class WaypointMover : MonoBehaviour
 
     // registers the traveller with the edge and makes it visible; 
     // it is necessarry for delayed spawns in case the traveller's spawn point would lead it to being inside another
-    private IEnumerator startCoroutine()
+    private IEnumerator waitUntilSpawnable()
     {
         //Calculating traveller's possition
         float myFront = this.distanceAlongEdge + hLen;
