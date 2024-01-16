@@ -119,15 +119,19 @@ public class WaypointMover : MonoBehaviour
         // Get Terminal Edge
         Edge terminalEdge = destinationBuilding.closestEdge;
         if(path.path.Count>0){
-            if(terminalEdge.StartWaypoint!=path.path[path.path.Count-1]){
-            // If the edge does not end in the correct waypoint, look for counterpart
-            terminalEdge = graph.getEdge(terminalEdge.endWaypoint, terminalEdge.startWaypoint);
-            // If counterpart does not exist, terminate
-            if (terminalEdge==null){
-                Destroy(this.gameObject);
-                return;
+                if(terminalEdge.StartWaypoint!=path.path[path.path.Count-1]){
+                // If the edge does not end in the correct waypoint, look for counterpart
+                terminalEdge = graph.getEdge(terminalEdge.endWaypoint, terminalEdge.startWaypoint);
+                // If counterpart does not exist, terminate
+                if (terminalEdge==null){
+                    Destroy(this.gameObject);
+                    return;
+                }
             }
         }
+        // If the destination is further along the same Edge, do not add the terminal edge
+        if(originEdge!=terminalEdge){
+            this.pathEdges.Add(terminalEdge);
         }
 
         // Position the traveller on the current Edge
@@ -140,12 +144,28 @@ public class WaypointMover : MonoBehaviour
             );
         // Obtain terminal location
         Vector3 terminal = destinationBuilding.closestPointOnEdge;
-        this.pathEdges.Add(terminalEdge);
         //this.terminalLength = terminalEdge.GetClosestPointAsFractionOfEdge(terminal);
         this.terminalLength = Vector3.Distance(
             terminalEdge.startWaypoint.transform.position,
             terminalEdge.GetClosestPoint(terminal)
             );
+        // If the destination is along the same edge, but in opposite direction
+        // reverse the current direction of travel, and regenerate the positions
+        if(originEdge==terminalEdge&&terminalLength<distanceAlongEdge){
+            this.currentEdge=graph.getEdge(currentEdge.endWaypoint,currentEdge.startWaypoint);
+            if (currentEdge==null){
+                Destroy(this.gameObject);
+                return;
+            }
+            this.distanceAlongEdge = Vector3.Distance(
+                this.currentEdge.startWaypoint.transform.position,
+                this.currentEdge.GetClosestPoint(this.transform.position)
+                );
+            this.terminalLength = Vector3.Distance(
+                currentEdge.startWaypoint.transform.position,
+                currentEdge.GetClosestPoint(terminal)
+                );
+        }
 
         Debug.Log("Traveller Instantiated");
         // Rotate the Traveller to align with the current edge
