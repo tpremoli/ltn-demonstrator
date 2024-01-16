@@ -10,6 +10,8 @@
 /ltn-demonstrator/[Ll]ogs/
 /ltn-demonstrator/[Uu]ser[Ss]ettings/
 
+/ltn-demonstrator/UpgradeLog.htm
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /ltn-demonstrator/[Mm]emoryCaptures/
@@ -70,3 +72,6 @@
 # Temporary auto-generated Android Assets
 /ltn-demonstrator/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /ltn-demonstrator/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# VS files
+*.csproj

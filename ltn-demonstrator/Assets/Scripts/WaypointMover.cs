@@ -4,33 +4,70 @@ using UnityEngine;
 
 public class WaypointMover : MonoBehaviour
 {
+    // Attributes controlling the object state
+    bool initialised;
     // Attributes from the Traveller class
     private float totalDistanceMoved;
-    private float positionOnEdge;
+    //private float positionOnEdge;
+    private float distanceAlongEdge;
     private float currentVelocity;
-    private float maxVelocity; // Will be assigned according to agent category enum (EdgeFunctionality)
+    private float maxVelocity = 5f; // Will be assigned according to agent category enum (EdgeFunctionality)
     private int noOfPassengers;
     private float rateOfEmission;
-
     private Building destinationBuilding;
+    // Movement controlling attributes
+    public float leftToMove
+    {
+        get; private set;
+    }
+    private float length = 0;
+    private float hLen = 0; // half-length
+    private float terminalLength;
+    private Edge currentEdge;
+    private List<WaypointMover> travsBlockedByThis;
+    private List<WaypointMover> travsBlockingThis;
+    private List<WaypointMover> CachedRejectedWaiting;
+    private List<Edge> pathEdges;
+    // Debug attributes
+    public float velocity
+    {
+        get; private set;
+    }
+    private List<WaypointMover> travsBlockedByThisDEBUG;
+    private List<WaypointMover> travsBlockingThisDEBUG;
 
     // Attributes from the WaypointMover class
-    [SerializeField] private Waypoint startingWaypoint;
-    [SerializeField] private float speed = 5f;
     [SerializeField] private float distanceThreshold = 0.1f;
     [SerializeField] private float leftLaneOffset = 1f;
 
     private WaypointPath path;           // Instance of the pathfinding class
-    private Waypoint currentWaypoint;    // Current waypoint the mover is heading towards
-    private Vector3 currentTargetPosition;
     private Graph graph;                 // Instance of the graph class
-
 
     // pick rnadom model and material
     [SerializeField] public List<GameObject> vehiclePrefabs;
-    
+
     void Start()
     {
+        // Start by making the object unready
+        this.initialised = false;
+        gameObject.GetComponent<Renderer>().enabled = false;
+        // Initialising object
+        this.pathEdges = new List<Edge>();
+        this.travsBlockedByThis = new List<WaypointMover>();
+        this.travsBlockedByThisDEBUG = new List<WaypointMover>();
+        this.travsBlockingThis = new List<WaypointMover>();
+        this.travsBlockingThisDEBUG = new List<WaypointMover>();
+
+        // Set Traveller's size
+        var r = GetComponent<Collider>();
+        if (r != null)
+        {
+            var bounds = r.bounds;
+            this.length = Mathf.Max(Mathf.Max(bounds.size.x, bounds.size.y), bounds.size.z);
+            this.hLen = length / 2;
+        }
+
+        // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
         // pick a random model and material
@@ -49,20 +86,210 @@ public class WaypointMover : MonoBehaviour
             Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
             Debug.LogWarning("End edge start: " + endEdge.StartWaypoint.name + " End edge end: " + endEdge.EndWaypoint.name);
             Destroy(this.gameObject);
+            return;
+        }
+        IEnumerator<Waypoint> iter = path.path.GetEnumerator();
+        iter.MoveNext();
+        Waypoint old_wp = null;
+        Waypoint wp = iter.Current;
+
+        // Convert the path into a list of edges
+        while (iter.MoveNext())
+        {
+            old_wp = wp;
+            wp = iter.Current;
+            Edge nextOne = this.graph.getEdge(old_wp, wp);
+            Debug.Log("Path from: " + old_wp.name + "  to: " + wp.name + "\nEdge: ");
+            if (nextOne == null)
+            {
+                Debug.LogError("There is no path connecting nodes.");
+            }
+            else
+            {
+                this.pathEdges.Add(nextOne);
+            }
+
+        }
+        // Get origin Edge
+        Edge originEdge = graph.getClosetEdge(this.transform.position);
+        if (path.path.Count > 0)
+        {
+            if (originEdge.EndWaypoint != path.path[0])
+            {
+                // If the edge does not end in the correct waypoint, look for counterpart
+                originEdge = graph.getEdge(originEdge.endWaypoint, originEdge.startWaypoint);
+                // If counterpart does not exist, terminate
+                if (originEdge == null)
+                {
+                    Destroy(this.gameObject);
+                    return;
+                }
+            }
+        }
+        // Get Terminal Edge
+        Edge terminalEdge = destinationBuilding.closestEdge;
+        if (path.path.Count > 0)
+        {
+            if (terminalEdge.StartWaypoint != path.path[path.path.Count - 1])
+            {
+                // If the edge does not end in the correct waypoint, look for counterpart
+                terminalEdge = graph.getEdge(terminalEdge.endWaypoint, terminalEdge.startWaypoint);
+                // If counterpart does not exist, terminate
+                if (terminalEdge == null)
+                {
+                    Destroy(this.gameObject);
+                    return;
+                }
+            }
+        }
+        // If the destination is further along the same Edge, do not add the terminal edge
+        if (originEdge != terminalEdge)
+        {
+            this.pathEdges.Add(terminalEdge);
         }
 
-        // Get the first waypoint in the path and set the initial position
-        currentWaypoint = path.PopNextWaypoint();
-        updateTargetPosition();
-
-        // We face the next destination (either the next waypoint or the destination)
-        faceNextDestinationInit();
-        moveToLeftLaneInit();
+        // Position the traveller on the current Edge
+        this.currentEdge = originEdge;
+        //this.currentEdge.Subscribe(this); // Delegated to coroutine
+        //this.positionOnEdge = this.currentEdge.GetClosestPointAsFractionOfEdge(this.transform.position);
+        this.distanceAlongEdge = Vector3.Distance(
+            this.currentEdge.startWaypoint.transform.position,
+            this.currentEdge.GetClosestPoint(this.transform.position)
+            );
+        // Obtain terminal location
+        Vector3 terminal = destinationBuilding.closestPointOnEdge;
+        //this.terminalLength = terminalEdge.GetClosestPointAsFractionOfEdge(terminal);
+        this.terminalLength = Vector3.Distance(
+            terminalEdge.startWaypoint.transform.position,
+            terminalEdge.GetClosestPoint(terminal)
+            );
+        // If the destination is along the same edge, but in opposite direction
+        // reverse the current direction of travel, and regenerate the positions
+        if (originEdge == terminalEdge && terminalLength < distanceAlongEdge)
+        {
+            this.currentEdge = graph.getEdge(currentEdge.endWaypoint, currentEdge.startWaypoint);
+            if (currentEdge == null)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+            this.distanceAlongEdge = Vector3.Distance(
+                this.currentEdge.startWaypoint.transform.position,
+                this.currentEdge.GetClosestPoint(this.transform.position)
+                );
+            this.terminalLength = Vector3.Distance(
+                currentEdge.startWaypoint.transform.position,
+                currentEdge.GetClosestPoint(terminal)
+                );
+        }
 
         Debug.Log("Traveller Instantiated");
-        DebugDrawPath();
+        // Rotate the Traveller to align with the current edge
+        updateHeading();
+
+        // Attempt to register the Traveller with road
+        StartCoroutine(waitUntilSpawnable());
+
+        // DEBUG
+        //DebugDrawPath();
     }
 
+    // registers the traveller with the edge and makes it visible; 
+    // it is necessarry for delayed spawns in case the traveller's spawn point would lead it to being inside another
+    private IEnumerator waitUntilSpawnable()
+    {
+        //Calculating traveller's possition
+        float myFront = this.distanceAlongEdge + hLen;
+        float myRear = this.distanceAlongEdge - hLen;
+
+        bool collided = true;
+        while (collided)
+        {
+            collided = false;
+            // COLLISION CHECK
+            // Check for collision at that point in the edge with every traveller present on the edge
+            foreach (WaypointMover wp in currentEdge.TravellersOnEdge)
+            {
+                if (wp == this) continue;
+                //Calculate position of other traveller on the edge in Real units
+                float wpPOEReal = wp.distanceAlongEdge;
+                //Calculate position of
+                float wpFront = wpPOEReal + wp.hLen + 0.5f;
+                float wpRear = wpPOEReal - wp.hLen - 0.5f;
+
+                // Check whether this' front would end up within the vehicle
+                if (myFront <= wpFront && myFront >= wpRear)
+                {
+                    // Collision occurred
+                    // re-loop
+                    collided = true;
+                    break;
+                }
+
+                // Check whether this' rear would end up within a vehilce
+                if (myRear <= wpFront && myRear >= wpRear)
+                {
+                    // collision occurred
+
+                    // re-loop
+                    collided = true;
+                    break;
+                }
+            }
+            if (collided)
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        // Registering the traveller with edge and allowing movement
+        this.currentEdge.Subscribe(this);
+        this.initialised = true;
+        gameObject.GetComponent<Renderer>().enabled = true;
+
+        Debug.Log("Traveller initialised - safe travels!");
+    }
+
+    // registers another traveller with this one to be notified in case this one moves.
+    private void registerForMove(WaypointMover trav)
+    {
+        // check that trav only gets added if it is not within the list already
+        foreach (WaypointMover wp in this.CachedRejectedWaiting)
+        {
+            if (wp == trav)
+            {
+                return;
+            }
+        }
+        // Check that there are no cycles
+        List<WaypointMover> visited = new List<WaypointMover>();
+        List<WaypointMover> toCheck = new List<WaypointMover>();
+        toCheck.Add(this);
+
+        while (toCheck.Count > 0)
+        {
+            foreach (WaypointMover wp in toCheck[0].travsBlockingThis)
+            {
+                if (visited.Contains(wp))
+                {
+                    continue;
+                }
+                if (wp == trav)
+                {
+                    this.CachedRejectedWaiting.Add(trav);
+                    return;
+                }
+                toCheck.Add(wp);
+            }
+            visited.Add(toCheck[0]);
+            toCheck.RemoveAt(0);
+        }
+
+        this.travsBlockedByThis.Add(trav);
+        this.CachedRejectedWaiting.Add(trav);
+    }
+
+    // visually draws the path with gizmos
     void DebugDrawPath()
     {
         if (path != null && path.path != null && path.path.Count > 0)
@@ -83,14 +310,17 @@ public class WaypointMover : MonoBehaviour
         }
     }
 
+
     // Choose a random destination from the possible buildings in the grid.
-    public void chooseDestinationBuilding() {
+    public void chooseDestinationBuilding()
+    {
         // Get list of buildings.
         // Choose random destination building.
         destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
 
         // Edge case where the chosen building is the same as the building the traveller spawned at.
-        while (Vector3.Distance(this.transform.position, destinationBuilding.closestPointOnEdge) < distanceThreshold) {
+        while (Vector3.Distance(this.transform.position, destinationBuilding.closestPointOnEdge) < distanceThreshold)
+        {
             // Choose new random destination building.
             destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
         }
@@ -98,140 +328,221 @@ public class WaypointMover : MonoBehaviour
 
     void Update()
     {
-        // Move towards the target position using linear interpolation
-        transform.position = Vector3.MoveTowards(transform.position, currentTargetPosition, speed * Time.deltaTime);
-
-        // Check the distance to the target position
-        if (Vector3.Distance(transform.position, currentTargetPosition) < distanceThreshold)
+        //Make sure the logic is only called if the Traveller was initialised
+        if (initialised)
         {
-            if (currentWaypoint != null)
+            Vector3 positionAtTheStart = new Vector3(
+                this.transform.position.x,
+                this.transform.position.y,
+                this.transform.position.z
+            );
+
+            // Calculate distance covered between frames
+            this.leftToMove = this.maxVelocity * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
+            Move();
+            this.velocity = Vector3.Distance(positionAtTheStart, this.transform.position);
+        }
+    }
+
+    // prepares the traveller for next frame
+    void LateUpdate()
+    {
+        // Make backups for debug visualisation
+        foreach (WaypointMover trav in this.travsBlockedByThis)
+        {
+            travsBlockedByThisDEBUG.Add(trav);
+        }
+        foreach (WaypointMover trav in this.travsBlockingThis)
+        {
+            travsBlockingThisDEBUG.Add(trav);
+        }
+        // Renew the logic
+        this.travsBlockedByThis = new List<WaypointMover>();
+        this.travsBlockingThis = new List<WaypointMover>();
+        this.CachedRejectedWaiting = new List<WaypointMover>();
+
+        if (initialised)
+        {
+            UpdatePosition();
+        }
+    }
+
+    // updates the traveller's position along the edge
+    void UpdatePosition()
+    {
+        // ~~~~~
+        // edge_origin * (1-positionOnEdge) + edge_end * positionOnEdge
+        //Vector3 newPosition = this.currentEdge.StartWaypoint.transform.position*(1-this.positionOnEdge) + this.currentEdge.EndWaypoint.transform.position*(this.positionOnEdge);
+
+        // Move the object's transform to:
+        // edge_origin + edge_diraction * distanceAlongEdge
+        Vector3 newPosition =
+            this.currentEdge.StartWaypoint.transform.position
+            + this.currentEdge.GetDirection() * distanceAlongEdge;
+        // Add offset to the new position to no be in the middle of the road
+        newPosition = newPosition + this.leftLaneOffset * Vector3.Cross(Vector3.up, this.currentEdge.GetDirection());
+        // Update the object's position
+        transform.position = newPosition;
+    }
+
+    // updates the traveller's heading to match the edge's direction
+    private void updateHeading()
+    {
+        Vector3 direction = this.currentEdge.GetDirection();
+        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+        transform.rotation = rotation;
+    }
+
+    // moves the traveller along the edge. Check the trello card for specifics on how this works.
+    private void Move()
+    {
+        // Check if Traveller has moved to the end of its edge
+        float proposedMovement = this.leftToMove;
+        // Check for collisions at the new location
+        bool proposalAccepted = false;
+        while (!proposalAccepted)
+        {
+            proposalAccepted = true;
+            if (proposedMovement < 0)
             {
-                // this change in transform position is kinda dirty, but it works.
-                // it essentially ensures all caluclations on direction & lanes are done relative to the original edges.
-                transform.position = currentWaypoint.transform.position;
-                faceNextDestination();
-                moveToLeftLane();
-                currentWaypoint = path.PopNextWaypoint();
-                updateTargetPosition();
+                proposedMovement = 0;
+                break;
             }
-            else
+            // Determine which Edge the Traveller ends up on, and how much movement it uses up in the process
+            float TravelledOverEdges = 0;
+            Edge terminalEdge = this.currentEdge;
+            float offset = this.distanceAlongEdge;
+
+            // Check whether proposed movement exceeds this edge
+            //if(proposedMovement>(this.currentEdge.Distance*(1-this.positionOnEdge))){
+            if (proposedMovement > (this.currentEdge.Distance - this.distanceAlongEdge))
             {
-                // If we're close enough to the destination and there's no waypoint, destroy the object
-                arriveToDestination();
-                updateTargetPosition();
+                offset = 0;
+                // Add the current edge to the distance TravelledOverEdges
+                TravelledOverEdges += (this.currentEdge.Distance - this.distanceAlongEdge);
+                // Calculate how much the Traveller travels over subsequent edges
+                IEnumerator<Edge> iter = this.pathEdges.GetEnumerator();
+                if (!iter.MoveNext())
+                {
+                    // Check whether there is a next edge, if not, the Traveller has reached its destination
+                    this.currentEdge.Unsubscribe(this);
+                    arriveToDestination();
+                }
+                // Calculate distance Travelled over subsequent Edges
+                while (iter.Current.Distance < proposedMovement - TravelledOverEdges)
+                {
+                    TravelledOverEdges += iter.Current.Distance;
+                    if (!iter.MoveNext())
+                    {
+                        // Check whether there is a next edge, if not, the Traveller has reached its destination
+                        this.currentEdge.Unsubscribe(this);
+                        arriveToDestination();
+                    }
+                }
+                terminalEdge = iter.Current;
+            }
+            // Determine how much movement in Edge the Traveller has left upon entering the edge
+            float TravelledInEdge = proposedMovement - TravelledOverEdges;
+            //Calculate position of
+            float myFront = TravelledInEdge + hLen + offset;
+            float myRear = TravelledInEdge - hLen + offset;
+
+            // collisION CHECK
+            // Check for collision at that point in the edge with every traveller present on the edge
+            foreach (WaypointMover wp in terminalEdge.TravellersOnEdge)
+            {
+                if (wp == this) continue;
+                //Calculate position of other traveller on the edge in Real units
+                float wpPOEReal = wp.distanceAlongEdge;
+                //Calculate position of
+                float wpFront = wpPOEReal + wp.hLen;
+                float wpRear = wpPOEReal - wp.hLen;
+
+                // Check whether this' front would end up within the vehicle
+                if (myFront <= wpFront && myFront >= wpRear)
+                {
+                    // Collision occurred
+                    // Reduce proposed movement
+                    proposedMovement -= myFront - wpRear + 0.01f;
+
+                    // register for notification
+                    this.travsBlockingThis.Add(wp);
+                    wp.registerForMove(this);
+
+                    // and re-loop
+                    proposalAccepted = false;
+                    break;
+                }
+
+                // Check whether this' rear would end up within a vehilce
+                if (myRear <= wpFront && myRear >= wpRear)
+                {
+                    // collision occurred
+                    // Reduce proposed movement
+                    proposedMovement -= myFront - wpRear + 0.0001f;
+
+                    // register for notification
+                    this.travsBlockingThis.Add(wp);
+                    wp.registerForMove(this);
+
+                    // and re-loop
+                    proposalAccepted = false;
+                    break;
+                }
+            }
+            // No collision occurred, the proposed movement is accepted
+        }
+        // Beginning to carry out proposed movement
+        this.leftToMove -= proposedMovement;
+        bool escapedEdge = false;
+        // Keep switching edges until the proposed movement is insufficient to escape the edge
+        while (proposedMovement > (this.currentEdge.Distance - this.distanceAlongEdge))
+        {
+            proposedMovement -= this.currentEdge.Distance - this.distanceAlongEdge;
+            // Exit current edge
+            this.currentEdge.Unsubscribe(this);
+            // Enter new edge
+            this.currentEdge = this.pathEdges[0];
+            this.pathEdges.RemoveAt(0);
+            this.currentEdge.Subscribe(this);
+            //this.positionOnEdge = 0;
+            this.distanceAlongEdge = 0;
+            // Set the variable
+            escapedEdge = true;
+        }
+        this.distanceAlongEdge += proposedMovement;
+        // Proposed movement carried out
+
+        // Rotate the traveller if it changed an edge
+        if (escapedEdge)
+        {
+            updateHeading();
+        }
+
+        // Check for arriving to destination
+        if (this.pathEdges.Count == 0 && this.distanceAlongEdge >= this.terminalLength)
+        {
+            this.currentEdge.Unsubscribe(this);
+            arriveToDestination();
+        }
+        bool finished = false;
+        while (!finished)
+        {
+            try
+            {
+                // Call Move() on all Travellers waiting to Move
+                foreach (WaypointMover trav in this.travsBlockedByThis)
+                {
+                    trav.Move();
+                }
+                finished = true;
+            }
+            catch
+            {
+
             }
         }
     }
-
-    private void updateTargetPosition()
-    {
-        // converts the current target position to the left of the line between waypoints
-        Vector3 nextPosition =  currentWaypoint == null ? path.destinationPos : currentWaypoint.transform.position;
-        Vector3 nextMoveDirection = nextPosition - transform.position;
-        nextMoveDirection.Normalize();
-        Vector3 leftVector = new Vector3(-nextMoveDirection.z, 0, nextMoveDirection.x);
-        currentTargetPosition = nextPosition + leftVector * leftLaneOffset;
-    }
-
-    private void faceNextDestination()
-    {   
-        // Calculate the next destination location (either the next waypoint or the destination)
-        Vector3 nextDestination = calcNextDestination();
-
-        // Calculate the arrow direction from the current position to the next destination
-        Vector3 arrowDirection = nextDestination - transform.position;
-
-        // Normalize the arrow direction to ensure a consistent offset magnitude
-        arrowDirection.Normalize();
-
-        // Calculate the offset position based on the arrow direction
-        Vector3 offsetPosition = nextDestination - arrowDirection * leftLaneOffset;
-
-        // Rotate towards the offset position
-        transform.LookAt(offsetPosition);
-    }
-
-    private void faceNextDestinationInit()
-    {
-        // this isn't a method as it's different to the above method
-        Vector3 nextDestination;
-        if (currentWaypoint == null)
-        {
-            // If the next waypoint is null, we face destination
-            nextDestination = path.destinationPos;
-        }
-        else
-        {
-            // Otherwise, we face the next waypoint
-            nextDestination = currentWaypoint.transform.position;
-        }
-
-        // Calculate the arrow direction from the current position to the next destination
-        Vector3 arrowDirection = nextDestination - transform.position;
-
-        // Normalize the arrow direction to ensure a consistent offset magnitude
-        arrowDirection.Normalize();
-
-        // Calculate the offset position based on the arrow direction
-        Vector3 offsetPosition = nextDestination - arrowDirection * leftLaneOffset;
-
-        // Rotate towards the offset position
-        transform.LookAt(offsetPosition);
-    }
-
-
-    private void moveToLeftLane()
-    {
-        // Calculate the next destination location (either the next waypoint or the destination)
-        Vector3 nextLocation = calcNextDestination();
-        
-        // we want to offset the position to the left, to simulate the agent being on the left side of the road
-        Vector3 nextMoveDirection = nextLocation - transform.position;
-        nextMoveDirection.Normalize();
-        Vector3 leftVector = new Vector3(-nextMoveDirection.z, 0, nextMoveDirection.x);
-
-        // Set the new position to the left of the line between waypoints
-        transform.position = currentWaypoint.transform.position + leftVector * leftLaneOffset;
-    }
-
-    private void moveToLeftLaneInit()
-    {
-        Waypoint nextWaypoint = path.PeekNextWaypoint();
-        Vector3 nextLocation;
-        if (nextWaypoint == null)
-        {
-            // If the next waypoint is null, we face destination
-            nextLocation = path.destinationPos;
-        }
-        else
-        {
-            // Otherwise, we face the next waypoint
-            nextLocation = nextWaypoint.transform.position;
-        }
-        // we want to offset the position to the left, to simulate the agent being on the left side of the road
-        Vector3 nextMoveDirection = nextLocation - transform.position;
-        nextMoveDirection.Normalize();
-        Vector3 leftVector = new Vector3(-nextMoveDirection.z, 0, nextMoveDirection.x);
-
-        // Set the new position to the left of the line between waypoints
-        transform.position = transform.position + leftVector * leftLaneOffset;
-    }
-    private Vector3 calcNextDestination(){
-        Waypoint nextWaypoint = path.PeekNextWaypoint();
-        Vector3 nextDestination;
-        if (nextWaypoint == null)
-        {
-            // If the next waypoint is null, we face destination
-            nextDestination = path.destinationPos;
-        }
-        else
-        {
-            // Otherwise, we face the next waypoint
-            nextDestination = nextWaypoint.transform.position;
-        }
-        return nextDestination;
-    }
-
 
     public void arriveToDestination()
     {
@@ -247,21 +558,11 @@ public class WaypointMover : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (Application.isPlaying)
+        if (Application.isPlaying && !(path == null))
         {
             // Draw the destination sphere
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(path.destinationPos, 1f);
-            if (currentWaypoint != null)
-            {
-                // Draw the current waypoint sphere
-                Gizmos.DrawSphere(currentWaypoint.transform.position, 1f);
-            }
-
-            // Draw the path from the agent's current position
-            Gizmos.color = Color.yellow;
-
-            Vector3 startPosition = currentWaypoint != null ? currentWaypoint.transform.position : transform.position; // Use the agent's position if the currentWaypoint is null
 
             if (path.path.Count > 0)
             {
@@ -270,23 +571,103 @@ public class WaypointMover : MonoBehaviour
                 {
                     // Draw a sphere for each waypoint
                     Gizmos.DrawSphere(waypoint.transform.position, 1f);
-
-                    // Draw an arrow from the start position to the current waypoint
-                    DrawArrow.ForGizmo(startPosition + Vector3.up, (waypoint.transform.position - startPosition) + Vector3.up, Color.yellow, 1f);
-
-                    // Update the start position
-                    startPosition = waypoint.transform.position;
                 }
             }
 
-            // Always draw an arrow to the destination from the current position or last waypoint
-            DrawArrow.ForGizmo(startPosition + Vector3.up, (path.destinationPos - startPosition) + Vector3.up, Color.yellow, 1f);
+            // Draw the path from the agent's current position
+            tracePath(Color.yellow, 1f, 1f);
+
+            if (this.travsBlockedByThisDEBUG.Count > 0)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(transform.position + Vector3.up * 3, 0.5f);
+                //this.travsBlockedByThisDEBUG = new List<WaypointMover>();
+            }
+        }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        if (Application.isPlaying && !(path == null))
+        {
+            // Draw the destination sphere
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(path.destinationPos, 1f);
+
+            if (path.path.Count > 0)
+            {
+                // Iterate through the remaining waypoints
+                foreach (var waypoint in path.path)
+                {
+                    // Draw a sphere for each waypoint
+                    Gizmos.DrawSphere(waypoint.transform.position, 1f);
+                }
+            }
+
+            // Draw arrow to vehicles collided with
+            Gizmos.color = Color.magenta;
+            travsBlockingThisDEBUG.RemoveAll(item => item == null);
+            Vector3 startPosition = this.transform.position + Vector3.up * 4;
+            foreach (WaypointMover wp in travsBlockingThisDEBUG)
+            {
+                Vector3 endPosition = wp.transform.position + Vector3.up * 4;//- startPosition
+                Gizmos.DrawLine(startPosition, endPosition);
+            }
+            // this.travsBlockingThisDEBUG = new List<WaypointMover>();
+
+            // Draw the path from the agent's current position
+            tracePath(Color.red, 2f, 10f);
+
+            // Draw vehicle's collider box
+            Gizmos.color = Color.blue;
+            Vector3 position =
+                this.currentEdge.startWaypoint.transform.position
+                + this.currentEdge.GetDirection() * this.distanceAlongEdge;
+            Gizmos.DrawWireCube(position, new Vector3(this.hLen * 2, this.hLen * 2, this.hLen * 2));
+        }
+        //debugText();
+    }
+
+    private void tracePath(Color c, float height, float thickness)
+    {
+        // Draw the path from the agent's current position
+        Gizmos.color = c;
+        Vector3 startPosition = currentEdge.startWaypoint.transform.position + currentEdge.GetDirection() * this.distanceAlongEdge + Vector3.up * height;
+        Vector3 endPosition = Vector3.zero;
+        if (this.pathEdges.Count > 0)
+        {
+            endPosition = currentEdge.endWaypoint.transform.position + Vector3.up * height - startPosition;
+        }
+        else
+        {
+            endPosition = currentEdge.GetDirection() * (this.terminalLength - this.distanceAlongEdge);
+        }
+
+        DrawArrow.ForGizmo(startPosition, endPosition, c, thickness);
+
+        // Draw the path for intermediate segments
+        if (this.pathEdges.Count > 1)
+        {
+            foreach (Edge edge in this.pathEdges.GetRange(0, this.pathEdges.Count - 1))
+            {
+                startPosition = edge.startWaypoint.transform.position + Vector3.up * height;
+                endPosition = edge.endWaypoint.transform.position + Vector3.up * height - startPosition;
+                DrawArrow.ForGizmo(startPosition, endPosition, c, thickness);
+            }
+        }
+        // Draw the final segment if it exists
+        if (this.pathEdges.Count > 0)
+        {
+            Edge e = this.pathEdges[this.pathEdges.Count - 1];
+            startPosition = e.startWaypoint.transform.position + Vector3.up * height;
+            endPosition = e.GetDirection() * this.terminalLength;
+            DrawArrow.ForGizmo(startPosition, endPosition, c, thickness);
         }
     }
 
-    private void pickRandomModelAndMaterial(){
+    private void pickRandomModelAndMaterial()
+    {
         // Randomly select a model and material
-        GameObject selectedPrefab = vehiclePrefabs[Random.Range(0, vehiclePrefabs.Count-1)];
+        GameObject selectedPrefab = vehiclePrefabs[Random.Range(0, vehiclePrefabs.Count - 1)];
 
         // Retrieve the MeshRenderer and MeshFilter of the selected prefab
         MeshRenderer selectedMeshRenderer = selectedPrefab.GetComponent<MeshRenderer>();

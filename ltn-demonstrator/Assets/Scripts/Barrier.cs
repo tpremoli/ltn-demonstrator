@@ -9,17 +9,17 @@ public class Barrier : MonoBehaviour
     {
 
     }
-    
+
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public bool isPointInBarrier(Vector3 point)
     {
         Collider barrierCollider = GetComponent<Collider>();
-        if(barrierCollider == null)
+        if (barrierCollider == null)
         {
             return false;
         }
@@ -27,4 +27,4 @@ public class Barrier : MonoBehaviour
         // Check if the point is within the barrier's collider
         return barrierCollider.bounds.Contains(point);
     }
-    }
+}
