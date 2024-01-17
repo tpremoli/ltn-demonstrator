@@ -9,7 +9,7 @@ public enum VehicleTypes
     Taxi
 }
 
-public class VehicleType
+public class VehicleTypeProperties
 {
     public VehicleTypes Type;
     private float maxVelocity;
@@ -57,11 +57,11 @@ public class VehicleType
         }
     }
 
-    public VehicleType(VehicleTypes type)
+    public VehicleTypeProperties(VehicleTypes type)
     {
         this.Type = type;
     }
-    public VehicleType()
+    public VehicleTypeProperties()
     {
         VehicleTypes type;
         Array values = Enum.GetValues(typeof(VehicleTypes));

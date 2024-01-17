@@ -8,7 +8,7 @@ public class WaypointMover : MonoBehaviour
     bool initialised;   // Controls whether object has been initialised and should begin travelling
 
     // Attributes controlling vehicle's type
-    VehicleType vType;
+    VehicleTypeProperties vType;
 
     // Statistic measures
     private float totalDistanceMoved;
