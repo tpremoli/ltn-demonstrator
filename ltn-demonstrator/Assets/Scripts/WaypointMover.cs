@@ -5,36 +5,40 @@ using UnityEngine;
 public class WaypointMover : MonoBehaviour
 {
     // Attributes controlling the object state
-    bool initialised;
-    // Attributes from the Traveller class
+    bool initialised;   // Controls whether object has been initialised and should begin travelling
+
+    // Attributes controlling vehicle's type
+    VehicleType vType;
+
+    // Statistic measures
     private float totalDistanceMoved;
-    //private float positionOnEdge;
-    private float distanceAlongEdge;
-    private float currentVelocity;
-    private float maxVelocity = 5f; // Will be assigned according to agent category enum (EdgeFunctionality)
-    private int noOfPassengers;
-    private float rateOfEmission;
-    private Building destinationBuilding;
-    // Movement controlling attributes
-    public float leftToMove
+
+    // Attribute serving movement
+    public float leftToMove // Control how much the traveller has left to move in this frame
     {
         get; private set;
     }
-    private float length = 0;
-    private float hLen = 0; // half-length
-    private float terminalLength;
-    private Edge currentEdge;
-    private List<WaypointMover> travsBlockedByThis;
-    private List<WaypointMover> travsBlockingThis;
-    private List<WaypointMover> CachedRejectedWaiting;
-    private List<Edge> pathEdges;
-    // Debug attributes
+    private float distanceAlongEdge;    // Controls how far along current edge the traveller is
+    private float terminalLength;       // Controls how far along the last edge in pathEdges / currentEdge if the previous is empty the terminal destination is
+    private Edge currentEdge;           // Controls which edge the traveller currently occupies
+    private List<Edge> pathEdges;       // List of edges the traveller needs to travel
+
+    // Attributes serving collissions
+    private List<WaypointMover> travsBlockedByThis;     // List of travellers prevented from moving by this traveller
+    private List<WaypointMover> travsBlockingThis;      // List of travellers preventing this traveller from moving
+    private List<WaypointMover> CachedRejectedWaiting;  // Travellers that should be declines from addition to travsBlockedByThis
+    private float length = 0;                           // The length of the edge the traveller occupies
+    private float hLen = 0;                             // half-length
+
+    // Debug attributes - velocity & velocity calculation
     public float velocity
     {
         get; private set;
     }
     private Edge edgeAtFrameBeginning;
     private float distanceAlongEdgeAtFrameBeginning; 
+
+    // Debug attributes - collissions
     private List<WaypointMover> travsBlockedByThisDEBUG;
     private List<WaypointMover> travsBlockingThisDEBUG;
 
@@ -42,10 +46,12 @@ public class WaypointMover : MonoBehaviour
     [SerializeField] private float distanceThreshold = 0.1f;
     [SerializeField] private float leftLaneOffset = 1f;
 
+    // Attributes for pathfinding
     private WaypointPath path;           // Instance of the pathfinding class
     private Graph graph;                 // Instance of the graph class
+    private Building destinationBuilding;
 
-    // pick rnadom model and material
+    // pick random model and material
     [SerializeField] public List<GameObject> vehiclePrefabs;
 
     void Start()
@@ -53,12 +59,17 @@ public class WaypointMover : MonoBehaviour
         // Start by making the object unready
         this.initialised = false;
         gameObject.GetComponent<Renderer>().enabled = false;
+
         // Initialising object
         this.pathEdges = new List<Edge>();
         this.travsBlockedByThis = new List<WaypointMover>();
         this.travsBlockedByThisDEBUG = new List<WaypointMover>();
         this.travsBlockingThis = new List<WaypointMover>();
         this.travsBlockingThisDEBUG = new List<WaypointMover>();
+
+        // pick a random model and material
+        this.vType = pickRandomVehicleType();
+        pickRandomModelAndMaterial();
 
         // Set Traveller's size
         var r = GetComponent<Collider>();
@@ -71,9 +82,6 @@ public class WaypointMover : MonoBehaviour
 
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
-
-        // pick a random model and material
-        pickRandomModelAndMaterial();
 
         chooseDestinationBuilding();
 
@@ -337,7 +345,7 @@ public class WaypointMover : MonoBehaviour
         if (initialised)
         {
             // Calculate distance covered between frames
-            this.leftToMove = this.maxVelocity * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
+            this.leftToMove = this.vType.MaxVelocity * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
             Move();
         }
     }
@@ -460,7 +468,7 @@ public class WaypointMover : MonoBehaviour
             float myFront = TravelledInEdge + hLen + offset;
             float myRear = TravelledInEdge - hLen + offset;
 
-            // collisION CHECK
+            // COLLISSION CHECK
             // Check for collision at that point in the edge with every traveller present on the edge
             foreach (WaypointMover wp in terminalEdge.TravellersOnEdge)
             {
@@ -507,6 +515,7 @@ public class WaypointMover : MonoBehaviour
         }
         // Beginning to carry out proposed movement
         this.leftToMove -= proposedMovement;
+        this.totalDistanceMoved+=proposedMovement;
         bool escapedEdge = false;
         // Keep switching edges until the proposed movement is insufficient to escape the edge
         while (proposedMovement > (this.currentEdge.Distance - this.distanceAlongEdge))
@@ -566,7 +575,7 @@ public class WaypointMover : MonoBehaviour
     public float calculateEmissions()
     {
         // Calculate emissions using the rateOfEmission attribute and totalDistanceMoved
-        return rateOfEmission * totalDistanceMoved;
+        return this.vType.RateOfEmission * totalDistanceMoved;
     }
 
     private void OnDrawGizmos()
@@ -675,6 +684,9 @@ public class WaypointMover : MonoBehaviour
             endPosition = e.GetDirection() * this.terminalLength;
             DrawArrow.ForGizmo(startPosition, endPosition, c, thickness);
         }
+    }
+    private VehicleType pickRandomVehicleType(){
+        return new VehicleType();
     }
 
     private void pickRandomModelAndMaterial()

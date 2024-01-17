@@ -1,82 +1,144 @@
+using UnityEngine;
+using System;
 public class VehicleType
 {
     private VehicleTypes type;
+    private float maxVelocity;
+    public float MaxVelocity{
+        get{
+            if (maxVelocity==0){
+                maxVelocity = this.getBaseMaxVelocity();
+                // vary up to the variance value
+                maxVelocity-= this.getVelocityVariance();
+                maxVelocity+= this.getVelocityVariance()*2*UnityEngine.Random.value;
+                
+            }
+            return maxVelocity;
+        }
+    }
+    public float Accelertion{
+        get{
+            return getAcceleration();
+        }
+    }
+    public float Deaccelertion{
+        get{
+            return getDeacceleration();
+        }
+    }
+    public float RateOfEmission{
+        get{
+            return getRateOfEmmision();
+        }
+    }
+    public int MaxNumberOfPassangers{
+        get{
+            return getMaxNumberOfPassangers();
+        }
+    }
 
     public VehicleType(VehicleTypes type)
     {
         this.type = type;
     }
-
-    public enum VehicleTypes
-    {
-        Pedestrian,
-        Bicycle,
-        Car,
-        Van,
-        Truck,
-        Bus
+    public VehicleType(){
+        VehicleTypes type;
+        Array values = Enum.GetValues(typeof(VehicleTypes));
+        type = (VehicleTypes)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        this.type=type;
     }
-
-    public float MaxVelocity()
-    {
+    private float getBaseMaxVelocity(){
         switch (type)
         {
-            case VehicleTypes.Pedestrian:
-                return 5.0f;
-            case VehicleTypes.Bicycle:
-                return 15.0f;
-            case VehicleTypes.Car:
-                return 120.0f;
+            case VehicleTypes.PersonalCar:
+                return 5f;
+            case VehicleTypes.SUV:
+                return 4.2f;
             case VehicleTypes.Van:
-                return 80.0f;
-            case VehicleTypes.Truck:
-                return 60.0f;
-            case VehicleTypes.Bus:
-                return 50.0f;
+                return 4.5f;
+            case VehicleTypes.Taxi:
+                return 4.8f;
             default:
                 return 0.0f;
         }
     }
-
-    public int MaxPassengers()
-    {
+    private float getVelocityVariance(){
         switch (type)
         {
-            case VehicleTypes.Pedestrian:
-                return 1;
-            case VehicleTypes.Bicycle:
-                return 1;
-            case VehicleTypes.Car:
-                return 5;
+            case VehicleTypes.PersonalCar:
+                return 1.0f;
+            case VehicleTypes.SUV:
+                return 0.6f;
             case VehicleTypes.Van:
-                return 8;
-            case VehicleTypes.Truck:
+                return 0.5f;
+            case VehicleTypes.Taxi:
+                return 0.2f;
+            default:
+                return 0.0f;
+        }
+    }
+    private float getAcceleration(){
+        switch (type)
+        {
+            case VehicleTypes.PersonalCar:
+                return 1.0f;
+            case VehicleTypes.SUV:
+                return 0.5f;
+            case VehicleTypes.Van:
+                return 0.25f;
+            case VehicleTypes.Taxi:
+                return 1.0f;
+            default:
+                return 0.0f;
+        }
+    }
+    private float getDeacceleration(){
+        switch(type){
+            case VehicleTypes.PersonalCar:
+                return 2.5f;
+            case VehicleTypes.SUV:
+                return 2.5f;
+            case VehicleTypes.Van:
+                return 2.0f;
+            case VehicleTypes.Taxi:
+                return 2.5f;
+            default:
+                return 0.0f;
+        }
+    }
+    private float getRateOfEmmision(){
+        switch(type){
+            case VehicleTypes.PersonalCar:
+                return 1.0f;
+            case VehicleTypes.SUV:
+                return 1.2f;
+            case VehicleTypes.Van:
+                return 1.4f;
+            case VehicleTypes.Taxi:
+                return 1.0f;
+            default:
+                return 0.0f;
+        }
+    }
+    private int getMaxNumberOfPassangers(){
+        switch(type){
+            case VehicleTypes.PersonalCar:
+                return 4;
+            case VehicleTypes.SUV:
+                return 6;
+            case VehicleTypes.Van:
                 return 2;
-            case VehicleTypes.Bus:
-                return 30;
+            case VehicleTypes.Taxi:
+                return 3;
             default:
                 return 0;
         }
     }
-
-    public int WeightClass()
+    public enum VehicleTypes
     {
-        switch (type)
-        {
-            case VehicleTypes.Pedestrian:
-                return 1;
-            case VehicleTypes.Bicycle:
-                return 1;
-            case VehicleTypes.Car:
-                return 5;
-            case VehicleTypes.Van:
-                return 8;
-            case VehicleTypes.Truck:
-                return 2;
-            case VehicleTypes.Bus:
-                return 30;
-            default:
-                return 0;
-        }
+        PersonalCar,
+        SUV,
+        Van,
+        Taxi
     }
 }

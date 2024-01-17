@@ -781,6 +781,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17593400}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &22256513 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+  m_PrefabInstance: {fileID: 1951576117}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &24914733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
@@ -24455,7 +24460,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1601751049}
     m_Modifications:
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
@@ -34386,118 +34391,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypointSize: 1
   edges:
-  - startWaypoint: {fileID: 954155280}
-    endWaypoint: {fileID: 362348763}
-    length: 23.249165
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1958116738}
-    endWaypoint: {fileID: 1734571836}
-    length: 18.728
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1663682655}
-    endWaypoint: {fileID: 1747004897}
-    length: 18.001225
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 362348763}
-    endWaypoint: {fileID: 1734571836}
-    length: 2.9593575
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 362348763}
-    endWaypoint: {fileID: 954155280}
-    length: 23.249165
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 362348763}
-    endWaypoint: {fileID: 1747004897}
-    length: 2.4534853
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 362348763}
-    endWaypoint: {fileID: 1747004897}
-    length: 2.4534853
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 362348763}
-    endWaypoint: {fileID: 1406318196}
-    length: 3.7282276
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1734571836}
-    endWaypoint: {fileID: 1406318196}
-    length: 2.686722
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1734571836}
-    endWaypoint: {fileID: 362348763}
-    length: 2.9593575
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1734571836}
-    endWaypoint: {fileID: 1958116738}
-    length: 18.728
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1734571836}
-    endWaypoint: {fileID: 1747004897}
-    length: 3.705265
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1747004897}
-    endWaypoint: {fileID: 1406318196}
-    length: 2.4410048
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1747004897}
-    endWaypoint: {fileID: 1663682655}
-    length: 18.001225
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1747004897}
-    endWaypoint: {fileID: 362348763}
-    length: 2.4534853
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
-  - startWaypoint: {fileID: 1747004897}
-    endWaypoint: {fileID: 1734571836}
-    length: 3.705265
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
   - startWaypoint: {fileID: 149555550}
     endWaypoint: {fileID: 1248626347}
     length: 44.71353
@@ -34592,6 +34485,41 @@ MonoBehaviour:
   - startWaypoint: {fileID: 349872977}
     endWaypoint: {fileID: 623191394}
     length: 40.30012
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 362348763}
+    endWaypoint: {fileID: 1734571836}
+    length: 2.9593575
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 362348763}
+    endWaypoint: {fileID: 954155280}
+    length: 23.249165
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 362348763}
+    endWaypoint: {fileID: 1747004897}
+    length: 2.4534853
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 362348763}
+    endWaypoint: {fileID: 1747004897}
+    length: 2.4534853
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 362348763}
+    endWaypoint: {fileID: 1406318196}
+    length: 3.7282276
     TravellersOnEdge: []
     isBarricated: 0
     barrierLocation: -1
@@ -34697,6 +34625,13 @@ MonoBehaviour:
   - startWaypoint: {fileID: 852969814}
     endWaypoint: {fileID: 623191394}
     length: 55.11534
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 954155280}
+    endWaypoint: {fileID: 362348763}
+    length: 23.249165
     TravellersOnEdge: []
     isBarricated: 0
     barrierLocation: -1
@@ -34813,6 +34748,13 @@ MonoBehaviour:
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
+  - startWaypoint: {fileID: 1663682655}
+    endWaypoint: {fileID: 1747004897}
+    length: 18.001225
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1675502917}
     endWaypoint: {fileID: 349872977}
     length: 25.612495
@@ -34862,6 +34804,69 @@ MonoBehaviour:
     isBarricated: 1
     barrierLocation: 0.48005527
     barrier: {fileID: 828492885}
+  - startWaypoint: {fileID: 1734571836}
+    endWaypoint: {fileID: 1406318196}
+    length: 2.686722
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 1734571836}
+    endWaypoint: {fileID: 362348763}
+    length: 2.9593575
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 1734571836}
+    endWaypoint: {fileID: 1958116738}
+    length: 18.728
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 1734571836}
+    endWaypoint: {fileID: 1747004897}
+    length: 3.705265
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 1747004897}
+    endWaypoint: {fileID: 1406318196}
+    length: 2.4410048
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 1747004897}
+    endWaypoint: {fileID: 1663682655}
+    length: 18.001225
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 1747004897}
+    endWaypoint: {fileID: 362348763}
+    length: 2.4534853
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 1747004897}
+    endWaypoint: {fileID: 1734571836}
+    length: 3.705265
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
+  - startWaypoint: {fileID: 1958116738}
+    endWaypoint: {fileID: 1734571836}
+    length: 18.728
+    TravellersOnEdge: []
+    isBarricated: 0
+    barrierLocation: -1
+    barrier: {fileID: 0}
   - startWaypoint: {fileID: 1988288480}
     endWaypoint: {fileID: 349872977}
     length: 30.100662
@@ -44793,6 +44798,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1236718115}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1237344016 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+  m_PrefabInstance: {fileID: 1518525283}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1241975660
 GameObject:
   m_ObjectHideFlags: 0
@@ -47777,7 +47787,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1601751049}
     m_Modifications:
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
@@ -49648,7 +49658,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1601751049}
     m_Modifications:
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
@@ -53768,7 +53778,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1601751049}
     m_Modifications:
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
@@ -56130,6 +56140,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579325453}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1581666285 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+  m_PrefabInstance: {fileID: 694763546}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1587097922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57725,6 +57740,12 @@ Transform:
   - {fileID: 1292508777}
   - {fileID: 113360989}
   - {fileID: 44128378}
+  - {fileID: 1653706027}
+  - {fileID: 2139382230}
+  - {fileID: 1237344016}
+  - {fileID: 1581666285}
+  - {fileID: 22256513}
+  - {fileID: 1763441964}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1603710819
@@ -59505,6 +59526,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652962648}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1653706027 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+  m_PrefabInstance: {fileID: 1723458407}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1655650946
 GameObject:
   m_ObjectHideFlags: 0
@@ -62338,7 +62364,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1601751049}
     m_Modifications:
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
@@ -64325,6 +64351,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1763430503}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1763441964 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+  m_PrefabInstance: {fileID: 1343446297}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1765196318
 GameObject:
   m_ObjectHideFlags: 0
@@ -69995,7 +70026,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1601751049}
     m_Modifications:
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
@@ -76016,6 +76047,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138648061}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &2139382230 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+  m_PrefabInstance: {fileID: 1397142827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2139794677
 GameObject:
   m_ObjectHideFlags: 0
@@ -76363,10 +76399,4 @@ SceneRoots:
   - {fileID: 980923535}
   - {fileID: 1601751049}
   - {fileID: 127275954}
-  - {fileID: 1723458407}
-  - {fileID: 1397142827}
-  - {fileID: 1518525283}
-  - {fileID: 694763546}
-  - {fileID: 1951576117}
-  - {fileID: 1343446297}
   - {fileID: 1712910518}
