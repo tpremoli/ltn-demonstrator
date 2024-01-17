@@ -68,7 +68,7 @@ public class WaypointMover : MonoBehaviour
         this.vType = pickRandomVehicleType();
         setVehicleModelAndMaterial();
 
-        // Set Traveller's size
+
         var r = GetComponent<Collider>();
         if (r != null)
         {
@@ -699,10 +699,15 @@ public class WaypointMover : MonoBehaviour
         GameObject model = TravellerManager.Instance.pickRandomModelAndMaterial(this.vType.Type);
         if (model != null)
         {
-            GameObject modelInstance = Instantiate(model, this.transform);
-            modelInstance.transform.localPosition = Vector3.zero;
-            modelInstance.transform.localRotation = Quaternion.identity;
-            modelInstance.transform.localScale = Vector3.one;
+            MeshRenderer thisMeshRenderer = GetComponent<MeshRenderer>();
+            MeshFilter thisMeshFilter = GetComponent<MeshFilter>();
+
+            thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
+            thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
+
+        }else{
+            Debug.LogError("No model found for vehicle type: " + this.vType.Type);
+            Destroy(this.gameObject);
         }
     }
 
