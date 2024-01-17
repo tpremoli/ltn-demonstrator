@@ -5,34 +5,40 @@ using UnityEngine;
 public class WaypointMover : MonoBehaviour
 {
     // Attributes controlling the object state
-    bool initialised;
-    // Attributes from the Traveller class
+    bool initialised;   // Controls whether object has been initialised and should begin travelling
+
+    // Attributes controlling vehicle's type
+    VehicleProperties vType;
+
+    // Statistic measures
     private float totalDistanceMoved;
-    //private float positionOnEdge;
-    private float distanceAlongEdge;
-    private float currentVelocity;
-    private float maxVelocity = 5f; // Will be assigned according to agent category enum (EdgeFunctionality)
-    private int noOfPassengers;
-    private float rateOfEmission;
-    private Building destinationBuilding;
-    // Movement controlling attributes
-    public float leftToMove
+
+    // Attribute serving movement
+    public float leftToMove // Control how much the traveller has left to move in this frame
     {
         get; private set;
     }
-    private float length = 0;
-    private float hLen = 0; // half-length
-    private float terminalLength;
-    private Edge currentEdge;
-    private List<WaypointMover> travsBlockedByThis;
-    private List<WaypointMover> travsBlockingThis;
-    private List<WaypointMover> CachedRejectedWaiting;
-    private List<Edge> pathEdges;
-    // Debug attributes
+    private float distanceAlongEdge;    // Controls how far along current edge the traveller is
+    private float terminalLength;       // Controls how far along the last edge in pathEdges / currentEdge if the previous is empty the terminal destination is
+    private Edge currentEdge;           // Controls which edge the traveller currently occupies
+    private List<Edge> pathEdges;       // List of edges the traveller needs to travel
+
+    // Attributes serving collissions
+    private List<WaypointMover> travsBlockedByThis;     // List of travellers prevented from moving by this traveller
+    private List<WaypointMover> travsBlockingThis;      // List of travellers preventing this traveller from moving
+    private List<WaypointMover> CachedRejectedWaiting;  // Travellers that should be declines from addition to travsBlockedByThis
+    private float length = 0;                           // The length of the edge the traveller occupies
+    private float hLen = 0;                             // half-length
+
+    // Debug attributes - velocity & velocity calculation
     public float velocity
     {
         get; private set;
     }
+    private Edge edgeAtFrameBeginning;
+    private float distanceAlongEdgeAtFrameBeginning;
+
+    // Debug attributes - collissions
     private List<WaypointMover> travsBlockedByThisDEBUG;
     private List<WaypointMover> travsBlockingThisDEBUG;
 
@@ -40,17 +46,17 @@ public class WaypointMover : MonoBehaviour
     [SerializeField] private float distanceThreshold = 0.1f;
     [SerializeField] private float leftLaneOffset = 1f;
 
+    // Attributes for pathfinding
     private WaypointPath path;           // Instance of the pathfinding class
     private Graph graph;                 // Instance of the graph class
-
-    // pick rnadom model and material
-    [SerializeField] public List<GameObject> vehiclePrefabs;
+    private Building destinationBuilding;
 
     void Start()
     {
         // Start by making the object unready
         this.initialised = false;
         gameObject.GetComponent<Renderer>().enabled = false;
+
         // Initialising object
         this.pathEdges = new List<Edge>();
         this.travsBlockedByThis = new List<WaypointMover>();
@@ -58,7 +64,10 @@ public class WaypointMover : MonoBehaviour
         this.travsBlockingThis = new List<WaypointMover>();
         this.travsBlockingThisDEBUG = new List<WaypointMover>();
 
-        // Set Traveller's size
+        // pick a random model and material
+        this.vType = pickRandomVehicleType();
+        setVehicleModelAndMaterial();
+
         var r = GetComponent<Collider>();
         if (r != null)
         {
@@ -69,9 +78,6 @@ public class WaypointMover : MonoBehaviour
 
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
-
-        // pick a random model and material
-        pickRandomModelAndMaterial();
 
         chooseDestinationBuilding();
 
@@ -328,25 +334,22 @@ public class WaypointMover : MonoBehaviour
 
     void Update()
     {
+        // Save location at the frame beginning for calulating velocity
+        this.edgeAtFrameBeginning = currentEdge;
+        this.distanceAlongEdgeAtFrameBeginning = this.distanceAlongEdge;
         //Make sure the logic is only called if the Traveller was initialised
         if (initialised)
         {
-            Vector3 positionAtTheStart = new Vector3(
-                this.transform.position.x,
-                this.transform.position.y,
-                this.transform.position.z
-            );
-
             // Calculate distance covered between frames
-            this.leftToMove = this.maxVelocity * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
+            this.leftToMove = this.vType.MaxVelocity * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
             Move();
-            this.velocity = Vector3.Distance(positionAtTheStart, this.transform.position);
         }
     }
 
     // prepares the traveller for next frame
     void LateUpdate()
     {
+
         // Make backups for debug visualisation
         foreach (WaypointMover trav in this.travsBlockedByThis)
         {
@@ -356,7 +359,7 @@ public class WaypointMover : MonoBehaviour
         {
             travsBlockingThisDEBUG.Add(trav);
         }
-        // Renew the logic
+        // Renew the blocking logic
         this.travsBlockedByThis = new List<WaypointMover>();
         this.travsBlockingThis = new List<WaypointMover>();
         this.CachedRejectedWaiting = new List<WaypointMover>();
@@ -364,6 +367,26 @@ public class WaypointMover : MonoBehaviour
         if (initialised)
         {
             UpdatePosition();
+
+            // Calculate velocity
+            if (currentEdge == edgeAtFrameBeginning)
+            {
+                this.velocity = (distanceAlongEdge - distanceAlongEdgeAtFrameBeginning) / Time.deltaTime;
+            }
+            else
+            {
+                if (edgeAtFrameBeginning == null)
+                {
+                    this.velocity = 0;
+                }
+                else
+                {
+                    this.velocity = edgeAtFrameBeginning.Distance - distanceAlongEdgeAtFrameBeginning;
+                    this.velocity += this.distanceAlongEdge;
+                    this.velocity = this.velocity / Time.deltaTime;
+                }
+
+            }
         }
     }
 
@@ -447,7 +470,7 @@ public class WaypointMover : MonoBehaviour
             float myFront = TravelledInEdge + hLen + offset;
             float myRear = TravelledInEdge - hLen + offset;
 
-            // collisION CHECK
+            // COLLISSION CHECK
             // Check for collision at that point in the edge with every traveller present on the edge
             foreach (WaypointMover wp in terminalEdge.TravellersOnEdge)
             {
@@ -494,6 +517,7 @@ public class WaypointMover : MonoBehaviour
         }
         // Beginning to carry out proposed movement
         this.leftToMove -= proposedMovement;
+        this.totalDistanceMoved += proposedMovement;
         bool escapedEdge = false;
         // Keep switching edges until the proposed movement is insufficient to escape the edge
         while (proposedMovement > (this.currentEdge.Distance - this.distanceAlongEdge))
@@ -553,7 +577,7 @@ public class WaypointMover : MonoBehaviour
     public float calculateEmissions()
     {
         // Calculate emissions using the rateOfEmission attribute and totalDistanceMoved
-        return rateOfEmission * totalDistanceMoved;
+        return this.vType.RateOfEmission * totalDistanceMoved;
     }
 
     private void OnDrawGizmos()
@@ -663,35 +687,27 @@ public class WaypointMover : MonoBehaviour
             DrawArrow.ForGizmo(startPosition, endPosition, c, thickness);
         }
     }
-
-    private void pickRandomModelAndMaterial()
+    private VehicleProperties pickRandomVehicleType()
     {
-        // Randomly select a model and material
-        GameObject selectedPrefab = vehiclePrefabs[Random.Range(0, vehiclePrefabs.Count - 1)];
+        return new VehicleProperties();
+    }
 
-        // Retrieve the MeshRenderer and MeshFilter of the selected prefab
-        MeshRenderer selectedMeshRenderer = selectedPrefab.GetComponent<MeshRenderer>();
-        MeshFilter selectedMeshFilter = selectedPrefab.GetComponent<MeshFilter>();
-
-        // Apply the mesh and material to the current GameObject
-        if (selectedMeshRenderer != null && selectedMeshFilter != null)
+    private void setVehicleModelAndMaterial()
+    {
+        // pick a random model and material
+        GameObject model = TravellerManager.Instance.pickRandomModelAndMaterial(this.vType.Type);
+        if (model != null)
         {
             MeshRenderer thisMeshRenderer = GetComponent<MeshRenderer>();
             MeshFilter thisMeshFilter = GetComponent<MeshFilter>();
 
-            if (thisMeshRenderer != null && thisMeshFilter != null)
-            {
-                thisMeshRenderer.material = selectedMeshRenderer.sharedMaterial;
-                thisMeshFilter.mesh = selectedMeshFilter.sharedMesh;
-            }
-            else
-            {
-                Debug.LogError("Current GameObject does not have MeshRenderer and/or MeshFilter.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Selected prefab does not have MeshRenderer and/or MeshFilter.");
+            thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
+            thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
+
+        }else{
+            Debug.LogError("No model found for vehicle type: " + this.vType.Type + ". Fix this please! Worse errors could arise later.");
+            DestroyImmediate(this.gameObject);
         }
     }
+
 }
