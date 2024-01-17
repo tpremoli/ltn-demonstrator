@@ -33,6 +33,8 @@ public class WaypointMover : MonoBehaviour
     {
         get; private set;
     }
+    private Edge edgeAtFrameBeginning;
+    private float distanceAlongEdgeAtFrameBeginning; 
     private List<WaypointMover> travsBlockedByThisDEBUG;
     private List<WaypointMover> travsBlockingThisDEBUG;
 
@@ -328,25 +330,22 @@ public class WaypointMover : MonoBehaviour
 
     void Update()
     {
+        // Save location at the frame beginning for calulating velocity
+        this.edgeAtFrameBeginning = currentEdge;
+        this.distanceAlongEdgeAtFrameBeginning = this.distanceAlongEdge;
         //Make sure the logic is only called if the Traveller was initialised
         if (initialised)
         {
-            Vector3 positionAtTheStart = new Vector3(
-                this.transform.position.x,
-                this.transform.position.y,
-                this.transform.position.z
-            );
-
             // Calculate distance covered between frames
             this.leftToMove = this.maxVelocity * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
             Move();
-            this.velocity = Vector3.Distance(positionAtTheStart, this.transform.position);
         }
     }
 
     // prepares the traveller for next frame
     void LateUpdate()
     {
+        
         // Make backups for debug visualisation
         foreach (WaypointMover trav in this.travsBlockedByThis)
         {
@@ -356,7 +355,7 @@ public class WaypointMover : MonoBehaviour
         {
             travsBlockingThisDEBUG.Add(trav);
         }
-        // Renew the logic
+        // Renew the blocking logic
         this.travsBlockedByThis = new List<WaypointMover>();
         this.travsBlockingThis = new List<WaypointMover>();
         this.CachedRejectedWaiting = new List<WaypointMover>();
@@ -364,6 +363,20 @@ public class WaypointMover : MonoBehaviour
         if (initialised)
         {
             UpdatePosition();
+
+            // Calculate velocity
+            if(currentEdge==edgeAtFrameBeginning){
+                this.velocity=(distanceAlongEdge-distanceAlongEdgeAtFrameBeginning)/Time.deltaTime;
+            } else {
+                if(edgeAtFrameBeginning==null){
+                    this.velocity=0;
+                } else {
+                    this.velocity=edgeAtFrameBeginning.Distance-distanceAlongEdgeAtFrameBeginning;
+                    this.velocity+=this.distanceAlongEdge;
+                    this.velocity=this.velocity/Time.deltaTime;
+                }
+                
+            }
         }
     }
 
