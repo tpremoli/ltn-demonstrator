@@ -1,54 +1,76 @@
 using UnityEngine;
 using System;
+
+public enum VehicleTypes
+{
+    PersonalCar,
+    SUV,
+    Van,
+    Taxi
+}
+
 public class VehicleType
 {
-    private VehicleTypes type;
+    public VehicleTypes Type;
     private float maxVelocity;
-    public float MaxVelocity{
-        get{
-            if (maxVelocity==0){
+    public float MaxVelocity
+    {
+        get
+        {
+            if (maxVelocity == 0)
+            {
                 maxVelocity = this.getBaseMaxVelocity();
                 // vary up to the variance value
-                maxVelocity-= this.getVelocityVariance();
-                maxVelocity+= this.getVelocityVariance()*2*UnityEngine.Random.value;
-                
+                maxVelocity -= this.getVelocityVariance();
+                maxVelocity += this.getVelocityVariance() * 2 * UnityEngine.Random.value;
+
             }
             return maxVelocity;
         }
     }
-    public float Accelertion{
-        get{
+    public float Acceleration
+    {
+        get
+        {
             return getAcceleration();
         }
     }
-    public float Deaccelertion{
-        get{
+    public float Deacceleration
+    {
+        get
+        {
             return getDeacceleration();
         }
     }
-    public float RateOfEmission{
-        get{
+    public float RateOfEmission
+    {
+        get
+        {
             return getRateOfEmmision();
         }
     }
-    public int MaxNumberOfPassangers{
-        get{
+    public int MaxNumberOfPassangers
+    {
+        get
+        {
             return getMaxNumberOfPassangers();
         }
     }
 
     public VehicleType(VehicleTypes type)
     {
-        this.type = type;
+        this.Type = type;
     }
-    public VehicleType(){
+    public VehicleType()
+    {
         VehicleTypes type;
         Array values = Enum.GetValues(typeof(VehicleTypes));
         type = (VehicleTypes)values.GetValue(UnityEngine.Random.Range(0, values.Length));
-        this.type=type;
+        this.Type = type;
     }
-    private float getBaseMaxVelocity(){
-        switch (type)
+    private float getBaseMaxVelocity()
+    {
+        switch (Type)
         {
             case VehicleTypes.PersonalCar:
                 return 5f;
@@ -62,8 +84,9 @@ public class VehicleType
                 return 0.0f;
         }
     }
-    private float getVelocityVariance(){
-        switch (type)
+    private float getVelocityVariance()
+    {
+        switch (Type)
         {
             case VehicleTypes.PersonalCar:
                 return 1.0f;
@@ -77,8 +100,9 @@ public class VehicleType
                 return 0.0f;
         }
     }
-    private float getAcceleration(){
-        switch (type)
+    private float getAcceleration()
+    {
+        switch (Type)
         {
             case VehicleTypes.PersonalCar:
                 return 1.0f;
@@ -92,8 +116,10 @@ public class VehicleType
                 return 0.0f;
         }
     }
-    private float getDeacceleration(){
-        switch(type){
+    private float getDeacceleration()
+    {
+        switch (Type)
+        {
             case VehicleTypes.PersonalCar:
                 return 2.5f;
             case VehicleTypes.SUV:
@@ -106,8 +132,10 @@ public class VehicleType
                 return 0.0f;
         }
     }
-    private float getRateOfEmmision(){
-        switch(type){
+    private float getRateOfEmmision()
+    {
+        switch (Type)
+        {
             case VehicleTypes.PersonalCar:
                 return 1.0f;
             case VehicleTypes.SUV:
@@ -120,8 +148,10 @@ public class VehicleType
                 return 0.0f;
         }
     }
-    private int getMaxNumberOfPassangers(){
-        switch(type){
+    private int getMaxNumberOfPassangers()
+    {
+        switch (Type)
+        {
             case VehicleTypes.PersonalCar:
                 return 4;
             case VehicleTypes.SUV:
@@ -133,12 +163,5 @@ public class VehicleType
             default:
                 return 0;
         }
-    }
-    public enum VehicleTypes
-    {
-        PersonalCar,
-        SUV,
-        Van,
-        Taxi
     }
 }

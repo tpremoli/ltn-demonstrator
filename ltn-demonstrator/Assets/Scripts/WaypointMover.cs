@@ -36,7 +36,7 @@ public class WaypointMover : MonoBehaviour
         get; private set;
     }
     private Edge edgeAtFrameBeginning;
-    private float distanceAlongEdgeAtFrameBeginning; 
+    private float distanceAlongEdgeAtFrameBeginning;
 
     // Debug attributes - collissions
     private List<WaypointMover> travsBlockedByThisDEBUG;
@@ -50,9 +50,6 @@ public class WaypointMover : MonoBehaviour
     private WaypointPath path;           // Instance of the pathfinding class
     private Graph graph;                 // Instance of the graph class
     private Building destinationBuilding;
-
-    // pick random model and material
-    [SerializeField] public List<GameObject> vehiclePrefabs;
 
     void Start()
     {
@@ -69,7 +66,7 @@ public class WaypointMover : MonoBehaviour
 
         // pick a random model and material
         this.vType = pickRandomVehicleType();
-        pickRandomModelAndMaterial();
+        setVehicleModelAndMaterial();
 
         // Set Traveller's size
         var r = GetComponent<Collider>();
@@ -353,7 +350,7 @@ public class WaypointMover : MonoBehaviour
     // prepares the traveller for next frame
     void LateUpdate()
     {
-        
+
         // Make backups for debug visualisation
         foreach (WaypointMover trav in this.travsBlockedByThis)
         {
@@ -373,17 +370,23 @@ public class WaypointMover : MonoBehaviour
             UpdatePosition();
 
             // Calculate velocity
-            if(currentEdge==edgeAtFrameBeginning){
-                this.velocity=(distanceAlongEdge-distanceAlongEdgeAtFrameBeginning)/Time.deltaTime;
-            } else {
-                if(edgeAtFrameBeginning==null){
-                    this.velocity=0;
-                } else {
-                    this.velocity=edgeAtFrameBeginning.Distance-distanceAlongEdgeAtFrameBeginning;
-                    this.velocity+=this.distanceAlongEdge;
-                    this.velocity=this.velocity/Time.deltaTime;
+            if (currentEdge == edgeAtFrameBeginning)
+            {
+                this.velocity = (distanceAlongEdge - distanceAlongEdgeAtFrameBeginning) / Time.deltaTime;
+            }
+            else
+            {
+                if (edgeAtFrameBeginning == null)
+                {
+                    this.velocity = 0;
                 }
-                
+                else
+                {
+                    this.velocity = edgeAtFrameBeginning.Distance - distanceAlongEdgeAtFrameBeginning;
+                    this.velocity += this.distanceAlongEdge;
+                    this.velocity = this.velocity / Time.deltaTime;
+                }
+
             }
         }
     }
@@ -515,7 +518,7 @@ public class WaypointMover : MonoBehaviour
         }
         // Beginning to carry out proposed movement
         this.leftToMove -= proposedMovement;
-        this.totalDistanceMoved+=proposedMovement;
+        this.totalDistanceMoved += proposedMovement;
         bool escapedEdge = false;
         // Keep switching edges until the proposed movement is insufficient to escape the edge
         while (proposedMovement > (this.currentEdge.Distance - this.distanceAlongEdge))
@@ -685,38 +688,22 @@ public class WaypointMover : MonoBehaviour
             DrawArrow.ForGizmo(startPosition, endPosition, c, thickness);
         }
     }
-    private VehicleType pickRandomVehicleType(){
+    private VehicleType pickRandomVehicleType()
+    {
         return new VehicleType();
     }
 
-    private void pickRandomModelAndMaterial()
+    private void setVehicleModelAndMaterial()
     {
-        // Randomly select a model and material
-        GameObject selectedPrefab = vehiclePrefabs[Random.Range(0, vehiclePrefabs.Count - 1)];
-
-        // Retrieve the MeshRenderer and MeshFilter of the selected prefab
-        MeshRenderer selectedMeshRenderer = selectedPrefab.GetComponent<MeshRenderer>();
-        MeshFilter selectedMeshFilter = selectedPrefab.GetComponent<MeshFilter>();
-
-        // Apply the mesh and material to the current GameObject
-        if (selectedMeshRenderer != null && selectedMeshFilter != null)
+        // pick a random model and material
+        GameObject model = TravellerManager.Instance.pickRandomModelAndMaterial(this.vType.Type);
+        if (model != null)
         {
-            MeshRenderer thisMeshRenderer = GetComponent<MeshRenderer>();
-            MeshFilter thisMeshFilter = GetComponent<MeshFilter>();
-
-            if (thisMeshRenderer != null && thisMeshFilter != null)
-            {
-                thisMeshRenderer.material = selectedMeshRenderer.sharedMaterial;
-                thisMeshFilter.mesh = selectedMeshFilter.sharedMesh;
-            }
-            else
-            {
-                Debug.LogError("Current GameObject does not have MeshRenderer and/or MeshFilter.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Selected prefab does not have MeshRenderer and/or MeshFilter.");
+            GameObject modelInstance = Instantiate(model, this.transform);
+            modelInstance.transform.localPosition = Vector3.zero;
+            modelInstance.transform.localRotation = Quaternion.identity;
+            modelInstance.transform.localScale = Vector3.one;
         }
     }
+
 }
