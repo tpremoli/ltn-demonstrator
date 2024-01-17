@@ -8,7 +8,7 @@ public class WaypointMover : MonoBehaviour
     bool initialised;   // Controls whether object has been initialised and should begin travelling
 
     // Attributes controlling vehicle's type
-    VehicleTypeProperties vType;
+    VehicleProperties vType;
 
     // Statistic measures
     private float totalDistanceMoved;
@@ -687,9 +687,9 @@ public class WaypointMover : MonoBehaviour
             DrawArrow.ForGizmo(startPosition, endPosition, c, thickness);
         }
     }
-    private VehicleType pickRandomVehicleType()
+    private VehicleProperties pickRandomVehicleType()
     {
-        return new VehicleType();
+        return new VehicleProperties();
     }
 
     private void setVehicleModelAndMaterial()

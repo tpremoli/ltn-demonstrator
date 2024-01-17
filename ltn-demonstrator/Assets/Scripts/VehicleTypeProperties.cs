@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public enum VehicleTypes
+public enum VehicleType
 {
     PersonalCar,
     SUV,
@@ -9,9 +9,9 @@ public enum VehicleTypes
     Taxi
 }
 
-public class VehicleTypeProperties
+public class VehicleProperties
 {
-    public VehicleTypes Type;
+    public VehicleType Type;
     private float maxVelocity;
     public float MaxVelocity
     {
@@ -57,28 +57,28 @@ public class VehicleTypeProperties
         }
     }
 
-    public VehicleTypeProperties(VehicleTypes type)
+    public VehicleProperties(VehicleType type)
     {
         this.Type = type;
     }
-    public VehicleTypeProperties()
+    public VehicleProperties()
     {
-        VehicleTypes type;
-        Array values = Enum.GetValues(typeof(VehicleTypes));
-        type = (VehicleTypes)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        VehicleType type;
+        Array values = Enum.GetValues(typeof(VehicleType));
+        type = (VehicleType)values.GetValue(UnityEngine.Random.Range(0, values.Length));
         this.Type = type;
     }
     private float getBaseMaxVelocity()
     {
         switch (Type)
         {
-            case VehicleTypes.PersonalCar:
+            case VehicleType.PersonalCar:
                 return 5f;
-            case VehicleTypes.SUV:
+            case VehicleType.SUV:
                 return 4.2f;
-            case VehicleTypes.Van:
+            case VehicleType.Van:
                 return 4.5f;
-            case VehicleTypes.Taxi:
+            case VehicleType.Taxi:
                 return 4.8f;
             default:
                 return 0.0f;
@@ -88,13 +88,13 @@ public class VehicleTypeProperties
     {
         switch (Type)
         {
-            case VehicleTypes.PersonalCar:
+            case VehicleType.PersonalCar:
                 return 1.0f;
-            case VehicleTypes.SUV:
+            case VehicleType.SUV:
                 return 0.6f;
-            case VehicleTypes.Van:
+            case VehicleType.Van:
                 return 0.5f;
-            case VehicleTypes.Taxi:
+            case VehicleType.Taxi:
                 return 0.2f;
             default:
                 return 0.0f;
@@ -104,13 +104,13 @@ public class VehicleTypeProperties
     {
         switch (Type)
         {
-            case VehicleTypes.PersonalCar:
+            case VehicleType.PersonalCar:
                 return 1.0f;
-            case VehicleTypes.SUV:
+            case VehicleType.SUV:
                 return 0.5f;
-            case VehicleTypes.Van:
+            case VehicleType.Van:
                 return 0.25f;
-            case VehicleTypes.Taxi:
+            case VehicleType.Taxi:
                 return 1.0f;
             default:
                 return 0.0f;
@@ -120,13 +120,13 @@ public class VehicleTypeProperties
     {
         switch (Type)
         {
-            case VehicleTypes.PersonalCar:
+            case VehicleType.PersonalCar:
                 return 2.5f;
-            case VehicleTypes.SUV:
+            case VehicleType.SUV:
                 return 2.5f;
-            case VehicleTypes.Van:
+            case VehicleType.Van:
                 return 2.0f;
-            case VehicleTypes.Taxi:
+            case VehicleType.Taxi:
                 return 2.5f;
             default:
                 return 0.0f;
@@ -136,13 +136,13 @@ public class VehicleTypeProperties
     {
         switch (Type)
         {
-            case VehicleTypes.PersonalCar:
+            case VehicleType.PersonalCar:
                 return 1.0f;
-            case VehicleTypes.SUV:
+            case VehicleType.SUV:
                 return 1.2f;
-            case VehicleTypes.Van:
+            case VehicleType.Van:
                 return 1.4f;
-            case VehicleTypes.Taxi:
+            case VehicleType.Taxi:
                 return 1.0f;
             default:
                 return 0.0f;
@@ -152,13 +152,13 @@ public class VehicleTypeProperties
     {
         switch (Type)
         {
-            case VehicleTypes.PersonalCar:
+            case VehicleType.PersonalCar:
                 return 4;
-            case VehicleTypes.SUV:
+            case VehicleType.SUV:
                 return 6;
-            case VehicleTypes.Van:
+            case VehicleType.Van:
                 return 2;
-            case VehicleTypes.Taxi:
+            case VehicleType.Taxi:
                 return 3;
             default:
                 return 0;

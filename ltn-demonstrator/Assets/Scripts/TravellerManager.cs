@@ -9,7 +9,7 @@ public class TravellerManager : MonoBehaviour
     public class VehiclePrefabTypePair
     {
         public GameObject vehiclePrefab;
-        public VehicleTypes vehicleType;
+        public VehicleType vehicleType;
     }
 
     public static TravellerManager Instance;
@@ -30,7 +30,7 @@ public class TravellerManager : MonoBehaviour
         }
     }
 
-    public GameObject pickRandomModelAndMaterial(VehicleTypes type)
+    public GameObject pickRandomModelAndMaterial(VehicleType type)
     {
         var filteredList = vehiclePrefabTypePairs.Where(pair => pair.vehicleType == type).ToList();
         if (filteredList.Count > 0)
