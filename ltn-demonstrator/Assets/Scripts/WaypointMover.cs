@@ -68,7 +68,6 @@ public class WaypointMover : MonoBehaviour
         this.vType = pickRandomVehicleType();
         setVehicleModelAndMaterial();
 
-
         var r = GetComponent<Collider>();
         if (r != null)
         {
@@ -706,8 +705,8 @@ public class WaypointMover : MonoBehaviour
             thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
 
         }else{
-            Debug.LogError("No model found for vehicle type: " + this.vType.Type);
-            Destroy(this.gameObject);
+            Debug.LogError("No model found for vehicle type: " + this.vType.Type + ". Fix this please! Worse errors could arise later.");
+            DestroyImmediate(this.gameObject);
         }
     }
 
