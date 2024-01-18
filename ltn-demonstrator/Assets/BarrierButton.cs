@@ -45,6 +45,20 @@ public class BarrierButton : MonoBehaviour
 
     public void DeleteSave()
     {
+        foreach (GameObject barrierObject in barrierManager.allBarriers.ToArray())
+        {
+            // Remove from list
+            barrierManager.allBarriers.Remove(barrierObject);
+
+            // Destroy the barrier
+            Destroy(barrierObject);
+        }
+
+        // Save the game to update the save file
+        SaveGame();
+
+        /*
+
         string filePath = Path.Combine(SAVE_FOLDER, "save.json");
         if (File.Exists(filePath))
         {
@@ -73,6 +87,7 @@ public class BarrierButton : MonoBehaviour
         {
             Debug.LogError("File not found: " + filePath);
         }
+        */
     }
 
     public void OnClick()
