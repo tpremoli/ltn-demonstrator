@@ -21,26 +21,21 @@ public class PedestrianPathGenerator
 
             if (numAdjacent == 1)
             {
-                // For a single adjacent, place two pedestrian waypoints at 120-degree intervals
+                // Handle cul-de-sacs
                 CreatePedestrianWaypointsForCulDeSac(waypoint);
+            }
+            else if (numAdjacent == 2)
+            {
+                // Handle waypoints with exactly two adjacents
+                CreatePedestrianWaypointsForTwoAdjacents(waypoint);
             }
             else
             {
-                // For multiple adjacents, calculate the bisecting direction for each pair
+                // Handle waypoints with more than two adjacents
                 for (int i = 0; i < numAdjacent; i++)
                 {
-                    Waypoint adjacent1 = waypoint.adjacentWaypoints[i];
-                    Vector3 dir1 = (adjacent1.transform.position - waypoint.transform.position).normalized;
-
                     int nextIndex = (i + 1) % numAdjacent;
-                    Waypoint adjacent2 = waypoint.adjacentWaypoints[nextIndex];
-                    Vector3 dir2 = (adjacent2.transform.position - waypoint.transform.position).normalized;
-
-                    // Calculate the bisecting direction
-                    Vector3 bisectingDir = AverageDirection(dir1, dir2);
-                    Vector3 offset = bisectingDir * laneWidth;
-
-                    CreatePedestrianWaypointAt(waypoint.transform.position + offset);
+                    CreatePedestrianWaypointForAdjacentPair(waypoint, i, nextIndex);
                 }
             }
         }
@@ -58,6 +53,31 @@ public class PedestrianPathGenerator
             Vector3 offset = rotatedDir * laneWidth;
             CreatePedestrianWaypointAt(waypoint.transform.position + offset);
         }
+    }
+
+    static void CreatePedestrianWaypointsForTwoAdjacents(Waypoint waypoint)
+    {
+        Vector3 dir1 = (waypoint.adjacentWaypoints[0].transform.position - waypoint.transform.position).normalized;
+        Vector3 dir2 = (waypoint.adjacentWaypoints[1].transform.position - waypoint.transform.position).normalized;
+
+        // Calculate the bisecting direction
+        Vector3 bisectingDir = AverageDirection(dir1, dir2);
+
+        // Create two waypoints, one on each side of the bisecting line
+        CreatePedestrianWaypointAt(waypoint.transform.position + bisectingDir * laneWidth);
+        CreatePedestrianWaypointAt(waypoint.transform.position - bisectingDir * laneWidth);
+    }
+
+    static void CreatePedestrianWaypointForAdjacentPair(Waypoint waypoint, int index1, int index2)
+    {
+        Vector3 dir1 = (waypoint.adjacentWaypoints[index1].transform.position - waypoint.transform.position).normalized;
+        Vector3 dir2 = (waypoint.adjacentWaypoints[index2].transform.position - waypoint.transform.position).normalized;
+
+        // Calculate the bisecting direction
+        Vector3 bisectingDir = AverageDirection(dir1, dir2);
+        Vector3 offset = bisectingDir * laneWidth;
+
+        CreatePedestrianWaypointAt(waypoint.transform.position + offset);
     }
 
     static void CreatePedestrianWaypointAt(Vector3 position)
