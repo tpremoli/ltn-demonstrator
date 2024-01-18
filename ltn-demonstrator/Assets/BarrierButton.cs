@@ -15,6 +15,18 @@ public class BarrierButton : MonoBehaviour
 
     public BarrierManager barrierManager; // Add this line
 
+    void Start()
+    {
+        if (barrierManager != null)
+        {
+            barrierManager.LoadBarriers();
+        }
+        else
+        {
+            Debug.LogError("No BarrierManager assigned to the BarrierButton.");
+        }
+    }
+
     public void SaveGame()
     {
         if (barrierManager != null)
@@ -53,6 +65,8 @@ public class BarrierButton : MonoBehaviour
             // Destroy the barrier
             Destroy(barrierObject);
         }
+
+        Debug.Log("Deleted Barriers");
 
         // Save the game to update the save file
         SaveGame();

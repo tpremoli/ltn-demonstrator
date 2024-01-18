@@ -5,10 +5,13 @@ using UnityEngine;
 public class BarrierManager : MonoBehaviour
 {
     public GameObject barrierPrefab; // Prefab for the barrier
-    public List<GameObject> allBarriers; 
+    public List<GameObject> allBarriers;
+    
+     
 
     public void LoadBarriers()
     {
+        Debug.Log("Loading...");
         // Remove old barriers
         foreach (GameObject barrier in allBarriers)
         {
