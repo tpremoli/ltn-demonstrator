@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class BarrierManager : MonoBehaviour
 {
-    public GameObject barrierPrefab;
-    public List<GameObject> allBarriers; // Add this line
+    public GameObject barrierPrefab; // Prefab for the barrier
+    public List<GameObject> allBarriers; 
 
-    public void Start()
+    public void LoadBarriers()
     {
-        allBarriers = new List<GameObject>(); // Initialize the list
-        LoadBarriers();
-    }
-
-    void LoadBarriers()
-    {
-        List<BarrierData> loadedBarriers = BarrierData.LoadBarriers();
-        foreach (BarrierData barrierData in loadedBarriers)
+        // Remove old barriers
+        foreach (GameObject barrier in allBarriers)
         {
-            Vector3 position = new Vector3(barrierData.position[0], barrierData.position[1], barrierData.position[2]);
-            Quaternion rotation = Quaternion.Euler(barrierData.rotation[0], barrierData.rotation[1], barrierData.rotation[2]);
-            GameObject barrier = Instantiate(barrierPrefab, position, rotation);
-            allBarriers.Add(barrier); // Add the barrier to the list
+            Destroy(barrier);
+        }
+        allBarriers.Clear();
+
+        // Load new barriers
+        List<BarrierData> barrierDataList = BarrierData.LoadBarriers();
+        foreach (BarrierData barrierData in barrierDataList)
+        {
+            GameObject newBarrier = Instantiate(barrierPrefab);
+            newBarrier.transform.position = new Vector3(barrierData.position[0], barrierData.position[1], barrierData.position[2]);
+            newBarrier.transform.rotation = Quaternion.Euler(barrierData.rotation[0], barrierData.rotation[1], barrierData.rotation[2]);
+            allBarriers.Add(newBarrier);
         }
     }
 }

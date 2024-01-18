@@ -8,13 +8,15 @@ public class BarrierButton : MonoBehaviour
     public GameObject barrierPrefab;
     public TextMeshProUGUI instructionText;
     private bool SpawnBarrier = false;
+    private bool deleteMode = false; // Add this line
 
     Transform barrierParent;
     private static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
 
+    public BarrierManager barrierManager; // Add this line
+
     public void SaveGame()
     {
-        BarrierManager barrierManager = GameObject.FindObjectOfType<BarrierManager>();
         if (barrierManager != null)
         {
             List<Barrier> barriers = new List<Barrier>();
@@ -35,33 +37,11 @@ public class BarrierButton : MonoBehaviour
         }
     }
 
-    
-    /*
-    public void LoadGame()
+    public void DeleteABarrier()
     {
-        BarrierManager barrierManager = GameObject.FindObjectOfType<BarrierManager>();
-        if (barrierManager != null)
-        {
-            if (barrierParent == null)
-            {
-                barrierParent = Instantiate(new GameObject("BarrierParent")).transform;
-            }
-
-            for (int i = 0; i < barrierManager.allBarriers.Count; i++)
-            {
-                Vector3 position = new Vector3(barrierManager.allBarriers[i].transform.position.x, barrierManager.allBarriers[i].transform.position.y, barrierManager.allBarriers[i].transform.position.z);
-                Quaternion rotation = Quaternion.Euler(barrierManager.allBarriers[i].transform.rotation.eulerAngles.x, barrierManager.allBarriers[i].transform.rotation.eulerAngles.y, barrierManager.allBarriers[i].transform.rotation.eulerAngles.z);
-                GameObject barrierObject = Instantiate(barrierPrefab, position, rotation, barrierParent);
-                Barrier barrier = barrierObject.GetComponent<Barrier>();
-                barrierManager.allBarriers.Add(barrier);
-            }
-        }
-        else
-        {
-            Debug.LogError("No BarrierManager found in the scene.");
-        }
+        instructionText.text = "Click on desired barrier to delete";
+        deleteMode = true; // Add this line
     }
-    */
 
     public void DeleteSave()
     {
@@ -70,6 +50,24 @@ public class BarrierButton : MonoBehaviour
         {
             File.Delete(filePath);
             Debug.Log("Save Deleted");
+
+            // Clear the barrier data list
+            BarriersContainer data = new BarriersContainer { barriers = new List<BarrierData>() };
+
+            // Save the empty list to the file
+            string json = JsonUtility.ToJson(data);
+            File.WriteAllText(filePath, json);
+
+            // Reload the barriers
+            if (barrierManager != null)
+            {
+                barrierManager.LoadBarriers();
+                Debug.Log("Barriers reloaded");
+            }
+            else
+            {
+                Debug.LogError("No BarrierManager assigned to the BarrierButton.");
+            }
         }
         else
         {
@@ -102,7 +100,6 @@ public class BarrierButton : MonoBehaviour
                 if (barrier != null)
                 {
                     Debug.Log("Barrier created at " + worldPosition);
-                    BarrierManager barrierManager = GameObject.FindObjectOfType<BarrierManager>();
                     if (barrierManager != null)
                     {
                         Debug.Log("Barrier List size: " + barrierManager.allBarriers.Count);
@@ -117,6 +114,31 @@ public class BarrierButton : MonoBehaviour
                 else
                 {
                     Debug.LogError("No Barrier component found on the instantiated object.");
+                }
+            }
+        }
+
+        // Add this block
+        if (deleteMode && Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Barrier hitBarrier = hit.transform.GetComponent<Barrier>();
+                if (hitBarrier != null)
+                {
+                    // Remove from list
+                    barrierManager.allBarriers.Remove(hit.transform.gameObject);
+
+                    // Destroy the barrier
+                    Destroy(hit.transform.gameObject);
+
+                    // Save the game to update the save file
+                    SaveGame();
+
+                    // Exit delete mode
+                    deleteMode = false;
                 }
             }
         }
