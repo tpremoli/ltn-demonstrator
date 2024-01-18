@@ -10,12 +10,14 @@ public class Waypoint : MonoBehaviour
     // As it is, all adjacent waypoints are two-way connections.
     public List<Waypoint> adjacentWaypoints; 
 
+    // New attribute to determine if the waypoint is for pedestrians only
+    public bool isPedestrianOnly = false;
     private void OnDrawGizmos()
     {
         float waypointSize = this.transform.parent.GetComponent<Graph>().WaypointSize;
 
         // Draw the gizmo for this waypoint
-        Gizmos.color = Color.blue;
+        Gizmos.color = isPedestrianOnly ? Color.green : Color.blue; // Green for pedestrian, blue otherwise
         Gizmos.DrawWireSphere(transform.position, waypointSize);
 
         // Draw lines to adjacent waypoints in red
@@ -24,7 +26,7 @@ public class Waypoint : MonoBehaviour
             if (adjacent != null)
             {
                 // if the adjacent waypoint is selected, draw the line in yellow, and if not, draw it in red
-                Gizmos.color = Selection.Contains(adjacent.gameObject) ? Color.yellow : Color.red;
+                Gizmos.color = Selection.Contains(adjacent.gameObject) ? Color.yellow : (isPedestrianOnly || adjacent.isPedestrianOnly) ? Color.magenta : Color.red;
                 Gizmos.DrawLine(transform.position, adjacent.transform.position);
             }
         }
