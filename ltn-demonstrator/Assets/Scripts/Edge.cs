@@ -1,16 +1,9 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Edge
 {
-    public static List<Edge> allEdges = new List<Edge>();
-
-    public Edge() {
-        allEdges.Add(this);
-    }
-
-    [SerializeField]
     public Waypoint startWaypoint;
 
     private Waypoint startWaypointLane;
@@ -22,6 +15,7 @@ public class Edge
 
     public Waypoint StartWaypoint { get { return startWaypoint; } }
     public Waypoint EndWaypoint { get { return endWaypoint; } }
+    public List<WaypointMover> TravellersOnEdge;
     public float Distance { get { return length; } }
 
     /// <summary>
@@ -38,7 +32,8 @@ public class Edge
         this.endWaypoint = endWaypoint;
         this.length = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
 
-        // finds barrier in path of edge 
+        this.TravellersOnEdge = new List<WaypointMover>();
+
         this.barrier = getBarrierInPath();
         this.isBarricated = barrier != null;
         this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
@@ -47,8 +42,26 @@ public class Edge
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
         }
+    }
 
-        allEdges.Add(this);
+    // converting between distance along edge and distance in world space
+    public float RealDistanceToDeltaD(float len)
+    {
+        return len / this.length;
+    }
+    public float DeltaDToRealDistance(float len)
+    {
+        return len * this.length;
+    }
+
+    // adds and removes travellers from the edge
+    public void Subscribe(WaypointMover trav)
+    {
+        this.TravellersOnEdge.Add(trav);
+    }
+    public void Unsubscribe(WaypointMover trav)
+    {
+        this.TravellersOnEdge.Remove(trav);
     }
 
     public void DrawGizmo()
@@ -84,12 +97,25 @@ public class Edge
         return distanceFromStart + distanceFromEnd <= edgeLength + 0.2f;
     }
 
+    // returns the distance from the edge to a point
     public float DistanceToEdge(Vector3 position)
     {
         Vector3 closestPoint = this.GetClosestPoint(position);
         return Vector3.Distance(position, closestPoint);
     }
 
+    // returns the direction of the edge
+    public Vector3 GetDirection()
+    {
+        Vector3 start = startWaypoint.transform.position;
+        Vector3 end = endWaypoint.transform.position;
+
+        Vector3 edgeDirection = end - start;
+        edgeDirection.Normalize();
+        return edgeDirection;
+    }
+
+    // returns the closest point on the edge to a point
     public Vector3 GetClosestPoint(Vector3 point)
     {
         Vector3 start = startWaypoint.transform.position;
@@ -118,6 +144,22 @@ public class Edge
         }
     }
 
+    // returns the closest point on the edge to a point, as a fraction of the edge
+    public float GetClosestPointAsFractionOfEdge(Vector3 point)
+    {
+        Vector3 start = startWaypoint.transform.position;
+        Vector3 end = endWaypoint.transform.position;
+
+        Vector3 edgeDirection = end - start;
+        Vector3 pointDirection = point - start;
+
+        float edgeLength = edgeDirection.magnitude;
+        edgeDirection.Normalize();
+
+        return Vector3.Dot(pointDirection, edgeDirection) / edgeLength;
+    }
+
+    // returns a random point on the edge
     public Vector3 GetRandomPointOnEdge()
     {
         Vector3 start = startWaypoint.transform.position;
@@ -133,12 +175,14 @@ public class Edge
         return randomPointOnEdge;
     }
 
+    // checks if two edges are the same (i.e. have the same waypoints)
     public bool isSameEdge(Edge otherEdge)
     {
         return (this.startWaypoint == otherEdge.startWaypoint && this.endWaypoint == otherEdge.endWaypoint) ||
                (this.startWaypoint == otherEdge.endWaypoint && this.endWaypoint == otherEdge.startWaypoint);
     }
 
+    // returns the distance along the edge of a point
     public float convertToPositionAlongEdge(Vector3 point)
     {
         Vector3 start = startWaypoint.transform.position;
