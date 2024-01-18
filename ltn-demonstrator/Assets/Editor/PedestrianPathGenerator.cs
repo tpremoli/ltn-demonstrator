@@ -31,11 +31,16 @@ public class PedestrianPathGenerator
             }
             else
             {
-                // Handle waypoints with more than two adjacents
-                for (int i = 0; i < numAdjacent; i++)
+                // Sort the adjacent waypoints based on their angle
+                List<Waypoint> sortedAdjacentWaypoints = waypoint.adjacentWaypoints
+                    .OrderBy(adj => AngleFromReference(waypoint.transform.position, adj.transform.position))
+                    .ToList();
+
+                // Create pedestrian waypoints for each pair of sorted adjacents
+                for (int i = 0; i < sortedAdjacentWaypoints.Count; i++)
                 {
-                    int nextIndex = (i + 1) % numAdjacent;
-                    CreatePedestrianWaypointForAdjacentPair(waypoint, i, nextIndex);
+                    int nextIndex = (i + 1) % sortedAdjacentWaypoints.Count;
+                    CreatePedestrianWaypointForAdjacentPair(waypoint, sortedAdjacentWaypoints[i], sortedAdjacentWaypoints[nextIndex]);
                 }
             }
         }
@@ -68,18 +73,29 @@ public class PedestrianPathGenerator
         CreatePedestrianWaypointAt(waypoint.transform.position - bisectingDir * laneWidth);
     }
 
-    static void CreatePedestrianWaypointForAdjacentPair(Waypoint waypoint, int index1, int index2)
+    static void CreatePedestrianWaypointForAdjacentPair(Waypoint waypoint, Waypoint adjacent1, Waypoint adjacent2)
     {
-        Vector3 dir1 = (waypoint.adjacentWaypoints[index1].transform.position - waypoint.transform.position).normalized;
-        Vector3 dir2 = (waypoint.adjacentWaypoints[index2].transform.position - waypoint.transform.position).normalized;
+        Vector3 dir1 = (adjacent1.transform.position - waypoint.transform.position).normalized;
+        Vector3 dir2 = (adjacent2.transform.position - waypoint.transform.position).normalized;
 
-        // Calculate the bisecting direction
-        Vector3 bisectingDir = AverageDirection(dir1, dir2);
-        Vector3 offset = bisectingDir * laneWidth;
+        // Calculate the average direction
+        Vector3 avgDir = AverageDirection(dir1, dir2);
+        Vector3 crossProduct = Vector3.Cross(dir1, dir2);
 
-        CreatePedestrianWaypointAt(waypoint.transform.position + offset);
+        // Determine if the average direction needs to be flipped
+        if (Vector3.Dot(crossProduct, Vector3.up) > 0)
+        {
+            avgDir = -avgDir;
+        }
+
+        CreatePedestrianWaypointAt(waypoint.transform.position + avgDir * laneWidth);
     }
 
+    static float AngleFromReference(Vector3 referencePoint, Vector3 targetPoint)
+    {
+        Vector3 direction = (targetPoint - referencePoint).normalized;
+        return Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+    }
     static void CreatePedestrianWaypointAt(Vector3 position)
     {
         GameObject newWaypointObj = new GameObject("Pedestrian Waypoint");
@@ -94,6 +110,5 @@ public class PedestrianPathGenerator
         Vector3 sum = dir1.normalized + dir2.normalized;
         return sum.normalized;
     }
-
 
 }
