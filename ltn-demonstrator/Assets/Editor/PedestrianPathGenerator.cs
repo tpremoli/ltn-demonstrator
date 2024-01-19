@@ -245,7 +245,7 @@ public class PedestrianPathGenerator
         }
     }
 
-    // STEP 4: Connect pedestrian waypoints to the original graph
+    // STEP 4: Connect pedestrian waypoints to the original graph (requires to split graph)
 
     // todo
 
@@ -271,5 +271,15 @@ public class PedestrianPathGenerator
 
         WaypointEditor.PruneDeletedWaypoints();
         EdgeLoader.LoadEdges();
+    }
+
+    // Run all steps
+    [MenuItem("Tools/Sidewalks/00. Run all pedestrian path steps")]
+    public static void RunAllSteps()
+    {
+        ClearPedestrianPaths(); // 5 - clear graph 
+        GeneratePedestrianWaypoints(); // 1
+        ConnectExternalPedestrianWaypoints(); // 2
+        ConnectInternalPedestrianWaypoints(); // 3
     }
 }
