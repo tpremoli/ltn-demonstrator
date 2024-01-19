@@ -14,14 +14,32 @@ public class WaypointMover : MonoBehaviour
     private float totalDistanceMoved;
 
     // Attribute serving movement
-    public float leftToMove // Control how much the traveller has left to move in this frame
+    public float movementUpperBound // Controls the maximum distance the traveller moves in a frame
     {
         get; private set;
+    }
+    public float movementLowerBound // Controls the minimum distance the traveller moves in a frame
+    {
+        get;
+        private set;
+    }
+    public float brakingDistance    // Calculated as a distance the vehicle needs to travel, before coming to a stop if deaccelerating at maximum rate
+    {
+        get;
+        private set;
     }
     private float distanceAlongEdge;    // Controls how far along current edge the traveller is
     private float terminalLength;       // Controls how far along the last edge in pathEdges / currentEdge if the previous is empty the terminal destination is
     private Edge currentEdge;           // Controls which edge the traveller currently occupies
     private List<Edge> pathEdges;       // List of edges the traveller needs to travel
+
+    // Movement attributes - velocity & velocity calculation
+    public float velocity
+    {
+        get; private set;
+    }
+    private Edge edgeAtFrameBeginning;
+    private float distanceAlongEdgeAtFrameBeginning;
 
     // Attributes serving collissions
     private List<WaypointMover> travsBlockedByThis;     // List of travellers prevented from moving by this traveller
@@ -30,17 +48,10 @@ public class WaypointMover : MonoBehaviour
     private float length = 0;                           // The length of the edge the traveller occupies
     private float hLen = 0;                             // half-length
 
-    // Debug attributes - velocity & velocity calculation
-    public float velocity
-    {
-        get; private set;
-    }
-    private Edge edgeAtFrameBeginning;
-    private float distanceAlongEdgeAtFrameBeginning;
-
     // Debug attributes - collissions
     private List<WaypointMover> travsBlockedByThisDEBUG;
     private List<WaypointMover> travsBlockingThisDEBUG;
+    private List<WaypointMover> travsSlowingThisDEBUG;
 
     // Attributes from the WaypointMover class
     [SerializeField] private float distanceThreshold = 0.1f;
@@ -63,10 +74,13 @@ public class WaypointMover : MonoBehaviour
         this.travsBlockedByThisDEBUG = new List<WaypointMover>();
         this.travsBlockingThis = new List<WaypointMover>();
         this.travsBlockingThisDEBUG = new List<WaypointMover>();
+        this.travsSlowingThisDEBUG = new List<WaypointMover>();
 
         // pick a random model and material
         this.vType = pickRandomVehicleType();
-        setVehicleModelAndMaterial();
+        if (!setVehicleModelAndMaterial()){
+            return;
+        }
 
         var r = GetComponent<Collider>();
         if (r != null)
@@ -340,8 +354,20 @@ public class WaypointMover : MonoBehaviour
         //Make sure the logic is only called if the Traveller was initialised
         if (initialised)
         {
-            // Calculate distance covered between frames
-            this.leftToMove = this.vType.MaxVelocity * Time.deltaTime; // Currently obtained from maxVelocity attribute, later should also consider the maximum velocity permitted by the edge
+            // Calculate minimum and maximum velocity
+            float maxV = Mathf.Min(this.velocity + Time.deltaTime * vType.Acceleration,this.vType.MaxVelocity);
+            float minV = Mathf.Max(this.velocity - Time.deltaTime * vType.Deacceleration,0);
+
+            // Calculate maximum movement
+            this.movementUpperBound = Time.deltaTime*velocity;
+            this.movementUpperBound+= Time.deltaTime * (maxV-velocity) * 0.5f;
+
+            // Calculate minimum movement
+            this.movementLowerBound = Time.deltaTime*velocity;
+            this.movementLowerBound-= Time.deltaTime * (velocity-minV) * 0.5f; 
+
+            // Calculate braking distance based on current velocity
+            this.brakingDistance = Mathf.Pow(velocity,2)/(2*vType.Deacceleration);
             Move();
         }
     }
@@ -420,7 +446,7 @@ public class WaypointMover : MonoBehaviour
     private void Move()
     {
         // Check if Traveller has moved to the end of its edge
-        float proposedMovement = this.leftToMove;
+        float proposedMovement = this.movementUpperBound;
         // Check for collisions at the new location
         bool proposalAccepted = false;
         while (!proposalAccepted)
@@ -434,6 +460,10 @@ public class WaypointMover : MonoBehaviour
             // Determine which Edge the Traveller ends up on, and how much movement it uses up in the process
             float TravelledOverEdges = 0;
             Edge terminalEdge = this.currentEdge;
+            Edge superTerminalEdge = null;
+            if(pathEdges.Count>0){
+                superTerminalEdge = pathEdges[0];
+            }
             float offset = this.distanceAlongEdge;
 
             // Check whether proposed movement exceeds this edge
@@ -463,14 +493,18 @@ public class WaypointMover : MonoBehaviour
                     }
                 }
                 terminalEdge = iter.Current;
+                iter.MoveNext();
+                superTerminalEdge = iter.Current;
             }
             // Determine how much movement in Edge the Traveller has left upon entering the edge
             float TravelledInEdge = proposedMovement - TravelledOverEdges;
+
+            // COLLISSION CHECK
             //Calculate position of
             float myFront = TravelledInEdge + hLen + offset;
             float myRear = TravelledInEdge - hLen + offset;
+            float myBrDis = TravelledInEdge + hLen + brakingDistance +offset;
 
-            // COLLISSION CHECK
             // Check for collision at that point in the edge with every traveller present on the edge
             foreach (WaypointMover wp in terminalEdge.TravellersOnEdge)
             {
@@ -502,7 +536,7 @@ public class WaypointMover : MonoBehaviour
                 {
                     // collision occurred
                     // Reduce proposed movement
-                    proposedMovement -= myFront - wpRear + 0.0001f;
+                    proposedMovement -= myFront - wpRear + 0.01f;
 
                     // register for notification
                     this.travsBlockingThis.Add(wp);
@@ -512,11 +546,90 @@ public class WaypointMover : MonoBehaviour
                     proposalAccepted = false;
                     break;
                 }
+
+                // Check whether there is a vehicle within braking path
+                if(wpRear<=myBrDis&&wpRear>=myFront&&proposedMovement>movementLowerBound){
+                    // Reduce proposed movement to maintain separation
+                    // Note that a car may not choose to reduce its movement below lowerBound
+                    float intersection = myBrDis-wpRear;
+                    proposedMovement = Mathf.Max(this.movementLowerBound,proposedMovement-intersection);
+                    proposedMovement-= 0.01f;
+
+                    // Register for notification
+                    this.travsSlowingThisDEBUG.Add(wp);
+                    wp.registerForMove(this);
+
+                    // and re-loop
+                    proposalAccepted = false;
+                    break;
+                }
             }
+            // Do the same for super-terminal edge
+            if(superTerminalEdge != null)
+            foreach (WaypointMover wp in superTerminalEdge.TravellersOnEdge)
+            {
+                if (wp == this) continue;
+                //Calculate position of other traveller on the edge in Real units
+                float wpPOEReal = wp.distanceAlongEdge+terminalEdge.Distance;
+                //Calculate position of
+                float wpFront = wpPOEReal + wp.hLen;
+                float wpRear = wpPOEReal - wp.hLen;
+
+                // Check whether this' front would end up within the vehicle
+                if (myFront <= wpFront && myFront >= wpRear)
+                {
+                    // Collision occurred
+                    // Reduce proposed movement
+                    proposedMovement -= myFront - wpRear + 0.01f;
+
+                    // register for notification
+                    this.travsBlockingThis.Add(wp);
+                    wp.registerForMove(this);
+
+                    // and re-loop
+                    proposalAccepted = false;
+                    break;
+                }
+
+                // Check whether this' rear would end up within a vehilce
+                if (myRear <= wpFront && myRear >= wpRear)
+                {
+                    // collision occurred
+                    // Reduce proposed movement
+                    proposedMovement -= myFront - wpRear + 0.01f;
+
+                    // register for notification
+                    this.travsBlockingThis.Add(wp);
+                    wp.registerForMove(this);
+
+                    // and re-loop
+                    proposalAccepted = false;
+                    break;
+                }
+
+                // Check whether there is a vehicle within braking path
+                if(wpRear<=myBrDis&&wpRear>=myFront&&proposedMovement>movementLowerBound){
+                    // Reduce proposed movement to maintain separation
+                    // Note that a car may not choose to reduce its movement below lowerBound
+                    float intersection = myBrDis-wpRear;
+                    proposedMovement = Mathf.Max(this.movementLowerBound,proposedMovement-intersection);
+                    proposedMovement-= 0.01f;
+
+                    // Register for notification
+                    this.travsSlowingThisDEBUG.Add(wp);
+                    wp.registerForMove(this);
+
+                    // and re-loop
+                    proposalAccepted = false;
+                    break;
+                }
+            }
+
             // No collision occurred, the proposed movement is accepted
         }
         // Beginning to carry out proposed movement
-        this.leftToMove -= proposedMovement;
+        this.movementUpperBound -= proposedMovement;
+        this.movementLowerBound -= proposedMovement;
         this.totalDistanceMoved += proposedMovement;
         bool escapedEdge = false;
         // Keep switching edges until the proposed movement is insufficient to escape the edge
@@ -627,7 +740,7 @@ public class WaypointMover : MonoBehaviour
                 }
             }
 
-            // Draw arrow to vehicles collided with
+            // Draw line to vehicles collided with
             Gizmos.color = Color.magenta;
             travsBlockingThisDEBUG.RemoveAll(item => item == null);
             Vector3 startPosition = this.transform.position + Vector3.up * 4;
@@ -636,7 +749,16 @@ public class WaypointMover : MonoBehaviour
                 Vector3 endPosition = wp.transform.position + Vector3.up * 4;//- startPosition
                 Gizmos.DrawLine(startPosition, endPosition);
             }
-            // this.travsBlockingThisDEBUG = new List<WaypointMover>();
+            //this.travsBlockingThisDEBUG = new List<WaypointMover>();
+
+            // Draw line to vehicles slowing this one
+            Gizmos.color = Color.green;
+            travsSlowingThisDEBUG.RemoveAll(item => item == null);
+            foreach (WaypointMover wp in travsSlowingThisDEBUG)
+            {
+                Vector3 endPosition = wp.transform.position + Vector3.up * 4;//- startPosition
+                Gizmos.DrawLine(startPosition, endPosition);
+            }
 
             // Draw the path from the agent's current position
             tracePath(Color.red, 2f, 10f);
@@ -692,7 +814,7 @@ public class WaypointMover : MonoBehaviour
         return new VehicleProperties();
     }
 
-    private void setVehicleModelAndMaterial()
+    private bool setVehicleModelAndMaterial()
     {
         // pick a random model and material
         GameObject model = TravellerManager.Instance.pickRandomModelAndMaterial(this.vType.Type);
@@ -707,7 +829,9 @@ public class WaypointMover : MonoBehaviour
         }else{
             Debug.LogError("No model found for vehicle type: " + this.vType.Type + ". Fix this please! Worse errors could arise later.");
             DestroyImmediate(this.gameObject);
+            return false;
         }
+        return true;
     }
 
 }
