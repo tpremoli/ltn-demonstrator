@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class BarrierManager : MonoBehaviour
 {
+    public static BarrierManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            LoadBarriers();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public GameObject barrierPrefab; // Prefab for the barrier
     public List<GameObject> allBarriers;
     
-     
 
     public void LoadBarriers()
     {
