@@ -92,6 +92,14 @@ public class PedestrianPathGenerator
         Vector3 dir1 = (adjacent1.transform.position - waypoint.transform.position).normalized;
         Vector3 dir2 = (adjacent2.transform.position - waypoint.transform.position).normalized;
 
+        // Adjust lane width based on the angle
+        // For example, using the cosine of the angle, ensuring it's not less than a minimum threshold
+        float angle = Vector3.Angle(dir1, dir2) * Mathf.Deg2Rad;
+        float minScaleFactor = 0.7f; // Minimum scale factor
+        float scaleFactor = Mathf.Max(Mathf.Sin(angle), minScaleFactor);
+        float adjustedLaneWidth = laneWidth * scaleFactor;
+
+
         // Calculate the average direction
         Vector3 avgDir = AverageDirection(dir1, dir2);
         Vector3 crossProduct = Vector3.Cross(dir1, dir2);
@@ -102,8 +110,9 @@ public class PedestrianPathGenerator
             avgDir = -avgDir;
         }
 
-        CreatePedestrianWaypointAt(waypoint.transform.position + avgDir * laneWidth, waypoint);
+        CreatePedestrianWaypointAt(waypoint.transform.position + avgDir * adjustedLaneWidth, waypoint);
     }
+
     static float AngleFromReference(Vector3 referencePoint, Vector3 targetPoint)
     {
         Vector3 direction = (targetPoint - referencePoint).normalized;
