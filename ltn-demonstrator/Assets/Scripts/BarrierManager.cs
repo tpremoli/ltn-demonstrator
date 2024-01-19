@@ -8,7 +8,7 @@ public class BarrierManager : MonoBehaviour
     public GameObject barrierPrefab; // Prefab for the barrier
     public List<GameObject> allBarriers;
 
-    public bool ShouldLoadBarriers = true;
+    public bool useSave;
 
 
     public static BarrierManager Instance { get; private set; }
@@ -18,15 +18,15 @@ public class BarrierManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            if (ShouldLoadBarriers)
+            if (useSave)
             {
-                LoadBarriers();
+                LoadBarriersFromSave();
             }
         }
     }
 
 
-    public void LoadBarriers()
+    public void LoadBarriersFromSave()
     {
         Debug.Log("Loading...");
         // Remove old barriers
