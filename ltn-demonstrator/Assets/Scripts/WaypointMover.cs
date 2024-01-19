@@ -156,11 +156,10 @@ public class WaypointMover : MonoBehaviour
 
         // Position the traveller on the current Edge
         this.currentEdge = originEdge;
-        //this.currentEdge.Subscribe(this); // Delegated to coroutine
-        //this.positionOnEdge = this.currentEdge.GetClosestPointAsFractionOfEdge(this.transform.position);
+
         this.distanceAlongEdge = Vector3.Distance(
             this.currentEdge.startWaypoint.transform.position,
-            this.currentEdge.GetClosestPoint(this.transform.position)
+            this.transform.position
             );
         // Obtain terminal location
         Vector3 terminal = destinationBuilding.closestPointOnEdge;
