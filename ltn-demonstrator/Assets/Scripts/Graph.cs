@@ -4,7 +4,7 @@ using UnityEngine;
 public class Graph : MonoBehaviour
 {
     // private waypointsize with getter
-    [Range(0f, 2f)] [SerializeField] private float waypointSize = 0.5f;
+    [Range(0f, 2f)][SerializeField] private float waypointSize = 0.5f;
     [SerializeField] public List<Edge> edges;
 
     public List<Building> buildings;
@@ -36,7 +36,7 @@ public class Graph : MonoBehaviour
         }
     }
 
-    
+
     public float CalculateDistance(Waypoint a, Waypoint b)
     {
         return Vector3.Distance(a.transform.position, b.transform.position);

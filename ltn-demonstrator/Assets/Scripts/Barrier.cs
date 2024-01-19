@@ -7,7 +7,7 @@ public class Barrier : MonoBehaviour
     public bool isPointInBarrier(Vector3 point)
     {
         Collider barrierCollider = GetComponent<Collider>();
-        if(barrierCollider == null)
+        if (barrierCollider == null)
         {
             return false;
         }

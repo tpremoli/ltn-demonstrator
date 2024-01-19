@@ -13,6 +13,9 @@ public enum BuildingType
 
 public class Building : MonoBehaviour
 {
+    // DEBUG ATTRIBUUTES
+    private static bool ALLOW_SPAWNING = true;
+
     // Private attributes
     [SerializeField] private int vehicleMax;
     [SerializeField] private int occupantMax;
@@ -21,8 +24,8 @@ public class Building : MonoBehaviour
 
     // the spawn probability should be based on the building type and maximum number of occupants.
     // as it stands, it is a constant value, but it should be a function/enum of the building type
-    [Range(0f, 1f)] [SerializeField] private float spawnProbability = 0.1f;
-    [Range(1, 600)] [SerializeField] private float timeBetweenSpawns = 1; // The time between spawn attempts
+    [Range(0f, 1f)][SerializeField] private float spawnProbability = 0.1f;
+    [Range(1, 600)][SerializeField] private float timeBetweenSpawns = 1; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
 
     public Edge closestEdge;
@@ -33,7 +36,8 @@ public class Building : MonoBehaviour
     public readonly BuildingType buildingType;// the type of the building (i.e "residence", "office", "restaurant", etc. would be an enum)
 
     // Start is called before the first frame update. We use these to initialize the building.
-    void Start(){
+    void Start()
+    {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
         // I don't want to hardcode these values, but I'm not sure how to do it otherwise.
@@ -50,13 +54,15 @@ public class Building : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color  = Color.green;
-        if (Application.IsPlaying(this)){
+        Gizmos.color = Color.green;
+        if (Application.IsPlaying(this))
+        {
             Gizmos.DrawLine(this.transform.position, closestPointOnEdge);
         }
     }
 
-    public Vector3 CalcClosestPointOnEdge() {
+    public Vector3 CalcClosestPointOnEdge()
+    {
         Graph tempGraph = GameObject.Find("Graph").GetComponent<Graph>();
 
         Edge closestEdge = tempGraph.getClosetEdge(this.transform.position);
@@ -87,10 +93,12 @@ public class Building : MonoBehaviour
     // Spawn method
     public void SpawnTraveller()
     {
+        if (!ALLOW_SPAWNING) return;
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
         // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
-        GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnEdge, Quaternion.identity);
+        GameObject travellerManager = TravellerManager.Instance.gameObject;
+        GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnEdge, Quaternion.identity, travellerManager.transform);
     }
 
     // public Vector3 getEdgeLocation()
