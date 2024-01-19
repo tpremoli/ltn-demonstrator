@@ -5,7 +5,7 @@ using System.Linq;
 
 public class PedestrianPathGenerator
 {
-    public static float laneWidth = 3f; // Width of a lane, adjust as needed
+    public static float laneWidth = 3.5f; // Width of a lane, adjust as needed
 
     private static Dictionary<Waypoint, List<Waypoint>> pedestrianWaypointsMap = new Dictionary<Waypoint, List<Waypoint>>();
 
@@ -225,5 +225,33 @@ public class PedestrianPathGenerator
                 current.AddAdjacentWaypoint(previous);
             }
         }
+    }
+
+    // STEP 4: Connect pedestrian waypoints to the original graph
+
+    // todo
+
+    // STEP 5: clear the map
+    [MenuItem("Tools/Sidewalks/5. Clear pedestrian waypoints")]
+    public static void ClearPedestrianPaths()
+    {
+        List<Waypoint> waypoints = Object.FindObjectsOfType<Waypoint>().ToList();
+        List<Waypoint> toDelete = new List<Waypoint>();
+
+        for (int i = 0; i < waypoints.Count; i++)
+        {
+            if (waypoints[i].isPedestrianOnly)
+            {
+                toDelete.Add(waypoints[i]);
+            }
+        }
+
+        for (int i = 0; i < toDelete.Count; i++)
+        {
+            Object.DestroyImmediate(toDelete[i].gameObject);
+        }
+
+        WaypointEditor.PruneDeletedWaypoints();
+        EdgeLoader.LoadEdges();
     }
 }
