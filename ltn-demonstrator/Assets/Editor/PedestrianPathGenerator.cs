@@ -12,7 +12,6 @@ public class PedestrianPathGenerator
     // STEP 1: Generate pedestrian waypoints
 
     [MenuItem("Tools/Sidewalks/1. Generate Pedestrian Waypoints")]
-    [RuntimeInitializeOnLoadMethod]
     public static void GeneratePedestrianWaypoints()
     {
         pedestrianWaypointsMap = new Dictionary<Waypoint, List<Waypoint>>();
@@ -126,7 +125,6 @@ public class PedestrianPathGenerator
     // STEP 2: Connect pedestrian waypoints between different waypoints
 
     [MenuItem("Tools/Sidewalks/2. Connect between waypoints")]
-    [RuntimeInitializeOnLoadMethod]
     public static void ConnectExternalPedestrianWaypoints()
     {
         // Iterate through all mappings

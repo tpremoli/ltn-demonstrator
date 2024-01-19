@@ -82,11 +82,11 @@ public class WaypointMover : MonoBehaviour
         chooseDestinationBuilding();
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.transform.position, destinationBuilding.closestPointOnEdge, this);
+        path = new WaypointPath(this.transform.position, destinationBuilding.closestPointOnRoadEdge, this);
 
         if (path.path == null)
         {
-            Edge endEdge = destinationBuilding.closestEdge;
+            Edge endEdge = destinationBuilding.closestRoadEdge;
             // If no path is found, destroy the object.
             // Later on, we should change this so that the traveller changes their mode of transport
             Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
@@ -117,7 +117,7 @@ public class WaypointMover : MonoBehaviour
 
         }
         // Get origin Edge
-        Edge originEdge = graph.getClosetEdge(this.transform.position);
+        Edge originEdge = graph.getClosetRoadEdge(this.transform.position);
         if (path.path.Count > 0)
         {
             if (originEdge.EndWaypoint != path.path[0])
@@ -133,7 +133,7 @@ public class WaypointMover : MonoBehaviour
             }
         }
         // Get Terminal Edge
-        Edge terminalEdge = destinationBuilding.closestEdge;
+        Edge terminalEdge = destinationBuilding.closestRoadEdge;
         if (path.path.Count > 0)
         {
             if (terminalEdge.StartWaypoint != path.path[path.path.Count - 1])
@@ -163,7 +163,7 @@ public class WaypointMover : MonoBehaviour
             this.currentEdge.GetClosestPoint(this.transform.position)
             );
         // Obtain terminal location
-        Vector3 terminal = destinationBuilding.closestPointOnEdge;
+        Vector3 terminal = destinationBuilding.closestPointOnRoadEdge;
         //this.terminalLength = terminalEdge.GetClosestPointAsFractionOfEdge(terminal);
         this.terminalLength = Vector3.Distance(
             terminalEdge.startWaypoint.transform.position,
@@ -325,7 +325,7 @@ public class WaypointMover : MonoBehaviour
         destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
 
         // Edge case where the chosen building is the same as the building the traveller spawned at.
-        while (Vector3.Distance(this.transform.position, destinationBuilding.closestPointOnEdge) < distanceThreshold)
+        while (Vector3.Distance(this.transform.position, destinationBuilding.closestPointOnRoadEdge) < distanceThreshold)
         {
             // Choose new random destination building.
             destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];

@@ -88,19 +88,43 @@ public class Graph : MonoBehaviour
         return null;
     }
 
-    public Edge getClosetEdge(Vector3 position)
+    public Edge getClosetRoadEdge(Vector3 position)
     {
         Edge closestEdge = null;
         float minDistance = float.MaxValue;
 
         foreach (Edge edge in edges)
         {
+            if (edge.isPedestrianOnly) continue;
+            
             float distance = edge.DistanceToEdge(position);
 
             if (distance < minDistance)
             {
                 minDistance = distance;
                 closestEdge = edge;
+            }
+        }
+
+        return closestEdge;
+    }
+
+    public Edge getClosetPedestrianEdge(Vector3 position)
+    {
+        Edge closestEdge = null;
+        float minDistance = float.MaxValue;
+
+        foreach (Edge edge in edges)
+        {
+            if (edge.isPedestrianOnly)
+            {
+                float distance = edge.DistanceToEdge(position);
+
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closestEdge = edge;
+                }
             }
         }
 
