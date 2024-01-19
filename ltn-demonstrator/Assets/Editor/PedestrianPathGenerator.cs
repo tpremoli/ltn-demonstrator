@@ -56,11 +56,13 @@ public class PedestrianPathGenerator
         // Direction from the waypoint to its single adjacent waypoint
         Vector3 directionToAdjacent = (waypoint.adjacentWaypoints[0].transform.position - waypoint.transform.position).normalized;
 
+        float adjustedLaneWidth = laneWidth * 0.85f; // Override the lane width for cul-de-sacs
+
         // Create two pedestrian waypoints, each at 120 degrees from the direction to the adjacent waypoint
         for (int i = -1; i <= 1; i += 2) // i will be -1 and 1, representing 120 and -120 degrees
         {
             Vector3 rotatedDir = Quaternion.Euler(0, 120 * i, 0) * directionToAdjacent;
-            Vector3 offset = rotatedDir * laneWidth;
+            Vector3 offset = rotatedDir * adjustedLaneWidth;
             CreatePedestrianWaypointAt(waypoint.transform.position + offset, waypoint);
         }
     }
@@ -70,12 +72,19 @@ public class PedestrianPathGenerator
         Vector3 dir1 = (waypoint.adjacentWaypoints[0].transform.position - waypoint.transform.position).normalized;
         Vector3 dir2 = (waypoint.adjacentWaypoints[1].transform.position - waypoint.transform.position).normalized;
 
+        // Adjust lane width based on the angle
+        // For example, using the cosine of the angle, ensuring it's not less than a minimum threshold
+        float angle = Vector3.Angle(dir1, dir2) * Mathf.Deg2Rad;
+        float minScaleFactor = 0.7f; // Minimum scale factor
+        float scaleFactor = Mathf.Max(Mathf.Sin(angle), minScaleFactor);
+        float adjustedLaneWidth = laneWidth * scaleFactor;
+
         // Calculate the bisecting direction
         Vector3 bisectingDir = AverageDirection(dir1, dir2);
 
         // Create two waypoints, one on each side of the bisecting line
-        CreatePedestrianWaypointAt(waypoint.transform.position + bisectingDir * laneWidth, waypoint);
-        CreatePedestrianWaypointAt(waypoint.transform.position - bisectingDir * laneWidth, waypoint);
+        CreatePedestrianWaypointAt(waypoint.transform.position + bisectingDir * adjustedLaneWidth, waypoint);
+        CreatePedestrianWaypointAt(waypoint.transform.position - bisectingDir * adjustedLaneWidth, waypoint);
     }
 
     static void CreatePedestrianWaypointForAdjacentPair(Waypoint waypoint, Waypoint adjacent1, Waypoint adjacent2)
