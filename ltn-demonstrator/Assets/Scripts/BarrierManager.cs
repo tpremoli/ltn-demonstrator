@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BarrierManager : MonoBehaviour
 {
+
+    public GameObject barrierPrefab; // Prefab for the barrier
+    public List<GameObject> allBarriers;
+    
+
     public static BarrierManager Instance { get; private set; }
 
     private void Awake()
@@ -11,17 +16,10 @@ public class BarrierManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            LoadBarriers();
-        }
-        else
-        {
-            Destroy(gameObject);
+            // LoadBarriers();
         }
     }
 
-    public GameObject barrierPrefab; // Prefab for the barrier
-    public List<GameObject> allBarriers;
-    
 
     public void LoadBarriers()
     {
