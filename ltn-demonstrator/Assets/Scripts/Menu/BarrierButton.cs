@@ -13,17 +13,14 @@ public class BarrierButton : MonoBehaviour
     Transform barrierParent;
     private static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
 
-    public BarrierManager barrierManager; // Add this line
+    BarrierManager barrierManager;
 
     void Start()
     {
-        if (barrierManager != null)
+        barrierManager = BarrierManager.Instance;
+        if (barrierManager == null)
         {
-            barrierManager.LoadBarriers();
-        }
-        else
-        {
-            Debug.LogError("No BarrierManager assigned to the BarrierButton.");
+            Debug.LogError("No BarrierManager found assigned to the BarrierButton.");
         }
     }
 
@@ -71,37 +68,6 @@ public class BarrierButton : MonoBehaviour
         // Save the game to update the save file
         SaveGame();
 
-        /*
-
-        string filePath = Path.Combine(SAVE_FOLDER, "save.json");
-        if (File.Exists(filePath))
-        {
-            File.Delete(filePath);
-            Debug.Log("Save Deleted");
-
-            // Clear the barrier data list
-            BarriersContainer data = new BarriersContainer { barriers = new List<BarrierData>() };
-
-            // Save the empty list to the file
-            string json = JsonUtility.ToJson(data);
-            File.WriteAllText(filePath, json);
-
-            // Reload the barriers
-            if (barrierManager != null)
-            {
-                barrierManager.LoadBarriers();
-                Debug.Log("Barriers reloaded");
-            }
-            else
-            {
-                Debug.LogError("No BarrierManager assigned to the BarrierButton.");
-            }
-        }
-        else
-        {
-            Debug.LogError("File not found: " + filePath);
-        }
-        */
     }
 
     public void OnClick()
@@ -124,26 +90,18 @@ public class BarrierButton : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Vector3 worldPosition = hit.point;
-                GameObject barrierObject = Instantiate(barrierPrefab, worldPosition, Quaternion.identity);
-                Barrier barrier = barrierObject.GetComponent<Barrier>();
-                if (barrier != null)
+                Debug.Log("Barrier created at " + worldPosition);
+                if (barrierManager != null)
                 {
-                    Debug.Log("Barrier created at " + worldPosition);
-                    if (barrierManager != null)
-                    {
-                        Debug.Log("Barrier List size: " + barrierManager.allBarriers.Count);
-                        barrierManager.allBarriers.Add(barrierObject); // Add the GameObject, not the Barrier
-                        SpawnBarrier = false;
-                    }
-                    else
-                    {
-                        Debug.LogError("No BarrierManager found in the scene.");
-                    }
+                    Debug.Log("Barrier List size: " + barrierManager.allBarriers.Count);
+                    barrierManager.AddBarrier(worldPosition);
+                    SpawnBarrier = false;
                 }
                 else
                 {
-                    Debug.LogError("No Barrier component found on the instantiated object.");
+                    Debug.LogError("No BarrierManager found in the scene.");
                 }
+
             }
         }
 

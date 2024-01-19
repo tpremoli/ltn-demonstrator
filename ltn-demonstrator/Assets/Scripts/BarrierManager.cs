@@ -7,7 +7,9 @@ public class BarrierManager : MonoBehaviour
 
     public GameObject barrierPrefab; // Prefab for the barrier
     public List<GameObject> allBarriers;
-    
+
+    public bool ShouldLoadBarriers = true;
+
 
     public static BarrierManager Instance { get; private set; }
 
@@ -16,7 +18,10 @@ public class BarrierManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // LoadBarriers();
+            if (ShouldLoadBarriers)
+            {
+                LoadBarriers();
+            }
         }
     }
 
@@ -38,7 +43,16 @@ public class BarrierManager : MonoBehaviour
             GameObject newBarrier = Instantiate(barrierPrefab);
             newBarrier.transform.position = new Vector3(barrierData.position[0], barrierData.position[1], barrierData.position[2]);
             newBarrier.transform.rotation = Quaternion.Euler(barrierData.rotation[0], barrierData.rotation[1], barrierData.rotation[2]);
+            newBarrier.transform.parent = transform;
             allBarriers.Add(newBarrier);
         }
+    }
+
+    public void AddBarrier(Vector3 position)
+    {
+        GameObject newBarrier = Instantiate(barrierPrefab);
+        newBarrier.transform.position = position;
+        newBarrier.transform.parent = transform;
+        allBarriers.Add(newBarrier);
     }
 }
