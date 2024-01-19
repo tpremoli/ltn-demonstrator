@@ -32796,6 +32796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrierPrefab: {fileID: 211012215410212970, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
   allBarriers: []
+  ShouldLoadBarriers: 1
 --- !u!4 &1012873308
 Transform:
   m_ObjectHideFlags: 0
@@ -32805,7 +32806,7 @@ Transform:
   m_GameObject: {fileID: 1012873306}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 61.36379, y: -10.380798, z: -13.841352}
+  m_LocalPosition: {x: 61.36379, y: 0.1, z: -13.841352}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48420,6 +48421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrierPrefab: {fileID: 211012215410212970, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
   allBarriers: []
+  ShouldLoadBarriers: 1
 --- !u!1 &1489992122
 GameObject:
   m_ObjectHideFlags: 0
