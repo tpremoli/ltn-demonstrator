@@ -9,9 +9,11 @@ public class PedestrianPathGenerator
 
     private static Dictionary<Waypoint, List<Waypoint>> pedestrianWaypointsMap = new Dictionary<Waypoint, List<Waypoint>>();
 
-    [MenuItem("Tools/Generate Pedestrian Paths")]
+    // STEP 1: Generate pedestrian waypoints
+
+    [MenuItem("Tools/Sidewalks/1. Generate Pedestrian Waypoints")]
     [RuntimeInitializeOnLoadMethod]
-    public static void GenerateParallelWaypoints()
+    public static void GeneratePedestrianWaypoints()
     {
         pedestrianWaypointsMap = new Dictionary<Waypoint, List<Waypoint>>();
 
@@ -94,7 +96,6 @@ public class PedestrianPathGenerator
 
         CreatePedestrianWaypointAt(waypoint.transform.position + avgDir * laneWidth, waypoint);
     }
-
     static float AngleFromReference(Vector3 referencePoint, Vector3 targetPoint)
     {
         Vector3 direction = (targetPoint - referencePoint).normalized;
@@ -122,9 +123,11 @@ public class PedestrianPathGenerator
     }
 
 
-    [MenuItem("Tools/Connect Pedestrian Paths")]
+    // STEP 2: Connect pedestrian waypoints between different waypoints
+
+    [MenuItem("Tools/Sidewalks/2. Connect between waypoints")]
     [RuntimeInitializeOnLoadMethod]
-    public static void ConnectPedestrianPaths()
+    public static void ConnectExternalPedestrianWaypoints()
     {
         // Iterate through all mappings
         foreach (var pair in pedestrianWaypointsMap)
@@ -196,4 +199,33 @@ public class PedestrianPathGenerator
         return sum.normalized;
     }
 
+    // STEP 3: Connect pedestrian waypoints within the same waypoint
+
+    [MenuItem("Tools/Sidewalks/3. Connect within waypoints")]
+    public static void ConnectInternalPedestrianWaypoints()
+    {
+        // Assuming pedestrianWaypointsMap is accessible here. If not, you might need to pass it as an argument
+        foreach (var pair in PedestrianPathGenerator.pedestrianWaypointsMap)
+        {
+            List<Waypoint> pedestrianWaypoints = pair.Value;
+
+            // Only connect for waypoints with 3 or more pedestrian waypoints
+            // if (pedestrianWaypoints.Count < 3) continue;
+
+            // Sort the waypoints in a clockwise order
+            Vector3 originalPosition = pair.Key.transform.position;
+            pedestrianWaypoints = pedestrianWaypoints.OrderBy(p => AngleFromReference(originalPosition, p.transform.position)).ToList();
+
+            // Connect each pedestrian waypoint to the next and previous one in the list
+            for (int i = 0; i < pedestrianWaypoints.Count; i++)
+            {
+                Waypoint current = pedestrianWaypoints[i];
+                Waypoint next = pedestrianWaypoints[(i + 1) % pedestrianWaypoints.Count]; // Next in clockwise order
+                Waypoint previous = pedestrianWaypoints[(i - 1 + pedestrianWaypoints.Count) % pedestrianWaypoints.Count]; // Previous in clockwise order
+
+                current.AddAdjacentWaypoint(next);
+                current.AddAdjacentWaypoint(previous);
+            }
+        }
+    }
 }

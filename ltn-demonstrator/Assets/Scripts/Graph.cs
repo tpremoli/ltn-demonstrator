@@ -31,7 +31,6 @@ public class Graph : MonoBehaviour
         if (drawEdgeGizmos) // Check if drawing of edge gizmos is enabled
         {
             DrawEdgeGizmos();
-
         }
     }
 
