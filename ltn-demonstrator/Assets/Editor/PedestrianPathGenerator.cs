@@ -50,37 +50,6 @@ public class PedestrianPathGenerator
         }
     }
 
-    [MenuItem("Tools/Connect Pedestrian Paths")]
-    [RuntimeInitializeOnLoadMethod]
-    public static void ConnectPedestrianPaths()
-    {
-        // Iterate through all mappings
-        foreach (var pair in pedestrianWaypointsMap)
-        {
-            Waypoint originalWaypoint = pair.Key;
-            List<Waypoint> pedestrianWaypoints = pair.Value;
-
-            // Connect each pedestrian waypoint with appropriate waypoints of adjacent waypoints
-            foreach (var pedestrianWaypoint in pedestrianWaypoints)
-            {
-                foreach (var adjacent in originalWaypoint.adjacentWaypoints)
-                {
-                    if (pedestrianWaypointsMap.TryGetValue(adjacent, out List<Waypoint> adjacentPedestrianWaypoints))
-                    {
-                        foreach (var adjacentPedestrianWaypoint in adjacentPedestrianWaypoints)
-                        {
-                            // Check if connection intersects with original graph
-                            if (!DoesIntersectWithGraph(originalWaypoint, adjacent, pedestrianWaypoint, adjacentPedestrianWaypoint))
-                            {
-                                pedestrianWaypoint.AddAdjacentWaypoint(adjacentPedestrianWaypoint);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     static void CreatePedestrianWaypointsForCulDeSac(Waypoint waypoint)
     {
         // Direction from the waypoint to its single adjacent waypoint
@@ -153,18 +122,57 @@ public class PedestrianPathGenerator
     }
 
 
-    static bool DoesIntersectWithGraph(Waypoint original1, Waypoint original2, Waypoint pedestrian1, Waypoint pedestrian2)
+    [MenuItem("Tools/Connect Pedestrian Paths")]
+    [RuntimeInitializeOnLoadMethod]
+    public static void ConnectPedestrianPaths()
     {
-        // Line segment from original1 to original2
-        Vector3 a = original1.transform.position;
-        Vector3 b = original2.transform.position;
+        // Iterate through all mappings
+        foreach (var pair in pedestrianWaypointsMap)
+        {
+            Waypoint originalWaypoint = pair.Key;
+            List<Waypoint> pedestrianWaypoints = pair.Value;
 
+            // Connect each pedestrian waypoint with appropriate waypoints of adjacent waypoints
+            foreach (var pedestrianWaypoint in pedestrianWaypoints)
+            {
+                foreach (var adjacent in originalWaypoint.adjacentWaypoints)
+                {
+                    if (pedestrianWaypointsMap.TryGetValue(adjacent, out List<Waypoint> adjacentPedestrianWaypoints))
+                    {
+                        foreach (var adjacentPedestrianWaypoint in adjacentPedestrianWaypoints)
+                        {
+                            // Check if connection intersects with original graph
+                            if (!DoesIntersectWithGraph(originalWaypoint, pedestrianWaypoint, adjacentPedestrianWaypoint) &&
+                                !DoesIntersectWithGraph(adjacent, pedestrianWaypoint, adjacentPedestrianWaypoint))
+                            {
+                                pedestrianWaypoint.AddAdjacentWaypoint(adjacentPedestrianWaypoint);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    static bool DoesIntersectWithGraph(Waypoint originalWaypoint, Waypoint pedestrian1, Waypoint pedestrian2)
+    {
         // Line segment from pedestrian1 to pedestrian2
         Vector3 c = pedestrian1.transform.position;
         Vector3 d = pedestrian2.transform.position;
 
-        // Check for intersection
-        return LineSegmentsIntersect(a, b, c, d);
+        // Check for intersection with all edges connected to the original waypoint
+        foreach (var adjacent in originalWaypoint.adjacentWaypoints)
+        {
+            Vector3 a = originalWaypoint.transform.position;
+            Vector3 b = adjacent.transform.position;
+
+            if (LineSegmentsIntersect(a, b, c, d))
+            {
+                return true; // Intersects with one of the edges
+            }
+        }
+
+        return false; // No intersection found
     }
 
     static bool LineSegmentsIntersect(Vector3 a, Vector3 b, Vector3 c, Vector3 d)
