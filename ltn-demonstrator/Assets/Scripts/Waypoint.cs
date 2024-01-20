@@ -59,7 +59,6 @@ public class Waypoint : MonoBehaviour
 
         // Optionally, draw connections in a different color when selected
         Gizmos.color = Color.yellow;
-
         foreach (Waypoint adjacent in adjacentWaypoints)
         {
             if (adjacent != null)
