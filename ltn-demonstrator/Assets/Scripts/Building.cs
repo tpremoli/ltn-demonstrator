@@ -11,6 +11,45 @@ public enum BuildingType
     Shop
 }
 
+public static class BuildingProperties {
+        public static Dictionary<BuildingType, float> destinationWeights = new Dictionary<BuildingType, float>(){
+            {BuildingType.Residence, 0.0f},
+            {BuildingType.Office, 0.0f},
+            {BuildingType.Restaurant, 0.0f},
+            {BuildingType.Shop, 1.0f},
+        };
+
+        public static List<BuildingType> buildingTypes = new List<BuildingType>((BuildingType[]) System.Enum.GetValues(typeof(BuildingType)));
+
+        public static BuildingType getRandomWeightedDestinationType() {
+            float totalDestinationWeight = 0.0f;
+            List<float> cumulativeWeights = new List<float>();
+
+            // Get totals for all destination weights and populate cumulative weights list.
+            foreach (KeyValuePair<BuildingType, float> destinationWeight in destinationWeights) {
+                totalDestinationWeight += destinationWeight.Value;
+
+                cumulativeWeights.Add(totalDestinationWeight);
+            }
+
+            // Select random float value.
+            float r = UnityEngine.Random.value * totalDestinationWeight;
+
+            // Iterate through cumulative weights to find index to select.
+            int index = -1;
+            for (int i=0; i < cumulativeWeights.Count; i++) {
+                float weight = cumulativeWeights[i];
+                if (r <= weight) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return buildingTypes[index];
+        }
+}
+
+
 public class Building : MonoBehaviour
 {
     // DEBUG ATTRIBUUTES
@@ -20,7 +59,7 @@ public class Building : MonoBehaviour
     [SerializeField] private int vehicleMax;
     [SerializeField] private int occupantMax;
     private Graph graph;
-    private Dictionary<BuildingType, float> destinationWeights; // Distribution for destination types
+    public static Dictionary<BuildingType, float> destinationWeights; // Distribution for destination types
 
     // the spawn probability should be based on the building type and maximum number of occupants.
     // as it stands, it is a constant value, but it should be a function/enum of the building type
@@ -33,12 +72,14 @@ public class Building : MonoBehaviour
 
     // Some more attributes - not sure if needed, but seemed useful
     public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
-    public readonly BuildingType buildingType;// the type of the building (i.e "residence", "office", "restaurant", etc. would be an enum)
+    [SerializeField] public BuildingType buildingType;// the type of the building (i.e "residence", "office", "restaurant", etc. would be an enum)
 
     // Start is called before the first frame update. We use these to initialize the building.
     void Start()
     {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
+
+        buildingType = BuildingProperties.buildingTypes[Random.Range(0, BuildingProperties.buildingTypes.Count)];
 
         // I don't want to hardcode these values, but I'm not sure how to do it otherwise.
         // if this is removed, the building will spam vehicles
