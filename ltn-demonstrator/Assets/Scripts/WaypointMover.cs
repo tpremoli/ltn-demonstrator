@@ -149,18 +149,17 @@ public class WaypointMover : MonoBehaviour
             }
         }
         // If the destination is further along the same Edge, do not add the terminal edge
-        if (originEdge != terminalEdge)
+        if (!originEdge.isSameEdge(terminalEdge))
         {
             this.pathEdges.Add(terminalEdge);
         }
 
         // Position the traveller on the current Edge
         this.currentEdge = originEdge;
-        //this.currentEdge.Subscribe(this); // Delegated to coroutine
-        //this.positionOnEdge = this.currentEdge.GetClosestPointAsFractionOfEdge(this.transform.position);
+
         this.distanceAlongEdge = Vector3.Distance(
             this.currentEdge.startWaypoint.transform.position,
-            this.currentEdge.GetClosestPoint(this.transform.position)
+            this.transform.position
             );
         // Obtain terminal location
         Vector3 terminal = destinationBuilding.closestPointOnRoadEdge;
@@ -171,21 +170,24 @@ public class WaypointMover : MonoBehaviour
             );
         // If the destination is along the same edge, but in opposite direction
         // reverse the current direction of travel, and regenerate the positions
-        if (originEdge == terminalEdge && terminalLength < distanceAlongEdge)
+        if (originEdge.isSameEdge(terminalEdge))
         {
-            this.currentEdge = graph.getEdge(currentEdge.endWaypoint, currentEdge.startWaypoint);
-            if (currentEdge == null)
-            {
-                Destroy(this.gameObject);
-                return;
-            }
-            this.distanceAlongEdge = Vector3.Distance(
-                this.currentEdge.startWaypoint.transform.position,
-                this.currentEdge.GetClosestPoint(this.transform.position)
-                );
+            // Get the closest points on the edge to the traveller's position and the destination
+            Vector3 travellerpos = this.transform.position;
+            Vector3 destination = destinationBuilding.closestPointOnEdge;
+
+            // direction from traveller to destination
+            Vector3 direction = destination - travellerpos;
+
+            currentEdge = chooseEdgeInDirection(direction, currentEdge);
+
             this.terminalLength = Vector3.Distance(
                 currentEdge.startWaypoint.transform.position,
-                currentEdge.GetClosestPoint(terminal)
+                destination
+                );
+            this.distanceAlongEdge = Vector3.Distance(
+                currentEdge.startWaypoint.transform.position,
+                this.transform.position
                 );
         }
 
@@ -199,6 +201,43 @@ public class WaypointMover : MonoBehaviour
         // DEBUG
         //DebugDrawPath();
     }
+
+    Edge chooseEdgeInDirection(Vector3 direction, Edge currentEdge)
+    {
+        // Normalize the direction vector for comparison
+        direction.Normalize();
+
+        // Get the direction vectors for both possible travel directions on the current edge
+        Vector3 edgeForwardDirection = (currentEdge.endWaypoint.transform.position - currentEdge.startWaypoint.transform.position).normalized;
+        Vector3 edgeBackwardDirection = -edgeForwardDirection;
+
+        // Calculate the dot product to determine alignment with the edge directions
+        float forwardDot = Vector3.Dot(direction, edgeForwardDirection);
+        float backwardDot = Vector3.Dot(direction, edgeBackwardDirection);
+
+        // Choose the edge direction that aligns more closely with the traveller's desired direction
+        if (forwardDot > backwardDot)
+        {
+            // The traveller's direction aligns more with the forward direction of the edge
+            return currentEdge;
+        }
+        else
+        {
+            // The traveller's direction aligns more with the backward direction, flip the edge
+            Edge flippedEdge = graph.getEdge(currentEdge.endWaypoint, currentEdge.startWaypoint);
+            if (flippedEdge != null)
+            {
+                return flippedEdge;
+            }
+            else
+            {
+                Debug.LogError("Flipped edge does not exist.");
+                return null; // or handle the error appropriately
+            }
+        }
+    }
+
+
 
     // registers the traveller with the edge and makes it visible; 
     // it is necessarry for delayed spawns in case the traveller's spawn point would lead it to being inside another
@@ -704,7 +743,9 @@ public class WaypointMover : MonoBehaviour
             thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
             thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
 
-        }else{
+        }
+        else
+        {
             Debug.LogError("No model found for vehicle type: " + this.vType.Type + ". Fix this please! Worse errors could arise later.");
             DestroyImmediate(this.gameObject);
         }
