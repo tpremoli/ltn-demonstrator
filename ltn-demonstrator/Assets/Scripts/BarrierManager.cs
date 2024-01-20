@@ -18,13 +18,12 @@ public class BarrierManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            if (useSave)
-            {
-                LoadBarriersFromSave();
-            }
+        }
+        if (useSave)
+        {
+            LoadBarriersFromSave();
         }
     }
-
 
     public void LoadBarriersFromSave()
     {
@@ -54,5 +53,29 @@ public class BarrierManager : MonoBehaviour
         newBarrier.transform.position = position;
         newBarrier.transform.parent = transform;
         allBarriers.Add(newBarrier);
+    }
+
+    void RecalcBarriersOnEdges()
+    {
+        Graph graph = Graph.Instance;
+
+        Debug.Log("Recalculating barriers on edges");
+
+        foreach (Edge edge in graph.edges)
+        {
+            edge.barrier = edge.getBarrierInPath();
+
+            Debug.Log("Edge between " + edge.startWaypoint.name + " and " + edge.endWaypoint.name + " has barrier " + edge.barrier);
+
+            edge.isBarricated = edge.barrier != null;
+            edge.barrierLocation = edge.barrier != null ? edge.convertToPositionAlongEdge(edge.barrier.transform.position) : -1f;
+
+            if (edge.isBarricated)
+            {
+                Debug.Log("Edge between " + edge.startWaypoint.name + " and " + edge.endWaypoint.name + " is barricaded at " + edge.barrierLocation);
+            }
+
+        }
+
     }
 }

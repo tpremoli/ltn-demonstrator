@@ -16,7 +16,7 @@ public class WaypointPath
 
     public WaypointPath(Vector3 beginningPos, Vector3 destinationPos, WaypointMover mover)
     {
-        this.graph = GameObject.Find("Graph").GetComponent<Graph>();
+        this.graph = Graph.Instance;
         this.beginningPos = beginningPos;
         this.destinationPos = destinationPos;
         this.mover = mover;

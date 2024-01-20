@@ -3,6 +3,16 @@ using UnityEngine;
 
 public class Graph : MonoBehaviour
 {
+    public static Graph Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     // private waypointsize with getter
     [Range(0f, 2f)][SerializeField] private float waypointSize = 0.5f;
     [SerializeField] public List<Edge> edges;

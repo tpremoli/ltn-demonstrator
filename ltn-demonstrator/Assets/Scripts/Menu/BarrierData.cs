@@ -41,32 +41,5 @@ public class BarrierData
         }
             
         return data.barriers;
-        /*
-        if (File.Exists(SAVE_FOLDER + "save.json"))
-        {
-            string json = File.ReadAllText(SAVE_FOLDER + "save.json");
-            BarriersContainer data = JsonUtility.FromJson<BarriersContainer>(json);
-            
-            if (data == null)
-            {
-                // If the file is empty, create a new BarriersContainer
-                // with an empty list of barriers
-                data = new BarriersContainer { barriers = new List<BarrierData>() };
-            }
-            else if (data.barriers == null)
-            {
-                // If the file is not empty but the list of barriers is null,
-                // create a new list of barriers
-                data.barriers = new List<BarrierData>();
-            }
-            
-            return data.barriers;
-        }
-        else
-        {
-            Debug.Log("Save file not found in " + SAVE_FOLDER + "save.json");
-            return new List<BarrierData>();
-        }
-        */
     }
 }
