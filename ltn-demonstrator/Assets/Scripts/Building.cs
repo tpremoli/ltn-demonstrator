@@ -53,7 +53,15 @@ public class Building : MonoBehaviour
         this.closestPointOnRoadEdge = closestRoadEdge.GetClosestPoint(this.transform.position);
 
         this.closestPedestrianEdge = graph.getClosetPedestrianEdge(this.transform.position);
-        this.closestPointOnPedestrianEdge = closestPedestrianEdge.GetClosestPoint(this.transform.position);
+        if (this.closestPedestrianEdge != null)
+        {
+            this.closestPointOnPedestrianEdge = closestPedestrianEdge.GetClosestPoint(this.transform.position);
+
+        }
+        else
+        {
+            Debug.Log("No Pedestrian Edge Found");
+        }
 
         Debug.Log("Building Instantiated");
     }
@@ -62,11 +70,18 @@ public class Building : MonoBehaviour
     {
         if (Application.IsPlaying(this))
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(this.transform.position, closestPointOnRoadEdge);
+            if (closestPointOnRoadEdge != null)
+            {
 
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(this.transform.position, closestPointOnPedestrianEdge);
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(this.transform.position, closestPointOnRoadEdge);
+            }
+
+            if (closestPedestrianEdge != null)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(this.transform.position, closestPointOnPedestrianEdge);
+            }
         }
     }
 
