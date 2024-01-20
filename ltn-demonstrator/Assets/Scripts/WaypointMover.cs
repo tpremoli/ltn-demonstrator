@@ -320,15 +320,24 @@ public class WaypointMover : MonoBehaviour
     // Choose a random destination from the possible buildings in the grid.
     public void chooseDestinationBuilding()
     {
-        // Get list of buildings.
-        // Choose random destination building.
-        destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
+        // Choose random destination building type.
+        BuildingType destinationBuildingType = BuildingProperties.getRandomWeightedDestinationType();
 
-        // Edge case where the chosen building is the same as the building the traveller spawned at.
-        while (Vector3.Distance(this.transform.position, destinationBuilding.closestPointOnEdge) < distanceThreshold)
-        {
-            // Choose new random destination building.
-            destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
+        Debug.Log("Chosen type: " + destinationBuildingType);
+
+        // Select random building.
+        bool destinationFound = false;
+        destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
+        while (!destinationFound) {
+            // Check if random building is same as selected type and if the building is not the one we started at (edge case).
+            if (destinationBuilding.buildingType == destinationBuildingType && Vector3.Distance(this.transform.position, destinationBuilding.closestPointOnEdge) >= distanceThreshold) {
+                destinationFound = true;
+                Debug.Log("Found building: " + destinationBuilding.buildingType);
+                break;
+            } else {
+                // Choose new destination building.
+                destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
+            }
         }
     }
 
