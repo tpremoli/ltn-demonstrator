@@ -13,14 +13,15 @@ public enum BuildingType
 
 public static class BuildingProperties {
         public static Dictionary<BuildingType, float> destinationWeights = new Dictionary<BuildingType, float>(){
-            {BuildingType.Residence, 0.0f},
-            {BuildingType.Office, 0.0f},
-            {BuildingType.Restaurant, 0.0f},
+            {BuildingType.Residence, 0.2f},
+            {BuildingType.Office, 0.4f},
+            {BuildingType.Restaurant, 0.3f},
             {BuildingType.Shop, 1.0f},
         };
 
         public static List<BuildingType> buildingTypes = new List<BuildingType>((BuildingType[]) System.Enum.GetValues(typeof(BuildingType)));
 
+        // Choose a random building type.
         public static BuildingType getRandomWeightedDestinationType() {
             float totalDestinationWeight = 0.0f;
             List<float> cumulativeWeights = new List<float>();
