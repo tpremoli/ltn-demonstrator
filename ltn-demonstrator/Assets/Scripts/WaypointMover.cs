@@ -50,6 +50,7 @@ public class WaypointMover : MonoBehaviour
     private WaypointPath path;           // Instance of the pathfinding class
     private Graph graph;                 // Instance of the graph class
     private Building destinationBuilding;
+    [SerializeField] private BuildingType destinationBuildingType;
 
     void Start()
     {
@@ -321,7 +322,7 @@ public class WaypointMover : MonoBehaviour
     public void chooseDestinationBuilding()
     {
         // Choose random destination building type.
-        BuildingType destinationBuildingType = BuildingProperties.getRandomWeightedDestinationType();
+        destinationBuildingType = BuildingProperties.getRandomWeightedDestinationType();
 
         Debug.Log("Chosen type: " + destinationBuildingType);
 
