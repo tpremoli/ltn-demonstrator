@@ -82,6 +82,8 @@ public class RoadLoader : EditorWindow
 
         foreach (Edge currentEdge in graph.edges)
         {
+            if (currentEdge.isPedestrianOnly) continue;
+
             // we first check if we have already processed this edge, as we don't want to draw it twice
             bool isDuplicate = false;
             foreach (Edge processedEdge in processedEdges)
@@ -139,6 +141,8 @@ public class RoadLoader : EditorWindow
         List<Waypoint> waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
         foreach (Waypoint waypoint in waypoints)
         {
+            if (waypoint.isPedestrianOnly) continue;
+
             // Check if the waypoint is an intersection (3 or more connected edges)
             if (waypoint.adjacentWaypoints.Count >= 1)
             {
