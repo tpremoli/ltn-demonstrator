@@ -12,11 +12,13 @@ public class TravellerManager : MonoBehaviour
         public VehicleType vehicleType;
     }
 
-    public static TravellerManager Instance;
+    public static TravellerManager Instance { get; private set; }
 
     // pick random model and material
     [SerializeField]
     public List<VehiclePrefabTypePair> vehiclePrefabTypePairs;
+    public int noOfTravellers;
+
 
     private void Awake()
     {

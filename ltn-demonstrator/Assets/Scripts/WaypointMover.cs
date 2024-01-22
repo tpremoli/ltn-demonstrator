@@ -6,6 +6,7 @@ public class WaypointMover : MonoBehaviour
 {
     // Attributes controlling the object state
     bool initialised;   // Controls whether object has been initialised and should begin travelling
+    public int ID {get; set;}
 
     // Attributes controlling vehicle's type
     VehicleProperties vType;
@@ -571,7 +572,15 @@ public class WaypointMover : MonoBehaviour
     public void arriveToDestination()
     {
         Debug.Log("Arrived to destination. Destroying object.");
+        //update path data
+        //find corresponding data struct in statistical controller
+        StatisticsManager.Instance.UpdateEndTime(this.ID);
         Destroy(this.gameObject);
+    }
+
+    public List<Edge> getEdgePath()
+    {
+        return this.pathEdges;
     }
 
     public float calculateEmissions()

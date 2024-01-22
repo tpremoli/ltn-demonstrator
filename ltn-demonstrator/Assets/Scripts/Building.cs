@@ -95,11 +95,29 @@ public class Building : MonoBehaviour
     {
         if (!ALLOW_SPAWNING) return;
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
+        //update the traveller count
+        TravellerManager.Instance.noOfTravellers += 1;
         // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject travellerManager = TravellerManager.Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnEdge, Quaternion.identity, travellerManager.transform);
+        SaveTravellerData(newTravellerObj);
     }
+
+    public void SaveTravellerData (GameObject newTravellerObj) {
+        //assign ID to traveller - although its actually a waypointPath, will need to be reconfigured
+        WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
+        waypointMover.ID = TravellerManager.Instance.noOfTravellers; // Assign ID
+        //create data struct for traveller information
+        PathData pathData = new PathData();
+        pathData.path = newTravellerObj.GetComponent<WaypointMover>().getEdgePath();//getpath
+        pathData.startTime = Time.frameCount;
+        pathData.ID = TravellerManager.Instance.noOfTravellers;
+        pathData.routeChange = false;
+        //store to list
+        StatisticsManager.Instance.AddPathData(pathData);  //finish append
+    }
+
 
     // public Vector3 getEdgeLocation()
     // {
