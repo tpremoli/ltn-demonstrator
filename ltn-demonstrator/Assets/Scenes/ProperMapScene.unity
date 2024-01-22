@@ -65602,6 +65602,8 @@ MonoBehaviour:
     vehicleType: 1
   - vehiclePrefab: {fileID: 100000, guid: 05aec82adc02f16409639716322b1673, type: 3}
     vehicleType: 3
+  - vehiclePrefab: {fileID: 100000, guid: 05aec82adc02f16409639716322b1673, type: 3}
+    vehicleType: 2
 --- !u!4 &2072816221
 Transform:
   m_ObjectHideFlags: 0

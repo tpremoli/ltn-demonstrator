@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    [SerializeField]
+    private Camera cam;
+
     private Vector3 dragOrigin; // Declare dragOrigin here
-    public Camera cam;
 
     private void Update()
     {
