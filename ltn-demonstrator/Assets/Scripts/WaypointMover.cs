@@ -43,7 +43,7 @@ public class WaypointMover : MonoBehaviour
     private List<WaypointMover> travsBlockingThisDEBUG;
 
     // Attributes from the WaypointMover class
-    [SerializeField] private float distanceThreshold = 0.1f;
+    private float distanceThreshold = 0.001f;
     [SerializeField] private float leftLaneOffset = 1f;
 
     // Attributes for pathfinding
@@ -80,7 +80,7 @@ public class WaypointMover : MonoBehaviour
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        chooseDestinationBuilding();
+        this.destinationBuilding = chooseDestinationBuilding();
 
         // Initialize the path with the starting waypoint
         path = new WaypointPath(this.transform.position, destinationBuilding.closestPointOnEdge, this);
@@ -319,27 +319,25 @@ public class WaypointMover : MonoBehaviour
 
 
     // Choose a random destination from the possible buildings in the grid.
-    public void chooseDestinationBuilding()
+    public Building chooseDestinationBuilding()
     {
         // Choose random destination building type.
         destinationBuildingType = BuildingProperties.getRandomWeightedDestinationType();
 
         Debug.Log("Chosen type: " + destinationBuildingType);
 
-        // Select random building.
-        bool destinationFound = false;
-        destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
-        while (!destinationFound) {
-            // Check if random building is same as selected type and if the building is not the one we started at (edge case).
-            if (destinationBuilding.buildingType == destinationBuildingType && Vector3.Distance(this.transform.position, destinationBuilding.closestPointOnEdge) >= distanceThreshold) {
-                destinationFound = true;
-                Debug.Log("Found building: " + destinationBuilding.buildingType);
-                break;
-            } else {
-                // Choose new destination building.
-                destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
-            }
+        // Select a random building.
+        // Previously we used a while loop here to select a new building but for some reason
+        // that causes an infinite loop which doesn't seem to fixable.
+        // Also, trying to destroy the traveller using either Destroy(gameObject) or
+        // arriveToDestination() doesn't work (causes a traffic jam?).
+        // TODO: change this to select a new random building for this edge case.
+        Building building = graph.getRandomBuildingByType(destinationBuildingType);   
+        if (Vector3.Distance(transform.position, building.closestPointOnEdge) < distanceThreshold) {
+            Debug.LogWarning("Spawned traveller with destination building same as spawn building!");
         }
+
+        return building;
     }
 
     void Update()

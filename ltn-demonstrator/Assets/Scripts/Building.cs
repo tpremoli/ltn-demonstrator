@@ -5,18 +5,20 @@ using UnityEngine;
 // This is here for future expansion, but is not currently used
 public enum BuildingType
 {
+    Generic,
     Residence,
     Office,
     Restaurant,
-    Shop
+    Shop,
 }
 
 public static class BuildingProperties {
         public static Dictionary<BuildingType, float> destinationWeights = new Dictionary<BuildingType, float>(){
-            {BuildingType.Residence, 0.2f},
-            {BuildingType.Office, 0.4f},
-            {BuildingType.Restaurant, 0.3f},
-            {BuildingType.Shop, 1.0f},
+            {BuildingType.Generic, 0.1f},
+            {BuildingType.Residence, 1.0f},
+            {BuildingType.Office, 2.0f},
+            {BuildingType.Restaurant, 2.5f},
+            {BuildingType.Shop, 5.0f},
         };
 
         public static List<BuildingType> buildingTypes = new List<BuildingType>((BuildingType[]) System.Enum.GetValues(typeof(BuildingType)));
@@ -80,7 +82,7 @@ public class Building : MonoBehaviour
     {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        buildingType = BuildingProperties.buildingTypes[Random.Range(0, BuildingProperties.buildingTypes.Count)];
+        //buildingType = BuildingProperties.buildingTypes[Random.Range(0, BuildingProperties.buildingTypes.Count)];
 
         // I don't want to hardcode these values, but I'm not sure how to do it otherwise.
         // if this is removed, the building will spam vehicles
