@@ -7,24 +7,66 @@ public class CameraMovement : MonoBehaviour
     [SerializeField]
     private Camera cam;
 
+    [SerializeField]
+    private float maxZoomLevel, minY, maxY;
+
+    [SerializeField]
+    float sensitivity = 1;
+
     private Vector3 dragOrigin; // Declare dragOrigin here
+
+    private float zoomLevel;
 
     private void Update()
     {
         PanCamera();
+        SetCameraHeight();
+        Zoom();
+    }
+
+    void SetCameraHeight()
+    {
+        var y = Mathf.Lerp(minY, maxY,1 - (zoomLevel / maxZoomLevel));
+        cam.transform.position = new Vector3(cam.transform.position.x, y, cam.transform.position.z);
+    }
+
+    private Vector3 GetRayDirectionFromMouse()
+    {
+        var mosPos = Input.mousePosition;
+        mosPos.z = 10;
+        var moseWorldPoint = cam.ScreenToWorldPoint(mosPos);
+        var raycastDir = (moseWorldPoint - cam.transform.position).normalized;
+
+        return raycastDir;
     }
 
     private void PanCamera()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
+
+            if (Physics.Raycast(cam.transform.position, GetRayDirectionFromMouse(), out RaycastHit hit))
+            {
+                var hitPosition = hit.point;
+                dragOrigin = hitPosition;
+
+            }
         }
         if (Input.GetMouseButton(0))
         {
-            Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log("Origin: " + dragOrigin + " Mouse: " + cam.ScreenToWorldPoint(Input.mousePosition) + " Difference: " + difference);
-            cam.transform.position += difference;
+            if (Physics.Raycast(cam.transform.position, GetRayDirectionFromMouse(), out RaycastHit hit))
+            {
+                var hitPosition = hit.point;
+                Vector3 difference = dragOrigin - hitPosition;
+                cam.transform.position += difference * sensitivity;
+            }
         }
+    }
+
+    public void Zoom()
+    {
+        var scroll = Input.mouseScrollDelta.y;
+        zoomLevel += scroll;
+        zoomLevel = Mathf.Clamp(zoomLevel, 0, maxZoomLevel);
     }
 }
