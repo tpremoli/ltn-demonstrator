@@ -50,6 +50,7 @@ public class WaypointMover : MonoBehaviour
     private WaypointPath path;           // Instance of the pathfinding class
     private Graph graph;                 // Instance of the graph class
     private Building destinationBuilding;
+    private Building originBuilding;
     [SerializeField] private BuildingType destinationBuildingType;
 
     void Start()
@@ -201,6 +202,10 @@ public class WaypointMover : MonoBehaviour
         //DebugDrawPath();
     }
 
+    public void setOriginBuilding(Building building) {
+        this.originBuilding = building;
+    }
+
     // registers the traveller with the edge and makes it visible; 
     // it is necessarry for delayed spawns in case the traveller's spawn point would lead it to being inside another
     private IEnumerator waitUntilSpawnable()
@@ -326,15 +331,12 @@ public class WaypointMover : MonoBehaviour
 
         Debug.Log("Chosen type: " + destinationBuildingType);
 
-        // Select a random building.
-        // Previously we used a while loop here to select a new building but for some reason
-        // that causes an infinite loop which doesn't seem to fixable.
-        // Also, trying to destroy the traveller using either Destroy(gameObject) or
-        // arriveToDestination() doesn't work (causes a traffic jam?).
-        // TODO: change this to select a new random building for this edge case.
-        Building building = graph.getRandomBuildingByType(destinationBuildingType);   
-        if (Vector3.Distance(transform.position, building.closestPointOnEdge) < distanceThreshold) {
-            Debug.LogWarning("Spawned traveller with destination building same as spawn building!");
+        // Select a random building by type. If the selected building is the same as the origin building,
+        // choose a new building.
+        Building building = graph.getRandomBuildingByType(destinationBuildingType);
+        while (building == originBuilding) {
+            Debug.LogWarning("Spawned traveller with same origin and destination building! Choosing new building.");
+            building = graph.getRandomBuildingByType(destinationBuildingType);
         }
 
         return building;

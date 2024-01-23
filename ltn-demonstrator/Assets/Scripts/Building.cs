@@ -143,6 +143,7 @@ public class Building : MonoBehaviour
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject travellerManager = TravellerManager.Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnEdge, Quaternion.identity, travellerManager.transform);
+        newTravellerObj.GetComponent<WaypointMover>().setOriginBuilding(this);
     }
 
     // public Vector3 getEdgeLocation()
