@@ -6,7 +6,7 @@ public class PlayButton : MonoBehaviour
 {
     public void OnPlayButtonPressed()
     {
-        // Load the ProperMapScene scene
-        SceneManager.LoadScene("ProperMapScene");
+        // Load the MenuProperMapScene scene
+        SceneManager.LoadScene("MenuProperMapScene");
     }
 }

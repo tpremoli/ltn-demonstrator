@@ -6,8 +6,8 @@ public class EditLTNButton : MonoBehaviour
 {
     public void OnButtonPressed()
     {
-        // Load the ProperMapScene scene
-        SceneManager.LoadScene("BarrierButtonScene");
+        // Load the EditLTN scene
+        SceneManager.LoadScene("EditLTN");
     }
 }
 

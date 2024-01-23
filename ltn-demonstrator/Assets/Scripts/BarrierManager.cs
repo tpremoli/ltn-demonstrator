@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BarrierManager : MonoBehaviour
 {
-
     public GameObject barrierPrefab; // Prefab for the barrier
     public List<GameObject> allBarriers;
 
