@@ -113,7 +113,7 @@ public class RoadLoader : EditorWindow
             Vector3 midPoint = (startPoint + endPoint) / 2;
 
             // Instantiate a primitive cube to represent the road
-            GameObject roadObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject roadObject = CreatePrimitiveWithoutCollider(PrimitiveType.Cube);
             roadObject.name = "RoadSegment";
 
             // Scale the cube to match the road dimensions
@@ -147,7 +147,7 @@ public class RoadLoader : EditorWindow
             if (waypoint.adjacentWaypoints.Count >= 1)
             {
                 // Instantiate a primitive cube to represent the intersection
-                GameObject intersectionObject = GameObject.CreatePrimitive(intersectionShape);
+                GameObject intersectionObject = CreatePrimitiveWithoutCollider(intersectionShape);
                 intersectionObject.name = "Intersection";
 
                 // Scale the cube to be slightly larger than the road width
@@ -196,7 +196,7 @@ public class RoadLoader : EditorWindow
             // Calculate position for each dash using linear interpolation
             Vector3 dashPosition = Vector3.Lerp(edge.startWaypoint.transform.position, edge.endWaypoint.transform.position, lerpFactor);
 
-            GameObject dash = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject dash = CreatePrimitiveWithoutCollider(PrimitiveType.Cube);
             dash.name = "Dash";
             dash.transform.localScale = new Vector3(0.1f, 0.05f, dashSize); // Scale for the dash
             dash.GetComponent<MeshRenderer>().material = dashMaterial; // Assign a white material
@@ -212,7 +212,7 @@ public class RoadLoader : EditorWindow
         // Create two curb objects, one for each side of the road
         for (int i = 0; i < 2; i++)
         {
-            GameObject curb = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject curb = CreatePrimitiveWithoutCollider(PrimitiveType.Cube);
             curb.name = "Curb";
 
             // Scale the curb
@@ -243,7 +243,7 @@ public class RoadLoader : EditorWindow
         float intersectionCurbSize = roadWidth + 2 * curbWidth;
 
         // Create a curb object for the intersection
-        GameObject intersectionCurb = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject intersectionCurb = CreatePrimitiveWithoutCollider(PrimitiveType.Cube);
         intersectionCurb.name = "IntersectionCurb";
 
         // Scale the curb to enclose the intersection
@@ -258,5 +258,13 @@ public class RoadLoader : EditorWindow
 
         // Set the parent of the intersection curb to the roadManager
         intersectionCurb.transform.parent = intersection.transform;
+    }
+
+    // helper function to create a primitive without a box collider
+    private static GameObject CreatePrimitiveWithoutCollider(PrimitiveType type)
+    {
+        GameObject gameObject = GameObject.CreatePrimitive(type);
+        DestroyImmediate(gameObject.GetComponent<BoxCollider>()); 
+        return gameObject;
     }
 }
