@@ -52,5 +52,15 @@ public class StatisticsManager : MonoBehaviour
             }
         }
     }
+
+    //function to check data is correct and learn about readability
+
+    //Total travel time spent
+
+    //Average traveller velocity
+
+    //Rate of deviation from original path
+
+    //Rate of pollution - uses arbitrary values for now
     
 }
