@@ -10,6 +10,7 @@ public enum BuildingType
     Office,
     Restaurant,
     Shop,
+    ThroughTrafficDummy
 }
 
 public static class BuildingProperties {
@@ -19,6 +20,7 @@ public static class BuildingProperties {
             {BuildingType.Office, 2.0f},
             {BuildingType.Restaurant, 2.5f},
             {BuildingType.Shop, 5.0f},
+            {BuildingType.ThroughTrafficDummy, 0.25f},
         };
 
         public static List<BuildingType> buildingTypes = new List<BuildingType>((BuildingType[]) System.Enum.GetValues(typeof(BuildingType)));
@@ -102,6 +104,11 @@ public class Building : MonoBehaviour
         if (Application.IsPlaying(this))
         {
             Gizmos.DrawLine(this.transform.position, closestPointOnEdge);
+        }
+
+        if (buildingType == BuildingType.ThroughTrafficDummy) {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(transform.position, new Vector3(2, 2, 2));
         }
     }
 
