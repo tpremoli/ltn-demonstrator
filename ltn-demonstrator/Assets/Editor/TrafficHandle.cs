@@ -21,6 +21,10 @@ class LabelHandle : Editor
 
         Handles.color = Color.blue;
         Handles.Label(wp.transform.position + Vector3.up * 3,
-            " ltm: " + wp.leftToMove + "\n vel: " + wp.velocity);
+            "                vel: " + wp.velocity +
+            "\n  upperBound left: " + wp.movementUpperBound +
+            "\n  lowerBound left: " + wp.movementLowerBound +
+            "\n braking distance: " + wp.brakingDistance
+        );
     }
 }

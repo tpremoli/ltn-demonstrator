@@ -28,8 +28,11 @@ public class Building : MonoBehaviour
     [Range(1, 600)][SerializeField] private float timeBetweenSpawns = 1; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
 
-    public Edge closestEdge;
-    public Vector3 closestPointOnEdge;
+    public Edge closestRoadEdge;
+    public Vector3 closestPointOnRoadEdge;
+
+    public Edge closestPedestrianEdge;
+    public Vector3 closestPointOnPedestrianEdge;
 
     // Some more attributes - not sure if needed, but seemed useful
     public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
@@ -46,18 +49,39 @@ public class Building : MonoBehaviour
         this.spawnProbability = 0.1f;
         this.nextSpawnTime = Time.time + timeBetweenSpawns;
 
-        this.closestEdge = graph.getClosetEdge(this.transform.position);
-        this.closestPointOnEdge = closestEdge.GetClosestPoint(this.transform.position);
+        this.closestRoadEdge = graph.getClosetRoadEdge(this.transform.position);
+        this.closestPointOnRoadEdge = closestRoadEdge.GetClosestPoint(this.transform.position);
+
+        this.closestPedestrianEdge = graph.getClosetPedestrianEdge(this.transform.position);
+        if (this.closestPedestrianEdge != null)
+        {
+            this.closestPointOnPedestrianEdge = closestPedestrianEdge.GetClosestPoint(this.transform.position);
+
+        }
+        else
+        {
+            Debug.Log("No Pedestrian Edge Found");
+        }
 
         Debug.Log("Building Instantiated");
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
         if (Application.IsPlaying(this))
         {
-            Gizmos.DrawLine(this.transform.position, closestPointOnEdge);
+            if (closestPointOnRoadEdge != null)
+            {
+
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(this.transform.position, closestPointOnRoadEdge);
+            }
+
+            if (closestPedestrianEdge != null)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(this.transform.position, closestPointOnPedestrianEdge);
+            }
         }
     }
 
@@ -65,7 +89,7 @@ public class Building : MonoBehaviour
     {
         Graph tempGraph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        Edge closestEdge = tempGraph.getClosetEdge(this.transform.position);
+        Edge closestEdge = tempGraph.getClosetRoadEdge(this.transform.position);
         Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(this.transform.position);
         return closestPointOnEdge;
     }
@@ -98,7 +122,7 @@ public class Building : MonoBehaviour
         // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject travellerManager = TravellerManager.Instance.gameObject;
-        GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnEdge, Quaternion.identity, travellerManager.transform);
+        GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnRoadEdge, Quaternion.identity, travellerManager.transform);
     }
 
     // public Vector3 getEdgeLocation()

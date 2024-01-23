@@ -105,13 +105,13 @@ public class VehicleProperties
         switch (Type)
         {
             case VehicleType.PersonalCar:
-                return 1.0f;
+                return 2.0f;
             case VehicleType.SUV:
-                return 0.5f;
+                return 1.5f;
             case VehicleType.Van:
-                return 0.25f;
-            case VehicleType.Taxi:
                 return 1.0f;
+            case VehicleType.Taxi:
+                return 2.0f;
             default:
                 return 0.0f;
         }
@@ -121,13 +121,13 @@ public class VehicleProperties
         switch (Type)
         {
             case VehicleType.PersonalCar:
-                return 2.5f;
+                return 4.0f;
             case VehicleType.SUV:
-                return 2.5f;
+                return 3.5f;
             case VehicleType.Van:
                 return 2.0f;
             case VehicleType.Taxi:
-                return 2.5f;
+                return 4.0f;
             default:
                 return 0.0f;
         }

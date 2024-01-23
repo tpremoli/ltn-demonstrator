@@ -21,8 +21,8 @@ public class WaypointPath
         this.destinationPos = destinationPos;
         this.mover = mover;
 
-        this.startEdge = graph.getClosetEdge(beginningPos);
-        this.endEdge = graph.getClosetEdge(destinationPos);
+        this.startEdge = graph.getClosetRoadEdge(beginningPos);
+        this.endEdge = graph.getClosetRoadEdge(destinationPos);
 
         if (PathExists())
         {
@@ -42,6 +42,12 @@ public class WaypointPath
     /// <returns>A path from the start position to the end position</returns>
     public List<Waypoint> Dijkstra()
     {
+        if (startEdge.isPedestrianOnly || endEdge.isPedestrianOnly)
+        {
+            Debug.LogError("Start or end edge is Pedestrian only, cannot use Dijkstra's algorithm.");
+            return null;
+        }
+
         // Check if start and end are on the same edge to handle this special case
         if (startEdge.isSameEdge(endEdge))
         {
