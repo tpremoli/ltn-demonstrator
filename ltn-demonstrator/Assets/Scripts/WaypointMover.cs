@@ -83,6 +83,13 @@ public class WaypointMover : MonoBehaviour
 
         this.destinationBuilding = chooseDestinationBuilding();
 
+        if (this.destinationBuilding == null)
+        {
+            Debug.LogError("No destination building found. Destroying object.");
+            Destroy(this.gameObject);
+            return;
+        }
+
         // Initialize the path with the starting waypoint
         path = new WaypointPath(this.transform.position, destinationBuilding.closestPointOnEdge, this);
 
@@ -336,6 +343,12 @@ public class WaypointMover : MonoBehaviour
         Building building = graph.getRandomBuildingByType(destinationBuildingType);
         while (building == originBuilding) {
             Debug.LogWarning("Spawned traveller with same origin and destination building! Choosing new building.");
+
+            if(graph.buildingsByType[destinationBuildingType].Count == 1) {
+                Debug.LogError("Only one building of type " + destinationBuildingType + " exists in the graph. Cannot choose new building.");
+                return null;
+            }
+
             building = graph.getRandomBuildingByType(destinationBuildingType);
         }
 

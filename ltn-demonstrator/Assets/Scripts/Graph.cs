@@ -8,7 +8,7 @@ public class Graph : MonoBehaviour
     [SerializeField] public List<Edge> edges;
 
     public List<Building> allBuildings;
-    public Dictionary<BuildingType, List<Building>> buildingsDictionary = new Dictionary<BuildingType, List<Building>>();
+    public Dictionary<BuildingType, List<Building>> buildingsByType = new Dictionary<BuildingType, List<Building>>();
 
     public List<Waypoint> waypoints;
 
@@ -19,26 +19,30 @@ public class Graph : MonoBehaviour
         Random.InitState(42); // Set seed for random number generator
 
         // Initialise buildings dictionary.
-        foreach (BuildingType bType in BuildingProperties.buildingTypes) {
-            buildingsDictionary.Add(bType, new List<Building>());
+        foreach (BuildingType bType in BuildingProperties.buildingTypes)
+        {
+            buildingsByType.Add(bType, new List<Building>());
         }
 
         // Get list of waypoints and all buildings.
         waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
         allBuildings = new List<Building>(FindObjectsOfType<Building>());
 
-        foreach (Building b in allBuildings) {
-            buildingsDictionary[b.buildingType].Add(b);
+        foreach (Building b in allBuildings)
+        {
+            buildingsByType[b.buildingType].Add(b);
         }
 
-        foreach (KeyValuePair<BuildingType, List<Building>> t in buildingsDictionary) {
+        foreach (KeyValuePair<BuildingType, List<Building>> t in buildingsByType)
+        {
             Debug.Log("Building Type: " + t.Key + ", Total: " + t.Value.Count);
         }
 
     }
 
-    public Building getRandomBuildingByType(BuildingType buildingType) {
-        return buildingsDictionary[buildingType][Random.Range(0, buildingsDictionary[buildingType].Count)];
+    public Building getRandomBuildingByType(BuildingType buildingType)
+    {
+        return buildingsByType[buildingType][Random.Range(0, buildingsByType[buildingType].Count)];
     }
 
     public float WaypointSize
