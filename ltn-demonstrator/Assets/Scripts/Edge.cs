@@ -26,6 +26,8 @@ public class Edge
     public bool isBarricated;
     public float barrierLocation;
     public Barrier barrier;
+
+    public bool isPedestrianOnly;
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.startWaypoint = startWaypoint;
@@ -37,6 +39,8 @@ public class Edge
         this.barrier = getBarrierInPath();
         this.isBarricated = barrier != null;
         this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
+
+        this.isPedestrianOnly = startWaypoint.isPedestrianOnly || endWaypoint.isPedestrianOnly;
 
         if (this.isBarricated)
         {
@@ -66,6 +70,12 @@ public class Edge
 
     public void DrawGizmo()
     {
+        // drawing the edge would be too much clutter
+        if (isPedestrianOnly)
+        {
+            return;
+        }
+
         // Draw arrow pointing in the edge's direction
         Vector3 startpoint = startWaypoint.transform.position;
         Vector3 endpoint = endWaypoint.transform.position;
