@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3592278638555855255}
   - component: {fileID: 1373373557582476401}
   m_Layer: 0
-  m_Name: Building
+  m_Name: Residence1
   m_TagString: Buildings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1108109500680130686}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.008065224, y: 2.624242, z: -1.659811}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -125,7 +125,10 @@ MonoBehaviour:
   closestEdge:
     startWaypoint: {fileID: 0}
     endWaypoint: {fileID: 0}
-    distance: 0
+    length: 0
+    TravellersOnEdge: []
     isBarricated: 0
     barrierLocation: 0
     barrier: {fileID: 0}
+  closestPointOnEdge: {x: 0, y: 0, z: 0}
+  buildingType: 0

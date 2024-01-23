@@ -54,13 +54,15 @@ public class WaypointMover : MonoBehaviour
     private List<WaypointMover> travsSlowingThisDEBUG;
 
     // Attributes from the WaypointMover class
-    [SerializeField] private float distanceThreshold = 0.1f;
+    private float distanceThreshold = 0.001f;
     [SerializeField] private float leftLaneOffset = 1f;
 
     // Attributes for pathfinding
     private WaypointPath path;           // Instance of the pathfinding class
     private Graph graph;                 // Instance of the graph class
     private Building destinationBuilding;
+    private Building originBuilding;
+    [SerializeField] private BuildingType destinationBuildingType;
 
     void Start()
     {
@@ -78,7 +80,8 @@ public class WaypointMover : MonoBehaviour
 
         // pick a random model and material
         this.vType = pickRandomVehicleType();
-        if (!setVehicleModelAndMaterial()){
+        if (!setVehicleModelAndMaterial())
+        {
             return;
         }
 
@@ -93,7 +96,14 @@ public class WaypointMover : MonoBehaviour
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        chooseDestinationBuilding();
+        this.destinationBuilding = chooseDestinationBuilding();
+
+        if (this.destinationBuilding == null)
+        {
+            Debug.LogError("No destination building found. Destroying object.");
+            Destroy(this.gameObject);
+            return;
+        }
 
         // Initialize the path with the starting waypoint
         path = new WaypointPath(this.transform.position, destinationBuilding.closestPointOnRoadEdge, this);
@@ -214,6 +224,11 @@ public class WaypointMover : MonoBehaviour
 
         // DEBUG
         //DebugDrawPath();
+    }
+
+    public void setOriginBuilding(Building building)
+    {
+        this.originBuilding = building;
     }
 
     Edge chooseEdgeInDirection(Vector3 direction, Edge currentEdge)
@@ -371,18 +386,30 @@ public class WaypointMover : MonoBehaviour
 
 
     // Choose a random destination from the possible buildings in the grid.
-    public void chooseDestinationBuilding()
+    public Building chooseDestinationBuilding()
     {
-        // Get list of buildings.
-        // Choose random destination building.
-        destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
+        // Choose random destination building type.
+        destinationBuildingType = BuildingProperties.getRandomWeightedDestinationType();
 
-        // Edge case where the chosen building is the same as the building the traveller spawned at.
-        while (Vector3.Distance(this.transform.position, destinationBuilding.closestPointOnRoadEdge) < distanceThreshold)
+        Debug.Log("Chosen type: " + destinationBuildingType);
+
+        // Select a random building by type. If the selected building is the same as the origin building,
+        // choose a new building.
+        Building building = graph.getRandomBuildingByType(destinationBuildingType);
+        while (building == originBuilding)
         {
-            // Choose new random destination building.
-            destinationBuilding = graph.buildings[Random.Range(0, graph.buildings.Count)];
+            Debug.LogWarning("Spawned traveller with same origin and destination building! Choosing new building.");
+
+            if (graph.buildingsByType[destinationBuildingType].Count == 1)
+            {
+                Debug.LogError("Only one building of type " + destinationBuildingType + " exists in the graph. Cannot choose new building.");
+                return null;
+            }
+
+            building = graph.getRandomBuildingByType(destinationBuildingType);
         }
+
+        return building;
     }
 
     void Update()
@@ -394,19 +421,19 @@ public class WaypointMover : MonoBehaviour
         if (initialised)
         {
             // Calculate minimum and maximum velocity
-            float maxV = Mathf.Min(this.velocity + Time.deltaTime * vType.Acceleration,this.vType.MaxVelocity);
-            float minV = Mathf.Max(this.velocity - Time.deltaTime * vType.Deacceleration,0);
+            float maxV = Mathf.Min(this.velocity + Time.deltaTime * vType.Acceleration, this.vType.MaxVelocity);
+            float minV = Mathf.Max(this.velocity - Time.deltaTime * vType.Deacceleration, 0);
 
             // Calculate maximum movement
-            this.movementUpperBound = Time.deltaTime*velocity;
-            this.movementUpperBound+= Time.deltaTime * (maxV-velocity) * 0.5f;
+            this.movementUpperBound = Time.deltaTime * velocity;
+            this.movementUpperBound += Time.deltaTime * (maxV - velocity) * 0.5f;
 
             // Calculate minimum movement
-            this.movementLowerBound = Time.deltaTime*velocity;
-            this.movementLowerBound-= Time.deltaTime * (velocity-minV) * 0.5f; 
+            this.movementLowerBound = Time.deltaTime * velocity;
+            this.movementLowerBound -= Time.deltaTime * (velocity - minV) * 0.5f;
 
             // Calculate braking distance based on current velocity
-            this.brakingDistance = Mathf.Pow(velocity,2)/(2*vType.Deacceleration);
+            this.brakingDistance = Mathf.Pow(velocity, 2) / (2 * vType.Deacceleration);
             Move();
         }
     }
@@ -500,7 +527,8 @@ public class WaypointMover : MonoBehaviour
             float TravelledOverEdges = 0;
             Edge terminalEdge = this.currentEdge;
             Edge superTerminalEdge = null;
-            if(pathEdges.Count>0){
+            if (pathEdges.Count > 0)
+            {
                 superTerminalEdge = pathEdges[0];
             }
             float offset = this.distanceAlongEdge;
@@ -542,7 +570,7 @@ public class WaypointMover : MonoBehaviour
             //Calculate position of
             float myFront = TravelledInEdge + hLen + offset;
             float myRear = TravelledInEdge - hLen + offset;
-            float myBrDis = TravelledInEdge + hLen + brakingDistance +offset;
+            float myBrDis = TravelledInEdge + hLen + brakingDistance + offset;
 
             // Check for collision at that point in the edge with every traveller present on the edge
             foreach (WaypointMover wp in terminalEdge.TravellersOnEdge)
@@ -587,12 +615,13 @@ public class WaypointMover : MonoBehaviour
                 }
 
                 // Check whether there is a vehicle within braking path
-                if(wpRear<=myBrDis&&wpRear>=myFront&&proposedMovement>movementLowerBound){
+                if (wpRear <= myBrDis && wpRear >= myFront && proposedMovement > movementLowerBound)
+                {
                     // Reduce proposed movement to maintain separation
                     // Note that a car may not choose to reduce its movement below lowerBound
-                    float intersection = myBrDis-wpRear;
-                    proposedMovement = Mathf.Max(this.movementLowerBound,proposedMovement-intersection);
-                    proposedMovement-= 0.01f;
+                    float intersection = myBrDis - wpRear;
+                    proposedMovement = Mathf.Max(this.movementLowerBound, proposedMovement - intersection);
+                    proposedMovement -= 0.01f;
 
                     // Register for notification
                     this.travsSlowingThisDEBUG.Add(wp);
@@ -604,65 +633,66 @@ public class WaypointMover : MonoBehaviour
                 }
             }
             // Do the same for super-terminal edge
-            if(superTerminalEdge != null)
-            foreach (WaypointMover wp in superTerminalEdge.TravellersOnEdge)
-            {
-                if (wp == this) continue;
-                //Calculate position of other traveller on the edge in Real units
-                float wpPOEReal = wp.distanceAlongEdge+terminalEdge.Distance;
-                //Calculate position of
-                float wpFront = wpPOEReal + wp.hLen;
-                float wpRear = wpPOEReal - wp.hLen;
-
-                // Check whether this' front would end up within the vehicle
-                if (myFront <= wpFront && myFront >= wpRear)
+            if (superTerminalEdge != null)
+                foreach (WaypointMover wp in superTerminalEdge.TravellersOnEdge)
                 {
-                    // Collision occurred
-                    // Reduce proposed movement
-                    proposedMovement -= myFront - wpRear + 0.01f;
+                    if (wp == this) continue;
+                    //Calculate position of other traveller on the edge in Real units
+                    float wpPOEReal = wp.distanceAlongEdge + terminalEdge.Distance;
+                    //Calculate position of
+                    float wpFront = wpPOEReal + wp.hLen;
+                    float wpRear = wpPOEReal - wp.hLen;
 
-                    // register for notification
-                    this.travsBlockingThis.Add(wp);
-                    wp.registerForMove(this);
+                    // Check whether this' front would end up within the vehicle
+                    if (myFront <= wpFront && myFront >= wpRear)
+                    {
+                        // Collision occurred
+                        // Reduce proposed movement
+                        proposedMovement -= myFront - wpRear + 0.01f;
 
-                    // and re-loop
-                    proposalAccepted = false;
-                    break;
+                        // register for notification
+                        this.travsBlockingThis.Add(wp);
+                        wp.registerForMove(this);
+
+                        // and re-loop
+                        proposalAccepted = false;
+                        break;
+                    }
+
+                    // Check whether this' rear would end up within a vehilce
+                    if (myRear <= wpFront && myRear >= wpRear)
+                    {
+                        // collision occurred
+                        // Reduce proposed movement
+                        proposedMovement -= myFront - wpRear + 0.01f;
+
+                        // register for notification
+                        this.travsBlockingThis.Add(wp);
+                        wp.registerForMove(this);
+
+                        // and re-loop
+                        proposalAccepted = false;
+                        break;
+                    }
+
+                    // Check whether there is a vehicle within braking path
+                    if (wpRear <= myBrDis && wpRear >= myFront && proposedMovement > movementLowerBound)
+                    {
+                        // Reduce proposed movement to maintain separation
+                        // Note that a car may not choose to reduce its movement below lowerBound
+                        float intersection = myBrDis - wpRear;
+                        proposedMovement = Mathf.Max(this.movementLowerBound, proposedMovement - intersection);
+                        proposedMovement -= 0.01f;
+
+                        // Register for notification
+                        this.travsSlowingThisDEBUG.Add(wp);
+                        wp.registerForMove(this);
+
+                        // and re-loop
+                        proposalAccepted = false;
+                        break;
+                    }
                 }
-
-                // Check whether this' rear would end up within a vehilce
-                if (myRear <= wpFront && myRear >= wpRear)
-                {
-                    // collision occurred
-                    // Reduce proposed movement
-                    proposedMovement -= myFront - wpRear + 0.01f;
-
-                    // register for notification
-                    this.travsBlockingThis.Add(wp);
-                    wp.registerForMove(this);
-
-                    // and re-loop
-                    proposalAccepted = false;
-                    break;
-                }
-
-                // Check whether there is a vehicle within braking path
-                if(wpRear<=myBrDis&&wpRear>=myFront&&proposedMovement>movementLowerBound){
-                    // Reduce proposed movement to maintain separation
-                    // Note that a car may not choose to reduce its movement below lowerBound
-                    float intersection = myBrDis-wpRear;
-                    proposedMovement = Mathf.Max(this.movementLowerBound,proposedMovement-intersection);
-                    proposedMovement-= 0.01f;
-
-                    // Register for notification
-                    this.travsSlowingThisDEBUG.Add(wp);
-                    wp.registerForMove(this);
-
-                    // and re-loop
-                    proposalAccepted = false;
-                    break;
-                }
-            }
 
             // No collision occurred, the proposed movement is accepted
         }
@@ -865,7 +895,9 @@ public class WaypointMover : MonoBehaviour
             thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
             thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
 
-        }else{
+        }
+        else
+        {
             Debug.LogError("No model found for vehicle type: " + this.vType.Type + ". Fix this please! Worse errors could arise later.");
             DestroyImmediate(this.gameObject);
             return false;
