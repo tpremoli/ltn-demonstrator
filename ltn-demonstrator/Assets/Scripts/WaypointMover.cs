@@ -61,8 +61,8 @@ public class WaypointMover : MonoBehaviour
     // Attributes for pathfinding
     private WaypointPath path;           // Instance of the pathfinding class
     private Graph graph;                 // Instance of the graph class
-    private Building destinationBuilding;
-    private Building originBuilding;
+    public Building destinationBuilding { get; private set; }
+    public Building originBuilding { get; private set; }
     [SerializeField] private BuildingType destinationBuildingType;
 
     void Start()
@@ -155,43 +155,8 @@ public class WaypointMover : MonoBehaviour
             this.pathEdges = new List<Edge>(path.pathAsEdges);
         }
 
-        // these two if statements should go into WaypointPath, but I'm not sure how to do it
-        // Get origin Edge
-        Edge originEdge = this.path.startEdge;
-        if (path.pathAsWaypoints.Count > 0)
-        {
-            if (originEdge.EndWaypoint != path.pathAsWaypoints[0])
-            {
-                // If the edge does not end in the correct waypoint, look for counterpart
-                originEdge = graph.getEdge(originEdge.endWaypoint, originEdge.startWaypoint);
-                // If counterpart does not exist, terminate
-                if (originEdge == null)
-                {
-                    Destroy(this.gameObject);
-                    return;
-                }
-            }
-        }
-
-        // Get Terminal Edge
-        Edge terminalEdge = this.path.endEdge;
-        if (path.pathAsWaypoints.Count > 0)
-        {
-            if (terminalEdge.StartWaypoint != path.pathAsWaypoints[path.pathAsWaypoints.Count - 1])
-            {
-                // If the edge does not end in the correct waypoint, look for counterpart
-                terminalEdge = graph.getEdge(terminalEdge.endWaypoint, terminalEdge.startWaypoint);
-                // If counterpart does not exist, terminate
-                if (terminalEdge == null)
-                {
-                    Destroy(this.gameObject);
-                    return;
-                }
-            }
-        }
-
-
         // Position the traveller on the current Edge
+        Edge originEdge = this.path.startEdge;
         this.currentEdge = originEdge;
 
         this.distanceAlongEdge = Vector3.Distance(
@@ -199,6 +164,7 @@ public class WaypointMover : MonoBehaviour
             this.transform.position);
 
         // Obtain terminal location
+        Edge terminalEdge = this.path.endEdge;
         Vector3 terminal = this.path.destinationPos;
 
         this.terminalLength = Vector3.Distance(
@@ -778,7 +744,7 @@ public class WaypointMover : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (Application.isPlaying && !(path == null))
+        if (Application.isPlaying)
         {
             // Draw the destination sphere
             Gizmos.color = Color.magenta;
@@ -805,9 +771,10 @@ public class WaypointMover : MonoBehaviour
             }
         }
     }
+
     private void OnDrawGizmosSelected()
     {
-        if (Application.isPlaying && !(path == null))
+        if (Application.isPlaying)
         {
             // Draw the destination sphere
             Gizmos.color = Color.magenta;

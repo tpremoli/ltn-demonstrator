@@ -7,12 +7,12 @@ public class WaypointPath
     private Graph graph;
     private ModeOfTransport mode;
 
-    public  List<Waypoint> pathAsWaypoints { get; }
-    public List<Edge> pathAsEdges { get; }
-    public Vector3 beginningPos { get; }
-    public Vector3 destinationPos { get; }
-    public Edge startEdge { get; }
-    public Edge endEdge { get; }
+    public List<Waypoint> pathAsWaypoints { get; private set; }
+    public List<Edge> pathAsEdges { get; private set; }
+    public Vector3 beginningPos { get; private set; }
+    public Vector3 destinationPos { get; private set; }
+    public Edge startEdge { get; private set; }
+    public Edge endEdge { get; private set; }
 
     public WaypointPath(Building originBuilding, Building destinationBuilding, ModeOfTransport mode)
     {
@@ -51,7 +51,7 @@ public class WaypointPath
         }
 
         this.pathAsEdges = new List<Edge>();
-        convertWaypointPathToEdges();
+        createPathAsEdges();
     }
 
     /// <summary>
@@ -385,11 +385,12 @@ public class WaypointPath
         return ConstructPath(prev);
     }
 
-    private List<Edge> convertWaypointPathToEdges()
+    private void createPathAsEdges()
     {
         if (this.pathAsWaypoints == null)
         {
-            return null;
+            this.pathAsEdges = null;
+            return;
         }
 
         IEnumerator<Waypoint> iter = this.pathAsWaypoints.GetEnumerator();
@@ -414,15 +415,39 @@ public class WaypointPath
             }
         }
 
+        // these two if statements should go into WaypointPath, but I'm not sure how to do it
+        // Get origin Edge
+        if (this.pathAsWaypoints.Count > 0)
+        {
+            if (this.startEdge.EndWaypoint != pathAsWaypoints[0])
+            {
+                // If the edge does not end in the correct waypoint, look for counterpart
+                this.startEdge = graph.getEdge(this.startEdge.endWaypoint, this.startEdge.startWaypoint);
+                // If counterpart does not exist, terminate
+                if (this.startEdge == null)
+                {
+                    throw new System.Exception("No counterpart edge found when flipping edges! Can't find edge: " + this.startEdge.endWaypoint.name + " to " + this.startEdge.startWaypoint.name);
+                }
+            }
+            if (this.endEdge.StartWaypoint != pathAsWaypoints[pathAsWaypoints.Count - 1])
+            {
+                // If the edge does not end in the correct waypoint, look for counterpart
+                this.endEdge = graph.getEdge(this.endEdge.endWaypoint, this.endEdge.startWaypoint);
+                // If counterpart does not exist, terminate
+                if (this.endEdge == null)
+                {
+                    throw new System.Exception("No counterpart edge found when flipping edges! Can't find edge: " + this.startEdge.endWaypoint.name + " to " + this.startEdge.startWaypoint.name);
+                }
+            }
+        }
+
+
         // If the destination is further along the same Edge, do not add the terminal edge
         if (!this.startEdge.isSameEdge(this.endEdge))
         {
             this.pathAsEdges.Add(this.endEdge);
         }
-
-        return this.pathAsEdges;
     }
-
 }
 
 
