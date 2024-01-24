@@ -411,6 +411,12 @@ public class WaypointPath
             }
         }
 
+        // If the destination is further along the same Edge, do not add the terminal edge
+        if (!this.startEdge.isSameEdge(this.endEdge))
+        {
+            edgesList.Add(this.endEdge);
+        }
+
         return edgesList;
     }
 

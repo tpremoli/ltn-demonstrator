@@ -108,13 +108,20 @@ public class WaypointMover : MonoBehaviour
         }
 
 
-        var r = GetComponent<Collider>();
-        if (r != null)
+        Collider collider = GetComponent<Collider>();
+        if (this.vType.Type == VehicleType.Pedestrian)
         {
-            var bounds = r.bounds;
+            // remove the collider for pedestrians
+            Destroy(collider);
+            this.length = 0f;
+            this.hLen = 0f;
+        }
+        if (collider != null)
+        {
+            var bounds = collider.bounds;
             this.length = Mathf.Max(Mathf.Max(bounds.size.x, bounds.size.y), bounds.size.z);
             this.hLen = length / 2;
-        }
+        } 
 
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
@@ -144,6 +151,7 @@ public class WaypointMover : MonoBehaviour
         
         this.pathEdges = path.pathAsEdges;
 
+        // these two if statements should go into WaypointPath, but I'm not sure how to do it
         // Get origin Edge
         Edge originEdge = this.path.startEdge;
         if (path.path.Count > 0)
@@ -178,11 +186,6 @@ public class WaypointMover : MonoBehaviour
             }
         }
         
-        // If the destination is further along the same Edge, do not add the terminal edge
-        if (!originEdge.isSameEdge(terminalEdge))
-        {
-            this.pathEdges.Add(terminalEdge);
-        }
 
         // Position the traveller on the current Edge
         this.currentEdge = originEdge;
@@ -900,7 +903,6 @@ public class WaypointMover : MonoBehaviour
 
             thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
             thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
-
         }
         else
         {
