@@ -89,17 +89,19 @@ public class WaypointMover : MonoBehaviour
         if (this.mode == ModeOfTransport.Pedestrian)
         {
             this.transform.position = this.originBuilding.closestPointOnPedestrianEdge;
-            this.leftLaneOffset = 0;
+            this.leftLaneOffset = 0.2f;
+            this.vType = pickRandomVehicleType();
+            this.vType.Type = VehicleType.Pedestrian; // Set the type to pedestrian TODO: this should be done in pickRandomVehicleType()
         }
 
         if (this.mode == ModeOfTransport.Car || this.mode == ModeOfTransport.Bicycle)
         {
             // Set the traveller's position to the closest point on the road edge
             this.transform.position = this.originBuilding.closestPointOnRoadEdge;
+            this.vType = pickRandomVehicleType();
         }
 
         // pick a random model and material
-        this.vType = pickRandomVehicleType();
         if (!setVehicleModelAndMaterial())
         {
             return;
