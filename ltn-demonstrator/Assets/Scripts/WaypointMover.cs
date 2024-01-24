@@ -141,28 +141,9 @@ public class WaypointMover : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-        IEnumerator<Waypoint> iter = path.path.GetEnumerator();
-        iter.MoveNext();
-        Waypoint old_wp = null;
-        Waypoint wp = iter.Current;
+        
+        this.pathEdges = path.pathAsEdges;
 
-        // Convert the path into a list of edges
-        while (iter.MoveNext())
-        {
-            old_wp = wp;
-            wp = iter.Current;
-            Edge nextOne = this.graph.getEdge(old_wp, wp);
-            Debug.Log("Path from: " + old_wp.name + "  to: " + wp.name + "\nEdge: ");
-            if (nextOne == null)
-            {
-                Debug.LogError("There is no path connecting nodes.");
-            }
-            else
-            {
-                this.pathEdges.Add(nextOne);
-            }
-
-        }
         // Get origin Edge
         Edge originEdge = this.path.startEdge;
         if (path.path.Count > 0)
@@ -179,6 +160,7 @@ public class WaypointMover : MonoBehaviour
                 }
             }
         }
+
         // Get Terminal Edge
         Edge terminalEdge = this.path.endEdge;
         if (path.path.Count > 0)
@@ -195,6 +177,7 @@ public class WaypointMover : MonoBehaviour
                 }
             }
         }
+        
         // If the destination is further along the same Edge, do not add the terminal edge
         if (!originEdge.isSameEdge(terminalEdge))
         {

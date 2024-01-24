@@ -14,6 +14,8 @@ public class WaypointPath
     public Edge startEdge;
     public Edge endEdge;
 
+    public List<Edge> pathAsEdges;
+
     public WaypointPath(Building originBuilding, Building destinationBuilding, ModeOfTransport mode)
     {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
@@ -48,6 +50,8 @@ public class WaypointPath
                 this.path = DijkstraForPedestrians();
                 break;
         }
+
+        this.pathAsEdges = convertWaypointPathToEdges();
     }
 
     /// <summary>
@@ -379,6 +383,35 @@ public class WaypointPath
 
         // If a path exists, construct the path
         return ConstructPath(prev);
+    }
+
+    private List<Edge> convertWaypointPathToEdges()
+    {
+        IEnumerator<Waypoint> iter = this.path.GetEnumerator();
+        iter.MoveNext();
+        Waypoint old_wp = null;
+        Waypoint wp = iter.Current;
+
+        List<Edge> edgesList = new List<Edge>();
+
+        // Convert the path into a list of edges
+        while (iter.MoveNext())
+        {
+            old_wp = wp;
+            wp = iter.Current;
+            Edge nextOne = this.graph.getEdge(old_wp, wp);
+            Debug.Log("Path from: " + old_wp.name + "  to: " + wp.name + "\nEdge: ");
+            if (nextOne == null)
+            {
+                Debug.LogError("There is no path connecting nodes.");
+            }
+            else
+            {
+                edgesList.Add(nextOne);
+            }
+        }
+
+        return edgesList;
     }
 
 }
