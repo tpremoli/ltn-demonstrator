@@ -39,7 +39,8 @@ public class WaypointPath
                     Debug.LogWarning("Path does not exist for road vehicle.");
                     this.path = null;
                 }
-                return;
+
+                break;
             case ModeOfTransport.Pedestrian:
                 this.beginningPos = originBuilding.closestPointOnPedestrianEdge;
                 this.destinationPos = destinationBuilding.closestPointOnPedestrianEdge;
@@ -51,7 +52,8 @@ public class WaypointPath
                 break;
         }
 
-        this.pathAsEdges = convertWaypointPathToEdges();
+        this.pathAsEdges = new List<Edge>();
+        convertWaypointPathToEdges();
     }
 
     /// <summary>
@@ -387,12 +389,15 @@ public class WaypointPath
 
     private List<Edge> convertWaypointPathToEdges()
     {
+        if (this.path == null)
+        {
+            return null;
+        }
+
         IEnumerator<Waypoint> iter = this.path.GetEnumerator();
         iter.MoveNext();
         Waypoint old_wp = null;
         Waypoint wp = iter.Current;
-
-        List<Edge> edgesList = new List<Edge>();
 
         // Convert the path into a list of edges
         while (iter.MoveNext())
@@ -407,17 +412,17 @@ public class WaypointPath
             }
             else
             {
-                edgesList.Add(nextOne);
+                this.pathAsEdges.Add(nextOne);
             }
         }
 
         // If the destination is further along the same Edge, do not add the terminal edge
         if (!this.startEdge.isSameEdge(this.endEdge))
         {
-            edgesList.Add(this.endEdge);
+            this.pathAsEdges.Add(this.endEdge);
         }
 
-        return edgesList;
+        return this.pathAsEdges;
     }
 
 }

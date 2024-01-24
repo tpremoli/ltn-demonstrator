@@ -81,9 +81,8 @@ public class WaypointMover : MonoBehaviour
 
         // Some heuristic to choose what ModeOfTransport to use?
         // vehicleChosen = someHeuristicThatReturnsAModeOfTransport();
-        // pick the mode randomly
-        this.mode = ModeOfTransport.Pedestrian;
-        // this.mode = (ModeOfTransport)Random.Range(0, 3);
+        // For now, pick the mode randomly
+        this.mode = (ModeOfTransport)Random.Range(0, 3);
 
         // if the mode is pedestrian, set the traveller's position to the closest point on the pedestrian edge
         if (this.mode == ModeOfTransport.Pedestrian)
@@ -92,9 +91,7 @@ public class WaypointMover : MonoBehaviour
             this.leftLaneOffset = 0.2f;
             this.vType = pickRandomVehicleType();
             this.vType.Type = VehicleType.Pedestrian; // Set the type to pedestrian TODO: this should be done in pickRandomVehicleType()
-        }
-
-        if (this.mode == ModeOfTransport.Car || this.mode == ModeOfTransport.Bicycle)
+        }else if (this.mode == ModeOfTransport.Car || this.mode == ModeOfTransport.Bicycle)
         {
             // Set the traveller's position to the closest point on the road edge
             this.transform.position = this.originBuilding.closestPointOnRoadEdge;
@@ -104,6 +101,8 @@ public class WaypointMover : MonoBehaviour
         // pick a random model and material
         if (!setVehicleModelAndMaterial())
         {
+            Debug.LogError("No model and material found. Destroying object.");
+            Destroy(this.gameObject);
             return;
         }
 
@@ -192,15 +191,15 @@ public class WaypointMover : MonoBehaviour
 
         this.distanceAlongEdge = Vector3.Distance(
             this.currentEdge.startWaypoint.transform.position,
-            this.transform.position
-            );
+            this.transform.position);
+
         // Obtain terminal location
         Vector3 terminal = this.path.destinationPos;
 
         this.terminalLength = Vector3.Distance(
             terminalEdge.startWaypoint.transform.position,
-            terminalEdge.GetClosestPoint(terminal)
-            );
+            terminalEdge.GetClosestPoint(terminal));
+
         // If the destination is along the same edge, but in opposite direction
         // reverse the current direction of travel, and regenerate the positions
         if (originEdge.isSameEdge(terminalEdge))
@@ -216,12 +215,10 @@ public class WaypointMover : MonoBehaviour
 
             this.terminalLength = Vector3.Distance(
                 currentEdge.startWaypoint.transform.position,
-                destination
-                );
+                destination);
             this.distanceAlongEdge = Vector3.Distance(
                 currentEdge.startWaypoint.transform.position,
-                this.transform.position
-                );
+                this.transform.position);
         }
 
         Debug.Log("Traveller Instantiated");
@@ -903,11 +900,17 @@ public class WaypointMover : MonoBehaviour
 
             thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
             thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
+
+            // this allows us to ensure that pedestrians are the correct size. Should be done with all vehicles,
+            // but we have to setup the prefabs correctly first.
+            if (this.vType.Type == VehicleType.Pedestrian) 
+            {
+                this.transform.localScale = model.transform.localScale;
+            }
         }
         else
         {
             Debug.LogError("No model found for vehicle type: " + this.vType.Type + ". Fix this please! Worse errors could arise later.");
-            DestroyImmediate(this.gameObject);
             return false;
         }
         return true;
