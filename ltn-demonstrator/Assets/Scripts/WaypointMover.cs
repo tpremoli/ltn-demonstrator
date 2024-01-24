@@ -137,19 +137,10 @@ public class WaypointMover : MonoBehaviour
         // Initialize the path with the starting waypoint
         path = new WaypointPath(this.originBuilding, destinationBuilding, this.mode);
 
-        // copying the path edges, as we don't want to modify the original path
         if (path.pathAsEdges == null)
         {
-            // path is invalid
+            // path doesn't exist
             this.pathEdges = null;
-        }
-        else
-        {
-            this.pathEdges = new List<Edge>(path.pathAsEdges);
-        }
-
-        if (path.pathAsWaypoints == null)
-        {
             Edge endEdge = path.endEdge;
             // If no path is found, destroy the object.
             // Later on, we should change this so that the traveller changes their mode of transport
@@ -157,6 +148,11 @@ public class WaypointMover : MonoBehaviour
             Debug.LogWarning("End edge start: " + endEdge.StartWaypoint.name + " End edge end: " + endEdge.EndWaypoint.name);
             Destroy(this.gameObject);
             return;
+        }
+        else
+        {
+            // copying the path edges, as we don't want to modify the original path
+            this.pathEdges = new List<Edge>(path.pathAsEdges);
         }
 
         // these two if statements should go into WaypointPath, but I'm not sure how to do it
@@ -562,7 +558,10 @@ public class WaypointMover : MonoBehaviour
                     // Check whether there is a next edge, if not, the Traveller has reached its destination
                     this.currentEdge.Unsubscribe(this);
                     arriveToDestination();
+                    // we need to return here, because the traveller has arrived to its destination.
+                    return;
                 }
+
                 // Calculate distance Travelled over subsequent Edges
                 while (iter.Current.Distance < proposedMovement - TravelledOverEdges)
                 {
