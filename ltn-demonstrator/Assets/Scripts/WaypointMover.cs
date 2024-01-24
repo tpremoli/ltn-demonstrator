@@ -81,7 +81,22 @@ public class WaypointMover : MonoBehaviour
 
         // Some heuristic to choose what ModeOfTransport to use?
         // vehicleChosen = someHeuristicThatReturnsAModeOfTransport();
+        // pick the mode randomly
         this.mode = ModeOfTransport.Car;
+
+        // this.mode = (ModeOfTransport)Random.Range(0, 3);
+
+        // if the mode is pedestrian, set the traveller's position to the closest point on the pedestrian edge
+        if (this.mode == ModeOfTransport.Pedestrian)
+        {
+            this.transform.position = this.originBuilding.closestPointOnPedestrianEdge;
+        }
+
+        if (this.mode == ModeOfTransport.Car || this.mode == ModeOfTransport.Bicycle)
+        {
+            // Set the traveller's position to the closest point on the road edge
+            this.transform.position = this.originBuilding.closestPointOnRoadEdge;
+        }
 
         // pick a random model and material
         this.vType = pickRandomVehicleType();
@@ -89,6 +104,7 @@ public class WaypointMover : MonoBehaviour
         {
             return;
         }
+
 
         var r = GetComponent<Collider>();
         if (r != null)

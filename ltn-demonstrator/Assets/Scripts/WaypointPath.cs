@@ -31,7 +31,6 @@ public class WaypointPath
             case ModeOfTransport.Bicycle: // Bicycle is treated as a car for now
                 if (PathExistsForCars())
                 {
-                    Debug.LogWarning("generating djikstraaa");
                     this.path = DijkstraForCars();
                 }
                 else
@@ -41,15 +40,8 @@ public class WaypointPath
                 }
                 return;
             case ModeOfTransport.Pedestrian:
-                if (PathExistsForPedestrians())
-                {
-                    this.path = DijkstraForPedestrians();
-                }
-                else
-                {
-                    Debug.LogWarning("Path does not exist for pedestrians.");
-                    this.path = null;
-                }
+                // paths for pedestrians always exist (why wouldn't they?)
+                this.path = DijkstraForPedestrians();
                 break;
         }
     }
@@ -227,30 +219,6 @@ public class WaypointPath
         return startDist < endDist ? edge.StartWaypoint : edge.EndWaypoint;
     }
 
-    // Get the next waypoint in the traversal
-    public Waypoint PopNextWaypoint()
-    {
-        if (path == null || path.Count == 0)
-        {
-            Debug.Log("Finished path, moving to destination point now.");
-            return null;
-        }
-        Waypoint nextWaypoint = path[0];
-        path.RemoveAt(0);
-        return nextWaypoint;
-    }
-
-    // Get the next waypoint in the traversal
-    public Waypoint PeekNextWaypoint()
-    {
-        if (path == null || path.Count == 0)
-        {
-            return null;
-        }
-        Waypoint nextWaypoint = path[0];
-        return nextWaypoint;
-    }
-
 
     /// <summary>
     /// This method checks if a path exists between the start and end positions.
@@ -268,6 +236,10 @@ public class WaypointPath
         // Set initial distances to all waypoints as infinite and previous waypoints as null
         foreach (Waypoint waypoint in graph.waypoints)
         {
+            if (waypoint.isPedestrianOnly)
+            {
+                continue; // Skip to the next waypoint if it is pedestrian only
+            }
             dist[waypoint] = float.MaxValue;
             prev[waypoint] = null;
         }
@@ -298,6 +270,11 @@ public class WaypointPath
                 // Get the edge connecting the current waypoint and its neighbor
                 Edge connectingEdge = graph.GetEdge(current, neighbor);
 
+                if (connectingEdge.isPedestrianOnly)
+                {
+                    continue; // Skip to the next neighbor if the edge is pedestrian only
+                }
+
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
                 if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
                 {
@@ -320,12 +297,6 @@ public class WaypointPath
         }
 
         // If the loop completes without finding the end waypoint, return false indicating no path exists
-        return false;
-    }
-
-
-    private bool PathExistsForPedestrians()
-    {
         return false;
     }
 

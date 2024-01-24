@@ -179,7 +179,7 @@ public class Building : MonoBehaviour
         // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject travellerManager = TravellerManager.Instance.gameObject;
-        GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnRoadEdge, Quaternion.identity, travellerManager.transform);
+        GameObject newTravellerObj = Instantiate(travellerPrefab, travellerManager.transform);
         newTravellerObj.GetComponent<WaypointMover>().setOriginBuilding(this);
     }
 
