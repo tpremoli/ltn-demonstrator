@@ -82,14 +82,14 @@ public class WaypointMover : MonoBehaviour
         // Some heuristic to choose what ModeOfTransport to use?
         // vehicleChosen = someHeuristicThatReturnsAModeOfTransport();
         // pick the mode randomly
-        this.mode = ModeOfTransport.Car;
-
+        this.mode = ModeOfTransport.Pedestrian;
         // this.mode = (ModeOfTransport)Random.Range(0, 3);
 
         // if the mode is pedestrian, set the traveller's position to the closest point on the pedestrian edge
         if (this.mode == ModeOfTransport.Pedestrian)
         {
             this.transform.position = this.originBuilding.closestPointOnPedestrianEdge;
+            this.leftLaneOffset = 0;
         }
 
         if (this.mode == ModeOfTransport.Car || this.mode == ModeOfTransport.Bicycle)
@@ -127,11 +127,11 @@ public class WaypointMover : MonoBehaviour
         }
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.transform.position, destinationBuilding.closestPointOnRoadEdge, ModeOfTransport.Car);
+        path = new WaypointPath(this.originBuilding, destinationBuilding, this.mode);
 
         if (path.path == null)
         {
-            Edge endEdge = destinationBuilding.closestRoadEdge;
+            Edge endEdge = path.endEdge;
             // If no path is found, destroy the object.
             // Later on, we should change this so that the traveller changes their mode of transport
             Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
