@@ -6,7 +6,7 @@ public class WaypointPath
 {
     public List<Waypoint> path;
     private Graph graph;
-    private WaypointMover mover;
+    private ModeOfTransport mode;
 
     public Vector3 beginningPos;
     public Vector3 destinationPos;
@@ -14,23 +14,43 @@ public class WaypointPath
     public Edge startEdge;
     public Edge endEdge;
 
-    public WaypointPath(Vector3 beginningPos, Vector3 destinationPos, WaypointMover mover)
+    public WaypointPath(Vector3 beginningPos, Vector3 destinationPos, ModeOfTransport mode)
     {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
         this.beginningPos = beginningPos;
         this.destinationPos = destinationPos;
-        this.mover = mover;
+        this.mode = mode;
 
         this.startEdge = graph.getClosetRoadEdge(beginningPos);
         this.endEdge = graph.getClosetRoadEdge(destinationPos);
 
-        if (PathExists())
+
+        switch (mode)
         {
-            this.path = Dijkstra();
-        }
-        else
-        {
-            this.path = null;
+            case ModeOfTransport.Car:
+            case ModeOfTransport.Bicycle: // Bicycle is treated as a car for now
+                if (PathExistsForCars())
+                {
+                    Debug.LogWarning("generating djikstraaa");
+                    this.path = DijkstraForCars();
+                }
+                else
+                {
+                    Debug.LogWarning("Path does not exist for road vehicle.");
+                    this.path = null;
+                }
+                return;
+            case ModeOfTransport.Pedestrian:
+                if (PathExistsForPedestrians())
+                {
+                    this.path = DijkstraForPedestrians();
+                }
+                else
+                {
+                    Debug.LogWarning("Path does not exist for pedestrians.");
+                    this.path = null;
+                }
+                break;
         }
     }
 
@@ -40,7 +60,7 @@ public class WaypointPath
     /// If the list is null, no path exists between the start and end positions.
     /// </summary>
     /// <returns>A path from the start position to the end position</returns>
-    public List<Waypoint> Dijkstra()
+    public List<Waypoint> DijkstraForCars()
     {
         if (startEdge.isPedestrianOnly || endEdge.isPedestrianOnly)
         {
@@ -236,7 +256,7 @@ public class WaypointPath
     /// This method checks if a path exists between the start and end positions.
     /// </summary>
     /// <returns></returns>
-    public bool PathExists()
+    public bool PathExistsForCars()
     {
         Waypoint nearestStartWaypoint = ClosestWaypointOnEdge(startEdge, beginningPos);
         Waypoint nearestEndWaypoint = ClosestWaypointOnEdge(endEdge, destinationPos);
@@ -303,6 +323,16 @@ public class WaypointPath
         return false;
     }
 
+
+    private bool PathExistsForPedestrians()
+    {
+        return false;
+    }
+
+    private List<Waypoint> DijkstraForPedestrians()
+    {
+        return null;
+    }
 
 }
 

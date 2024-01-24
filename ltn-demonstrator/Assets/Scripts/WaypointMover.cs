@@ -8,7 +8,8 @@ public class WaypointMover : MonoBehaviour
     bool initialised;   // Controls whether object has been initialised and should begin travelling
 
     // Attributes controlling vehicle's type
-    VehicleProperties vType;
+    public VehicleProperties vType;
+    public ModeOfTransport mode;
 
     // Statistic measures
     private float totalDistanceMoved;
@@ -78,6 +79,10 @@ public class WaypointMover : MonoBehaviour
         this.travsBlockingThisDEBUG = new List<WaypointMover>();
         this.travsSlowingThisDEBUG = new List<WaypointMover>();
 
+        // Some heuristic to choose what ModeOfTransport to use?
+        // vehicleChosen = someHeuristicThatReturnsAModeOfTransport();
+        this.mode = ModeOfTransport.Car;
+
         // pick a random model and material
         this.vType = pickRandomVehicleType();
         if (!setVehicleModelAndMaterial())
@@ -106,7 +111,7 @@ public class WaypointMover : MonoBehaviour
         }
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.transform.position, destinationBuilding.closestPointOnRoadEdge, this);
+        path = new WaypointPath(this.transform.position, destinationBuilding.closestPointOnRoadEdge, ModeOfTransport.Car);
 
         if (path.path == null)
         {
