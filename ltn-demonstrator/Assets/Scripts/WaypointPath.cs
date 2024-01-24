@@ -4,17 +4,15 @@ using Utils;
 
 public class WaypointPath
 {
-    public List<Waypoint> path;
     private Graph graph;
     private ModeOfTransport mode;
 
-    public Vector3 beginningPos;
-    public Vector3 destinationPos;
-
-    public Edge startEdge;
-    public Edge endEdge;
-
-    public List<Edge> pathAsEdges;
+    public  List<Waypoint> pathAsWaypoints { get; }
+    public List<Edge> pathAsEdges { get; }
+    public Vector3 beginningPos { get; }
+    public Vector3 destinationPos { get; }
+    public Edge startEdge { get; }
+    public Edge endEdge { get; }
 
     public WaypointPath(Building originBuilding, Building destinationBuilding, ModeOfTransport mode)
     {
@@ -32,12 +30,12 @@ public class WaypointPath
 
                 if (PathExistsForCars())
                 {
-                    this.path = DijkstraForCars();
+                    this.pathAsWaypoints = DijkstraForCars();
                 }
                 else
                 {
                     Debug.LogWarning("Path does not exist for road vehicle.");
-                    this.path = null;
+                    this.pathAsWaypoints = null;
                 }
 
                 break;
@@ -48,7 +46,7 @@ public class WaypointPath
                 this.endEdge = destinationBuilding.closestPedestrianEdge;
 
                 // paths for pedestrians always exist (why wouldn't they?)
-                this.path = DijkstraForPedestrians();
+                this.pathAsWaypoints = DijkstraForPedestrians();
                 break;
         }
 
@@ -389,12 +387,12 @@ public class WaypointPath
 
     private List<Edge> convertWaypointPathToEdges()
     {
-        if (this.path == null)
+        if (this.pathAsWaypoints == null)
         {
             return null;
         }
 
-        IEnumerator<Waypoint> iter = this.path.GetEnumerator();
+        IEnumerator<Waypoint> iter = this.pathAsWaypoints.GetEnumerator();
         iter.MoveNext();
         Waypoint old_wp = null;
         Waypoint wp = iter.Current;

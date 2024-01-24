@@ -32,7 +32,7 @@ public class WaypointMover : MonoBehaviour
     private float distanceAlongEdge;    // Controls how far along current edge the traveller is
     private float terminalLength;       // Controls how far along the last edge in pathEdges / currentEdge if the previous is empty the terminal destination is
     private Edge currentEdge;           // Controls which edge the traveller currently occupies
-    private List<Edge> pathEdges;       // List of edges the traveller needs to travel
+    private List<Edge> pathEdges;       // Controls which edges the traveller will travel along
 
     // Movement attributes - velocity & velocity calculation
     public float velocity
@@ -72,7 +72,6 @@ public class WaypointMover : MonoBehaviour
         gameObject.GetComponent<Renderer>().enabled = false;
 
         // Initialising object
-        this.pathEdges = new List<Edge>();
         this.travsBlockedByThis = new List<WaypointMover>();
         this.travsBlockedByThisDEBUG = new List<WaypointMover>();
         this.travsBlockingThis = new List<WaypointMover>();
@@ -91,7 +90,8 @@ public class WaypointMover : MonoBehaviour
             this.leftLaneOffset = 0.2f;
             this.vType = pickRandomVehicleType();
             this.vType.Type = VehicleType.Pedestrian; // Set the type to pedestrian TODO: this should be done in pickRandomVehicleType()
-        }else if (this.mode == ModeOfTransport.Car || this.mode == ModeOfTransport.Bicycle)
+        }
+        else if (this.mode == ModeOfTransport.Car || this.mode == ModeOfTransport.Bicycle)
         {
             // Set the traveller's position to the closest point on the road edge
             this.transform.position = this.originBuilding.closestPointOnRoadEdge;
@@ -120,7 +120,7 @@ public class WaypointMover : MonoBehaviour
             var bounds = collider.bounds;
             this.length = Mathf.Max(Mathf.Max(bounds.size.x, bounds.size.y), bounds.size.z);
             this.hLen = length / 2;
-        } 
+        }
 
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
@@ -137,7 +137,18 @@ public class WaypointMover : MonoBehaviour
         // Initialize the path with the starting waypoint
         path = new WaypointPath(this.originBuilding, destinationBuilding, this.mode);
 
-        if (path.path == null)
+        // copying the path edges, as we don't want to modify the original path
+        if (path.pathAsEdges == null)
+        {
+            // path is invalid
+            this.pathEdges = null;
+        }
+        else
+        {
+            this.pathEdges = new List<Edge>(path.pathAsEdges);
+        }
+
+        if (path.pathAsWaypoints == null)
         {
             Edge endEdge = path.endEdge;
             // If no path is found, destroy the object.
@@ -147,15 +158,13 @@ public class WaypointMover : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-        
-        this.pathEdges = path.pathAsEdges;
 
         // these two if statements should go into WaypointPath, but I'm not sure how to do it
         // Get origin Edge
         Edge originEdge = this.path.startEdge;
-        if (path.path.Count > 0)
+        if (path.pathAsWaypoints.Count > 0)
         {
-            if (originEdge.EndWaypoint != path.path[0])
+            if (originEdge.EndWaypoint != path.pathAsWaypoints[0])
             {
                 // If the edge does not end in the correct waypoint, look for counterpart
                 originEdge = graph.getEdge(originEdge.endWaypoint, originEdge.startWaypoint);
@@ -170,9 +179,9 @@ public class WaypointMover : MonoBehaviour
 
         // Get Terminal Edge
         Edge terminalEdge = this.path.endEdge;
-        if (path.path.Count > 0)
+        if (path.pathAsWaypoints.Count > 0)
         {
-            if (terminalEdge.StartWaypoint != path.path[path.path.Count - 1])
+            if (terminalEdge.StartWaypoint != path.pathAsWaypoints[path.pathAsWaypoints.Count - 1])
             {
                 // If the edge does not end in the correct waypoint, look for counterpart
                 terminalEdge = graph.getEdge(terminalEdge.endWaypoint, terminalEdge.startWaypoint);
@@ -184,7 +193,7 @@ public class WaypointMover : MonoBehaviour
                 }
             }
         }
-        
+
 
         // Position the traveller on the current Edge
         this.currentEdge = originEdge;
@@ -372,14 +381,14 @@ public class WaypointMover : MonoBehaviour
     // visually draws the path with gizmos
     void DebugDrawPath()
     {
-        if (path != null && path.path != null && path.path.Count > 0)
+        if (path != null && path.pathAsWaypoints != null && path.pathAsWaypoints.Count > 0)
         {
-            Vector3[] pathPositions = new Vector3[path.path.Count + 1];
+            Vector3[] pathPositions = new Vector3[path.pathAsWaypoints.Count + 1];
             pathPositions[0] = transform.position;
 
-            for (int i = 0; i < path.path.Count; i++)
+            for (int i = 0; i < path.pathAsWaypoints.Count; i++)
             {
-                pathPositions[i + 1] = path.path[i].transform.position;
+                pathPositions[i + 1] = path.pathAsWaypoints[i].transform.position;
             }
 
             // Draw the path using Debug.DrawLine
@@ -533,9 +542,9 @@ public class WaypointMover : MonoBehaviour
             float TravelledOverEdges = 0;
             Edge terminalEdge = this.currentEdge;
             Edge superTerminalEdge = null;
-            if (pathEdges.Count > 0)
+            if (this.pathEdges.Count > 0)
             {
-                superTerminalEdge = pathEdges[0];
+                superTerminalEdge = this.pathEdges[0];
             }
             float offset = this.distanceAlongEdge;
 
@@ -776,10 +785,10 @@ public class WaypointMover : MonoBehaviour
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(path.destinationPos, 1f);
 
-            if (path.path.Count > 0)
+            if (path.pathAsWaypoints.Count > 0)
             {
                 // Iterate through the remaining waypoints
-                foreach (var waypoint in path.path)
+                foreach (var waypoint in path.pathAsWaypoints)
                 {
                     // Draw a sphere for each waypoint
                     Gizmos.DrawSphere(waypoint.transform.position, 1f);
@@ -805,10 +814,10 @@ public class WaypointMover : MonoBehaviour
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(path.destinationPos, 1f);
 
-            if (path.path.Count > 0)
+            if (path.pathAsWaypoints.Count > 0)
             {
                 // Iterate through the remaining waypoints
-                foreach (var waypoint in path.path)
+                foreach (var waypoint in path.pathAsWaypoints)
                 {
                     // Draw a sphere for each waypoint
                     Gizmos.DrawSphere(waypoint.transform.position, 1f);
@@ -903,7 +912,7 @@ public class WaypointMover : MonoBehaviour
 
             // this allows us to ensure that pedestrians are the correct size. Should be done with all vehicles,
             // but we have to setup the prefabs correctly first.
-            if (this.vType.Type == VehicleType.Pedestrian) 
+            if (this.vType.Type == VehicleType.Pedestrian)
             {
                 this.transform.localScale = model.transform.localScale;
             }
