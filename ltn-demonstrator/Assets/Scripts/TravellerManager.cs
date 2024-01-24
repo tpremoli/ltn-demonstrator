@@ -25,6 +25,7 @@ public class TravellerManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            noOfTravellers = 0;
         }
         else
         {

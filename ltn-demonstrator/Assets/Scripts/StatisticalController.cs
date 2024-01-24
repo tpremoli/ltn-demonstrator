@@ -12,6 +12,7 @@ public class StatisticsManager : MonoBehaviour
     public static List<PathData> allPathData { get; private set; }
     //text for stats in the statistical measures screen
     public TMP_Text statsText;
+    public const int TERMINATION_CRITERIA = 10;
     private int finishedPaths;
     private bool endSim;
     
@@ -26,6 +27,8 @@ public class StatisticsManager : MonoBehaviour
             //initialise termination criteria vars
             finishedPaths = 0; 
             endSim = false; 
+            //speed up simulation
+            Time.timeScale = 1;
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
         }
         else
@@ -48,7 +51,7 @@ public class StatisticsManager : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
         if (currentSceneName == "BuildingScene")
         {
-            if (TravellerManager.Instance.noOfTravellers >= 10) // Assuming noOfTravellers is a public field or property
+            if (endSim == true) // Assuming noOfTravellers is a public field or property
             {
                 // End Simulation - change to next scene
                 Debug.Log("SIMULATION ENDED");
@@ -91,14 +94,19 @@ public class StatisticsManager : MonoBehaviour
     }
 
 
+    public void BUGFIXincrementFinishedPaths() {
+        finishedPaths++;
+    }
+
     public void RecieveEndTime (int ID) {
         UpdateEndTime(ID);
         finishedPaths++;
-
-
+        Debug.Log($"finished Paths = {finishedPaths}, term = {TERMINATION_CRITERIA}, num of spawned Travellers = {TravellerManager.Instance.noOfTravellers}");
+        if (finishedPaths >= TERMINATION_CRITERIA) {
+            Debug.Log("ending simulation");
+            endSim = true;
+        }
     }
-
-
 
 
     public void UpdateEndTime(int id) {
@@ -177,7 +185,7 @@ public class StatisticsManager : MonoBehaviour
         string finalString = "";
         //Total time spent travelling
         string totalTravelTime = TotalTravelTime();
-        finalString = $"Total travel time: {totalTravelTime} \nAverage traveller velocity: N/A \nRate of deviation from original path: N/A \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
+        finalString = $"Number of travellers: N/A \nTotal travel time: {totalTravelTime} \nAverage traveller velocity: N/A \nRate of deviation from original path: N/A \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
 
 
 

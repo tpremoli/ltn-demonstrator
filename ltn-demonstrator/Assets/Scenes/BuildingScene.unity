@@ -1239,6 +1239,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3805309877017662717, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: vehiclePrefabTypePairs.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805309877017662717, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: vehiclePrefabTypePairs.Array.data[7].vehicleType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805309877017662717, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: vehiclePrefabTypePairs.Array.data[7].vehiclePrefab
+      value: 
+      objectReference: {fileID: 100000, guid: cffe1734bc43bcb47b6433ebca05c04c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

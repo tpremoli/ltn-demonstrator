@@ -92,6 +92,9 @@ public class WaypointMover : MonoBehaviour
             // Later on, we should change this so that the traveller changes their mode of transport
             Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
             Debug.LogWarning("End edge start: " + endEdge.StartWaypoint.name + " End edge end: " + endEdge.EndWaypoint.name);
+            //when the change is made, remove the code below - it is used to deal with
+            //paths that are destroyed so that the sim can terminate
+            StatisticsManager.Instance.BUGFIXincrementFinishedPaths();
             Destroy(this.gameObject);
             return;
         }
@@ -200,6 +203,11 @@ public class WaypointMover : MonoBehaviour
         // DEBUG
         //DebugDrawPath();
     }
+
+
+    public VehicleProperties getVType() {
+        return vType;
+        }
 
     // registers the traveller with the edge and makes it visible; 
     // it is necessarry for delayed spawns in case the traveller's spawn point would lead it to being inside another
@@ -574,7 +582,7 @@ public class WaypointMover : MonoBehaviour
         Debug.Log("Arrived to destination. Destroying object.");
         //update path data
         //find corresponding data struct in statistical controller
-        StatisticsManager.Instance.UpdateEndTime(this.ID);
+        StatisticsManager.Instance.RecieveEndTime(this.ID);
         Destroy(this.gameObject);
     }
 

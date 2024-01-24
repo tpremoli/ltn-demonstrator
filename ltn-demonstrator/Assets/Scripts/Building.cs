@@ -81,7 +81,6 @@ public class Building : MonoBehaviour
             // Spawn a vehicle, if the random number is less than the spawn probability
             if (Random.value < spawnProbability)
             {
-                Debug.Log("Spawning traveller");
                 SpawnTraveller();
             }
             // Set the next spawn time
@@ -94,6 +93,7 @@ public class Building : MonoBehaviour
     public void SpawnTraveller()
     {
         if (!ALLOW_SPAWNING) return;
+        Debug.Log("Spawning traveller");
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
         //update the traveller count
         TravellerManager.Instance.noOfTravellers += 1;
@@ -101,7 +101,24 @@ public class Building : MonoBehaviour
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject travellerManager = TravellerManager.Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnEdge, Quaternion.identity, travellerManager.transform);
+        Debug.Log("here");
+        WaypointMover wM = newTravellerObj.GetComponent<WaypointMover>();
+        //Debug.Log($"the traveller type is {newTravellerObj.GetComponent<WaypointMover>().getVType().ToString()}");
+        Debug.Log("It didnt print");
+        //FIX
+        // Check the type of the vehicle, abort if van (broken)
+        //WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
+        //Debug.Log($"the travller type is {newTravellerObj.getVType().Type.ToString()}");
+        //if (waypointMover != null && waypointMover.getVType().Type.ToString() == "Van")
+        //{
+        //    Debug.LogError("No model found for vehicle type: Van. Spawning aborted.");
+        //    return; // Abort the function to prevent further execution
+        //}
         SaveTravellerData(newTravellerObj);
+        //stops spawning if max number of travellers reached
+        if (TravellerManager.Instance.noOfTravellers >= StatisticsManager.TERMINATION_CRITERIA) {
+            ALLOW_SPAWNING = false;
+        }
     }
 
     public void SaveTravellerData (GameObject newTravellerObj) {
