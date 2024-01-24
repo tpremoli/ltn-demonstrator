@@ -25,3 +25,7 @@ Ethical and legal considerations are vital for this project as it models Low Tra
 
 ## Conclusion:
 Given the ethical and legal considerations outlined above, most aspects of the project do not require ethical approval (bar conferring with marginalized groups), as they involve minimal risk legally and ethically. If we decide to consult members of marginalized groups (limited mobility, race etc.), then this may change, hence, we will seek ethical approval from the university.
+
+## Review
+
+This document was reviewed in January 2024. The review found that there were no changes required to be made to this document and that the information listed here with respect to legal and ethical concerns are still accurate and up-to-date.
