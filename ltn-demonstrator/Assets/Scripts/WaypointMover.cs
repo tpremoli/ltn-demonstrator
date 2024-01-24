@@ -162,7 +162,7 @@ public class WaypointMover : MonoBehaviour
 
         }
         // Get origin Edge
-        Edge originEdge = graph.getClosetRoadEdge(this.transform.position);
+        Edge originEdge = this.path.startEdge;
         if (path.path.Count > 0)
         {
             if (originEdge.EndWaypoint != path.path[0])
@@ -178,7 +178,7 @@ public class WaypointMover : MonoBehaviour
             }
         }
         // Get Terminal Edge
-        Edge terminalEdge = destinationBuilding.closestRoadEdge;
+        Edge terminalEdge = this.path.endEdge;
         if (path.path.Count > 0)
         {
             if (terminalEdge.StartWaypoint != path.path[path.path.Count - 1])
@@ -207,8 +207,8 @@ public class WaypointMover : MonoBehaviour
             this.transform.position
             );
         // Obtain terminal location
-        Vector3 terminal = destinationBuilding.closestPointOnRoadEdge;
-        //this.terminalLength = terminalEdge.GetClosestPointAsFractionOfEdge(terminal);
+        Vector3 terminal = this.path.destinationPos;
+
         this.terminalLength = Vector3.Distance(
             terminalEdge.startWaypoint.transform.position,
             terminalEdge.GetClosestPoint(terminal)
@@ -219,7 +219,7 @@ public class WaypointMover : MonoBehaviour
         {
             // Get the closest points on the edge to the traveller's position and the destination
             Vector3 travellerpos = this.transform.position;
-            Vector3 destination = destinationBuilding.closestPointOnRoadEdge;
+            Vector3 destination = this.path.destinationPos;
 
             // direction from traveller to destination
             Vector3 direction = destination - travellerpos;
