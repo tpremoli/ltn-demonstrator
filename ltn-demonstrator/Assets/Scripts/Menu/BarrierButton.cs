@@ -8,12 +8,19 @@ public class BarrierButton : MonoBehaviour
     public GameObject barrierPrefab;
     public TextMeshProUGUI instructionText;
     private bool SpawnBarrier = false;
-    private bool deleteMode = false; // Add this line
+    private bool deleteMode = false;
 
     Transform barrierParent;
     private static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
 
-    BarrierManager barrierManager;
+    public BarrierManager barrierManager;
+    public Edge closestRoadEdge;
+    public Vector3 closestPointOnRoadEdge;
+    private Graph graph;
+    private Waypoint startWaypointLane;
+
+    public Waypoint endWaypoint;
+
 
     void Start()
     {
@@ -49,25 +56,19 @@ public class BarrierButton : MonoBehaviour
     public void DeleteABarrier()
     {
         instructionText.text = "Click on desired barrier to delete";
-        deleteMode = true; // Add this line
+        deleteMode = true;
     }
 
     public void DeleteSave()
     {
         foreach (GameObject barrierObject in barrierManager.allBarriers.ToArray())
         {
-            // Remove from list
             barrierManager.allBarriers.Remove(barrierObject);
-
-            // Destroy the barrier
             Destroy(barrierObject);
         }
 
         Debug.Log("Deleted Barriers");
-
-        // Save the game to update the save file
         SaveGame();
-
     }
 
     public void OnClick()
@@ -93,6 +94,14 @@ public class BarrierButton : MonoBehaviour
                 Debug.Log("Barrier created at " + worldPosition);
                 if (barrierManager != null)
                 {
+                    this.graph = GameObject.Find("Graph").GetComponent<Graph>();
+                    this.closestRoadEdge = graph.getClosetRoadEdge(this.transform.position);
+                    this.closestPointOnRoadEdge = closestRoadEdge.GetClosestPoint(this.transform.position);
+                    Debug.Log("Closest Road Edge: " + closestRoadEdge.position + " Closest Point on Road Edge: " + closestPointOnRoadEdge);
+                    Debug.Log("Direction of the Closest Road Edge: " + closestRoadEdge.direction);
+                    //Edge nearestEdge = barrierManager.GetNearestEdge(worldPosition);
+                    //Debug.Log("Nearest edge to worldPosition is at " + nearestEdge.position + " with direction " + nearestEdge.edgeDirection);
+
                     Debug.Log("Barrier List size: " + barrierManager.allBarriers.Count);
                     barrierManager.AddBarrier(worldPosition);
                     SpawnBarrier = false;
@@ -101,11 +110,9 @@ public class BarrierButton : MonoBehaviour
                 {
                     Debug.LogError("No BarrierManager found in the scene.");
                 }
-
             }
-        }
+        } // This is the missing closing brace
 
-        // Add this block
         if (deleteMode && Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -115,19 +122,38 @@ public class BarrierButton : MonoBehaviour
                 Barrier hitBarrier = hit.transform.GetComponent<Barrier>();
                 if (hitBarrier != null)
                 {
-                    // Remove from list
                     barrierManager.allBarriers.Remove(hit.transform.gameObject);
-
-                    // Destroy the barrier
                     Destroy(hit.transform.gameObject);
-
-                    // Save the game to update the save file
                     SaveGame();
-
-                    // Exit delete mode
                     deleteMode = false;
                 }
             }
         }
     }
+    /*
+    public static void PositionBarrier()
+    {
+        Graph tempGraph = GameObject.Find("Graph").GetComponent<Graph>();
+
+        Edge closestEdge = tempGraph.getClosetRoadEdge(this.transform.position);
+        Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(this.transform.position);
+        Vector3 directionFromClosestPointToBarrier = barrier.transform.position - closestPointOnEdge; // Calculate direction vector
+
+        if (directionFromClosestPointToBarrier != Vector3.zero)
+        {
+            // Normalize the direction vector
+            Vector3 normalizedDirection = directionFromClosestPointToBarrier.normalized;
+
+            // rotate barrier horizontal to the road
+            barrier.transform.rotation = Quaternion.LookRotation(normalizedDirection.normalized, Vector3.up);
+
+            // Set the barrier's position to this new position
+            barrier.transform.position = newPosition;
+        }
+    
+
+        // mark scene as dirty so it saves
+        UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
+    }
+    */
 }

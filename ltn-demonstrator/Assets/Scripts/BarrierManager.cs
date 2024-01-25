@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class BarrierManager : MonoBehaviour
 {
+    
+    public Edge closestRoadEdge;
+    public Vector3 closestPointOnRoadEdge;
+    private Graph graph;
+    private Waypoint startWaypointLane;
+
+    public Waypoint endWaypoint;
     public GameObject barrierPrefab; // Prefab for the barrier
     public List<GameObject> allBarriers;
 
@@ -48,9 +55,31 @@ public class BarrierManager : MonoBehaviour
 
     public void AddBarrier(Vector3 position)
     {
-        GameObject newBarrier = Instantiate(barrierPrefab);
-        newBarrier.transform.position = position;
-        newBarrier.transform.parent = transform;
+        GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
+        newBarrier.transform.Rotate(0, 90, 0); 
+        // Rotate the barrier on the y axis 
+        Graph tempGraph = GameObject.Find("Graph").GetComponent<Graph>();
+
+        Edge closestEdge = tempGraph.getClosetRoadEdge(position);
+        Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(position);
+        Vector3 directionFromClosestPointToBarrier = newBarrier.transform.position - closestPointOnEdge; // Calculate direction vector
+
+        if (directionFromClosestPointToBarrier != Vector3.zero)
+        {
+            // Normalize the direction vector
+            Vector3 normalizedDirection = directionFromClosestPointToBarrier.normalized;
+
+            // rotate barrier horizontal to the road
+            newBarrier.transform.rotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
+
+            // rotate 90 degrees
+            newBarrier.transform.Rotate(0, 90, 0);
+
+            // Set the barrier's position to this new position
+            newBarrier.transform.position = position;
+        }
+
+        // Add the barrier to the list of all barriers
         allBarriers.Add(newBarrier);
     }
 

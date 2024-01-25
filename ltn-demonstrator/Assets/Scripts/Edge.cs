@@ -4,6 +4,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Edge
 {
+    public Vector3 position;
+    public Vector3 direction;
     public Waypoint startWaypoint;
 
     private Waypoint startWaypointLane;
@@ -80,6 +82,7 @@ public class Edge
         Vector3 startpoint = startWaypoint.transform.position;
         Vector3 endpoint = endWaypoint.transform.position;
         Vector3 direction = endpoint - startpoint;
+        // Debug.Log("Direction of the Road Edge: " + direction);
 
         // Make the arrows shorter by 20%
         float shortenedMagnitude = direction.magnitude * 0.7f;
@@ -228,6 +231,13 @@ public class Edge
         {
             if (allBarriers[i].isPointInBarrier(this.GetClosestPoint(allBarriers[i].transform.position)))
             {
+                // Calculate the angle between the barrier's forward direction and the edge direction
+                Vector3 edgeDirection = this.GetDirection();
+                float angle = Vector3.Angle(allBarriers[i].transform.forward, edgeDirection);
+
+                // Apply the rotation to the barrier
+                allBarriers[i].transform.rotation = Quaternion.Euler(0, angle, 0);
+
                 return allBarriers[i];
             }
         }
