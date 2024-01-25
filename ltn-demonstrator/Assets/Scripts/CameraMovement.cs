@@ -8,7 +8,9 @@ public class CameraMovement : MonoBehaviour
     private Camera cam;
 
     [SerializeField]
-    private float maxZoomLevel, minY, maxY;
+    private float minY;
+
+    private float maxY = 175;
 
     [SerializeField]
     float sensitivity = 1;
@@ -23,6 +25,8 @@ public class CameraMovement : MonoBehaviour
         SetCameraHeight();
         Zoom();
     }
+
+    const int maxZoomLevel = 1000;
 
     void SetCameraHeight()
     {
