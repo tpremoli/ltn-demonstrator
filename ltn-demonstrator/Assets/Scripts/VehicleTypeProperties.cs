@@ -118,7 +118,7 @@ public class VehicleProperties
             case VehicleType.Taxi:
                 return 2.0f;
             case VehicleType.Pedestrian:
-                return 10.0f;
+                return 1000.0f;
             default:
                 return 0.0f;
         }
@@ -136,7 +136,7 @@ public class VehicleProperties
             case VehicleType.Taxi:
                 return 4.0f;
             case VehicleType.Pedestrian:
-                return 10.0f;
+                return 1000.0f;
             default:
                 return 0.0f;
         }

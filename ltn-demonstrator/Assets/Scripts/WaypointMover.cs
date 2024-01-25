@@ -87,15 +87,18 @@ public class WaypointMover : MonoBehaviour
         if (this.mode == ModeOfTransport.Pedestrian)
         {
             this.transform.position = this.originBuilding.closestPointOnPedestrianEdge;
-            this.leftLaneOffset = 0.2f;
+            // this.leftLaneOffset = 0.2f;
+            this.leftLaneOffset = Random.Range(-0.25f, 0.25f); // randomizing offset for dynamic look
             this.vType = pickRandomVehicleType();
             this.vType.Type = VehicleType.Pedestrian; // Set the type to pedestrian TODO: this should be done in pickRandomVehicleType()
+            this.gameObject.name = "Pedestrian";
         }
         else if (this.mode == ModeOfTransport.Car || this.mode == ModeOfTransport.Bicycle)
         {
             // Set the traveller's position to the closest point on the road edge
             this.transform.position = this.originBuilding.closestPointOnRoadEdge;
             this.vType = pickRandomVehicleType();
+            this.gameObject.name = vType.Type.ToString();
         }
 
         // pick a random model and material
