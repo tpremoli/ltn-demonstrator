@@ -41,7 +41,7 @@ public class Building : MonoBehaviour
     // Start is called before the first frame update. We use these to initialize the building.
     void Start()
     {
-        this.graph = GameObject.Find("Graph").GetComponent<Graph>();
+        this.graph = Graph.Instance;
 
         // I don't want to hardcode these values, but I'm not sure how to do it otherwise.
         // if this is removed, the building will spam vehicles
@@ -100,7 +100,8 @@ public class Building : MonoBehaviour
         // Using time-based spawning- there is a spawnProbability chance of spawning a 
         // vehicle every timeBetweenSpawns seconds. Only spawn if the maximum number of
         // vehicles has not been reached.
-        if (Time.time >= nextSpawnTime) // && VehicleList.Count < vehicleMax  
+        // && VehicleList.Count < vehicleMax  
+        if (Time.time >= nextSpawnTime && !graph.inEditMode) // Check if it is time to spawn a vehicle
         {
             // Spawn a vehicle, if the random number is less than the spawn probability
             if (Random.value < spawnProbability)
