@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 
-public class EditLTNButton : MonoBehaviour
+public class PlayModeMenu : MonoBehaviour
 {
-    public void OnButtonPressed()
+    public void OnEditLTNButtonPressed()
     {
         // Load the EditLTN scene
+        Debug.LogError("EditLTNButton.cs: OnButtonPressed(");
         SceneManager.LoadScene("EditLTN");
     }
 }

@@ -40494,8 +40494,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1186075791}
-        m_TargetAssemblyTypeName: EditLTNButton, Assembly-CSharp
-        m_MethodName: OnButtonPressed
+        m_TargetAssemblyTypeName: PlayModeMenu, Assembly-CSharp
+        m_MethodName: OnEditLTNButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

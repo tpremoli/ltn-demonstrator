@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using System.IO;
 
-public class BarrierButton : MonoBehaviour
+public class EditScreenMenu : MonoBehaviour
 {
     public GameObject barrierPrefab;
     public TextMeshProUGUI instructionText;
@@ -53,13 +53,13 @@ public class BarrierButton : MonoBehaviour
         }
     }
 
-    public void DeleteABarrier()
+    public void OnDeleteBarrierPressed()
     {
         instructionText.text = "Click on desired barrier to delete";
         deleteMode = true;
     }
 
-    public void DeleteSave()
+    public void OnDeleteSavePressed()
     {
         foreach (GameObject barrierObject in barrierManager.allBarriers.ToArray())
         {
@@ -71,7 +71,7 @@ public class BarrierButton : MonoBehaviour
         SaveGame();
     }
 
-    public void OnClick()
+    public void OnAddBarrierPressed()
     {
         instructionText.text = "Click on desired barrier location";
         SpawnBarrier = true;
@@ -131,5 +131,10 @@ public class BarrierButton : MonoBehaviour
             }
         }
     }
-    
+
+    public void OnPlayButtonPressed()
+    {
+        // Load the MenuProperMapScene scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MenuProperMapScene");
+    }
 }
