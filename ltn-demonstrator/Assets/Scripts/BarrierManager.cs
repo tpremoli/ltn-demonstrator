@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BarrierManager : MonoBehaviour
 {
-    
+
     public Edge closestRoadEdge;
     public Vector3 closestPointOnRoadEdge;
     private Graph graph;
@@ -18,6 +18,15 @@ public class BarrierManager : MonoBehaviour
 
 
     public static BarrierManager Instance { get; private set; }
+
+    void Update()
+    {   
+        // force reload barriers
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            RecalcBarriersOnEdges();
+        }
+    }
 
     private void Awake()
     {
@@ -50,13 +59,17 @@ public class BarrierManager : MonoBehaviour
             newBarrier.transform.rotation = Quaternion.Euler(barrierData.rotation[0], barrierData.rotation[1], barrierData.rotation[2]);
             newBarrier.transform.parent = transform;
             allBarriers.Add(newBarrier);
+
+            // this essentially reloads colliders so we can use them to generate barriers etc.
+            // this is not efficient at all. HOWEVER, it is only called once on load.
+            Physics.SyncTransforms();
         }
     }
 
     public void AddBarrier(Vector3 position)
     {
         GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
-        newBarrier.transform.Rotate(0, 90, 0); 
+        newBarrier.transform.Rotate(0, 90, 0);
         // Rotate the barrier on the y axis 
         Graph graph = Graph.Instance;
 
@@ -83,26 +96,16 @@ public class BarrierManager : MonoBehaviour
         allBarriers.Add(newBarrier);
     }
 
-    void RecalcBarriersOnEdges()
+    public void RecalcBarriersOnEdges()
     {
         Graph graph = Graph.Instance;
 
         Debug.Log("Recalculating barriers on edges");
 
+        // this is not efficient at all.
         foreach (Edge edge in graph.edges)
         {
-            edge.barrier = edge.getBarrierInPath();
-
-            Debug.Log("Edge between " + edge.startWaypoint.name + " and " + edge.endWaypoint.name + " has barrier " + edge.barrier);
-
-            edge.isBarricated = edge.barrier != null;
-            edge.barrierLocation = edge.barrier != null ? edge.convertToPositionAlongEdge(edge.barrier.transform.position) : -1f;
-
-            if (edge.isBarricated)
-            {
-                Debug.Log("Edge between " + edge.startWaypoint.name + " and " + edge.endWaypoint.name + " is barricaded at " + edge.barrierLocation);
-            }
-
+            edge.RecheckBarriers();
         }
 
     }

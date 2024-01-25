@@ -51,6 +51,10 @@ public class Graph : MonoBehaviour
             Debug.Log("Building Type: " + t.Key + ", Total: " + t.Value.Count);
         }
 
+        if (!inEditMode && BarrierManager.Instance.loadBarriersFromSave){
+            BarrierManager.Instance.RecalcBarriersOnEdges();
+        }
+
     }
 
     public Building getRandomBuildingByType(BuildingType buildingType)

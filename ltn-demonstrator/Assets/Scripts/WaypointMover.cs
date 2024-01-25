@@ -129,7 +129,7 @@ public class WaypointMover : MonoBehaviour
             old_wp = wp;
             wp = iter.Current;
             Edge nextOne = this.graph.getEdge(old_wp, wp);
-            Debug.Log("Path from: " + old_wp.name + "  to: " + wp.name + "\nEdge: ");
+            // Debug.Log("Path from: " + old_wp.name + "  to: " + wp.name + "\nEdge: ");
             if (nextOne == null)
             {
                 Debug.LogError("There is no path connecting nodes.");

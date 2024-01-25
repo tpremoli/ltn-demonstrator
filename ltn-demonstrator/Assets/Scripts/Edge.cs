@@ -50,6 +50,17 @@ public class Edge
         }
     }
 
+    public void RecheckBarriers()
+    {
+        this.barrier = getBarrierInPath();
+        this.isBarricated = barrier != null;
+        this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
+        if (this.isBarricated)
+        {
+            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
+        }
+    }
+
     // converting between distance along edge and distance in world space
     public float RealDistanceToDeltaD(float len)
     {
@@ -225,20 +236,38 @@ public class Edge
 
     public Barrier getBarrierInPath()
     {
-        // we go through the Barrier and check if the edge intersects with any of them
-        Barrier[] allBarriers = GameObject.FindObjectsOfType<Barrier>();
-        for (int i = 0; i < allBarriers.Length; i++)
+        Barrier[] allBarriers;
+
+        if (BarrierManager.Instance == null)
         {
-            if (allBarriers[i].isPointInBarrier(this.GetClosestPoint(allBarriers[i].transform.position)))
+            allBarriers = GameObject.FindObjectsOfType<Barrier>();
+        }
+        else
+        {
+            List<GameObject> allBarrierGameObjects;
+            allBarrierGameObjects = BarrierManager.Instance.allBarriers;
+            // get all the Barrier objects from the list of GameObjects
+            allBarriers = new Barrier[allBarrierGameObjects.Count];
+            for (int i = 0; i < allBarrierGameObjects.Count; i++)
             {
+                allBarriers[i] = allBarrierGameObjects[i].GetComponent<Barrier>();
+            }
+        }
+
+        // we go through the Barrier and check if the edge intersects with any of them
+        foreach (Barrier barrier in allBarriers)
+        {
+            if (barrier.isPointInBarrier(this.GetClosestPoint(barrier.transform.position)))
+            {
+                Debug.LogError("Barrier found at " + barrier.transform.position);
                 // Calculate the angle between the barrier's forward direction and the edge direction
                 Vector3 edgeDirection = this.GetDirection();
-                float angle = Vector3.Angle(allBarriers[i].transform.forward, edgeDirection);
+                float angle = Vector3.Angle(barrier.transform.forward, edgeDirection);
 
                 // Apply the rotation to the barrier
-                allBarriers[i].transform.rotation = Quaternion.Euler(0, angle, 0);
+                barrier.transform.rotation = Quaternion.Euler(0, angle, 0);
 
-                return allBarriers[i];
+                return barrier;
             }
         }
         return null;
