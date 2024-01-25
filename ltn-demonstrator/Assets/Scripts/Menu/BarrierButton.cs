@@ -105,6 +105,7 @@ public class BarrierButton : MonoBehaviour
                     Debug.Log("Barrier List size: " + barrierManager.allBarriers.Count);
                     barrierManager.AddBarrier(worldPosition);
                     SpawnBarrier = false;
+                    instructionText.text = "To add a barrier, click on the button again. To delete a barrier, click on the delete button.";
                 }
                 else
                 {
@@ -130,30 +131,5 @@ public class BarrierButton : MonoBehaviour
             }
         }
     }
-    /*
-    public static void PositionBarrier()
-    {
-        Graph tempGraph = GameObject.Find("Graph").GetComponent<Graph>();
-
-        Edge closestEdge = tempGraph.getClosetRoadEdge(this.transform.position);
-        Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(this.transform.position);
-        Vector3 directionFromClosestPointToBarrier = barrier.transform.position - closestPointOnEdge; // Calculate direction vector
-
-        if (directionFromClosestPointToBarrier != Vector3.zero)
-        {
-            // Normalize the direction vector
-            Vector3 normalizedDirection = directionFromClosestPointToBarrier.normalized;
-
-            // rotate barrier horizontal to the road
-            barrier.transform.rotation = Quaternion.LookRotation(normalizedDirection.normalized, Vector3.up);
-
-            // Set the barrier's position to this new position
-            barrier.transform.position = newPosition;
-        }
     
-
-        // mark scene as dirty so it saves
-        UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
-    }
-    */
 }
