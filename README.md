@@ -20,3 +20,37 @@ Our proposed simulation seeks to demystify the complexities of neighbourhood des
 
 
 [1]: https://www.devon.gov.uk/news/heavitree-and-whipton-active-streets-trial-begins-today/
+
+## Technical System Requirements
+
+The following two subsections outlines the system requirement necessary for running and development respectively. Note that these figures are subject to change.
+
+### Deployement
+
+The application is fully self-contained to the end-user and does not require any server or other resources beyond a machine to be ran on.
+
+The Unity software supports export to a variety of platforms, and you may see their system requirements in [2]. At the moment our implementation of the LTN Simulator supports desktop only. The system requirements can be seen [here](https://docs.unity3d.com/Manual/system-requirements.html#desktop).
+
+An example system that fulfills those criteria is Raspberry Pi 5, priced at [60 GBP](https://thepihut.com/products/raspberry-pi-5?src=raspberrypi&variant=42531604922563). Note that this does not include power cable, (priced at betwen [6](https://uk.rs-online.com/web/p/raspberry-pi-power-supplies/1873417?cm_mmc=UK-PLA-DS3A-_-google-_-CSS_UK_EN_PMAX_Catch+All-_--_-1873417&matchtype=&&gad_source=1&gclid=Cj0KCQiAqsitBhDlARIsAGMR1Ri02gqkj9Kgj6hY_vOYhE8HqKdiJeC1602vF6URd893YvAXE_LMzXwaAuE4EALw_wcB&gclsrc=aw.ds) to [12](https://cpc.farnell.com/raspberry-pi/sc1152/rpi-5-27w-usb-c-psu-eu-white/dp/SC20195?mckv=s_dc|pcrid|605262956803|kword||match||plid||slid||product|SC20195|pgrid|138313687415|ptaid|pla-1678231542173|&CMP=KNC-GUK-CPC-SHOPPING-9262013734-138313687415-SC20195&s_kwcid=AL!5616!3!605262956803!!!network}!1678231542173!&gclid=Cj0KCQiAqsitBhDlARIsAGMR1RgfKnCaeAR100Jw6ifS97C_uY2R5PMc8Gdt1EpFfWhmt51tNO1WBigaAj58EALw_wcB) GBP, the power requirements for the application are unknown at this time,) and other periferies, such as mouse, keyboard and computer screen.
+
+In other words, most generic purpose home computers are suitable to run this program. The exact requirements on the computing capacity of the computer are going to be known later in the development.
+
+No maintenance is expected.
+
+[2]: https://docs.unity3d.com/Manual/system-requirements.html
+
+### Development
+
+Continued development requires a licence to the Unity software provided by Unity Technologies, which can be obtained [here](https://unity.com/pricing). Note that depending on the client's needs, either a personal (free) or Pro version (priced at 170 EUR per developer per month) license can be obtained. Note that any potential developer should consult legal advice, (price not estimated) as to which licence is suitable for them.
+
+Further development is also going to require access to a machine, per developer. Unity Editor [system requirements](https://unity.com/download) lists:
+
+> **OS**:
+> Windows 7 SP1+, 8, 10, 64-bit versions only; Mac OS X 10.13+; Ubuntu 16.04, 18.04, and CentOS 7.
+> 
+> **GPU**: 
+> Graphics card with DX10 (shader model 4.0) capabilities.
+
+Most machines should be suitable.
+
+Note that it may be necessary to write additional code, in which case a separate IDE license may be required.
