@@ -5,11 +5,60 @@ using UnityEngine;
 // This is here for future expansion, but is not currently used
 public enum BuildingType
 {
+    Generic,
     Residence,
     Office,
     Restaurant,
-    Shop
+    Shop,
+    ThroughTrafficDummy
 }
+
+public static class BuildingProperties
+{
+    public static Dictionary<BuildingType, float> destinationWeights = new Dictionary<BuildingType, float>(){
+            {BuildingType.Generic, 0.1f},
+            {BuildingType.Residence, 1.0f},
+            {BuildingType.Office, 2.0f},
+            {BuildingType.Restaurant, 2.5f},
+            {BuildingType.Shop, 5.0f},
+            {BuildingType.ThroughTrafficDummy, 0.25f},
+        };
+
+    public static List<BuildingType> buildingTypes = new List<BuildingType>((BuildingType[])System.Enum.GetValues(typeof(BuildingType)));
+
+    // Choose a random building type.
+    public static BuildingType getRandomWeightedDestinationType()
+    {
+        float totalDestinationWeight = 0.0f;
+        List<float> cumulativeWeights = new List<float>();
+
+        // Get totals for all destination weights and populate cumulative weights list.
+        foreach (KeyValuePair<BuildingType, float> destinationWeight in destinationWeights)
+        {
+            totalDestinationWeight += destinationWeight.Value;
+
+            cumulativeWeights.Add(totalDestinationWeight);
+        }
+
+        // Select random float value.
+        float r = UnityEngine.Random.value * totalDestinationWeight;
+
+        // Iterate through cumulative weights to find index to select.
+        int index = -1;
+        for (int i = 0; i < cumulativeWeights.Count; i++)
+        {
+            float weight = cumulativeWeights[i];
+            if (r <= weight)
+            {
+                index = i;
+                break;
+            }
+        }
+
+        return buildingTypes[index];
+    }
+}
+
 
 public class Building : MonoBehaviour
 {
@@ -20,7 +69,7 @@ public class Building : MonoBehaviour
     [SerializeField] private int vehicleMax;
     [SerializeField] private int occupantMax;
     private Graph graph;
-    private Dictionary<BuildingType, float> destinationWeights; // Distribution for destination types
+    public static Dictionary<BuildingType, float> destinationWeights; // Distribution for destination types
 
     // the spawn probability should be based on the building type and maximum number of occupants.
     // as it stands, it is a constant value, but it should be a function/enum of the building type
@@ -28,17 +77,22 @@ public class Building : MonoBehaviour
     [Range(1, 600)][SerializeField] private float timeBetweenSpawns = 1; // The time between spawn attempts
     private float nextSpawnTime; // The time of the next spawn attempt
 
-    public Edge closestEdge;
-    public Vector3 closestPointOnEdge;
+    public Edge closestRoadEdge;
+    public Vector3 closestPointOnRoadEdge;
+
+    public Edge closestPedestrianEdge;
+    public Vector3 closestPointOnPedestrianEdge;
 
     // Some more attributes - not sure if needed, but seemed useful
     public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
-    public readonly BuildingType buildingType;// the type of the building (i.e "residence", "office", "restaurant", etc. would be an enum)
+    [SerializeField] public BuildingType buildingType;// the type of the building (i.e "residence", "office", "restaurant", etc. would be an enum)
 
     // Start is called before the first frame update. We use these to initialize the building.
     void Start()
     {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
+
+        //buildingType = BuildingProperties.buildingTypes[Random.Range(0, BuildingProperties.buildingTypes.Count)];
 
         // I don't want to hardcode these values, but I'm not sure how to do it otherwise.
         // if this is removed, the building will spam vehicles
@@ -46,18 +100,45 @@ public class Building : MonoBehaviour
         this.spawnProbability = 0.1f;
         this.nextSpawnTime = Time.time + timeBetweenSpawns;
 
-        this.closestEdge = graph.getClosetEdge(this.transform.position);
-        this.closestPointOnEdge = closestEdge.GetClosestPoint(this.transform.position);
+        this.closestRoadEdge = graph.getClosetRoadEdge(this.transform.position);
+        this.closestPointOnRoadEdge = closestRoadEdge.GetClosestPoint(this.transform.position);
+
+        this.closestPedestrianEdge = graph.getClosetPedestrianEdge(this.transform.position);
+        if (this.closestPedestrianEdge != null)
+        {
+            this.closestPointOnPedestrianEdge = closestPedestrianEdge.GetClosestPoint(this.transform.position);
+
+        }
+        else
+        {
+            Debug.Log("No Pedestrian Edge Found");
+        }
 
         Debug.Log("Building Instantiated");
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
         if (Application.IsPlaying(this))
         {
-            Gizmos.DrawLine(this.transform.position, closestPointOnEdge);
+            if (closestPointOnRoadEdge != null)
+            {
+
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(this.transform.position, closestPointOnRoadEdge);
+            }
+
+            if (closestPedestrianEdge != null)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(this.transform.position, closestPointOnPedestrianEdge);
+            }
+        }
+
+        if (buildingType == BuildingType.ThroughTrafficDummy)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(transform.position, new Vector3(2, 2, 2));
         }
     }
 
@@ -65,7 +146,7 @@ public class Building : MonoBehaviour
     {
         Graph tempGraph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        Edge closestEdge = tempGraph.getClosetEdge(this.transform.position);
+        Edge closestEdge = tempGraph.getClosetRoadEdge(this.transform.position);
         Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(this.transform.position);
         return closestPointOnEdge;
     }
@@ -98,7 +179,8 @@ public class Building : MonoBehaviour
         // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject travellerManager = TravellerManager.Instance.gameObject;
-        GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnEdge, Quaternion.identity, travellerManager.transform);
+        GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnRoadEdge, Quaternion.identity, travellerManager.transform);
+        newTravellerObj.GetComponent<WaypointMover>().setOriginBuilding(this);
     }
 
     // public Vector3 getEdgeLocation()
