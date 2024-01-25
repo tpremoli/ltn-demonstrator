@@ -49295,7 +49295,7 @@ GameObject:
   - component: {fileID: 1485045119}
   - component: {fileID: 1485045118}
   m_Layer: 5
-  m_Name: Button
+  m_Name: AddBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67849,7 +67849,7 @@ GameObject:
   - component: {fileID: 2065610372}
   - component: {fileID: 2065610371}
   m_Layer: 5
-  m_Name: Delete Barrier
+  m_Name: DeleteBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
