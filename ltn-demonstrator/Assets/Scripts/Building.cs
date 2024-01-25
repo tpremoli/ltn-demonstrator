@@ -101,19 +101,7 @@ public class Building : MonoBehaviour
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject travellerManager = TravellerManager.Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.closestPointOnEdge, Quaternion.identity, travellerManager.transform);
-        Debug.Log("here");
-        WaypointMover wM = newTravellerObj.GetComponent<WaypointMover>();
-        //Debug.Log($"the traveller type is {newTravellerObj.GetComponent<WaypointMover>().getVType().ToString()}");
-        Debug.Log("It didnt print");
-        //FIX
-        // Check the type of the vehicle, abort if van (broken)
-        //WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
-        //Debug.Log($"the travller type is {newTravellerObj.getVType().Type.ToString()}");
-        //if (waypointMover != null && waypointMover.getVType().Type.ToString() == "Van")
-        //{
-        //    Debug.LogError("No model found for vehicle type: Van. Spawning aborted.");
-        //    return; // Abort the function to prevent further execution
-        //}
+        //save data
         SaveTravellerData(newTravellerObj);
         //stops spawning if max number of travellers reached
         if (TravellerManager.Instance.noOfTravellers >= StatisticsManager.TERMINATION_CRITERIA) {

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
+
 
 
 public class StatisticsManager : MonoBehaviour
@@ -17,6 +19,7 @@ public class StatisticsManager : MonoBehaviour
     private bool endSim;
     
 
+    //-------------------------------INBUILT FUNCTION EXTENSIONS---------------------------------------------------------------------------------
     private void Awake()
     {
         if (Instance == null)
@@ -37,16 +40,8 @@ public class StatisticsManager : MonoBehaviour
         }
     }
 
-
-    // Method to add PathData to the list.
-    public void AddPathData(PathData pathData)
+    public void Update()
     {
-        allPathData.Add(pathData);
-    }
-
-
-
-    public void Update(){
         // Get the name of the current active scene
         string currentSceneName = SceneManager.GetActiveScene().name;
         if (currentSceneName == "BuildingScene")
@@ -75,50 +70,33 @@ public class StatisticsManager : MonoBehaviour
             //get path data for test
         }
     }
-
-
-
-    public void UpdateStatsText() {
-        if (statsText.text != null) 
-        {
-            Debug.Log("kinda working");
-            Debug.Log(allPathData[0].ID);
-            //string pd = ReadData(allPathData[0]);
-            //statsText.text = pd;
-            statsText.text = "Heooollool";
-            }
-        else 
-        {
-            Debug.Log("Object not available");
-        }
+    
+    void OnEnable() {
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-
-    public void BUGFIXincrementFinishedPaths() {
-        finishedPaths++;
+    void OnDisable() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    public void RecieveEndTime (int ID) {
-        UpdateEndTime(ID);
-        finishedPaths++;
-        Debug.Log($"finished Paths = {finishedPaths}, term = {TERMINATION_CRITERIA}, num of spawned Travellers = {TravellerManager.Instance.noOfTravellers}");
-        if (finishedPaths >= TERMINATION_CRITERIA) {
-            Debug.Log("ending simulation");
-            endSim = true;
-        }
-    }
-
-
-    public void UpdateEndTime(int id) {
-        foreach (var pathData in allPathData)
-        {
-            if (pathData.ID == id)
-            {
-                pathData.endTime = Time.frameCount; 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (scene.name == "StatisticsScene") {
+            statsText = GameObject.Find("Body").GetComponent<TMP_Text>();
+            if (statsText == null) {
+                Debug.LogError("Failed to find the TMP_Text component on 'Body'.");
+            } else {
+                Debug.Log("Should be updating stats as we speak");
+                //Clean the data
+                PrunePathData();
+                // Now you can update the statsText with your data.
+                UpdateTextWithStatistics();
+                
             }
         }
     }
 
+
+    //-------------------------------------DIAGNOSTICS AND ERROR HANDLING----------------------------------------------------------------------------
     //function to check data is correct and learn about readability
     public string ReadData(PathData pd)
     {
@@ -153,24 +131,28 @@ public class StatisticsManager : MonoBehaviour
 
         return dataString;
     }
-    void OnEnable() {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+
+    public void BUGFIXincrementFinishedPaths() {
+        finishedPaths++;
     }
 
-    void OnDisable() {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        if (scene.name == "StatisticsScene") {
-            statsText = GameObject.Find("Body").GetComponent<TMP_Text>();
-            if (statsText == null) {
-                Debug.LogError("Failed to find the TMP_Text component on 'Body'.");
-            } else {
-                Debug.Log("Should be updating stats as we speak");
-                // Now you can update the statsText with your data.
-                UpdateTextWithStatistics();
+    //-------------------------------------DATA HANDLING---------------------------------------------------------------------------------------------
+    //Prune all incomplete data entries
+    private void PrunePathData()
+    {
+        for (int i = allPathData.Count - 1; i >= 0; i--)
+        {
+            //check id field
+            if (allPathData[i].ID < 0 || 
+                allPathData[i].startTime < 0 || 
+                allPathData[i].endTime < 1 || 
+                !(allPathData[i].routeChange == false || allPathData[i].routeChange == true) || 
+                !Enum.IsDefined(typeof(ModeOfTransport.Mode), allPathData[i].travellerType))
+            {
+                allPathData.RemoveAt(i);
             }
+            //add functionality to check validity of path
         }
     }
 
@@ -185,26 +167,57 @@ public class StatisticsManager : MonoBehaviour
         string finalString = "";
         //Total time spent travelling
         string totalTravelTime = TotalTravelTime();
-        finalString = $"Number of travellers: N/A \nTotal travel time: {totalTravelTime} \nAverage traveller velocity: N/A \nRate of deviation from original path: N/A \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
-
-
-
+        string totalNoOfTravellers = TotalNumberOfTravellers();
+        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} frames\nAverage traveller velocity: N/A \nRate of deviation from original path: N/A \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
+        //Set the TMP object to the stats we calc
         statsText.text = finalString;
         
     }
 
+    // Method to add PathData to the list.
+    public void AddPathData(PathData pathData)
+    {
+        allPathData.Add(pathData);
+    }
+
+    public void RecieveEndTime (int ID) {
+        UpdateEndTime(ID);
+        finishedPaths++;
+        Debug.Log($"finished Paths = {finishedPaths}, term = {TERMINATION_CRITERIA}, num of spawned Travellers = {TravellerManager.Instance.noOfTravellers}");
+        if (finishedPaths >= TERMINATION_CRITERIA) {
+            Debug.Log("ending simulation");
+            endSim = true;
+        }
+    }
+
+    public void UpdateEndTime(int id) {
+        foreach (var pathData in allPathData)
+        {
+            if (pathData.ID == id)
+            {
+                pathData.endTime = Time.frameCount; 
+            }
+        }
+    }
 
 
-    
+    //---------------------------------STATISTICAL MEASURES------------------------------------------------------------------------------------------
 
     //Total travel time spent
-    private string TotalTravelTime (){
+    private string TotalTravelTime ()
+    {
         float totalTravelTime = 0;
         foreach (var pathData in allPathData) {
             totalTravelTime += pathData.endTime - pathData.startTime;
             Debug.Log($"{pathData.endTime} - {pathData.startTime} = {pathData.endTime - pathData.startTime}");
         }
         return totalTravelTime.ToString();
+    }
+
+    //Total Number of Travellers
+    private string TotalNumberOfTravellers () 
+    {
+        return allPathData.Count.ToString();
     }
 
 
@@ -214,4 +227,8 @@ public class StatisticsManager : MonoBehaviour
 
     //Rate of pollution - uses arbitrary values for now
     
+
+
+
+
 }
