@@ -14,7 +14,7 @@ public class BarrierManager : MonoBehaviour
     public GameObject barrierPrefab; // Prefab for the barrier
     public List<GameObject> allBarriers;
 
-    public bool useSave;
+    public bool loadBarriersFromSave;
 
 
     public static BarrierManager Instance { get; private set; }
@@ -25,7 +25,7 @@ public class BarrierManager : MonoBehaviour
         {
             Instance = this;
         }
-        if (useSave)
+        if (loadBarriersFromSave)
         {
             LoadBarriersFromSave();
         }
@@ -58,9 +58,9 @@ public class BarrierManager : MonoBehaviour
         GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
         newBarrier.transform.Rotate(0, 90, 0); 
         // Rotate the barrier on the y axis 
-        Graph tempGraph = GameObject.Find("Graph").GetComponent<Graph>();
+        Graph graph = Graph.Instance;
 
-        Edge closestEdge = tempGraph.getClosetRoadEdge(position);
+        Edge closestEdge = graph.getClosetRoadEdge(position);
         Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(position);
         Vector3 directionFromClosestPointToBarrier = newBarrier.transform.position - closestPointOnEdge; // Calculate direction vector
 

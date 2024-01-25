@@ -23,6 +23,8 @@ public class Graph : MonoBehaviour
 
     [SerializeField] private bool drawEdgeGizmos = true;
 
+    [SerializeField] public bool inEditMode;
+
     void Start()
     {
         Random.InitState(42); // Set seed for random number generator
