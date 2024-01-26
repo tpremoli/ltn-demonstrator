@@ -549,6 +549,7 @@ public class WaypointMover : MonoBehaviour
                     // Check whether there is a next edge, if not, the Traveller has reached its destination
                     this.currentEdge.Unsubscribe(this);
                     arriveToDestination();
+                    goto notification;
                 }
                 // Calculate distance Travelled over subsequent Edges
                 while (iter.Current.Distance < proposedMovement - TravelledOverEdges)
@@ -733,6 +734,8 @@ public class WaypointMover : MonoBehaviour
             this.currentEdge.Unsubscribe(this);
             arriveToDestination();
         }
+        // Notify all traveller waiting for this one
+        notification:
         bool finished = false;
         while (!finished)
         {
