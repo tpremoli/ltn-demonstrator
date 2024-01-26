@@ -79,10 +79,6 @@ public class EditScreenMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SaveGame();
-        }
 
         if (SpawnBarrier && Input.GetMouseButtonDown(0))
         {
@@ -134,6 +130,8 @@ public class EditScreenMenu : MonoBehaviour
 
     public void OnPlayButtonPressed()
     {
+        SaveGame();
+        Debug.Log("Game Saved");
         // Load the MenuProperMapScene scene
         UnityEngine.SceneManagement.SceneManager.LoadScene("MenuProperMapScene");
     }
