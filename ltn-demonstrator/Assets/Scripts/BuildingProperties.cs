@@ -8,7 +8,7 @@ public static class BuildingProperties
             {BuildingType.Residence, 1.0f},
             {BuildingType.Office, 2.0f},
             {BuildingType.Restaurant, 2.5f},
-            {BuildingType.Shop, 5.0f},
+            {BuildingType.Shop, 4.0f},
             {BuildingType.ThroughTrafficDummy, 0.25f},
         };
 

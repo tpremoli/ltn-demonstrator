@@ -33,8 +33,8 @@ public class Building : MonoBehaviour
     public Edge closestRoadEdge;
     public Vector3 closestPointOnRoadEdge;
 
-    public Edge closestPedestrianEdge;
-    public Vector3 closestPointOnPedestrianEdge;
+    public Edge closestPedestrianEdge { get; private set; } = null;
+    public Vector3 closestPointOnPedestrianEdge { get; private set; } = Vector3.zero;
 
     // Some more attributes - not sure if needed, but seemed useful
     public readonly string buildingName;    // the name of the building (i.e "the X residence". Would be fun to have a random name generator?)
@@ -60,7 +60,6 @@ public class Building : MonoBehaviour
         if (this.closestPedestrianEdge != null)
         {
             this.closestPointOnPedestrianEdge = closestPedestrianEdge.GetClosestPoint(this.transform.position);
-
         }
         else
         {
@@ -74,7 +73,7 @@ public class Building : MonoBehaviour
     {
         if (Application.IsPlaying(this))
         {
-            if (closestPointOnRoadEdge != null)
+            if (closestRoadEdge != null)
             {
 
                 Gizmos.color = Color.green;

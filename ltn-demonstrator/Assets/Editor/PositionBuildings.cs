@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PositionBuildings : EditorWindow
 {
-    private static float buildingOffset = 10f; // Set this to your desired offset distance
+    private static float buildingOffset = 4.81f; // Set this to your desired offset distance
 
     [MenuItem("Tools/Buildings/Rotate Buildings to Face Roads")]
     public static void RotateBuildings()
