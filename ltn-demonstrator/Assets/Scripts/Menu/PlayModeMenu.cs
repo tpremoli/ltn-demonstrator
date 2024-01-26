@@ -7,8 +7,8 @@ public class PlayModeMenu : MonoBehaviour
     public void OnEditLTNButtonPressed()
     {
         // Load the EditLTN scene
-        Debug.LogError("EditLTNButton.cs: OnButtonPressed(");
-        SceneManager.LoadScene("EditLTN");
+        Debug.Log("EditLTNButton.cs: OnButtonPressed(");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("EditLTN");
     }
 }
 

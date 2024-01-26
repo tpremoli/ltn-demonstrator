@@ -131,7 +131,6 @@ public class EditScreenMenu : MonoBehaviour
     public void OnPlayButtonPressed()
     {
         SaveGame();
-        Debug.Log("Game Saved");
         // Load the MenuProperMapScene scene
         UnityEngine.SceneManagement.SceneManager.LoadScene("MenuProperMapScene");
     }
