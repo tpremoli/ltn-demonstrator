@@ -31,7 +31,7 @@ public class StatisticsManager : MonoBehaviour
             finishedPaths = 0; 
             endSim = false; 
             //speed up simulation
-            Time.timeScale = 1;
+            Time.timeScale = 3;
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
         }
         else
@@ -168,7 +168,9 @@ public class StatisticsManager : MonoBehaviour
         //Total time spent travelling
         string totalTravelTime = TotalTravelTime();
         string totalNoOfTravellers = TotalNumberOfTravellers();
-        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} frames\nAverage traveller velocity: N/A \nRate of deviation from original path: N/A \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
+        string averageTravVelo = AverageTravellerVelocity();
+        string rateOfDeviation = RateOfDeviation();
+        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} frames\nAverage traveller velocity: {averageTravVelo} \nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
         //Set the TMP object to the stats we calc
         statsText.text = finalString;
         
@@ -209,7 +211,7 @@ public class StatisticsManager : MonoBehaviour
         float totalTravelTime = 0;
         foreach (var pathData in allPathData) {
             totalTravelTime += pathData.endTime - pathData.startTime;
-            Debug.Log($"{pathData.endTime} - {pathData.startTime} = {pathData.endTime - pathData.startTime}");
+            //Debug.Log($"{pathData.endTime} - {pathData.startTime} = {pathData.endTime - pathData.startTime}");
         }
         return totalTravelTime.ToString();
     }
@@ -220,13 +222,64 @@ public class StatisticsManager : MonoBehaviour
         return allPathData.Count.ToString();
     }
 
-
     //Average traveller velocity
+private string AverageTravellerVelocity() 
+{
+    float totalTime;
+    float totalDistance = 0;
+    int numberOfTravellers;
+    float.TryParse(TotalTravelTime(), out totalTime);
+    int.TryParse(TotalNumberOfTravellers(), out numberOfTravellers);
+
+    foreach (PathData pd in allPathData) 
+    {
+        if (pd.path == null)
+        {
+            Debug.LogWarning("PathData path is null");
+            continue; // Skip this PathData as its path is null
+        }
+
+        foreach (Edge e in pd.path)
+        {
+            if (e == null)
+            {
+                Debug.LogWarning("Edge in path is null");
+                continue; // Skip this Edge as it is null
+            }
+
+            totalDistance += e.length;
+        }
+    }
+
+    if (totalTime * numberOfTravellers == 0)
+    {
+        return "0"; // Avoid division by zero
+    }
+
+    return (totalDistance / (totalTime * numberOfTravellers)).ToString();
+}
+
+
 
     //Rate of deviation from original path
+    private string RateOfDeviation ()
+    {
+        int deviated = 0;
+        foreach (PathData pd in allPathData) 
+        {
+            if (pd.routeChange == true)
+            {
+                deviated++;
+            }
+        }
+        return (deviated/allPathData.Count).ToString();
+    }
 
     //Rate of pollution - uses arbitrary values for now
     
+
+
+    //Total Pollution
 
 
 
