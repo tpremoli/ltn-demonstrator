@@ -8,37 +8,26 @@ public class WaypointMover : MonoBehaviour
     bool initialised;   // Controls whether object has been initialised and should begin travelling
 
     // Attributes controlling vehicle's type
-    public VehicleProperties vType;
-    public ModeOfTransport mode;
+    public VehicleProperties vType { get; private set; }
+    public ModeOfTransport mode { get; private set; }
 
     // Statistic measures
     private float totalDistanceMoved;
 
     // Attribute serving movement
-    public float movementUpperBound // Controls the maximum distance the traveller moves in a frame
-    {
-        get; private set;
-    }
-    public float movementLowerBound // Controls the minimum distance the traveller moves in a frame
-    {
-        get;
-        private set;
-    }
-    public float brakingDistance    // Calculated as a distance the vehicle needs to travel, before coming to a stop if deaccelerating at maximum rate
-    {
-        get;
-        private set;
-    }
+    // Controls the maximum distance the traveller moves in a frame
+    public float movementUpperBound { get; private set; }
+    // Controls the minimum distance the traveller moves in a frame
+    public float movementLowerBound { get; private set; }
+    // Calculated as a distance the vehicle needs to travel, before coming to a stop if deaccelerating at maximum rate
+    public float brakingDistance { get; private set; }
     private float distanceAlongEdge;    // Controls how far along current edge the traveller is
     private float terminalLength;       // Controls how far along the last edge in pathEdges / currentEdge if the previous is empty the terminal destination is
     private Edge currentEdge;           // Controls which edge the traveller currently occupies
     private List<Edge> pathEdges;       // Controls which edges the traveller will travel along
 
     // Movement attributes - velocity & velocity calculation
-    public float velocity
-    {
-        get; private set;
-    }
+    public float velocity { get; private set; }
     private Edge edgeAtFrameBeginning;
     private float distanceAlongEdgeAtFrameBeginning;
 
@@ -370,7 +359,8 @@ public class WaypointMover : MonoBehaviour
         // Choose random destination building type.
         destinationBuildingType = BuildingProperties.getRandomWeightedDestinationType();
 
-        if (graph.buildingsByType[destinationBuildingType].Count == 0) {
+        if (graph.buildingsByType[destinationBuildingType].Count == 0)
+        {
             Debug.LogWarning("No buildings of type " + destinationBuildingType + " exist in the simulation. Cannot choose building.");
             return null;
         }
@@ -383,7 +373,8 @@ public class WaypointMover : MonoBehaviour
         {
             Debug.LogWarning("Spawned traveller with same origin and destination building! Choosing new building.");
 
-            if (graph.buildingsByType[destinationBuildingType].Count == 1) {
+            if (graph.buildingsByType[destinationBuildingType].Count == 1)
+            {
                 Debug.LogWarning("Fewer than 2 buildings of type " + destinationBuildingType + " exist in the simulation. Cannot choose new building.");
                 return null;
             }
@@ -715,8 +706,8 @@ public class WaypointMover : MonoBehaviour
             this.currentEdge.Unsubscribe(this);
             arriveToDestination();
         }
-        // Notify all traveller waiting for this one
-        notification:
+    // Notify all traveller waiting for this one
+    notification:
         bool finished = false;
         while (!finished)
         {
