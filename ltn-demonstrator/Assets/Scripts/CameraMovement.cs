@@ -19,11 +19,16 @@ public class CameraMovement : MonoBehaviour
 
     private float zoomLevel;
 
+    public bool canMove = true; // Add this line
+
     private void Update()
     {
-        PanCamera();
-        SetCameraHeight();
-        Zoom();
+        if (canMove) // Add this line
+        {
+            PanCamera();
+            SetCameraHeight();
+            Zoom();
+        }
     }
 
     const int maxZoomLevel = 1000;

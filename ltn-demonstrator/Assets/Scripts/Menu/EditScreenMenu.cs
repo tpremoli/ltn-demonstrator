@@ -5,6 +5,7 @@ using System.IO;
 
 public class EditScreenMenu : MonoBehaviour
 {
+    
     public GameObject barrierPrefab;
     public TextMeshProUGUI instructionText;
     private bool SpawnBarrier = false;
@@ -17,13 +18,18 @@ public class EditScreenMenu : MonoBehaviour
     public Edge closestRoadEdge;
     public Vector3 closestPointOnRoadEdge;
     private Graph graph;
-    private Waypoint startWaypointLane;
+    // Declare the CameraMovement variable
+    public CameraMovement cameraMovement;
 
+    private Waypoint startWaypointLane;
     public Waypoint endWaypoint;
 
 
     void Start()
     {
+        // Get the CameraMovement component
+        cameraMovement = FindObjectOfType<CameraMovement>();
+
         barrierManager = BarrierManager.Instance;
         if (barrierManager == null)
         {
@@ -33,6 +39,7 @@ public class EditScreenMenu : MonoBehaviour
 
     public void SaveGame()
     {
+    
         if (barrierManager != null)
         {
             List<Barrier> barriers = new List<Barrier>();
@@ -79,54 +86,70 @@ public class EditScreenMenu : MonoBehaviour
 
     void Update()
     {
-
-        if (SpawnBarrier && Input.GetMouseButtonDown(0))
+        if (SpawnBarrier)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Input.GetMouseButtonDown(0))
             {
-                Vector3 worldPosition = hit.point;
-                Debug.Log("Barrier created at " + worldPosition);
-                if (barrierManager != null)
-                {
-                    this.graph = GameObject.Find("Graph").GetComponent<Graph>();
-                    this.closestRoadEdge = graph.getClosetRoadEdge(this.transform.position);
-                    this.closestPointOnRoadEdge = closestRoadEdge.GetClosestPoint(this.transform.position);
-                    Debug.Log("Closest Road Edge: " + closestRoadEdge.position + " Closest Point on Road Edge: " + closestPointOnRoadEdge);
-                    Debug.Log("Direction of the Closest Road Edge: " + closestRoadEdge.direction);
-                    //Edge nearestEdge = barrierManager.GetNearestEdge(worldPosition);
-                    //Debug.Log("Nearest edge to worldPosition is at " + nearestEdge.position + " with direction " + nearestEdge.edgeDirection);
+                // Disable camera movement
+                cameraMovement.canMove = false;
 
-                    Debug.Log("Barrier List size: " + barrierManager.allBarriers.Count);
-                    barrierManager.AddBarrier(worldPosition);
-                    SpawnBarrier = false;
-                    instructionText.text = "To add a barrier, click on the button again. To delete a barrier, click on the delete button.";
-                }
-                else
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
                 {
-                    Debug.LogError("No BarrierManager found in the scene.");
-                }
-            }
-        } // This is the missing closing brace
+                    Vector3 worldPosition = hit.point;
+                    Debug.Log("Barrier created at " + worldPosition);
+                    if (barrierManager != null)
+                    {
+                        this.graph = GameObject.Find("Graph").GetComponent<Graph>();
+                        this.closestRoadEdge = graph.getClosetRoadEdge(this.transform.position);
+                        this.closestPointOnRoadEdge = closestRoadEdge.GetClosestPoint(this.transform.position);
+                        Debug.Log("Closest Road Edge: " + closestRoadEdge.position + " Closest Point on Road Edge: " + closestPointOnRoadEdge);
+                        Debug.Log("Direction of the Closest Road Edge: " + closestRoadEdge.direction);
 
-        if (deleteMode && Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                Barrier hitBarrier = hit.transform.GetComponent<Barrier>();
-                if (hitBarrier != null)
-                {
-                    barrierManager.allBarriers.Remove(hit.transform.gameObject);
-                    Destroy(hit.transform.gameObject);
-                    SaveGame();
-                    deleteMode = false;
+                        Debug.Log("Barrier List size: " + barrierManager.allBarriers.Count);
+                        barrierManager.AddBarrier(worldPosition);
+                        SpawnBarrier = false;
+                        instructionText.text = "To add a barrier, click on the button again. To delete a barrier, click on the delete button.";
+                    }
+                    else
+                    {
+                        Debug.LogError("No BarrierManager found in the scene.");
+                    }
                 }
             }
         }
+
+        if (deleteMode)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                // Disable camera movement
+                cameraMovement.canMove = false;
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Barrier hitBarrier = hit.transform.GetComponent<Barrier>();
+                    if (hitBarrier != null)
+                    {
+                        barrierManager.allBarriers.Remove(hit.transform.gameObject);
+                        Destroy(hit.transform.gameObject);
+                        SaveGame();
+                        deleteMode = false;
+                    }
+                }
+            }
+        }
+
+        // Re-enable camera movement when no mouse button is pressed
+        if (!Input.GetMouseButton(0))
+        {
+            cameraMovement.canMove = true;
+        }
     }
+    
 
     public void OnPlayButtonPressed()
     {
