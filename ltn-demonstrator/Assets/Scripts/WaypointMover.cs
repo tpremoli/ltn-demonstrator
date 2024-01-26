@@ -100,7 +100,7 @@ public class WaypointMover : MonoBehaviour
 
         if (this.destinationBuilding == null)
         {
-            Debug.LogError("No destination building found. Destroying object.");
+            Debug.Log("No destination building found. Destroying object.");
             Destroy(this.gameObject);
             return;
         }
@@ -402,7 +402,7 @@ public class WaypointMover : MonoBehaviour
 
             if (graph.buildingsByType[destinationBuildingType].Count == 1)
             {
-                Debug.LogError("Only one building of type " + destinationBuildingType + " exists in the graph. Cannot choose new building.");
+                Debug.Log("Only one building of type " + destinationBuildingType + " exists in the graph. Cannot choose new building.");
                 return null;
             }
 

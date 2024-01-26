@@ -259,7 +259,7 @@ public class Edge
         {
             if (barrier.isPointInBarrier(this.GetClosestPoint(barrier.transform.position)))
             {
-                Debug.LogError("Barrier found at " + barrier.transform.position);
+                Debug.Log("Barrier found at " + barrier.transform.position);
                 // Calculate the angle between the barrier's forward direction and the edge direction
                 Vector3 edgeDirection = this.GetDirection();
                 float angle = Vector3.Angle(barrier.transform.forward, edgeDirection);
