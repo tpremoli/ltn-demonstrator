@@ -97,10 +97,9 @@ public class WaypointMover : MonoBehaviour
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
         this.destinationBuilding = chooseDestinationBuilding();
-
         if (this.destinationBuilding == null)
         {
-            Debug.LogError("No destination building found. Destroying object.");
+            Debug.LogWarning("No destination building found. Destroying object.");
             Destroy(this.gameObject);
             return;
         }
@@ -404,8 +403,9 @@ public class WaypointMover : MonoBehaviour
         {
             Debug.LogWarning("Spawned traveller with same origin and destination building! Choosing new building.");
 
-            if (graph.buildingsByType[destinationBuildingType].Count <= 1) {
+            if (graph.buildingsByType[destinationBuildingType].Count == 1) {
                 Debug.LogWarning("Fewer than 2 buildings of type " + destinationBuildingType + " exist in the simulation. Cannot choose new building.");
+                return null;
             }
 
             building = graph.getRandomBuildingByType(destinationBuildingType);
