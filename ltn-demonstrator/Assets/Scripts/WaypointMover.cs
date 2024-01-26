@@ -97,10 +97,9 @@ public class WaypointMover : MonoBehaviour
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
         this.destinationBuilding = chooseDestinationBuilding();
-
         if (this.destinationBuilding == null)
         {
-            Debug.Log("No destination building found. Destroying object.");
+            Debug.LogWarning("No destination building found. Destroying object.");
             Destroy(this.gameObject);
             return;
         }
@@ -391,7 +390,11 @@ public class WaypointMover : MonoBehaviour
         // Choose random destination building type.
         destinationBuildingType = BuildingProperties.getRandomWeightedDestinationType();
 
-        Debug.Log("Chosen type: " + destinationBuildingType);
+        if (graph.buildingsByType[destinationBuildingType].Count == 0) {
+            Debug.LogWarning("No buildings of type " + destinationBuildingType + " exist in the simulation. Cannot choose building.");
+            return null;
+        }
+
 
         // Select a random building by type. If the selected building is the same as the origin building,
         // choose a new building.
@@ -400,9 +403,8 @@ public class WaypointMover : MonoBehaviour
         {
             Debug.LogWarning("Spawned traveller with same origin and destination building! Choosing new building.");
 
-            if (graph.buildingsByType[destinationBuildingType].Count == 1)
-            {
-                Debug.Log("Only one building of type " + destinationBuildingType + " exists in the graph. Cannot choose new building.");
+            if (graph.buildingsByType[destinationBuildingType].Count == 1) {
+                Debug.LogWarning("Fewer than 2 buildings of type " + destinationBuildingType + " exist in the simulation. Cannot choose new building.");
                 return null;
             }
 
@@ -547,6 +549,7 @@ public class WaypointMover : MonoBehaviour
                     // Check whether there is a next edge, if not, the Traveller has reached its destination
                     this.currentEdge.Unsubscribe(this);
                     arriveToDestination();
+                    goto notification;
                 }
                 // Calculate distance Travelled over subsequent Edges
                 while (iter.Current.Distance < proposedMovement - TravelledOverEdges)
@@ -731,6 +734,8 @@ public class WaypointMover : MonoBehaviour
             this.currentEdge.Unsubscribe(this);
             arriveToDestination();
         }
+        // Notify all traveller waiting for this one
+        notification:
         bool finished = false;
         while (!finished)
         {
