@@ -37706,6 +37706,7 @@ MonoBehaviour:
   cam: {fileID: 1136161526}
   minY: 0
   sensitivity: 1
+  canMove: 1
 --- !u!4 &1138859340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}

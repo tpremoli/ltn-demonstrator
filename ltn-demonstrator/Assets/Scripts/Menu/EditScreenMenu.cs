@@ -155,6 +155,6 @@ public class EditScreenMenu : MonoBehaviour
     {
         SaveGame();
         // Load the MenuProperMapScene scene
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MenuProperMapScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("PlayMode");
     }
 }

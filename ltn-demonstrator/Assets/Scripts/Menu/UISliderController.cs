@@ -13,7 +13,12 @@ public class UISliderController : MonoBehaviour
 
     public void OnSliderValueChanged(float value)
     {
+        Debug.Log("value: " + value);
+        Debug.Log("maxSliderValue: " + maxSliderValue);
+
         float localValue = value * maxSliderValue;
+        Debug.Log("localValue: " + localValue);
+
         sliderValueText.text = localValue.ToString();
 
         // Change the time scale with the slider value

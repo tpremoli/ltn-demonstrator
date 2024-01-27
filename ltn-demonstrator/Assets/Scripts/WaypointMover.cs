@@ -493,11 +493,16 @@ public class WaypointMover : MonoBehaviour
 
         // Move the object's transform to:
         // edge_origin + edge_diraction * distanceAlongEdge
+        //Debug.Log("distanceAlongEdge: " + distanceAlongEdge);
+        //Debug.Log("this.currentEdge.StartWaypoint.transform.position" + this.currentEdge.StartWaypoint.transform.position);
+        //Debug.Log("this.currentEdge.GetDirection()" + this.currentEdge.GetDirection());
         Vector3 newPosition =
             this.currentEdge.StartWaypoint.transform.position
             + this.currentEdge.GetDirection() * distanceAlongEdge;
+        //Debug.Log("distanceAlongEdge: " + distanceAlongEdge);
         // Add offset to the new position to no be in the middle of the road
         newPosition = newPosition + this.leftLaneOffset * Vector3.Cross(Vector3.up, this.currentEdge.GetDirection());
+        //Debug.Log("distanceAlongEdge: " + distanceAlongEdge);
         // Update the object's position
         transform.position = newPosition;
     }
