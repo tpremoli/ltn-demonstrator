@@ -4010,10 +4010,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1012968092}
   m_HandleRect: {fileID: 1885033870}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0
+  m_MinValue: 1
+  m_MaxValue: 50
+  m_WholeNumbers: 1
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4025,7 +4025,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -9658,7 +9658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9751,8 +9751,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 93.6, y: 2.2}
-  m_SizeDelta: {x: 11.6097, y: 20}
+  m_AnchoredPosition: {x: 128.99265, y: 2.2}
+  m_SizeDelta: {x: 82.3955, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &302176057
 GameObject:
@@ -15546,7 +15546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sliderValueText: {fileID: 298942400}
-  maxSliderValue: 100
+  slider: {fileID: 146046436}
 --- !u!1 &527581974
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UISliderController : MonoBehaviour
@@ -9,19 +8,38 @@ public class UISliderController : MonoBehaviour
     private TextMeshProUGUI sliderValueText;
 
     [SerializeField]
-    private float maxSliderValue = 100f;
+    private Slider slider;
 
-    public void OnSliderValueChanged(float value)
+    // Assuming you have a variable for speed
+    private float speed;
+
+    void Start()
     {
-        Debug.Log("value: " + value);
-        Debug.Log("maxSliderValue: " + maxSliderValue);
+        // Ensure the Slider component is assigned in the inspector
+        if (slider != null)
+        {
+            slider.minValue = 1; // Set the minimum value to 1
+            slider.onValueChanged.AddListener(OnSliderValueChanged);
+        }
+        else
+        {
+            Debug.LogError("Slider is not assigned in the inspector");
+        }
+    }
 
-        float localValue = value * maxSliderValue;
-        Debug.Log("localValue: " + localValue);
+    void OnSliderValueChanged(float value)
+    {
+        // Update the text
+        sliderValueText.text = value.ToString();
 
-        sliderValueText.text = localValue.ToString();
+        // Update the speed
+        speed = value;
 
-        // Change the time scale with the slider value
-        Time.timeScale = localValue;
+        // Update the time scale
+        Time.timeScale = value;
+
+        // Log the new speed and time scale
+        Debug.Log("Speed is now " + speed);
+        Debug.Log("Time scale is now " + Time.timeScale);
     }
 }
