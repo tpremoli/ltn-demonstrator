@@ -4,34 +4,54 @@ using Utils;
 
 public class WaypointPath
 {
-    public List<Waypoint> path;
     private Graph graph;
-    private WaypointMover mover;
+    private ModeOfTransport mode;
 
-    public Vector3 beginningPos;
-    public Vector3 destinationPos;
+    public List<Waypoint> pathAsWaypoints { get; private set; }
+    public List<Edge> pathAsEdges { get; private set; }
+    public Vector3 beginningPos { get; private set; }
+    public Vector3 destinationPos { get; private set; }
+    public Edge startEdge { get; private set; }
+    public Edge endEdge { get; private set; }
 
-    public Edge startEdge;
-    public Edge endEdge;
-
-    public WaypointPath(Vector3 beginningPos, Vector3 destinationPos, WaypointMover mover)
+    public WaypointPath(Building originBuilding, Building destinationBuilding, ModeOfTransport mode)
     {
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
-        this.beginningPos = beginningPos;
-        this.destinationPos = destinationPos;
-        this.mover = mover;
+        this.mode = mode;
 
-        this.startEdge = graph.getClosetRoadEdge(beginningPos);
-        this.endEdge = graph.getClosetRoadEdge(destinationPos);
+        switch (mode)
+        {
+            case ModeOfTransport.Car:
+            case ModeOfTransport.Bicycle: // Bicycle is treated as a car for now
+                this.beginningPos = originBuilding.closestPointOnRoadEdge;
+                this.destinationPos = destinationBuilding.closestPointOnRoadEdge;
+                this.startEdge = originBuilding.closestRoadEdge;
+                this.endEdge = destinationBuilding.closestRoadEdge;
 
-        if (PathExists())
-        {
-            this.path = Dijkstra();
+                if (PathExistsForCars())
+                {
+                    this.pathAsWaypoints = DijkstraForCars();
+                }
+                else
+                {
+                    Debug.LogWarning("Path does not exist for road vehicle.");
+                    this.pathAsWaypoints = null;
+                }
+
+                break;
+            case ModeOfTransport.Pedestrian:
+                this.beginningPos = originBuilding.closestPointOnPedestrianEdge;
+                this.destinationPos = destinationBuilding.closestPointOnPedestrianEdge;
+                this.startEdge = originBuilding.closestPedestrianEdge;
+                this.endEdge = destinationBuilding.closestPedestrianEdge;
+
+                // paths for pedestrians always exist (why wouldn't they?)
+                this.pathAsWaypoints = DijkstraForPedestrians();
+                break;
         }
-        else
-        {
-            this.path = null;
-        }
+
+        this.pathAsEdges = new List<Edge>();
+        createPathAsEdges();
     }
 
     /// <summary>
@@ -40,7 +60,7 @@ public class WaypointPath
     /// If the list is null, no path exists between the start and end positions.
     /// </summary>
     /// <returns>A path from the start position to the end position</returns>
-    public List<Waypoint> Dijkstra()
+    public List<Waypoint> DijkstraForCars()
     {
         if (startEdge.isPedestrianOnly || endEdge.isPedestrianOnly)
         {
@@ -207,38 +227,14 @@ public class WaypointPath
         return startDist < endDist ? edge.StartWaypoint : edge.EndWaypoint;
     }
 
-    // Get the next waypoint in the traversal
-    public Waypoint PopNextWaypoint()
-    {
-        if (path == null || path.Count == 0)
-        {
-            Debug.Log("Finished path, moving to destination point now.");
-            return null;
-        }
-        Waypoint nextWaypoint = path[0];
-        path.RemoveAt(0);
-        return nextWaypoint;
-    }
-
-    // Get the next waypoint in the traversal
-    public Waypoint PeekNextWaypoint()
-    {
-        if (path == null || path.Count == 0)
-        {
-            return null;
-        }
-        Waypoint nextWaypoint = path[0];
-        return nextWaypoint;
-    }
-
 
     /// <summary>
     /// This method checks if a path exists between the start and end positions.
     /// </summary>
     /// <returns></returns>
-    public bool PathExists()
+    public bool PathExistsForCars()
     {
-        Waypoint nearestStartWaypoint = ClosestWaypointOnEdge(startEdge, beginningPos);
+        Waypoint nearestStartWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos);
         Waypoint nearestEndWaypoint = ClosestWaypointOnEdge(endEdge, destinationPos);
 
         // Initialize dictionaries for distances and previous waypoints
@@ -248,6 +244,10 @@ public class WaypointPath
         // Set initial distances to all waypoints as infinite and previous waypoints as null
         foreach (Waypoint waypoint in graph.waypoints)
         {
+            if (waypoint.isPedestrianOnly)
+            {
+                continue; // Skip to the next waypoint if it is pedestrian only
+            }
             dist[waypoint] = float.MaxValue;
             prev[waypoint] = null;
         }
@@ -278,6 +278,11 @@ public class WaypointPath
                 // Get the edge connecting the current waypoint and its neighbor
                 Edge connectingEdge = graph.GetEdge(current, neighbor);
 
+                if (connectingEdge.isPedestrianOnly)
+                {
+                    continue; // Skip to the next neighbor if the edge is pedestrian only
+                }
+
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
                 if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
                 {
@@ -303,7 +308,146 @@ public class WaypointPath
         return false;
     }
 
+    private List<Waypoint> DijkstraForPedestrians()
+    {
+        if (!startEdge.isPedestrianOnly || !endEdge.isPedestrianOnly)
+        {
+            Debug.LogError("Start or end edge is not Pedestrian only, cannot use Dijkstra's algorithm.");
+            return null;
+        }
 
+        // Check if start and end are on the same edge to handle this special case
+        if (startEdge.isSameEdge(endEdge))
+        {
+            // return a direct path
+            return new List<Waypoint>();
+        }
+
+        // Initialize dictionaries to store distances, previous waypoints, and the most recent distances
+        Dictionary<Waypoint, float> dist = new Dictionary<Waypoint, float>();
+        Dictionary<Waypoint, Waypoint> prev = new Dictionary<Waypoint, Waypoint>();
+        Dictionary<Waypoint, float> mostRecentDistances = new Dictionary<Waypoint, float>();
+
+        // Set initial distances to all waypoints as infinite and previous waypoints as null
+        foreach (Waypoint waypoint in graph.waypoints)
+        {
+            dist[waypoint] = float.MaxValue;
+            prev[waypoint] = null;
+        }
+
+        // Priority queue to manage waypoints based on their current shortest distance
+        PriorityQueue<Waypoint, float> queue = new PriorityQueue<Waypoint, float>();
+
+        // Initialize the distances for the start waypoints on the start edge
+        dist[startEdge.StartWaypoint] = Vector3.Distance(startEdge.StartWaypoint.transform.position, beginningPos);
+        dist[startEdge.EndWaypoint] = Vector3.Distance(startEdge.EndWaypoint.transform.position, beginningPos);
+
+        // Enqueue the start waypoints and update their most recent distances
+        queue.Enqueue(startEdge.StartWaypoint, dist[startEdge.StartWaypoint]);
+        mostRecentDistances[startEdge.StartWaypoint] = dist[startEdge.StartWaypoint];
+
+        queue.Enqueue(startEdge.EndWaypoint, dist[startEdge.EndWaypoint]);
+        mostRecentDistances[startEdge.EndWaypoint] = dist[startEdge.EndWaypoint];
+
+        // Process each waypoint in the queue
+        while (queue.Count > 0)
+        {
+            Waypoint current = queue.Dequeue();
+
+            // Skip processing if the current distance is not the most recent
+            if (mostRecentDistances[current] != dist[current])
+            {
+                continue;
+            }
+
+            // Explore all adjacent waypoints of the current waypoint
+            foreach (Waypoint neighbor in current.adjacentWaypoints)
+            {
+                // first, we check if the edge is traversable.
+                Edge connectingEdge = graph.GetEdge(current, neighbor);
+
+                float alt = dist[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
+
+                // If the alternative distance is shorter, update the distance and previous waypoint
+                if (alt < dist[neighbor])
+                {
+                    dist[neighbor] = alt;
+                    prev[neighbor] = current;
+
+                    // Enqueue the neighbor with the updated distance
+                    queue.Enqueue(neighbor, alt);
+                    mostRecentDistances[neighbor] = alt; // Update the most recent distance
+                }
+            }
+        }
+
+        // If a path exists, construct the path
+        return ConstructPath(prev);
+    }
+
+    private void createPathAsEdges()
+    {
+        if (this.pathAsWaypoints == null)
+        {
+            this.pathAsEdges = null;
+            return;
+        }
+
+        IEnumerator<Waypoint> iter = this.pathAsWaypoints.GetEnumerator();
+        iter.MoveNext();
+        Waypoint old_wp = null;
+        Waypoint wp = iter.Current;
+
+        // Convert the path into a list of edges
+        while (iter.MoveNext())
+        {
+            old_wp = wp;
+            wp = iter.Current;
+            Edge nextOne = this.graph.getEdge(old_wp, wp);
+            Debug.Log("Path from: " + old_wp.name + "  to: " + wp.name + "\nEdge: ");
+            if (nextOne == null)
+            {
+                Debug.LogError("There is no path connecting nodes.");
+            }
+            else
+            {
+                this.pathAsEdges.Add(nextOne);
+            }
+        }
+
+        // these two if statements should go into WaypointPath, but I'm not sure how to do it
+        // Get origin Edge
+        if (this.pathAsWaypoints.Count > 0)
+        {
+            if (this.startEdge.EndWaypoint != pathAsWaypoints[0])
+            {
+                // If the edge does not end in the correct waypoint, look for counterpart
+                this.startEdge = graph.getEdge(this.startEdge.endWaypoint, this.startEdge.startWaypoint);
+                // If counterpart does not exist, terminate
+                if (this.startEdge == null)
+                {
+                    throw new System.Exception("No counterpart edge found when flipping edges! Can't find edge: " + this.startEdge.endWaypoint.name + " to " + this.startEdge.startWaypoint.name);
+                }
+            }
+            if (this.endEdge.StartWaypoint != pathAsWaypoints[pathAsWaypoints.Count - 1])
+            {
+                // If the edge does not end in the correct waypoint, look for counterpart
+                this.endEdge = graph.getEdge(this.endEdge.endWaypoint, this.endEdge.startWaypoint);
+                // If counterpart does not exist, terminate
+                if (this.endEdge == null)
+                {
+                    throw new System.Exception("No counterpart edge found when flipping edges! Can't find edge: " + this.startEdge.endWaypoint.name + " to " + this.startEdge.startWaypoint.name);
+                }
+            }
+        }
+
+
+        // If the destination is further along the same Edge, do not add the terminal edge
+        if (!this.startEdge.isSameEdge(this.endEdge))
+        {
+            this.pathAsEdges.Add(this.endEdge);
+        }
+    }
 }
 
 
