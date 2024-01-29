@@ -2714,7 +2714,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  buildings: []
+  allBuildings: []
   waypoints: []
   drawEdgeGizmos: 1
   inEditMode: 0
@@ -4828,6 +4828,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
   m_PrefabInstance: {fileID: 971628701}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1947969365
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1607599608456417088, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: m_Name
+      value: TravellerManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848455605297487021, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848455605297487021, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848455605297487021, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848455605297487021, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848455605297487021, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848455605297487021, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848455605297487021, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848455605297487021, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848455605297487021, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848455605297487021, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6da5421cc279f5c44a1f4a46c1be2aea, type: 3}
 --- !u!4 &1952517061 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
@@ -5118,65 +5175,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
   m_PrefabInstance: {fileID: 1616176321}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2072816219
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2072816221}
-  - component: {fileID: 2072816220}
-  m_Layer: 0
-  m_Name: TravellerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2072816220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2072816219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff666f853c288ad4eb7243cb1e95ae21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vehiclePrefabTypePairs:
-  - vehiclePrefab: {fileID: 100000, guid: a119eb0fa059db34bbaef286c1af1696, type: 3}
-    vehicleType: 0
-  - vehiclePrefab: {fileID: 100000, guid: 81835658bbd378143a0f525b8552f557, type: 3}
-    vehicleType: 0
-  - vehiclePrefab: {fileID: 100000, guid: c98da428142c39c42bb62c454958cd1f, type: 3}
-    vehicleType: 0
-  - vehiclePrefab: {fileID: 100000, guid: 288b117258616aa4f928ba6f91dc47c3, type: 3}
-    vehicleType: 1
-  - vehiclePrefab: {fileID: 100000, guid: b0ad868427d8c8a4b86144f9786776d3, type: 3}
-    vehicleType: 1
-  - vehiclePrefab: {fileID: 100000, guid: 00d77ce56096de34eb6645947a0f8925, type: 3}
-    vehicleType: 1
-  - vehiclePrefab: {fileID: 100000, guid: 05aec82adc02f16409639716322b1673, type: 3}
-    vehicleType: 3
---- !u!4 &2072816221
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2072816219}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2080818170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
@@ -5304,5 +5302,5 @@ SceneRoots:
   - {fileID: 1597052159}
   - {fileID: 980923535}
   - {fileID: 1601751049}
-  - {fileID: 2072816221}
   - {fileID: 1354111483}
+  - {fileID: 1947969365}
