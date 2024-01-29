@@ -3,6 +3,16 @@ using UnityEngine;
 
 public class Graph : MonoBehaviour
 {
+    public static Graph Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     // private waypointsize with getter
     [Range(0f, 2f)][SerializeField] private float waypointSize = 0.5f;
     [SerializeField] public List<Edge> edges;
@@ -14,9 +24,12 @@ public class Graph : MonoBehaviour
 
     [SerializeField] private bool drawEdgeGizmos = true;
 
+    [SerializeField] public bool inEditMode;
+
     void Start()
     {
         Random.InitState(42); // Set seed for random number generator
+        Time.timeScale = 1; // Set time scale to 1
 
         // Initialise buildings dictionary.
         foreach (BuildingType bType in BuildingProperties.buildingTypes)
@@ -36,6 +49,10 @@ public class Graph : MonoBehaviour
         foreach (KeyValuePair<BuildingType, List<Building>> t in buildingsByType)
         {
             Debug.Log("Building Type: " + t.Key + ", Total: " + t.Value.Count);
+        }
+
+        if (!inEditMode && BarrierManager.Instance.loadBarriersFromSave){
+            BarrierManager.Instance.RecalcBarriersOnEdges();
         }
 
     }

@@ -16,7 +16,9 @@ public class WaypointPath
 
     public WaypointPath(Building originBuilding, Building destinationBuilding, ModeOfTransport mode)
     {
-        this.graph = GameObject.Find("Graph").GetComponent<Graph>();
+        this.graph = Graph.Instance;
+        this.beginningPos = beginningPos;
+        this.destinationPos = destinationPos;
         this.mode = mode;
 
         switch (mode)

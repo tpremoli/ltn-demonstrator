@@ -70,7 +70,15 @@ public class WaypointMover : MonoBehaviour
         // Some heuristic to choose what ModeOfTransport to use?
         // vehicleChosen = someHeuristicThatReturnsAModeOfTransport();
         // For now, pick the mode randomly
-        this.mode = (ModeOfTransport)Random.Range(0, 3);
+        if (this.originBuilding.closestPedestrianEdge == null)
+        {
+            // we don't have a pedestrian edge, so we can't be a pedestrian (for now)
+            this.mode = (ModeOfTransport)Random.Range(1, 3);
+        }
+        else
+        {
+            this.mode = (ModeOfTransport)Random.Range(0, 3);
+        }
 
         // if the mode is pedestrian, set the traveller's position to the closest point on the pedestrian edge
         if (this.mode == ModeOfTransport.Pedestrian)
@@ -93,7 +101,7 @@ public class WaypointMover : MonoBehaviour
         // pick a random model and material
         if (!setVehicleModelAndMaterial())
         {
-            Debug.LogError("No model and material found. Destroying object.");
+            Debug.LogWarning("No model found for vehicle type: " + this.vType.Type + ". Fix this please! Worse errors could arise later.");
             Destroy(this.gameObject);
             return;
         }
@@ -464,11 +472,16 @@ public class WaypointMover : MonoBehaviour
 
         // Move the object's transform to:
         // edge_origin + edge_diraction * distanceAlongEdge
+        //Debug.Log("distanceAlongEdge: " + distanceAlongEdge);
+        //Debug.Log("this.currentEdge.StartWaypoint.transform.position" + this.currentEdge.StartWaypoint.transform.position);
+        //Debug.Log("this.currentEdge.GetDirection()" + this.currentEdge.GetDirection());
         Vector3 newPosition =
             this.currentEdge.StartWaypoint.transform.position
             + this.currentEdge.GetDirection() * distanceAlongEdge;
+        //Debug.Log("distanceAlongEdge: " + distanceAlongEdge);
         // Add offset to the new position to no be in the middle of the road
         newPosition = newPosition + this.leftLaneOffset * Vector3.Cross(Vector3.up, this.currentEdge.GetDirection());
+        //Debug.Log("distanceAlongEdge: " + distanceAlongEdge);
         // Update the object's position
         transform.position = newPosition;
     }
@@ -882,7 +895,6 @@ public class WaypointMover : MonoBehaviour
         }
         else
         {
-            Debug.LogError("No model found for vehicle type: " + this.vType.Type + ". Fix this please! Worse errors could arise later.");
             return false;
         }
         return true;

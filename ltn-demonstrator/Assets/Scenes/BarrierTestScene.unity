@@ -197,6 +197,98 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2992303471834186168, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
   m_PrefabInstance: {fileID: 39311549}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &109974686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 109974689}
+  - component: {fileID: 109974688}
+  - component: {fileID: 109974687}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &109974687
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109974686}
+  m_Enabled: 0
+--- !u!20 &109974688
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109974686}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 25.769981
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &109974689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109974686}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.4473218, y: -0.1997776, z: 0.103388295, w: -0.86562294}
+  m_LocalPosition: {x: -4.6, y: 48.3, z: -15.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 22.535, y: -165.244, z: 3.445}
 --- !u!1 &127275953
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +437,7 @@ Transform:
   m_GameObject: {fileID: 621272570}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.1, y: 0, z: 10.5}
+  m_LocalPosition: {x: 11.5, y: 0.1, z: 16.2}
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -395,40 +487,47 @@ MonoBehaviour:
   edges:
   - startWaypoint: {fileID: 149555550}
     endWaypoint: {fileID: 1248626347}
-    distance: 33.551826
+    length: 0
+    TravellersOnEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 149555550}
     endWaypoint: {fileID: 1953294309}
-    distance: 40.295906
+    length: 0
+    TravellersOnEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 1248626347}
     endWaypoint: {fileID: 1953294309}
-    distance: 36.354435
+    length: 0
+    TravellersOnEdge: []
     isBarricated: 1
     barrierLocation: 0.40587905
     barrier: {fileID: 909597566}
   - startWaypoint: {fileID: 1248626347}
     endWaypoint: {fileID: 149555550}
-    distance: 33.551826
+    length: 0
+    TravellersOnEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
   - startWaypoint: {fileID: 1953294309}
     endWaypoint: {fileID: 1248626347}
-    distance: 36.354435
+    length: 0
+    TravellersOnEdge: []
     isBarricated: 1
     barrierLocation: 0.5941209
     barrier: {fileID: 909597566}
   - startWaypoint: {fileID: 1953294309}
     endWaypoint: {fileID: 149555550}
-    distance: 40.295906
+    length: 0
+    TravellersOnEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
+  buildings: []
   waypoints: []
   drawEdgeGizmos: 1
 --- !u!4 &980923535
@@ -474,7 +573,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136161524}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1136161526
 Camera:
   m_ObjectHideFlags: 0
@@ -981,3 +1080,4 @@ SceneRoots:
   - {fileID: 980923535}
   - {fileID: 1601751049}
   - {fileID: 127275954}
+  - {fileID: 109974689}
