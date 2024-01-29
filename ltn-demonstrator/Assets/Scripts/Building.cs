@@ -50,7 +50,7 @@ public class Building : MonoBehaviour
         // I don't want to hardcode these values, but I'm not sure how to do it otherwise.
         // if this is removed, the building will spam vehicles
         this.timeBetweenSpawns = 1;
-        this.spawnProbability = 0.1f;
+        this.spawnProbability = 0.03f;
         this.nextSpawnTime = Time.time + timeBetweenSpawns;
 
         this.closestRoadEdge = graph.getClosetRoadEdge(this.transform.position);

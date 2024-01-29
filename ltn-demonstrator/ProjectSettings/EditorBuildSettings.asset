@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MenuProperMapScene.unity
     guid: 645875487aa6ce14d83276adb755bdf2
+  - enabled: 1
+    path: Assets/Scenes/PlayMode.unity
+    guid: fbb16c6a831024f0d82d2315897d8c66
   m_configObjects: {}
