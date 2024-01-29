@@ -8,36 +8,26 @@ public class WaypointMover : MonoBehaviour
     bool initialised;   // Controls whether object has been initialised and should begin travelling
 
     // Attributes controlling vehicle's type
-    VehicleProperties vType;
+    public VehicleProperties vType { get; private set; }
+    public ModeOfTransport mode { get; private set; }
 
     // Statistic measures
     private float totalDistanceMoved;
 
     // Attribute serving movement
-    public float movementUpperBound // Controls the maximum distance the traveller moves in a frame
-    {
-        get; private set;
-    }
-    public float movementLowerBound // Controls the minimum distance the traveller moves in a frame
-    {
-        get;
-        private set;
-    }
-    public float brakingDistance    // Calculated as a distance the vehicle needs to travel, before coming to a stop if deaccelerating at maximum rate
-    {
-        get;
-        private set;
-    }
+    // Controls the maximum distance the traveller moves in a frame
+    public float movementUpperBound { get; private set; }
+    // Controls the minimum distance the traveller moves in a frame
+    public float movementLowerBound { get; private set; }
+    // Calculated as a distance the vehicle needs to travel, before coming to a stop if deaccelerating at maximum rate
+    public float brakingDistance { get; private set; }
     private float distanceAlongEdge;    // Controls how far along current edge the traveller is
     private float terminalLength;       // Controls how far along the last edge in pathEdges / currentEdge if the previous is empty the terminal destination is
     private Edge currentEdge;           // Controls which edge the traveller currently occupies
-    private List<Edge> pathEdges;       // List of edges the traveller needs to travel
+    private List<Edge> pathEdges;       // Controls which edges the traveller will travel along
 
     // Movement attributes - velocity & velocity calculation
-    public float velocity
-    {
-        get; private set;
-    }
+    public float velocity { get; private set; }
     private Edge edgeAtFrameBeginning;
     private float distanceAlongEdgeAtFrameBeginning;
 
@@ -60,8 +50,8 @@ public class WaypointMover : MonoBehaviour
     // Attributes for pathfinding
     private WaypointPath path;           // Instance of the pathfinding class
     private Graph graph;                 // Instance of the graph class
-    private Building destinationBuilding;
-    private Building originBuilding;
+    public Building destinationBuilding { get; private set; }
+    public Building originBuilding { get; private set; }
     [SerializeField] private BuildingType destinationBuildingType;
 
     void Start()
@@ -71,24 +61,55 @@ public class WaypointMover : MonoBehaviour
         gameObject.GetComponent<Renderer>().enabled = false;
 
         // Initialising object
-        this.pathEdges = new List<Edge>();
         this.travsBlockedByThis = new List<WaypointMover>();
         this.travsBlockedByThisDEBUG = new List<WaypointMover>();
         this.travsBlockingThis = new List<WaypointMover>();
         this.travsBlockingThisDEBUG = new List<WaypointMover>();
         this.travsSlowingThisDEBUG = new List<WaypointMover>();
 
+        // Some heuristic to choose what ModeOfTransport to use?
+        // vehicleChosen = someHeuristicThatReturnsAModeOfTransport();
+        // For now, pick the mode randomly
+        this.mode = (ModeOfTransport)Random.Range(0, 3);
+
+        // if the mode is pedestrian, set the traveller's position to the closest point on the pedestrian edge
+        if (this.mode == ModeOfTransport.Pedestrian)
+        {
+            this.transform.position = this.originBuilding.closestPointOnPedestrianEdge;
+            // this.leftLaneOffset = 0.2f;
+            this.leftLaneOffset = Random.Range(-0.25f, 0.25f); // randomizing offset for dynamic look
+            this.vType = pickRandomVehicleType();
+            this.vType.Type = VehicleType.Pedestrian; // Set the type to pedestrian TODO: this should be done in pickRandomVehicleType()
+            this.gameObject.name = "Pedestrian";
+        }
+        else if (this.mode == ModeOfTransport.Car || this.mode == ModeOfTransport.Bicycle)
+        {
+            // Set the traveller's position to the closest point on the road edge
+            this.transform.position = this.originBuilding.closestPointOnRoadEdge;
+            this.vType = pickRandomVehicleType();
+            this.gameObject.name = vType.Type.ToString();
+        }
+
         // pick a random model and material
-        this.vType = pickRandomVehicleType();
         if (!setVehicleModelAndMaterial())
         {
+            Debug.LogError("No model and material found. Destroying object.");
+            Destroy(this.gameObject);
             return;
         }
 
-        var r = GetComponent<Collider>();
-        if (r != null)
+
+        Collider collider = GetComponent<Collider>();
+        if (this.vType.Type == VehicleType.Pedestrian)
         {
-            var bounds = r.bounds;
+            // remove the collider for pedestrians
+            Destroy(collider);
+            this.length = 0f;
+            this.hLen = 0f;
+        }
+        if (collider != null)
+        {
+            var bounds = collider.bounds;
             this.length = Mathf.Max(Mathf.Max(bounds.size.x, bounds.size.y), bounds.size.z);
             this.hLen = length / 2;
         }
@@ -105,11 +126,13 @@ public class WaypointMover : MonoBehaviour
         }
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.transform.position, destinationBuilding.closestPointOnRoadEdge, this);
+        path = new WaypointPath(this.originBuilding, destinationBuilding, this.mode);
 
-        if (path.path == null)
+        if (path.pathAsEdges == null)
         {
-            Edge endEdge = destinationBuilding.closestRoadEdge;
+            // path doesn't exist
+            this.pathEdges = null;
+            Edge endEdge = path.endEdge;
             // If no path is found, destroy the object.
             // Later on, we should change this so that the traveller changes their mode of transport
             Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
@@ -117,87 +140,35 @@ public class WaypointMover : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-        IEnumerator<Waypoint> iter = path.path.GetEnumerator();
-        iter.MoveNext();
-        Waypoint old_wp = null;
-        Waypoint wp = iter.Current;
-
-        // Convert the path into a list of edges
-        while (iter.MoveNext())
+        else
         {
-            old_wp = wp;
-            wp = iter.Current;
-            Edge nextOne = this.graph.getEdge(old_wp, wp);
-            // Debug.Log("Path from: " + old_wp.name + "  to: " + wp.name + "\nEdge: ");
-            if (nextOne == null)
-            {
-                Debug.LogError("There is no path connecting nodes.");
-            }
-            else
-            {
-                this.pathEdges.Add(nextOne);
-            }
-
-        }
-        // Get origin Edge
-        Edge originEdge = graph.getClosetRoadEdge(this.transform.position);
-        if (path.path.Count > 0)
-        {
-            if (originEdge.EndWaypoint != path.path[0])
-            {
-                // If the edge does not end in the correct waypoint, look for counterpart
-                originEdge = graph.getEdge(originEdge.endWaypoint, originEdge.startWaypoint);
-                // If counterpart does not exist, terminate
-                if (originEdge == null)
-                {
-                    Destroy(this.gameObject);
-                    return;
-                }
-            }
-        }
-        // Get Terminal Edge
-        Edge terminalEdge = destinationBuilding.closestRoadEdge;
-        if (path.path.Count > 0)
-        {
-            if (terminalEdge.StartWaypoint != path.path[path.path.Count - 1])
-            {
-                // If the edge does not end in the correct waypoint, look for counterpart
-                terminalEdge = graph.getEdge(terminalEdge.endWaypoint, terminalEdge.startWaypoint);
-                // If counterpart does not exist, terminate
-                if (terminalEdge == null)
-                {
-                    Destroy(this.gameObject);
-                    return;
-                }
-            }
-        }
-        // If the destination is further along the same Edge, do not add the terminal edge
-        if (!originEdge.isSameEdge(terminalEdge))
-        {
-            this.pathEdges.Add(terminalEdge);
+            // copying the path edges, as we don't want to modify the original path
+            this.pathEdges = new List<Edge>(path.pathAsEdges);
         }
 
         // Position the traveller on the current Edge
+        Edge originEdge = this.path.startEdge;
         this.currentEdge = originEdge;
 
         this.distanceAlongEdge = Vector3.Distance(
             this.currentEdge.startWaypoint.transform.position,
-            this.transform.position
-            );
+            this.transform.position);
+
         // Obtain terminal location
-        Vector3 terminal = destinationBuilding.closestPointOnRoadEdge;
-        //this.terminalLength = terminalEdge.GetClosestPointAsFractionOfEdge(terminal);
+        Edge terminalEdge = this.path.endEdge;
+        Vector3 terminal = this.path.destinationPos;
+
         this.terminalLength = Vector3.Distance(
             terminalEdge.startWaypoint.transform.position,
-            terminalEdge.GetClosestPoint(terminal)
-            );
+            terminalEdge.GetClosestPoint(terminal));
+
         // If the destination is along the same edge, but in opposite direction
         // reverse the current direction of travel, and regenerate the positions
         if (originEdge.isSameEdge(terminalEdge))
         {
             // Get the closest points on the edge to the traveller's position and the destination
             Vector3 travellerpos = this.transform.position;
-            Vector3 destination = destinationBuilding.closestPointOnRoadEdge;
+            Vector3 destination = this.path.destinationPos;
 
             // direction from traveller to destination
             Vector3 direction = destination - travellerpos;
@@ -206,12 +177,10 @@ public class WaypointMover : MonoBehaviour
 
             this.terminalLength = Vector3.Distance(
                 currentEdge.startWaypoint.transform.position,
-                destination
-                );
+                destination);
             this.distanceAlongEdge = Vector3.Distance(
                 currentEdge.startWaypoint.transform.position,
-                this.transform.position
-                );
+                this.transform.position);
         }
 
         Debug.Log("Traveller Instantiated");
@@ -365,14 +334,14 @@ public class WaypointMover : MonoBehaviour
     // visually draws the path with gizmos
     void DebugDrawPath()
     {
-        if (path != null && path.path != null && path.path.Count > 0)
+        if (path != null && path.pathAsWaypoints != null && path.pathAsWaypoints.Count > 0)
         {
-            Vector3[] pathPositions = new Vector3[path.path.Count + 1];
+            Vector3[] pathPositions = new Vector3[path.pathAsWaypoints.Count + 1];
             pathPositions[0] = transform.position;
 
-            for (int i = 0; i < path.path.Count; i++)
+            for (int i = 0; i < path.pathAsWaypoints.Count; i++)
             {
-                pathPositions[i + 1] = path.path[i].transform.position;
+                pathPositions[i + 1] = path.pathAsWaypoints[i].transform.position;
             }
 
             // Draw the path using Debug.DrawLine
@@ -390,7 +359,8 @@ public class WaypointMover : MonoBehaviour
         // Choose random destination building type.
         destinationBuildingType = BuildingProperties.getRandomWeightedDestinationType();
 
-        if (graph.buildingsByType[destinationBuildingType].Count == 0) {
+        if (graph.buildingsByType[destinationBuildingType].Count == 0)
+        {
             Debug.LogWarning("No buildings of type " + destinationBuildingType + " exist in the simulation. Cannot choose building.");
             return null;
         }
@@ -403,7 +373,8 @@ public class WaypointMover : MonoBehaviour
         {
             Debug.LogWarning("Spawned traveller with same origin and destination building! Choosing new building.");
 
-            if (graph.buildingsByType[destinationBuildingType].Count == 1) {
+            if (graph.buildingsByType[destinationBuildingType].Count == 1)
+            {
                 Debug.LogWarning("Fewer than 2 buildings of type " + destinationBuildingType + " exist in the simulation. Cannot choose new building.");
                 return null;
             }
@@ -534,9 +505,9 @@ public class WaypointMover : MonoBehaviour
             float TravelledOverEdges = 0;
             Edge terminalEdge = this.currentEdge;
             Edge superTerminalEdge = null;
-            if (pathEdges.Count > 0)
+            if (this.pathEdges.Count > 0)
             {
-                superTerminalEdge = pathEdges[0];
+                superTerminalEdge = this.pathEdges[0];
             }
             float offset = this.distanceAlongEdge;
 
@@ -556,6 +527,7 @@ public class WaypointMover : MonoBehaviour
                     arriveToDestination();
                     goto notification;
                 }
+
                 // Calculate distance Travelled over subsequent Edges
                 while (iter.Current.Distance < proposedMovement - TravelledOverEdges)
                 {
@@ -739,8 +711,8 @@ public class WaypointMover : MonoBehaviour
             this.currentEdge.Unsubscribe(this);
             arriveToDestination();
         }
-        // Notify all traveller waiting for this one
-        notification:
+    // Notify all traveller waiting for this one
+    notification:
         bool finished = false;
         while (!finished)
         {
@@ -774,16 +746,16 @@ public class WaypointMover : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (Application.isPlaying && !(path == null))
+        if (Application.isPlaying)
         {
             // Draw the destination sphere
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(path.destinationPos, 1f);
 
-            if (path.path.Count > 0)
+            if (path.pathAsWaypoints.Count > 0)
             {
                 // Iterate through the remaining waypoints
-                foreach (var waypoint in path.path)
+                foreach (var waypoint in path.pathAsWaypoints)
                 {
                     // Draw a sphere for each waypoint
                     Gizmos.DrawSphere(waypoint.transform.position, 1f);
@@ -801,18 +773,19 @@ public class WaypointMover : MonoBehaviour
             }
         }
     }
+
     private void OnDrawGizmosSelected()
     {
-        if (Application.isPlaying && !(path == null))
+        if (Application.isPlaying)
         {
             // Draw the destination sphere
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(path.destinationPos, 1f);
 
-            if (path.path.Count > 0)
+            if (path.pathAsWaypoints.Count > 0)
             {
                 // Iterate through the remaining waypoints
-                foreach (var waypoint in path.path)
+                foreach (var waypoint in path.pathAsWaypoints)
                 {
                     // Draw a sphere for each waypoint
                     Gizmos.DrawSphere(waypoint.transform.position, 1f);
@@ -905,11 +878,16 @@ public class WaypointMover : MonoBehaviour
             thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
             thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
 
+            // this allows us to ensure that pedestrians are the correct size. Should be done with all vehicles,
+            // but we have to setup the prefabs correctly first.
+            if (this.vType.Type == VehicleType.Pedestrian)
+            {
+                this.transform.localScale = model.transform.localScale;
+            }
         }
         else
         {
             Debug.LogError("No model found for vehicle type: " + this.vType.Type + ". Fix this please! Worse errors could arise later.");
-            DestroyImmediate(this.gameObject);
             return false;
         }
         return true;
