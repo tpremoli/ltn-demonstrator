@@ -3,22 +3,63 @@ using UnityEngine;
 
 public class Graph : MonoBehaviour
 {
+    public static Graph Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     // private waypointsize with getter
     [Range(0f, 2f)][SerializeField] private float waypointSize = 0.5f;
     [SerializeField] public List<Edge> edges;
 
-    public List<Building> buildings;
+    public List<Building> allBuildings;
+    public Dictionary<BuildingType, List<Building>> buildingsByType = new Dictionary<BuildingType, List<Building>>();
 
     public List<Waypoint> waypoints;
 
     [SerializeField] private bool drawEdgeGizmos = true;
 
+    [SerializeField] public bool inEditMode;
+
     void Start()
     {
         Random.InitState(42); // Set seed for random number generator
+        Time.timeScale = 1; // Set time scale to 1
 
+        // Initialise buildings dictionary.
+        foreach (BuildingType bType in BuildingProperties.buildingTypes)
+        {
+            buildingsByType.Add(bType, new List<Building>());
+        }
+
+        // Get list of waypoints and all buildings.
         waypoints = new List<Waypoint>(FindObjectsOfType<Waypoint>());
-        buildings = new List<Building>(FindObjectsOfType<Building>());
+        allBuildings = new List<Building>(FindObjectsOfType<Building>());
+
+        foreach (Building b in allBuildings)
+        {
+            buildingsByType[b.buildingType].Add(b);
+        }
+
+        foreach (KeyValuePair<BuildingType, List<Building>> t in buildingsByType)
+        {
+            Debug.Log("Building Type: " + t.Key + ", Total: " + t.Value.Count);
+        }
+
+        if (!inEditMode && BarrierManager.Instance.loadBarriersFromSave){
+            BarrierManager.Instance.RecalcBarriersOnEdges();
+        }
+
+    }
+
+    public Building getRandomBuildingByType(BuildingType buildingType)
+    {
+        return buildingsByType[buildingType][Random.Range(0, buildingsByType[buildingType].Count)];
     }
 
     public float WaypointSize
@@ -31,7 +72,6 @@ public class Graph : MonoBehaviour
         if (drawEdgeGizmos) // Check if drawing of edge gizmos is enabled
         {
             DrawEdgeGizmos();
-
         }
     }
 
@@ -89,19 +129,43 @@ public class Graph : MonoBehaviour
         return null;
     }
 
-    public Edge getClosetEdge(Vector3 position)
+    public Edge getClosetRoadEdge(Vector3 position)
     {
         Edge closestEdge = null;
         float minDistance = float.MaxValue;
 
         foreach (Edge edge in edges)
         {
+            if (edge.isPedestrianOnly) continue;
+            
             float distance = edge.DistanceToEdge(position);
 
             if (distance < minDistance)
             {
                 minDistance = distance;
                 closestEdge = edge;
+            }
+        }
+
+        return closestEdge;
+    }
+
+    public Edge getClosetPedestrianEdge(Vector3 position)
+    {
+        Edge closestEdge = null;
+        float minDistance = float.MaxValue;
+
+        foreach (Edge edge in edges)
+        {
+            if (edge.isPedestrianOnly)
+            {
+                float distance = edge.DistanceToEdge(position);
+
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closestEdge = edge;
+                }
             }
         }
 

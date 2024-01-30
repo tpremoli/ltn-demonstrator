@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StatisticsScene.unity
     guid: c78bf72bec5e9db46ab3f9f67ea8e8da
+  - enabled: 1
+    path: Assets/Scenes/EditLTN.unity
+    guid: dab8a8926742643cab366effdc6fd4ea
+  - enabled: 1
+    path: Assets/Scenes/ProperMapScene.unity
+    guid: ca848d6cb9fa3f947a195dedb4ca25a9
+  - enabled: 1
+    path: Assets/Scenes/MenuProperMapScene.unity
+    guid: 645875487aa6ce14d83276adb755bdf2
+  - enabled: 1
+    path: Assets/Scenes/PlayMode.unity
+    guid: fbb16c6a831024f0d82d2315897d8c66
   m_configObjects: {}

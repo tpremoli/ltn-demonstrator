@@ -4,6 +4,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Edge
 {
+    public Vector3 position;
+    public Vector3 direction;
     public Waypoint startWaypoint;
 
     private Waypoint startWaypointLane;
@@ -26,6 +28,8 @@ public class Edge
     public bool isBarricated;
     public float barrierLocation;
     public Barrier barrier;
+
+    public bool isPedestrianOnly;
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.startWaypoint = startWaypoint;
@@ -38,6 +42,19 @@ public class Edge
         this.isBarricated = barrier != null;
         this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
 
+        this.isPedestrianOnly = startWaypoint.isPedestrianOnly || endWaypoint.isPedestrianOnly;
+
+        if (this.isBarricated)
+        {
+            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
+        }
+    }
+
+    public void RecheckBarriers()
+    {
+        this.barrier = getBarrierInPath();
+        this.isBarricated = barrier != null;
+        this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
         if (this.isBarricated)
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
@@ -66,10 +83,17 @@ public class Edge
 
     public void DrawGizmo()
     {
+        // drawing the edge would be too much clutter
+        if (isPedestrianOnly)
+        {
+            return;
+        }
+
         // Draw arrow pointing in the edge's direction
         Vector3 startpoint = startWaypoint.transform.position;
         Vector3 endpoint = endWaypoint.transform.position;
         Vector3 direction = endpoint - startpoint;
+        // Debug.Log("Direction of the Road Edge: " + direction);
 
         // Make the arrows shorter by 20%
         float shortenedMagnitude = direction.magnitude * 0.7f;
@@ -212,13 +236,38 @@ public class Edge
 
     public Barrier getBarrierInPath()
     {
-        // we go through the Barrier and check if the edge intersects with any of them
-        Barrier[] allBarriers = GameObject.FindObjectsOfType<Barrier>();
-        for (int i = 0; i < allBarriers.Length; i++)
+        Barrier[] allBarriers;
+
+        if (BarrierManager.Instance == null)
         {
-            if (allBarriers[i].isPointInBarrier(this.GetClosestPoint(allBarriers[i].transform.position)))
+            allBarriers = GameObject.FindObjectsOfType<Barrier>();
+        }
+        else
+        {
+            List<GameObject> allBarrierGameObjects;
+            allBarrierGameObjects = BarrierManager.Instance.allBarriers;
+            // get all the Barrier objects from the list of GameObjects
+            allBarriers = new Barrier[allBarrierGameObjects.Count];
+            for (int i = 0; i < allBarrierGameObjects.Count; i++)
             {
-                return allBarriers[i];
+                allBarriers[i] = allBarrierGameObjects[i].GetComponent<Barrier>();
+            }
+        }
+
+        // we go through the Barrier and check if the edge intersects with any of them
+        foreach (Barrier barrier in allBarriers)
+        {
+            if (barrier.isPointInBarrier(this.GetClosestPoint(barrier.transform.position)))
+            {
+                Debug.Log("Barrier found at " + barrier.transform.position);
+                // Calculate the angle between the barrier's forward direction and the edge direction
+                Vector3 edgeDirection = this.GetDirection();
+                float angle = Vector3.Angle(barrier.transform.forward, edgeDirection);
+
+                // Apply the rotation to the barrier
+                barrier.transform.rotation = Quaternion.Euler(0, angle, 0);
+
+                return barrier;
             }
         }
         return null;

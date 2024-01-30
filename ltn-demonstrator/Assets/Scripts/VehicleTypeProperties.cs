@@ -6,7 +6,8 @@ public enum VehicleType
     PersonalCar,
     SUV,
     Van,
-    Taxi
+    Taxi,
+    Pedestrian
 }
 
 public class VehicleProperties
@@ -65,7 +66,7 @@ public class VehicleProperties
     {
         VehicleType type;
         Array values = Enum.GetValues(typeof(VehicleType));
-        type = (VehicleType)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        type = (VehicleType)values.GetValue(UnityEngine.Random.Range(0, values.Length-1)); // -1 to exclude Pedestrian. TODO: make this more elegant
         this.Type = type;
     }
     private float getBaseMaxVelocity()
@@ -80,6 +81,8 @@ public class VehicleProperties
                 return 4.5f;
             case VehicleType.Taxi:
                 return 4.8f;
+            case VehicleType.Pedestrian:
+                return 1.5f;
             default:
                 return 0.0f;
         }
@@ -96,6 +99,8 @@ public class VehicleProperties
                 return 0.5f;
             case VehicleType.Taxi:
                 return 0.2f;
+            case VehicleType.Pedestrian:
+                return 0.2f;
             default:
                 return 0.0f;
         }
@@ -105,13 +110,15 @@ public class VehicleProperties
         switch (Type)
         {
             case VehicleType.PersonalCar:
-                return 1.0f;
+                return 2.0f;
             case VehicleType.SUV:
-                return 0.5f;
+                return 1.5f;
             case VehicleType.Van:
-                return 0.25f;
-            case VehicleType.Taxi:
                 return 1.0f;
+            case VehicleType.Taxi:
+                return 2.0f;
+            case VehicleType.Pedestrian:
+                return 1000.0f;
             default:
                 return 0.0f;
         }
@@ -121,13 +128,15 @@ public class VehicleProperties
         switch (Type)
         {
             case VehicleType.PersonalCar:
-                return 2.5f;
+                return 4.0f;
             case VehicleType.SUV:
-                return 2.5f;
+                return 3.5f;
             case VehicleType.Van:
                 return 2.0f;
             case VehicleType.Taxi:
-                return 2.5f;
+                return 4.0f;
+            case VehicleType.Pedestrian:
+                return 1000.0f;
             default:
                 return 0.0f;
         }
@@ -160,6 +169,8 @@ public class VehicleProperties
                 return 2;
             case VehicleType.Taxi:
                 return 3;
+            case VehicleType.Pedestrian:
+                return 1; // lol
             default:
                 return 0;
         }

@@ -59,3 +59,5 @@ MonoBehaviour:
     vehicleType: 1
   - vehiclePrefab: {fileID: 100000, guid: 05aec82adc02f16409639716322b1673, type: 3}
     vehicleType: 3
+  - vehiclePrefab: {fileID: 100000, guid: 36f453c34cda9cb458647901440ff410, type: 3}
+    vehicleType: 4
