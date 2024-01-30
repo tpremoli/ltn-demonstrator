@@ -104,6 +104,8 @@ public class WaypointMover : MonoBehaviour
         {
             Debug.LogWarning("No model found for vehicle type: " + this.vType.Type + ". Fix this please! Worse errors could arise later.");
             Destroy(this.gameObject);
+            StatisticsManager.Instance.BUGFIXincrementFinishedPaths();
+            Debug.Log("Incremented");
             return;
         }
 
@@ -195,7 +197,7 @@ public class WaypointMover : MonoBehaviour
                 this.transform.position);
         }
 
-        Debug.Log("Traveller Instantiated");
+        //Debug.Log("Traveller Instantiated");
         // Rotate the Traveller to align with the current edge
         updateHeading();
 

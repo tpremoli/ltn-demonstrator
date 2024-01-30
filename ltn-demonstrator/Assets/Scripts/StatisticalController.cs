@@ -31,7 +31,7 @@ public class StatisticsManager : MonoBehaviour
             finishedPaths = 0; 
             endSim = false; 
             //speed up simulation
-            Time.timeScale = 3;
+            Time.timeScale = 5;
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
         }
         else
@@ -44,7 +44,7 @@ public class StatisticsManager : MonoBehaviour
     {
         // Get the name of the current active scene
         string currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName == "BuildingScene")
+        if (currentSceneName == "ProperMapSceneForStats")
         {
             if (endSim == true) // Assuming noOfTravellers is a public field or property
             {
@@ -148,7 +148,7 @@ public class StatisticsManager : MonoBehaviour
                 allPathData[i].startTime < 0 || 
                 allPathData[i].endTime < 1 || 
                 !(allPathData[i].routeChange == false || allPathData[i].routeChange == true) || 
-                !Enum.IsDefined(typeof(ModeOfTransport.Mode), allPathData[i].travellerType))
+                !Enum.IsDefined(typeof(ModeOfTransport), allPathData[i].travellerType))
             {
                 allPathData.RemoveAt(i);
             }
@@ -170,7 +170,7 @@ public class StatisticsManager : MonoBehaviour
         string totalNoOfTravellers = TotalNumberOfTravellers();
         string averageTravVelo = AverageTravellerVelocity();
         string rateOfDeviation = RateOfDeviation();
-        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} frames\nAverage traveller velocity: {averageTravVelo} \nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
+        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage traveller velocity: {averageTravVelo} \nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
         //Set the TMP object to the stats we calc
         statsText.text = finalString;
         
@@ -213,7 +213,9 @@ public class StatisticsManager : MonoBehaviour
             totalTravelTime += pathData.endTime - pathData.startTime;
             //Debug.Log($"{pathData.endTime} - {pathData.startTime} = {pathData.endTime - pathData.startTime}");
         }
-        return totalTravelTime.ToString();
+        // convert to seconds
+        totalTravelTime = totalTravelTime*Time.deltaTime*0.5;
+        return totalTravelTime.ToString() ;
     }
 
     //Total Number of Travellers
@@ -235,6 +237,7 @@ private string AverageTravellerVelocity()
     {
         if (pd.path == null)
         {
+            Debug.Log(Time.deltaTime);
             Debug.LogWarning("PathData path is null");
             continue; // Skip this PathData as its path is null
         }

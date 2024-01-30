@@ -139,7 +139,9 @@ public class Building : MonoBehaviour
         //save data
         SaveTravellerData(newTravellerObj);
         //stops spawning if max number of travellers reached
+        
         if (TravellerManager.Instance.noOfTravellers >= StatisticsManager.TERMINATION_CRITERIA) {
+            Debug.Log("------------------Max Travellers Spawned");
             ALLOW_SPAWNING = false;
         }
     }

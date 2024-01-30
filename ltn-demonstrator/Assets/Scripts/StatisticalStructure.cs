@@ -8,7 +8,7 @@ public class PathData {
     public float startTime;
     public float endTime;
     public bool routeChange;
-    public ModeOfTransport.Mode travellerType;
+    public ModeOfTransport travellerType;
 }
 
 public class SerialisableEdge {
