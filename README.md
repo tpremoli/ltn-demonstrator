@@ -23,3 +23,5 @@ Our proposed simulation seeks to demystify the complexities of neighbourhood des
 
 ## Technical System Requirements:
 These can be found under ltn-demonstrator/docs/technical_system_requirements.md
+Link:
+https://github.com/2023-24-UoE-ECMM427/ltn-demonstrator/blob/CA2/docs/technical_system_requirements.md
