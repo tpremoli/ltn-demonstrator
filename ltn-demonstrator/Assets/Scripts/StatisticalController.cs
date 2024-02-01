@@ -50,6 +50,10 @@ public class StatisticsManager : MonoBehaviour
             {
                 // End Simulation - change to next scene
                 Debug.Log("SIMULATION ENDED");
+                //Clean the data
+                PrunePathData();
+                //serialise data
+                SerialisePathDataSave();
                 //change scene
                 SceneManager.LoadScene("StatisticsScene");
 
@@ -86,8 +90,6 @@ public class StatisticsManager : MonoBehaviour
                 Debug.LogError("Failed to find the TMP_Text component on 'Body'.");
             } else {
                 Debug.Log("Should be updating stats as we speak");
-                //Clean the data
-                PrunePathData();
                 // Now you can update the statsText with your data.
                 UpdateTextWithStatistics();
                 
@@ -148,7 +150,8 @@ public class StatisticsManager : MonoBehaviour
                 allPathData[i].startTime < 0 || 
                 allPathData[i].endTime < 1 || 
                 !(allPathData[i].routeChange == false || allPathData[i].routeChange == true) || 
-                !Enum.IsDefined(typeof(ModeOfTransport), allPathData[i].travellerType))
+                !Enum.IsDefined(typeof(ModeOfTransport), allPathData[i].travellerType) ||
+                allPathData[i].path == null)
             {
                 allPathData.RemoveAt(i);
             }
@@ -170,7 +173,7 @@ public class StatisticsManager : MonoBehaviour
         string totalNoOfTravellers = TotalNumberOfTravellers();
         string averageTravVelo = AverageTravellerVelocity();
         string rateOfDeviation = RateOfDeviation();
-        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage traveller velocity: {averageTravVelo} \nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
+        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage traveller velocity: {averageTravVelo} spatial units/s\nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
         //Set the TMP object to the stats we calc
         statsText.text = finalString;
         
@@ -182,8 +185,8 @@ public class StatisticsManager : MonoBehaviour
         allPathData.Add(pathData);
     }
 
-    public void RecieveEndTime (int ID) {
-        UpdateEndTime(ID);
+    public void RecieveEndTime (int ID, List<Edge> path) {
+        UpdateEndTimeAndPath(ID, path);
         finishedPaths++;
         Debug.Log($"finished Paths = {finishedPaths}, term = {TERMINATION_CRITERIA}, num of spawned Travellers = {TravellerManager.Instance.noOfTravellers}");
         if (finishedPaths >= TERMINATION_CRITERIA) {
@@ -192,15 +195,119 @@ public class StatisticsManager : MonoBehaviour
         }
     }
 
-    public void UpdateEndTime(int id) {
+    public void UpdateEndTimeAndPath(int id, List<Edge> path) {
         foreach (var pathData in allPathData)
         {
             if (pathData.ID == id)
             {
                 pathData.endTime = Time.frameCount; 
+                pathData.path = path;
+                if (path == null) {
+                    Debug.LogError("path is null");
+                }
             }
         }
     }
+
+    // for each edge object in the simulation, convert to serialisable edge
+    private List<SerialisableEdge> convertEdgeToSerialisable () {
+        List <Edge> old_edges = new List<Edge>();
+        List <SerialisableEdge> new_edges = new List<SerialisableEdge>();
+        int ID_counter = 0;
+        Debug.Log("converting edges");
+        //get all edges, extract on necessary from allPathData
+        foreach (var pathData in allPathData) {
+            foreach (var edge in pathData.path) {
+                Debug.Log($"edge ID = {edge.ID}");
+                Debug.Log("edge id didnt work");
+                //assign ID attribute to each edge arbitrarily
+                if (edge.ID == -1) {
+                    edge.ID = ID_counter;
+                    ID_counter+=1;
+                    old_edges.Add(edge);
+                    //create serialisable edge from original edge
+                    SerialisableEdge serial_edge = new SerialisableEdge(edge);
+                    new_edges.Add(serial_edge);
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        return new_edges;
+    }
+
+    //for each waypoint in the simulation, convert to a serialisable waypoint
+    //---------------------------------------FIX-----------------------------------------------
+    private List<SerialisableWaypoint> convertWaypointToSerialisable () {
+        List <Waypoint> old_waypoints = new List<Waypoint>();
+        List <SerialisableWaypoint> new_waypoints = new List<SerialisableWaypoint>();
+        int ID_counter = 0;
+        //get all waypoints, extract on necessary from allPathData
+        foreach (var pathData in allPathData) {
+            foreach (var edge in pathData.path) {
+                //assign ID attribute to each edge arbitrarily
+                if (edge.startWaypoint.ID == -1) {
+                    edge.startWaypoint.ID = ID_counter;
+                    ID_counter++;
+                    old_waypoints.Add(edge.startWaypoint);
+                    //create serialisable edge from original edge
+                    SerialisableWaypoint serial_waypoint = new SerialisableWaypoint(edge.startWaypoint);
+                    new_waypoints.Add(serial_waypoint);
+                }
+                else {
+                    continue;
+                }
+                if (edge.endWaypoint.ID == -1) {
+                    edge.endWaypoint.ID = ID_counter;
+                    ID_counter++;
+                    old_waypoints.Add(edge.endWaypoint);
+                    //create serialisable edge from original edge
+                    SerialisableWaypoint serial_waypoint = new SerialisableWaypoint(edge.endWaypoint);
+                    new_waypoints.Add(serial_waypoint);
+                }
+                else {
+                    continue;
+                }   
+            }
+        }
+        return new_waypoints;
+    }
+
+    //convert all pathData to serialisable pathdata
+    public void SerialisePathDataSave () {
+        Debug.Log("BEGINNING SERIALISATION");
+        //get the serialised versions of all edges
+        List<SerialisableEdge> allNewEdges = convertEdgeToSerialisable();
+        //for each edge in each path, create a serialisable edge list
+        foreach (var pathData in allPathData) {
+            //create a serialisable pathData
+            List<SerialisableEdge> newEdges = new List<SerialisableEdge>();
+            Debug.Log($"pathdata.path.Count is {pathData.path.Count}");
+            foreach (var edge in pathData.path) {
+                //find equivilant edge in allNewEdges
+                foreach (var newEdge in allNewEdges) {
+                    if (edge.ID == newEdge.ID) {
+                        newEdges.Add(newEdge);
+                        
+                    }
+                    else {
+                        Debug.LogError("Edge not found in allNewEdges");
+                    }
+                }
+            }
+            pathData.serialisablePath = newEdges;
+        }
+        Debug.Log("Serialised all pathData");
+        //set each pd.serialisablePath to the list
+        //save the allPathData list as a json file
+    }
+
+
+    public void SerialisePathDataLoad () {
+        //load the json file and set allPathData equal to it
+    }
+
 
 
     //---------------------------------STATISTICAL MEASURES------------------------------------------------------------------------------------------
@@ -214,7 +321,7 @@ public class StatisticsManager : MonoBehaviour
             //Debug.Log($"{pathData.endTime} - {pathData.startTime} = {pathData.endTime - pathData.startTime}");
         }
         // convert to seconds
-        totalTravelTime = totalTravelTime*Time.deltaTime*0.5;
+        totalTravelTime = (float)(totalTravelTime*Time.deltaTime);
         return totalTravelTime.ToString() ;
     }
 
@@ -235,21 +342,23 @@ private string AverageTravellerVelocity()
 
     foreach (PathData pd in allPathData) 
     {
-        if (pd.path == null)
+        
+        if (pd.serialisablePath == null)
         {
             Debug.Log(Time.deltaTime);
             Debug.LogWarning("PathData path is null");
             continue; // Skip this PathData as its path is null
         }
-
-        foreach (Edge e in pd.path)
+        Debug.Log($"in the loop");
+        Debug.Log($"pd.serialisablePath.Count is {pd.serialisablePath.Count}");
+        foreach (SerialisableEdge e in pd.serialisablePath)
         {
             if (e == null)
             {
                 Debug.LogWarning("Edge in path is null");
                 continue; // Skip this Edge as it is null
             }
-
+            Debug.Log($"e.length is {e.length}");
             totalDistance += e.length;
         }
     }
@@ -258,7 +367,6 @@ private string AverageTravellerVelocity()
     {
         return "0"; // Avoid division by zero
     }
-
     return (totalDistance / (totalTime * numberOfTravellers)).ToString();
 }
 
@@ -279,7 +387,10 @@ private string AverageTravellerVelocity()
     }
 
     //Rate of pollution - uses arbitrary values for now
-    
+    private string RateOfPollution ()
+    {
+        return "N/A";
+    }
 
 
     //Total Pollution

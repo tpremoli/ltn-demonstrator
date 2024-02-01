@@ -4,6 +4,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Edge
 {
+    public int ID;
     public Vector3 position;
     public Vector3 direction;
     public Waypoint startWaypoint;
@@ -32,6 +33,7 @@ public class Edge
     public bool isPedestrianOnly;
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
+        this.ID = -1;
         this.startWaypoint = startWaypoint;
         this.endWaypoint = endWaypoint;
         this.length = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);

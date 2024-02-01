@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 // This is here for future expansion, but is not currently used
 public enum BuildingType
@@ -150,6 +151,8 @@ public class Building : MonoBehaviour
         //assign ID to traveller - although its actually a waypointPath, will need to be reconfigured
         WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
         waypointMover.ID = TravellerManager.Instance.noOfTravellers; // Assign ID
+        //make stats structures here 
+
         //create data struct for traveller information
         PathData pathData = new PathData();
         pathData.path = newTravellerObj.GetComponent<WaypointMover>().getEdgePath();//getpath
@@ -159,6 +162,7 @@ public class Building : MonoBehaviour
         //store to list
         StatisticsManager.Instance.AddPathData(pathData);  //finish append
     }
+
 
 
     // public Vector3 getEdgeLocation()
