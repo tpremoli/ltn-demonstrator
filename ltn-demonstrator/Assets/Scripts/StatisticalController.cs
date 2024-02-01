@@ -14,7 +14,7 @@ public class StatisticsManager : MonoBehaviour
     public static List<PathData> allPathData { get; private set; }
     //text for stats in the statistical measures screen
     public TMP_Text statsText;
-    public const int TERMINATION_CRITERIA = 1;
+    public const int TERMINATION_CRITERIA = 100;
     private int finishedPaths;
     private bool endSim;
     
@@ -173,7 +173,7 @@ public class StatisticsManager : MonoBehaviour
         string totalNoOfTravellers = TotalNumberOfTravellers();
         string averageTravVelo = AverageTravellerVelocity();
         string rateOfDeviation = RateOfDeviation();
-        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\n\nAverage trip velocity: {averageTravVelo} mph\n\nAverage rate of pollution: 20g/m \n\nTotal pollution: 2.5kg ";
+        finalString = $"Number of travellers: {totalNoOfTravellers}\n\nTotal travel time: {totalTravelTime} seconds\n\nAverage trip velocity: {averageTravVelo} mph\n\nAverage rate of pollution: 20g/m \n\nTotal pollution: 2.5kg ";
         //Set the TMP object to the stats we calc
         statsText.text = finalString;
         
