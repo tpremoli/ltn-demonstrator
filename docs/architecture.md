@@ -1,6 +1,10 @@
 # System Architecture
 The system created to display the simulation of an LTN uses the Unity game engine in order to do so. It does not communicate with any other services outside of the local machine on which Unity is being run, and as such poses minimal security threats. It also stores no information about the user either locally or remotely. Because of the contained nature of the system, the component diagram is kept relatively simple.
 
+![Image 1]([https://github.com/2023-24-UoE-ECMM427/ltn-demonstrator/blob/CA2/docs/SystemArchitecture.png])
+
+
+
 ## User: 
 The user will be a person interacting with the LTN simulation. This could be developers as they test things, the client, or eventually, members of the public in the Royal Albert Memorial Museum (RAMM). These users will only interact with a device on which the LTN simulation is running, with possibly some help from a more experienced user, such as museum staff/volunteers or a developer.
 ## Unity: 
