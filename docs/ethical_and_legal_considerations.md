@@ -1,4 +1,4 @@
-LTN simulation and statistical modelling\
+LTN simulation and statistical modelling
 Date: February 2023
 ## Introduction:
 Ethical and legal considerations are vital for this project as it models Low Traffic Neighbourhoods (LTN's) and influences urban planning decisions. They ensure fairness, transparency, and community consent, while also guarding against legal complications. These considerations help maintain credibility and build trust within the communities the project impacts.  
@@ -15,6 +15,9 @@ Ethical and legal considerations are vital for this project as it models Low Tra
 8. **Equitable Access:** Ensure that the simulation is designed to be user-friendly, accessible, and comprehensible for individuals of all age groups, including those with diverse backgrounds, abilities, or technological literacy.
 9. **Educational Purpose:** The simulation serves as an educational tool, facilitating an understanding of urban planning's complexities and societal impacts, while acknowledging its inherent limitations.
 10. **Restrictions in Eductional Use:** Ethical considerations necessitate a careful appraisal of the simulation's use in educational settings, particularly in terms of age-appropriateness and potential biases influencing student perceptions. Considerations regarding accessability should also be covered.
+11. **Community Involvement:** Active engagement with local communities is essential. This involves seeking their input, addressing their concerns, and incorporating their feedback into the LTN model. Such involvement ensures the model reflects diverse perspectives and real-world scenarios.
+12. **Respect for Community Views:** Recognize and respect the varied views within the community, ensuring that all voices, especially those from marginalized groups, are heard and considered in the simulation's development.
+13. **Consent and Privacy in Engagement:** Obtain informed consent for any data collection during community engagement activities, ensuring adherence to privacy and data protection standards.
 
  
 ## Legal Considerations:
@@ -25,7 +28,11 @@ Ethical and legal considerations are vital for this project as it models Low Tra
 5. **Local Regulation:** Regulation determining data usage, mapping, and transparency will vary, and said variation should be accommodated by the local implementation. This project is being developed specifically for studying LTN's in Heavitree, Exeter, but should incorporate the flexibility to be applied to other neighbourhoods. 
 6. **Environmental Regulations:** Since this project will consider environmental impact, we will need to ensure it complies with environmental regulations. Certain domains will have restrictions on travel and type of vehicle, or incentives to travel in certain ways. This regulations should be considered in the simulation or the simulation framework.
 7. **Educational Liscensing:** For educational deployment, the simulation requires specific licensing, ensuring compliance with academic standards and legal norms.
-8. **Limitations for Educational Use:** Legal constraints, particularly in data privacy, must be rigorously observed when integrating the simulation into educational curricula.
+8. **Educational Use Compliance:** Ensure that the use of the LTN simulation in an educational setting complies with the terms of its existing license. This might involve restrictions on how the simulation can be used for teaching purposes.
+9. **Limitations for Educational Use:** Legal constraints, particularly in data privacy, must be rigorously observed when integrating the simulation into educational curricula.
+10. **Compliance with Educational Standards:** Ensure that the use of the simulation aligns with educational standards and practices, particularly if it will be integrated into formal curricula.
+11. **Public Consultation Requirements:** Adhere to legal requirements regarding public consultations for urban planning projects. Ensure that all community engagement activities comply with these regulations.
+12. **Documentation and Record-Keeping:** Maintain thorough records of community consultations, feedback, and how this input is integrated into the project, to ensure transparency and accountability.
 
 
 ## Accountability / Liability:
@@ -33,12 +40,21 @@ Ethical and legal considerations are vital for this project as it models Low Tra
 2. **Incorrect Conclusions from Simulation:** Due to the complexity of simulating real life, solutions proposed by the simulation might not reflect reality. If this is made clear, users of the simulation (like Exeter city council) can make more informed decisions, and have awareness regarding consequences of certain implementations, as well as deviation from intended implementation. 
 3. **Experimental Use by Public:** If this project is utilized by the RAMM and the public, the users must be informed that solutions discovered by the simulation do not equate directly to reality, and that the authority to implement such solutions belongs to governmental bodies. A disclaimer can be issued and/or signed by any user, accepting that the solutions proposed by the simulation are suggestions, not factual.
 4. **Misinterpretation in Educational Contexts:** The risk of misinterpretation in educational contexts is acknowledged, necessitating clear guidelines and supplementary materials to ensure accurate comprehension.
+5. **Responsiveness to Community Feedback:** Ensure there are clear mechanisms to respond to community concerns and feedback. Establish processes to adjust the project based on this input, mitigating any potential negative impacts on the community.
+6. **Liability for Community Misunderstandings:** Address and clarify any misunderstandings that may arise from community engagement sessions, reducing the risk of misinformation and potential liability.
+
+
+## Community Engagement:
+1. **Engagement Strategy:** Develop a comprehensive strategy for community engagement, detailing how and when the community will be involved in the project.
+2. **Diverse Participation:** Ensure the engagement strategy is inclusive, allowing for the participation of a wide range of community members, including those from underrepresented groups.
+3. **Feedback Mechanisms:** Implement effective mechanisms for collecting and analyzing community feedback, such as surveys, public forums, and online platforms.
+4. **Impact on Modeling:** Detail how community input will influence the LTN simulation, ensuring that the model remains relevant and reflective of community needs.
 
 
 ## Conclusion:
 Given the ethical and legal considerations outlined above, most aspects of the project do not require ethical approval (bar conferring with marginalized groups), as they involve minimal risk legally and ethically. If we decide to consult members of marginalized groups (limited mobility, race etc.), then this may change, hence, we will seek ethical approval from the university.
 
 
-## Review
+## Review:
 This document was reviewed in January 2024. It was amended to consider the use of the simulation in educational setting, with all sections (Introduction, Legal Considerations and Accountability and Liability) being updated accordingly, with additional focus on
-the misrepresentation or misuse of data and results. Otherwise, the review found that there were no changes required to be made to this document and that the information listed here with respect to legal and ethical concerns are still accurate and up-to-date.
+the misrepresentation or misuse of data and results. Additionally, considerations towards community engagement have been made throughout all sections, and a section regarding our intentions with the community has been added. Otherwise, the review found that there were no changes required to be made to this document and that the information listed here with respect to legal and ethical concerns are still accurate and up-to-date.
