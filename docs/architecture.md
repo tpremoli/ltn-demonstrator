@@ -1,7 +1,7 @@
 # System Architecture
 The system created to display the simulation of an LTN uses the Unity game engine in order to do so. It does not communicate with any other services outside of the local machine on which Unity is being run, and as such poses minimal security threats. It also stores no information about the user either locally or remotely. Because of the contained nature of the system, the component diagram is kept relatively simple.
 
-![Image 1]([https://github.com/2023-24-UoE-ECMM427/ltn-demonstrator/blob/CA2/docs/SystemArchitecture.png])
+![Image 1]([SystemArchitecture.png])
 
 
 
