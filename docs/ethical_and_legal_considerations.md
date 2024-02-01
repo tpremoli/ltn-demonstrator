@@ -56,5 +56,5 @@ Given the ethical and legal considerations outlined above, most aspects of the p
 
 
 ## Review:
-This document was reviewed in January 2024. It was amended to consider the use of the simulation in educational setting, with all sections (Introduction, Legal Considerations and Accountability and Liability) being updated accordingly, with additional focus on
+This document was reviewed in January 2024. It was amended in February 2024 to consider the use of the simulation in educational setting, with all sections (Introduction, Legal Considerations and Accountability and Liability) being updated accordingly, with additional focus on
 the misrepresentation or misuse of data and results. Additionally, considerations towards community engagement have been made throughout all sections, and a section regarding our intentions with the community has been added. Otherwise, the review found that there were no changes required to be made to this document and that the information listed here with respect to legal and ethical concerns are still accurate and up-to-date.
