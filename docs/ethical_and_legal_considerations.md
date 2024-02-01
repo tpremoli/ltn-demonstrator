@@ -24,7 +24,7 @@ Ethical and legal considerations are vital for this project as it models Low Tra
 4. **Copyright and Licensing:** Credit or recognition must be provided to any code or library used in the simulation. Copyright and open-source licensing terms must be respected. 
 5. **Local Regulation:** Regulation determining data usage, mapping, and transparency will vary, and said variation should be accommodated by the local implementation. This project is being developed specifically for studying LTN's in Heavitree, Exeter, but should incorporate the flexibility to be applied to other neighbourhoods. 
 6. **Environmental Regulations:** Since this project will consider environmental impact, we will need to ensure it complies with environmental regulations. Certain domains will have restrictions on travel and type of vehicle, or incentives to travel in certain ways. This regulations should be considered in the simulation or the simulation framework.
-7. **Educational Liscensing** For educational deployment, the simulation requires specific licensing, ensuring compliance with academic standards and legal norms.
+7. **Educational Liscensing:** For educational deployment, the simulation requires specific licensing, ensuring compliance with academic standards and legal norms.
 8. **Limitations for Educational Use:** Legal constraints, particularly in data privacy, must be rigorously observed when integrating the simulation into educational curricula.
 
 
