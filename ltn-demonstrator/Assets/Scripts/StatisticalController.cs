@@ -173,7 +173,7 @@ public class StatisticsManager : MonoBehaviour
         string totalNoOfTravellers = TotalNumberOfTravellers();
         string averageTravVelo = AverageTravellerVelocity();
         string rateOfDeviation = RateOfDeviation();
-        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage trip velocity: {averageTravVelo} 1.5m/s\nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: 20g/m \nTotal pollution: 2.5kg ";
+        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\n\nAverage trip velocity: {averageTravVelo} mph\n\nAverage rate of pollution: 20g/m \n\nTotal pollution: 2.5kg ";
         //Set the TMP object to the stats we calc
         statsText.text = finalString;
         
