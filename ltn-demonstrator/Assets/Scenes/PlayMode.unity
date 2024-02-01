@@ -1435,6 +1435,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6900731108726962697, guid: 0cca2be2bbe04cc488e3d560b15b4d30, type: 3}
+      propertyPath: tm
+      value: 
+      objectReference: {fileID: 1412720821}
+    - target: {fileID: 6900731108726962697, guid: 0cca2be2bbe04cc488e3d560b15b4d30, type: 3}
+      propertyPath: statsText
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67105,7 +67113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypointSize: 1
   edges:
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 5688593}
@@ -67116,7 +67124,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 5688593}
@@ -67127,7 +67135,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 5688593}
@@ -67138,7 +67146,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 5688593}
@@ -67149,7 +67157,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
@@ -67160,7 +67168,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
@@ -67171,7 +67179,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
@@ -67182,7 +67190,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
@@ -67193,7 +67201,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
@@ -67204,7 +67212,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
@@ -67215,7 +67223,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
@@ -67226,7 +67234,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
@@ -67237,7 +67245,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 95928381}
@@ -67248,7 +67256,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 95928381}
@@ -67259,7 +67267,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 105288849}
@@ -67270,7 +67278,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 105288849}
@@ -67281,7 +67289,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
@@ -67292,7 +67300,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
@@ -67303,7 +67311,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
@@ -67314,7 +67322,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
@@ -67325,7 +67333,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 119660090}
@@ -67336,7 +67344,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 119660090}
@@ -67347,7 +67355,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 119660090}
@@ -67358,7 +67366,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
@@ -67369,7 +67377,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
@@ -67380,7 +67388,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
@@ -67391,7 +67399,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
@@ -67402,7 +67410,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
@@ -67413,7 +67421,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
@@ -67424,7 +67432,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
@@ -67435,7 +67443,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
@@ -67446,7 +67454,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
@@ -67457,7 +67465,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
@@ -67468,7 +67476,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
@@ -67479,7 +67487,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
@@ -67490,7 +67498,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
@@ -67501,7 +67509,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
@@ -67512,7 +67520,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
@@ -67523,7 +67531,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
@@ -67534,7 +67542,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
@@ -67545,7 +67553,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
@@ -67556,7 +67564,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
@@ -67567,7 +67575,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
@@ -67578,7 +67586,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 290847012}
@@ -67589,7 +67597,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 290847012}
@@ -67600,7 +67608,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
@@ -67611,7 +67619,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
@@ -67622,7 +67630,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
@@ -67633,7 +67641,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
@@ -67644,7 +67652,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 303305277}
@@ -67655,7 +67663,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 303305277}
@@ -67666,7 +67674,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 332563259}
@@ -67677,7 +67685,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 332563259}
@@ -67688,7 +67696,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 340646349}
@@ -67699,7 +67707,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 365317387}
@@ -67710,7 +67718,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 365317387}
@@ -67721,7 +67729,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
@@ -67732,7 +67740,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
@@ -67743,7 +67751,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
@@ -67754,7 +67762,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
@@ -67765,7 +67773,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 439925891}
@@ -67776,7 +67784,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 439925891}
@@ -67787,7 +67795,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 439925891}
@@ -67798,7 +67806,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
@@ -67809,7 +67817,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
@@ -67820,7 +67828,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
@@ -67831,7 +67839,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
@@ -67842,7 +67850,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 501149561}
@@ -67853,7 +67861,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
@@ -67864,7 +67872,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
@@ -67875,7 +67883,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
@@ -67886,7 +67894,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
@@ -67897,7 +67905,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 547087813}
@@ -67908,7 +67916,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 547087813}
@@ -67919,7 +67927,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 547087813}
@@ -67930,7 +67938,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 557419713}
@@ -67941,7 +67949,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 557419713}
@@ -67952,7 +67960,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
@@ -67963,7 +67971,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
@@ -67974,7 +67982,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
@@ -67985,7 +67993,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
@@ -67996,7 +68004,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
@@ -68007,7 +68015,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
@@ -68018,7 +68026,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
@@ -68029,7 +68037,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
@@ -68040,7 +68048,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
@@ -68051,7 +68059,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
@@ -68062,7 +68070,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
@@ -68073,7 +68081,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
@@ -68084,7 +68092,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 668685364}
@@ -68095,7 +68103,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 668685364}
@@ -68106,7 +68114,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
@@ -68117,7 +68125,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
@@ -68128,7 +68136,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
@@ -68139,7 +68147,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
@@ -68150,7 +68158,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
@@ -68161,7 +68169,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
@@ -68172,7 +68180,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
@@ -68183,7 +68191,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
@@ -68194,7 +68202,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 692326419}
@@ -68205,7 +68213,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 692326419}
@@ -68216,7 +68224,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 692326419}
@@ -68227,7 +68235,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
@@ -68238,7 +68246,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
@@ -68249,7 +68257,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
@@ -68260,7 +68268,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
@@ -68271,7 +68279,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
@@ -68282,7 +68290,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
@@ -68293,7 +68301,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
@@ -68304,7 +68312,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
@@ -68315,7 +68323,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 750075704}
@@ -68326,7 +68334,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 750075704}
@@ -68337,7 +68345,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 872469780}
@@ -68348,7 +68356,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 872469780}
@@ -68359,7 +68367,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 872469780}
@@ -68370,7 +68378,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 883918156}
@@ -68381,7 +68389,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 883918156}
@@ -68392,7 +68400,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 902534252}
@@ -68403,7 +68411,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 902534252}
@@ -68414,7 +68422,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
@@ -68425,7 +68433,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
@@ -68436,7 +68444,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
@@ -68447,7 +68455,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
@@ -68458,7 +68466,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 966921723}
@@ -68469,7 +68477,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1002765805}
@@ -68480,7 +68488,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1002765805}
@@ -68491,7 +68499,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
@@ -68502,7 +68510,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
@@ -68513,7 +68521,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
@@ -68524,7 +68532,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
@@ -68535,7 +68543,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1096723634}
@@ -68546,7 +68554,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1096723634}
@@ -68557,7 +68565,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
@@ -68568,7 +68576,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
@@ -68579,7 +68587,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
@@ -68590,7 +68598,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
@@ -68601,7 +68609,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
@@ -68612,7 +68620,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
@@ -68623,7 +68631,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
@@ -68634,7 +68642,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
@@ -68645,7 +68653,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
@@ -68656,7 +68664,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
@@ -68667,7 +68675,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
@@ -68678,7 +68686,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
@@ -68689,7 +68697,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
@@ -68700,7 +68708,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
@@ -68711,7 +68719,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
@@ -68722,7 +68730,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
@@ -68733,7 +68741,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1218208234}
@@ -68744,7 +68752,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1218208234}
@@ -68755,7 +68763,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1222596885}
@@ -68766,7 +68774,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
@@ -68777,7 +68785,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
@@ -68788,7 +68796,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
@@ -68799,7 +68807,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
@@ -68810,7 +68818,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1277130997}
@@ -68821,7 +68829,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1279267445}
@@ -68832,7 +68840,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1287622241}
@@ -68843,7 +68851,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1287622241}
@@ -68854,7 +68862,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1312245970}
@@ -68865,7 +68873,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1312245970}
@@ -68876,7 +68884,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1328479508}
@@ -68887,7 +68895,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1328479508}
@@ -68898,7 +68906,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1328479508}
@@ -68909,7 +68917,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1387554582}
@@ -68920,7 +68928,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
@@ -68931,7 +68939,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
@@ -68942,7 +68950,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
@@ -68953,7 +68961,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
@@ -68964,7 +68972,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
@@ -68975,7 +68983,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
@@ -68986,7 +68994,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
@@ -68997,7 +69005,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
@@ -69008,7 +69016,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
@@ -69019,7 +69027,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
@@ -69030,7 +69038,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
@@ -69041,7 +69049,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
@@ -69052,7 +69060,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1549056168}
@@ -69063,7 +69071,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1549056168}
@@ -69074,7 +69082,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1549056168}
@@ -69085,7 +69093,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1602942848}
@@ -69096,7 +69104,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1602942848}
@@ -69107,7 +69115,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
@@ -69118,7 +69126,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
@@ -69129,7 +69137,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
@@ -69140,7 +69148,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
@@ -69151,7 +69159,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
@@ -69162,7 +69170,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
@@ -69173,7 +69181,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
@@ -69184,7 +69192,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
@@ -69195,7 +69203,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
@@ -69206,7 +69214,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
@@ -69217,7 +69225,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
@@ -69228,7 +69236,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
@@ -69239,7 +69247,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
@@ -69250,7 +69258,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
@@ -69261,7 +69269,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
@@ -69272,7 +69280,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
@@ -69283,7 +69291,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1692226764}
@@ -69294,7 +69302,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1692226764}
@@ -69305,7 +69313,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1701784750}
@@ -69316,7 +69324,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1701784750}
@@ -69327,7 +69335,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1701784750}
@@ -69338,7 +69346,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1708879216}
@@ -69349,7 +69357,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
@@ -69360,7 +69368,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
@@ -69371,7 +69379,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
@@ -69382,7 +69390,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
@@ -69393,7 +69401,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1763713852}
@@ -69404,7 +69412,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1763713852}
@@ -69415,7 +69423,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
@@ -69426,7 +69434,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
@@ -69437,7 +69445,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
@@ -69448,7 +69456,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
@@ -69459,7 +69467,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1835555966}
@@ -69470,7 +69478,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1835555966}
@@ -69481,7 +69489,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1835555966}
@@ -69492,7 +69500,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
@@ -69503,7 +69511,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
@@ -69514,7 +69522,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
@@ -69525,7 +69533,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
@@ -69536,7 +69544,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1886856595}
@@ -69547,7 +69555,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1886856595}
@@ -69558,7 +69566,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1886856595}
@@ -69569,7 +69577,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
@@ -69580,7 +69588,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
@@ -69591,7 +69599,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
@@ -69602,7 +69610,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
@@ -69613,7 +69621,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1960957215}
@@ -69624,7 +69632,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1985082742}
@@ -69635,7 +69643,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2041507252}
@@ -69646,7 +69654,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2041507252}
@@ -69657,7 +69665,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2041507252}
@@ -69668,7 +69676,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2076254888}
@@ -69679,7 +69687,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2076254888}
@@ -69690,7 +69698,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
@@ -69701,7 +69709,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
@@ -69712,7 +69720,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
@@ -69723,7 +69731,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
@@ -69734,7 +69742,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2114516592}
@@ -69745,7 +69753,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2114516592}
@@ -69756,7 +69764,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2121232756}
@@ -69767,7 +69775,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2121232756}
@@ -69778,7 +69786,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2132590382}
@@ -69789,7 +69797,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2132590382}
@@ -69800,7 +69808,7 @@ MonoBehaviour:
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - ID: 0
+  - ID: -1
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2132590382}
