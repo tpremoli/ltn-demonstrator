@@ -14,7 +14,7 @@ public class StatisticsManager : MonoBehaviour
     public static List<PathData> allPathData { get; private set; }
     //text for stats in the statistical measures screen
     public TMP_Text statsText;
-    public const int TERMINATION_CRITERIA = 100;
+    public const int TERMINATION_CRITERIA = 1;
     private int finishedPaths;
     private bool endSim;
     
@@ -44,12 +44,12 @@ public class StatisticsManager : MonoBehaviour
     {
         // Get the name of the current active scene
         string currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName == "ProperMapSceneForStats")
+        if (currentSceneName == "PlayMode")
         {
             if (endSim == true) // Assuming noOfTravellers is a public field or property
             {
                 // End Simulation - change to next scene
-                Debug.Log("SIMULATION ENDED");
+                Debug.LogWarning("SIMULATION ENDED");
                 //Clean the data
                 PrunePathData();
                 //serialise data
@@ -173,7 +173,7 @@ public class StatisticsManager : MonoBehaviour
         string totalNoOfTravellers = TotalNumberOfTravellers();
         string averageTravVelo = AverageTravellerVelocity();
         string rateOfDeviation = RateOfDeviation();
-        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage traveller velocity: {averageTravVelo} spatial units/s\nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
+        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage trip velocity: {averageTravVelo} 1.5m/s\nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: 20g/m \nTotal pollution: 2.5kg ";
         //Set the TMP object to the stats we calc
         statsText.text = finalString;
         
