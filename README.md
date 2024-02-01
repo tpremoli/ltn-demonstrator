@@ -20,3 +20,6 @@ Our proposed simulation seeks to demystify the complexities of neighbourhood des
 
 
 [1]: https://www.devon.gov.uk/news/heavitree-and-whipton-active-streets-trial-begins-today/
+
+## Technical System Requirements:
+These can be found under ltn-demonstrator/docs/technical_system_requirements.md
