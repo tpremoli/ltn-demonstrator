@@ -22,7 +22,9 @@ public class BarrierManager : MonoBehaviour
     // List of different barrier prefabs
     public List<GameObject> barrierPrefabs;
 
+    
 
+    public int selectedBarrierType;
 
     public Edge closestRoadEdge;
     public Vector3 closestPointOnRoadEdge;
@@ -31,6 +33,12 @@ public class BarrierManager : MonoBehaviour
 
     public Waypoint endWaypoint;
     public GameObject barrierPrefab; // Prefab for the barrier
+    
+    public GameObject blockAllMotorVehiclesPrefab;
+    public GameObject blockAllPrefab;
+    public GameObject blockHeavyTrafficPrefab;
+    public GameObject busOnlyPrefab;
+    public GameObject busAndTaxiOnlyPrefab;
     public List<GameObject> allBarriers;
 
     public bool loadBarriersFromSave;
@@ -45,6 +53,7 @@ public class BarrierManager : MonoBehaviour
         {
             RecalcBarriersOnEdges();
         }
+        //Debug.Log("barrierPrefabs ", barrierPrefabs.Count);
     }
 
     private void Awake()
@@ -87,39 +96,41 @@ public class BarrierManager : MonoBehaviour
 
     public void AddBarrier(Vector3 position)
     {
-        // Get the selected barrier type
-        int selectedBarrierType = barrierTypeDropdown.value;
-
-        // Instantiate the selected barrier type
-        GameObject newBarrier = Instantiate(barrierPrefabs[selectedBarrierType], position, Quaternion.identity);
-        
-
-        //GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
-        newBarrier.transform.Rotate(0, 90, 0);
-        // Rotate the barrier on the y axis 
-        Graph graph = Graph.Instance;
-
-        Edge closestEdge = graph.getClosetRoadEdge(position);
-        Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(position);
-        Vector3 directionFromClosestPointToBarrier = newBarrier.transform.position - closestPointOnEdge; // Calculate direction vector
-
-        if (directionFromClosestPointToBarrier != Vector3.zero)
+        if (selectedBarrierType >= 0 && selectedBarrierType < barrierPrefabs.Count)
         {
-            // Normalize the direction vector
-            Vector3 normalizedDirection = directionFromClosestPointToBarrier.normalized;
+            GameObject newBarrier = Instantiate(barrierPrefabs[selectedBarrierType], position, Quaternion.identity);
 
-            // rotate barrier horizontal to the road
-            newBarrier.transform.rotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
-
-            // rotate 90 degrees
+            //GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
             newBarrier.transform.Rotate(0, 90, 0);
+            // Rotate the barrier on the y axis 
+            Graph graph = Graph.Instance;
 
-            // Set the barrier's position to this new position
-            newBarrier.transform.position = position;
+            Edge closestEdge = graph.getClosetRoadEdge(position);
+            Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(position);
+            Vector3 directionFromClosestPointToBarrier = newBarrier.transform.position - closestPointOnEdge; // Calculate direction vector
+
+            if (directionFromClosestPointToBarrier != Vector3.zero)
+            {
+                // Normalize the direction vector
+                Vector3 normalizedDirection = directionFromClosestPointToBarrier.normalized;
+
+                // rotate barrier horizontal to the road
+                newBarrier.transform.rotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
+
+                // rotate 90 degrees
+                newBarrier.transform.Rotate(0, 90, 0);
+
+                // Set the barrier's position to this new position
+                newBarrier.transform.position = position;
+            }
+
+            // Add the barrier to the list of all barriers
+            allBarriers.Add(newBarrier);
         }
-
-        // Add the barrier to the list of all barriers
-        allBarriers.Add(newBarrier);
+        else
+        {
+            Debug.LogError("Invalid barrier type selected: " + selectedBarrierType);
+        }
     }
 
 

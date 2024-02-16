@@ -7,6 +7,11 @@ public class EditScreenMenu : MonoBehaviour
 {
     
     public GameObject barrierPrefab;
+    public GameObject blockAllMotorVehiclesPrefab;
+    public GameObject blockAllPrefab;
+    public GameObject blockHeavyTrafficPrefab;
+    public GameObject busOnlyPrefab;
+    public GameObject busAndTaxiOnlyPrefab;
     public TextMeshProUGUI instructionText;
     private bool SpawnBarrier = false;
     private bool deleteMode = false;
@@ -72,10 +77,42 @@ public class EditScreenMenu : MonoBehaviour
         SaveGame();
     }
 
-    public void OnAddBarrierPressed()
+    public void OnAddBarrierPressed(int barrierType)
     {
+        // Set the selected barrier type
+        barrierManager.selectedBarrierType = barrierType;
+
         instructionText.text = "Click on desired barrier location";
         SpawnBarrier = true;
+    }
+    public void OnAddBlockAllBarrierPressed()
+    {
+        barrierPrefab = blockAllPrefab;
+        OnAddBarrierPressed(0);
+    }
+
+    public void OnAddBlockAllMotorVehiclesBarrierPressed()
+    {
+        barrierPrefab = blockAllMotorVehiclesPrefab;
+        OnAddBarrierPressed(1);
+    }
+
+    public void OnAddBlockHeavyTrafficBarrierPressed()
+    {
+        barrierPrefab = blockHeavyTrafficPrefab;
+        OnAddBarrierPressed(2);
+    }
+
+    public void OnAddBusandTaxiOnlyBarrierPressed()
+    {
+        barrierPrefab = busAndTaxiOnlyPrefab;
+        OnAddBarrierPressed(3);
+    }
+
+    public void OnAddBusOnlyBarrierPressed()
+    {
+        barrierPrefab = busOnlyPrefab;
+        OnAddBarrierPressed(4);
     }
 
     void Update()
