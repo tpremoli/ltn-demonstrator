@@ -15,15 +15,9 @@ public class EditScreenMenu : MonoBehaviour
     private static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
 
     public BarrierManager barrierManager;
-    public Edge closestRoadEdge;
-    public Vector3 closestPointOnRoadEdge;
     private Graph graph;
     // Declare the CameraMovement variable
     public CameraMovement cameraMovement;
-
-    private Waypoint startWaypointLane;
-    public Waypoint endWaypoint;
-
 
     void Start()
     {
@@ -102,10 +96,6 @@ public class EditScreenMenu : MonoBehaviour
                     if (barrierManager != null)
                     {
                         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
-                        this.closestRoadEdge = graph.getClosetRoadEdge(this.transform.position);
-                        this.closestPointOnRoadEdge = closestRoadEdge.GetClosestPoint(this.transform.position);
-                        Debug.Log("Closest Road Edge: " + closestRoadEdge.position + " Closest Point on Road Edge: " + closestPointOnRoadEdge);
-                        Debug.Log("Direction of the Closest Road Edge: " + closestRoadEdge.direction);
 
                         Debug.Log("Barrier List size: " + barrierManager.allBarriers.Count);
                         barrierManager.AddBarrier(worldPosition);

@@ -10065,7 +10065,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -586, y: 278}
+  m_AnchoredPosition: {x: -456.8333, y: 142.52725}
   m_SizeDelta: {x: -1069.0935, y: -500.218}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &312896067
@@ -56326,21 +56326,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrierPrefab: {fileID: 211012215410212970, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
   instructionText: {fileID: 277417783}
-  barrierManager: {fileID: 0}
-  closestRoadEdge:
-    position: {x: 0, y: 0, z: 0}
-    direction: {x: 0, y: 0, z: 0}
-    startWaypoint: {fileID: 0}
-    endWaypoint: {fileID: 0}
-    length: 0
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: 0
-    barrier: {fileID: 0}
-    isPedestrianOnly: 0
-  closestPointOnRoadEdge: {x: 0, y: 0, z: 0}
-  cameraMovement: {fileID: 0}
-  endWaypoint: {fileID: 0}
+  barrierManager: {fileID: 1012873307}
+  cameraMovement: {fileID: 1136161528}
 --- !u!114 &1692891943
 MonoBehaviour:
   m_ObjectHideFlags: 0
