@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BarrierManager : MonoBehaviour
 {
 
-    """
+    /*
     Current Edits in this branch:
     - Added a public field for the dropdown
     - Added a list of barrier prefabs
     - Added a public field for the barrier prefab
     - Added a list of all barriers
-    """
+    */
     // Add a public field for the dropdown
     // The parent transform of the toggles
     public Transform barrierTypeContainer;
@@ -100,7 +101,7 @@ public class BarrierManager : MonoBehaviour
                 // Instantiate the selected barrier type
                 GameObject newBarrier = Instantiate(barrierPrefabs[i], position, Quaternion.identity);
 
-                GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
+                //GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
                 newBarrier.transform.Rotate(0, 90, 0);
                 // Rotate the barrier on the y axis 
                 Graph graph = Graph.Instance;
@@ -128,7 +129,10 @@ public class BarrierManager : MonoBehaviour
                 allBarriers.Add(newBarrier);
             }
 
-            public void RecalcBarriersOnEdges()
+        }
+
+    }
+        public void RecalcBarriersOnEdges()
             {
                 Graph graph = Graph.Instance;
 
@@ -141,6 +145,6 @@ public class BarrierManager : MonoBehaviour
                 }
 
             }
-        }
-    }
+
+
 }
