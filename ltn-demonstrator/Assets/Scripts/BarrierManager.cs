@@ -17,11 +17,11 @@ public class BarrierManager : MonoBehaviour
     // The parent transform of the toggles
     public Transform barrierTypeContainer;
 
+    // Reference to the Dropdown component
+    public Dropdown barrierTypeDropdown;
     // List of different barrier prefabs
     public List<GameObject> barrierPrefabs;
 
-    // List of Toggle components
-    private List<Toggle> barrierTypeToggles = new List<Toggle>();
 
 
     public Edge closestRoadEdge;
@@ -37,12 +37,6 @@ public class BarrierManager : MonoBehaviour
 
 
     public static BarrierManager Instance { get; private set; }
-
-    void Start()
-    {
-        // Get all the toggles in the container
-        barrierTypeToggles.AddRange(barrierTypeContainer.GetComponentsInChildren<Toggle>());
-    }
 
     void Update()
     {   
@@ -93,58 +87,57 @@ public class BarrierManager : MonoBehaviour
 
     public void AddBarrier(Vector3 position)
     {
-        // Iterate over all toggles and instantiate the selected barrier types
-        for (int i = 0; i < barrierTypeToggles.Count; i++)
+        // Get the selected barrier type
+        int selectedBarrierType = barrierTypeDropdown.value;
+
+        // Instantiate the selected barrier type
+        GameObject newBarrier = Instantiate(barrierPrefabs[selectedBarrierType], position, Quaternion.identity);
+        
+
+        //GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
+        newBarrier.transform.Rotate(0, 90, 0);
+        // Rotate the barrier on the y axis 
+        Graph graph = Graph.Instance;
+
+        Edge closestEdge = graph.getClosetRoadEdge(position);
+        Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(position);
+        Vector3 directionFromClosestPointToBarrier = newBarrier.transform.position - closestPointOnEdge; // Calculate direction vector
+
+        if (directionFromClosestPointToBarrier != Vector3.zero)
         {
-            if (barrierTypeToggles[i].isOn)
+            // Normalize the direction vector
+            Vector3 normalizedDirection = directionFromClosestPointToBarrier.normalized;
+
+            // rotate barrier horizontal to the road
+            newBarrier.transform.rotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
+
+            // rotate 90 degrees
+            newBarrier.transform.Rotate(0, 90, 0);
+
+            // Set the barrier's position to this new position
+            newBarrier.transform.position = position;
+        }
+
+        // Add the barrier to the list of all barriers
+        allBarriers.Add(newBarrier);
+    }
+
+
+
+    
+    public void RecalcBarriersOnEdges()
+        {
+            Graph graph = Graph.Instance;
+
+            Debug.Log("Recalculating barriers on edges");
+
+            // this is not efficient at all.
+            foreach (Edge edge in graph.edges)
             {
-                // Instantiate the selected barrier type
-                GameObject newBarrier = Instantiate(barrierPrefabs[i], position, Quaternion.identity);
-
-                //GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
-                newBarrier.transform.Rotate(0, 90, 0);
-                // Rotate the barrier on the y axis 
-                Graph graph = Graph.Instance;
-
-                Edge closestEdge = graph.getClosetRoadEdge(position);
-                Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(position);
-                Vector3 directionFromClosestPointToBarrier = newBarrier.transform.position - closestPointOnEdge; // Calculate direction vector
-
-                if (directionFromClosestPointToBarrier != Vector3.zero)
-                {
-                    // Normalize the direction vector
-                    Vector3 normalizedDirection = directionFromClosestPointToBarrier.normalized;
-
-                    // rotate barrier horizontal to the road
-                    newBarrier.transform.rotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
-
-                    // rotate 90 degrees
-                    newBarrier.transform.Rotate(0, 90, 0);
-
-                    // Set the barrier's position to this new position
-                    newBarrier.transform.position = position;
-                }
-
-                // Add the barrier to the list of all barriers
-                allBarriers.Add(newBarrier);
+                edge.RecheckBarriers();
             }
 
         }
-
-    }
-        public void RecalcBarriersOnEdges()
-            {
-                Graph graph = Graph.Instance;
-
-                Debug.Log("Recalculating barriers on edges");
-
-                // this is not efficient at all.
-                foreach (Edge edge in graph.edges)
-                {
-                    edge.RecheckBarriers();
-                }
-
-            }
 
 
 }
