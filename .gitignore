@@ -19,6 +19,9 @@
 # Recordings can get excessive in size
 /ltn-demonstrator/[Rr]ecordings/
 
+# Saves are unnecessary to commit
+/ltn-demonstrator/Assets/Saves/save.json
+
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /ltn-demonstrator/[Aa]ssets/AssetStoreTools*
 
