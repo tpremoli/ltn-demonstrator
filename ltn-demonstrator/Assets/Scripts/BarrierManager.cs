@@ -19,10 +19,6 @@ public class BarrierManager : MonoBehaviour
 
     // Reference to the Dropdown component
     public Dropdown barrierTypeDropdown;
-    // List of different barrier prefabs
-    public List<GameObject> barrierPrefabs;
-
-    
 
     public int selectedBarrierType;
 
@@ -46,6 +42,21 @@ public class BarrierManager : MonoBehaviour
 
     public static BarrierManager Instance { get; private set; }
 
+    // List of different barrier prefabs
+    public List<GameObject> barrierPrefabs = new List<GameObject>();
+
+    
+
+    private void Start()
+    {
+        // Add the prefabs to the list
+        barrierPrefabs.Add(barrierPrefab);
+        barrierPrefabs.Add(blockAllMotorVehiclesPrefab);
+        barrierPrefabs.Add(blockAllPrefab);
+        barrierPrefabs.Add(blockHeavyTrafficPrefab);
+        barrierPrefabs.Add(busOnlyPrefab);
+        barrierPrefabs.Add(busAndTaxiOnlyPrefab);
+    }
     void Update()
     {   
         // force reload barriers
