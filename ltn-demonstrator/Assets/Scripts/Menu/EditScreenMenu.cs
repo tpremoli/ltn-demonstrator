@@ -77,6 +77,13 @@ public class EditScreenMenu : MonoBehaviour
         SaveGame();
     }
 
+    public void OnAddSensorPressed()
+    {
+        sensorManager = SensorManager.Instance;
+        instructionText.text = "Click on desired sensor location";
+        SpawnSensor = true;
+    }
+
     public void OnAddBarrierPressed(int barrierType)
     {
         // Set the selected barrier type
@@ -165,6 +172,32 @@ public class EditScreenMenu : MonoBehaviour
                         Destroy(hit.transform.gameObject);
                         SaveGame();
                         deleteMode = false;
+                    }
+                }
+            }
+            if (SpawnSensor)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    // Disable camera movement
+                    cameraMovement.canMove = false;
+
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        Vector3 worldPosition = hit.point;
+                        Debug.Log("Sensor created at " + worldPosition);
+                        if (sensorManager != null)
+                        {
+                            sensorManager.AddSensor(worldPosition);
+                            SpawnSensor = false;
+                            instructionText.text = "To add a sensor, click on the button again. To delete a sensor, click on the delete button.";
+                        }
+                        else
+                        {
+                            Debug.LogError("No SensorManager found in the scene.");
+                        }
                     }
                 }
             }
