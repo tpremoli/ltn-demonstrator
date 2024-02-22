@@ -4,7 +4,7 @@ public enum ModeOfTransport
 {
     Pedestrian,
     Bicycle,
-    Car
+    Car,
     // can add more modes of transport herex
     PersonalCar,
     SUV,

@@ -375,11 +375,7 @@ public class WaypointPath
                 }
 
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
-                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position)
-                && connectingEdge.barrierType == BarrierType.busAndTaxiOnly
-                || connectingEdge.barrierType == BarrierType.busOnly
-                || connectingEdge.barrierType == BarrierType.blockAllMotorVehicles
-                || connectingEdge.barrierType == BarrierType.blockAll)
+                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
                 {
                     continue; // Skip to the next neighbor if there is a barrier
                 }
@@ -455,12 +451,7 @@ public class WaypointPath
                 }
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
                 // Barrier Type = blockHeavyTraffic
-                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position) 
-                && connectingEdge.barrierType == BarrierType.blockHeavyTraffic
-                || connectingEdge.barrierType == BarrierType.busAndTaxiOnly
-                || connectingEdge.barrierType == BarrierType.busOnly
-                || connectingEdge.barrierType == BarrierType.blockAllMotorVehicles
-                || connectingEdge.barrierType == BarrierType.blockAll)
+                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
                 {
                     continue; // Skip to the next neighbor if there is a barrier
                 }
@@ -533,10 +524,7 @@ public class WaypointPath
                     continue; // Skip to the next neighbor if the edge is pedestrian only
                 }
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
-                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position) 
-                && connectingEdge.barrierType == BarrierType.busOnly
-                || connectingEdge.barrierType == BarrierType.blockAllMotorVehicles
-                || connectingEdge.barrierType == BarrierType.blockAll)
+                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
                 {
                     continue; // Skip to the next neighbor if there is a barrier
                 }
@@ -610,9 +598,7 @@ public class WaypointPath
                     continue; // Skip to the next neighbor if the edge is pedestrian only
                 }
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
-                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position) 
-                && connectingEdge.barrierType == BarrierType.blockAllMotorVehicles
-                || connectingEdge.barrierType == BarrierType.blockAll)
+                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
                 {
                     continue; // Skip to the next neighbor if there is a barrier
                 }

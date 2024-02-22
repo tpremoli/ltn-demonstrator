@@ -9,7 +9,9 @@ public class SensorManager : MonoBehaviour
     public List<GameObject> allSensors;
     public static SensorManager Instance { get; private set; }
 
-    public void LoadSensorsFromSave(){}
+    public Text instructionText;
+    public void LoadSensorsFromSave()
+    {
         Debug.Log("Loading...");
         foreach (GameObject sensor in allSensors)
         {
@@ -87,6 +89,6 @@ public class SensorManager : MonoBehaviour
     public void OnAddSensorPressed()
     {
         instructionText.text = "Click on the map to add a sensor";
-        addMode = true;
+        spawnSensor = true;
     }
 }

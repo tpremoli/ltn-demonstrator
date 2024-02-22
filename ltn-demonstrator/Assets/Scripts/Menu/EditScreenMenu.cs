@@ -14,12 +14,15 @@ public class EditScreenMenu : MonoBehaviour
     public GameObject busAndTaxiOnlyPrefab;
     public TextMeshProUGUI instructionText;
     private bool SpawnBarrier = false;
+
+    private bool SpawnSensor = false;
     private bool deleteMode = false;
 
     Transform barrierParent;
     private static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
 
     public BarrierManager barrierManager;
+    public SensorManager sensorManager;
     private Graph graph;
     // Declare the CameraMovement variable
     public CameraMovement cameraMovement;
@@ -33,6 +36,12 @@ public class EditScreenMenu : MonoBehaviour
         if (barrierManager == null)
         {
             Debug.LogError("No BarrierManager found assigned to the BarrierButton.");
+        }
+
+        sensorManager = SensorManager.Instance;
+        if (sensorManager == null)
+        {
+            Debug.LogError("No SensorManager found assigned to the SensorButton.");
         }
     }
 
@@ -175,33 +184,34 @@ public class EditScreenMenu : MonoBehaviour
                     }
                 }
             }
-            if (SpawnSensor)
+        }
+        if (SpawnSensor)
+        {
+            if (Input.GetMouseButtonDown(0))
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    // Disable camera movement
-                    cameraMovement.canMove = false;
+                // Disable camera movement
+                cameraMovement.canMove = false;
 
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit))
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Vector3 worldPosition = hit.point;
+                    Debug.Log("Sensor created at " + worldPosition);
+                    if (sensorManager != null)
                     {
-                        Vector3 worldPosition = hit.point;
-                        Debug.Log("Sensor created at " + worldPosition);
-                        if (sensorManager != null)
-                        {
-                            sensorManager.AddSensor(worldPosition);
-                            SpawnSensor = false;
-                            instructionText.text = "To add a sensor, click on the button again. To delete a sensor, click on the delete button.";
-                        }
-                        else
-                        {
-                            Debug.LogError("No SensorManager found in the scene.");
-                        }
+                        sensorManager.AddSensor(worldPosition);
+                        SpawnSensor = false;
+                        instructionText.text = "To add a sensor, click on the button again. To delete a sensor, click on the delete button.";
+                    }
+                    else
+                    {
+                        Debug.LogError("No SensorManager found in the scene.");
                     }
                 }
             }
         }
+        
 
         // Re-enable camera movement when no mouse button is pressed
         if (!Input.GetMouseButton(0))
