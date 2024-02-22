@@ -38,6 +38,7 @@ public class Edge
         this.length = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
 
         this.TravellersOnEdge = new List<WaypointMover>();
+        this.IntersectingEdges = new List<Edge>();
 
         this.barrier = getBarrierInPath();
         this.isBarricated = barrier != null;
