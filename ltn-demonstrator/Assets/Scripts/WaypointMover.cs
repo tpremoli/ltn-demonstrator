@@ -555,6 +555,14 @@ public class WaypointMover : MonoBehaviour
             float TravelledInEdge = proposedMovement - TravelledOverEdges;
 
             // COLLISSION CHECK
+
+            // If the terminal edge is busy, reduce the movement outside of it.
+            if (terminalEdge.IntersectingEdgesBusy()) {
+                proposedMovement-=TravelledInEdge+0.01f;
+                proposalAccepted = false;
+                continue;
+            }
+
             //Calculate position of
             float myFront = TravelledInEdge + hLen + offset;
             float myRear = TravelledInEdge - hLen + offset;
@@ -621,7 +629,28 @@ public class WaypointMover : MonoBehaviour
                 }
             }
             // Do the same for super-terminal edge
-            if (superTerminalEdge != null)
+            if (superTerminalEdge != null){
+                // Check if super-terminal edge is busy.
+                if (superTerminalEdge.IntersectingEdgesBusy()) {
+                    // If only the breaking distance intersects with the busy edge, begin braking
+                    if (myBrDis > terminalEdge.Distance && proposedMovement > movementLowerBound) {
+                        proposedMovement=Mathf.Max(
+                                            this.movementLowerBound,
+                                            proposedMovement-(myBrDis-terminalEdge.Distance)
+                                            );
+                        proposedMovement-= 0.01f;
+                        proposalAccepted=false;
+                        continue;
+                    }
+                    // If the front of the car intersects with the busy edge, reduce movement to prevent colission
+                    if(myFront > terminalEdge.Distance){
+                        proposedMovement-=myFront-terminalEdge.Distance;
+                        proposedMovement-=0.01f;
+                        proposalAccepted=false;
+                        continue;
+                    }
+                }
+                
                 foreach (WaypointMover wp in superTerminalEdge.TravellersOnEdge)
                 {
                     if (wp == this) continue;
@@ -681,7 +710,7 @@ public class WaypointMover : MonoBehaviour
                         break;
                     }
                 }
-
+            }
             // No collision occurred, the proposed movement is accepted
         }
         // Beginning to carry out proposed movement
