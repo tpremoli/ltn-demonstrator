@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BarrierType
+{
+    Barrier,
+    busOnly,
+    busAndTaxiOnly,
+    blockAllMotorVehicles,
+    blockAll,
+    blockHeavyTraffic
+}
+
 public class Barrier : MonoBehaviour
 {
     public bool isPointInBarrier(Vector3 point)

@@ -28,6 +28,7 @@ public class Edge
     public bool isBarricated;
     public float barrierLocation;
     public Barrier barrier;
+    public BarrierType BarrierType { get; set; }
 
     public bool isPedestrianOnly;
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
@@ -37,7 +38,7 @@ public class Edge
         this.length = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
 
         this.TravellersOnEdge = new List<WaypointMover>();
-
+        
         this.barrier = getBarrierInPath();
         this.isBarricated = barrier != null;
         this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;

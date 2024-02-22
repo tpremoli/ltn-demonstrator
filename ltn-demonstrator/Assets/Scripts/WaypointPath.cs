@@ -14,6 +14,8 @@ public class WaypointPath
     public Edge startEdge { get; private set; }
     public Edge endEdge { get; private set; }
 
+    
+
     public WaypointPath(Building originBuilding, Building destinationBuilding, ModeOfTransport mode)
     {
         this.graph = Graph.Instance;
@@ -376,10 +378,10 @@ public class WaypointPath
 
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
                 if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position)
-                && connectingEdge.barrierType == BarrierType.busAndTaxiOnly
-                || connectingEdge.barrierType == BarrierType.busOnly
-                || connectingEdge.barrierType == BarrierType.blockAllMotorVehicles
-                || connectingEdge.barrierType == BarrierType.blockAll)
+                && connectingEdge.BarrierType == BarrierType.busAndTaxiOnly
+                || connectingEdge.BarrierType == BarrierType.busOnly
+                || connectingEdge.BarrierType == BarrierType.blockAllMotorVehicles
+                || connectingEdge.BarrierType == BarrierType.blockAll)
                 {
                     continue; // Skip to the next neighbor if there is a barrier
                 }
@@ -456,11 +458,11 @@ public class WaypointPath
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
                 // Barrier Type = blockHeavyTraffic
                 if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position) 
-                && connectingEdge.barrierType == BarrierType.blockHeavyTraffic
-                || connectingEdge.barrierType == BarrierType.busAndTaxiOnly
-                || connectingEdge.barrierType == BarrierType.busOnly
-                || connectingEdge.barrierType == BarrierType.blockAllMotorVehicles
-                || connectingEdge.barrierType == BarrierType.blockAll)
+                && connectingEdge.BarrierType == BarrierType.blockHeavyTraffic
+                || connectingEdge.BarrierType == BarrierType.busAndTaxiOnly
+                || connectingEdge.BarrierType == BarrierType.busOnly
+                || connectingEdge.BarrierType == BarrierType.blockAllMotorVehicles
+                || connectingEdge.BarrierType == BarrierType.blockAll)
                 {
                     continue; // Skip to the next neighbor if there is a barrier
                 }
@@ -534,9 +536,9 @@ public class WaypointPath
                 }
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
                 if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position) 
-                && connectingEdge.barrierType == BarrierType.busOnly
-                || connectingEdge.barrierType == BarrierType.blockAllMotorVehicles
-                || connectingEdge.barrierType == BarrierType.blockAll)
+                && connectingEdge.BarrierType == BarrierType.busOnly
+                || connectingEdge.BarrierType == BarrierType.blockAllMotorVehicles
+                || connectingEdge.BarrierType == BarrierType.blockAll)
                 {
                     continue; // Skip to the next neighbor if there is a barrier
                 }
@@ -611,8 +613,8 @@ public class WaypointPath
                 }
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
                 if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position) 
-                && connectingEdge.barrierType == BarrierType.blockAllMotorVehicles
-                || connectingEdge.barrierType == BarrierType.blockAll)
+                && connectingEdge.BarrierType == BarrierType.blockAllMotorVehicles
+                || connectingEdge.BarrierType == BarrierType.blockAll)
                 {
                     continue; // Skip to the next neighbor if there is a barrier
                 }
