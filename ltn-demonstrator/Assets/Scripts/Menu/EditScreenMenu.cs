@@ -66,11 +66,36 @@ public class EditScreenMenu : MonoBehaviour
         {
             Debug.LogError("No BarrierManager found in the scene.");
         }
+
+        if (sensorManager != null)
+        {
+            List<Sensor> sensors = new List<Sensor>();
+            foreach (GameObject gameObject in sensorManager.allSensors)
+            {
+                Sensor sensor = gameObject.GetComponent<Sensor>();
+                if (sensor != null)
+                {
+                    sensors.Add(sensor);
+                }
+            }
+            SaveSystem.SaveSensors(sensors);
+            Debug.Log("Game Saved");
+        }
+        else
+        {
+            Debug.LogError("No SensorManager found in the scene.");
+        }
     }
 
     public void OnDeleteBarrierPressed()
     {
         instructionText.text = "Click on desired barrier to delete";
+        deleteMode = true;
+    }
+
+    public void OnDeleteSensorPressed()
+    {
+        instructionText.text = "Click on desired sensor to delete";
         deleteMode = true;
     }
 

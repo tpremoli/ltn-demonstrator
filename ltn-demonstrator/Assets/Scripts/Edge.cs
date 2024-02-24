@@ -30,6 +30,9 @@ public class Edge
     public Barrier barrier;
 
     public bool isPedestrianOnly;
+
+    public Sensor sensor;
+    public float sensorLocation;
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.startWaypoint = startWaypoint;
@@ -58,6 +61,17 @@ public class Edge
         if (this.isBarricated)
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
+        }
+    }
+
+    public void RecheckSensors()
+    {
+        this.sensor = getSensorInPath();
+        this.isBarricated = sensor != null;
+        this.sensorLocation = sensor != null ? convertToPositionAlongEdge(sensor.transform.position) : -1f;
+        if (this.isBarricated)
+        {
+            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.sensorLocation);
         }
     }
 
@@ -268,6 +282,45 @@ public class Edge
                 barrier.transform.rotation = Quaternion.Euler(0, angle, 0);
 
                 return barrier;
+            }
+        }
+        return null;
+    }
+
+    public Sensor getSensorInPath()
+    {
+        Sensor[] allSensors;
+
+        if (SensorManager.Instance == null)
+        {
+            allSensors = GameObject.FindObjectsOfType<Sensor>();
+        }
+        else
+        {
+            List<GameObject> allSensorGameObjects;
+            allSensorGameObjects = SensorManager.Instance.allSensors;
+            // get all the Sensor objects from the list of GameObjects
+            allSensors = new Sensor[allSensorGameObjects.Count];
+            for (int i = 0; i < allSensorGameObjects.Count; i++)
+            {
+                allSensors[i] = allSensorGameObjects[i].GetComponent<Sensor>();
+            }
+        }
+
+        // we go through the Sensor and check if the edge intersects with any of them
+        foreach (Sensor sensor in allSensors)
+        {
+            if (sensor.isPointInSensor(this.GetClosestPoint(sensor.transform.position)))
+            {
+                Debug.Log("Sensor found at " + sensor.transform.position);
+                // Calculate the angle between the sensor's forward direction and the edge direction
+                Vector3 edgeDirection = this.GetDirection();
+                float angle = Vector3.Angle(sensor.transform.forward, edgeDirection);
+
+                // Apply the rotation to the sensor
+                sensor.transform.rotation = Quaternion.Euler(0, angle, 0);
+
+                return sensor;
             }
         }
         return null;

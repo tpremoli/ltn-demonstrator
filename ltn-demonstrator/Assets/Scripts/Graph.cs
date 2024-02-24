@@ -52,7 +52,12 @@ public class Graph : MonoBehaviour
         }
 
         if (!inEditMode && BarrierManager.Instance.loadBarriersFromSave){
+            // Recalculate barriers on edges
             BarrierManager.Instance.RecalcBarriersOnEdges();
+        }
+
+        if (!inEditMode && SensorManager.Instance.loadSensorsFromSave){
+            SensorManager.Instance.RecalcSensorsOnEdges();
         }
 
     }

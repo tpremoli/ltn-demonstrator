@@ -24,7 +24,7 @@ public class SensorData
 
     public static List<SensorData> LoadSensors()
     {
-        string json = File.ReadAllText(SAVE_FOLDER + "save.json");
+        string json = File.ReadAllText(SAVE_FOLDER + "sensor_save.json");
         SensorsContainer data = JsonUtility.FromJson<SensorsContainer>(json);
             
         if (data == null)

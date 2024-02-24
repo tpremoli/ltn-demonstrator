@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sensor : MonoBehaviour
 {
-    /*
+    
     public bool isPointInSensor(Vector3 point)
     {
         Collider sensorCollider = GetComponent<Collider>();
@@ -16,5 +16,5 @@ public class Sensor : MonoBehaviour
         // Check if the point is within the sensor's collider
         return sensorCollider.bounds.Contains(point);
     }
-    */
+    
 }
