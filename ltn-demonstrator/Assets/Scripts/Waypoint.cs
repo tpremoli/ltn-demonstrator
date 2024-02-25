@@ -12,12 +12,15 @@ public class Waypoint : MonoBehaviour
 
     // New attribute to determine if the waypoint is for pedestrians only
     public bool isPedestrianOnly = false;
+    public bool isSubdivided = false;
     private void OnDrawGizmos()
     {
         float waypointSize = this.transform.parent.GetComponent<Graph>().WaypointSize;
         if (this.isPedestrianOnly)
         {
             waypointSize = waypointSize / 2;
+        }else if ( this.isSubdivided){
+            waypointSize = waypointSize / 4;
         }
 
         // Draw the gizmo for this waypoint

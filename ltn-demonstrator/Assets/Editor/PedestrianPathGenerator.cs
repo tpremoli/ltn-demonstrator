@@ -2,7 +2,6 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-
 public class PedestrianPathGenerator
 {
     public static float laneWidth = 3.5f; // Width of a lane, adjust as needed
@@ -10,7 +9,8 @@ public class PedestrianPathGenerator
     private static Dictionary<Waypoint, List<Waypoint>> intersectionPedWaypointsMap = new Dictionary<Waypoint, List<Waypoint>>();
     private static Dictionary<Waypoint, Waypoint> pedWaypointCenters = new Dictionary<Waypoint, Waypoint>();
 
-    private static List<Waypoint> subdividedWaypoints = new List<Waypoint>();
+    // this maps an intersection to its supdivided waypoints
+    private static Dictionary<Waypoint, List<Waypoint>> subdividedWaypoints = new Dictionary<Waypoint, List<Waypoint>>();
     
     // STEP 1: Generate pedestrian waypoints
 
@@ -281,11 +281,12 @@ public class PedestrianPathGenerator
                     Waypoint intersectionCenter = pedWaypointCenters[pedEdge.startWaypoint];
 
                     // Calculate points to divide the pedestrian edge
-                    Vector3 pointCloserToIntersection = CalculateDivisionPoint(intersectionPoint, intersectionCenter, laneWidth, true);
-                    Vector3 pointFurtherFromIntersection = CalculateDivisionPoint(intersectionPoint, intersectionCenter, laneWidth, false);
+                    Vector3 pointCloserToIntersection = CalculateDivisionPoint(intersectionPoint, intersectionCenter, laneWidth*0.2f, true);
+                    Vector3 pointFurtherFromIntersection = CalculateDivisionPoint(intersectionPoint, intersectionCenter, laneWidth*0.2f, false);
 
                     // Replace or modify the pedestrian edge in the graph
-                    // DivideAndReplacePedestrianEdge(pedEdge, pointCloserToIntersection, pointFurtherFromIntersection);
+                    createSubdividedWaypoint(pointCloserToIntersection, intersectionCenter);
+                    createSubdividedWaypoint(pointFurtherFromIntersection, intersectionCenter);
                 }
             }
         }
@@ -332,6 +333,27 @@ public class PedestrianPathGenerator
         Vector3 divisionPoint = intersectionPoint + directionToCenter * distance;
 
         return divisionPoint;
+    }
+
+    private static void createSubdividedWaypoint(Vector3 position, Waypoint center)
+    {
+        GameObject newWaypointObj = new GameObject("Subdivided Waypoint");
+        newWaypointObj.transform.position = position;
+        Waypoint newWaypoint = newWaypointObj.AddComponent<Waypoint>();
+        newWaypoint.adjacentWaypoints = new List<Waypoint>();  // Initialize the list here
+        newWaypoint.isPedestrianOnly = false;
+        newWaypoint.isSubdivided = true;
+        newWaypointObj.transform.parent = Object.FindObjectOfType<Graph>().transform;
+
+        // Store the new waypoint in the map
+        if (subdividedWaypoints.ContainsKey(center))
+        {
+            subdividedWaypoints[center].Add(newWaypoint);
+        }
+        else
+        {
+            subdividedWaypoints[center] = new List<Waypoint> { newWaypoint };
+        }
     }
 
     // STEP 5: clear the map
