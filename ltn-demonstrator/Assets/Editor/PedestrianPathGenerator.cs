@@ -271,8 +271,8 @@ public class PedestrianPathGenerator
                 if (pedEdge.isSameEdge(crosswalk))
                 {
                     // TODO: register as intersecting edge
+                    // May not be necessary, as we're going to set them as mutually intersectingbelow
                     hasEdgeBeenProcessed = true;
-                    Debug.LogError("Edge already processed");
                     break;
                 }
             }
@@ -319,7 +319,7 @@ public class PedestrianPathGenerator
                     furtherWaypoint.adjacentWaypoints.Add(oppositeIntersectionWaypoint);
                     oppositeIntersectionWaypoint.adjacentWaypoints.Add(furtherWaypoint);
 
-                    // Update the road edge to use the new waypoints
+                    // 4. Update the road edge to use the new waypoints
                     if (roadEdge.startWaypoint == intersectionCenter)
                     {
                         roadEdge.startWaypoint = closerWaypoint;
@@ -328,6 +328,20 @@ public class PedestrianPathGenerator
                     {
                         roadEdge.endWaypoint = closerWaypoint;
                     }
+
+                    // 5. Setting the intersecting edges
+                    var oppositeDirectionPedEdge = graph.getEdge(pedEdge.endWaypoint, pedEdge.startWaypoint);
+                    var oppositeDirectionRoadEdge = graph.getEdge(roadEdge.endWaypoint, roadEdge.startWaypoint);
+
+                    pedEdge.IntersectingEdges.Add(roadEdge);
+                    pedEdge.IntersectingEdges.Add(oppositeDirectionRoadEdge);
+                    oppositeDirectionPedEdge.IntersectingEdges.Add(roadEdge);
+                    oppositeDirectionPedEdge.IntersectingEdges.Add(oppositeDirectionRoadEdge);
+
+                    roadEdge.IntersectingEdges.Add(pedEdge);
+                    roadEdge.IntersectingEdges.Add(oppositeDirectionPedEdge);
+                    oppositeDirectionRoadEdge.IntersectingEdges.Add(pedEdge);
+                    oppositeDirectionRoadEdge.IntersectingEdges.Add(oppositeDirectionPedEdge);
                 }
             }
 
@@ -387,7 +401,6 @@ public class PedestrianPathGenerator
         {
             if (waypoint.transform.position == position)
             {
-                Debug.LogWarning("Waypoint already exists at position " + position);
                 return null;
             }
         }

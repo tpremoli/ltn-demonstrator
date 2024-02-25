@@ -17,7 +17,7 @@ public class Edge
     public Waypoint StartWaypoint { get { return startWaypoint; } }
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public List<WaypointMover> TravellersOnEdge;
-    private List<Edge> IntersectingEdges;
+    public List<Edge> IntersectingEdges;
     public float Distance { get { return length; } }
 
     /// <summary>
@@ -97,7 +97,7 @@ public class Edge
         if (isPedestrianOnly)
         {
             return;
-        }
+        } 
 
         // Draw arrow pointing in the edge's direction
         Vector3 startpoint = startWaypoint.transform.position;
