@@ -287,6 +287,25 @@ public class Edge
         return null;
     }
 
+    public Waypoint FindNearestWaypoint(Sensor sensor)
+    {
+        Waypoint[] allWaypoints = GameObject.FindObjectsOfType<Waypoint>();
+        Waypoint nearestWaypoint = null;
+        float minDistance = float.MaxValue;
+
+        foreach (Waypoint waypoint in allWaypoints)
+        {
+            float distance = Vector3.Distance(sensor.transform.position, waypoint.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestWaypoint = waypoint;
+            }
+        }
+
+        return nearestWaypoint;
+    }
+
     public Sensor getSensorInPath()
     {
         Sensor[] allSensors;
@@ -307,7 +326,6 @@ public class Edge
             }
         }
 
-        // we go through the Sensor and check if the edge intersects with any of them
         foreach (Sensor sensor in allSensors)
         {
             if (sensor.isPointInSensor(this.GetClosestPoint(sensor.transform.position)))
@@ -320,10 +338,22 @@ public class Edge
                 // Apply the rotation to the sensor
                 sensor.transform.rotation = Quaternion.Euler(0, angle, 0);
 
+                // Find the nearest waypoint to the sensor
+                Waypoint nearestWaypoint = FindNearestWaypoint(sensor);
+                if (nearestWaypoint != null)
+                {
+                    Debug.Log("Nearest waypoint to sensor is at " + nearestWaypoint.transform.position);
+                }
+                else
+                {
+                    Debug.Log("No waypoints found.");
+                }
+
                 return sensor;
             }
         }
-        return null;
+
+        return null; // return null if no sensor is found in the path
     }
 
     public Waypoint getClosestWaypoint(Vector3 point)
