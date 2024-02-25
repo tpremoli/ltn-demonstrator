@@ -320,19 +320,21 @@ public class PedestrianPathGenerator
                     oppositeIntersectionWaypoint.adjacentWaypoints.Add(furtherWaypoint);
 
                     // 4. Update the road edge to use the new waypoints
-                    if (roadEdge.startWaypoint == intersectionCenter)
-                    {
-                        roadEdge.startWaypoint = closerWaypoint;
-                    }
-                    else
-                    {
-                        roadEdge.endWaypoint = closerWaypoint;
-                    }
-
-                    // 5. Setting the intersecting edges
                     var oppositeDirectionPedEdge = graph.getEdge(pedEdge.endWaypoint, pedEdge.startWaypoint);
                     var oppositeDirectionRoadEdge = graph.getEdge(roadEdge.endWaypoint, roadEdge.startWaypoint);
 
+                    if (roadEdge.startWaypoint == intersectionCenter)
+                    {
+                        roadEdge.startWaypoint = furtherWaypoint;
+                        oppositeDirectionRoadEdge.endWaypoint = furtherWaypoint;
+                    }
+                    else
+                    {
+                        roadEdge.endWaypoint = furtherWaypoint;
+                        oppositeDirectionRoadEdge.startWaypoint = furtherWaypoint;
+                    }
+
+                    // 5. Setting the intersecting edges TODO: do we remove this and do it in EdgeLoader?
                     pedEdge.IntersectingEdges.Add(roadEdge);
                     pedEdge.IntersectingEdges.Add(oppositeDirectionRoadEdge);
                     oppositeDirectionPedEdge.IntersectingEdges.Add(roadEdge);
@@ -348,6 +350,10 @@ public class PedestrianPathGenerator
             crosswalkEdges.Add(pedEdge);
         }
 
+        // we re-load the edges to update the graph.
+        // TODO: this isn't accounting for intersecting edges. Maybe pass in a Dict<Edge, List<Edges>> 
+        // so it keeps it in memory and doesn't have to re-calculate it?
+        // idk this is hard
         EdgeLoader.LoadEdges();
     }
     private static bool TryGetIntersection(Edge pedestrianEdge, Edge roadEdge, out Vector3 intersectionPoint)

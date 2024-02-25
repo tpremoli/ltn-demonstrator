@@ -97,7 +97,13 @@ public class Edge
         if (isPedestrianOnly)
         {
             return;
-        } 
+        } else if (IntersectingEdges.Count > 0)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(startWaypoint.transform.position, endWaypoint.transform.position);
+            Debug.Log("Intersecting edge found");
+            return;
+        }
 
         // Draw arrow pointing in the edge's direction
         Vector3 startpoint = startWaypoint.transform.position;

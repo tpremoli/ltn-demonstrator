@@ -13,7 +13,6 @@ public class EdgeLoader
     {
         Graph graph = Object.FindFirstObjectByType<Graph>();
 
-
         if (graph == null)
         {
             Debug.LogError("No graph found in scene.");
