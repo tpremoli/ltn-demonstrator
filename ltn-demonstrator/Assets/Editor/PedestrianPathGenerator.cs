@@ -7,14 +7,16 @@ public class PedestrianPathGenerator
 {
     public static float laneWidth = 3.5f; // Width of a lane, adjust as needed
 
-    private static Dictionary<Waypoint, List<Waypoint>> pedestrianWaypointsMap = new Dictionary<Waypoint, List<Waypoint>>();
+    private static Dictionary<Waypoint, List<Waypoint>> intersectionPedWaypointsMap = new Dictionary<Waypoint, List<Waypoint>>();
+    private static Dictionary<Waypoint, Waypoint> pedWaypointCenters = new Dictionary<Waypoint, Waypoint>();
 
     // STEP 1: Generate pedestrian waypoints
 
     [MenuItem("Tools/Sidewalks/1. Generate Pedestrian Waypoints")]
     public static void GeneratePedestrianWaypoints()
     {
-        pedestrianWaypointsMap = new Dictionary<Waypoint, List<Waypoint>>();
+        intersectionPedWaypointsMap = new Dictionary<Waypoint, List<Waypoint>>();
+        pedWaypointCenters = new Dictionary<Waypoint, Waypoint>();
 
         // Iterate through all waypoints in the scene
         Waypoint[] allWaypoints = Object.FindObjectsOfType<Waypoint>();
@@ -128,15 +130,16 @@ public class PedestrianPathGenerator
         newWaypointObj.transform.parent = Object.FindObjectOfType<Graph>().transform;
 
         // Store the new waypoint in the map
-        if (pedestrianWaypointsMap.ContainsKey(currentWaypoint))
+        if (intersectionPedWaypointsMap.ContainsKey(currentWaypoint))
         {
-            pedestrianWaypointsMap[currentWaypoint].Add(newWaypoint);
+            intersectionPedWaypointsMap[currentWaypoint].Add(newWaypoint);
         }
         else
         {
-            pedestrianWaypointsMap[currentWaypoint] = new List<Waypoint> { newWaypoint };
+            intersectionPedWaypointsMap[currentWaypoint] = new List<Waypoint> { newWaypoint };
         }
 
+        pedWaypointCenters[newWaypoint] = currentWaypoint;
     }
 
 
@@ -146,7 +149,7 @@ public class PedestrianPathGenerator
     public static void ConnectExternalPedestrianWaypoints()
     {
         // Iterate through all mappings
-        foreach (var pair in pedestrianWaypointsMap)
+        foreach (var pair in intersectionPedWaypointsMap)
         {
             Waypoint originalWaypoint = pair.Key;
             List<Waypoint> pedestrianWaypoints = pair.Value;
@@ -156,7 +159,7 @@ public class PedestrianPathGenerator
             {
                 foreach (var adjacent in originalWaypoint.adjacentWaypoints)
                 {
-                    if (pedestrianWaypointsMap.TryGetValue(adjacent, out List<Waypoint> adjacentPedestrianWaypoints))
+                    if (intersectionPedWaypointsMap.TryGetValue(adjacent, out List<Waypoint> adjacentPedestrianWaypoints))
                     {
                         foreach (var adjacentPedestrianWaypoint in adjacentPedestrianWaypoints)
                         {
@@ -221,7 +224,7 @@ public class PedestrianPathGenerator
     public static void ConnectInternalPedestrianWaypoints()
     {
         // Assuming pedestrianWaypointsMap is accessible here. If not, you might need to pass it as an argument
-        foreach (var pair in PedestrianPathGenerator.pedestrianWaypointsMap)
+        foreach (var pair in PedestrianPathGenerator.intersectionPedWaypointsMap)
         {
             List<Waypoint> pedestrianWaypoints = pair.Value;
 
@@ -246,9 +249,71 @@ public class PedestrianPathGenerator
     }
 
     // STEP 4: Connect pedestrian waypoints to the original graph (requires to split graph)
+    [MenuItem("Tools/Sidewalks/4. Add Crosswalk intersections to graph")]
+    public static void AddCrosswalksToGraph()
+    {
+        EdgeLoader.LoadEdges();
 
-    // todo
+        var graph = Object.FindFirstObjectByType<Graph>();
+        var allEdges = graph.edges;
+        var pedestrianEdges = allEdges.Where(edge => edge.isPedestrianOnly).ToList();
+        var roadEdges = allEdges.Except(pedestrianEdges).ToList();
 
+        List<Edge> crosswalkEdges = new List<Edge>();
+
+        foreach (var pedEdge in pedestrianEdges)
+        {
+            foreach (var crosswalk in crosswalkEdges){
+                if (pedEdge.isSameEdge(crosswalk)) {
+                    // TODO: register as intersecting edge
+                    continue;
+                }
+            }
+
+            foreach (var roadEdge in roadEdges)
+            {
+                if (TryGetIntersection(pedEdge, roadEdge, out Vector3 intersectionPoint))
+                {
+                    Waypoint intersectionCenter = pedWaypointCenters[pedEdge.startWaypoint];
+
+                    // // Calculate points to divide the pedestrian edge
+                    // Vector3 pointCloserToIntersection = CalculateDivisionPoint(pedEdge, intersectionPoint, true);
+                    // Vector3 pointFurtherFromIntersection = CalculateDivisionPoint(pedEdge, intersectionPoint, false);
+
+                    // // Replace or modify the pedestrian edge in the graph
+                    // DivideAndReplacePedestrianEdge(pedEdge, pointCloserToIntersection, pointFurtherFromIntersection);
+                }
+            }
+        }
+    }
+    private static bool TryGetIntersection(Edge pedestrianEdge, Edge roadEdge, out Vector3 intersectionPoint)
+    {
+        intersectionPoint = Vector3.zero; // Default to zero if no intersection is found
+
+        Vector3 p1 = pedestrianEdge.startWaypoint.transform.position;
+        Vector3 p2 = pedestrianEdge.endWaypoint.transform.position;
+        Vector3 p3 = roadEdge.startWaypoint.transform.position;
+        Vector3 p4 = roadEdge.endWaypoint.transform.position;
+
+        float denominator = (p1.x - p2.x) * (p3.z - p4.z) - (p1.z - p2.z) * (p3.x - p4.x);
+
+        // Check if lines are parallel (denominator is zero)
+        if (Mathf.Approximately(denominator, 0)) return false;
+
+        float t = ((p1.x - p3.x) * (p3.z - p4.z) - (p1.z - p3.z) * (p3.x - p4.x)) / denominator;
+        float u = -((p1.x - p2.x) * (p1.z - p3.z) - (p1.z - p2.z) * (p1.x - p3.x)) / denominator;
+
+        // Check if intersection point is on both line segments
+        if (t >= 0 && t <= 1 && u >= 0 && u <= 1)
+        {
+            intersectionPoint.x = p1.x + t * (p2.x - p1.x);
+            intersectionPoint.z = p1.z + t * (p2.z - p1.z);
+            // Assuming the y-coordinate is constant or not relevant for intersection calculation
+            return true;
+        }
+
+        return false;
+    }
     // STEP 5: clear the map
     [MenuItem("Tools/Sidewalks/5. Clear pedestrian waypoints")]
     public static void ClearPedestrianPaths()
