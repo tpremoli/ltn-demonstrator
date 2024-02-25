@@ -322,6 +322,8 @@ public class PedestrianPathGenerator
 
             crosswalkEdges.Add(pedEdge);
         }
+
+        EdgeLoader.LoadEdges();
     }
     private static bool TryGetIntersection(Edge pedestrianEdge, Edge roadEdge, out Vector3 intersectionPoint)
     {
@@ -417,12 +419,24 @@ public class PedestrianPathGenerator
     }
 
     // Run all steps
-    [MenuItem("Tools/Sidewalks/00. Run all pedestrian path steps")]
+    [MenuItem("Tools/Sidewalks/0. Run all pedestrian path steps")]
     public static void RunAllSteps()
     {
         ClearPedestrianPaths(); // 5 - clear graph 
         GeneratePedestrianWaypoints(); // 1
         ConnectExternalPedestrianWaypoints(); // 2
         ConnectInternalPedestrianWaypoints(); // 3
+    }
+
+    [MenuItem("Tools/Sidewalks/9. Clear Static Variables")]
+    public static void ClearStaticVariables()
+    {
+        // Reset the laneWidth to its default value if necessary
+        laneWidth = 3.5f; // Or set it to another default value as needed
+
+        // Clear the collections
+        intersectionPedWaypointsMap.Clear();
+        pedWaypointCenters.Clear();
+        subdividedWaypoints.Clear();
     }
 }
