@@ -10,8 +10,8 @@ public class PedestrianPathGenerator
     private static Dictionary<Waypoint, Waypoint> pedWaypointCenters = new Dictionary<Waypoint, Waypoint>();
 
     // this maps an intersection to its supdivided waypoints
-    private static Dictionary<Waypoint, List<Waypoint>> subdividedWaypoints = new Dictionary<Waypoint, List<Waypoint>>();
-    
+    private static List<Waypoint> subdividedWaypoints = new List<Waypoint>();
+
     // STEP 1: Generate pedestrian waypoints
 
     [MenuItem("Tools/Sidewalks/1. Generate Pedestrian Waypoints")]
@@ -265,30 +265,62 @@ public class PedestrianPathGenerator
 
         foreach (var pedEdge in pedestrianEdges)
         {
+            bool hasEdgeBeenProcessed = false;
             foreach (var crosswalk in crosswalkEdges)
             {
                 if (pedEdge.isSameEdge(crosswalk))
                 {
                     // TODO: register as intersecting edge
-                    continue;
+                    hasEdgeBeenProcessed = true;
+                    Debug.LogError("Edge already processed");
+                    break;
                 }
             }
+            if (hasEdgeBeenProcessed) continue;
 
             foreach (var roadEdge in roadEdges)
             {
                 if (TryGetIntersection(pedEdge, roadEdge, out Vector3 intersectionPoint))
                 {
+                    // the center of the intersection
                     Waypoint intersectionCenter = pedWaypointCenters[pedEdge.startWaypoint];
+                    Waypoint oppositeIntersectionWaypoint;
+                    if (intersectionCenter == roadEdge.startWaypoint)
+                    {
+                        oppositeIntersectionWaypoint = roadEdge.endWaypoint;
+                    }
+                    else
+                    {
+                        oppositeIntersectionWaypoint = roadEdge.startWaypoint;
+                    }
 
                     // Calculate points to divide the pedestrian edge
-                    Vector3 pointCloserToIntersection = CalculateDivisionPoint(intersectionPoint, intersectionCenter, laneWidth*0.2f, true);
-                    Vector3 pointFurtherFromIntersection = CalculateDivisionPoint(intersectionPoint, intersectionCenter, laneWidth*0.2f, false);
+                    Vector3 pointCloserToIntersection = CalculateDivisionPoint(intersectionPoint, intersectionCenter, laneWidth * 0.2f, true);
+                    Vector3 pointFurtherFromIntersection = CalculateDivisionPoint(intersectionPoint, intersectionCenter, laneWidth * 0.2f, false);
 
                     // Replace or modify the pedestrian edge in the graph
-                    createSubdividedWaypoint(pointCloserToIntersection, intersectionCenter);
-                    createSubdividedWaypoint(pointFurtherFromIntersection, intersectionCenter);
+                    var closerWaypoint = createSubdividedWaypoint(pointCloserToIntersection, intersectionCenter);
+                    var furtherWaypoint = createSubdividedWaypoint(pointFurtherFromIntersection, intersectionCenter);
+
+                    // 0. Remove intersection adjacency
+                    intersectionCenter.adjacentWaypoints.Remove(oppositeIntersectionWaypoint);
+                    oppositeIntersectionWaypoint.adjacentWaypoints.Remove(intersectionCenter);
+
+                    // 1. Set closerWaypoint and furtherWaypoint as adjacent to each other
+                    closerWaypoint.adjacentWaypoints.Add(furtherWaypoint);
+                    furtherWaypoint.adjacentWaypoints.Add(closerWaypoint);
+
+                    // 2. Set closerWaypoint and intersectionCenter as adjacent to each other
+                    closerWaypoint.adjacentWaypoints.Add(intersectionCenter);
+                    intersectionCenter.adjacentWaypoints.Add(closerWaypoint);
+
+                    // 3. Set furtherWaypoint and oppositeIntersectionWaypoint as adjacent to each other
+                    furtherWaypoint.adjacentWaypoints.Add(oppositeIntersectionWaypoint);
+                    oppositeIntersectionWaypoint.adjacentWaypoints.Add(furtherWaypoint);
                 }
             }
+
+            crosswalkEdges.Add(pedEdge);
         }
     }
     private static bool TryGetIntersection(Edge pedestrianEdge, Edge roadEdge, out Vector3 intersectionPoint)
@@ -335,8 +367,18 @@ public class PedestrianPathGenerator
         return divisionPoint;
     }
 
-    private static void createSubdividedWaypoint(Vector3 position, Waypoint center)
+    private static Waypoint createSubdividedWaypoint(Vector3 position, Waypoint center)
     {
+        // check if a waypoint already exists at the position, and if so, return it
+        foreach (var waypoint in subdividedWaypoints)
+        {
+            if (waypoint.transform.position == position)
+            {
+                Debug.LogWarning("Waypoint already exists at position " + position);
+                return waypoint;
+            }
+        }
+
         GameObject newWaypointObj = new GameObject("Subdivided Waypoint");
         newWaypointObj.transform.position = position;
         Waypoint newWaypoint = newWaypointObj.AddComponent<Waypoint>();
@@ -345,15 +387,9 @@ public class PedestrianPathGenerator
         newWaypoint.isSubdivided = true;
         newWaypointObj.transform.parent = Object.FindObjectOfType<Graph>().transform;
 
-        // Store the new waypoint in the map
-        if (subdividedWaypoints.ContainsKey(center))
-        {
-            subdividedWaypoints[center].Add(newWaypoint);
-        }
-        else
-        {
-            subdividedWaypoints[center] = new List<Waypoint> { newWaypoint };
-        }
+        subdividedWaypoints.Add(newWaypoint);
+
+        return newWaypoint;
     }
 
     // STEP 5: clear the map

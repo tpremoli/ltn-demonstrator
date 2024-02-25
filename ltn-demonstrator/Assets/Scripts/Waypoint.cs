@@ -19,7 +19,9 @@ public class Waypoint : MonoBehaviour
         if (this.isPedestrianOnly)
         {
             waypointSize = waypointSize / 2;
-        }else if ( this.isSubdivided){
+        }
+        else if (this.isSubdivided)
+        {
             waypointSize = waypointSize / 4;
         }
 
@@ -53,6 +55,10 @@ public class Waypoint : MonoBehaviour
         if (this.isPedestrianOnly)
         {
             waypointSize = waypointSize / 2;
+        }
+        else if (this.isSubdivided)
+        {
+            waypointSize = waypointSize / 4;
         }
 
 
