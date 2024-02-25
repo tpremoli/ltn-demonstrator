@@ -4625,7 +4625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e560e9c8fddfb4b32817feb1ac850923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensorPrefab: {fileID: 100000, guid: 878eb4575d3db2143bff9ebf5c266974, type: 3}
+  sensorPrefab: {fileID: 100000, guid: f796062cb1be74bfcb5011dcd7470357, type: 3}
   allSensors: []
   loadSensorsFromSave: 1
 --- !u!4 &128833593
