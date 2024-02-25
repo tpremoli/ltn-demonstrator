@@ -15,7 +15,7 @@ public class Graph : MonoBehaviour
 
     // private waypointsize with getter
     [Range(0f, 2f)][SerializeField] private float waypointSize = 0.5f;
-    [SerializeField] public List<Edge> edges;
+    public List<Edge> edges;
 
     public List<Building> allBuildings;
     public Dictionary<BuildingType, List<Building>> buildingsByType = new Dictionary<BuildingType, List<Building>>();
@@ -110,6 +110,7 @@ public class Graph : MonoBehaviour
 
     private void DrawEdgeGizmos()
     {
+        if (edges == null) return;
         foreach (Edge edge in edges)
         {
             edge.DrawGizmo();
