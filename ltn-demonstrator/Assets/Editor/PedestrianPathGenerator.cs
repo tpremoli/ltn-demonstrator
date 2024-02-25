@@ -301,6 +301,7 @@ public class PedestrianPathGenerator
                     // Replace or modify the pedestrian edge in the graph
                     var closerWaypoint = createSubdividedWaypoint(pointCloserToIntersection, intersectionCenter);
                     var furtherWaypoint = createSubdividedWaypoint(pointFurtherFromIntersection, intersectionCenter);
+                    if (closerWaypoint == null || furtherWaypoint == null) continue; // Skip if the waypoints already exist
 
                     // 0. Remove intersection adjacency
                     intersectionCenter.adjacentWaypoints.Remove(oppositeIntersectionWaypoint);
@@ -317,6 +318,16 @@ public class PedestrianPathGenerator
                     // 3. Set furtherWaypoint and oppositeIntersectionWaypoint as adjacent to each other
                     furtherWaypoint.adjacentWaypoints.Add(oppositeIntersectionWaypoint);
                     oppositeIntersectionWaypoint.adjacentWaypoints.Add(furtherWaypoint);
+
+                    // Update the road edge to use the new waypoints
+                    if (roadEdge.startWaypoint == intersectionCenter)
+                    {
+                        roadEdge.startWaypoint = closerWaypoint;
+                    }
+                    else
+                    {
+                        roadEdge.endWaypoint = closerWaypoint;
+                    }
                 }
             }
 
@@ -377,7 +388,7 @@ public class PedestrianPathGenerator
             if (waypoint.transform.position == position)
             {
                 Debug.LogWarning("Waypoint already exists at position " + position);
-                return waypoint;
+                return null;
             }
         }
 

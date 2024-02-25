@@ -20,7 +20,6 @@ public class EdgeLoader
             return;
         }
 
-
         graph.edges = new List<Edge>();
         Waypoint[] waypoints = Object.FindObjectsOfType<Waypoint>();
 
