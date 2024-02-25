@@ -10,6 +10,8 @@ public class PedestrianPathGenerator
     private static Dictionary<Waypoint, List<Waypoint>> intersectionPedWaypointsMap = new Dictionary<Waypoint, List<Waypoint>>();
     private static Dictionary<Waypoint, Waypoint> pedWaypointCenters = new Dictionary<Waypoint, Waypoint>();
 
+    private static List<Waypoint> subdividedWaypoints = new List<Waypoint>();
+    
     // STEP 1: Generate pedestrian waypoints
 
     [MenuItem("Tools/Sidewalks/1. Generate Pedestrian Waypoints")]
@@ -263,8 +265,10 @@ public class PedestrianPathGenerator
 
         foreach (var pedEdge in pedestrianEdges)
         {
-            foreach (var crosswalk in crosswalkEdges){
-                if (pedEdge.isSameEdge(crosswalk)) {
+            foreach (var crosswalk in crosswalkEdges)
+            {
+                if (pedEdge.isSameEdge(crosswalk))
+                {
                     // TODO: register as intersecting edge
                     continue;
                 }
@@ -276,11 +280,11 @@ public class PedestrianPathGenerator
                 {
                     Waypoint intersectionCenter = pedWaypointCenters[pedEdge.startWaypoint];
 
-                    // // Calculate points to divide the pedestrian edge
-                    // Vector3 pointCloserToIntersection = CalculateDivisionPoint(pedEdge, intersectionPoint, true);
-                    // Vector3 pointFurtherFromIntersection = CalculateDivisionPoint(pedEdge, intersectionPoint, false);
+                    // Calculate points to divide the pedestrian edge
+                    Vector3 pointCloserToIntersection = CalculateDivisionPoint(intersectionPoint, intersectionCenter, laneWidth, true);
+                    Vector3 pointFurtherFromIntersection = CalculateDivisionPoint(intersectionPoint, intersectionCenter, laneWidth, false);
 
-                    // // Replace or modify the pedestrian edge in the graph
+                    // Replace or modify the pedestrian edge in the graph
                     // DivideAndReplacePedestrianEdge(pedEdge, pointCloserToIntersection, pointFurtherFromIntersection);
                 }
             }
@@ -314,6 +318,22 @@ public class PedestrianPathGenerator
 
         return false;
     }
+
+    private static Vector3 CalculateDivisionPoint(Vector3 intersectionPoint, Waypoint intersectionCenter, float distance, bool towardsCenter)
+    {
+        Vector3 directionToCenter = (intersectionCenter.transform.position - intersectionPoint).normalized;
+        if (!towardsCenter)
+        {
+            // If we want the point away from the center, reverse the direction
+            directionToCenter = -directionToCenter;
+        }
+
+        // Calculate the new point by moving the intersection point along the direction vector by the specified distance
+        Vector3 divisionPoint = intersectionPoint + directionToCenter * distance;
+
+        return divisionPoint;
+    }
+
     // STEP 5: clear the map
     [MenuItem("Tools/Sidewalks/5. Clear pedestrian waypoints")]
     public static void ClearPedestrianPaths()
