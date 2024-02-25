@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.IO;
+using System.Linq;
 
 public class EditScreenMenu : MonoBehaviour
 {
@@ -70,14 +71,18 @@ public class EditScreenMenu : MonoBehaviour
         if (sensorManager != null)
         {
             List<Sensor> sensors = new List<Sensor>();
+            Debug.Log("SensorManager has: " + sensorManager.allSensors);
             foreach (GameObject gameObject in sensorManager.allSensors)
             {
+                Debug.Log("GameObject: " + gameObject);
+                Debug.Log("Components: " + string.Join(", ", gameObject.GetComponents<Component>().Select(c => c.GetType().Name)));
                 Sensor sensor = gameObject.GetComponent<Sensor>();
                 if (sensor != null)
                 {
                     sensors.Add(sensor);
                 }
             }
+            Debug.Log("Saving sensors: " + string.Join(", ", sensors.Select(s => s.name)));
             SaveSystem.SaveSensors(sensors);
             Debug.Log("Game Saved");
         }

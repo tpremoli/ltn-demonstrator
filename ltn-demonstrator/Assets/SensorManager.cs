@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class SensorManager : MonoBehaviour
 {
@@ -11,10 +12,6 @@ public class SensorManager : MonoBehaviour
 
     public bool loadSensorsFromSave;
 
-    void Start()
-    {
-        allSensors = new List<GameObject>();
-    }
 
     void Update()
     {   
@@ -93,6 +90,9 @@ public class SensorManager : MonoBehaviour
 
         // Add the sensor to the list of all sensors
         allSensors.Add(newSensor);
+        Debug.Log("Sensor count: " + allSensors.Count.ToString());
+        Debug.Log("All sensors: " + string.Join(", ", allSensors.Select(s => s.name)));
+        
         
     }
 

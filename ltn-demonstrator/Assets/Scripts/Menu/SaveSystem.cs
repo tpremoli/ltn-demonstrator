@@ -12,6 +12,12 @@ public static class SaveSystem
         public List<BarrierData> barriers;
     }
 
+    [System.Serializable]
+    public class SensorsContainer
+    {
+        public List<SensorData> sensors;
+    }
+
     public static void SaveSensors(List<Sensor> sensors)
     {
         if (!Directory.Exists(SAVE_FOLDER))

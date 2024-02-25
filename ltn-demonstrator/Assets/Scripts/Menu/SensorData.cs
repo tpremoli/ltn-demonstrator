@@ -6,6 +6,7 @@ using System.IO; // Add this line
 [System.Serializable]
 public class SensorsContainer
 {
+    // container for list of sensor data
     public List<SensorData> sensors;
 }
 
