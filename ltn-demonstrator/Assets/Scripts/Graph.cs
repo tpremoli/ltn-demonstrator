@@ -189,6 +189,6 @@ public class Graph : MonoBehaviour
     }
 
     public Building pickRandomBuilding() {
-        return buildings.Values.ToList<Building>()[Random.Range(0, buildings.Count)];
+        return buildings.Values.ToList<Building>()[Random.Range(0, buildings.Count - 1)];
     }
 }

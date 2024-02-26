@@ -13,6 +13,10 @@ public class TravellerManager : MonoBehaviour
     }
 
     public static TravellerManager Instance;
+    public float timeBetweenSpawns;
+    public float spawnProbability;
+    public float nextSpawnTime;
+    private Graph graph;
 
     // pick random model and material
     [SerializeField]
@@ -28,6 +32,33 @@ public class TravellerManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Start() {
+        this.timeBetweenSpawns = 0.5f;
+        this.spawnProbability = 1f;
+        this.nextSpawnTime = Time.time + timeBetweenSpawns;
+        this.graph = Graph.Instance;
+
+    }
+
+    public void Update() {
+        if (Time.time >= nextSpawnTime) {
+            Debug.Log("Time to spawn new traveller!");
+            if (Random.value < spawnProbability) {
+                Debug.Log("Spawning traveller from Traveller Manager");
+                SpawnTraveller();
+            }
+
+            nextSpawnTime = Time.time + timeBetweenSpawns;
+        }
+    }
+
+    public void SpawnTraveller() {
+        GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
+        //GameObject travellerManager = Instance.gameObject;
+        GameObject newTravellerObj = Instantiate(travellerPrefab, this.transform);
+        newTravellerObj.GetComponent<WaypointMover>().Setup(graph.pickRandomBuilding(), graph.pickRandomBuilding(), ModeOfTransport.Car);
     }
 
     public GameObject pickRandomModelAndMaterial(VehicleType type)

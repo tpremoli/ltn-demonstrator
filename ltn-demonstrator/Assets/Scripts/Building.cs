@@ -16,7 +16,7 @@ public enum BuildingType
 public class Building : MonoBehaviour
 {
     // DEBUG ATTRIBUUTES
-    private static bool ALLOW_SPAWNING = true;
+    private static bool ALLOW_SPAWNING = false;
 
     // Private attributes
     [SerializeField] private int vehicleMax;
@@ -115,7 +115,7 @@ public class Building : MonoBehaviour
             // Spawn a vehicle, if the random number is less than the spawn probability
             if (Random.value < spawnProbability)
             {
-                Debug.Log("Spawning traveller");
+                //Debug.Log("Spawning traveller");
                 SpawnTraveller();
             }
             // Set the next spawn time
