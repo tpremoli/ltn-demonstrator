@@ -133,7 +133,7 @@ public class Building : MonoBehaviour
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject travellerManager = TravellerManager.Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, travellerManager.transform);
-        newTravellerObj.GetComponent<WaypointMover>().setOriginBuilding(this);
+        newTravellerObj.GetComponent<WaypointMover>().Setup(this, graph.pickRandomBuilding(), ModeOfTransport.Car);
     }
 
     // public Vector3 getEdgeLocation()

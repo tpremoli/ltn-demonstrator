@@ -70,6 +70,7 @@ public class WaypointMover : MonoBehaviour
         // Some heuristic to choose what ModeOfTransport to use?
         // vehicleChosen = someHeuristicThatReturnsAModeOfTransport();
         // For now, pick the mode randomly
+        /*
         if (this.originBuilding.closestPedestrianEdge == null)
         {
             // we don't have a pedestrian edge, so we can't be a pedestrian (for now)
@@ -79,6 +80,7 @@ public class WaypointMover : MonoBehaviour
         {
             this.mode = (ModeOfTransport)Random.Range(0, 3);
         }
+        */
 
         // if the mode is pedestrian, set the traveller's position to the closest point on the pedestrian edge
         if (this.mode == ModeOfTransport.Pedestrian)
@@ -125,16 +127,18 @@ public class WaypointMover : MonoBehaviour
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        this.destinationBuilding = chooseDestinationBuilding();
+//        this.destinationBuilding = chooseDestinationBuilding();
+        /*
         if (this.destinationBuilding == null)
         {
             Debug.LogWarning("No destination building found. Destroying object.");
             Destroy(this.gameObject);
             return;
         }
+        */
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.originBuilding, destinationBuilding, this.mode);
+        path = new WaypointPath(this.originBuilding, this.destinationBuilding, this.mode);
 
         if (path.pathAsEdges == null)
         {
@@ -200,6 +204,13 @@ public class WaypointMover : MonoBehaviour
 
         // DEBUG
         //DebugDrawPath();
+    }
+
+    // Set the origin building, destination building and mode of transport for the agent.
+    public void Setup(Building originBuilding, Building destinationBuilding, ModeOfTransport modeOfTransport) {
+        this.mode = modeOfTransport;
+        this.originBuilding = originBuilding;
+        this.destinationBuilding = destinationBuilding;
     }
 
     public void setOriginBuilding(Building building)

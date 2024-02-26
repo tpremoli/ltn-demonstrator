@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Graph : MonoBehaviour
@@ -185,5 +186,9 @@ public class Graph : MonoBehaviour
         }
 
         return null;
+    }
+
+    public Building pickRandomBuilding() {
+        return buildings.Values.ToList<Building>()[Random.Range(0, buildings.Count)];
     }
 }
