@@ -18,6 +18,7 @@ public class Graph : MonoBehaviour
     [SerializeField] public List<Edge> edges;
 
     public List<Building> allBuildings;
+    public Dictionary<string, Building> buildings = new Dictionary<string, Building>();
     public Dictionary<BuildingType, List<Building>> buildingsByType = new Dictionary<BuildingType, List<Building>>();
 
     public List<Waypoint> waypoints;
@@ -44,6 +45,7 @@ public class Graph : MonoBehaviour
         foreach (Building b in allBuildings)
         {
             buildingsByType[b.buildingType].Add(b);
+            buildings.Add(b.GetComponent<UniqueID>().uniqueID, b);
         }
 
         foreach (KeyValuePair<BuildingType, List<Building>> t in buildingsByType)
