@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: -6477739720309692430}
   - component: {fileID: 4683937035775245252}
+  - component: {fileID: 9065710327314798628}
   m_Layer: 0
   m_Name: Residence2
   m_TagString: Untagged
@@ -122,7 +123,9 @@ MonoBehaviour:
   occupantMax: 0
   spawnProbability: 0.1
   timeBetweenSpawns: 1
-  closestEdge:
+  closestRoadEdge:
+    position: {x: 0, y: 0, z: 0}
+    direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 0}
     endWaypoint: {fileID: 0}
     length: 0
@@ -130,5 +133,19 @@ MonoBehaviour:
     isBarricated: 0
     barrierLocation: 0
     barrier: {fileID: 0}
-  closestPointOnEdge: {x: 0, y: 0, z: 0}
+    isPedestrianOnly: 0
+  closestPointOnRoadEdge: {x: 0, y: 0, z: 0}
   buildingType: 1
+--- !u!114 &9065710327314798628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ca0c3e2e54177041ab674d285f863d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueID: 

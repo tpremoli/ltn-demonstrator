@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: -5098591384075483732}
   - component: {fileID: 8821813151354335889}
+  - component: {fileID: 5754920297517633004}
   m_Layer: 0
   m_Name: Generic
   m_TagString: Untagged
@@ -102,6 +103,8 @@ MonoBehaviour:
   spawnProbability: 0.1
   timeBetweenSpawns: 1
   closestRoadEdge:
+    position: {x: 0, y: 0, z: 0}
+    direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 0}
     endWaypoint: {fileID: 0}
     length: 0
@@ -111,16 +114,6 @@ MonoBehaviour:
     barrier: {fileID: 0}
     isPedestrianOnly: 0
   closestPointOnRoadEdge: {x: 0, y: 0, z: 0}
-  closestPedestrianEdge:
-    startWaypoint: {fileID: 0}
-    endWaypoint: {fileID: 0}
-    length: 0
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: 0
-    barrier: {fileID: 0}
-    isPedestrianOnly: 0
-  closestPointOnPedestrianEdge: {x: 0, y: 0, z: 0}
   buildingType: 0
 --- !u!65 &8821813151354335889
 BoxCollider:
@@ -143,3 +136,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5754920297517633004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ca0c3e2e54177041ab674d285f863d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
