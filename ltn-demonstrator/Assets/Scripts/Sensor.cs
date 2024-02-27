@@ -35,9 +35,15 @@ public class Sensor : MonoBehaviour
         return nearestWaypoint;
     }
 
+   
+    
+    
+
     // Use this for initialization
     void Start()
     {
+        Graph graph = Graph.Instance;
+
         Waypoint nearestWaypoint = FindNearestWaypoint();
         if (nearestWaypoint != null)
         {
@@ -47,5 +53,58 @@ public class Sensor : MonoBehaviour
         {
             Debug.Log("No waypoints found.");
         }
+
+        Vector3 position = this.transform.position;
+        Edge nearestEdge = graph.getClosetRoadEdge(position);
+        if (nearestEdge != null && nearestEdge.StartWaypoint != null && nearestEdge.EndWaypoint != null)
+        {
+            Debug.Log("Nearest edge to sensor is " + nearestEdge.StartWaypoint.transform.position + " to " + nearestEdge.EndWaypoint.transform.position);
+        }
+        else
+        {
+            Debug.Log("No edges found or edge waypoints are null.");
+        }
+    
+    }
+
+    public Edge FindNearestEdge()
+    {
+        Graph graph = Graph.Instance;
+        if (graph == null || graph.edges == null)
+        {
+            Debug.Log("Graph or edges list is null.");
+            return null;
+        }
+
+        Edge nearestEdge = null;
+        float minDistance = float.MaxValue;
+
+        foreach (Edge edge in graph.edges)
+        {
+            if (edge != null)
+            {
+                Vector3 closestPoint = edge.GetClosestPoint(this.transform.position);
+                if (closestPoint != null)
+                {
+                    float distance = Vector3.Distance(this.transform.position, closestPoint);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        nearestEdge = edge;
+                    }
+                }
+            }
+        }
+
+        if (nearestEdge != null)
+        {
+            Debug.Log("Nearest edge to sensor is " + nearestEdge.StartWaypoint.transform.position + " to " + nearestEdge.EndWaypoint.transform.position);
+        }
+        else
+        {
+            Debug.Log("No edges found.");
+        }
+
+        return nearestEdge;
     }
 }
