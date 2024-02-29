@@ -12,6 +12,26 @@ public class SensorManager : MonoBehaviour
 
     public bool loadSensorsFromSave;
 
+    public Edge edge; // Reference to the Edge object
+
+    void Start()
+    {
+        if (edge != null)
+        {
+            foreach (GameObject sensorObject in allSensors)
+            {
+                Sensor sensor = sensorObject.GetComponent<Sensor>();
+                if (sensor != null)
+                {
+                    edge.RegisterSensor(sensor);
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Edge is null.");
+        }
+    }
 
     void Update()
     {   

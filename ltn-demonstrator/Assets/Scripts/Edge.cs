@@ -33,6 +33,17 @@ public class Edge
 
     public Sensor sensor;
     public float sensorLocation;
+
+    private List<Sensor> sensors = new List<Sensor>();
+
+    public void RegisterSensor(Sensor sensor)
+    {
+        if (sensor != null && !sensors.Contains(sensor))
+        {
+            sensors.Add(sensor);
+        }
+    }
+    
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.startWaypoint = startWaypoint;
