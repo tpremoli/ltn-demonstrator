@@ -70,7 +70,7 @@ public class WaypointEditor : Editor
     /// This can be called manually from the editor, or automatically when a waypoint is deleted.
     /// </summary>
     [MenuItem("Tools/Waypoints/Prune Deleted Waypoints")] [InitializeOnLoadMethod]
-    static void PruneDeletedWaypoints()
+    public static void PruneDeletedWaypoints()
     {
         Waypoint[] allWaypoints = FindObjectsOfType<Waypoint>();
 

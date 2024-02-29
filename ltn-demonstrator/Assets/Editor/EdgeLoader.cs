@@ -10,13 +10,16 @@ public class EdgeLoader
     public static void LoadEdges()
     {
         Graph graph = Object.FindFirstObjectByType<Graph>();
-        graph.edges = new List<Edge>();
 
+        
         if (graph == null)
         {
             Debug.LogError("No graph found in scene.");
             return;
         }
+        
+
+        graph.edges = new List<Edge>();
         Waypoint[] waypoints = Object.FindObjectsOfType<Waypoint>();
 
         foreach (Waypoint waypoint in waypoints)

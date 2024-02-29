@@ -104,8 +104,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.5923922, y: 2.2525814, z: 6.3996105}
+  m_Center: {x: 0.0034947195, y: 1.1063907, z: -0.2057463}
 --- !u!114 &-7686631778684168970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,19 +115,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4363102034047660110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e3ff3568b90b18488b6ec236b1693b2, type: 3}
+  m_Script: {fileID: 11500000, guid: f44b065cb513935409fd520c503ca1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingWaypoint: {fileID: 0}
-  speed: 10.63
   distanceThreshold: 0.1
   leftLaneOffset: 1
-  vehiclePrefabs:
-  - {fileID: 100000, guid: a119eb0fa059db34bbaef286c1af1696, type: 3}
-  - {fileID: 100000, guid: 81835658bbd378143a0f525b8552f557, type: 3}
-  - {fileID: 100000, guid: c98da428142c39c42bb62c454958cd1f, type: 3}
-  - {fileID: 100000, guid: 93d0d450ec8b42e46b724bf2bbee330b, type: 3}
-  - {fileID: 100000, guid: 81c050d9e127fdd45af1f6b8da476b2b, type: 3}
-  - {fileID: 100000, guid: ce2dd4bb67fdc684dac928dc2cfb7a0f, type: 3}
-  - {fileID: 100000, guid: 05aec82adc02f16409639716322b1673, type: 3}
-  - {fileID: 100000, guid: b0ad868427d8c8a4b86144f9786776d3, type: 3}
