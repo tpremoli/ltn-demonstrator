@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 public class EdgeLoader
 {
-    // Find the Graph object in the scene
-    Graph graph = Object.FindObjectOfType<Graph>();
-    
+
     [MenuItem("Tools/Reload Edges")]
     [InitializeOnLoadMethod]
     [RuntimeInitializeOnLoadMethod]
     public static void LoadEdges()
     {
+        // Find the Graph object in the scene
+        Graph graph = Object.FindObjectOfType<Graph>();
 
         // If no Graph object is found, log an error and return
         if (graph == null)
