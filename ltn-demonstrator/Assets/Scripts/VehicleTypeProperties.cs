@@ -50,11 +50,11 @@ public class VehicleProperties
             return getRateOfEmmision();
         }
     }
-    public int MaxNumberOfPassangers
+    public int MaxNumberOfPassengers
     {
         get
         {
-            return getMaxNumberOfPassangers();
+            return getMaxNumberOfPassengers();
         }
     }
 
@@ -157,7 +157,7 @@ public class VehicleProperties
                 return 0.0f;
         }
     }
-    private int getMaxNumberOfPassangers()
+    private int getMaxNumberOfPassengers()
     {
         switch (Type)
         {

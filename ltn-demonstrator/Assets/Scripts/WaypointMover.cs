@@ -6,6 +6,8 @@ public class WaypointMover : MonoBehaviour
 {
     // Attributes controlling the object state
     bool initialised;   // Controls whether object has been initialised and should begin travelling
+    public int ID {get; set;}
+    public List<Edge> pathOriginal { get; private set; }
 
     // Attributes controlling vehicle's type
     public VehicleProperties vType { get; private set; }
@@ -103,6 +105,8 @@ public class WaypointMover : MonoBehaviour
         {
             Debug.LogWarning("No model found for vehicle type: " + this.vType.Type + ". Fix this please! Worse errors could arise later.");
             Destroy(this.gameObject);
+            StatisticsManager.Instance.BUGFIXincrementFinishedPaths();
+            Debug.Log("Incremented");
             return;
         }
 
@@ -145,6 +149,9 @@ public class WaypointMover : MonoBehaviour
             // Later on, we should change this so that the traveller changes their mode of transport
             Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
             Debug.LogWarning("End edge start: " + endEdge.StartWaypoint.name + " End edge end: " + endEdge.EndWaypoint.name);
+            //when the change is made, remove the code below - it is used to deal with
+            //paths that are destroyed so that the sim can terminate
+            StatisticsManager.Instance.BUGFIXincrementFinishedPaths();
             Destroy(this.gameObject);
             return;
         }
@@ -152,6 +159,7 @@ public class WaypointMover : MonoBehaviour
         {
             // copying the path edges, as we don't want to modify the original path
             this.pathEdges = new List<Edge>(path.pathAsEdges);
+            this.pathOriginal = new List<Edge>(path.pathAsEdges);
         }
 
         // Position the traveller on the current Edge
@@ -191,7 +199,7 @@ public class WaypointMover : MonoBehaviour
                 this.transform.position);
         }
 
-        Debug.Log("Traveller Instantiated");
+        //Debug.Log("Traveller Instantiated");
         // Rotate the Traveller to align with the current edge
         updateHeading();
 
@@ -201,6 +209,11 @@ public class WaypointMover : MonoBehaviour
         // DEBUG
         //DebugDrawPath();
     }
+
+
+    public VehicleProperties getVType() {
+        return vType;
+        }
 
     public void setOriginBuilding(Building building)
     {
@@ -743,7 +756,19 @@ public class WaypointMover : MonoBehaviour
     public void arriveToDestination()
     {
         Debug.Log("Arrived to destination. Destroying object.");
+        //update path data
+        //find corresponding data struct in statistical controller
+        StatisticsManager.Instance.RecieveEndTime(this.ID, getOriginalEdgePath());
         Destroy(this.gameObject);
+    }
+
+    public List<Edge> getEdgePath()
+    {
+        return this.pathEdges;
+    }
+
+    public List<Edge> getOriginalEdgePath() {
+        return this.pathOriginal;
     }
 
     public float calculateEmissions()

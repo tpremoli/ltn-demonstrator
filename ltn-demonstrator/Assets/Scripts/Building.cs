@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 // This is here for future expansion, but is not currently used
 public enum BuildingType
@@ -115,7 +116,6 @@ public class Building : MonoBehaviour
             // Spawn a vehicle, if the random number is less than the spawn probability
             if (Random.value < spawnProbability)
             {
-                Debug.Log("Spawning traveller");
                 SpawnTraveller();
             }
             // Set the next spawn time
@@ -128,13 +128,42 @@ public class Building : MonoBehaviour
     public void SpawnTraveller()
     {
         if (!ALLOW_SPAWNING) return;
+        Debug.Log("Spawning traveller");
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
+        //update the traveller count
+        TravellerManager.Instance.noOfTravellers += 1;
         // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject travellerManager = TravellerManager.Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, travellerManager.transform);
         newTravellerObj.GetComponent<WaypointMover>().setOriginBuilding(this);
+        //save data
+        SaveTravellerData(newTravellerObj);
+        //stops spawning if max number of travellers reached
+        
+        if (TravellerManager.Instance.noOfTravellers >= StatisticsManager.TERMINATION_CRITERIA) {
+            Debug.Log("------------------Max Travellers Spawned");
+            ALLOW_SPAWNING = false;
+        }
     }
+
+    public void SaveTravellerData (GameObject newTravellerObj) {
+        //assign ID to traveller - although its actually a waypointPath, will need to be reconfigured
+        WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
+        waypointMover.ID = TravellerManager.Instance.noOfTravellers; // Assign ID
+        //make stats structures here 
+
+        //create data struct for traveller information
+        PathData pathData = new PathData();
+        pathData.path = newTravellerObj.GetComponent<WaypointMover>().getEdgePath();//getpath
+        pathData.startTime = Time.frameCount;
+        pathData.ID = TravellerManager.Instance.noOfTravellers;
+        pathData.routeChange = false;
+        //store to list
+        StatisticsManager.Instance.AddPathData(pathData);  //finish append
+    }
+
+
 
     // public Vector3 getEdgeLocation()
     // {

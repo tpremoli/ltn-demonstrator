@@ -8,6 +8,7 @@ public class Waypoint : MonoBehaviour
     // We can add a second list of "connections" which are one-way connections, and use that to create one 
     // way streets.
     // As it is, all adjacent waypoints are two-way connections.
+    public int ID = -1;
     public List<Waypoint> adjacentWaypoints;
 
     // New attribute to determine if the waypoint is for pedestrians only
