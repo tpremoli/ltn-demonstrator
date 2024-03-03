@@ -1,27 +1,32 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.VisualScripting;
 using System;
-
-#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
-#endif
 
+
+/*
+UniqueID is a scripting component that can be attached to any game object/prefab
+to give that particular game object/prefab instance a unique identifier. This ID
+is persistent, so if Unity is closed and opened again, the ID will persist and
+remain the same.
+*/
 [ExecuteInEditMode]
 public class UniqueID : MonoBehaviour
 {
     static Dictionary<string, UniqueID> allGUIDs = new Dictionary<string, UniqueID>();
     public string uniqueID;
 
-    #if UNITY_EDITOR
     void Update()
     {
-        if (Application.isPlaying) {
+        if (Application.isPlaying || uniqueID != "") {
             return;
         }
 
+        GenerateUniqueID();
+    }
+
+    void GenerateUniqueID() {
         bool anotherComponentAlreadyHasGUID = (
             uniqueID != null &&
             allGUIDs.ContainsKey(uniqueID) &&
@@ -42,5 +47,4 @@ public class UniqueID : MonoBehaviour
     void OnDestroy() {
         allGUIDs.Remove(uniqueID);
     }
-    #endif
 }
