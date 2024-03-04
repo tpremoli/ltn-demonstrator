@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System;
+using System.IO;
+
+
 
 
 
@@ -18,6 +21,27 @@ public class StatisticsManager : MonoBehaviour
     private int finishedPaths;
     private bool endSim;
     
+    // --------------------------------------SERIALISATION ASSETS------------------------------------------
+    //Used for loading and saving data
+    [System.Serializable]
+    private class Serialization<T>
+    {
+        [SerializeField]
+        List<T> items;
+
+        public Serialization(List<T> items)
+        {
+            this.items = items;
+        }
+
+        public List<T> ToList()
+        {
+            return items;
+        }
+    }
+
+
+
 
     //-------------------------------INBUILT FUNCTION EXTENSIONS---------------------------------------------------------------------------------
     private void Awake()
@@ -42,9 +66,15 @@ public class StatisticsManager : MonoBehaviour
 
     public void Update()
     {
+        //--------------------------------REMOVE
+        //--------------------------------------
+        //--------------------------------------
+        //--------------------------------------
+        Time.timeScale = 10;
         // Get the name of the current active scene
         string currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName == "ProperMapSceneForStats")
+        // fix this
+        if (currentSceneName != "StatisticsScene")
         {
             if (endSim == true) // Assuming noOfTravellers is a public field or property
             {
@@ -52,8 +82,10 @@ public class StatisticsManager : MonoBehaviour
                 Debug.Log("SIMULATION ENDED");
                 //Clean the data
                 PrunePathData();
+                Debug.Log("Pruned PathData");
                 //serialise data
                 SerialisePathDataSave();
+                Debug.Log("Serialised PathData");
                 //change scene
                 SceneManager.LoadScene("StatisticsScene");
 
@@ -89,9 +121,11 @@ public class StatisticsManager : MonoBehaviour
             if (statsText == null) {
                 Debug.LogError("Failed to find the TMP_Text component on 'Body'.");
             } else {
-                Debug.Log("Should be updating stats as we speak");
-                // Now you can update the statsText with your data.
+                // update the statsText with your data.
                 UpdateTextWithStatistics();
+
+                //serialise pathdata
+                //SerialisePathDataSave();
                 
             }
         }
@@ -209,6 +243,8 @@ public class StatisticsManager : MonoBehaviour
         }
     }
 
+
+
     // for each edge object in the simulation, convert to serialisable edge
     private List<SerialisableEdge> convertEdgeToSerialisable () {
         List <Edge> old_edges = new List<Edge>();
@@ -218,8 +254,6 @@ public class StatisticsManager : MonoBehaviour
         //get all edges, extract on necessary from allPathData
         foreach (var pathData in allPathData) {
             foreach (var edge in pathData.path) {
-                Debug.Log($"edge ID = {edge.ID}");
-                Debug.Log("edge id didnt work");
                 //assign ID attribute to each edge arbitrarily
                 if (edge.ID == -1) {
                     edge.ID = ID_counter;
@@ -231,11 +265,15 @@ public class StatisticsManager : MonoBehaviour
                 }
                 else {
                     continue;
+
                 }
             }
         }
+        Debug.Log($"finished converting edges, length of new_edges = {new_edges.Count}");
         return new_edges;
     }
+
+
 
     //for each waypoint in the simulation, convert to a serialisable waypoint
     //---------------------------------------FIX-----------------------------------------------
@@ -274,39 +312,69 @@ public class StatisticsManager : MonoBehaviour
         return new_waypoints;
     }
 
+
+
+
     //convert all pathData to serialisable pathdata
-    public void SerialisePathDataSave () {
+    public void SerialisePathDataSave (bool saveAsJson = false) {
         Debug.Log("BEGINNING SERIALISATION");
+        //serialise the waypoints
+        List<SerialisableWaypoint> allNewWaypoints = convertWaypointToSerialisable();
+        Debug.LogError($"length of allNewWaypoints: {allNewWaypoints.Count}");
         //get the serialised versions of all edges
         List<SerialisableEdge> allNewEdges = convertEdgeToSerialisable();
         //for each edge in each path, create a serialisable edge list
         foreach (var pathData in allPathData) {
             //create a serialisable pathData
             List<SerialisableEdge> newEdges = new List<SerialisableEdge>();
-            Debug.Log($"pathdata.path.Count is {pathData.path.Count}");
-            foreach (var edge in pathData.path) {
+            foreach (Edge edge in pathData.path) {
                 //find equivilant edge in allNewEdges
-                foreach (var newEdge in allNewEdges) {
+                foreach (SerialisableEdge newEdge in allNewEdges) {
                     if (edge.ID == newEdge.ID) {
                         newEdges.Add(newEdge);
                         
                     }
                     else {
-                        Debug.LogError("Edge not found in allNewEdges");
+                        continue;
                     }
                 }
             }
+             //set each pd.serialisablePath to the list
             pathData.serialisablePath = newEdges;
         }
-        Debug.Log("Serialised all pathData");
-        //set each pd.serialisablePath to the list
-        //save the allPathData list as a json file
+        Debug.Log($"Serialised all pathData, count is {allPathData.Count}");
+        //save the allPathData list as a json file if paramater is true
+        if (saveAsJson == true) {
+            //save as json
+            SaveToJson(allPathData, "pathData.json");
+        }
+
+    }
+
+    //Save to Json
+    public void SaveToJson<T>(List<T> objects, string filename)
+    {
+        string json = JsonUtility.ToJson(new Serialization<T>(objects));
+        File.WriteAllText(filename, json);
     }
 
 
-    public void SerialisePathDataLoad () {
-        //load the json file and set allPathData equal to it
+    //Load from Json
+
+public List<T> LoadFromJson<T>(string filename)
+{
+    if (!File.Exists(filename))
+    {
+        return new List<T>(); // Return an empty list if the file doesn't exist
     }
+
+    string json = File.ReadAllText(filename);
+    Serialization<T> data = JsonUtility.FromJson<Serialization<T>>(json);
+    return data.ToList();
+}
+
+
+
 
 
 
@@ -331,44 +399,42 @@ public class StatisticsManager : MonoBehaviour
         return allPathData.Count.ToString();
     }
 
-    //Average traveller velocity
-private string AverageTravellerVelocity() 
-{
-    float totalTime;
-    float totalDistance = 0;
-    int numberOfTravellers;
-    float.TryParse(TotalTravelTime(), out totalTime);
-    int.TryParse(TotalNumberOfTravellers(), out numberOfTravellers);
-
-    foreach (PathData pd in allPathData) 
+    //Average traveller velocity - needs delta D conversion
+    private string AverageTravellerVelocity() 
     {
-        
-        if (pd.serialisablePath == null)
+        float totalTime;
+        float totalDistance = 0;
+        int numberOfTravellers;
+        float.TryParse(TotalTravelTime(), out totalTime);
+        int.TryParse(TotalNumberOfTravellers(), out numberOfTravellers);
+
+        foreach (PathData pd in allPathData) 
         {
-            Debug.Log(Time.deltaTime);
-            Debug.LogWarning("PathData path is null");
-            continue; // Skip this PathData as its path is null
-        }
-        Debug.Log($"in the loop");
-        Debug.Log($"pd.serialisablePath.Count is {pd.serialisablePath.Count}");
-        foreach (SerialisableEdge e in pd.serialisablePath)
-        {
-            if (e == null)
+            
+            if (pd.serialisablePath == null)
             {
-                Debug.LogWarning("Edge in path is null");
-                continue; // Skip this Edge as it is null
+                Debug.Log(Time.deltaTime);
+                Debug.LogWarning("PathData path is null");
+                continue; // Skip this PathData as its path is null
             }
-            Debug.Log($"e.length is {e.length}");
-            totalDistance += e.length;
+            foreach (SerialisableEdge e in pd.serialisablePath)
+            {
+                if (e == null)
+                {
+                    Debug.LogWarning("Edge in path is null");
+                    continue; // Skip this Edge as it is null
+                }
+                //Debug.Log($"e.length is {e.length}");
+                totalDistance += e.length;
+            }
         }
+        if (totalTime * numberOfTravellers == 0)
+        {
+            return "0"; // Avoid division by zero
+        }
+        //Needs delta D conversion
+        return (totalDistance / (totalTime * numberOfTravellers)).ToString();
     }
-
-    if (totalTime * numberOfTravellers == 0)
-    {
-        return "0"; // Avoid division by zero
-    }
-    return (totalDistance / (totalTime * numberOfTravellers)).ToString();
-}
 
 
 
@@ -398,4 +464,35 @@ private string AverageTravellerVelocity()
 
 
 
+
+
+
+    //-------------------------------HEATMAP GENERATION-------------------------------------------------------------------------------------------
+    
+    public void MakeHeatmap ()
+    {
+
+    }
+
+
+    public void GetEdgeWeights () {
+        //iterate through all pathdata serialisable paths
+        foreach (PathData pd in allPathData) {
+            foreach (SerialisableEdge e in pd.serialisablePath) {
+                //increment pathdata weight
+                e.weight++;
+            }
+        }
+        //normalise weights
+        foreach (PathData pd in allPathData) {
+            foreach (SerialisableEdge e in pd.serialisablePath) {
+                e.weight = e.weight / allPathData.Count;
+            }
+        }
+    }
+
+
 }
+
+
+

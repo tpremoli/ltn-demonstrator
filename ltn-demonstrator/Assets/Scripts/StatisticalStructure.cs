@@ -19,6 +19,7 @@ public class SerialisableEdge {
     public bool isBarricaded;
     public SerialisableWaypoint startWaypoint;
     public SerialisableWaypoint endWaypoint;
+    public float weight;
     //whichever other ones are needed
 
     public SerialisableEdge(Edge edge) {
