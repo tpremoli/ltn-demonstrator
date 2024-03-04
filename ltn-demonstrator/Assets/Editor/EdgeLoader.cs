@@ -4,7 +4,12 @@ using System.Collections.Generic;
 
 public class EdgeLoader
 {
+<<<<<<< HEAD
 
+=======
+    
+    
+>>>>>>> e5677320 (Fully working edge association)
     [MenuItem("Tools/Reload Edges")]
     [InitializeOnLoadMethod]
     [RuntimeInitializeOnLoadMethod]
@@ -12,7 +17,11 @@ public class EdgeLoader
     {
         // Find the Graph object in the scene
         Graph graph = Object.FindObjectOfType<Graph>();
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> e5677320 (Fully working edge association)
         // If no Graph object is found, log an error and return
         if (graph == null)
         {

@@ -36,6 +36,7 @@ public class Edge
 
     private List<Sensor> sensors = new List<Sensor>();
 
+<<<<<<< HEAD
     public void RegisterSensor(Sensor sensor)
     {
         if (sensor != null && !sensors.Contains(sensor))
@@ -44,6 +45,10 @@ public class Edge
         }
     }
 
+=======
+    
+    
+>>>>>>> e5677320 (Fully working edge association)
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.startWaypoint = startWaypoint;
@@ -61,6 +66,15 @@ public class Edge
         if (this.isBarricated)
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
+        }
+        sensors = new List<Sensor>();
+    }
+
+    public void RegisterSensor(Sensor sensor)
+    {
+        if (sensor != null && !sensors.Contains(sensor))
+        {
+            sensors.Add(sensor);
         }
     }
 

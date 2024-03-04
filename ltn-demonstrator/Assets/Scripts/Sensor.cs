@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sensor : MonoBehaviour
 {
+    private Edge edgeAssigned;
     public bool isPointInSensor(Vector3 point)
     {
         Collider sensorCollider = GetComponent<Collider>();
@@ -56,6 +57,7 @@ public class Sensor : MonoBehaviour
 
         Vector3 position = this.transform.position;
         Edge nearestEdge = graph.getClosetRoadEdge(position);
+        edgeAssigned = nearestEdge;
         if (nearestEdge != null && nearestEdge.StartWaypoint != null && nearestEdge.EndWaypoint != null)
         {
             Debug.Log("Nearest edge to sensor is " + nearestEdge.StartWaypoint.transform.position + " to " + nearestEdge.EndWaypoint.transform.position);
@@ -106,5 +108,14 @@ public class Sensor : MonoBehaviour
         }
 
         return nearestEdge;
+    }
+
+    private void OnDrawGizmosSelected(){
+        Gizmos.color = Color.red;
+        Vector3 startPos = this.transform.position+Vector3.up*2;
+        Vector3 startWaypointRef = edgeAssigned.StartWaypoint.transform.position+Vector3.up*2;
+        Vector3 endWaypointRef = edgeAssigned.EndWaypoint.transform.position+Vector3.up*2;
+        Gizmos.DrawLine(startPos, startWaypointRef);
+        Gizmos.DrawLine(startPos, endWaypointRef);
     }
 }

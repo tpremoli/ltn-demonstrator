@@ -16,21 +16,7 @@ public class SensorManager : MonoBehaviour
 
     void Start()
     {
-        if (edge != null)
-        {
-            foreach (GameObject sensorObject in allSensors)
-            {
-                Sensor sensor = sensorObject.GetComponent<Sensor>();
-                if (sensor != null)
-                {
-                    edge.RegisterSensor(sensor);
-                }
-            }
-        }
-        else
-        {
-            Debug.Log("Edge is null.");
-        }
+        allSensors = new List<GameObject>();
     }
 
     void Update()
@@ -108,12 +94,14 @@ public class SensorManager : MonoBehaviour
             newSensor.transform.position = position;
         }
 
+        Edge nearestEdge = graph.getClosetRoadEdge(position);
+        nearestEdge.RegisterSensor(newSensor);
         // Add the sensor to the list of all sensors
         allSensors.Add(newSensor);
         Debug.Log("Sensor count: " + allSensors.Count.ToString());
         Debug.Log("All sensors: " + string.Join(", ", allSensors.Select(s => s.name)));
-        
-        
+        // log nearest edge
+    
     }
 
 
