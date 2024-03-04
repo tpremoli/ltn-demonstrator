@@ -18,6 +18,8 @@ public class TravellerManager : MonoBehaviour
     public float nextSpawnTime;
     private Graph graph;
 
+    EventManager eventManager;
+
     // pick random model and material
     [SerializeField]
     public List<VehiclePrefabTypePair> vehiclePrefabTypePairs;
@@ -39,22 +41,42 @@ public class TravellerManager : MonoBehaviour
         this.spawnProbability = 1f;
         this.nextSpawnTime = Time.time + timeBetweenSpawns;
         this.graph = Graph.Instance;
+        
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
 
     }
 
     public void Update() {
         if (Time.time >= nextSpawnTime) {
-            Debug.Log("Time to spawn new traveller!");
             if (Random.value < spawnProbability) {
-                Debug.Log("Spawning traveller from Traveller Manager");
-                SpawnTraveller();
+                //Debug.Log("Spawning random traveller...");
+                //SpawnRandomTraveller();
             }
 
             nextSpawnTime = Time.time + timeBetweenSpawns;
         }
+
+        if (eventManager.eventList.Count > 0) {
+            foreach (Journey j in eventManager.eventList) {
+                if (j.status == JourneyStatus.NotStarted) {
+                    Debug.Log("Spawning traveller from event list: " + j.origin + " to " + j.destination + " at time " + j.time + " (current time is " + Time.time + ")");
+                    SpawnTraveller(j.origin, j.destination);
+                    j.traveller.journeyStarted(j);
+                }
+                //eventManager.eventList.Remove(j);
+            }
+        }
+    }
+    
+    public void SpawnTraveller(string origin, string destination) {
+        GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
+        GameObject newTravellerObj = Instantiate(travellerPrefab, this.transform);
+        Building originBuilding = Graph.Instance.buildings[origin];
+        Building destinationBuilding = Graph.Instance.buildings[destination];
+        newTravellerObj.GetComponent<WaypointMover>().Setup(originBuilding, destinationBuilding, ModeOfTransport.Car);
     }
 
-    public void SpawnTraveller() {
+    public void SpawnRandomTraveller() {
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         //GameObject travellerManager = Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.transform);
