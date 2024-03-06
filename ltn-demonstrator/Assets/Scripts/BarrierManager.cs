@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum BarrierType{
+    Default,
+    BlockAll,
+    BlockAllMotorVehicles,
+    BlockHeavyTraffic,
+    BusOnly,
+    BusAndTaxiOnly,
+}
+
 public class BarrierManager : MonoBehaviour
 {
 
@@ -15,11 +24,11 @@ public class BarrierManager : MonoBehaviour
     */
     // Add a public field for the dropdown
     // The parent transform of the toggles
-    public int selectedBarrierType;
+    public BarrierType selectedBarrierType;
 
     public GameObject barrierPrefab; // Prefab for the barrier
-    public GameObject blockAllMotorVehiclesPrefab;
     public GameObject blockAllPrefab;
+    public GameObject blockAllMotorVehiclesPrefab;
     public GameObject blockHeavyTrafficPrefab;
     public GameObject busOnlyPrefab;
     public GameObject busAndTaxiOnlyPrefab;
@@ -30,7 +39,7 @@ public class BarrierManager : MonoBehaviour
     public static BarrierManager Instance { get; private set; }
 
     // List of different barrier prefabs
-    public List<GameObject> barrierPrefabs = new List<GameObject>();
+    public Dictionary<BarrierType><GameObject> barrierPrefabs = new Dictionary<BarrierType><GameObject>();
 
 
     private void Start()
@@ -99,6 +108,7 @@ public class BarrierManager : MonoBehaviour
 
             //GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
             newBarrier.transform.Rotate(0, 90, 0);
+
             // Rotate the barrier on the y axis 
             Graph graph = Graph.Instance;
 

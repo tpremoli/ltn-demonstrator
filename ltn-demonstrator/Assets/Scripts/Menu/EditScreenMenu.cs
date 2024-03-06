@@ -123,7 +123,7 @@ public class EditScreenMenu : MonoBehaviour
         SpawnSensor = true;
     }
 
-    public void OnAddBarrierPressed(int barrierType)
+    public void OnAddBarrierPressed(BarrierType barrierType)
     {
         // Set the selected barrier type
         barrierManager.selectedBarrierType = barrierType;
@@ -134,31 +134,31 @@ public class EditScreenMenu : MonoBehaviour
     public void OnAddBlockAllBarrierPressed()
     {
         barrierPrefab = blockAllPrefab;
-        OnAddBarrierPressed(0);
+        OnAddBarrierPressed(BarrierType.BlockAll);
     }
 
     public void OnAddBlockAllMotorVehiclesBarrierPressed()
     {
         barrierPrefab = blockAllMotorVehiclesPrefab;
-        OnAddBarrierPressed(1);
+        OnAddBarrierPressed(BarrierType.BlockAllMotorVehicles);
     }
 
     public void OnAddBlockHeavyTrafficBarrierPressed()
     {
         barrierPrefab = blockHeavyTrafficPrefab;
-        OnAddBarrierPressed(2);
+        OnAddBarrierPressed(BarrierType.BlockHeavyTraffic);
     }
 
     public void OnAddBusandTaxiOnlyBarrierPressed()
     {
         barrierPrefab = busAndTaxiOnlyPrefab;
-        OnAddBarrierPressed(3);
+        OnAddBarrierPressed(BarrierType.BusAndTaxiOnly);
     }
 
     public void OnAddBusOnlyBarrierPressed()
     {
         barrierPrefab = busOnlyPrefab;
-        OnAddBarrierPressed(4);
+        OnAddBarrierPressed(BarrierType.BusOnly);
     }
 
     void Update()
