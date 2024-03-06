@@ -409,12 +409,12 @@ public class Edge
         if (distanceToStart < distanceToEnd)
         {
             // If there is no barrier between the point and the start waypoint, return start waypoint
-            if (!isBarrierBetween(point, startWaypoint.transform.position))
+            if (!isEdgeTraversableThroughBarrier(point, startWaypoint.transform.position))
             {
                 return startWaypoint;
             }
             // Otherwise, check if the end waypoint is accessible
-            else if (!isBarrierBetween(point, endWaypoint.transform.position))
+            else if (!isEdgeTraversableThroughBarrier(point, endWaypoint.transform.position))
             {
                 return endWaypoint;
             }
@@ -422,12 +422,12 @@ public class Edge
         else
         {
             // If there is no barrier between the point and the end waypoint, return end waypoint
-            if (!isBarrierBetween(point, endWaypoint.transform.position))
+            if (!isEdgeTraversableThroughBarrier(point, endWaypoint.transform.position))
             {
                 return endWaypoint;
             }
             // Otherwise, check if the start waypoint is accessible
-            else if (!isBarrierBetween(point, startWaypoint.transform.position))
+            else if (!isEdgeTraversableThroughBarrier(point, startWaypoint.transform.position))
             {
                 return startWaypoint;
             }
@@ -439,12 +439,13 @@ public class Edge
     }
 
     /// <summary>
-    /// This checks if there is a barrier between a start point and an end point on the edge
+    /// This checks if the edge is traverasable by the modeoftransport (according to the barrier)
     /// </summary>
     /// <param name="start"></param>
     /// <param name="destination"></param>
+    /// <param name="mode"></param>
     /// <returns></returns>
-    public bool isBarrierBetween(Vector3 start, Vector3 destination)
+    public bool isEdgeTraversableThroughBarrier(Vector3 start, Vector3 destination, ModeOfTransport mode = ModeOfTransport.Car)
     {
         // Check if barricade is active
         if (!isBarricated)
