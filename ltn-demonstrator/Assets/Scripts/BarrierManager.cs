@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BarrierType{
-    Default,
+public enum BarrierType
+{
     BlockAll,
     BlockAllMotorVehicles,
     BlockHeavyTraffic,
@@ -39,21 +39,20 @@ public class BarrierManager : MonoBehaviour
     public static BarrierManager Instance { get; private set; }
 
     // List of different barrier prefabs
-    public Dictionary<BarrierType><GameObject> barrierPrefabs = new Dictionary<BarrierType><GameObject>();
+    public Dictionary<BarrierType, GameObject> barrierPrefabs = new Dictionary<BarrierType, GameObject>();
 
 
     private void Start()
     {
-        // Add the prefabs to the list
-        barrierPrefabs.Add(barrierPrefab);
-        barrierPrefabs.Add(blockAllMotorVehiclesPrefab);
-        barrierPrefabs.Add(blockAllPrefab);
-        barrierPrefabs.Add(blockHeavyTrafficPrefab);
-        barrierPrefabs.Add(busOnlyPrefab);
-        barrierPrefabs.Add(busAndTaxiOnlyPrefab);
+        barrierPrefabs.Add(BarrierType.BlockAll, blockAllPrefab);
+        barrierPrefabs.Add(BarrierType.BlockAllMotorVehicles, blockAllMotorVehiclesPrefab);
+        barrierPrefabs.Add(BarrierType.BlockHeavyTraffic, blockHeavyTrafficPrefab);
+        barrierPrefabs.Add(BarrierType.BusOnly, busOnlyPrefab);
+        barrierPrefabs.Add(BarrierType.BusAndTaxiOnly, busAndTaxiOnlyPrefab);
     }
+
     void Update()
-    {   
+    {
         // force reload barriers
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -102,60 +101,53 @@ public class BarrierManager : MonoBehaviour
 
     public void AddBarrier(Vector3 position)
     {
-        if (selectedBarrierType >= 0 && selectedBarrierType < barrierPrefabs.Count)
-        {
-            GameObject newBarrier = Instantiate(barrierPrefabs[selectedBarrierType], position, Quaternion.identity);
+        GameObject newBarrier = Instantiate(barrierPrefabs[selectedBarrierType], position, Quaternion.identity);
 
-            //GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
+        //GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
+        newBarrier.transform.Rotate(0, 90, 0);
+
+        // Rotate the barrier on the y axis 
+        Graph graph = Graph.Instance;
+
+        Edge closestEdge = graph.getClosetRoadEdge(position);
+        Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(position);
+        Vector3 directionFromClosestPointToBarrier = newBarrier.transform.position - closestPointOnEdge; // Calculate direction vector
+
+        if (directionFromClosestPointToBarrier != Vector3.zero)
+        {
+            // Normalize the direction vector
+            Vector3 normalizedDirection = directionFromClosestPointToBarrier.normalized;
+
+            // rotate barrier horizontal to the road
+            newBarrier.transform.rotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
+
+            // rotate 90 degrees
             newBarrier.transform.Rotate(0, 90, 0);
 
-            // Rotate the barrier on the y axis 
-            Graph graph = Graph.Instance;
-
-            Edge closestEdge = graph.getClosetRoadEdge(position);
-            Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(position);
-            Vector3 directionFromClosestPointToBarrier = newBarrier.transform.position - closestPointOnEdge; // Calculate direction vector
-
-            if (directionFromClosestPointToBarrier != Vector3.zero)
-            {
-                // Normalize the direction vector
-                Vector3 normalizedDirection = directionFromClosestPointToBarrier.normalized;
-
-                // rotate barrier horizontal to the road
-                newBarrier.transform.rotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
-
-                // rotate 90 degrees
-                newBarrier.transform.Rotate(0, 90, 0);
-
-                // Set the barrier's position to this new position
-                newBarrier.transform.position = position;
-            }
-
-            // Add the barrier to the list of all barriers
-            allBarriers.Add(newBarrier);
+            // Set the barrier's position to this new position
+            newBarrier.transform.position = position;
         }
-        else
-        {
-            Debug.LogError("Invalid barrier type selected: " + selectedBarrierType);
-        }
+
+        // Add the barrier to the list of all barriers
+        allBarriers.Add(newBarrier);
     }
 
 
 
-    
+
     public void RecalcBarriersOnEdges()
+    {
+        Graph graph = Graph.Instance;
+
+        Debug.Log("Recalculating barriers on edges");
+
+        // this is not efficient at all.
+        foreach (Edge edge in graph.edges)
         {
-            Graph graph = Graph.Instance;
-
-            Debug.Log("Recalculating barriers on edges");
-
-            // this is not efficient at all.
-            foreach (Edge edge in graph.edges)
-            {
-                edge.RecheckBarriers();
-            }
-
+            edge.RecheckBarriers();
         }
+
+    }
 
 
 }
