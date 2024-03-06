@@ -459,8 +459,18 @@ public class Edge
         float barrierDistance = convertToPositionAlongEdge(barrier.transform.position);
 
         // Check if the barrier is between start and destination
-        // Assuming lower distance value is closer to the starting point of the edge
-        return barrierDistance > System.Math.Min(startDistance, destinationDistance) &&
-            barrierDistance < System.Math.Max(startDistance, destinationDistance);
+        bool isBarrierBetween = barrierDistance > System.Math.Min(startDistance, destinationDistance) &&
+                                barrierDistance < System.Math.Max(startDistance, destinationDistance);
+
+        if (!isBarrierBetween)
+        {
+            return true; // The barrier does not affect the path
+        }
+
+        // Retrieve the list of blocked modes for the barrier's type
+        List<ModeOfTransport> blockedModes = BarrierTypeProperties.GetBlockedModes(barrier.BarrierType);
+
+        // Check if the current mode of transport is allowed
+        return !blockedModes.Contains(mode);
     }
 }
