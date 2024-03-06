@@ -7,12 +7,8 @@ using System.Linq;
 public class EditScreenMenu : MonoBehaviour
 {
     
-    public GameObject barrierPrefab;
-    public GameObject blockAllMotorVehiclesPrefab;
-    public GameObject blockAllPrefab;
-    public GameObject blockHeavyTrafficPrefab;
-    public GameObject busOnlyPrefab;
-    public GameObject busAndTaxiOnlyPrefab;
+    public BarrierType selectedBarrierType;
+
     public TextMeshProUGUI instructionText;
     private bool SpawnBarrier = false;
 
@@ -126,38 +122,33 @@ public class EditScreenMenu : MonoBehaviour
     public void OnAddBarrierPressed(BarrierType barrierType)
     {
         // Set the selected barrier type
-        barrierManager.selectedBarrierType = barrierType;
+        this.selectedBarrierType = barrierType;
 
         instructionText.text = "Click on desired barrier location";
         SpawnBarrier = true;
     }
     public void OnAddBlockAllBarrierPressed()
     {
-        barrierPrefab = blockAllPrefab;
         OnAddBarrierPressed(BarrierType.BlockAll);
     }
 
     public void OnAddBlockAllMotorVehiclesBarrierPressed()
     {
-        barrierPrefab = blockAllMotorVehiclesPrefab;
         OnAddBarrierPressed(BarrierType.BlockAllMotorVehicles);
     }
 
     public void OnAddBlockHeavyTrafficBarrierPressed()
     {
-        barrierPrefab = blockHeavyTrafficPrefab;
         OnAddBarrierPressed(BarrierType.BlockHeavyTraffic);
     }
 
     public void OnAddBusandTaxiOnlyBarrierPressed()
     {
-        barrierPrefab = busAndTaxiOnlyPrefab;
         OnAddBarrierPressed(BarrierType.BusAndTaxiOnly);
     }
 
     public void OnAddBusOnlyBarrierPressed()
     {
-        barrierPrefab = busOnlyPrefab;
         OnAddBarrierPressed(BarrierType.BusOnly);
     }
 
@@ -181,7 +172,7 @@ public class EditScreenMenu : MonoBehaviour
                         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
                         Debug.Log("Barrier List size: " + barrierManager.allBarriers.Count);
-                        barrierManager.AddBarrier(worldPosition);
+                        barrierManager.AddBarrier(worldPosition, this.selectedBarrierType);
                         SpawnBarrier = false;
                         instructionText.text = "To add a barrier, click on the button again. To delete a barrier, click on the delete button.";
                     }

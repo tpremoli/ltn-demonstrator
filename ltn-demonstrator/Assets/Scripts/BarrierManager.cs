@@ -24,8 +24,6 @@ public class BarrierManager : MonoBehaviour
     */
     // Add a public field for the dropdown
     // The parent transform of the toggles
-    public BarrierType selectedBarrierType;
-
     public GameObject barrierPrefab; // Prefab for the barrier
     public GameObject blockAllPrefab;
     public GameObject blockAllMotorVehiclesPrefab;
@@ -87,6 +85,7 @@ public class BarrierManager : MonoBehaviour
         List<BarrierData> barrierDataList = BarrierData.LoadBarriers();
         foreach (BarrierData barrierData in barrierDataList)
         {
+            // NOTE: this won't load the correct barrier type
             GameObject newBarrier = Instantiate(barrierPrefab);
             newBarrier.transform.position = new Vector3(barrierData.position[0], barrierData.position[1], barrierData.position[2]);
             newBarrier.transform.rotation = Quaternion.Euler(barrierData.rotation[0], barrierData.rotation[1], barrierData.rotation[2]);
@@ -99,7 +98,7 @@ public class BarrierManager : MonoBehaviour
         }
     }
 
-    public void AddBarrier(Vector3 position)
+    public void AddBarrier(Vector3 position, BarrierType selectedBarrierType)
     {
         GameObject newBarrier = Instantiate(barrierPrefabs[selectedBarrierType], position, Quaternion.identity);
 
