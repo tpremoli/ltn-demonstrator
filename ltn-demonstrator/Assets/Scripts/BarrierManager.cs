@@ -3,15 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BarrierType
-{
-    BlockAll,
-    BlockAllMotorVehicles,
-    BlockHeavyTraffic,
-    BusOnly,
-    BusAndTaxiOnly,
-}
-
 public class BarrierManager : MonoBehaviour
 {
 
@@ -102,7 +93,8 @@ public class BarrierManager : MonoBehaviour
     {
         GameObject newBarrier = Instantiate(barrierPrefabs[selectedBarrierType], position, Quaternion.identity);
 
-        //GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
+        newBarrier.GetComponent<Barrier>().BarrierType = selectedBarrierType;
+
         newBarrier.transform.Rotate(0, 90, 0);
 
         // Rotate the barrier on the y axis 

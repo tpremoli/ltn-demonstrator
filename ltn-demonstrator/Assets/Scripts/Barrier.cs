@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Barrier : MonoBehaviour
 {
+    public BarrierType BarrierType;
+
     public bool isPointInBarrier(Vector3 point)
     {
         Collider barrierCollider = GetComponent<Collider>();
