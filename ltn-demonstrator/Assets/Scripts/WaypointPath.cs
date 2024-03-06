@@ -248,8 +248,8 @@ public class WaypointPath
     /// <returns></returns>
     public bool PathExistsForRoadVehicle(ModeOfTransport mode = ModeOfTransport.Car)
     {
-        Waypoint nearestStartWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos);
-        Waypoint nearestEndWaypoint = endEdge.getClosestAccesibleWaypoint(destinationPos);
+        Waypoint nearestStartWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos, mode);
+        Waypoint nearestEndWaypoint = endEdge.getClosestAccesibleWaypoint(destinationPos, mode);
 
         // Initialize dictionaries for distances and previous waypoints
         Dictionary<Waypoint, float> dist = new Dictionary<Waypoint, float>();

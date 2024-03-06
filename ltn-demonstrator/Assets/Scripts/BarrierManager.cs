@@ -15,21 +15,9 @@ public class BarrierManager : MonoBehaviour
     */
     // Add a public field for the dropdown
     // The parent transform of the toggles
-    public Transform barrierTypeContainer;
-
-    // Reference to the Dropdown component
-    public Dropdown barrierTypeDropdown;
-
     public int selectedBarrierType;
 
-    public Edge closestRoadEdge;
-    public Vector3 closestPointOnRoadEdge;
-    private Graph graph;
-    private Waypoint startWaypointLane;
-
-    public Waypoint endWaypoint;
     public GameObject barrierPrefab; // Prefab for the barrier
-    
     public GameObject blockAllMotorVehiclesPrefab;
     public GameObject blockAllPrefab;
     public GameObject blockHeavyTrafficPrefab;
@@ -39,13 +27,11 @@ public class BarrierManager : MonoBehaviour
 
     public bool loadBarriersFromSave;
 
-
     public static BarrierManager Instance { get; private set; }
 
     // List of different barrier prefabs
     public List<GameObject> barrierPrefabs = new List<GameObject>();
 
-    
 
     private void Start()
     {
