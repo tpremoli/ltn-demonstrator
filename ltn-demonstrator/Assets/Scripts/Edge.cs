@@ -43,7 +43,7 @@ public class Edge
             sensors.Add(sensor);
         }
     }
-    
+
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.startWaypoint = startWaypoint;
@@ -391,10 +391,14 @@ public class Edge
     /// <summary>
     /// This method returns the closest waypoint that is not blocked by a barrier, given a point.
     /// If both waypoints are blocked, it returns null.
+    /// 
+    /// Beyond that, if we pass in a ModeOfTransport, it will consider the modes of the barriers as well
+    /// when collecting the accessible waypoint.
     /// </summary>
     /// <param name="point">the point we want to check</param>
+    /// <param name="mode">The mode of transport we're checking accessibility for</param>
     /// <returns></returns>
-    public Waypoint getClosestAccesibleWaypoint(Vector3 point)
+    public Waypoint getClosestAccesibleWaypoint(Vector3 point, ModeOfTransport mode = ModeOfTransport.Car)
     {
         float distanceToStart = Vector3.Distance(point, startWaypoint.transform.position);
         float distanceToEnd = Vector3.Distance(point, endWaypoint.transform.position);
