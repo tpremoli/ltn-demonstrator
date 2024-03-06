@@ -260,8 +260,8 @@ public class WaypointPath
     {
         List<Waypoint> path = new List<Waypoint>();
 
-        // Determine the endpoint that leads most directly to the destination
-        Waypoint closerEndpoint = ClosestWaypointOnEdge(endEdge, destinationPos);
+        // Determine the accessible endpoint that leads most directly to the destination
+        Waypoint closerEndpoint = endEdge.getClosestAccesibleWaypoint(destinationPos);
 
         // Check if a path exists to the closer endpoint
         if (!prev.ContainsKey(closerEndpoint))
@@ -305,19 +305,6 @@ public class WaypointPath
         return distanceToLast + distanceToSecondLast <= totalDistance + 0.1f; // Add a small tolerance
     }
 
-    private Waypoint ClosestWaypointOnEdge(Edge edge, Vector3 position)
-    {
-        if (!edge.isPointOnEdge(position))
-        {
-            Debug.Log("Position is not on edge");
-            return null;
-        }
-        // Determine the closest waypoint on the given edge
-        float startDist = Vector3.Distance(position, edge.StartWaypoint.transform.position);
-        float endDist = Vector3.Distance(position, edge.EndWaypoint.transform.position);
-        return startDist < endDist ? edge.StartWaypoint : edge.EndWaypoint;
-    }
-
 
     /// <summary>
     /// This method checks if a path exists between the start and end positions.
@@ -326,7 +313,7 @@ public class WaypointPath
     public bool PathExistsForCars()
     {
         Waypoint nearestStartWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos);
-        Waypoint nearestEndWaypoint = ClosestWaypointOnEdge(endEdge, destinationPos);
+        Waypoint nearestEndWaypoint = endEdge.getClosestAccesibleWaypoint(destinationPos);
 
         // Initialize dictionaries for distances and previous waypoints
         Dictionary<Waypoint, float> dist = new Dictionary<Waypoint, float>();
