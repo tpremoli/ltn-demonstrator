@@ -54,6 +54,8 @@ public class WaypointMover : MonoBehaviour
     public Building originBuilding { get; private set; }
     [SerializeField] private BuildingType destinationBuildingType;
 
+    public Journey journey;
+
     void Start()
     {
         // Start by making the object unready
@@ -150,6 +152,11 @@ public class WaypointMover : MonoBehaviour
             Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
             Debug.LogWarning("End edge start: " + endEdge.StartWaypoint.name + " End edge end: " + endEdge.EndWaypoint.name);
             Destroy(this.gameObject);
+
+            if (journey != null) {
+                journey.traveller.journeyAbandoned(journey);
+            }
+            
             return;
         }
         else
@@ -207,10 +214,11 @@ public class WaypointMover : MonoBehaviour
     }
 
     // Set the origin building, destination building and mode of transport for the agent.
-    public void Setup(Building originBuilding, Building destinationBuilding, ModeOfTransport modeOfTransport) {
+    public void Setup(Building originBuilding, Building destinationBuilding, ModeOfTransport modeOfTransport, Journey journey) {
         this.mode = modeOfTransport;
         this.originBuilding = originBuilding;
         this.destinationBuilding = destinationBuilding;
+        this.journey = journey;
     }
 
     public void setOriginBuilding(Building building)
@@ -754,6 +762,9 @@ public class WaypointMover : MonoBehaviour
     public void arriveToDestination()
     {
         Debug.Log("Arrived to destination. Destroying object.");
+        if (journey != null) {
+            journey.traveller.journeyCompleted(journey);
+        }
         Destroy(this.gameObject);
     }
 

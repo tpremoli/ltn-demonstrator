@@ -8,13 +8,15 @@ public class PersistentTraveller {
     bool inTransit;
     string currentLocation;
     Journey currentJourney;
+    int journeyIndex;
 
     public PersistentTraveller() {
         GenerateJourneys();
 
-        // Set in transit flag and current location.
+        // Set in transit flag, current location and journey index.
         inTransit = false;
-        currentLocation = journeys[0].origin;
+        currentLocation = journeys[journeyIndex].origin;
+        journeyIndex = 0;
     }
 
     // Generate some random journeys to complete.
@@ -41,25 +43,39 @@ public class PersistentTraveller {
     }
 
     public void journeyStarted(Journey journey) {
+        // Set transit flag, clear current location, set current journey and set journey status to in progress.
         inTransit = true;
         currentLocation = "";
         currentJourney = journey;
         journey.status = JourneyStatus.InProgress;
+
+        Debug.Log("Journey started: " + journey);
     }
 
     public void journeyCompleted(Journey journey) {
-        currentJourney = null;
-        currentLocation = journey.destination;
+        // Unset transit flag, set current location, clear current journey and set journey status to completed.
         inTransit = false;
+        currentLocation = journey.destination;
+        currentJourney = null;
+        journey.status = JourneyStatus.Completed;
+
+        // Increment current journey index.
+        journeyIndex += 1;
+
+        Debug.Log("Journey completed: " + journey);
     }
 
-    public void setInTransit() {
-        this.inTransit = true;
-        this.currentLocation = null;
-    }
+    public void journeyAbandoned(Journey journey) {
+        // Unset transit flag, reset current location, clear current journey and set journey status to abandoned.
+        inTransit = false;
+        currentLocation = journey.origin;
+        currentJourney = null;
+        journey.status = JourneyStatus.Abandoned;
 
-    public void arrivedToDestination(string destination) {
-        this.currentLocation = destination;
+        // Remove future journeys.
+        removeFutureJourneys(journey);
+
+        Debug.Log("Journey abandoned: " + journey);
     }
 
     public List<Journey> peekJourneys() {
@@ -67,7 +83,7 @@ public class PersistentTraveller {
     }
 
     public Journey pickJourney() {
-        Journey j = journeys[0];
+        Journey j = journeys[journeyIndex];
 
         if (currentLocation.Equals(j.origin) && Time.time > j.time && j.status == JourneyStatus.NotStarted) {
             return j;
@@ -78,11 +94,16 @@ public class PersistentTraveller {
 
     public void removeFutureJourneys(Journey journey) {
 
-        for (int i = 0; i < journeys.Count; i++) {
+        for (int i = journeyIndex; i < journeys.Count; i++) {
             Journey j = journeys[i];
 
             if (journey.origin.Equals(j.origin)) {
                 break;
+            }
+            else {
+                j.status = JourneyStatus.Abandoned;
+                journeyIndex += 1;
+
             }
         }
     }

@@ -60,7 +60,7 @@ public class TravellerManager : MonoBehaviour
             foreach (Journey j in eventManager.eventList) {
                 if (j.status == JourneyStatus.NotStarted) {
                     Debug.Log("Spawning traveller from event list: " + j.origin + " to " + j.destination + " at time " + j.time + " (current time is " + Time.time + ")");
-                    SpawnTraveller(j.origin, j.destination);
+                    SpawnTraveller(j);
                     j.traveller.journeyStarted(j);
                 }
                 //eventManager.eventList.Remove(j);
@@ -68,19 +68,19 @@ public class TravellerManager : MonoBehaviour
         }
     }
     
-    public void SpawnTraveller(string origin, string destination) {
+    public void SpawnTraveller(Journey journey) {
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.transform);
-        Building originBuilding = Graph.Instance.buildings[origin];
-        Building destinationBuilding = Graph.Instance.buildings[destination];
-        newTravellerObj.GetComponent<WaypointMover>().Setup(originBuilding, destinationBuilding, ModeOfTransport.Car);
+        Building originBuilding = Graph.Instance.buildings[journey.origin];
+        Building destinationBuilding = Graph.Instance.buildings[journey.destination];
+        newTravellerObj.GetComponent<WaypointMover>().Setup(originBuilding, destinationBuilding, ModeOfTransport.Car, journey);
     }
 
     public void SpawnRandomTraveller() {
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         //GameObject travellerManager = Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.transform);
-        newTravellerObj.GetComponent<WaypointMover>().Setup(graph.pickRandomBuilding(), graph.pickRandomBuilding(), ModeOfTransport.Car);
+        newTravellerObj.GetComponent<WaypointMover>().Setup(graph.pickRandomBuilding(), graph.pickRandomBuilding(), ModeOfTransport.Car, null);
     }
 
     public GameObject pickRandomModelAndMaterial(VehicleType type)

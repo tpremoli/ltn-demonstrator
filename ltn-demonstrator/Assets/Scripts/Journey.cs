@@ -17,6 +17,10 @@ public class Journey
         this.traveller = traveller;
         this.status = JourneyStatus.NotStarted;
     }
+
+    public override string ToString() {
+        return this.origin + " to " + this.destination + " at " + this.time;
+    }
 }
 
 public enum JourneyStatus {
