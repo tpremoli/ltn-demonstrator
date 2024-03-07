@@ -4,6 +4,8 @@
     using TMPro;
     using System;
     using System.IO;
+    using UnityEngine.UI;
+
 
 
 
@@ -15,6 +17,7 @@
         // list to store all PathData instances.
         public TravellerManager tm;
         public static List<PathData> allPathData { get; private set; }
+
         //text for stats in the statistical measures screen
         public TMP_Text statsText;
         //loads a whitescreen object
@@ -22,6 +25,8 @@
         public const int TERMINATION_CRITERIA = 10;
         private int finishedPaths;
         private bool endSim;
+        private bool isHeatMapVisible = false;       //used to toggle the heatmap on and off
+
         
         // --------------------------------------SERIALISATION ASSETS------------------------------------------
         //Used for loading and saving data
@@ -414,17 +419,72 @@
                     }
                 }
                 HideWhiteScreen();
-                ShowWhiteScreen();
+                //ShowWhiteScreen();
+
+            Button heatmapToggleButton = GameObject.Find("Heatmap Toggle").GetComponent<Button>(); // Replace with your actual button name
+            if (heatmapToggleButton != null) {
+                heatmapToggleButton.onClick.RemoveAllListeners(); // Remove existing listeners to prevent stacking if scene is reloaded
+                heatmapToggleButton.onClick.AddListener(ToggleHeatMap);
+                Debug.Log("Added listener to Heatmap Toggle Button.");
+            } else {
+                Debug.LogError("Failed to find the Heatmap Toggle Button GameObject.");
+            }
         }
 
 
-        public void DrawWaypoints()
+        public void DrawWaypoints(List<SerialisableWaypoint> waypoints)
         {
+            for (int i = 0; i < waypoints.Count; i++)
+            {
+                //draw the waypoint
+                Debug.Log("Drawing Waypoint");
+            }
 
-            
         }
 
 
+
+
+        public void DrawEdges(List<SerialisableEdge> edges)
+        {
+            for (int i = 0; i < edges.Count; i++)
+            {
+                //draw the edge
+                Debug.Log("Drawing Edge");
+            }
+        }
+
+        public void ToggleHeatMap() {
+            if (isHeatMapVisible) {
+                HideHeatMap();
+            } else {
+                DrawHeatMap();
+            }
+        }
+
+        public void DrawHeatMap() 
+        {
+            //draw the white screen
+            ShowWhiteScreen();
+            Debug.Log("Drawing Heatmap");
+            //draw all waypoints and edges
+            //DrawWaypoints(convertWaypointToSerialisable());
+
+            //switch tracking variable
+            isHeatMapVisible = true;
+        }
+
+        public void HideHeatMap() 
+        {
+            //unload all waypoints and edges
+            //unload the white screen
+            HideWhiteScreen();
+            Debug.Log("Hiding Heatmap");
+
+
+            //switch tracking variable
+            isHeatMapVisible = false;
+        }
 
         //---------------------------------STATISTICAL MEASURES------------------------------------------------------------------------------------------
 
