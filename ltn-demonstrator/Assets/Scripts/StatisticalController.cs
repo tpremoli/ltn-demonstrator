@@ -257,16 +257,18 @@
 
         //get all edges in the simulation
         private List<Edge> GetAllEdges() {
-            // FindObjectsOfType gets every instance of Edge in the scene
-            Edge[] edges = FindObjectsOfType<Edge>();
-            return new List<Edge>(edges); // Convert the array to a list
+            if (Graph.Instance != null) {
+                return Graph.Instance.edges;
+            }
+            return new List<Edge>();
         }
 
         //get all waypoints in the simulation
         private List<Waypoint> GetAllWaypoints() {
-            // FindObjectsOfType gets every instance of Waypoint in the scene
-            Waypoint[] waypoints = FindObjectsOfType<Waypoint>();
-            return new List<Waypoint>(waypoints); // Convert the array to a list
+            if (Graph.Instance != null) {
+                return Graph.Instance.waypoints;
+            }
+            return new List<Waypoint>();
         }
 
 
@@ -498,7 +500,7 @@
             for (int i = 0; i < waypoints.Count; i++)
             {
                 //draw the waypoint
-                Debug.Log("Drawing Waypoint");
+                Debug.Log($"Waypoint {waypoints[i].ID} drawn at {waypoints[i].x}, {waypoints[i].y}, {waypoints[i].z}");
             }
 
         }
@@ -546,8 +548,8 @@
             ShowWhiteScreen();
             Debug.Log("Drawing Heatmap");
             //draw all waypoints and edges
-            DrawWaypoints(convertWaypointToSerialisable());
-            DrawEdges(convertEdgeToSerialisable());
+            DrawWaypoints(allWaypoints);
+            DrawEdges(allEdges);
             //switch tracking variable
             isHeatMapVisible = true;
         }
