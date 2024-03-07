@@ -31,6 +31,25 @@ public class Edge
     public Barrier barrier;
 
     public bool isPedestrianOnly;
+
+    public Sensor sensor;
+    public float sensorLocation;
+
+    private List<Sensor> sensors = new List<Sensor>();
+
+<<<<<<< HEAD
+    public void RegisterSensor(Sensor sensor)
+    {
+        if (sensor != null && !sensors.Contains(sensor))
+        {
+            sensors.Add(sensor);
+        }
+    }
+
+=======
+    
+    
+>>>>>>> e5677320 (Fully working edge association)
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.ID = -1;
@@ -50,6 +69,15 @@ public class Edge
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
         }
+        sensors = new List<Sensor>();
+    }
+
+    public void RegisterSensor(Sensor sensor)
+    {
+        if (sensor != null && !sensors.Contains(sensor))
+        {
+            sensors.Add(sensor);
+        }
     }
 
     public void RecheckBarriers()
@@ -60,6 +88,17 @@ public class Edge
         if (this.isBarricated)
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
+        }
+    }
+
+    public void RecheckSensors()
+    {
+        this.sensor = getSensorInPath();
+        this.isBarricated = sensor != null;
+        this.sensorLocation = sensor != null ? convertToPositionAlongEdge(sensor.transform.position) : -1f;
+        if (this.isBarricated)
+        {
+            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.sensorLocation);
         }
     }
 
@@ -77,10 +116,21 @@ public class Edge
     public void Subscribe(WaypointMover trav)
     {
         this.TravellersOnEdge.Add(trav);
+        // for all sensors call CollectDataOnEnter(WaypointMover trav)
+        foreach (Sensor sensor in sensors)
+        {
+            sensor.CollectDataOnEnter(trav);
+        }
+
     }
     public void Unsubscribe(WaypointMover trav)
     {
         this.TravellersOnEdge.Remove(trav);
+        // for all sensors call CollectDataOnLeave(WaypointMover trav)
+        foreach (Sensor sensor in sensors)
+        {
+            sensor.CollectDataOnLeave(trav);
+        }
     }
 
     public void DrawGizmo()
@@ -275,6 +325,75 @@ public class Edge
         return null;
     }
 
+    public Waypoint FindNearestWaypoint(Sensor sensor)
+    {
+        Waypoint[] allWaypoints = GameObject.FindObjectsOfType<Waypoint>();
+        Waypoint nearestWaypoint = null;
+        float minDistance = float.MaxValue;
+
+        foreach (Waypoint waypoint in allWaypoints)
+        {
+            float distance = Vector3.Distance(sensor.transform.position, waypoint.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestWaypoint = waypoint;
+            }
+        }
+
+        return nearestWaypoint;
+    }
+
+    public Sensor getSensorInPath()
+    {
+        Sensor[] allSensors;
+
+        if (SensorManager.Instance == null)
+        {
+            allSensors = GameObject.FindObjectsOfType<Sensor>();
+        }
+        else
+        {
+            List<GameObject> allSensorGameObjects;
+            allSensorGameObjects = SensorManager.Instance.allSensors;
+            // get all the Sensor objects from the list of GameObjects
+            allSensors = new Sensor[allSensorGameObjects.Count];
+            for (int i = 0; i < allSensorGameObjects.Count; i++)
+            {
+                allSensors[i] = allSensorGameObjects[i].GetComponent<Sensor>();
+            }
+        }
+
+        foreach (Sensor sensor in allSensors)
+        {
+            if (sensor.isPointInSensor(this.GetClosestPoint(sensor.transform.position)))
+            {
+                Debug.Log("Sensor found at " + sensor.transform.position);
+                // Calculate the angle between the sensor's forward direction and the edge direction
+                Vector3 edgeDirection = this.GetDirection();
+                float angle = Vector3.Angle(sensor.transform.forward, edgeDirection);
+
+                // Apply the rotation to the sensor
+                sensor.transform.rotation = Quaternion.Euler(0, angle, 0);
+
+                // Find the nearest waypoint to the sensor
+                Waypoint nearestWaypoint = FindNearestWaypoint(sensor);
+                if (nearestWaypoint != null)
+                {
+                    Debug.Log("Nearest waypoint to sensor is at " + nearestWaypoint.transform.position);
+                }
+                else
+                {
+                    Debug.Log("No waypoints found.");
+                }
+
+                return sensor;
+            }
+        }
+
+        return null; // return null if no sensor is found in the path
+    }
+
     public Waypoint getClosestWaypoint(Vector3 point)
     {
         if (!isPointOnEdge(point))
@@ -299,10 +418,14 @@ public class Edge
     /// <summary>
     /// This method returns the closest waypoint that is not blocked by a barrier, given a point.
     /// If both waypoints are blocked, it returns null.
+    /// 
+    /// Beyond that, if we pass in a ModeOfTransport, it will consider the modes of the barriers as well
+    /// when collecting the accessible waypoint.
     /// </summary>
     /// <param name="point">the point we want to check</param>
+    /// <param name="mode">The mode of transport we're checking accessibility for</param>
     /// <returns></returns>
-    public Waypoint getClosestAccesibleWaypoint(Vector3 point)
+    public Waypoint getClosestAccesibleWaypoint(Vector3 point, ModeOfTransport mode = ModeOfTransport.Car)
     {
         float distanceToStart = Vector3.Distance(point, startWaypoint.transform.position);
         float distanceToEnd = Vector3.Distance(point, endWaypoint.transform.position);

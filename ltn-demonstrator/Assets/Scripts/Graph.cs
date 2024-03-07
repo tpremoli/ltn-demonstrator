@@ -15,7 +15,7 @@ public class Graph : MonoBehaviour
 
     // private waypointsize with getter
     [Range(0f, 2f)][SerializeField] private float waypointSize = 0.5f;
-    [SerializeField] public List<Edge> edges;
+    [SerializeField] public List<Edge> edges; // list of edges
 
     public List<Building> allBuildings;
     public Dictionary<BuildingType, List<Building>> buildingsByType = new Dictionary<BuildingType, List<Building>>();
@@ -52,7 +52,12 @@ public class Graph : MonoBehaviour
         }
 
         if (!inEditMode && BarrierManager.Instance.loadBarriersFromSave){
+            // Recalculate barriers on edges
             BarrierManager.Instance.RecalcBarriersOnEdges();
+        }
+
+        if (!inEditMode && SensorManager.Instance.loadSensorsFromSave){
+            SensorManager.Instance.RecalcSensorsOnEdges();
         }
 
     }
@@ -146,6 +151,8 @@ public class Graph : MonoBehaviour
                 closestEdge = edge;
             }
         }
+
+        Debug.Log("Closest road edge to " + position + " is " + closestEdge.StartWaypoint.transform.position + " to " + closestEdge.EndWaypoint.transform.position);
 
         return closestEdge;
     }

@@ -21,18 +21,43 @@ public class WaypointPath
         this.destinationPos = destinationPos;
         this.mode = mode;
 
+        /*
+        -- Overview of Barrier Types --
+        blockAllMotorVehicles: Blocks all motor vehicles
+        blockAll: Blocks all vehicles
+        blockHeavyTraffic: Blocks heavy vehicles
+            Inlude in:
+            - SUV
+            - Van
+        busOnly: Blocks all but buses
+            Include in:
+            - Car
+            - SUV
+            - Van
+            - Taxi
+        busAndTaxiOnly: Blocks all but buses and taxis
+            Include in:
+            - Car
+            - SUV
+            - Van
+        */
+
         switch (mode)
         {
             case ModeOfTransport.Car:
-            case ModeOfTransport.Bicycle: // Bicycle is treated as a car for now
+            case ModeOfTransport.Bicycle: // Bicycle is treated as a road vehicle for now
+            case ModeOfTransport.SUV:
+            case ModeOfTransport.Van:
+            case ModeOfTransport.Taxi:
+            case ModeOfTransport.Bus:
                 this.beginningPos = originBuilding.closestPointOnRoadEdge;
                 this.destinationPos = destinationBuilding.closestPointOnRoadEdge;
                 this.startEdge = originBuilding.closestRoadEdge;
                 this.endEdge = destinationBuilding.closestRoadEdge;
 
-                if (PathExistsForCars())
+                if (PathExistsForRoadVehicle(mode))
                 {
-                    this.pathAsWaypoints = DijkstraForCars();
+                    this.pathAsWaypoints = DijkstraForRoadVehicle(mode);
                 }
                 else
                 {
@@ -62,7 +87,7 @@ public class WaypointPath
     /// If the list is null, no path exists between the start and end positions.
     /// </summary>
     /// <returns>A path from the start position to the end position</returns>
-    public List<Waypoint> DijkstraForCars()
+    public List<Waypoint> DijkstraForRoadVehicle(ModeOfTransport mode = ModeOfTransport.Car)
     {
         if (startEdge.isPedestrianOnly || endEdge.isPedestrianOnly)
         {
@@ -221,10 +246,10 @@ public class WaypointPath
     /// This method checks if a path exists between the start and end positions.
     /// </summary>
     /// <returns></returns>
-    public bool PathExistsForCars()
+    public bool PathExistsForRoadVehicle(ModeOfTransport mode = ModeOfTransport.Car)
     {
-        Waypoint nearestStartWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos);
-        Waypoint nearestEndWaypoint = endEdge.getClosestAccesibleWaypoint(destinationPos);
+        Waypoint nearestStartWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos, mode);
+        Waypoint nearestEndWaypoint = endEdge.getClosestAccesibleWaypoint(destinationPos, mode);
 
         // Initialize dictionaries for distances and previous waypoints
         Dictionary<Waypoint, float> dist = new Dictionary<Waypoint, float>();

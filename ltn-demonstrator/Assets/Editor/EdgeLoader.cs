@@ -4,35 +4,55 @@ using System.Collections.Generic;
 
 public class EdgeLoader
 {
+<<<<<<< HEAD
+
+=======
+    
+    
+>>>>>>> e5677320 (Fully working edge association)
     [MenuItem("Tools/Reload Edges")]
     [InitializeOnLoadMethod]
     [RuntimeInitializeOnLoadMethod]
     public static void LoadEdges()
     {
-        Graph graph = Object.FindFirstObjectByType<Graph>();
+        // Find the Graph object in the scene
+        Graph graph = Object.FindObjectOfType<Graph>();
+<<<<<<< HEAD
 
+=======
         
+>>>>>>> e5677320 (Fully working edge association)
+        // If no Graph object is found, log an error and return
         if (graph == null)
         {
             Debug.LogError("No graph found in scene.");
             return;
         }
-        
 
+        // Initialize the edges list in the Graph object
         graph.edges = new List<Edge>();
+
+        // Find all Waypoint objects in the scene
         Waypoint[] waypoints = Object.FindObjectsOfType<Waypoint>();
 
+        // For each Waypoint object
         foreach (Waypoint waypoint in waypoints)
         {
+            // For each adjacent waypoint
             foreach (Waypoint adjacentWaypoint in waypoint.adjacentWaypoints)
             {
+                // Calculate the distance between the waypoint and the adjacent waypoint
                 float distance = graph.CalculateDistance(waypoint, adjacentWaypoint);
-                // instantiate edge as empty game object
+
+                // Create a new Edge object with the waypoint and the adjacent waypoint
                 Edge edge = new Edge(waypoint, adjacentWaypoint);
-                //SHIFT EDGE???
+
+                // Add the new Edge object to the edges list in the Graph object
                 graph.edges.Add(edge);
             }
         }
+
+        // Log the number of edges calculated
         Debug.Log("Calculated " + graph.edges.Count + " edges.");
     }
 }

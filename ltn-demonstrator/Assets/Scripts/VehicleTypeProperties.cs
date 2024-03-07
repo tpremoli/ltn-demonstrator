@@ -1,6 +1,10 @@
 using UnityEngine;
 using System;
 
+// NOTE: Similar info is found in ModeOfTransport.cs
+// we need better separation betweeen the classes,
+// as this doesn't really make sense atm.
+// We should get rid of ModeOfTransport.cs
 public enum VehicleType
 {
     PersonalCar,
