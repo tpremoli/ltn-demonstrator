@@ -18,6 +18,10 @@
         public TravellerManager tm;
         public static List<PathData> allPathData { get; private set; }
 
+        //Used to represent the edges and waypoints in the simulation
+        public static List<SerialisableEdge> allEdges { get; private set; }
+        public static List<SerialisableWaypoint> allWaypoints { get; private set; }
+
         //text for stats in the statistical measures screen
         public TMP_Text statsText;
         //loads a whitescreen object
@@ -90,7 +94,7 @@
                     PrunePathData();
                     Debug.Log("Pruned PathData");
                     //serialise data
-                    SerialisePathDataSave();
+                    CreateSerialisableEdgesAndWaypoints();
                     Debug.Log("Serialised PathData");
                     //change scene
                     SceneManager.LoadScene("StatisticsScene");
@@ -131,8 +135,7 @@
                     UpdateTextWithStatistics();
                     FindWhiteScreen();
 
-                    //serialise pathdata
-                    //SerialisePathDataSave();
+
                     
                 }
             }
@@ -252,6 +255,21 @@
         }
 
 
+        //get all edges in the simulation
+        private List<Edge> GetAllEdges() {
+            // FindObjectsOfType gets every instance of Edge in the scene
+            Edge[] edges = FindObjectsOfType<Edge>();
+            return new List<Edge>(edges); // Convert the array to a list
+        }
+
+        //get all waypoints in the simulation
+        private List<Waypoint> GetAllWaypoints() {
+            // FindObjectsOfType gets every instance of Waypoint in the scene
+            Waypoint[] waypoints = FindObjectsOfType<Waypoint>();
+            return new List<Waypoint>(waypoints); // Convert the array to a list
+        }
+
+
 
         // for each edge object in the simulation, convert to serialisable edge
         private List<SerialisableEdge> convertEdgeToSerialisable () {
@@ -321,16 +339,50 @@
         }
 
 
+        //converts a list of edges to a list of serialisable edges
+        private List<SerialisableEdge> ConvertEdgeListToSerializable(List<Edge> edges) {
+            List<SerialisableEdge> new_edges = new List<SerialisableEdge>();
+            int ID_counter = 0;
+            foreach (var edge in edges) {
+                if (edge.ID == -1) {
+                    edge.ID = ID_counter++;
+                }
+                // Assume SerialisableEdge has a constructor that takes an Edge object
+                SerialisableEdge serial_edge = new SerialisableEdge(edge);
+                new_edges.Add(serial_edge);
+            }
+            return new_edges;
+        }
+
+
+        //converts a list of waypoints to a list of serialisable waypoints
+        private List<SerialisableWaypoint> ConvertWaypointsToSerializable(List<Waypoint> waypoints) {
+            List<SerialisableWaypoint> new_waypoints = new List<SerialisableWaypoint>();
+            int ID_counter = 0;
+            foreach (var waypoint in waypoints) {
+                if (waypoint.ID == -1) {
+                    waypoint.ID = ID_counter++;
+                }
+                // Assume SerialisableWaypoint has a constructor that takes a Waypoint object
+                SerialisableWaypoint serial_waypoint = new SerialisableWaypoint(waypoint);
+                new_waypoints.Add(serial_waypoint);
+            }
+            return new_waypoints;
+        }
+
+
+
+
 
 
         //convert all pathData to serialisable pathdata
         public void SerialisePathDataSave (bool saveAsJson = false) {
             Debug.Log("BEGINNING SERIALISATION");
             //serialise the waypoints
-            List<SerialisableWaypoint> allNewWaypoints = convertWaypointToSerialisable();
+            List<SerialisableWaypoint> allNewWaypoints = allWaypoints;
             Debug.LogError($"length of allNewWaypoints: {allNewWaypoints.Count}");
             //get the serialised versions of all edges
-            List<SerialisableEdge> allNewEdges = convertEdgeToSerialisable();
+            List<SerialisableEdge> allNewEdges = allEdges;
             //for each edge in each path, create a serialisable edge list
             foreach (var pathData in allPathData) {
                 //create a serialisable pathData
@@ -387,6 +439,13 @@
         }
 
 
+
+        public void CreateSerialisableEdgesAndWaypoints() {
+            allEdges = ConvertEdgeListToSerializable(GetAllEdges());
+            allWaypoints = ConvertWaypointsToSerializable(GetAllWaypoints());
+            Debug.Log($"allEdges length: {allEdges.Count}, allWaypoints length: {allWaypoints.Count}");
+        }
+
         //-------------------------------------HEATMAP FUNCTIONS---------------------------------------------------------------------------------------
 
         public void ShowWhiteScreen()
@@ -434,6 +493,8 @@
 
         public void DrawWaypoints(List<SerialisableWaypoint> waypoints)
         {
+            Debug.Log("Got here");
+            Debug.Log($"length of waypoints: {waypoints.Count}");
             for (int i = 0; i < waypoints.Count; i++)
             {
                 //draw the waypoint
@@ -441,8 +502,6 @@
             }
 
         }
-
-
 
 
         public void DrawEdges(List<SerialisableEdge> edges)
@@ -453,6 +512,25 @@
                 Debug.Log("Drawing Edge");
             }
         }
+
+        public void HideWaypoints(List<SerialisableWaypoint> waypoints)
+        {
+            for (int i = 0; i < waypoints.Count; i++)
+            {
+                //hide the waypoint
+                Debug.Log("Hiding Waypoint");
+            }
+        }
+
+        public void HideEdges(List<SerialisableEdge> edges)
+        {
+            for (int i = 0; i < edges.Count; i++)
+            {
+                //hide the edge
+                Debug.Log("Hiding Edge");
+            }
+        }
+
 
         public void ToggleHeatMap() {
             if (isHeatMapVisible) {
@@ -468,8 +546,8 @@
             ShowWhiteScreen();
             Debug.Log("Drawing Heatmap");
             //draw all waypoints and edges
-            //DrawWaypoints(convertWaypointToSerialisable());
-
+            DrawWaypoints(convertWaypointToSerialisable());
+            DrawEdges(convertEdgeToSerialisable());
             //switch tracking variable
             isHeatMapVisible = true;
         }
