@@ -354,24 +354,30 @@ public class StatisticsManager : MonoBehaviour
     //Save to Json
     public void SaveToJson<T>(List<T> objects, string filename)
     {
+        string relativePath = "Saves/" + filename; // Relative path within the Assets directory
+        string fullPath = Path.Combine(Application.dataPath, relativePath);
+        
         string json = JsonUtility.ToJson(new Serialization<T>(objects));
-        File.WriteAllText(filename, json);
+        File.WriteAllText(fullPath, json);
     }
 
 
     //Load from Json
-
-public List<T> LoadFromJson<T>(string filename)
-{
-    if (!File.Exists(filename))
+    public List<T> LoadFromJson<T>(string filename)
     {
-        return new List<T>(); // Return an empty list if the file doesn't exist
+        string relativePath = "Saves/" + filename; // Relative path within the Assets directory
+        string fullPath = Path.Combine(Application.dataPath, relativePath);
+
+        if (!File.Exists(fullPath))
+        {
+            return new List<T>(); // Return an empty list if the file doesn't exist
+        }
+
+        string json = File.ReadAllText(fullPath);
+        Serialization<T> data = JsonUtility.FromJson<Serialization<T>>(json);
+        return data.ToList();
     }
 
-    string json = File.ReadAllText(filename);
-    Serialization<T> data = JsonUtility.FromJson<Serialization<T>>(json);
-    return data.ToList();
-}
 
 
 
