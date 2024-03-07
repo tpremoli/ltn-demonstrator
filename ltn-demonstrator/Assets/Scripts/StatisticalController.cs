@@ -95,6 +95,8 @@
                     Debug.Log("Pruned PathData");
                     //serialise data
                     CreateSerialisableEdgesAndWaypoints();
+                    Debug.LogError("SERIALISED EDGES AND WAYPOINTS");
+                    //SerialisePathDataSave();
                     Debug.Log("Serialised PathData");
                     //change scene
                     SceneManager.LoadScene("StatisticsScene");
@@ -351,7 +353,17 @@
                 }
                 // Assume SerialisableEdge has a constructor that takes an Edge object
                 SerialisableEdge serial_edge = new SerialisableEdge(edge);
+                //find corresponding serialisable waypoints in allwaypoints
+                foreach (var waypoint in allWaypoints) {
+                    if (waypoint.ID == edge.startWaypoint.ID) {
+                        serial_edge.startWaypoint = waypoint;
+                    }
+                    if (waypoint.ID == edge.endWaypoint.ID) {
+                        serial_edge.endWaypoint = waypoint;
+                    }
+                }
                 new_edges.Add(serial_edge);
+
             }
             return new_edges;
         }
@@ -443,9 +455,9 @@
 
 
         public void CreateSerialisableEdgesAndWaypoints() {
-            allEdges = ConvertEdgeListToSerializable(GetAllEdges());
             allWaypoints = ConvertWaypointsToSerializable(GetAllWaypoints());
-            Debug.Log($"allEdges length: {allEdges.Count}, allWaypoints length: {allWaypoints.Count}");
+            allEdges = ConvertEdgeListToSerializable(GetAllEdges());
+            Debug.LogError($"allEdges length: {allEdges.Count}, allWaypoints length: {allWaypoints.Count}");
         }
 
         //-------------------------------------HEATMAP FUNCTIONS---------------------------------------------------------------------------------------
@@ -495,8 +507,6 @@
 
         public void DrawWaypoints(List<SerialisableWaypoint> waypoints)
         {
-            Debug.Log("Got here");
-            Debug.Log($"length of waypoints: {waypoints.Count}");
             for (int i = 0; i < waypoints.Count; i++)
             {
                 //draw the waypoint
@@ -508,10 +518,11 @@
 
         public void DrawEdges(List<SerialisableEdge> edges)
         {
+            Debug.LogError("Drawing Edges");
             for (int i = 0; i < edges.Count; i++)
             {
                 //draw the edge
-                Debug.Log("Drawing Edge");
+                Debug.Log($"Edge {edges[i].ID} drawn from {edges[i].startWaypoint.ID} to {edges[i].endWaypoint.ID}");
             }
         }
 
