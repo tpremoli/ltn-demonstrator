@@ -58,12 +58,6 @@
                 Time.timeScale = 5;
                 SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
 
-                // find whiteScreenPanel
-                if (whiteScreenPanel == null)
-                {
-                    whiteScreenPanel = GameObject.Find("WhiteScreen");
-                }
-                HideWhiteScreen();
             }
             else
             {
@@ -130,6 +124,7 @@
                 } else {
                     // update the statsText with your data.
                     UpdateTextWithStatistics();
+                    FindWhiteScreen();
 
                     //serialise pathdata
                     //SerialisePathDataSave();
@@ -225,6 +220,7 @@
         {
             allPathData.Add(pathData);
         }
+
 
         public void RecieveEndTime (int ID, List<Edge> path) {
             UpdateEndTimeAndPath(ID, path);
@@ -405,6 +401,28 @@
         }
 
 
+        public void FindWhiteScreen()
+        {
+            // find whiteScreenPanel
+            if (whiteScreenPanel == null)
+                {
+                    Debug.LogWarning("WhiteScreen Being searched for ");
+                    whiteScreenPanel = GameObject.Find("WhiteScreen");
+                    if (whiteScreenPanel == null)
+                    {
+                        Debug.LogError("Failed to find the WhiteScreen GameObject.");
+                    }
+                }
+                HideWhiteScreen();
+                ShowWhiteScreen();
+        }
+
+
+        public void DrawWaypoints()
+        {
+
+            
+        }
 
 
 
