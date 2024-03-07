@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Sensor : MonoBehaviour
 {
+    public int sensor_trav_count = 0;
+    public Dictionary<WaypointMover, int> sensor_trav_stats = new Dictionary<WaypointMover, int>();
     private Edge edgeAssigned;
     public bool isPointInSensor(Vector3 point)
     {
@@ -117,5 +119,25 @@ public class Sensor : MonoBehaviour
         Vector3 endWaypointRef = edgeAssigned.EndWaypoint.transform.position+Vector3.up*2;
         Gizmos.DrawLine(startPos, startWaypointRef);
         Gizmos.DrawLine(startPos, endWaypointRef);
+    }
+    public int CollectDataOnLeave(WaypointMover trav){
+        // This method is a stub TO BE EXTENDED for collecting data from trav
+        // TED ;)
+
+        // increment traveller count for this sensor
+        sensor_trav_count += 1;
+        sensor_trav_stats[trav] += 1;
+        //sensor_trav_stats[trav] += trav.getSpeed();
+        // Ted maybe adding other traveller stats here
+        //sensor_trav_stats[trav] += trav.
+        return sensor_trav_count;
+        
+
+    }
+    public int CollectDataOnEnter(WaypointMover trav){
+        // This method is a stub TO BE EXTENDED for collecting data from trav
+        // TED ;)
+        sensor_trav_count -= 1;
+        return sensor_trav_count;
     }
 }

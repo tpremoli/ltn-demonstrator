@@ -114,10 +114,21 @@ public class Edge
     public void Subscribe(WaypointMover trav)
     {
         this.TravellersOnEdge.Add(trav);
+        // for all sensors call CollectDataOnEnter(WaypointMover trav)
+        foreach (Sensor sensor in sensors)
+        {
+            sensor.CollectDataOnEnter(trav);
+        }
+
     }
     public void Unsubscribe(WaypointMover trav)
     {
         this.TravellersOnEdge.Remove(trav);
+        // for all sensors call CollectDataOnLeave(WaypointMover trav)
+        foreach (Sensor sensor in sensors)
+        {
+            sensor.CollectDataOnLeave(trav);
+        }
     }
 
     public void DrawGizmo()

@@ -93,8 +93,14 @@ public class SensorManager : MonoBehaviour
             // Set the sensor's position to this new position
             newSensor.transform.position = position;
         }
-
+        else
+        {
+            Debug.Log("Direction from closest point to sensor is zero.");
+        }
         Edge nearestEdge = graph.getClosetRoadEdge(position);
+        // Register the sensor with the nearest edge
+        // Argument 1: cannot convert from 'UnityEngine.GameObject' to 'Sensor'
+        
         nearestEdge.RegisterSensor(newSensor);
         // Add the sensor to the list of all sensors
         allSensors.Add(newSensor);
