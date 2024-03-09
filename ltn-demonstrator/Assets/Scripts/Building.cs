@@ -134,6 +134,12 @@ public class Building : MonoBehaviour
         TravellerManager.Instance.noOfTravellers += 1;
         // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
+        // Ensure that the traveller prefab is not null
+        if (travellerPrefab == null)
+        {
+            Debug.Log("travellerPrefab is null.");
+            return;
+        }
         GameObject travellerManager = TravellerManager.Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, travellerManager.transform);
         newTravellerObj.GetComponent<WaypointMover>().setOriginBuilding(this);
@@ -148,6 +154,11 @@ public class Building : MonoBehaviour
     }
 
     public void SaveTravellerData (GameObject newTravellerObj) {
+        if (newTravellerObj == null)
+        {
+            Debug.Log("newTravellerObj is null.");
+            return;
+        }
         //assign ID to traveller - although its actually a waypointPath, will need to be reconfigured
         WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
         waypointMover.ID = TravellerManager.Instance.noOfTravellers; // Assign ID

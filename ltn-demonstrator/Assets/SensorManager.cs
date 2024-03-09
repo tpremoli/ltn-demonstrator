@@ -101,7 +101,7 @@ public class SensorManager : MonoBehaviour
         // Register the sensor with the nearest edge
         // Argument 1: cannot convert from 'UnityEngine.GameObject' to 'Sensor'
         
-        nearestEdge.RegisterSensor(newSensor);
+        //nearestEdge.RegisterSensor(newSensor);
         // Add the sensor to the list of all sensors
         allSensors.Add(newSensor);
         Debug.Log("Sensor count: " + allSensors.Count.ToString());

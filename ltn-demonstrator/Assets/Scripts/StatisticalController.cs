@@ -15,11 +15,19 @@ public class StatisticsManager : MonoBehaviour
     // list to store all PathData instances.
     public TravellerManager tm;
     public static List<PathData> allPathData { get; private set; }
+
+    // real time data
+    public static List<PathData> RealTimePathData { get; private set; }
+
+    public static List<PathData> finishPathData { get; private set; }
     //text for stats in the statistical measures screen
     public TMP_Text statsText;
     public const int TERMINATION_CRITERIA = 10;
     private int finishedPaths;
     private bool endSim;
+
+    public TextMeshProUGUI StatisticsText;
+    
     
     // --------------------------------------SERIALISATION ASSETS------------------------------------------
     //Used for loading and saving data
@@ -105,6 +113,11 @@ public class StatisticsManager : MonoBehaviour
 
             //get path data for test
         }
+
+        // update StatisticsText in real time
+        TextMeshProUGUI StatisticsText = GameObject.Find("Body").GetComponent<TextMeshProUGUI>();
+        RealTime_UpdateTextWithStatistics();
+
     }
     
     void OnEnable() {
@@ -213,6 +226,26 @@ public class StatisticsManager : MonoBehaviour
         
     }
 
+    private void RealTime_UpdateTextWithStatistics() {
+        // Assuming you have a method to format your statistics data into a string
+        //string stats = GetFormattedStatistics();
+        string stats = "Changes";
+
+        StatisticsText.text = stats;
+
+        //do for each statisic, send string to TMP_Object
+        string finalString = "";
+        //Total time spent travelling
+        string totalTravelTime = TotalTravelTime();
+        string totalNoOfTravellers = TotalNumberOfTravellers();
+        string averageTravVelo = AverageTravellerVelocity();
+        string rateOfDeviation = RateOfDeviation();
+        finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage traveller velocity: {averageTravVelo} spatial units/s\nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
+        //Set the TMP object to the stats we calc
+        StatisticsText.text = finalString;
+        
+    }
+
     // Method to add PathData to the list.
     public void AddPathData(PathData pathData)
     {
@@ -229,7 +262,8 @@ public class StatisticsManager : MonoBehaviour
         }
     }
 
-    public void UpdateEndTimeAndPath(int id, List<Edge> path) {
+
+    public void UpdateEndTimeAndPath(int id, List<Edge> path) { // stats of path
         foreach (var pathData in allPathData)
         {
             if (pathData.ID == id)
