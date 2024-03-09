@@ -104,21 +104,39 @@ public class Edge
     // adds and removes travellers from the edge
     public void Subscribe(WaypointMover trav)
     {
-        this.TravellersOnEdge.Add(trav);
-        // for all sensors call CollectDataOnEnter(WaypointMover trav)
-        foreach (Sensor sensor in sensors)
+        if (trav == null)
         {
-            sensor.CollectDataOnEnter(trav);
+            Debug.Log("WaypointMover component is missing.");
+            return;
         }
 
+        if (WaypointMover.Instance == null)
+        {
+            Debug.Log("WaypointMover instance is null.");
+            return;
+        }
+
+        // Add your code here
     }
     public void Unsubscribe(WaypointMover trav)
     {
+        if (trav == null)
+        {
+            Debug.Log("WaypointMover component is missing.");
+            return;
+        }
+
+        if (WaypointMover.Instance == null)
+        {
+            Debug.Log("WaypointMover instance is null.");
+            return;
+        }
         this.TravellersOnEdge.Remove(trav);
         // for all sensors call CollectDataOnLeave(WaypointMover trav)
         foreach (Sensor sensor in sensors)
         {
-            sensor.CollectDataOnLeave(trav);
+            //sensor.CollectDataOnLeave(trav);
+            continue;
         }
     }
 

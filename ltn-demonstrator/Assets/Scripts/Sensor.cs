@@ -1,12 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System.IO;
 
 public class Sensor : MonoBehaviour
 {
     public int sensor_trav_count = 0;
     public Dictionary<WaypointMover, int> sensor_trav_stats = new Dictionary<WaypointMover, int>();
     private Edge edgeAssigned;
+
+    public UIManager UIManager;
+
+    private void OnMouseDown()
+    {
+        if (UIManager != null)
+        {
+            // Show sensor stats UI panel
+            UIManager.ShowSensorStats(transform.position, sensor_trav_count);
+        }
+
+        OnSensorClicked();
+    }
+
+    public void OnSensorClicked()
+    {
+        Debug.Log("Sensor clicked.");
+    }
+
+
     public bool isPointInSensor(Vector3 point)
     {
         Collider sensorCollider = GetComponent<Collider>();

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WaypointMover : MonoBehaviour
 {
+    public static WaypointMover Instance { get; private set; }
     // Attributes controlling the object state
     bool initialised;   // Controls whether object has been initialised and should begin travelling
     public int ID {get; set;}
@@ -45,6 +46,7 @@ public class WaypointMover : MonoBehaviour
     private List<WaypointMover> travsBlockingThisDEBUG;
     private List<WaypointMover> travsSlowingThisDEBUG;
 
+
     // Attributes from the WaypointMover class
     private float distanceThreshold = 0.001f;
     [SerializeField] private float leftLaneOffset = 1f;
@@ -55,6 +57,18 @@ public class WaypointMover : MonoBehaviour
     public Building destinationBuilding { get; private set; }
     public Building originBuilding { get; private set; }
     [SerializeField] private BuildingType destinationBuildingType;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -777,8 +791,9 @@ public class WaypointMover : MonoBehaviour
         return this.vType.RateOfEmission * totalDistanceMoved;
     }
 
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
+        
         if (Application.isPlaying)
         {
             // Draw the destination sphere

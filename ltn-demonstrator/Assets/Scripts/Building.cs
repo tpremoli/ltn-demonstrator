@@ -129,6 +129,9 @@ public class Building : MonoBehaviour
     {
         if (!ALLOW_SPAWNING) return;
         Debug.Log("Spawning traveller");
+
+        // error handling
+        
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
         //update the traveller count
         TravellerManager.Instance.noOfTravellers += 1;
@@ -142,6 +145,20 @@ public class Building : MonoBehaviour
         }
         GameObject travellerManager = TravellerManager.Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, travellerManager.transform);
+        WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
+        if (waypointMover == null)
+        {
+            Debug.Log("WaypointMover component is missing.");
+            return;
+        }
+
+        if (TravellerManager.Instance == null)
+        {
+            Debug.Log("TravellerManager instance is null.");
+            return;
+        }
+
+        waypointMover.ID = TravellerManager.Instance.noOfTravellers; // Assign ID
         newTravellerObj.GetComponent<WaypointMover>().setOriginBuilding(this);
         //save data
         SaveTravellerData(newTravellerObj);
@@ -153,20 +170,37 @@ public class Building : MonoBehaviour
         }
     }
 
-    public void SaveTravellerData (GameObject newTravellerObj) {
+    public void SaveTravellerData(GameObject newTravellerObj)
+    {
         if (newTravellerObj == null)
         {
             Debug.Log("newTravellerObj is null.");
             return;
         }
-        //assign ID to traveller - although its actually a waypointPath, will need to be reconfigured
-        WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
-        waypointMover.ID = TravellerManager.Instance.noOfTravellers; // Assign ID
-        //make stats structures here 
 
-        //create data struct for traveller information
+        WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
+        if (waypointMover == null)
+        {
+            Debug.Log("WaypointMover component is missing.");
+            return;
+        }
+
+        if (TravellerManager.Instance == null)
+        {
+            Debug.Log("TravellerManager instance is null.");
+            return;
+        }
+
+        waypointMover.ID = TravellerManager.Instance.noOfTravellers; // Assign ID
+
         PathData pathData = new PathData();
-        pathData.path = newTravellerObj.GetComponent<WaypointMover>().getEdgePath();//getpath
+        pathData.path = waypointMover.getEdgePath();
+        if (pathData.path == null)
+        {
+            Debug.Log("getEdgePath returned null.");
+            return;
+        }
+
         pathData.startTime = Time.frameCount;
         pathData.ID = TravellerManager.Instance.noOfTravellers;
         pathData.routeChange = false;
