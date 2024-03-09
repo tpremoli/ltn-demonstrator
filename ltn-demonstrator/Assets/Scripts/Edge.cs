@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 public class Edge
 {
+    private static int IDcounter = 0;
+    private int EdgeID;
+    private static Dictionary<int, Edge> edgesByID = new Dictionary<int, Edge>();
     public Vector3 position;
     public Vector3 direction;
     public Waypoint startWaypoint;
@@ -17,7 +20,10 @@ public class Edge
     public Waypoint StartWaypoint { get { return startWaypoint; } }
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public List<WaypointMover> TravellersOnEdge;
+
+    [System.NonSerialized]
     public List<Edge> IntersectingEdges;
+    private List<int> IntersectingEdgesById;
     public float Distance { get { return length; } }
 
     /// <summary>
@@ -32,12 +38,16 @@ public class Edge
     public bool isPedestrianOnly;
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
+        this.EdgeID = Edge.IDcounter;
+        Edge.IDcounter++;
+
         this.startWaypoint = startWaypoint;
         this.endWaypoint = endWaypoint;
         this.length = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
 
         this.TravellersOnEdge = new List<WaypointMover>();
         this.IntersectingEdges = new List<Edge>();
+        this.IntersectingEdgesById = new List<int>();
 
         this.barrier = getBarrierInPath();
         this.isBarricated = barrier != null;
@@ -49,8 +59,20 @@ public class Edge
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
         }
-    }
 
+        Edge.edgesByID.Add(this.EdgeID, this);
+    }
+    public void OnBeforeSerialize(){
+        foreach(Edge e in IntersectingEdges){
+            this.IntersectingEdgesById.Add(e.EdgeID);
+        }
+    }
+    public void OnAfterDeserialize(){
+        foreach(int i in IntersectingEdgesById){
+            Edge e = Edge.edgesByID[i];
+            this.IntersectingEdges.Add(e);
+        }
+    }
     public void RecheckBarriers()
     {
         this.barrier = getBarrierInPath();
