@@ -130,7 +130,7 @@ public class WaypointPath
         if (startEdge.isBarricated)
         {
             // Only set distance for the waypoint on the same side of the barrier as beginningPos
-            Waypoint accessibleWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos);
+            Waypoint accessibleWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos, mode);
 
             dist[accessibleWaypoint] = Vector3.Distance(accessibleWaypoint.transform.position, beginningPos);
             queue.Enqueue(accessibleWaypoint, dist[accessibleWaypoint]);
@@ -197,7 +197,7 @@ public class WaypointPath
         List<Waypoint> path = new List<Waypoint>();
 
         // Determine the accessible endpoint that leads most directly to the destination
-        Waypoint closerEndpoint = endEdge.getClosestAccesibleWaypoint(destinationPos);
+        Waypoint closerEndpoint = endEdge.getClosestAccesibleWaypoint(destinationPos, mode);
 
         // Check if a path exists to the closer endpoint
         if (!prev.ContainsKey(closerEndpoint))

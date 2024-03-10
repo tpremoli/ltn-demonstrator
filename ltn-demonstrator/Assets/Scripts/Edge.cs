@@ -409,12 +409,12 @@ public class Edge
         if (distanceToStart < distanceToEnd)
         {
             // If there is no barrier between the point and the start waypoint, return start waypoint
-            if (!isEdgeTraversableThroughBarrier(point, startWaypoint.transform.position))
+            if (!isEdgeTraversableThroughBarrier(point, startWaypoint.transform.position, mode))
             {
                 return startWaypoint;
             }
             // Otherwise, check if the end waypoint is accessible
-            else if (!isEdgeTraversableThroughBarrier(point, endWaypoint.transform.position))
+            else if (!isEdgeTraversableThroughBarrier(point, endWaypoint.transform.position, mode))
             {
                 return endWaypoint;
             }
@@ -422,12 +422,12 @@ public class Edge
         else
         {
             // If there is no barrier between the point and the end waypoint, return end waypoint
-            if (!isEdgeTraversableThroughBarrier(point, endWaypoint.transform.position))
+            if (!isEdgeTraversableThroughBarrier(point, endWaypoint.transform.position, mode))
             {
                 return endWaypoint;
             }
             // Otherwise, check if the start waypoint is accessible
-            else if (!isEdgeTraversableThroughBarrier(point, startWaypoint.transform.position))
+            else if (!isEdgeTraversableThroughBarrier(point, startWaypoint.transform.position, mode))
             {
                 return startWaypoint;
             }
