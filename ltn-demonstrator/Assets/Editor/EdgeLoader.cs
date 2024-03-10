@@ -9,7 +9,14 @@ public class EdgeLoader
     [MenuItem("Tools/Reload Edges")]
     [InitializeOnLoadMethod]
     [RuntimeInitializeOnLoadMethod]
-    public static void LoadEdges()
+    public static void LoadEdgesOnStart()
+    {
+        // This method will be called by Unity and should not have parameters.
+        // You can have it call another method with default parameters if needed.
+        LoadEdges();
+    }
+
+    public static void LoadEdges(Dictionary<Edge, List<Edge>> intersectingEdgesOverride = null)
     {
         Graph graph = Object.FindFirstObjectByType<Graph>();
 
@@ -33,6 +40,19 @@ public class EdgeLoader
             }
         }
         Debug.Log("Calculated " + graph.edges.Count + " edges.");
+
+        if (intersectingEdgesOverride != null)
+        {
+            Debug.Log("Overriding intersecting edges.");
+
+            // these edges will be stale, however, we can get the updated edges from the graph
+            foreach (KeyValuePair<Edge, List<Edge>> kvp in intersectingEdgesOverride)
+            {
+                graph.getEdge(kvp.Key.startWaypoint, kvp.Key.endWaypoint).ReregisterStaleEdges(kvp.Value);
+            }
+
+            Debug.Log("Overridden intersecting edges.");
+        }
     }
 
     // Constructor static method will be called in both editor and play mode

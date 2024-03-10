@@ -4,8 +4,8 @@ using System.Collections.Generic;
 public class Edge
 {
     private static int IDcounter = 0;
-    private int EdgeID;
     private static Dictionary<int, Edge> edgesByID = new Dictionary<int, Edge>();
+    private int EdgeID;
     public Vector3 position;
     public Vector3 direction;
     public Waypoint startWaypoint;
@@ -102,6 +102,11 @@ public class Edge
     public void Unsubscribe(WaypointMover trav)
     {
         this.TravellersOnEdge.Remove(trav);
+    }
+    public void ReregisterStaleEdges(List<Edge> edges){
+        foreach (Edge e in edges){
+            this.IntersectingEdges.Add(Graph.Instance.getEdge(e.startWaypoint, e.endWaypoint));
+        }
     }
     public void RegisterIntersectingEdge(Edge e){
         this.IntersectingEdges.Add(e);
