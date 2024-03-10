@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 public class EdgeLoader
 {
+    // [InitializeOnLoadMethod]
+    // [RuntimeInitializeOnLoadMethod]
     [MenuItem("Tools/Reload Edges")]
-    [InitializeOnLoadMethod]
-    [RuntimeInitializeOnLoadMethod]
     public static void LoadEdgesOnStart()
     {
         // This method will be called by Unity and should not have parameters.
@@ -48,7 +48,11 @@ public class EdgeLoader
             // these edges will be stale, however, we can get the updated edges from the graph
             foreach (KeyValuePair<Edge, List<Edge>> kvp in intersectingEdgesOverride)
             {
-                graph.getEdge(kvp.Key.startWaypoint, kvp.Key.endWaypoint).ReregisterStaleEdges(kvp.Value);
+                Edge keyEdge = graph.getEdge(kvp.Key.startWaypoint, kvp.Key.endWaypoint);
+                foreach (Edge edge in kvp.Value)
+                {
+                    keyEdge.RegisterIntersectingEdge(graph.getEdge(edge.startWaypoint, edge.endWaypoint));
+                }
             }
 
             Debug.Log("Overridden intersecting edges.");

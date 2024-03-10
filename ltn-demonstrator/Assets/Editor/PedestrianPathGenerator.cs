@@ -261,6 +261,22 @@ public class PedestrianPathGenerator
         var pedestrianEdges = allEdges.Where(edge => edge.isPedestrianOnly).ToList();
         var roadEdges = allEdges.Except(pedestrianEdges).ToList();
 
+        // This is a dictionary that will store the intersecting edges for each edge
+        Dictionary<Edge, List<Edge>> intersectingEdgesOverride = new Dictionary<Edge, List<Edge>>();
+        // Helper method to add edges to the dictionary
+        void AddIntersectingEdge(Edge keyEdge, Edge intersectingEdge)
+        {
+            if (intersectingEdgesOverride.ContainsKey(keyEdge))
+            {
+                intersectingEdgesOverride[keyEdge].Add(intersectingEdge);
+            }
+            else
+            {
+                intersectingEdgesOverride[keyEdge] = new List<Edge> { intersectingEdge };
+            }
+        }
+
+
         List<Edge> crosswalkEdges = new List<Edge>();
 
         foreach (var pedEdge in pedestrianEdges)
@@ -270,8 +286,14 @@ public class PedestrianPathGenerator
             {
                 if (pedEdge.isSameEdge(crosswalk))
                 {
-                    // TODO: register as intersecting edge
-                    // May not be necessary, as we're going to set them as mutually intersectingbelow
+                    foreach (var intersectingEdge in crosswalk.IntersectingEdges)
+                    {
+                        AddIntersectingEdge(pedEdge, intersectingEdge);
+                    }
+                    foreach (var intersectingEdge in pedEdge.IntersectingEdges)
+                    {
+                        AddIntersectingEdge(crosswalk, intersectingEdge);
+                    }
                     hasEdgeBeenProcessed = true;
                     break;
                 }
@@ -334,16 +356,16 @@ public class PedestrianPathGenerator
                         oppositeDirectionRoadEdge.startWaypoint = furtherWaypoint;
                     }
 
-                    // 5. Setting the intersecting edges TODO: do we remove this and do it in EdgeLoader?
-                    pedEdge.IntersectingEdges.Add(roadEdge);
-                    pedEdge.IntersectingEdges.Add(oppositeDirectionRoadEdge);
-                    oppositeDirectionPedEdge.IntersectingEdges.Add(roadEdge);
-                    oppositeDirectionPedEdge.IntersectingEdges.Add(oppositeDirectionRoadEdge);
+                    // Adding the intersecting edges
+                    AddIntersectingEdge(pedEdge, roadEdge);
+                    AddIntersectingEdge(pedEdge, oppositeDirectionRoadEdge);
+                    AddIntersectingEdge(oppositeDirectionPedEdge, roadEdge);
+                    AddIntersectingEdge(oppositeDirectionPedEdge, oppositeDirectionRoadEdge);
 
-                    roadEdge.IntersectingEdges.Add(pedEdge);
-                    roadEdge.IntersectingEdges.Add(oppositeDirectionPedEdge);
-                    oppositeDirectionRoadEdge.IntersectingEdges.Add(pedEdge);
-                    oppositeDirectionRoadEdge.IntersectingEdges.Add(oppositeDirectionPedEdge);
+                    AddIntersectingEdge(roadEdge, pedEdge);
+                    AddIntersectingEdge(roadEdge, oppositeDirectionPedEdge);
+                    AddIntersectingEdge(oppositeDirectionRoadEdge, pedEdge);
+                    AddIntersectingEdge(oppositeDirectionRoadEdge, oppositeDirectionPedEdge);
                 }
             }
 
@@ -354,8 +376,9 @@ public class PedestrianPathGenerator
         // TODO: this isn't accounting for intersecting edges. Maybe pass in a Dict<Edge, List<Edges>> 
         // so it keeps it in memory and doesn't have to re-calculate it?
         // idk this is hard
-        EdgeLoader.LoadEdges();
+        EdgeLoader.LoadEdges(intersectingEdgesOverride);
     }
+
     private static bool TryGetIntersection(Edge pedestrianEdge, Edge roadEdge, out Vector3 intersectionPoint)
     {
         intersectionPoint = Vector3.zero; // Default to zero if no intersection is found
