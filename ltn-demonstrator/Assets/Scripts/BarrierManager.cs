@@ -97,6 +97,8 @@ public class BarrierManager : MonoBehaviour
 
         newBarrier.transform.Rotate(0, 90, 0);
 
+        newBarrier.transform.parent = this.transform;
+
         // Rotate the barrier on the y axis 
         Graph graph = Graph.Instance;
 

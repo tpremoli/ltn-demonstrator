@@ -14,12 +14,14 @@ public class BarrierData
 {
     public float[] position;
     public float[] rotation;
+    public BarrierType type;
     private static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
 
     public BarrierData(Barrier barrier)
     {
         position = new float[] { barrier.transform.position.x, barrier.transform.position.y, barrier.transform.position.z };
         rotation = new float[] { barrier.transform.rotation.eulerAngles.x, barrier.transform.rotation.eulerAngles.y, barrier.transform.rotation.eulerAngles.z };
+        type = barrier.BarrierType;
     }
 
     public static List<BarrierData> LoadBarriers()
