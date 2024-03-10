@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class Edge
 {
     private static int IDcounter = 0;
@@ -21,8 +22,7 @@ public class Edge
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public List<WaypointMover> TravellersOnEdge;
 
-    [System.NonSerialized]
-    public List<Edge> IntersectingEdges;
+    [SerializeField]
     private List<int> IntersectingEdgesById;
     public float Distance { get { return length; } }
 
@@ -34,8 +34,11 @@ public class Edge
     public bool isBarricated;
     public float barrierLocation;
     public Barrier barrier;
-
     public bool isPedestrianOnly;
+
+    [System.NonSerialized]
+    public List<Edge> IntersectingEdges;
+
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.EdgeID = Edge.IDcounter;
@@ -62,13 +65,10 @@ public class Edge
 
         Edge.edgesByID.Add(this.EdgeID, this);
     }
-    public void OnBeforeSerialize(){
-        foreach(Edge e in IntersectingEdges){
-            this.IntersectingEdgesById.Add(e.EdgeID);
-        }
-    }
-    public void OnAfterDeserialize(){
-        foreach(int i in IntersectingEdgesById){
+    public void OnAfterDeserialize()
+    {
+        foreach (int i in IntersectingEdgesById)
+        {
             Edge e = Edge.edgesByID[i];
             this.IntersectingEdges.Add(e);
         }
@@ -103,16 +103,15 @@ public class Edge
     {
         this.TravellersOnEdge.Remove(trav);
     }
-    public void ReregisterStaleEdges(List<Edge> edges){
-        foreach (Edge e in edges){
-            this.IntersectingEdges.Add(Graph.Instance.getEdge(e.startWaypoint, e.endWaypoint));
-        }
-    }
-    public void RegisterIntersectingEdge(Edge e){
+    public void RegisterIntersectingEdge(Edge e)
+    {
         this.IntersectingEdges.Add(e);
+        this.IntersectingEdgesById.Add(e.EdgeID);
     }
-    public bool IntersectingEdgesBusy(){
-        foreach(Edge e in this.IntersectingEdges){
+    public bool IntersectingEdgesBusy()
+    {
+        foreach (Edge e in this.IntersectingEdges)
+        {
             if (e.TravellersOnEdge.Count > 0) return true;
         }
         return false;
@@ -121,14 +120,15 @@ public class Edge
     public void DrawGizmo()
     {
         // drawing the edge would be too much clutter
-        if (isPedestrianOnly)
-        {
-            return;
-        } else if (IntersectingEdges.Count > 0)
+        if (IntersectingEdges.Count > 0)
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(startWaypoint.transform.position, endWaypoint.transform.position);
             Debug.Log("Intersecting edge found");
+            return;
+        }
+        else if (isPedestrianOnly)
+        {
             return;
         }
 
