@@ -63,40 +63,4 @@ public static class SaveSystem
 
         File.WriteAllText(SAVE_FOLDER + "save.json", json);
     }
-
-    public static List<BarrierData> LoadBarriers()
-    {
-        if (File.Exists(SAVE_FOLDER + "save.json"))
-        {
-            string json = File.ReadAllText(SAVE_FOLDER + "save.json");
-            var data = JsonUtility.FromJson<Root>(json);
-            return data.barriers;
-        }
-        else
-        {
-            Debug.LogError("Save file not found in " + SAVE_FOLDER + "save.json");
-            return null;
-        }
-    }
-
-    public static List<SensorData> LoadSensors()
-    {
-        if (File.Exists(SAVE_FOLDER + "sensor_save.json"))
-        {
-            string json = File.ReadAllText(SAVE_FOLDER + "sensor_save.json");
-            var data = JsonUtility.FromJson<SensorsContainer>(json);
-            return data.sensors;
-        }
-        else
-        {
-            Debug.LogError("Save file not found in " + SAVE_FOLDER + "sensor_save.json");
-            return null;
-        }
-    }
-
-    [System.Serializable]
-    private class Root
-    {
-        public List<BarrierData> barriers;
-    }
 }
