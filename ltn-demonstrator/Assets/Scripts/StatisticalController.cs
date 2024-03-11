@@ -26,6 +26,9 @@
         public TMP_Text statsText;
         //loads a whitescreen object
         public GameObject whiteScreenPanel;
+        public GameObject waypointPrefab;
+        //public GameObject edgePrefab;
+
         public const int TERMINATION_CRITERIA = 10;
         private int finishedPaths;
         private bool endSim;
@@ -505,12 +508,76 @@
         }
 
 
+        public void CalculateTransform(List<SerialisableWaypoint> waypoints, float margin = 0.9f)
+        {
+            // get the dimensions of the panel
+            GameObject panelGameObject = GameObject.Find("WhiteScreen");
+            RectTransform panelRectTransform = panelGameObject.GetComponent<RectTransform>();
+            Vector2 panelSize = panelRectTransform.rect.size;
+
+            Debug.LogError($" panelSize = {panelSize}");
+
+            // calculate the scale factor for the x and y coordinates
+            float minx = float.MaxValue;
+            float maxx = float.MinValue;
+            float minz = float.MaxValue;
+            float maxz = float.MinValue;
+
+            foreach (var waypoint in waypoints)
+            {
+
+                if (waypoint.x < minx)
+                {
+                    minx = waypoint.x;
+                }
+                if (waypoint.x > maxx)
+                {
+                    maxx = waypoint.x;
+                }
+                if (waypoint.z < minz)
+                {
+                    minz = waypoint.z;
+                }
+                if (waypoint.z > maxz)
+                {
+                    maxz = waypoint.z;
+                }
+            }
+
+            Debug.Log($"minx = {minx}, maxx = {maxx}, minz = {minz}, maxz = {maxz}");
+
+            float xStretch = (panelSize.x / (maxx - minx))*margin;
+            float zStretch = (panelSize.y / (maxz - minz))*margin;
+
+            Debug.Log($"xStretch = {xStretch}, zStretch = {zStretch}");
+
+            //
+            foreach (var waypoint in waypoints)
+            {
+                waypoint.x = ((waypoint.x - minx) / (maxx - minx) * panelSize.x * margin) + (panelSize.x * (1 - margin) / 2);
+                waypoint.z = ((waypoint.z - minz) / (maxz - minz) * panelSize.y * margin) + (panelSize.y * (1 - margin) / 2);
+
+            }
+        }
+
+
+
+
         public void DrawWaypoints(List<SerialisableWaypoint> waypoints)
         {
+            //Transform waypoints so that they are correctly oriented
+            CalculateTransform(waypoints);
             for (int i = 0; i < waypoints.Count; i++)
             {
                 //draw the waypoint
                 Debug.Log($"Waypoint {waypoints[i].ID} drawn at {waypoints[i].x}, {waypoints[i].y}, {waypoints[i].z}");
+                //create gameObject in unity for each waypoint and place it at the coordinates
+                // Create the waypoint position from the serialized data
+                Vector3 waypointPosition = new Vector3(waypoints[i].x, waypoints[i].z, 0); //(x,y,z)
+                // Instantiate the waypoint prefab at this position
+                Instantiate(waypointPrefab, waypointPosition, Quaternion.identity);
+                Debug.Log("Spawned");
+
             }
 
         }
@@ -560,7 +627,7 @@
             Debug.Log("Drawing Heatmap");
             //draw all waypoints and edges
             DrawWaypoints(allWaypoints);
-            DrawEdges(allEdges);
+            //DrawEdges(allEdges);
             //switch tracking variable
             isHeatMapVisible = true;
         }
