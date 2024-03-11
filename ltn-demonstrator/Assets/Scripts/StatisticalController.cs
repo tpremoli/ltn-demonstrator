@@ -27,12 +27,15 @@
         //loads a whitescreen object
         public GameObject whiteScreenPanel;
         public GameObject waypointPrefab;
+        public GameObject linePrefab; 
+
         //public GameObject edgePrefab;
 
         public const int TERMINATION_CRITERIA = 10;
         private int finishedPaths;
         private bool endSim;
         private bool isHeatMapVisible = false;       //used to toggle the heatmap on and off
+        
 
         
         // --------------------------------------SERIALISATION ASSETS------------------------------------------
@@ -590,8 +593,52 @@
             {
                 //draw the edge
                 Debug.Log($"Edge {edges[i].ID} drawn from {edges[i].startWaypoint.ID} to {edges[i].endWaypoint.ID}");
+
+                Vector3 startPoint = new Vector3(edges[i].startWaypoint.x, edges[i].startWaypoint.z, -1);
+                Vector3 endPoint = new Vector3(edges[i].endWaypoint.x, edges[i].endWaypoint.z, -1);
+
+                DrawLine(startPoint, endPoint);   
             }
         }
+
+
+
+        public void DrawLine(Vector3 start, Vector3 end)
+        {   
+            float weight = 15f;
+            GameObject lineObj = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
+            LineRenderer lineRenderer = lineObj.GetComponent<LineRenderer>();
+
+            // Set the positions
+            lineRenderer.SetPosition(0, start);
+            lineRenderer.SetPosition(1, end);
+
+            // Adjust width based on weight
+            AnimationCurve widthCurve = new AnimationCurve(
+                new Keyframe(0.0f, Mathf.Lerp(0.1f, 0.5f, weight)), // Start width
+                new Keyframe(0.5f, Mathf.Lerp(0.2f, 1.0f, weight)), // Middle width
+                new Keyframe(1.0f, Mathf.Lerp(0.1f, 0.5f, weight))  // End width
+            );
+            lineRenderer.widthCurve = widthCurve;
+
+            // Adjust color based on weight
+            Gradient gradient = new Gradient();
+            gradient.SetKeys(
+                new GradientColorKey[] { new GradientColorKey(GetColorFromWeight(weight), 0.0f), new GradientColorKey(GetColorFromWeight(weight), 1.0f) },
+                new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
+            );
+            lineRenderer.colorGradient = gradient;
+        }
+
+        private Color GetColorFromWeight(float weight)
+        {
+            // Implement your logic to return a color based on the weight
+            // For example, from green (low weight) to red (high weight)
+            return Color.Lerp(Color.green, Color.red, weight);
+        }
+
+
+
 
         public void HideWaypoints(List<SerialisableWaypoint> waypoints)
         {
@@ -627,7 +674,8 @@
             Debug.Log("Drawing Heatmap");
             //draw all waypoints and edges
             DrawWaypoints(allWaypoints);
-            //DrawEdges(allEdges);
+            DrawEdges(allEdges);
+            Debug.LogError("edges drawn");
             //switch tracking variable
             isHeatMapVisible = true;
         }

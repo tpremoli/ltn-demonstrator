@@ -38888,6 +38888,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6900731108726962697, guid: 0cca2be2bbe04cc488e3d560b15b4d30, type: 3}
+      propertyPath: linePrefab
+      value: 
+      objectReference: {fileID: 5147207458534632305, guid: 6bc2f402752c78c4ebf329b319329d33, type: 3}
+    - target: {fileID: 6900731108726962697, guid: 0cca2be2bbe04cc488e3d560b15b4d30, type: 3}
       propertyPath: waypointPrefab
       value: 
       objectReference: {fileID: 8620543531893827763, guid: 2776efdeeb9f20a4784723fa9af06c06, type: 3}
