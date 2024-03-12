@@ -126,5 +126,9 @@ public class SensorManager : MonoBehaviour
             }
 
         }
-
+    public List<SensorData> GetAllSensorData()
+    {
+        // Implement your logic here to return a list of SensorData objects
+        return new List<SensorData>();
+    }
 }

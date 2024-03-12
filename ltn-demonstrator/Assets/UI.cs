@@ -1,74 +1,72 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Collections.Generic;
 
-public class UI : MonoBehaviour
+public class MiniWorld_UI : MonoBehaviour
 {
+    VisualElement root;
+    private List<VisualElement> sensorUIElements;
+    private SensorManager sensorManager;
+
     private void OnEnable()
     {
-        VisualElement root = GetComponent<UIDocument>().rootVisualElement;
-        // UIBuild_1.uxml
-        /*
-        <ui:VisualElement name="container" style="flex-grow: 1; flex-basis: 20%; position: absolute; height: 114px; width: 912px; top: 367px; color: rgb(0, 0, 0); -unity-text-outline-color: rgba(0, 0, 0, 0); background-color: rgba(231, 226, 191, 0.53); left: -6px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; flex-direction: row;">
-                <ui:Button text="Edit LTN" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 91px;" />
-                <ui:Button text="Main Camera" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px;" />
-                <ui:Button text="Cinematic Camera" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px;" />
-                <ui:Button text="Sensor Cameras" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px;" />
-                <ui:Button text="More Statistics" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px;" />
-                <ui:Label tabindex="-1" text="Statistics:" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 191px;" />
-        </ui:VisualElement>
-        */
-        Button EditLTNbutton = root.Q<Button>("EditLTNbutton");
-        // Camera Buttons
-        Button MainCameraButton = root.Q<Button>("MainCameraButton");
-        Button CinematicCameraButton = root.Q<Button>("CinematicCameraButton");
-        Button SensorCamerasButton = root.Q<Button>("SensorCamerasButton");
-        // Statistics Button
-        Button MoreStatisticsButton = root.Q<Button>("MoreStatisticsButton");
-        // Statistics Label
-        Label StatisticsLabel = root.Q<Label>("StatisticsLabel");
+        root = GetComponent<UIDocument>().rootVisualElement;
+        sensorManager = FindObjectOfType<SensorManager>();
 
-        // Add click events
-        EditLTNbutton.clicked += () => EditLTN();
-        MainCameraButton.clicked += () => MainCamera();
-        CinematicCameraButton.clicked += () => CinematicCamera();
-        SensorCamerasButton.clicked += () => SensorCameras();
-        MoreStatisticsButton.clicked += () => MoreStatistics();
-
-        // Set Statistics Label
-        StatisticsLabel.text = "Statistics:"; // replace with ted's code
-    }
-
-    private void EditLTN()
-    {
-        Debug.Log("Edit LTN");
-    }
-
-    private void MainCamera()
-    {
-        Debug.Log("Main Camera");
-    }
-
-    private void CinematicCamera()
-    {
-        Debug.Log("Cinematic Camera");
-    }
-
-    private void SensorCameras()
-    {
-        Debug.Log("Sensor Cameras");
-    }
-
-    private void MoreStatistics()
-    {
-        Debug.Log("More Statistics");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log("Update Statistics Label");
+        // Assuming you have a VisualTreeAsset for sensors UI
+        VisualTreeAsset sensorUIAsset = Resources.Load<VisualTreeAsset>("SensorUI");
         
+        // Load sensors from the sensor manager
+        sensorManager.LoadSensorsFromSave();
+        
+        // Clear existing UI elements if any
+        if(sensorUIElements != null)
+        {
+            foreach(var sensorUI in sensorUIElements)
+            {
+                root.Remove(sensorUI);
+            }
+        }
+        
+        // Initialize the list for UI elements
+        sensorUIElements = new List<VisualElement>();
+
+        // Get the sensor data list from the sensor manager
+        // The SensorManager should have a public method or property to access the sensors' data
+        var sensorDataList = sensorManager.GetAllSensorData(); 
+
+        foreach (var sensorData in sensorDataList)
+        {
+            VisualElement sensorUI = sensorUIAsset.Instantiate();
+            // Update the sensorUI based on the sensorData
+            // This could involve setting text, positions, or other properties to reflect the state of the sensor
+            sensorUIElements.Add(sensorUI);
+            root.Add(sensorUI);
+        }
     }
+
+    // This method can be called to refresh the UI when sensors are added, removed, or changed
+    public void RefreshSensorUI()
+    {
+        OnEnable();
+    }
+
+    private void Update()
+{
+    // Assuming sensorUIElements is the list that holds the UI elements for each sensor
+    // and allSensors is the list that holds the actual sensor GameObjects
+    for (int i = 0; i < sensorManager.allSensors.Count; i++)
+    {
+        GameObject sensor = sensorManager.allSensors[i];
+        VisualElement sensorUI = sensorUIElements[i];
+
+        // Convert the world position of the sensor to a screen point for the UI
+        Vector3 screenPoint = Camera.main.WorldToScreenPoint(sensor.transform.position);
+
+        // Update the style of the sensor UI to position it on the screen
+        sensorUI.style.left = screenPoint.x - (sensorUI.layout.width / 2);
+        sensorUI.style.top = Screen.height - screenPoint.y - 100; // Offset by 100 pixels from the top
+    }
+}
+
 }
