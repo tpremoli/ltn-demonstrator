@@ -69,7 +69,7 @@ public class EdgeLoader
     // This method will be called whenever a scene is opened in the Editor
     private static void SceneOpenedCallback(Scene scene, OpenSceneMode mode)
     {
-        LoadEdges();
+        // LoadEdges();
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -80,7 +80,7 @@ public class EdgeLoader
 
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        LoadEdges();
+        // LoadEdges();
     }
 }
 

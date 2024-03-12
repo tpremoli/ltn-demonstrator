@@ -4,9 +4,9 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Edge
 {
-    private static int IDcounter = 0;
-    private static Dictionary<int, Edge> edgesByID = new Dictionary<int, Edge>();
-    private int EdgeID;
+    [SerializeField] private static int IDcounter = 0;
+    [SerializeField] private static Dictionary<int, Edge> edgesByID = new Dictionary<int, Edge>();
+    [SerializeField] private int EdgeID;
     public Vector3 position;
     public Vector3 direction;
     public Waypoint startWaypoint;
@@ -22,8 +22,7 @@ public class Edge
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public List<WaypointMover> TravellersOnEdge;
 
-    [SerializeField]
-    private List<int> IntersectingEdgesById;
+    [SerializeField] private List<int> IntersectingEdgesById;
     public float Distance { get { return length; } }
 
     /// <summary>
@@ -124,7 +123,7 @@ public class Edge
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(startWaypoint.transform.position, endWaypoint.transform.position);
-            Debug.Log("Intersecting edge found");
+            // Debug.Log("Intersecting edge found");
             return;
         }
         else if (isPedestrianOnly)
