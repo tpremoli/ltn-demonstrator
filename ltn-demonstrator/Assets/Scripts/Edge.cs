@@ -133,11 +133,13 @@ public class Edge
         }
         this.TravellersOnEdge.Remove(trav);
         // for all sensors call CollectDataOnLeave(WaypointMover trav)
+        /**
         foreach (Sensor sensor in sensors)
         {
             //sensor.CollectDataOnLeave(trav);
             continue;
         }
+        **/
     }
 
     public void DrawGizmo()
