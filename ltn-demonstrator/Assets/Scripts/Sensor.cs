@@ -10,18 +10,6 @@ public class Sensor : MonoBehaviour
     public Dictionary<WaypointMover, int> sensor_trav_stats = new Dictionary<WaypointMover, int>();
     private Edge edgeAssigned;
 
-    public UIManager UIManager;
-
-    private void OnMouseDown()
-    {
-        if (UIManager != null)
-        {
-            // Show sensor stats UI panel
-            UIManager.ShowSensorStats(transform.position, sensor_trav_count);
-        }
-
-        OnSensorClicked();
-    }
 
     public void OnSensorClicked()
     {
