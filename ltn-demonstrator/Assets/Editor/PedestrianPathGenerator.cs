@@ -266,6 +266,7 @@ public class PedestrianPathGenerator
         // Helper method to add edges to the dictionary
         void AddIntersectingEdge(Edge keyEdge, Edge intersectingEdge)
         {
+            // keyEdge.RegisterIntersectingEdge(intersectingEdge);
             if (intersectingEdgesOverride.ContainsKey(keyEdge))
             {
                 intersectingEdgesOverride[keyEdge].Add(intersectingEdge);

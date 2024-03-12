@@ -118,18 +118,27 @@ public class Edge
 
     public void DrawGizmo()
     {
-        // drawing the edge would be too much clutter
+        Color edgeColor;
         if (IntersectingEdges.Count > 0)
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(startWaypoint.transform.position, endWaypoint.transform.position);
-            // Debug.Log("Intersecting edge found");
-            return;
+            edgeColor = Color.yellow;
+            if (isPedestrianOnly)
+            {
+                Gizmos.color = edgeColor;
+                Gizmos.DrawLine(startWaypoint.transform.position, endWaypoint.transform.position);
+                return;
+            }
         }
-        else if (isPedestrianOnly)
+        else
         {
-            return;
+            edgeColor = Color.green;
+            if (isPedestrianOnly)
+            {
+                return;
+            }
+
         }
+
 
         // Draw arrow pointing in the edge's direction
         Vector3 startpoint = startWaypoint.transform.position;
@@ -148,7 +157,7 @@ public class Edge
         Vector3 shiftedMiddlePosition = middlePosition + Vector3.Cross(direction, Vector3.up).normalized * 0.6f;
 
         // Draw the arrow with the shifted middle position and shortened direction
-        DrawArrow.ForGizmo(shiftedMiddlePosition, shortenedDirection, Color.green, 1f, 30f);
+        DrawArrow.ForGizmo(shiftedMiddlePosition, shortenedDirection, edgeColor, 1f, 30f);
     }
 
     public bool isPointOnEdge(Vector3 point)

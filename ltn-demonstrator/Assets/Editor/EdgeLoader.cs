@@ -55,7 +55,6 @@ public class EdgeLoader
                 }
             }
 
-            Debug.Log("Overridden intersecting edges.");
         }
     }
 
