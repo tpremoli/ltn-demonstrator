@@ -115,7 +115,24 @@ public class StatisticsManager : MonoBehaviour
         }
 
         // update StatisticsText in real time
-        TextMeshProUGUI StatisticsText = GameObject.Find("Body").GetComponent<TextMeshProUGUI>();
+        GameObject body = GameObject.Find("Body");
+        if (body == null)
+        {
+            Debug.LogError("Body not found");
+        }
+        else
+        {
+            TextMeshProUGUI statisticsText = body.GetComponent<TextMeshProUGUI>();
+            if (statisticsText == null)
+            {
+                Debug.LogError("TextMeshProUGUI component not found on Body");
+            }
+            else
+            {
+                // Use statisticsText here
+                Debug.Log("TextMeshProUGUI component found on Body");
+            }
+        }
         RealTime_UpdateTextWithStatistics();
 
     }
@@ -481,6 +498,11 @@ public class StatisticsManager : MonoBehaviour
     //Rate of deviation from original path
     private string RateOfDeviation ()
     {
+        // if allpathdata is empty rerturn
+        if (allPathData.Count == 0)
+        {
+            return "0"; // Or return a default value
+        }
         int deviated = 0;
         foreach (PathData pd in allPathData) 
         {
@@ -489,7 +511,14 @@ public class StatisticsManager : MonoBehaviour
                 deviated++;
             }
         }
-        return (deviated/allPathData.Count).ToString();
+
+        if (allPathData.Count == 0)
+        {
+            Debug.LogError("allPathData.Count is zero, cannot calculate rate of deviation");
+            return "0"; // Or return a default value
+        }
+
+        return (deviated / (float)allPathData.Count).ToString();
     }
 
     //Rate of pollution - uses arbitrary values for now
