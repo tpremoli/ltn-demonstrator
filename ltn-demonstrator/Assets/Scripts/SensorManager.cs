@@ -36,10 +36,10 @@ public class SensorManager : MonoBehaviour
     void Update()
     {   
         // force reload sensors
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            RecalcSensorsOnEdges();
-        }
+        // if (Input.GetKeyDown(KeyCode.U))
+        // {
+        //     RecalcSensorsOnEdges();
+        // }
         //Debug.Log("sensorPrefabs ", sensorPrefabs.Count);
     }
 
@@ -77,7 +77,7 @@ public class SensorManager : MonoBehaviour
 
             // this essentially reloads colliders so we can use them to generate sensors etc.
             // this is not efficient at all. HOWEVER, it is only called once on load.
-            Physics.SyncTransforms();
+            // Physics.SyncTransforms();
         }
     }
 

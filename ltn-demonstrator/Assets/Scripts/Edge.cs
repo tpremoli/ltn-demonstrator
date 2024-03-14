@@ -478,6 +478,6 @@ public class Edge
         List<ModeOfTransport> blockedModes = BarrierTypeProperties.GetBlockedModes(barrier.BarrierType);
 
         // Check if the current mode of transport is allowed
-        return !blockedModes.Contains(mode);
+        return blockedModes.Contains(mode);
     }
 }

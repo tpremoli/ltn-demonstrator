@@ -45,6 +45,8 @@ public class BarrierManager : MonoBehaviour
         // force reload barriers
         if (Input.GetKeyDown(KeyCode.U))
         {
+            Physics.SyncTransforms();
+            Debug.LogWarning("Reloading barriers!");
             RecalcBarriersOnEdges();
         }
     }
@@ -79,12 +81,12 @@ public class BarrierManager : MonoBehaviour
             GameObject newBarrier = Instantiate(barrierPrefab);
             newBarrier.transform.position = new Vector3(barrierData.position[0], barrierData.position[1], barrierData.position[2]);
             newBarrier.transform.rotation = Quaternion.Euler(barrierData.rotation[0], barrierData.rotation[1], barrierData.rotation[2]);
-            
+
             // we also need the barrier type
-            BarrierType spawnedBarrierType = (BarrierType) barrierData.type;
+            BarrierType spawnedBarrierType = (BarrierType)barrierData.type;
             newBarrier.GetComponent<Barrier>().BarrierType = spawnedBarrierType;
             newBarrier.transform.name = spawnedBarrierType.ToString();
-            
+
             newBarrier.transform.parent = transform;
             allBarriers.Add(newBarrier);
 

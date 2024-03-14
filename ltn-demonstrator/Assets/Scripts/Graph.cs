@@ -154,8 +154,6 @@ public class Graph : MonoBehaviour
             }
         }
 
-        Debug.Log("Closest road edge to " + position + " is " + closestEdge.StartWaypoint.transform.position + " to " + closestEdge.EndWaypoint.transform.position);
-
         return closestEdge;
     }
 

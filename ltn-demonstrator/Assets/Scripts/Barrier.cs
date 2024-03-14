@@ -11,6 +11,7 @@ public class Barrier : MonoBehaviour
         Collider barrierCollider = GetComponent<Collider>();
         if (barrierCollider == null)
         {
+            Debug.LogError("Barrier has no collider! Will be ignored.");
             return false;
         }
 
