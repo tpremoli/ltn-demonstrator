@@ -1,6 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public class ReducedEdge
+{
+    public Waypoint startWaypoint;
+    public Waypoint endWaypoint;
+
+    public ReducedEdge(Edge edge)
+    {
+        this.startWaypoint = edge.startWaypoint;
+        this.endWaypoint = edge.endWaypoint;
+    }
+}
+
 [System.Serializable]
 public class Edge
 {
