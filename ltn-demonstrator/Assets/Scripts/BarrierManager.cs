@@ -135,8 +135,6 @@ public class BarrierManager : MonoBehaviour
     }
 
 
-
-
     public void RecalcBarriersOnEdges()
     {
         Graph graph = Graph.Instance;
