@@ -20,7 +20,9 @@ public class SerialisableEdge {
     public SerialisableWaypoint startWaypoint;
     public SerialisableWaypoint endWaypoint;
     public float weight;
+    public GameObject EdgeObject { get; set; } 
     //whichever other ones are needed
+    
 
     public SerialisableEdge(Edge edge) {
         ID = edge.ID;
@@ -34,6 +36,7 @@ public class SerialisableWaypoint {
     public float x;
     public float y;
     public float z;
+    public GameObject WaypointObject { get; set; }
     //whichever other ones are needed
 
     public SerialisableWaypoint(Waypoint waypoint) {

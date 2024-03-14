@@ -576,10 +576,11 @@
                 Debug.Log($"Waypoint {waypoints[i].ID} drawn at {waypoints[i].x}, {waypoints[i].y}, {waypoints[i].z}");
                 //create gameObject in unity for each waypoint and place it at the coordinates
                 // Create the waypoint position from the serialized data
-                Vector3 waypointPosition = new Vector3(waypoints[i].x, waypoints[i].z, 0); //(x,y,z)
+                Vector3 waypointPosition = new Vector3(waypoints[i].x, waypoints[i].z, -3); //(x,y,z)
                 // Instantiate the waypoint prefab at this position
                 Instantiate(waypointPrefab, waypointPosition, Quaternion.identity);
                 Debug.Log("Spawned");
+
 
             }
 
@@ -598,6 +599,7 @@
                 Vector3 endPoint = new Vector3(edges[i].endWaypoint.x, edges[i].endWaypoint.z, -1);
 
                 DrawLine(startPoint, endPoint);   
+                Debug.Log($"Edge weight is {edges[i].weight}");
             }
         }
 
@@ -605,7 +607,14 @@
 
         public void DrawLine(Vector3 start, Vector3 end)
         {   
-            float weight = 15f;
+            float weight = 15f; // This is your existing weight value
+            float uniformWidth = Mathf.Lerp(0.1f, 0.5f, weight*100); // Calculate the uniform width based on weight
+
+            //translate the start and end points to the correct position, increase z by 5
+            start.z = -3;
+            end.z = -3;
+
+
             GameObject lineObj = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
             LineRenderer lineRenderer = lineObj.GetComponent<LineRenderer>();
 
@@ -613,11 +622,11 @@
             lineRenderer.SetPosition(0, start);
             lineRenderer.SetPosition(1, end);
 
-            // Adjust width based on weight
+            // Set the AnimationCurve for width to have the same value at start, middle, and end
             AnimationCurve widthCurve = new AnimationCurve(
-                new Keyframe(0.0f, Mathf.Lerp(0.1f, 0.5f, weight)), // Start width
-                new Keyframe(0.5f, Mathf.Lerp(0.2f, 1.0f, weight)), // Middle width
-                new Keyframe(1.0f, Mathf.Lerp(0.1f, 0.5f, weight))  // End width
+                new Keyframe(0.0f, uniformWidth), // Start width
+                new Keyframe(0.5f, uniformWidth), // Middle width
+                new Keyframe(1.0f, uniformWidth)  // End width
             );
             lineRenderer.widthCurve = widthCurve;
 
@@ -628,7 +637,9 @@
                 new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
             );
             lineRenderer.colorGradient = gradient;
+            lineObj.SetActive(true);
         }
+
 
         private Color GetColorFromWeight(float weight)
         {
