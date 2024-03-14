@@ -47,7 +47,6 @@ public class BarrierManager : MonoBehaviour
         {
             RecalcBarriersOnEdges();
         }
-        //Debug.Log("barrierPrefabs ", barrierPrefabs.Count);
     }
 
     private void Awake()
@@ -89,10 +88,12 @@ public class BarrierManager : MonoBehaviour
             newBarrier.transform.parent = transform;
             allBarriers.Add(newBarrier);
 
-            // this essentially reloads colliders so we can use them to generate barriers etc.
-            // this is not efficient at all. HOWEVER, it is only called once on load.
-            Physics.SyncTransforms();
         }
+
+        // this essentially reloads colliders so we can use them to generate barriers etc.
+        // this is not efficient at all. HOWEVER, it is only called once on load.
+        Physics.SyncTransforms();
+        RecalcBarriersOnEdges();
     }
 
     public void AddBarrier(Vector3 position, BarrierType selectedBarrierType)
@@ -147,8 +148,5 @@ public class BarrierManager : MonoBehaviour
         {
             edge.CheckBarriers();
         }
-
     }
-
-
 }

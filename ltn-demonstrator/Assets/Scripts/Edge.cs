@@ -80,8 +80,8 @@ public class Edge
     public void RecheckSensors()
     {
         this.sensor = getSensorInPath();
-        // this.isBarricated = sensor != null;
         this.sensorLocation = sensor != null ? convertToPositionAlongEdge(sensor.transform.position) : -1f;
+        // this.isBarricated = sensor != null;
         // if (this.isBarricated)
         // {
         //     Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.sensorLocation);
