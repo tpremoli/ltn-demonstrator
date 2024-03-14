@@ -264,21 +264,17 @@ public class PedestrianPathGenerator
         // This is a dictionary that will store the intersecting edges for each edge
         Dictionary<ReducedEdge, List<ReducedEdge>> intersectingEdgesOverride = new Dictionary<ReducedEdge, List<ReducedEdge>>();
         // Helper method to add edges to the dictionary
-        void AddIntersectingEdge(Edge keyEdge, Edge intersectingEdge)
+        void AddIntersectingEdge(ReducedEdge keyEdge, ReducedEdge intersectingEdge)
         {
             // we keep track of intersecting edges using reduced edges, which are just
             // stripped down versions of the edges that only contain the start and end waypoints
-            ReducedEdge key = new ReducedEdge(keyEdge);
-            ReducedEdge intersecting = new ReducedEdge(intersectingEdge);
-
-            // keyEdge.RegisterIntersectingEdge(intersectingEdge);
-            if (intersectingEdgesOverride.ContainsKey(key))
+            if (intersectingEdgesOverride.ContainsKey(keyEdge))
             {
-                intersectingEdgesOverride[key].Add(intersecting);
+                intersectingEdgesOverride[keyEdge].Add(intersectingEdge);
             }
             else
             {
-                intersectingEdgesOverride[key] = new List<ReducedEdge> { intersecting };
+                intersectingEdgesOverride[keyEdge] = new List<ReducedEdge> { intersectingEdge };
             }
         }
 
@@ -294,11 +290,11 @@ public class PedestrianPathGenerator
                 {
                     foreach (var intersectingEdge in crosswalk.IntersectingEdges)
                     {
-                        AddIntersectingEdge(pedEdge, intersectingEdge);
+                        AddIntersectingEdge(new ReducedEdge(pedEdge), new ReducedEdge(intersectingEdge));
                     }
                     foreach (var intersectingEdge in pedEdge.IntersectingEdges)
                     {
-                        AddIntersectingEdge(crosswalk, intersectingEdge);
+                        AddIntersectingEdge(new ReducedEdge(crosswalk), new ReducedEdge(intersectingEdge));
                     }
                     hasEdgeBeenProcessed = true;
                     break;
@@ -363,15 +359,19 @@ public class PedestrianPathGenerator
                     }
 
                     // Adding the intersecting edges
-                    AddIntersectingEdge(pedEdge, roadEdge);
-                    AddIntersectingEdge(pedEdge, oppositeDirectionRoadEdge);
-                    AddIntersectingEdge(oppositeDirectionPedEdge, roadEdge);
-                    AddIntersectingEdge(oppositeDirectionPedEdge, oppositeDirectionRoadEdge);
+                    ReducedEdge subdividedRoadEdge = new ReducedEdge(closerWaypoint, furtherWaypoint);
+                    ReducedEdge subdividedOppositeRoadEdge = new ReducedEdge(furtherWaypoint, closerWaypoint);
+                    ReducedEdge reducedPedEdge = new ReducedEdge(pedEdge.startWaypoint, pedEdge.endWaypoint);
+                    ReducedEdge reducedOppositePedEdge = new ReducedEdge(pedEdge.endWaypoint, pedEdge.startWaypoint);
+                    AddIntersectingEdge(reducedPedEdge, subdividedRoadEdge);
+                    AddIntersectingEdge(reducedPedEdge, subdividedOppositeRoadEdge);
+                    AddIntersectingEdge(reducedOppositePedEdge, subdividedRoadEdge);
+                    AddIntersectingEdge(reducedOppositePedEdge, subdividedOppositeRoadEdge);
 
-                    AddIntersectingEdge(roadEdge, pedEdge);
-                    AddIntersectingEdge(roadEdge, oppositeDirectionPedEdge);
-                    AddIntersectingEdge(oppositeDirectionRoadEdge, pedEdge);
-                    AddIntersectingEdge(oppositeDirectionRoadEdge, oppositeDirectionPedEdge);
+                    AddIntersectingEdge(subdividedRoadEdge, reducedPedEdge);
+                    AddIntersectingEdge(subdividedRoadEdge, reducedOppositePedEdge);
+                    AddIntersectingEdge(subdividedOppositeRoadEdge, reducedPedEdge);
+                    AddIntersectingEdge(subdividedOppositeRoadEdge, reducedOppositePedEdge);
                 }
             }
 

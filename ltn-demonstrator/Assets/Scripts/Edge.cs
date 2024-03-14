@@ -11,6 +11,12 @@ public class ReducedEdge
         this.startWaypoint = edge.startWaypoint;
         this.endWaypoint = edge.endWaypoint;
     }
+    public ReducedEdge(Waypoint startWaypoint, Waypoint endWaypoint)
+    {
+        this.startWaypoint = startWaypoint;
+        this.endWaypoint = endWaypoint;
+    }
+
 }
 
 [System.Serializable]
