@@ -578,7 +578,7 @@
                 // Create the waypoint position from the serialized data
                 Vector3 waypointPosition = new Vector3(waypoints[i].x, waypoints[i].z, -3); //(x,y,z)
                 // Instantiate the waypoint prefab at this position
-                Instantiate(waypointPrefab, waypointPosition, Quaternion.identity);
+                waypoints[i].WaypointObject =  Instantiate(waypointPrefab, waypointPosition, Quaternion.identity);
                 Debug.Log("Spawned");
 
 
@@ -598,14 +598,14 @@
                 Vector3 startPoint = new Vector3(edges[i].startWaypoint.x, edges[i].startWaypoint.z, -1);
                 Vector3 endPoint = new Vector3(edges[i].endWaypoint.x, edges[i].endWaypoint.z, -1);
 
-                DrawLine(startPoint, endPoint);   
+                DrawLine(edges[i], startPoint, endPoint);   
                 Debug.Log($"Edge weight is {edges[i].weight}");
             }
         }
 
 
 
-        public void DrawLine(Vector3 start, Vector3 end)
+        public void DrawLine(SerialisableEdge edge, Vector3 start, Vector3 end)
         {   
             float weight = 15f; // This is your existing weight value
             float uniformWidth = Mathf.Lerp(0.1f, 0.5f, weight*100); // Calculate the uniform width based on weight
@@ -638,6 +638,9 @@
             );
             lineRenderer.colorGradient = gradient;
             lineObj.SetActive(true);
+
+            //assign to serialisable edge object
+            edge.EdgeObject = lineObj;
         }
 
 
@@ -653,19 +656,22 @@
 
         public void HideWaypoints(List<SerialisableWaypoint> waypoints)
         {
+            Debug.Log("Hiding Waypoints");
             for (int i = 0; i < waypoints.Count; i++)
             {
                 //hide the waypoint
-                Debug.Log("Hiding Waypoint");
+                waypoints[i].WaypointObject.SetActive(false);
+                
             }
         }
 
         public void HideEdges(List<SerialisableEdge> edges)
         {
+            Debug.Log("Hiding Edges");
             for (int i = 0; i < edges.Count; i++)
             {
                 //hide the edge
-                Debug.Log("Hiding Edge");
+                edges[i].EdgeObject.SetActive(false);
             }
         }
 
@@ -697,7 +703,9 @@
             //unload the white screen
             HideWhiteScreen();
             Debug.Log("Hiding Heatmap");
-
+            //hide all waypoints and edges
+            HideWaypoints(allWaypoints);
+            HideEdges(allEdges);
 
             //switch tracking variable
             isHeatMapVisible = false;
