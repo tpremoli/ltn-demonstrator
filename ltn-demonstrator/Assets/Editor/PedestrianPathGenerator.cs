@@ -257,7 +257,7 @@ public class PedestrianPathGenerator
         EdgeLoader.LoadEdges();
 
         var graph = Object.FindFirstObjectByType<Graph>();
-        var allEdges = graph.edges;
+        var allEdges = graph.GetAllEdges();
         var pedestrianEdges = allEdges.Where(edge => edge.isPedestrianOnly).ToList();
         var roadEdges = allEdges.Except(pedestrianEdges).ToList();
 
@@ -344,8 +344,8 @@ public class PedestrianPathGenerator
                     oppositeIntersectionWaypoint.adjacentWaypoints.Add(furtherWaypoint);
 
                     // 4. Update the road edge to use the new waypoints
-                    var oppositeDirectionPedEdge = graph.getEdge(pedEdge.endWaypoint, pedEdge.startWaypoint);
-                    var oppositeDirectionRoadEdge = graph.getEdge(roadEdge.endWaypoint, roadEdge.startWaypoint);
+                    var oppositeDirectionPedEdge = graph.GetEdge(pedEdge.endWaypoint, pedEdge.startWaypoint);
+                    var oppositeDirectionRoadEdge = graph.GetEdge(roadEdge.endWaypoint, roadEdge.startWaypoint);
 
                     if (roadEdge.startWaypoint == intersectionCenter)
                     {

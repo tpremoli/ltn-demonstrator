@@ -26,7 +26,7 @@ public class EdgeLoader
             return;
         }
 
-        graph.edges = new List<Edge>();
+        graph.ResetEdges();
         Waypoint[] waypoints = Object.FindObjectsOfType<Waypoint>();
 
         foreach (Waypoint waypoint in waypoints)
@@ -36,10 +36,10 @@ public class EdgeLoader
                 float distance = graph.CalculateDistance(waypoint, adjacentWaypoint);
                 // instantiate edge as empty game object
                 Edge edge = new Edge(waypoint, adjacentWaypoint);
-                graph.edges.Add(edge);
+                graph.AddEdge(edge);
             }
         }
-        Debug.Log("Calculated " + graph.edges.Count + " edges.");
+        Debug.Log("Calculated " + graph.GetAllEdges().Count + " edges.");
 
         if (intersectingEdgesOverride != null)
         {
@@ -48,10 +48,10 @@ public class EdgeLoader
             // these edges will be stale, however, we can get the updated edges from the graph
             foreach (KeyValuePair<ReducedEdge, List<ReducedEdge>> kvp in intersectingEdgesOverride)
             {
-                Edge keyEdge = graph.getEdge(kvp.Key.startWaypoint, kvp.Key.endWaypoint);
+                Edge keyEdge = graph.GetEdge(kvp.Key.startWaypoint, kvp.Key.endWaypoint);
                 foreach (ReducedEdge reducedEdge in kvp.Value)
                 {
-                    keyEdge.RegisterIntersectingEdge(graph.getEdge(reducedEdge.startWaypoint, reducedEdge.endWaypoint));
+                    keyEdge.RegisterIntersectingEdge(graph.GetEdge(reducedEdge.startWaypoint, reducedEdge.endWaypoint));
                 }
             }
 

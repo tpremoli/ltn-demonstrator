@@ -103,7 +103,7 @@ public class BarrierManager : MonoBehaviour
         Debug.Log("Recalculating barriers on edges");
 
         // this is not efficient at all.
-        foreach (Edge edge in graph.edges)
+        foreach (Edge edge in graph.GetAllEdges())
         {
             edge.RecheckBarriers();
         }

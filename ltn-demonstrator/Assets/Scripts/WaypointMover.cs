@@ -229,7 +229,7 @@ public class WaypointMover : MonoBehaviour
         else
         {
             // The traveller's direction aligns more with the backward direction, flip the edge
-            Edge flippedEdge = graph.getEdge(currentEdge.endWaypoint, currentEdge.startWaypoint);
+            Edge flippedEdge = graph.GetEdge(currentEdge.endWaypoint, currentEdge.startWaypoint);
             if (flippedEdge != null)
             {
                 return flippedEdge;

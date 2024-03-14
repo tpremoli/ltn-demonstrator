@@ -405,7 +405,7 @@ public class WaypointPath
         {
             old_wp = wp;
             wp = iter.Current;
-            Edge nextOne = this.graph.getEdge(old_wp, wp);
+            Edge nextOne = this.graph.GetEdge(old_wp, wp);
             Debug.Log("Path from: " + old_wp.name + "  to: " + wp.name + "\nEdge: ");
             if (nextOne == null)
             {
@@ -424,7 +424,7 @@ public class WaypointPath
             if (this.startEdge.EndWaypoint != pathAsWaypoints[0])
             {
                 // If the edge does not end in the correct waypoint, look for counterpart
-                this.startEdge = graph.getEdge(this.startEdge.endWaypoint, this.startEdge.startWaypoint);
+                this.startEdge = graph.GetEdge(this.startEdge.endWaypoint, this.startEdge.startWaypoint);
                 // If counterpart does not exist, terminate
                 if (this.startEdge == null)
                 {
@@ -434,7 +434,7 @@ public class WaypointPath
             if (this.endEdge.StartWaypoint != pathAsWaypoints[pathAsWaypoints.Count - 1])
             {
                 // If the edge does not end in the correct waypoint, look for counterpart
-                this.endEdge = graph.getEdge(this.endEdge.endWaypoint, this.endEdge.startWaypoint);
+                this.endEdge = graph.GetEdge(this.endEdge.endWaypoint, this.endEdge.startWaypoint);
                 // If counterpart does not exist, terminate
                 if (this.endEdge == null)
                 {
