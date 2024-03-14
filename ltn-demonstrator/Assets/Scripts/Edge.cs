@@ -78,12 +78,12 @@ public class Edge
     public void RecheckSensors()
     {
         this.sensor = getSensorInPath();
-        this.isBarricated = sensor != null;
+        // this.isBarricated = sensor != null;
         this.sensorLocation = sensor != null ? convertToPositionAlongEdge(sensor.transform.position) : -1f;
-        if (this.isBarricated)
-        {
-            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.sensorLocation);
-        }
+        // if (this.isBarricated)
+        // {
+        //     Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.sensorLocation);
+        // }
     }
 
     // converting between distance along edge and distance in world space
@@ -409,12 +409,12 @@ public class Edge
         if (distanceToStart < distanceToEnd)
         {
             // If there is no barrier between the point and the start waypoint, return start waypoint
-            if (!isEdgeTraversableThroughBarrier(point, startWaypoint.transform.position, mode))
+            if (!isBarrierBlocking(point, startWaypoint.transform.position, mode))
             {
                 return startWaypoint;
             }
             // Otherwise, check if the end waypoint is accessible
-            else if (!isEdgeTraversableThroughBarrier(point, endWaypoint.transform.position, mode))
+            else if (!isBarrierBlocking(point, endWaypoint.transform.position, mode))
             {
                 return endWaypoint;
             }
@@ -422,12 +422,12 @@ public class Edge
         else
         {
             // If there is no barrier between the point and the end waypoint, return end waypoint
-            if (!isEdgeTraversableThroughBarrier(point, endWaypoint.transform.position, mode))
+            if (!isBarrierBlocking(point, endWaypoint.transform.position, mode))
             {
                 return endWaypoint;
             }
             // Otherwise, check if the start waypoint is accessible
-            else if (!isEdgeTraversableThroughBarrier(point, startWaypoint.transform.position, mode))
+            else if (!isBarrierBlocking(point, startWaypoint.transform.position, mode))
             {
                 return startWaypoint;
             }
@@ -445,11 +445,16 @@ public class Edge
     /// <param name="destination"></param>
     /// <param name="mode"></param>
     /// <returns></returns>
-    public bool isEdgeTraversableThroughBarrier(Vector3 start, Vector3 destination, ModeOfTransport mode = ModeOfTransport.Car)
+    public bool isBarrierBlocking(Vector3 start, Vector3 destination, ModeOfTransport mode = ModeOfTransport.Car)
     {
         // Check if barricade is active
         if (!isBarricated)
         {
+            Debug.LogWarning("Barrier is not between start and destination. this is barricated "+ isBarricated);
+            if (this.startWaypoint.transform.name == "Waypoint" || this.endWaypoint.transform.name == "Waypoint (1)")
+            {
+                Debug.LogError("this is a big bug. isbarricated: " + isBarricated);
+            }
             return false;
         }
 

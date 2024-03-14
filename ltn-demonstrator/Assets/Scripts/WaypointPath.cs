@@ -98,7 +98,7 @@ public class WaypointPath
         // Check if start and end are on the same edge to handle this special case
         if (startEdge.isSameEdge(endEdge))
         {
-            if (startEdge.isBarricated && !startEdge.isEdgeTraversableThroughBarrier(beginningPos, destinationPos))
+            if (startEdge.isBarricated && !startEdge.isBarrierBlocking(beginningPos, destinationPos, mode))
             {
                 // Barrier, but the destination is before the barrier, return a direct path
                 return new List<Waypoint>();
@@ -168,7 +168,7 @@ public class WaypointPath
                 Edge connectingEdge = graph.GetEdge(current, neighbor);
 
                 // Calculate the alternative distance to this neighbor
-                if (connectingEdge.isEdgeTraversableThroughBarrier(current.transform.position, neighbor.transform.position))
+                if (connectingEdge.isBarrierBlocking(current.transform.position, neighbor.transform.position, mode))
                 {
                     continue;
                 }
@@ -298,7 +298,7 @@ public class WaypointPath
                 }
 
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
-                if (connectingEdge.isEdgeTraversableThroughBarrier(current.transform.position, neighbor.transform.position, mode))
+                if (connectingEdge.isBarrierBlocking(current.transform.position, neighbor.transform.position, mode))
                 {
                     continue; // Skip to the next neighbor if there is a barrier
                 }
