@@ -16,7 +16,7 @@ public class EdgeLoader
         LoadEdges();
     }
 
-    public static void LoadEdges(Dictionary<Edge, List<Edge>> intersectingEdgesOverride = null)
+    public static void LoadEdges(Dictionary<ReducedEdge, List<ReducedEdge>> intersectingEdgesOverride = null)
     {
         Graph graph = Object.FindFirstObjectByType<Graph>();
 
@@ -46,12 +46,12 @@ public class EdgeLoader
             Debug.Log("Overriding intersecting edges.");
 
             // these edges will be stale, however, we can get the updated edges from the graph
-            foreach (KeyValuePair<Edge, List<Edge>> kvp in intersectingEdgesOverride)
+            foreach (KeyValuePair<ReducedEdge, List<ReducedEdge>> kvp in intersectingEdgesOverride)
             {
                 Edge keyEdge = graph.getEdge(kvp.Key.startWaypoint, kvp.Key.endWaypoint);
-                foreach (Edge edge in kvp.Value)
+                foreach (ReducedEdge reducedEdge in kvp.Value)
                 {
-                    keyEdge.RegisterIntersectingEdge(graph.getEdge(edge.startWaypoint, edge.endWaypoint));
+                    keyEdge.RegisterIntersectingEdge(graph.getEdge(reducedEdge.startWaypoint, reducedEdge.endWaypoint));
                 }
             }
 

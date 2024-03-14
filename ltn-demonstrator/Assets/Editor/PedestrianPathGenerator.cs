@@ -262,18 +262,23 @@ public class PedestrianPathGenerator
         var roadEdges = allEdges.Except(pedestrianEdges).ToList();
 
         // This is a dictionary that will store the intersecting edges for each edge
-        Dictionary<Edge, List<Edge>> intersectingEdgesOverride = new Dictionary<Edge, List<Edge>>();
+        Dictionary<ReducedEdge, List<ReducedEdge>> intersectingEdgesOverride = new Dictionary<ReducedEdge, List<ReducedEdge>>();
         // Helper method to add edges to the dictionary
         void AddIntersectingEdge(Edge keyEdge, Edge intersectingEdge)
         {
+            // we keep track of intersecting edges using reduced edges, which are just
+            // stripped down versions of the edges that only contain the start and end waypoints
+            ReducedEdge key = new ReducedEdge(keyEdge);
+            ReducedEdge intersecting = new ReducedEdge(intersectingEdge);
+
             // keyEdge.RegisterIntersectingEdge(intersectingEdge);
-            if (intersectingEdgesOverride.ContainsKey(keyEdge))
+            if (intersectingEdgesOverride.ContainsKey(key))
             {
-                intersectingEdgesOverride[keyEdge].Add(intersectingEdge);
+                intersectingEdgesOverride[key].Add(intersecting);
             }
             else
             {
-                intersectingEdgesOverride[keyEdge] = new List<Edge> { intersectingEdge };
+                intersectingEdgesOverride[key] = new List<ReducedEdge> { intersecting };
             }
         }
 
@@ -374,9 +379,6 @@ public class PedestrianPathGenerator
         }
 
         // we re-load the edges to update the graph.
-        // TODO: this isn't accounting for intersecting edges. Maybe pass in a Dict<Edge, List<Edges>> 
-        // so it keeps it in memory and doesn't have to re-calculate it?
-        // idk this is hard
         EdgeLoader.LoadEdges(intersectingEdgesOverride);
     }
 
