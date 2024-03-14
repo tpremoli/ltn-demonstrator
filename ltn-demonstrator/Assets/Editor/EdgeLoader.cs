@@ -32,9 +32,6 @@ public class EdgeLoader
             // For each adjacent waypoint
             foreach (Waypoint adjacentWaypoint in waypoint.adjacentWaypoints)
             {
-                // Calculate the distance between the waypoint and the adjacent waypoint
-                float distance = graph.CalculateDistance(waypoint, adjacentWaypoint);
-
                 // Create a new Edge object with the waypoint and the adjacent waypoint
                 Edge edge = new Edge(waypoint, adjacentWaypoint);
 

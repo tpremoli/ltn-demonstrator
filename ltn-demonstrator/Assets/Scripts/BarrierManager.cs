@@ -145,7 +145,7 @@ public class BarrierManager : MonoBehaviour
         // this is not efficient at all.
         foreach (Edge edge in graph.edges)
         {
-            edge.RecheckBarriers();
+            edge.CheckBarriers();
         }
 
     }

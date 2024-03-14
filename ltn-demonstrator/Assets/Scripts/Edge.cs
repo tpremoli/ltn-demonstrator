@@ -52,23 +52,25 @@ public class Edge
 
         this.TravellersOnEdge = new List<WaypointMover>();
 
-        this.barrier = getBarrierInPath();
-        this.isBarricated = barrier != null;
-        this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
-
         this.isPedestrianOnly = startWaypoint.isPedestrianOnly || endWaypoint.isPedestrianOnly;
 
-        if (this.isBarricated)
-        {
-            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
-        }
+        CheckBarriers();
     }
 
-    public void RecheckBarriers()
+    public void CheckBarriers()
     {
         this.barrier = getBarrierInPath();
-        this.isBarricated = barrier != null;
-        this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
+        if (this.isPedestrianOnly)
+        {
+            this.isBarricated = false;
+            this.barrierLocation = -1f;
+        }
+        else
+        {
+            this.isBarricated = barrier != null;
+            this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
+        }
+
         if (this.isBarricated)
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
@@ -450,7 +452,7 @@ public class Edge
         // Check if barricade is active
         if (!isBarricated)
         {
-            Debug.LogWarning("Barrier is not between start and destination. this is barricated "+ isBarricated);
+            Debug.LogWarning("Barrier is not between start and destination. this is barricated " + isBarricated);
             if (this.startWaypoint.transform.name == "Waypoint" || this.endWaypoint.transform.name == "Waypoint (1)")
             {
                 Debug.LogError("this is a big bug. isbarricated: " + isBarricated);
