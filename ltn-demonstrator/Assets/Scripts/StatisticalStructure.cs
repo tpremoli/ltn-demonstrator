@@ -10,7 +10,7 @@ public class PathData {
     public float startTime;
     public float endTime;
     public bool routeChange;
-    public ModeOfTransport travellerType;
+    public VehicleProperties vType;
 }
 
 public class SerialisableEdge {

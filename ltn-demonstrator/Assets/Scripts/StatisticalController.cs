@@ -103,7 +103,9 @@
                     CreateSerialisableEdgesAndWaypoints();
                     Debug.LogError("SERIALISED EDGES AND WAYPOINTS");
                     //SerialisePathDataSave();
+                    getAllSerialisedPaths();
                     Debug.Log("Serialised PathData");
+
                     //change scene
                     SceneManager.LoadScene("StatisticsScene");
 
@@ -181,7 +183,7 @@
                                 $"Start Time: {pd.startTime}\n" +
                                 $"End Time: {pd.endTime}\n" +
                                 $"Route Changed: {(pd.routeChange ? "Yes" : "No")}\n" +
-                                $"Traveller Type: {pd.travellerType}";
+                                $"Traveller Type: {pd.vType}";
 
             return dataString;
         }
@@ -202,7 +204,7 @@
                     allPathData[i].startTime < 0 || 
                     allPathData[i].endTime < 1 || 
                     !(allPathData[i].routeChange == false || allPathData[i].routeChange == true) || 
-                    !Enum.IsDefined(typeof(ModeOfTransport), allPathData[i].travellerType) ||
+                    //!Enum.IsDefined(typeof(VehicleType), allPathData[i].vType) ||
                     allPathData[i].path == null)
                 {
                     allPathData.RemoveAt(i);
@@ -225,7 +227,8 @@
             string totalNoOfTravellers = TotalNumberOfTravellers();
             string averageTravVelo = AverageTravellerVelocity();
             string rateOfDeviation = RateOfDeviation();
-            finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage traveller velocity: {averageTravVelo} spatial units/s\nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: N/A \nTotal pollution: N/A ";
+            string rateOfPollution = "N/A";
+            finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage traveller velocity: {averageTravVelo} spatial units/s\nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: {rateOfPollution} \nTotal pollution: N/A ";
             //Set the TMP object to the stats we calc
             statsText.text = finalString;
             
@@ -309,6 +312,27 @@
             return new_edges;
         }
 
+
+        private VehicleType ConvertToVehicleType(ModeOfTransport mode)
+        {
+            switch (mode)
+            {
+                case ModeOfTransport.Car:
+                    return VehicleType.PersonalCar;
+                case ModeOfTransport.SUV:
+                    return VehicleType.SUV;
+                case ModeOfTransport.Van:
+                    return VehicleType.Van;
+                case ModeOfTransport.Taxi:
+                    return VehicleType.Taxi;
+                case ModeOfTransport.Pedestrian:
+                case ModeOfTransport.Bicycle: // If you treat Bicycle as Pedestrian in this context
+                    return VehicleType.Pedestrian;
+                // Map other modes of transport if needed
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(mode), $"Not supported mode: {mode}");
+            }
+        }
 
 
         //for each waypoint in the simulation, convert to a serialisable waypoint
@@ -466,6 +490,29 @@
             Debug.LogError($"allEdges length: {allEdges.Count}, allWaypoints length: {allWaypoints.Count}");
         }
 
+
+        public List<SerialisableEdge> CreateSerialisablePath(List<Edge> path)
+        {
+            List<SerialisableEdge> serialisablePath = new List<SerialisableEdge>();
+            foreach (Edge edge in path)
+            {
+                foreach (SerialisableEdge serialisableEdge in allEdges)
+                {
+                    if (serialisableEdge.ID == edge.ID)
+                    {
+                        serialisablePath.Add(serialisableEdge);
+                    }
+                }
+            }
+            return serialisablePath;
+        }
+
+        public void getAllSerialisedPaths() {
+            foreach (var pathData in allPathData) {
+                pathData.serialisablePath = CreateSerialisablePath(pathData.path);
+            }
+        }
+
         //-------------------------------------HEATMAP FUNCTIONS---------------------------------------------------------------------------------------
 
         public void ShowWhiteScreen()
@@ -565,7 +612,6 @@
 
 
 
-
         public void DrawWaypoints(List<SerialisableWaypoint> waypoints)
         {
             //Transform waypoints so that they are correctly oriented
@@ -607,13 +653,13 @@
 
         public void DrawLine(SerialisableEdge edge, Vector3 start, Vector3 end)
         {   
-            float weight = 15f; // This is your existing weight value
-            float uniformWidth = Mathf.Lerp(0.1f, 0.5f, weight*100); // Calculate the uniform width based on weight
+            Debug.Log($"Edge weight is {edge.weight}");
+            // If you want a really wide line, you can set this directly to a large number
+            float uniformWidth = 7f; // for example, a very wide line
 
-            //translate the start and end points to the correct position, increase z by 5
+            //translate the start and end points to the correct position, set z to -3
             start.z = -3;
             end.z = -3;
-
 
             GameObject lineObj = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
             LineRenderer lineRenderer = lineObj.GetComponent<LineRenderer>();
@@ -622,33 +668,32 @@
             lineRenderer.SetPosition(0, start);
             lineRenderer.SetPosition(1, end);
 
-            // Set the AnimationCurve for width to have the same value at start, middle, and end
-            AnimationCurve widthCurve = new AnimationCurve(
-                new Keyframe(0.0f, uniformWidth), // Start width
-                new Keyframe(0.5f, uniformWidth), // Middle width
-                new Keyframe(1.0f, uniformWidth)  // End width
-            );
-            lineRenderer.widthCurve = widthCurve;
+            // Set the width of the line to be the same at the start, mi ddle, and end
+            lineRenderer.startWidth = uniformWidth;
+            lineRenderer.endWidth = uniformWidth;
 
-            // Adjust color based on weight
+            // Adjust color based on weight (you'll replace this part with your own method to get color from weight)
             Gradient gradient = new Gradient();
             gradient.SetKeys(
-                new GradientColorKey[] { new GradientColorKey(GetColorFromWeight(weight), 0.0f), new GradientColorKey(GetColorFromWeight(weight), 1.0f) },
+                new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.white, 1.0f) },
                 new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
             );
             lineRenderer.colorGradient = gradient;
+
+            // Enable the line object
             lineObj.SetActive(true);
 
-            //assign to serialisable edge object
+            // Assign the GameObject to the serializable edge
             edge.EdgeObject = lineObj;
         }
+
 
 
         private Color GetColorFromWeight(float weight)
         {
             // Implement your logic to return a color based on the weight
             // For example, from green (low weight) to red (high weight)
-            return Color.Lerp(Color.green, Color.red, weight);
+            return Color.Lerp(Color.green, Color.green, weight);
         }
 
 
@@ -664,6 +709,7 @@
                 
             }
         }
+
 
         public void HideEdges(List<SerialisableEdge> edges)
         {
@@ -684,6 +730,7 @@
             }
         }
 
+
         public void DrawHeatMap() 
         {
             //draw the white screen
@@ -696,6 +743,7 @@
             //switch tracking variable
             isHeatMapVisible = true;
         }
+
 
         public void HideHeatMap() 
         {
@@ -710,6 +758,28 @@
             //switch tracking variable
             isHeatMapVisible = false;
         }
+
+
+        public void CalcEdgeWeightsByUsage () {
+            //iterate through all pathdata serialisable paths
+            foreach (PathData pd in allPathData) {
+                foreach (SerialisableEdge e in pd.serialisablePath) {
+                    //increment pathdata weight, normalise the amount
+                    e.weight+= 1 / allPathData.Count;
+                }
+            }
+        }
+
+        public void CalcEdgeWeightsByEmissions () {
+            //iterate through all pathdata serialisable paths
+            foreach (PathData pd in allPathData) {
+                foreach (SerialisableEdge e in pd.serialisablePath) {
+                    //increment pathdata weight by emmision score, normalise the amount
+                    e.weight+= 1 / allPathData.Count;
+                }
+            }
+        }
+
 
         //---------------------------------STATISTICAL MEASURES------------------------------------------------------------------------------------------
 
@@ -747,7 +817,6 @@
                 if (pd.serialisablePath == null)
                 {
                     Debug.Log(Time.deltaTime);
-                    Debug.LogWarning("PathData path is null");
                     continue; // Skip this PathData as its path is null
                 }
                 foreach (SerialisableEdge e in pd.serialisablePath)
@@ -786,15 +855,50 @@
         }
 
         //Rate of pollution - uses arbitrary values for now
-        private string RateOfPollution ()
+        private string RateOfPollution()
         {
+            if (allPathData == null) 
+            {
+                Debug.LogError("allPathData is null");
+                return "N/A";
+            }
+
+            foreach (PathData pd in allPathData)
+            {
+                Debug.Log($"traveller type is {pd.vType}");
+                // Create an instance of VehicleProperties with the traveller type
+                Debug.Log($"emission rate is {pd.vType.RateOfEmission}");
+                // Ensure pd.serialisablePath is not null
+                if (pd.serialisablePath == null)
+                {
+                    Debug.LogError("serialisablePath is null for PathData: " + pd.vType);
+                    continue;
+                }
+
+                foreach (SerialisableEdge e in pd.serialisablePath)
+                {
+                    if (e == null)
+                    {
+                        Debug.LogError("One of the SerializableEdges in serialisablePath is null");
+                        continue;
+                    }
+
+                    // Assuming you want to use the emission rate in your calculation
+                    float emissionRate = pd.vType.RateOfEmission; 
+                    e.weight += emissionRate / allPathData.Count;
+                }
+            }
+
             return "N/A";
         }
+
+
 
 
         //Total Pollution
 
 
+        // Sum type of pollution
 
 
 
@@ -802,27 +906,9 @@
 
         //-------------------------------HEATMAP GENERATION-------------------------------------------------------------------------------------------
         
-        public void MakeHeatmap ()
-        {
-
-        }
+    
 
 
-        public void GetEdgeWeights () {
-            //iterate through all pathdata serialisable paths
-            foreach (PathData pd in allPathData) {
-                foreach (SerialisableEdge e in pd.serialisablePath) {
-                    //increment pathdata weight
-                    e.weight++;
-                }
-            }
-            //normalise weights
-            foreach (PathData pd in allPathData) {
-                foreach (SerialisableEdge e in pd.serialisablePath) {
-                    e.weight = e.weight / allPathData.Count;
-                }
-            }   
-        }
 
 
     }
