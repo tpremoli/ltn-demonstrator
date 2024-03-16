@@ -391,6 +391,7 @@ MonoBehaviour:
   - {fileID: 685707326}
   - {fileID: 626713118}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &5688594
 Transform:
   m_ObjectHideFlags: 0
@@ -2331,6 +2332,7 @@ MonoBehaviour:
   - {fileID: 1985082742}
   - {fileID: 2132590382}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &64477429
 Transform:
   m_ObjectHideFlags: 0
@@ -3126,6 +3128,7 @@ MonoBehaviour:
   - {fileID: 1647580529}
   - {fileID: 938341096}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &78900479
 Transform:
   m_ObjectHideFlags: 0
@@ -3804,6 +3807,7 @@ MonoBehaviour:
   - {fileID: 295954365}
   - {fileID: 1763713852}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &95928382
 Transform:
   m_ObjectHideFlags: 0
@@ -4377,6 +4381,7 @@ MonoBehaviour:
   - {fileID: 732809768}
   - {fileID: 1218208234}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &105288850
 Transform:
   m_ObjectHideFlags: 0
@@ -4427,6 +4432,7 @@ MonoBehaviour:
   - {fileID: 464982270}
   - {fileID: 1414880892}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &111726483
 Transform:
   m_ObjectHideFlags: 0
@@ -4581,6 +4587,7 @@ MonoBehaviour:
   - {fileID: 1886856595}
   - {fileID: 1328479508}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &119660091
 Transform:
   m_ObjectHideFlags: 0
@@ -5640,6 +5647,7 @@ MonoBehaviour:
   - {fileID: 541101200}
   - {fileID: 2090414314}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!1 &158780618
 GameObject:
   m_ObjectHideFlags: 0
@@ -6095,6 +6103,7 @@ MonoBehaviour:
   - {fileID: 1175969183}
   - {fileID: 1104895437}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &177077790
 Transform:
   m_ObjectHideFlags: 0
@@ -7017,6 +7026,7 @@ MonoBehaviour:
   - {fileID: 1658340891}
   - {fileID: 1148522935}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &206155781
 Transform:
   m_ObjectHideFlags: 0
@@ -8723,6 +8733,7 @@ MonoBehaviour:
   - {fileID: 1188097640}
   - {fileID: 1611620866}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &242191367
 Transform:
   m_ObjectHideFlags: 0
@@ -8835,6 +8846,7 @@ MonoBehaviour:
   - {fileID: 1796866495}
   - {fileID: 1755818239}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &245217072
 Transform:
   m_ObjectHideFlags: 0
@@ -10063,6 +10075,7 @@ MonoBehaviour:
   - {fileID: 1104895437}
   - {fileID: 883918156}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &290847013
 Transform:
   m_ObjectHideFlags: 0
@@ -10113,6 +10126,7 @@ MonoBehaviour:
   - {fileID: 1248166020}
   - {fileID: 569206410}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &295954366
 Transform:
   m_ObjectHideFlags: 0
@@ -10752,6 +10766,7 @@ MonoBehaviour:
   - {fileID: 1188097640}
   - {fileID: 750075704}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &303305278
 Transform:
   m_ObjectHideFlags: 0
@@ -11831,6 +11846,7 @@ MonoBehaviour:
   - {fileID: 626713118}
   - {fileID: 1096723634}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &332563260
 Transform:
   m_ObjectHideFlags: 0
@@ -12088,6 +12104,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 2041507252}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &340646350
 Transform:
   m_ObjectHideFlags: 0
@@ -12793,6 +12810,7 @@ MonoBehaviour:
   - {fileID: 1549056168}
   - {fileID: 64477428}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &365317388
 Transform:
   m_ObjectHideFlags: 0
@@ -13220,6 +13238,7 @@ MonoBehaviour:
   - {fileID: 1853832083}
   - {fileID: 748827876}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &378921276
 Transform:
   m_ObjectHideFlags: 0
@@ -14968,6 +14987,7 @@ MonoBehaviour:
   - {fileID: 2041507252}
   - {fileID: 1387554582}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &439925892
 Transform:
   m_ObjectHideFlags: 0
@@ -16210,6 +16230,7 @@ MonoBehaviour:
   - {fileID: 1616635259}
   - {fileID: 111726482}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &464982271
 Transform:
   m_ObjectHideFlags: 0
@@ -17202,6 +17223,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 1886856595}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &501149562
 Transform:
   m_ObjectHideFlags: 0
@@ -18745,6 +18767,7 @@ MonoBehaviour:
   - {fileID: 156480190}
   - {fileID: 2090414314}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &541101201
 Transform:
   m_ObjectHideFlags: 0
@@ -18899,6 +18922,7 @@ MonoBehaviour:
   - {fileID: 2090414314}
   - {fileID: 1701784750}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &547087814
 Transform:
   m_ObjectHideFlags: 0
@@ -19534,6 +19558,7 @@ MonoBehaviour:
   - {fileID: 1414880892}
   - {fileID: 668685364}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &557419714
 Transform:
   m_ObjectHideFlags: 0
@@ -20214,6 +20239,7 @@ MonoBehaviour:
   - {fileID: 1248166020}
   - {fileID: 295954365}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &569206411
 Transform:
   m_ObjectHideFlags: 0
@@ -21007,6 +21033,7 @@ MonoBehaviour:
   - {fileID: 1658340891}
   - {fileID: 1148522935}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &582245137
 Transform:
   m_ObjectHideFlags: 0
@@ -21925,6 +21952,7 @@ MonoBehaviour:
   - {fileID: 685707326}
   - {fileID: 5688593}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &626713119
 Transform:
   m_ObjectHideFlags: 0
@@ -23165,6 +23193,7 @@ MonoBehaviour:
   - {fileID: 1616635259}
   - {fileID: 557419713}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &668685365
 Transform:
   m_ObjectHideFlags: 0
@@ -23635,6 +23664,7 @@ MonoBehaviour:
   - {fileID: 1279267445}
   - {fileID: 1960957215}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &679939648
 Transform:
   m_ObjectHideFlags: 0
@@ -23895,6 +23925,7 @@ MonoBehaviour:
   - {fileID: 626713118}
   - {fileID: 5688593}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &685707327
 Transform:
   m_ObjectHideFlags: 0
@@ -24279,6 +24310,7 @@ MonoBehaviour:
   - {fileID: 1549056168}
   - {fileID: 1277130997}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &692326420
 Transform:
   m_ObjectHideFlags: 0
@@ -25305,6 +25337,7 @@ MonoBehaviour:
   - {fileID: 1908004338}
   - {fileID: 1016711020}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &732809769
 Transform:
   m_ObjectHideFlags: 0
@@ -25880,6 +25913,7 @@ MonoBehaviour:
   - {fileID: 378921275}
   - {fileID: 1853832083}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &748827877
 Transform:
   m_ObjectHideFlags: 0
@@ -26033,6 +26067,7 @@ MonoBehaviour:
   - {fileID: 242191366}
   - {fileID: 303305277}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &750075705
 Transform:
   m_ObjectHideFlags: 0
@@ -28326,6 +28361,7 @@ MonoBehaviour:
   - {fileID: 1908004338}
   - {fileID: 1835555966}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &872469781
 Transform:
   m_ObjectHideFlags: 0
@@ -29172,6 +29208,7 @@ MonoBehaviour:
   - {fileID: 177077789}
   - {fileID: 290847012}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &883918157
 Transform:
   m_ObjectHideFlags: 0
@@ -29769,6 +29806,7 @@ MonoBehaviour:
   - {fileID: 1148522935}
   - {fileID: 2121232756}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &902534253
 Transform:
   m_ObjectHideFlags: 0
@@ -30871,6 +30909,7 @@ MonoBehaviour:
   - {fileID: 1647580529}
   - {fileID: 78900478}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &938341097
 Transform:
   m_ObjectHideFlags: 0
@@ -31610,6 +31649,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 2132590382}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &966921724
 Transform:
   m_ObjectHideFlags: 0
@@ -32961,6 +33001,7 @@ MonoBehaviour:
   - {fileID: 156480190}
   - {fileID: 1602942848}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1002765806
 Transform:
   m_ObjectHideFlags: 0
@@ -33296,6 +33337,7 @@ MonoBehaviour:
   - {fileID: 1908004338}
   - {fileID: 732809768}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1016711021
 Transform:
   m_ObjectHideFlags: 0
@@ -36095,6 +36137,7 @@ MonoBehaviour:
   - {fileID: 685707326}
   - {fileID: 332563259}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1096723635
 Transform:
   m_ObjectHideFlags: 0
@@ -36460,6 +36503,7 @@ MonoBehaviour:
   - {fileID: 1175969183}
   - {fileID: 177077789}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1104895438
 Transform:
   m_ObjectHideFlags: 0
@@ -38004,6 +38048,7 @@ MonoBehaviour:
   - {fileID: 582245136}
   - {fileID: 206155780}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1148522936
 Transform:
   m_ObjectHideFlags: 0
@@ -38760,6 +38805,7 @@ MonoBehaviour:
   - {fileID: 1104895437}
   - {fileID: 177077789}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1175969184
 Transform:
   m_ObjectHideFlags: 0
@@ -39163,6 +39209,7 @@ MonoBehaviour:
   - {fileID: 242191366}
   - {fileID: 1388386941}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1188097641
 Transform:
   m_ObjectHideFlags: 0
@@ -39588,6 +39635,7 @@ MonoBehaviour:
   - {fileID: 1908004338}
   - {fileID: 105288849}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1218208235
 Transform:
   m_ObjectHideFlags: 0
@@ -39845,6 +39893,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 1450750186}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1222596886
 Transform:
   m_ObjectHideFlags: 0
@@ -40315,6 +40364,7 @@ MonoBehaviour:
   - {fileID: 295954365}
   - {fileID: 569206410}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1248166021
 Transform:
   m_ObjectHideFlags: 0
@@ -41230,6 +41280,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 692326419}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1277130998
 Transform:
   m_ObjectHideFlags: 0
@@ -41277,6 +41328,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 679939647}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1279267446
 Transform:
   m_ObjectHideFlags: 0
@@ -41850,6 +41902,7 @@ MonoBehaviour:
   - {fileID: 206155780}
   - {fileID: 2114516592}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1287622242
 Transform:
   m_ObjectHideFlags: 0
@@ -42553,6 +42606,7 @@ MonoBehaviour:
   - {fileID: 378921275}
   - {fileID: 2076254888}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1312245971
 Transform:
   m_ObjectHideFlags: 0
@@ -45091,6 +45145,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 439925891}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1387554583
 Transform:
   m_ObjectHideFlags: 0
@@ -45141,6 +45196,7 @@ MonoBehaviour:
   - {fileID: 1188097640}
   - {fileID: 1611620866}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1388386942
 Transform:
   m_ObjectHideFlags: 0
@@ -46049,6 +46105,7 @@ MonoBehaviour:
   - {fileID: 1616635259}
   - {fileID: 111726482}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1414880893
 Transform:
   m_ObjectHideFlags: 0
@@ -47396,6 +47453,7 @@ MonoBehaviour:
   - {fileID: 1222596885}
   - {fileID: 1692226764}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1450750187
 Transform:
   m_ObjectHideFlags: 0
@@ -51445,6 +51503,7 @@ MonoBehaviour:
   - {fileID: 365317387}
   - {fileID: 1708879216}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1549056169
 Transform:
   m_ObjectHideFlags: 0
@@ -52964,6 +53023,7 @@ MonoBehaviour:
   - {fileID: 541101200}
   - {fileID: 1002765805}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1602942849
 Transform:
   m_ObjectHideFlags: 0
@@ -53330,6 +53390,7 @@ MonoBehaviour:
   - {fileID: 242191366}
   - {fileID: 1388386941}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1611620867
 Transform:
   m_ObjectHideFlags: 0
@@ -53485,6 +53546,7 @@ MonoBehaviour:
   - {fileID: 464982270}
   - {fileID: 1414880892}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1616635260
 Transform:
   m_ObjectHideFlags: 0
@@ -54795,6 +54857,7 @@ MonoBehaviour:
   - {fileID: 78900478}
   - {fileID: 938341096}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1647580530
 Transform:
   m_ObjectHideFlags: 0
@@ -55398,6 +55461,7 @@ MonoBehaviour:
   - {fileID: 582245136}
   - {fileID: 206155780}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1658340892
 Transform:
   m_ObjectHideFlags: 0
@@ -56283,2463 +56347,2955 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointSize: 1
-  edges:
-  - position: {x: 0, y: 0, z: 0}
+  allEdges:
+  - EdgeID: 0
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 5688593}
     endWaypoint: {fileID: 1755818239}
     length: 34.578743
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 1
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 5688593}
     endWaypoint: {fileID: 1175969183}
     length: 39.660164
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 2
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 5688593}
     endWaypoint: {fileID: 685707326}
     length: 5.481173
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 3
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 5688593}
     endWaypoint: {fileID: 626713118}
     length: 4.942559
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 4
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
     endWaypoint: {fileID: 365317387}
     length: 46.2
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 5
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
     endWaypoint: {fileID: 1450750186}
     length: 25.612495
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 6
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
     endWaypoint: {fileID: 1985082742}
     length: 30.100662
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 7
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
     endWaypoint: {fileID: 2132590382}
     length: 40.30012
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 8
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
     endWaypoint: {fileID: 1755818239}
     length: 42.10296
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 9
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
     endWaypoint: {fileID: 582245136}
     length: 39.761806
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 10
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
     endWaypoint: {fileID: 1647580529}
     length: 5.523691
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 11
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
     endWaypoint: {fileID: 938341096}
     length: 4.9703236
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 12
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 95928381}
     endWaypoint: {fileID: 295954365}
     length: 48.408367
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 13
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 95928381}
     endWaypoint: {fileID: 1763713852}
     length: 5.1528525
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 14
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 105288849}
     endWaypoint: {fileID: 732809768}
     length: 35.388737
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 15
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 105288849}
     endWaypoint: {fileID: 1218208234}
     length: 5.1528506
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 16
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
     endWaypoint: {fileID: 1796866495}
     length: 20.15644
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 17
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
     endWaypoint: {fileID: 1701784750}
     length: 39.758965
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 18
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
     endWaypoint: {fileID: 464982270}
     length: 4.9253654
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 19
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
     endWaypoint: {fileID: 1414880892}
     length: 4.942266
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 20
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 119660090}
     endWaypoint: {fileID: 1450750186}
     length: 25.103188
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 21
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 119660090}
     endWaypoint: {fileID: 1886856595}
     length: 37.110916
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 22
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 119660090}
     endWaypoint: {fileID: 1328479508}
     length: 44.51359
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 23
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
     endWaypoint: {fileID: 242191366}
     length: 37.788227
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 24
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
     endWaypoint: {fileID: 1002765805}
     length: 56.577126
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 25
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
     endWaypoint: {fileID: 541101200}
     length: 5.5318127
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 26
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
     endWaypoint: {fileID: 2090414314}
     length: 5.4640484
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 27
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
     endWaypoint: {fileID: 883918156}
     length: 29.029257
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 28
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
     endWaypoint: {fileID: 295954365}
     length: 32.40765
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 29
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
     endWaypoint: {fileID: 1175969183}
     length: 4.983664
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 30
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
     endWaypoint: {fileID: 1104895437}
     length: 5.4888444
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 31
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
     endWaypoint: {fileID: 2121232756}
     length: 47.191
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 32
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
     endWaypoint: {fileID: 1287622241}
     length: 41.194878
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 33
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
     endWaypoint: {fileID: 1658340891}
     length: 4.9727006
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 34
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
     endWaypoint: {fileID: 1148522935}
     length: 4.9717655
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 35
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
     endWaypoint: {fileID: 750075704}
     length: 29.10235
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 36
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
     endWaypoint: {fileID: 156480190}
     length: 37.788227
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 37
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
     endWaypoint: {fileID: 1188097640}
     length: 4.946517
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 38
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
     endWaypoint: {fileID: 1611620866}
     length: 4.978569
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 39
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
     endWaypoint: {fileID: 1414880892}
     length: 20.157982
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 40
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
     endWaypoint: {fileID: 1647580529}
     length: 42.067104
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 41
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
     endWaypoint: {fileID: 1796866495}
     length: 4.9462733
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 42
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
     endWaypoint: {fileID: 1755818239}
     length: 5.530843
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 43
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 290847012}
     endWaypoint: {fileID: 1104895437}
     length: 31.482168
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 44
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 290847012}
     endWaypoint: {fileID: 883918156}
     length: 5.1528573
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 45
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
     endWaypoint: {fileID: 177077789}
     length: 32.40765
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 46
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
     endWaypoint: {fileID: 95928381}
     length: 48.408367
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 47
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
     endWaypoint: {fileID: 1248166020}
     length: 5.5442905
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 48
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
     endWaypoint: {fileID: 569206410}
     length: 4.9188232
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 49
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 303305277}
     endWaypoint: {fileID: 1188097640}
     length: 29.12173
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 50
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 303305277}
     endWaypoint: {fileID: 750075704}
     length: 5.15285
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 51
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 332563259}
     endWaypoint: {fileID: 626713118}
     length: 16.37988
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 52
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 332563259}
     endWaypoint: {fileID: 1096723634}
     length: 5.1528516
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 53
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 340646349}
     endWaypoint: {fileID: 2041507252}
     length: 30.030329
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 54
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 365317387}
     endWaypoint: {fileID: 1549056168}
     length: 42.60575
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 55
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 365317387}
     endWaypoint: {fileID: 64477428}
     length: 46.2
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 56
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
     endWaypoint: {fileID: 732809768}
     length: 48.828377
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 57
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
     endWaypoint: {fileID: 1312245970}
     length: 48.624054
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 58
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
     endWaypoint: {fileID: 1853832083}
     length: 4.966165
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 59
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
     endWaypoint: {fileID: 748827876}
     length: 5.5057397
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 60
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 439925891}
     endWaypoint: {fileID: 679939647}
     length: 44.32539
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 61
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 439925891}
     endWaypoint: {fileID: 2041507252}
     length: 37.30482
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 62
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 439925891}
     endWaypoint: {fileID: 1387554582}
     length: 49.329296
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 63
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
     endWaypoint: {fileID: 1611620866}
     length: 20.644459
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 64
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
     endWaypoint: {fileID: 547087813}
     length: 34.899918
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 65
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
     endWaypoint: {fileID: 1616635259}
     length: 4.945698
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 66
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
     endWaypoint: {fileID: 111726482}
     length: 4.9253654
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 67
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 501149561}
     endWaypoint: {fileID: 1886856595}
     length: 17.304619
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 68
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
     endWaypoint: {fileID: 1602942848}
     length: 54.230583
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 69
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
     endWaypoint: {fileID: 1701784750}
     length: 24.835478
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 70
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
     endWaypoint: {fileID: 156480190}
     length: 5.5318127
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 71
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
     endWaypoint: {fileID: 2090414314}
     length: 4.964884
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 72
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 547087813}
     endWaypoint: {fileID: 464982270}
     length: 34.899918
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 73
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 547087813}
     endWaypoint: {fileID: 2090414314}
     length: 19.922989
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 74
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 547087813}
     endWaypoint: {fileID: 1701784750}
     length: 6.9803343
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 75
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 557419713}
     endWaypoint: {fileID: 1414880892}
     length: 42.17839
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 76
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 557419713}
     endWaypoint: {fileID: 668685364}
     length: 5.15285
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 77
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
     endWaypoint: {fileID: 1148522935}
     length: 39.34798
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 78
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
     endWaypoint: {fileID: 1763713852}
     length: 48.2652
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 79
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
     endWaypoint: {fileID: 1248166020}
     length: 5.475798
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 80
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
     endWaypoint: {fileID: 295954365}
     length: 4.9188232
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 81
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
     endWaypoint: {fileID: 1248166020}
     length: 41.805393
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 82
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
     endWaypoint: {fileID: 78900478}
     length: 39.761806
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 83
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
     endWaypoint: {fileID: 1658340891}
     length: 4.919336
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 84
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
     endWaypoint: {fileID: 1148522935}
     length: 4.9183903
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 85
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
     endWaypoint: {fileID: 332563259}
     length: 16.37988
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 86
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
     endWaypoint: {fileID: 1104895437}
     length: 42.165424
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 87
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
     endWaypoint: {fileID: 685707326}
     length: 5.5344186
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 88
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
     endWaypoint: {fileID: 5688593}
     length: 4.942559
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 89
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 668685364}
     endWaypoint: {fileID: 1616635259}
     length: 42.30165
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 90
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 668685364}
     endWaypoint: {fileID: 557419713}
     length: 5.15285
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 91
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
     endWaypoint: {fileID: 1328479508}
     length: 44.71353
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 92
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
     endWaypoint: {fileID: 439925891}
     length: 44.32539
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 93
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
     endWaypoint: {fileID: 1279267445}
     length: 48.200413
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 94
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
     endWaypoint: {fileID: 1960957215}
     length: 42.204266
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 95
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
     endWaypoint: {fileID: 1796866495}
     length: 34.590343
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 96
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
     endWaypoint: {fileID: 1096723634}
     length: 18.793854
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 97
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
     endWaypoint: {fileID: 626713118}
     length: 5.5344186
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 98
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
     endWaypoint: {fileID: 5688593}
     length: 5.481173
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 99
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 692326419}
     endWaypoint: {fileID: 1328479508}
     length: 42.300472
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 100
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 692326419}
     endWaypoint: {fileID: 1549056168}
     length: 51.30624
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 101
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 692326419}
     endWaypoint: {fileID: 1277130997}
     length: 49.608162
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 102
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
     endWaypoint: {fileID: 378921275}
     length: 48.828377
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 103
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
     endWaypoint: {fileID: 105288849}
     length: 35.388737
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 104
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
     endWaypoint: {fileID: 1908004338}
     length: 5.511246
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 105
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
     endWaypoint: {fileID: 1016711020}
     length: 5.5094376
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 106
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
     endWaypoint: {fileID: 938341096}
     length: 39.774227
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 107
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
     endWaypoint: {fileID: 2076254888}
     length: 51.079376
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 108
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
     endWaypoint: {fileID: 378921275}
     length: 5.5057397
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 109
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
     endWaypoint: {fileID: 1853832083}
     length: 5.5101533
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 110
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 750075704}
     endWaypoint: {fileID: 242191366}
     length: 29.10235
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 111
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 750075704}
     endWaypoint: {fileID: 303305277}
     length: 5.15285
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 112
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 872469780}
     endWaypoint: {fileID: 1188097640}
     length: 43.75356
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 113
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 872469780}
     endWaypoint: {fileID: 1908004338}
     length: 40.156258
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 114
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 872469780}
     endWaypoint: {fileID: 1835555966}
     length: 4.900003
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 115
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 883918156}
     endWaypoint: {fileID: 177077789}
     length: 29.029257
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 116
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 883918156}
     endWaypoint: {fileID: 290847012}
     length: 5.1528573
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 117
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 902534252}
     endWaypoint: {fileID: 1148522935}
     length: 47.262287
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 118
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 902534252}
     endWaypoint: {fileID: 2121232756}
     length: 5.1528506
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 119
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
     endWaypoint: {fileID: 1658340891}
     length: 39.779255
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 120
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
     endWaypoint: {fileID: 748827876}
     length: 39.774227
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 121
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
     endWaypoint: {fileID: 1647580529}
     length: 5.4828005
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 122
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
     endWaypoint: {fileID: 78900478}
     length: 4.9703236
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 123
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 966921723}
     endWaypoint: {fileID: 2132590382}
     length: 55.11534
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 124
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1002765805}
     endWaypoint: {fileID: 156480190}
     length: 56.577126
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 125
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1002765805}
     endWaypoint: {fileID: 1602942848}
     length: 5.15285
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 126
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
     endWaypoint: {fileID: 1835555966}
     length: 40.111797
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 127
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
     endWaypoint: {fileID: 1853832083}
     length: 46.371155
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 128
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
     endWaypoint: {fileID: 1908004338}
     length: 4.955971
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 129
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
     endWaypoint: {fileID: 732809768}
     length: 5.5094376
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 130
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1096723634}
     endWaypoint: {fileID: 685707326}
     length: 18.793854
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 131
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1096723634}
     endWaypoint: {fileID: 332563259}
     length: 5.1528516
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 132
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
     endWaypoint: {fileID: 290847012}
     length: 31.482168
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 133
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
     endWaypoint: {fileID: 626713118}
     length: 42.165424
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 134
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
     endWaypoint: {fileID: 1175969183}
     length: 5.515249
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 135
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
     endWaypoint: {fileID: 177077789}
     length: 5.4888444
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 136
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
     endWaypoint: {fileID: 569206410}
     length: 39.34798
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 137
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
     endWaypoint: {fileID: 902534252}
     length: 47.262287
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 138
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
     endWaypoint: {fileID: 582245136}
     length: 4.9183903
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 139
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
     endWaypoint: {fileID: 206155780}
     length: 4.9717655
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 140
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
     endWaypoint: {fileID: 1248166020}
     length: 34.904716
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 141
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
     endWaypoint: {fileID: 5688593}
     length: 39.660164
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 142
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
     endWaypoint: {fileID: 1104895437}
     length: 5.515249
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 143
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
     endWaypoint: {fileID: 177077789}
     length: 4.983664
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 144
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
     endWaypoint: {fileID: 872469780}
     length: 43.75356
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 145
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
     endWaypoint: {fileID: 303305277}
     length: 29.12173
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 146
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
     endWaypoint: {fileID: 242191366}
     length: 4.946517
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 147
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
     endWaypoint: {fileID: 1388386941}
     length: 4.917961
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 148
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1218208234}
     endWaypoint: {fileID: 1908004338}
     length: 32.925243
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 149
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1218208234}
     endWaypoint: {fileID: 105288849}
     length: 5.1528506
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 150
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1222596885}
     endWaypoint: {fileID: 1450750186}
     length: 43.214
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 151
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
     endWaypoint: {fileID: 582245136}
     length: 41.805393
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 152
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
     endWaypoint: {fileID: 1175969183}
     length: 34.904716
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 153
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
     endWaypoint: {fileID: 295954365}
     length: 5.5442905
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 154
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
     endWaypoint: {fileID: 569206410}
     length: 5.475798
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 155
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1277130997}
     endWaypoint: {fileID: 692326419}
     length: 49.608162
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 156
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1279267445}
     endWaypoint: {fileID: 679939647}
     length: 48.200413
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 157
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1287622241}
     endWaypoint: {fileID: 206155780}
     length: 41.194878
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 158
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1287622241}
     endWaypoint: {fileID: 2114516592}
     length: 5.152851
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 159
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1312245970}
     endWaypoint: {fileID: 378921275}
     length: 48.624054
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 160
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1312245970}
     endWaypoint: {fileID: 2076254888}
     length: 5.152851
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 161
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1328479508}
     endWaypoint: {fileID: 679939647}
     length: 44.71353
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 162
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1328479508}
     endWaypoint: {fileID: 692326419}
     length: 42.300472
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 163
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1328479508}
     endWaypoint: {fileID: 119660090}
     length: 44.51359
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 164
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1387554582}
     endWaypoint: {fileID: 439925891}
     length: 49.329296
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 165
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
     endWaypoint: {fileID: 1835555966}
     length: 43.667873
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 166
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
     endWaypoint: {fileID: 1616635259}
     length: 20.700895
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 167
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
     endWaypoint: {fileID: 1188097640}
     length: 4.917961
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 168
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
     endWaypoint: {fileID: 1611620866}
     length: 4.9502
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 169
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
     endWaypoint: {fileID: 245217071}
     length: 20.157982
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 170
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
     endWaypoint: {fileID: 557419713}
     length: 42.17839
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 171
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
     endWaypoint: {fileID: 1616635259}
     length: 4.962533
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 172
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
     endWaypoint: {fileID: 111726482}
     length: 4.942266
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 173
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
     endWaypoint: {fileID: 64477428}
     length: 25.612495
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 174
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
     endWaypoint: {fileID: 119660090}
     length: 25.103188
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 175
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
     endWaypoint: {fileID: 1222596885}
     length: 43.214
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 176
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
     endWaypoint: {fileID: 1692226764}
     length: 39.810177
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 177
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1549056168}
     endWaypoint: {fileID: 692326419}
     length: 51.30624
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 178
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1549056168}
     endWaypoint: {fileID: 365317387}
     length: 42.60575
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 179
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1549056168}
     endWaypoint: {fileID: 1708879216}
     length: 33.907227
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 180
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1602942848}
     endWaypoint: {fileID: 541101200}
     length: 54.230583
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 181
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1602942848}
     endWaypoint: {fileID: 1002765805}
     length: 5.15285
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 182
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
     endWaypoint: {fileID: 464982270}
     length: 20.644459
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 183
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
     endWaypoint: {fileID: 2090414314}
     length: 35.330894
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 184
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
     endWaypoint: {fileID: 242191366}
     length: 4.978569
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 185
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
     endWaypoint: {fileID: 1388386941}
     length: 4.9502
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 186
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
     endWaypoint: {fileID: 1388386941}
     length: 20.700895
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 187
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
     endWaypoint: {fileID: 668685364}
     length: 42.30165
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 188
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
     endWaypoint: {fileID: 464982270}
     length: 4.945698
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 189
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
     endWaypoint: {fileID: 1414880892}
     length: 4.962533
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 190
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
     endWaypoint: {fileID: 245217071}
     length: 42.067104
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 191
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
     endWaypoint: {fileID: 1853832083}
     length: 39.814766
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 192
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
     endWaypoint: {fileID: 78900478}
     length: 5.523691
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 193
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
     endWaypoint: {fileID: 938341096}
     length: 5.4828005
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 194
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
     endWaypoint: {fileID: 938341096}
     length: 39.779255
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 195
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
     endWaypoint: {fileID: 2114516592}
     length: 41.26726
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 196
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
     endWaypoint: {fileID: 582245136}
     length: 4.919336
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 197
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
     endWaypoint: {fileID: 206155780}
     length: 4.9727006
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 198
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1692226764}
     endWaypoint: {fileID: 1450750186}
     length: 39.810177
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 199
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1692226764}
     endWaypoint: {fileID: 2132590382}
     length: 24.834047
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 200
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1701784750}
     endWaypoint: {fileID: 111726482}
     length: 39.758965
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 201
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1701784750}
     endWaypoint: {fileID: 541101200}
     length: 24.835478
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 202
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1701784750}
     endWaypoint: {fileID: 547087813}
     length: 6.9803343
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 203
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1708879216}
     endWaypoint: {fileID: 1549056168}
     length: 33.907227
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 204
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
     endWaypoint: {fileID: 5688593}
     length: 34.578743
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 205
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
     endWaypoint: {fileID: 78900478}
     length: 42.10296
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 206
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
     endWaypoint: {fileID: 245217071}
     length: 5.530843
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 207
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
     endWaypoint: {fileID: 1796866495}
     length: 5.486436
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 208
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1763713852}
     endWaypoint: {fileID: 569206410}
     length: 48.2652
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 209
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1763713852}
     endWaypoint: {fileID: 95928381}
     length: 5.1528525
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 210
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
     endWaypoint: {fileID: 111726482}
     length: 20.15644
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 211
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
     endWaypoint: {fileID: 685707326}
     length: 34.590343
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 212
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
     endWaypoint: {fileID: 245217071}
     length: 4.9462733
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 213
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
     endWaypoint: {fileID: 1755818239}
     length: 5.486436
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 214
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1835555966}
     endWaypoint: {fileID: 1388386941}
     length: 43.667873
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 215
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1835555966}
     endWaypoint: {fileID: 1016711020}
     length: 40.111797
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 216
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1835555966}
     endWaypoint: {fileID: 872469780}
     length: 4.900003
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 217
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
     endWaypoint: {fileID: 1647580529}
     length: 39.814766
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 218
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
     endWaypoint: {fileID: 1016711020}
     length: 46.371155
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 219
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
     endWaypoint: {fileID: 378921275}
     length: 4.966165
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 220
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
     endWaypoint: {fileID: 748827876}
     length: 5.5101533
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 221
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1886856595}
     endWaypoint: {fileID: 119660090}
     length: 37.110916
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 222
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1886856595}
     endWaypoint: {fileID: 2041507252}
     length: 44.61356
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 223
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1886856595}
     endWaypoint: {fileID: 501149561}
     length: 17.304619
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 224
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
     endWaypoint: {fileID: 872469780}
     length: 40.156258
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 225
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
     endWaypoint: {fileID: 1218208234}
     length: 32.925243
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 226
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
     endWaypoint: {fileID: 1016711020}
     length: 4.955971
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 227
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
     endWaypoint: {fileID: 732809768}
     length: 5.511246
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 228
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1960957215}
     endWaypoint: {fileID: 679939647}
     length: 42.204266
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 229
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1985082742}
     endWaypoint: {fileID: 64477428}
     length: 30.100662
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 230
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2041507252}
     endWaypoint: {fileID: 1886856595}
     length: 44.61356
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 231
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2041507252}
     endWaypoint: {fileID: 439925891}
     length: 37.30482
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 232
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2041507252}
     endWaypoint: {fileID: 340646349}
     length: 30.030329
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 233
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2076254888}
     endWaypoint: {fileID: 748827876}
     length: 51.079376
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 234
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2076254888}
     endWaypoint: {fileID: 1312245970}
     length: 5.152851
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 235
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
     endWaypoint: {fileID: 1611620866}
     length: 35.330894
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 236
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
     endWaypoint: {fileID: 547087813}
     length: 19.922989
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 237
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
     endWaypoint: {fileID: 156480190}
     length: 5.4640484
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 238
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
     endWaypoint: {fileID: 541101200}
     length: 4.964884
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 239
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2114516592}
     endWaypoint: {fileID: 1658340891}
     length: 41.26726
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 240
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2114516592}
     endWaypoint: {fileID: 1287622241}
     length: 5.152851
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 241
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2121232756}
     endWaypoint: {fileID: 206155780}
     length: 47.191
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 242
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2121232756}
     endWaypoint: {fileID: 902534252}
     length: 5.1528506
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 1
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 243
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2132590382}
     endWaypoint: {fileID: 64477428}
     length: 40.30012
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 244
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2132590382}
     endWaypoint: {fileID: 966921723}
     length: 55.11534
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+  - EdgeID: 245
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2132590382}
     endWaypoint: {fileID: 1692226764}
     length: 24.834047
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
@@ -59615,6 +60171,7 @@ MonoBehaviour:
   - {fileID: 1450750186}
   - {fileID: 2132590382}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1692226765
 Transform:
   m_ObjectHideFlags: 0
@@ -59874,6 +60431,7 @@ MonoBehaviour:
   - {fileID: 541101200}
   - {fileID: 547087813}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1701784751
 Transform:
   m_ObjectHideFlags: 0
@@ -60341,6 +60899,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 1549056168}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1708879217
 Transform:
   m_ObjectHideFlags: 0
@@ -61636,6 +62195,7 @@ MonoBehaviour:
   - {fileID: 245217071}
   - {fileID: 1796866495}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1755818240
 Transform:
   m_ObjectHideFlags: 0
@@ -62209,6 +62769,7 @@ MonoBehaviour:
   - {fileID: 569206410}
   - {fileID: 95928381}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1763713853
 Transform:
   m_ObjectHideFlags: 0
@@ -63686,6 +64247,7 @@ MonoBehaviour:
   - {fileID: 245217071}
   - {fileID: 1755818239}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1796866496
 Transform:
   m_ObjectHideFlags: 0
@@ -64817,6 +65379,7 @@ MonoBehaviour:
   - {fileID: 1016711020}
   - {fileID: 872469780}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1835555967
 Transform:
   m_ObjectHideFlags: 0
@@ -65392,6 +65955,7 @@ MonoBehaviour:
   - {fileID: 378921275}
   - {fileID: 748827876}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1853832084
 Transform:
   m_ObjectHideFlags: 0
@@ -66499,6 +67063,7 @@ MonoBehaviour:
   - {fileID: 2041507252}
   - {fileID: 501149561}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1886856596
 Transform:
   m_ObjectHideFlags: 0
@@ -66887,6 +67452,7 @@ MonoBehaviour:
   - {fileID: 1016711020}
   - {fileID: 732809768}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &1908004339
 Transform:
   m_ObjectHideFlags: 0
@@ -67457,12 +68023,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closestRoadEdge:
+    EdgeID: 0
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 0}
     endWaypoint: {fileID: 0}
     length: 0
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: 0
     barrier: {fileID: 0}
@@ -69014,6 +69582,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 679939647}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1960957216
 Transform:
   m_ObjectHideFlags: 0
@@ -69692,6 +70261,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 64477428}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1985082743
 Transform:
   m_ObjectHideFlags: 0
@@ -71453,6 +72023,7 @@ MonoBehaviour:
   - {fileID: 439925891}
   - {fileID: 340646349}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &2041507253
 Transform:
   m_ObjectHideFlags: 0
@@ -72614,6 +73185,7 @@ MonoBehaviour:
   - {fileID: 748827876}
   - {fileID: 1312245970}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &2076254889
 Transform:
   m_ObjectHideFlags: 0
@@ -72979,6 +73551,7 @@ MonoBehaviour:
   - {fileID: 156480190}
   - {fileID: 541101200}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &2090414315
 Transform:
   m_ObjectHideFlags: 0
@@ -74397,6 +74970,7 @@ MonoBehaviour:
   - {fileID: 1658340891}
   - {fileID: 1287622241}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &2114516593
 Transform:
   m_ObjectHideFlags: 0
@@ -74760,6 +75334,7 @@ MonoBehaviour:
   - {fileID: 206155780}
   - {fileID: 902534252}
   isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!4 &2121232757
 Transform:
   m_ObjectHideFlags: 0
@@ -75019,6 +75594,7 @@ MonoBehaviour:
   - {fileID: 966921723}
   - {fileID: 1692226764}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &2132590383
 Transform:
   m_ObjectHideFlags: 0

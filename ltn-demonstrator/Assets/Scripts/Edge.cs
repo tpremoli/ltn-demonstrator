@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class ReducedEdge
 {
     public Waypoint startWaypoint;
@@ -20,7 +21,7 @@ public class ReducedEdge
 }
 
 [System.Serializable]
-public class Edge
+public class Edge : ISerializationCallbackReceiver
 {
     [SerializeField] private static int IDcounter = 0;
     [SerializeField] private static Dictionary<int, Edge> edgesByID = new Dictionary<int, Edge>();
@@ -40,7 +41,7 @@ public class Edge
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public List<WaypointMover> TravellersOnEdge;
 
-    [SerializeField] private List<ReducedEdge> IntersectingEdgesByReducedEdge;
+    [SerializeField] public List<ReducedEdge> IntersectingEdgesByReducedEdge;
     public float Distance { get { return length; } }
 
     /// <summary>
@@ -82,13 +83,19 @@ public class Edge
 
         Edge.edgesByID.Add(this.EdgeID, this);
     }
+
+    // Implement this method, but you can leave it empty if you don't need it
+    public void OnBeforeSerialize() { }
     public void OnAfterDeserialize()
     {
+        this.IntersectingEdges = new List<Edge>();
+
         foreach (ReducedEdge r in IntersectingEdgesByReducedEdge)
         {
             this.IntersectingEdges.Add(Graph.Instance.GetEdge(r));
         }
     }
+
     public void RecheckBarriers()
     {
         this.barrier = getBarrierInPath();
@@ -433,7 +440,8 @@ public class Edge
             barrierDistance < System.Math.Max(startDistance, destinationDistance);
     }
 
-    public ReducedEdge Reduce(){
+    public ReducedEdge Reduce()
+    {
         return new ReducedEdge(this.startWaypoint, this.endWaypoint);
     }
 }

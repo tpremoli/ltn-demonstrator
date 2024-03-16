@@ -17,7 +17,10 @@ public class Graph : MonoBehaviour
     [Range(0f, 2f)][SerializeField] private float waypointSize = 0.5f;
     
     // this contains a simple list of all edges
-    private List<Edge> allEdges;
+    [SerializeField] private List<Edge> allEdges;
+
+    // this contains a list of all reduced edges
+    private List<ReducedEdge> reducedEdges;
     
     // this contains a dictionary of all edges, making them a lot faster to access
     // reduced edge is a simple struct containing two waypoints, so it can be used as a key
@@ -73,12 +76,16 @@ public class Graph : MonoBehaviour
     }
     public void ResetEdges(){
         allEdges = new List<Edge>();
+        reducedEdges = new List<ReducedEdge>();
+        edgesAsDict = new Dictionary<ReducedEdge, Edge>();
     }
 
     public void AddEdge(Edge edge)
     {
+        ReducedEdge reducedEdge = edge.Reduce();
         allEdges.Add(edge);
-        edgesAsDict.Add(new ReducedEdge(edge.startWaypoint, edge.endWaypoint), edge);
+        reducedEdges.Add(reducedEdge);
+        edgesAsDict.Add(reducedEdge, edge);
     }
 
     public Building getRandomBuildingByType(BuildingType buildingType)
