@@ -149,6 +149,20 @@ public class Graph : MonoBehaviour
 
     public Edge GetEdge(Waypoint a, Waypoint b)
     {
+        foreach (Edge edge in allEdges)
+        {
+            if (edge.StartWaypoint == a && edge.EndWaypoint == b)
+            {
+                return edge;
+            }
+        }
+
+        return null;
+    }
+
+    // currently not working unfortunately. bit of a nightmare to fix
+    public Edge GetEdgeReduced(Waypoint a, Waypoint b)
+    {
         try
         {
             return edgesAsDict[new ReducedEdge(a, b)];
