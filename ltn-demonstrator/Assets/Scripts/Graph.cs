@@ -20,7 +20,7 @@ public class Graph : MonoBehaviour
     [SerializeField] private List<Edge> allEdges;
 
     // this contains a list of all reduced edges
-    private List<ReducedEdge> reducedEdges;
+    [SerializeField] private List<ReducedEdge> reducedEdges;
     
     // this contains a dictionary of all edges, making them a lot faster to access
     // reduced edge is a simple struct containing two waypoints, so it can be used as a key
