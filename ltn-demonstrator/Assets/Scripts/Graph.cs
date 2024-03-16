@@ -155,6 +155,7 @@ public class Graph : MonoBehaviour
         }
         catch (KeyNotFoundException e)
         {
+            Debug.LogError("Edge not found: " + e.Message + " " + a + " " + b);
             return null;
         }
     }

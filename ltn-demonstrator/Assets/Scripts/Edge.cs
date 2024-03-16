@@ -18,7 +18,34 @@ public class ReducedEdge
         this.endWaypoint = endWaypoint;
     }
 
+    public override bool Equals(object obj)
+    {
+        if (obj == null || this.GetType() != obj.GetType())
+            return false;
+
+        ReducedEdge other = (ReducedEdge)obj;
+        return (this.startWaypoint == other.startWaypoint && this.endWaypoint == other.endWaypoint);
+    }
+
+    public override int GetHashCode()
+    {
+        unchecked // Overflow is fine, just wrap
+        {
+            int hash = 17;
+
+            // Order the waypoints to ensure that the hash code is the same for 
+            // ReducedEdge(start, end) and ReducedEdge(end, start) if that symmetry is desired.
+            // If the direction matters, remove the ordering (Min, Max).
+            int startHash = startWaypoint.GetHashCode();
+            int endHash = endWaypoint.GetHashCode();
+
+            hash = hash * 31 + System.Math.Min(startHash, endHash);
+            hash = hash * 31 + System.Math.Max(startHash, endHash);
+            return hash;
+        }
+    }
 }
+
 
 [System.Serializable]
 public class Edge : ISerializationCallbackReceiver
