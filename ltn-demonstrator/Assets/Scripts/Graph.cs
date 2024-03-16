@@ -151,6 +151,9 @@ public class Graph : MonoBehaviour
             return null;
         }
     }
+    public Edge GetEdge(ReducedEdge re){
+        return this.GetEdge(re.startWaypoint,re.endWaypoint);
+    }
 
     public Edge getClosetRoadEdge(Vector3 position)
     {

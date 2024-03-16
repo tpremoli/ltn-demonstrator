@@ -40,7 +40,7 @@ public class Edge
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public List<WaypointMover> TravellersOnEdge;
 
-    [SerializeField] private List<int> IntersectingEdgesById;
+    [SerializeField] private List<ReducedEdge> IntersectingEdgesByReducedEdge;
     public float Distance { get { return length; } }
 
     /// <summary>
@@ -67,7 +67,7 @@ public class Edge
 
         this.TravellersOnEdge = new List<WaypointMover>();
         this.IntersectingEdges = new List<Edge>();
-        this.IntersectingEdgesById = new List<int>();
+        this.IntersectingEdgesByReducedEdge = new List<ReducedEdge>();
 
         this.barrier = getBarrierInPath();
         this.isBarricated = barrier != null;
@@ -84,10 +84,9 @@ public class Edge
     }
     public void OnAfterDeserialize()
     {
-        foreach (int i in IntersectingEdgesById)
+        foreach (ReducedEdge r in IntersectingEdgesByReducedEdge)
         {
-            Edge e = Edge.edgesByID[i];
-            this.IntersectingEdges.Add(e);
+            this.IntersectingEdges.Add(Graph.Instance.GetEdge(r));
         }
     }
     public void RecheckBarriers()
@@ -123,7 +122,7 @@ public class Edge
     public void RegisterIntersectingEdge(Edge e)
     {
         this.IntersectingEdges.Add(e);
-        this.IntersectingEdgesById.Add(e.EdgeID);
+        this.IntersectingEdgesByReducedEdge.Add(e.Reduce());
     }
     public bool IntersectingEdgesBusy()
     {
@@ -432,5 +431,9 @@ public class Edge
         // Assuming lower distance value is closer to the starting point of the edge
         return barrierDistance > System.Math.Min(startDistance, destinationDistance) &&
             barrierDistance < System.Math.Max(startDistance, destinationDistance);
+    }
+
+    public ReducedEdge Reduce(){
+        return new ReducedEdge(this.startWaypoint, this.endWaypoint);
     }
 }
