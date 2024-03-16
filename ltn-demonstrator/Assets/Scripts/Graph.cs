@@ -40,6 +40,11 @@ public class Graph : MonoBehaviour
         Random.InitState(42); // Set seed for random number generator
         Time.timeScale = 1; // Set time scale to 1
 
+        foreach (Edge edge in allEdges)
+        {
+            edge.BootstrapIntersectingEdges();
+        }
+
         // Initialise buildings dictionary.
         foreach (BuildingType bType in BuildingProperties.buildingTypes)
         {
@@ -156,7 +161,7 @@ public class Graph : MonoBehaviour
                 return edge;
             }
         }
-
+        Debug.LogError("Edge not found: " + a + " - " + b);
         return null;
     }
 

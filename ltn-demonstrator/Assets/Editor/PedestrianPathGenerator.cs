@@ -470,6 +470,7 @@ public class PedestrianPathGenerator
             Object.DestroyImmediate(toDelete[i].gameObject);
         }
 
+        ClearStaticVariables();
         WaypointEditor.PruneDeletedWaypoints();
         EdgeLoader.LoadEdges();
     }

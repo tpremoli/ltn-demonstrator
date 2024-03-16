@@ -48,7 +48,7 @@ public class ReducedEdge
 
 
 [System.Serializable]
-public class Edge : ISerializationCallbackReceiver
+public class Edge
 {
     [SerializeField] private static int IDcounter = 0;
     [SerializeField] private static Dictionary<int, Edge> edgesByID = new Dictionary<int, Edge>();
@@ -111,15 +111,14 @@ public class Edge : ISerializationCallbackReceiver
         Edge.edgesByID.Add(this.EdgeID, this);
     }
 
-    // Implement this method, but you can leave it empty if you don't need it
-    public void OnBeforeSerialize() { }
-    public void OnAfterDeserialize()
+    public void BootstrapIntersectingEdges()
     {
+        Graph graph = Object.FindObjectOfType<Graph>();
         this.IntersectingEdges = new List<Edge>();
 
         foreach (ReducedEdge r in IntersectingEdgesByReducedEdge)
         {
-            this.IntersectingEdges.Add(Graph.Instance.GetEdge(r));
+            this.IntersectingEdges.Add(graph.GetEdge(r));
         }
     }
 
