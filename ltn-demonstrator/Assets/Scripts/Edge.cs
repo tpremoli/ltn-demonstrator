@@ -111,9 +111,8 @@ public class Edge
         Edge.edgesByID.Add(this.EdgeID, this);
     }
 
-    public void BootstrapIntersectingEdges()
+    public void BootstrapIntersectingEdges(Graph graph)
     {
-        Graph graph = Object.FindObjectOfType<Graph>();
         this.IntersectingEdges = new List<Edge>();
 
         foreach (ReducedEdge r in IntersectingEdgesByReducedEdge)

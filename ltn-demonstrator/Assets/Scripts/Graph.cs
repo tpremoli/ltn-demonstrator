@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Graph : MonoBehaviour
+public class Graph : MonoBehaviour, ISerializationCallbackReceiver
 {
     public static Graph Instance { get; private set; }
 
@@ -15,13 +15,13 @@ public class Graph : MonoBehaviour
 
     // private waypointsize with getter
     [Range(0f, 2f)][SerializeField] private float waypointSize = 0.5f;
-    
+
     // this contains a simple list of all edges
     [SerializeField] private List<Edge> allEdges;
 
     // this contains a list of all reduced edges
     [SerializeField] private List<ReducedEdge> reducedEdges;
-    
+
     // this contains a dictionary of all edges, making them a lot faster to access
     // reduced edge is a simple struct containing two waypoints, so it can be used as a key
     private Dictionary<ReducedEdge, Edge> edgesAsDict = new Dictionary<ReducedEdge, Edge>();
@@ -39,11 +39,6 @@ public class Graph : MonoBehaviour
     {
         Random.InitState(42); // Set seed for random number generator
         Time.timeScale = 1; // Set time scale to 1
-
-        foreach (Edge edge in allEdges)
-        {
-            edge.BootstrapIntersectingEdges();
-        }
 
         // Initialise buildings dictionary.
         foreach (BuildingType bType in BuildingProperties.buildingTypes)
@@ -79,7 +74,8 @@ public class Graph : MonoBehaviour
     {
         return allEdges;
     }
-    public void ResetEdges(){
+    public void ResetEdges()
+    {
         allEdges = new List<Edge>();
         reducedEdges = new List<ReducedEdge>();
         edgesAsDict = new Dictionary<ReducedEdge, Edge>();
@@ -101,6 +97,18 @@ public class Graph : MonoBehaviour
     public float WaypointSize
     {
         get { return waypointSize; }
+    }
+
+    public void OnBeforeSerialize()
+    {
+    }
+
+    public void OnAfterDeserialize()
+    {
+        foreach (Edge edge in allEdges)
+        {
+            edge.BootstrapIntersectingEdges(this);
+        }
     }
 
     private void OnDrawGizmos()
@@ -178,8 +186,9 @@ public class Graph : MonoBehaviour
             return null;
         }
     }
-    public Edge GetEdge(ReducedEdge re){
-        return this.GetEdge(re.startWaypoint,re.endWaypoint);
+    public Edge GetEdge(ReducedEdge re)
+    {
+        return this.GetEdge(re.startWaypoint, re.endWaypoint);
     }
 
     public Edge getClosetRoadEdge(Vector3 position)
