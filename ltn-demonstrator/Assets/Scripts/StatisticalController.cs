@@ -105,6 +105,9 @@
                     //SerialisePathDataSave();
                     getAllSerialisedPaths();
                     Debug.Log("Serialised PathData");
+                    //calculate edge weights
+                    CalcEdgeWeightsByUsage();
+                    Debug.Log("Calculated Edge Weights");
 
                     //change scene
                     SceneManager.LoadScene("StatisticsScene");
@@ -227,8 +230,9 @@
             string totalNoOfTravellers = TotalNumberOfTravellers();
             string averageTravVelo = AverageTravellerVelocity();
             string rateOfDeviation = RateOfDeviation();
-            string rateOfPollution = "N/A";
-            finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage traveller velocity: {averageTravVelo} spatial units/s\nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: {rateOfPollution} \nTotal pollution: N/A ";
+            string sumOfPollution = SumOfPollution();
+            string rateOfPollution = RateOfPollution();
+            finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage traveller velocity: {averageTravVelo} spatial units/s\nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: {rateOfPollution} \nTotal pollution: {sumOfPollution} ";
             //Set the TMP object to the stats we calc
             statsText.text = finalString;
             
@@ -241,8 +245,8 @@
         }
 
 
-        public void RecieveEndTime (int ID, List<Edge> path) {
-            UpdateEndTimeAndPath(ID, path);
+        public void RecieveEndTime (int ID, List<Edge> path, VehicleProperties vType) {
+            UpdateEndTimeAndPath(ID, path, vType);
             finishedPaths++;
             Debug.Log($"finished Paths = {finishedPaths}, term = {TERMINATION_CRITERIA}, num of spawned Travellers = {TravellerManager.Instance.noOfTravellers}");
             if (finishedPaths >= TERMINATION_CRITERIA) {
@@ -251,13 +255,14 @@
             }
         }
 
-        public void UpdateEndTimeAndPath(int id, List<Edge> path) {
+        public void UpdateEndTimeAndPath(int id, List<Edge> path, VehicleProperties vType) {
             foreach (var pathData in allPathData)
             {
                 if (pathData.ID == id)
                 {
                     pathData.endTime = Time.frameCount; 
                     pathData.path = path;
+                    pathData.vType = vType;
                     if (path == null) {
                         Debug.LogError("path is null");
                     }
@@ -655,7 +660,7 @@
         {   
             Debug.Log($"Edge weight is {edge.weight}");
             // If you want a really wide line, you can set this directly to a large number
-            float uniformWidth = 7f; // for example, a very wide line
+            float uniformWidth = 1f + (30f*edge.weight); // for example, a very wide line
 
             //translate the start and end points to the correct position, set z to -3
             start.z = -3;
@@ -673,9 +678,11 @@
             lineRenderer.endWidth = uniformWidth;
 
             // Adjust color based on weight (you'll replace this part with your own method to get color from weight)
+            // Get color from weight
+            Color colorFromWeight = GetColorFromWeight(edge.weight);
             Gradient gradient = new Gradient();
             gradient.SetKeys(
-                new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.white, 1.0f) },
+                new GradientColorKey[] { new GradientColorKey(colorFromWeight, 0.0f), new GradientColorKey(colorFromWeight, 1.0f) },
                 new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
             );
             lineRenderer.colorGradient = gradient;
@@ -691,10 +698,19 @@
 
         private Color GetColorFromWeight(float weight)
         {
-            // Implement your logic to return a color based on the weight
-            // For example, from green (low weight) to red (high weight)
-            return Color.Lerp(Color.green, Color.green, weight);
+            if (weight > 0.4f)
+                return Color.Lerp(Color.grey, new Color(220f / 255, 20f / 255, 60f / 255), 0.5f); // Subtle Crimson
+            else if (weight > 0.3f)
+                return Color.Lerp(Color.grey, new Color(1f, 0.4f, 0.4f), 0.5f); // Subtle Light Red
+            else if (weight > 0.2f)
+                return Color.Lerp(Color.grey, new Color(1f, 165f / 255, 0), 0.5f); // Subtle Orange
+            else if (weight > 0.1f)
+                return Color.Lerp(Color.grey, Color.yellow, 0.5f); // Subtle Yellow
+            else
+                return Color.Lerp(Color.grey, Color.green, 0.5f); // Subtle Green
         }
+
+
 
 
 
@@ -765,7 +781,9 @@
             foreach (PathData pd in allPathData) {
                 foreach (SerialisableEdge e in pd.serialisablePath) {
                     //increment pathdata weight, normalise the amount
-                    e.weight+= 1 / allPathData.Count;
+                    float increment = 1f / (float)allPathData.Count;
+                    e.weight += increment;
+
                 }
             }
         }
@@ -854,9 +872,12 @@
             return (deviated/allPathData.Count).ToString();
         }
 
-        //Rate of pollution - uses arbitrary values for now
-        private string RateOfPollution()
+
+
+        //Sum of pollution - uses arbitrary values for now
+        private string SumOfPollution()
         {
+            float totalPollution = 0;
             if (allPathData == null) 
             {
                 Debug.LogError("allPathData is null");
@@ -868,34 +889,37 @@
                 Debug.Log($"traveller type is {pd.vType}");
                 // Create an instance of VehicleProperties with the traveller type
                 Debug.Log($"emission rate is {pd.vType.RateOfEmission}");
-                // Ensure pd.serialisablePath is not null
-                if (pd.serialisablePath == null)
-                {
-                    Debug.LogError("serialisablePath is null for PathData: " + pd.vType);
-                    continue;
-                }
+
+                //
+                float pathLength = 0;
 
                 foreach (SerialisableEdge e in pd.serialisablePath)
                 {
-                    if (e == null)
-                    {
-                        Debug.LogError("One of the SerializableEdges in serialisablePath is null");
-                        continue;
-                    }
-
-                    // Assuming you want to use the emission rate in your calculation
-                    float emissionRate = pd.vType.RateOfEmission; 
-                    e.weight += emissionRate / allPathData.Count;
+                    pathLength += e.length;
                 }
+
+                totalPollution += pd.vType.RateOfEmission * pathLength;
             }
 
-            return "N/A";
+            return totalPollution.ToString();
         }
 
 
 
 
-        //Total Pollution
+        //rate of Pollution - sum / no. of travellers
+        private string RateOfPollution()
+        {
+            float sum = 0;
+            float.TryParse(SumOfPollution(), out sum);
+            int noOfTravellers = 0;
+            int.TryParse(TotalNumberOfTravellers(), out noOfTravellers);
+            if (noOfTravellers == 0)
+            {
+                return "0"; // Avoid division by zero
+            }
+            return (sum / noOfTravellers).ToString();
+        }
 
 
         // Sum type of pollution

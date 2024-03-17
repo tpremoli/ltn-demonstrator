@@ -157,7 +157,7 @@ public class Building : MonoBehaviour
         PathData pathData = new PathData();
         pathData.path = newTravellerObj.GetComponent<WaypointMover>().getEdgePath();//getpath
         pathData.vType = newTravellerObj.GetComponent<WaypointMover>().vType;
-        Debug.Log("Vehicle Type: " + pathData.vType);
+        Debug.Log("------------------Vehicle Type: " + pathData.vType);
         pathData.startTime = Time.frameCount;
         pathData.ID = TravellerManager.Instance.noOfTravellers;
         pathData.routeChange = false;

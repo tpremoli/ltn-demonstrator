@@ -110,6 +110,8 @@ public class WaypointMover : MonoBehaviour
             return;
         }
 
+        // find pathdata for this waypoint mover and send
+
 
         Collider collider = GetComponent<Collider>();
         if (this.vType.Type == VehicleType.Pedestrian)
@@ -757,8 +759,8 @@ public class WaypointMover : MonoBehaviour
     {
         Debug.Log("Arrived to destination. Destroying object.");
         //update path data
-        //find corresponding data struct in statistical controller
-        StatisticsManager.Instance.RecieveEndTime(this.ID, getOriginalEdgePath());
+        //find corresponding data struct in statistical controller, send vtype
+        StatisticsManager.Instance.RecieveEndTime(this.ID, getOriginalEdgePath(), this.vType);
         Destroy(this.gameObject);
     }
 
