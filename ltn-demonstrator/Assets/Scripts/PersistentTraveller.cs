@@ -5,10 +5,10 @@ using UnityEngine;
 public class PersistentTraveller {
     List<Journey> journeys = new List<Journey>();
 
-    bool inTransit;
-    string currentLocation;
-    Journey currentJourney;
-    int journeyIndex;
+    public bool inTransit;
+    public string currentLocation;
+    public Journey currentJourney;
+    public int journeyIndex;
 
     public PersistentTraveller() {
         GenerateJourneys();
@@ -33,8 +33,10 @@ public class PersistentTraveller {
 
             float time = Random.Range(0f, 50f);
 
+            Condition condition = new Condition(origin, time, this);
+
             // Create new journey object and add to list of journeys.
-            Journey j = new Journey(origin, destination, time, this);
+            Journey j = new Journey(origin, destination, time, this, condition);
             journeys.Add(j);
         }
 
@@ -84,8 +86,9 @@ public class PersistentTraveller {
 
     public Journey pickJourney() {
         Journey j = journeys[journeyIndex];
+        Condition c = j.condition;
 
-        if (currentLocation.Equals(j.origin) && Time.time > j.time && j.status == JourneyStatus.NotStarted) {
+        if (c.ConditionMet(Time.time) && j.status == JourneyStatus.NotStarted) {
             return j;
         } else {
             return null;

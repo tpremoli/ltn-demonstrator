@@ -1,5 +1,5 @@
-    // Journey is a class used for describing a journey a persistent traveller should complete.
-// It specifies the origin and destination, along with the time to complete the journey and
+// Journey is a class used for describing a journey a persistent traveller should complete.
+// It specifies the origin and destination, along with the time to start the journey and
 // the traveller that needs to complete the journey.
 public class Journey
 {
@@ -8,14 +8,16 @@ public class Journey
     public float time {get; private set;}
     public PersistentTraveller traveller {get; private set;}
     public JourneyStatus status;
+    public Condition condition;
 
     // Construct a new Journey object.
-    public Journey(string origin, string destination, float time, PersistentTraveller traveller) {
+    public Journey(string origin, string destination, float time, PersistentTraveller traveller, Condition condition) {
         this.origin = origin;
         this.destination = destination;
         this.time = time;
         this.traveller = traveller;
         this.status = JourneyStatus.NotStarted;
+        this.condition = condition;
     }
 
     public override string ToString() {
