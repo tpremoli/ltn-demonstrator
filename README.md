@@ -1,8 +1,8 @@
 # Software Demonstrator for LTNs for RAMM
 
-## Project Descritpion
+## About
 
-This project is a traffic simulator which can be used to understand the impacts of LTNs, with a focus on the Heavitree neighbourhood in Exeter, UK. The simulator was designed and developed by the LTN Team at the University of Exeter using the Unity engine.
+This project is a traffic simulator which can be used to understand the impacts of LTNs, with a focus on the Heavitree neighbourhood in Exeter, UK. The simulator was designed and developed by the LTN Team at the University of Exeter using the Unity engine. Further details can be found in the [project description](docs/project_description.md).
 
 ## Executive Summary
 
