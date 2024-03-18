@@ -50,6 +50,8 @@ The costs for operating this project include:
 
 An example platform that could run this software would be the [Acer Aspire 3](https://www.currys.co.uk/products/acer-aspire-3-15.6-laptop-intel-core-i3-128-gb-ssd-silver-10226972.html), costing about £299. Note: this cost may vary and can be cheaper/more expensive depending on the individual users requirements.
 
+Besides the initial setup, there are no anticipated labour costs relating to maintenance or upkeep of the software. The project is entirely self contained and there are no extra components to maintain (see the [architecture documentation](/docs/architecture/README.md) for more details).
+
 ### Development
 
 The costs for developing this project include:
