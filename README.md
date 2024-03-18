@@ -27,7 +27,7 @@ Our proposed simulation seeks to demystify the complexities of neighbourhood des
 
 ## Built With
 
-This project is developed and built using the [Unity](https://unity.com/) game engine. Details about the software used in this project can be in the [software bill of materials](/docs/software_bom.xlsx) and the [technical system requirements](/docs/technical-system-requirements.md).
+This project is developed and built using the [Unity](https://unity.com/) game engine. Details about the software used in this project can be in the [software bill of materials](/docs/software_bom.xlsx) and the [technical system requirements](/docs/technical_system_requirements.md).
 
 ## Usage
 
