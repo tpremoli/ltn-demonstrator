@@ -2,7 +2,7 @@
 
 ## About
 
-This project is a traffic simulator which can be used to understand the impacts of LTNs, with a focus on the Heavitree neighbourhood in Exeter, UK. The simulator was designed and developed by the LTN Team at the University of Exeter using the Unity engine. Further details can be found in the [project description](docs/project_description.md).
+This project is a traffic simulator which can be used to understand the impacts of LTNs, with a focus on the Heavitree neighbourhood in Exeter, UK. The simulator was designed and developed by the LTN Team at the University of Exeter using the Unity engine. Further details can be found in the [project description](/docs/project_description.md).
 
 ## Executive Summary
 
@@ -27,7 +27,19 @@ Our proposed simulation seeks to demystify the complexities of neighbourhood des
 
 ## Built With
 
-This project is developed and built using the [Unity](https://unity.com/) game engine. Details about the software used in this project can be in the [software bill of materials](docs/software_bom.xlsx).
+This project is developed and built using the [Unity](https://unity.com/) game engine. Details about the software used in this project can be in the [software bill of materials](/docs/software_bom.xlsx) and the [technical system requirements](/docs/technical-system-requirements.md).
+
+## Usage
+
+Details of how to setup and use the project can be found in the [setup and usage guide](/docs/setup_and_usage.md).
+
+## Contributing
+
+Details of how to setup a development environment for extending, modifying or otherwise contributing to the project can be found in the [development environment guide](/docs/development_environment.md).
+
+## Documentation
+
+Documentation for this project can be found in the [`docs` directory](/docs/README.md).
 
 ## License
 
