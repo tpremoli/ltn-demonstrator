@@ -314,7 +314,10 @@ public class PedestrianPathGenerator
                     // special handling for intersections with only two pedestrian waypoints
                     if (intersectionPedWaypointsMap[intersectionCenter].Count == 2)
                     {
-                        ProcessTwoWaypointIntersection(intersectionCenter);
+                        if (!centersToDelete.Contains(intersectionCenter))
+                        {
+                            ProcessTwoWaypointIntersection(intersectionCenter, graph);
+                        }
                         continue;
                     }
 
@@ -389,6 +392,11 @@ public class PedestrianPathGenerator
             crosswalkEdges.Add(pedEdge);
         }
 
+        // clearing waypoints
+        foreach (Waypoint wp in centersToDelete){
+            Object.DestroyImmediate(wp);
+        }
+
         // we re-load the edges to update the graph.
         EdgeLoader.LoadEdges(intersectingEdgesOverride);
     }
@@ -423,7 +431,7 @@ public class PedestrianPathGenerator
     }
 
 
-    private static void ProcessTwoWaypointIntersection(Waypoint intersectionCenter)
+    private static void ProcessTwoWaypointIntersection(Waypoint intersectionCenter, Graph graph)
     {
         if (intersectionCenter == null || centersToDelete.Contains(intersectionCenter)) return;
         centersToDelete.Add(intersectionCenter);
@@ -460,6 +468,47 @@ public class PedestrianPathGenerator
         intersectionCenter.adjacentWaypoints.Remove(wp0);
         intersectionCenter.adjacentWaypoints.Remove(wp1);
         // GameObject.DestroyImmediate(intersectionCenter.gameObject);
+
+        // 4. Update the edges to use the new waypoints
+        Edge edge0 = graph.GetEdge(intersectionCenter, wp0);
+        if (edge0.startWaypoint == intersectionCenter)
+        {
+            edge0.startWaypoint = subdividedWp0;
+        }
+        else
+        {
+            edge0.endWaypoint = subdividedWp0;
+        }
+
+        Edge oppositeEdge0 = graph.GetEdge(wp0, intersectionCenter);
+        if (oppositeEdge0.endWaypoint == intersectionCenter)
+        {
+            oppositeEdge0.endWaypoint = subdividedWp0;
+        }
+        else
+        {
+            oppositeEdge0.startWaypoint = subdividedWp0;
+        }
+
+        Edge edge1 = graph.GetEdge(intersectionCenter, wp1);
+        if (edge1.startWaypoint == intersectionCenter)
+        {
+            edge1.startWaypoint = subdividedWp1;
+        }
+        else
+        {
+            edge1.endWaypoint = subdividedWp1;
+        }
+
+        Edge oppositeEdge1 = graph.GetEdge(wp1, intersectionCenter);
+        if (oppositeEdge1.endWaypoint == intersectionCenter)
+        {
+            oppositeEdge1.endWaypoint = subdividedWp1;
+        }
+        else
+        {
+            oppositeEdge1.startWaypoint = subdividedWp1;
+        }
 
         // setting up edges        
         Waypoint pedWp0 = intersectionPedWaypointsMap[intersectionCenter][0];
