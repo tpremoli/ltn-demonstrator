@@ -314,6 +314,7 @@ public class PedestrianPathGenerator
                     {
                         float distance = laneWidth * 0.5f; // Override the lane width for intersections with two pedestrian waypoints
 
+                        // getting both waypoint directions
                         Waypoint wp0 = intersectionCenter.adjacentWaypoints[0];
                         Waypoint wp1 = intersectionCenter.adjacentWaypoints[1];
 
@@ -323,7 +324,17 @@ public class PedestrianPathGenerator
                         Waypoint subdividedWp0 = createSubdividedWaypoint(intersectionCenter.transform.position + directionWp0 * distance, intersectionCenter);
                         Waypoint subdividedWp1 = createSubdividedWaypoint(intersectionCenter.transform.position + directionWp1 * distance, intersectionCenter);
 
+                        // resetting the adjacent waypoints
+                        subdividedWp0.adjacentWaypoints.Add(subdividedWp1);
+                        subdividedWp0.adjacentWaypoints.Add(wp0);
 
+                        subdividedWp1.adjacentWaypoints.Add(subdividedWp0);
+                        subdividedWp1.adjacentWaypoints.Add(wp1);
+
+                        wp0.adjacentWaypoints.Add(subdividedWp0);
+                        wp1.adjacentWaypoints.Add(subdividedWp1);
+                        wp0.adjacentWaypoints.Remove(intersectionCenter);
+                        wp1.adjacentWaypoints.Remove(intersectionCenter);
 
                         continue;
                     }
