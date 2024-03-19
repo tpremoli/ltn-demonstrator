@@ -308,6 +308,27 @@ public class PedestrianPathGenerator
                 {
                     // the center of the intersection
                     Waypoint intersectionCenter = pedWaypointCenters[pedEdge.startWaypoint];
+
+                    // special handling for intersections with only two pedestrian waypoints
+                    if (intersectionPedWaypointsMap[intersectionCenter].Count == 2)
+                    {
+                        float distance = laneWidth * 0.5f; // Override the lane width for intersections with two pedestrian waypoints
+
+                        Waypoint wp0 = intersectionCenter.adjacentWaypoints[0];
+                        Waypoint wp1 = intersectionCenter.adjacentWaypoints[1];
+
+                        Vector3 directionWp0 = (wp0.transform.position - intersectionCenter.transform.position).normalized;
+                        Vector3 directionWp1 = (wp1.transform.position - intersectionCenter.transform.position).normalized;
+
+                        Waypoint subdividedWp0 = createSubdividedWaypoint(intersectionCenter.transform.position + directionWp0 * distance, intersectionCenter);
+                        Waypoint subdividedWp1 = createSubdividedWaypoint(intersectionCenter.transform.position + directionWp1 * distance, intersectionCenter);
+
+
+
+                        continue;
+                    }
+
+
                     Waypoint oppositeIntersectionWaypoint;
                     if (intersectionCenter == roadEdge.startWaypoint)
                     {
