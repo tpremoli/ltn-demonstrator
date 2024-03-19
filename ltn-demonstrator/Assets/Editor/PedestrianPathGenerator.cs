@@ -324,17 +324,29 @@ public class PedestrianPathGenerator
                         Waypoint subdividedWp0 = createSubdividedWaypoint(intersectionCenter.transform.position + directionWp0 * distance, intersectionCenter);
                         Waypoint subdividedWp1 = createSubdividedWaypoint(intersectionCenter.transform.position + directionWp1 * distance, intersectionCenter);
 
+                        // Skip if the waypoints already exist
+                        if (subdividedWp0 == null || subdividedWp1 == null) continue;
+
                         // resetting the adjacent waypoints
+                        wp0.adjacentWaypoints.Remove(intersectionCenter);
+                        wp1.adjacentWaypoints.Remove(intersectionCenter);
+
+                        wp0.adjacentWaypoints.Add(subdividedWp0);
+                        wp1.adjacentWaypoints.Add(subdividedWp1);
+
                         subdividedWp0.adjacentWaypoints.Add(subdividedWp1);
                         subdividedWp0.adjacentWaypoints.Add(wp0);
 
                         subdividedWp1.adjacentWaypoints.Add(subdividedWp0);
                         subdividedWp1.adjacentWaypoints.Add(wp1);
 
-                        wp0.adjacentWaypoints.Add(subdividedWp0);
-                        wp1.adjacentWaypoints.Add(subdividedWp1);
-                        wp0.adjacentWaypoints.Remove(intersectionCenter);
-                        wp1.adjacentWaypoints.Remove(intersectionCenter);
+                        // get rid of the original intersection
+                        intersectionCenter.adjacentWaypoints.Remove(wp0);
+                        intersectionCenter.adjacentWaypoints.Remove(wp1);
+                        GameObject.DestroyImmediate(intersectionCenter);
+
+                        // set up intersecting edges
+
 
                         continue;
                     }
@@ -465,7 +477,7 @@ public class PedestrianPathGenerator
         {
             if (waypoint.transform.position == position)
             {
-                return null;
+                return waypoint;
             }
         }
 

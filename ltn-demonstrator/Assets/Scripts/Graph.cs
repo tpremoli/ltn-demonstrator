@@ -86,7 +86,7 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
         ReducedEdge reducedEdge = edge.Reduce();
         allEdges.Add(edge);
         reducedEdges.Add(reducedEdge);
-        edgesAsDict.Add(reducedEdge, edge);
+        // edgesAsDict.Add(reducedEdge, edge);
     }
 
     public Building getRandomBuildingByType(BuildingType buildingType)
