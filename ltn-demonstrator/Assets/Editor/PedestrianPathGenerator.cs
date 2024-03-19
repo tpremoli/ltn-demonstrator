@@ -393,7 +393,8 @@ public class PedestrianPathGenerator
         }
 
         // clearing waypoints
-        foreach (Waypoint wp in centersToDelete){
+        foreach (Waypoint wp in centersToDelete)
+        {
             Object.DestroyImmediate(wp);
         }
 
@@ -522,9 +523,13 @@ public class PedestrianPathGenerator
 
         AddIntersectingEdge(reducedPedEdge, reducedRoadEdge);
         AddIntersectingEdge(reducedPedEdge, oppositeReducedRoadEdge);
-
         AddIntersectingEdge(oppositeReducedPedEdge, reducedRoadEdge);
         AddIntersectingEdge(oppositeReducedPedEdge, oppositeReducedRoadEdge);
+
+        AddIntersectingEdge(reducedRoadEdge, reducedPedEdge);
+        AddIntersectingEdge(reducedRoadEdge, oppositeReducedPedEdge);
+        AddIntersectingEdge(oppositeReducedRoadEdge, reducedPedEdge);
+        AddIntersectingEdge(oppositeReducedRoadEdge, oppositeReducedPedEdge);
     }
 
 
@@ -612,5 +617,6 @@ public class PedestrianPathGenerator
         intersectionPedWaypointsMap.Clear();
         pedWaypointCenters.Clear();
         subdividedWaypoints.Clear();
+        centersToDelete.Clear();
     }
 }
