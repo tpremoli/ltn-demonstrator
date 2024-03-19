@@ -11,6 +11,8 @@ public class PedestrianPathGenerator
 
     // This is a dictionary that will store the intersecting edges for each edge
     private static Dictionary<ReducedEdge, List<ReducedEdge>> intersectingEdgesOverride = new Dictionary<ReducedEdge, List<ReducedEdge>>();
+    private static List<Waypoint> centersToDelete = new List<Waypoint>();
+
     // Helper method to add edges to the dictionary
     private static void AddIntersectingEdge(ReducedEdge keyEdge, ReducedEdge intersectingEdge)
     {
@@ -279,8 +281,6 @@ public class PedestrianPathGenerator
         var pedestrianEdges = allEdges.Where(edge => edge.isPedestrianOnly).ToList();
         var roadEdges = allEdges.Except(pedestrianEdges).ToList();
 
-
-
         List<Edge> crosswalkEdges = new List<Edge>();
 
         foreach (var pedEdge in pedestrianEdges)
@@ -422,8 +422,12 @@ public class PedestrianPathGenerator
         return false;
     }
 
+
     private static void ProcessTwoWaypointIntersection(Waypoint intersectionCenter)
     {
+        if (intersectionCenter == null || centersToDelete.Contains(intersectionCenter)) return;
+        centersToDelete.Add(intersectionCenter);
+
         float distance = laneWidth * 0.5f; // Override the lane width for intersections with two pedestrian waypoints
 
         // getting both waypoint directions
@@ -455,9 +459,23 @@ public class PedestrianPathGenerator
         // get rid of the original intersection
         intersectionCenter.adjacentWaypoints.Remove(wp0);
         intersectionCenter.adjacentWaypoints.Remove(wp1);
-        GameObject.DestroyImmediate(intersectionCenter.gameObject);
+        // GameObject.DestroyImmediate(intersectionCenter.gameObject);
 
-        // Note: Additional logic to update intersecting edges can be added here if needed
+        // setting up edges        
+        Waypoint pedWp0 = intersectionPedWaypointsMap[intersectionCenter][0];
+        Waypoint pedWp1 = intersectionPedWaypointsMap[intersectionCenter][1];
+
+        ReducedEdge reducedPedEdge = new ReducedEdge(pedWp0, pedWp1);
+        ReducedEdge oppositeReducedPedEdge = new ReducedEdge(pedWp1, pedWp0);
+
+        ReducedEdge reducedRoadEdge = new ReducedEdge(subdividedWp0, subdividedWp1);
+        ReducedEdge oppositeReducedRoadEdge = new ReducedEdge(subdividedWp1, subdividedWp0);
+
+        AddIntersectingEdge(reducedPedEdge, reducedRoadEdge);
+        AddIntersectingEdge(reducedPedEdge, oppositeReducedRoadEdge);
+
+        AddIntersectingEdge(oppositeReducedPedEdge, reducedRoadEdge);
+        AddIntersectingEdge(oppositeReducedPedEdge, oppositeReducedRoadEdge);
     }
 
 
