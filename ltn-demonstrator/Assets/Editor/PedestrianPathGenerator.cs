@@ -9,6 +9,24 @@ public class PedestrianPathGenerator
     private static Dictionary<Waypoint, List<Waypoint>> intersectionPedWaypointsMap = new Dictionary<Waypoint, List<Waypoint>>();
     private static Dictionary<Waypoint, Waypoint> pedWaypointCenters = new Dictionary<Waypoint, Waypoint>();
 
+    // This is a dictionary that will store the intersecting edges for each edge
+    private static Dictionary<ReducedEdge, List<ReducedEdge>> intersectingEdgesOverride = new Dictionary<ReducedEdge, List<ReducedEdge>>();
+    // Helper method to add edges to the dictionary
+    private static void AddIntersectingEdge(ReducedEdge keyEdge, ReducedEdge intersectingEdge)
+    {
+        // we keep track of intersecting edges using reduced edges, which are just
+        // stripped down versions of the edges that only contain the start and end waypoints
+        if (intersectingEdgesOverride.ContainsKey(keyEdge))
+        {
+            intersectingEdgesOverride[keyEdge].Add(intersectingEdge);
+        }
+        else
+        {
+            intersectingEdgesOverride[keyEdge] = new List<ReducedEdge> { intersectingEdge };
+        }
+    }
+
+
     // this maps an intersection to its supdivided waypoints
     private static List<Waypoint> subdividedWaypoints = new List<Waypoint>();
 
@@ -261,22 +279,6 @@ public class PedestrianPathGenerator
         var pedestrianEdges = allEdges.Where(edge => edge.isPedestrianOnly).ToList();
         var roadEdges = allEdges.Except(pedestrianEdges).ToList();
 
-        // This is a dictionary that will store the intersecting edges for each edge
-        Dictionary<ReducedEdge, List<ReducedEdge>> intersectingEdgesOverride = new Dictionary<ReducedEdge, List<ReducedEdge>>();
-        // Helper method to add edges to the dictionary
-        void AddIntersectingEdge(ReducedEdge keyEdge, ReducedEdge intersectingEdge)
-        {
-            // we keep track of intersecting edges using reduced edges, which are just
-            // stripped down versions of the edges that only contain the start and end waypoints
-            if (intersectingEdgesOverride.ContainsKey(keyEdge))
-            {
-                intersectingEdgesOverride[keyEdge].Add(intersectingEdge);
-            }
-            else
-            {
-                intersectingEdgesOverride[keyEdge] = new List<ReducedEdge> { intersectingEdge };
-            }
-        }
 
 
         List<Edge> crosswalkEdges = new List<Edge>();
@@ -312,42 +314,7 @@ public class PedestrianPathGenerator
                     // special handling for intersections with only two pedestrian waypoints
                     if (intersectionPedWaypointsMap[intersectionCenter].Count == 2)
                     {
-                        float distance = laneWidth * 0.5f; // Override the lane width for intersections with two pedestrian waypoints
-
-                        // getting both waypoint directions
-                        Waypoint wp0 = intersectionCenter.adjacentWaypoints[0];
-                        Waypoint wp1 = intersectionCenter.adjacentWaypoints[1];
-
-                        Vector3 directionWp0 = (wp0.transform.position - intersectionCenter.transform.position).normalized;
-                        Vector3 directionWp1 = (wp1.transform.position - intersectionCenter.transform.position).normalized;
-
-                        Waypoint subdividedWp0 = createSubdividedWaypoint(intersectionCenter.transform.position + directionWp0 * distance, intersectionCenter);
-                        Waypoint subdividedWp1 = createSubdividedWaypoint(intersectionCenter.transform.position + directionWp1 * distance, intersectionCenter);
-
-                        // Skip if the waypoints already exist
-                        if (subdividedWp0 == null || subdividedWp1 == null) continue;
-
-                        // resetting the adjacent waypoints
-                        wp0.adjacentWaypoints.Remove(intersectionCenter);
-                        wp1.adjacentWaypoints.Remove(intersectionCenter);
-
-                        wp0.adjacentWaypoints.Add(subdividedWp0);
-                        wp1.adjacentWaypoints.Add(subdividedWp1);
-
-                        subdividedWp0.adjacentWaypoints.Add(subdividedWp1);
-                        subdividedWp0.adjacentWaypoints.Add(wp0);
-
-                        subdividedWp1.adjacentWaypoints.Add(subdividedWp0);
-                        subdividedWp1.adjacentWaypoints.Add(wp1);
-
-                        // get rid of the original intersection
-                        intersectionCenter.adjacentWaypoints.Remove(wp0);
-                        intersectionCenter.adjacentWaypoints.Remove(wp1);
-                        GameObject.DestroyImmediate(intersectionCenter);
-
-                        // set up intersecting edges
-
-
+                        ProcessTwoWaypointIntersection(intersectionCenter);
                         continue;
                     }
 
@@ -454,6 +421,45 @@ public class PedestrianPathGenerator
 
         return false;
     }
+
+    private static void ProcessTwoWaypointIntersection(Waypoint intersectionCenter)
+    {
+        float distance = laneWidth * 0.5f; // Override the lane width for intersections with two pedestrian waypoints
+
+        // getting both waypoint directions
+        Waypoint wp0 = intersectionCenter.adjacentWaypoints[0];
+        Waypoint wp1 = intersectionCenter.adjacentWaypoints[1];
+
+        Vector3 directionWp0 = (wp0.transform.position - intersectionCenter.transform.position).normalized;
+        Vector3 directionWp1 = (wp1.transform.position - intersectionCenter.transform.position).normalized;
+
+        Waypoint subdividedWp0 = createSubdividedWaypoint(intersectionCenter.transform.position + directionWp0 * distance, intersectionCenter);
+        Waypoint subdividedWp1 = createSubdividedWaypoint(intersectionCenter.transform.position + directionWp1 * distance, intersectionCenter);
+
+        // Skip if the waypoints already exist
+        if (subdividedWp0 == null || subdividedWp1 == null) return;
+
+        // resetting the adjacent waypoints
+        wp0.adjacentWaypoints.Remove(intersectionCenter);
+        wp1.adjacentWaypoints.Remove(intersectionCenter);
+
+        wp0.adjacentWaypoints.Add(subdividedWp0);
+        wp1.adjacentWaypoints.Add(subdividedWp1);
+
+        subdividedWp0.adjacentWaypoints.Add(subdividedWp1);
+        subdividedWp0.adjacentWaypoints.Add(wp0);
+
+        subdividedWp1.adjacentWaypoints.Add(subdividedWp0);
+        subdividedWp1.adjacentWaypoints.Add(wp1);
+
+        // get rid of the original intersection
+        intersectionCenter.adjacentWaypoints.Remove(wp0);
+        intersectionCenter.adjacentWaypoints.Remove(wp1);
+        GameObject.DestroyImmediate(intersectionCenter.gameObject);
+
+        // Note: Additional logic to update intersecting edges can be added here if needed
+    }
+
 
     private static Vector3 CalculateDivisionPoint(Vector3 intersectionPoint, Waypoint intersectionCenter, float distance, bool towardsCenter)
     {
