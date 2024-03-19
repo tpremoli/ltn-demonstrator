@@ -9,11 +9,11 @@ The system architecture is given by the diagram below:
 ![System Architecture](system-architecture.png)
 
 The system architecture consists of the following components:
-- A user
-- The LTN simulation software
-- The Unity engine and C# runtime
-- The local filesystem on the machine
-- The local machine used to run the software
+- A user.
+- The LTN simulation software.
+- The Unity engine and C# runtime.
+- The local filesystem on the machine.
+- The local machine used to run the software.
 
 These are described in further detail below.
 
@@ -23,7 +23,7 @@ The user will be a person interacting with the LTN simulation. This could be the
 
 ## Simulation Software
 
-The simulation software contains the actual LTN simulation which the user will interact with. This simulation will allow the user to place barriers in a neighbourhood and start the simulation. When the simulation is run, a number of agents are spawned stochastically and travel through the neighbourhood, with data being collected during runtime (e.g. distance travelled, time taken, etc.). This data is presented to the user for analysis both during and after the simulation has completed.
+The simulation software contains the actual LTN simulation which the user will interact with. This simulation will allow the user to place barriers in a neighbourhood and start the simulation. When the simulation is run, a number of agents are spawned stochastically and travel through the neighbourhood, with data being collected during runtime (e.g. distance travelled, time taken, etc.). This data is analysed and presented to the user both during and after the simulation has completed.
 
 The software is developed and run using the Unity Engine and the C# runtime, which are discussed in more detail below. The software is distributed with the C# runtime and Unity engine bundled into a single software package: the simulation runs on top of these frameworks and allows the user to visualise and interact with the simulation.
 
