@@ -118,7 +118,7 @@ public class StatisticsManager : MonoBehaviour
         GameObject body = GameObject.Find("Body");
         if (body == null)
         {
-            Debug.LogError("Body not found");
+            Debug.Log("Body not found");
         }
         else
         {
