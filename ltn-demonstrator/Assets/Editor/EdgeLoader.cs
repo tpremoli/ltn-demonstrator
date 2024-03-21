@@ -49,9 +49,12 @@ public class EdgeLoader
             foreach (KeyValuePair<ReducedEdge, List<ReducedEdge>> kvp in intersectingEdgesOverride)
             {
                 Edge keyEdge = graph.GetEdge(kvp.Key.startWaypoint, kvp.Key.endWaypoint);
+                if (keyEdge == null) continue;
                 foreach (ReducedEdge reducedEdge in kvp.Value)
                 {
-                    keyEdge.RegisterIntersectingEdge(graph.GetEdge(reducedEdge.startWaypoint, reducedEdge.endWaypoint));
+                    Edge intersecting = graph.GetEdge(reducedEdge.startWaypoint, reducedEdge.endWaypoint);
+                    if (intersecting == null) continue;
+                    keyEdge.RegisterIntersectingEdge(intersecting);
                 }
             }
 

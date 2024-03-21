@@ -24,7 +24,7 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
 
     // this contains a dictionary of all edges, making them a lot faster to access
     // reduced edge is a simple struct containing two waypoints, so it can be used as a key
-    private Dictionary<ReducedEdge, Edge> edgesAsDict = new Dictionary<ReducedEdge, Edge>();
+    // private Dictionary<ReducedEdge, Edge> edgesAsDict = new Dictionary<ReducedEdge, Edge>();
 
     public List<Building> allBuildings;
     public Dictionary<BuildingType, List<Building>> buildingsByType = new Dictionary<BuildingType, List<Building>>();
@@ -77,8 +77,6 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
     public void ResetEdges()
     {
         allEdges = new List<Edge>();
-        reducedEdges = new List<ReducedEdge>();
-        edgesAsDict = new Dictionary<ReducedEdge, Edge>();
     }
 
     public void AddEdge(Edge edge)
@@ -86,7 +84,6 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
         ReducedEdge reducedEdge = edge.Reduce();
         allEdges.Add(edge);
         reducedEdges.Add(reducedEdge);
-        // edgesAsDict.Add(reducedEdge, edge);
     }
 
     public Building getRandomBuildingByType(BuildingType buildingType)
@@ -171,20 +168,6 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
         }
         Debug.LogError("Edge not found: " + a + " - " + b);
         return null;
-    }
-
-    // currently not working unfortunately. bit of a nightmare to fix
-    public Edge GetEdgeReduced(Waypoint a, Waypoint b)
-    {
-        try
-        {
-            return edgesAsDict[new ReducedEdge(a, b)];
-        }
-        catch (KeyNotFoundException e)
-        {
-            Debug.LogError("Edge not found: " + e.Message + " " + a + " " + b);
-            return null;
-        }
     }
     public Edge GetEdge(ReducedEdge re)
     {
