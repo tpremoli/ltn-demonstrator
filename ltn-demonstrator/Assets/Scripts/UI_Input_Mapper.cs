@@ -8,6 +8,7 @@ public class UI_InputMapper: MonoBehaviour
     private void OnEnable()
     {
         document = GetComponent<UIDocument>();
+        // TODO here you will need to filter out only the UI document you want to work for, I think that's why your menu gets moved
 
         document.panelSettings.SetScreenToPanelSpaceFunction((Vector2 screenPosition) => 
         {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SensorInfo_PanelSettings
   m_EditorClassIdentifier: 
   themeUss: {fileID: -4733365628477956816, guid: fa0906092b6d544e08a0e3fc5e5eb2af, type: 3}
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 7ec34b203ca7540948a1426dc940078c, type: 2}
   m_ScaleMode: 1
   m_ReferenceSpritePixelsPerUnit: 100
   m_Scale: 1
