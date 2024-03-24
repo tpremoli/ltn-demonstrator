@@ -26,6 +26,8 @@ The software required to operate this project is listed below:
 | Software | Version |
 | --- | --- |
 | Windows, MacOS or Linux | Windows 10+, Mojave 10.14+ or Ubuntu 18.04+ |
+| Unity | 2022.3.13f1 |
+| Git | 2.44.0 |
 
 ### Development
 
@@ -37,6 +39,7 @@ The minimum software required to develop this project is listed in the [software
 | Unity | 2022.3.13f |
 | Visual Studio Code | 1.87 |
 | .NET SDK | 8.0.3 |
+| Git | 2.44.0 |
 
 ## Costs
 
