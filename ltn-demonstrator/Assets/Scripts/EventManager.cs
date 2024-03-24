@@ -41,7 +41,7 @@ public class EventManager : MonoBehaviour
         List<Journey> journeys = new List<Journey>();
 
         // Choose a random number of journeys.
-        int numberOfJourneys = Random.Range(1, maxJourneys);
+        int numberOfJourneys = Random.Range(0, maxJourneys);
 
         // Start journey always originates from either residence or through traffic node.
         // Randomly select building type based on probability that traveller is from local area.
@@ -49,8 +49,8 @@ public class EventManager : MonoBehaviour
 
         // Choose some random time, random origin building, random destination building (ensure they are not the same).
         float time = Random.Range(1f, 3f);
-        Building origin = Graph.Instance.getRandomBuildingByType(chosenType);
-        string originID = origin.GetComponent<UniqueID>().uniqueID;
+        Building building = Graph.Instance.getRandomBuildingByType(chosenType);
+        string originID = building.GetComponent<UniqueID>().uniqueID;
         string destinationID = Graph.Instance.pickRandomBuildingID();
         while (originID.Equals(destinationID)) {
             destinationID = Graph.Instance.pickRandomBuildingID();
@@ -75,7 +75,11 @@ public class EventManager : MonoBehaviour
         for (int i = 0; i < numberOfJourneys; i++) {
             // Origin is destination of previous journey.
             originID = journeys[journeys.Count - 1].destination;
-            destinationID = Graph.Instance.pickRandomBuildingID();
+
+            chosenType = BuildingProperties.getRandomWeightedDestinationType();
+            Debug.Log("Chosen building type: " + chosenType);
+            building = Graph.Instance.getRandomBuildingByType(chosenType);
+            destinationID = building.GetComponent<UniqueID>().uniqueID;
             time = times[i];
 
             condition = new Condition(originID, time, traveller);
