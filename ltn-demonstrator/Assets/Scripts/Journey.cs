@@ -3,10 +3,10 @@
 // the traveller that needs to complete the journey.
 public class Journey
 {
-    public string origin {get; private set;}
-    public string destination {get; private set;}
-    public float time {get; private set;}
-    public PersistentTraveller traveller {get; private set;}
+    public string origin;
+    public string destination;
+    public float time;
+    public PersistentTraveller traveller;
     public JourneyStatus status;
     public Condition condition;
 

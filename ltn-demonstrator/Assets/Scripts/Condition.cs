@@ -2,9 +2,9 @@
 // that needs to be met before a journey can start. It specifies
 // that a traveller must be at a specific location at some given time.
 public class Condition {
-    public string location {get; private set;}
-    public float time {get; private set;}
-    public PersistentTraveller traveller {get; private set;}
+    public string location;
+    public float time;
+    public PersistentTraveller traveller;
 
     public Condition(string location, float time, PersistentTraveller traveller) {
         this.location = location;

@@ -11,16 +11,23 @@ public class PersistentTraveller {
     public int journeyIndex;
 
     public PersistentTraveller() {
-        GenerateJourneys();
+        //GenerateRandomJourneys();
 
         // Set in transit flag, current location and journey index.
         inTransit = false;
-        currentLocation = journeys[journeyIndex].origin;
         journeyIndex = 0;
     }
 
+    public void Setup(List<Journey> journeys) {
+        // Set list of journeys.
+        this.journeys = journeys;
+
+        // Set current location based on list of journeys.
+        currentLocation = this.journeys[journeyIndex].origin;
+    }
+
     // Generate some random journeys to complete.
-    public void GenerateJourneys() {
+    public void GenerateRandomJourneys() {
         // Generate some random journeys to complete.
         for (int i = 0; i < 5; i++) {
             // Choose random origin and destination.
@@ -42,6 +49,11 @@ public class PersistentTraveller {
 
         // Order journeys by time.
         journeys = journeys.OrderBy(j => j.time).ToList();
+    }
+
+    // Add a journey to the list of journeys for this traveller.
+    public void addJourney(Journey journey) {
+        this.journeys.Add(journey);
     }
 
     public void journeyStarted(Journey journey) {
@@ -85,6 +97,11 @@ public class PersistentTraveller {
     }
 
     public Journey pickJourney() {
+        // Check if all journeys completed: if so, exit.
+        if (journeyIndex == journeys.Count) {
+            return null;
+        }
+        
         Journey j = journeys[journeyIndex];
         Condition c = j.condition;
 

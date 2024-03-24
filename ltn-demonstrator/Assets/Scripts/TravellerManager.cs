@@ -18,7 +18,7 @@ public class TravellerManager : MonoBehaviour
     public float nextSpawnTime;
     private Graph graph;
 
-    EventManager eventManager;
+    public EventManager eventManager;
 
     // pick random model and material
     [SerializeField]
