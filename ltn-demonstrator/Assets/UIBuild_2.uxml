@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="UI_AddBarrier" src="project://database/Assets/UI_AddBarrier.uxml?fileID=9197481963319205126&amp;guid=e7995ace5b9034124b28d3ba5f1a2200&amp;type=3#UI_AddBarrier" />
     <Style src="project://database/Assets/StyleButton.uss?fileID=7433441132597879392&amp;guid=f21beb806a9f34ea5896a0a450408277&amp;type=3#StyleButton" />
     <ui:VisualElement style="flex-grow: 1; height: 238px; color: rgb(0, 0, 0); background-color: rgba(0, 73, 236, 0.46);">
         <ui:VisualElement name="container" style="flex-grow: 1; flex-basis: 20%; position: absolute; height: 114px; width: 790px; top: 271px; color: rgb(0, 0, 0); -unity-text-outline-color: rgba(0, 0, 0, 0); background-color: rgba(231, 226, 191, 0.53); left: -2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; flex-direction: row;">
@@ -10,4 +11,5 @@
             <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="InstructionLabel" style="width: 216px;" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:Instance template="UI_AddBarrier" name="UI_AddBarrier" style="position: absolute;" />
 </ui:UXML>
