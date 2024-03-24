@@ -453,10 +453,6 @@ public class Edge
         if (!isBarricated)
         {
             Debug.LogWarning("Barrier is not between start and destination. this is barricated " + isBarricated);
-            if (this.startWaypoint.transform.name == "Waypoint" || this.endWaypoint.transform.name == "Waypoint (1)")
-            {
-                Debug.LogError("this is a big bug. isbarricated: " + isBarricated);
-            }
             return false;
         }
 

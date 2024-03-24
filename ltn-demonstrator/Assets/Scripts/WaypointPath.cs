@@ -251,6 +251,11 @@ public class WaypointPath
         Waypoint nearestStartWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos, mode);
         Waypoint nearestEndWaypoint = endEdge.getClosestAccesibleWaypoint(destinationPos, mode);
 
+        if (nearestStartWaypoint == null || nearestEndWaypoint == null)
+        {
+            return false;
+        }
+
         // Initialize dictionaries for distances and previous waypoints
         Dictionary<Waypoint, float> dist = new Dictionary<Waypoint, float>();
         Dictionary<Waypoint, Waypoint> prev = new Dictionary<Waypoint, Waypoint>();
