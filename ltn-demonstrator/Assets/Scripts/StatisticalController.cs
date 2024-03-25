@@ -106,7 +106,7 @@
                     getAllSerialisedPaths();
                     Debug.Log("Serialised PathData");
                     //calculate edge weights
-                    CalcEdgeWeightsByUsage();
+                    CalcEdgeWeightsByEmissions();
                     Debug.Log("Calculated Edge Weights");
 
                     //change scene
@@ -229,10 +229,11 @@
             string totalTravelTime = TotalTravelTime();
             string totalNoOfTravellers = TotalNumberOfTravellers();
             string averageTravVelo = AverageTravellerVelocity();
+            string totalDistance = TotalDistance();
             string rateOfDeviation = RateOfDeviation();
             string sumOfPollution = SumOfPollution();
             string rateOfPollution = RateOfPollution();
-            finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage traveller velocity: {averageTravVelo} spatial units/s\nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: {rateOfPollution} \nTotal pollution: {sumOfPollution} ";
+            finalString = $"Number of travellers: {totalNoOfTravellers} \nTotal travel time: {totalTravelTime} seconds\nAverage traveller velocity: {averageTravVelo} km/h\nTotal distance travelled: {totalDistance} km\nRate of deviation from original path: {rateOfDeviation} \nAverage rate of pollution: {rateOfPollution} g/vehicle \nTotal pollution: {sumOfPollution} g ";
             //Set the TMP object to the stats we calc
             statsText.text = finalString;
             
@@ -778,22 +779,27 @@
 
         public void CalcEdgeWeightsByUsage () {
             //iterate through all pathdata serialisable paths
+            float denominator = (float)allPathData.Count;
             foreach (PathData pd in allPathData) {
                 foreach (SerialisableEdge e in pd.serialisablePath) {
                     //increment pathdata weight, normalise the amount
-                    float increment = 1f / (float)allPathData.Count;
-                    e.weight += increment;
-
+                    e.weight += 1f / denominator;
                 }
             }
         }
 
         public void CalcEdgeWeightsByEmissions () {
             //iterate through all pathdata serialisable paths
+            float denominator = (float)allPathData.Count;
             foreach (PathData pd in allPathData) {
+                float pathLength = 0;
+                float currentWeight = 0;
+                float currentEmission = pd.vType.RateOfEmission;
                 foreach (SerialisableEdge e in pd.serialisablePath) {
-                    //increment pathdata weight by emmision score, normalise the amount
-                    e.weight+= 1 / allPathData.Count;
+                    //increment pathdata weight by emission score*path length, normalise the amount
+                    float increment = (currentEmission/denominator)*10;
+                    e.weight += increment;
+                    Debug.LogError($"e.weight is {e.weight}");
                 }
             }
         }
@@ -819,6 +825,7 @@
         {
             return allPathData.Count.ToString();
         }
+
 
         //Average traveller velocity - needs delta D conversion
         private string AverageTravellerVelocity() 
@@ -852,8 +859,10 @@
             {
                 return "0"; // Avoid division by zero
             }
-            //Needs delta D conversion
-            return (totalDistance / (totalTime * numberOfTravellers)).ToString();
+            //Needs delta D conversion, time conversion (Time.deltaTime)
+            float averageVelocity = (totalDistance/Time.deltaTime) / (totalTime * numberOfTravellers);
+            float normalisedAverageVelocity = averageVelocity * 3.6f;
+            return normalisedAverageVelocity.ToString();
         }
 
 
@@ -886,9 +895,7 @@
 
             foreach (PathData pd in allPathData)
             {
-                Debug.Log($"traveller type is {pd.vType}");
                 // Create an instance of VehicleProperties with the traveller type
-                Debug.Log($"emission rate is {pd.vType.RateOfEmission}");
 
                 //
                 float pathLength = 0;
@@ -922,14 +929,31 @@
         }
 
 
-        // Sum type of pollution
+        private string TotalDistance () {
+            float totalDistance = 0;
+            foreach (var pathData in allPathData) {
+                foreach (var edge in pathData.serialisablePath) {
+                    totalDistance += edge.length;
+                }
+            }
+            return (totalDistance/1000).ToString();
+        }
+
+
+
+
+//------------------------------------------PHASE TWO PARETO FRONT-------------------------------------------
 
 
 
 
 
-        
-    
+
+
+
+
+
+
 
 
 
