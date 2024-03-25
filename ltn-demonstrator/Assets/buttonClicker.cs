@@ -21,68 +21,54 @@ public class ButtonClicker : MonoBehaviour
     private Graph graph;
     // Declare the CameraMovement variable
     public CameraMovement cameraMovement;
-    public UIDocument mainUIDocument; // Assign UIBuild_2.uxml in the Inspector
-    public UIDocument addBarrierUIDocument;
-
+    [SerializeField] private UIDocument mainUIDocument;
+    [SerializeField] private UIDocument addBarrierUIDocument;
+    private VisualElement rootVisualElement;
     private Label instructionLabel;
-    
-    /**
-    public enum BarrierType
-    {
-        BlockAll,
-        BlockAllMotorVehicles, // Renamed from BlockAllMotorVehicles
-        BlockHeavyTraffic,
-        BusOnly,
-        BusAndTaxiOnly // Renamed from BusAndTaxiOnly
-        // Removed BusOnly if it's not needed
-        BlockAll,
-    BlockAllMotorVehicles,
-    BlockHeavyTraffic,
-    BusOnly,
-    BusAndTaxiOnly,
-    }
-    **/
 
     public BarrierType selectedBarrierType;
-
-    private VisualElement rootVisualElement;
     private VisualElement addBarrierRoot;
+
+    public CanvasRenderer uiElementRenderer;
+
+public void HideUIElement()
+{
+    // This will hide the UI element without disabling the GameObject
+    uiElementRenderer.SetAlpha(0);
+}
+
+public void ShowUIElement()
+{
+    // This will show the UI element
+    uiElementRenderer.SetAlpha(1);
+}
 
     private void OnEnable()
     {
-        // Ensure the main UI is active and the add barrier UI is inactive at the start.
-        if (mainUIDocument != null)
+        if (!mainUIDocument)
         {
-            mainUIDocument.gameObject.SetActive(true); // Activate the main UI document.
+            Debug.LogError("Main UIDocument is not assigned in the inspector.");
+            return;
         }
-        else
+        if (!addBarrierUIDocument)
         {
-            Debug.LogError("Main UIDocument is not assigned in the Inspector.");
-        }
-
-        if (addBarrierUIDocument != null)
-        {
-            addBarrierUIDocument.gameObject.SetActive(false); // Deactivate the add barrier UI document.
-        }
-        else
-        {
-            Debug.LogError("Add Barrier UIDocument is not assigned in the Inspector.");
+            Debug.LogError("Add Barrier UIDocument is not assigned in the inspector.");
+            return;
         }
 
-        // Proceed to set up the main buttons if the main UI document is available.
-        if (mainUIDocument != null && mainUIDocument.rootVisualElement != null)
+        mainUIDocument.gameObject.SetActive(true);
+        addBarrierUIDocument.gameObject.SetActive(false);
+
+        rootVisualElement = mainUIDocument.rootVisualElement;
+        addBarrierRoot = addBarrierUIDocument.rootVisualElement;
+        instructionLabel = rootVisualElement.Q<Label>("InstructionLabel");
+        if (instructionLabel == null)
         {
-            rootVisualElement = mainUIDocument.rootVisualElement;
-            instructionLabel = rootVisualElement.Q<Label>("InstructionLabel");
-            if (instructionLabel == null)
-            {
-                Debug.LogError("Instruction Label is not found in the Main UIDocument.");
-            }
-            else
-            {
-                SetupMainButtons();
-            }
+            Debug.LogError("Instruction Label is not found in the Main UIDocument.");
+            return;
         }
+
+        SetupMainButtons();
     }
 
 
@@ -98,13 +84,23 @@ public class ButtonClicker : MonoBehaviour
 
     private void SetupAddBarrierButtons()
     {
+        addBarrierRoot = addBarrierUIDocument.rootVisualElement;
+
+        Debug.LogError("Start");
+        Debug.LogError(addBarrierRoot);
         // Set up the buttons for the add barrier UI
         addBarrierRoot.Q<Button>("BackButton").clicked += () => OnBackButtonPressed();
+        Debug.LogError("Button1 Added");
         addBarrierRoot.Q<Button>("BlockAllButton").clicked += () => OnAddBlockAllBarrierPressed();
-        addBarrierRoot.Q<Button>("BlockAllMotorVehiclesButton").clicked += () => OnAddBlockAllMotorVehiclesBarrierPressed();
+        Debug.LogError("Button2 Added");
+        addBarrierRoot.Q<Button>("BlockMotorVehiclesButton").clicked += () => OnAddBlockAllMotorVehiclesBarrierPressed();
+        Debug.LogError("Button3 Added");
         addBarrierRoot.Q<Button>("BlockHeavyButton").clicked += () => OnAddBlockAllMotorVehiclesBarrierPressed();
-        addBarrierRoot.Q<Button>("BusOnlyButton").clicked += () => OnAddBusOnlyBarrierPressed();
-        addBarrierRoot.Q<Button>("BusAndTaxiOnlyButton").clicked += () => OnAddBusandTaxiOnlyBarrierPressed();
+        Debug.LogError("Button4 Added");
+        addBarrierRoot.Q<Button>("AllowBusButton").clicked += () => OnAddBusOnlyBarrierPressed();
+        Debug.LogError("Button5 Added");
+        addBarrierRoot.Q<Button>("AllowBusTaxiButton").clicked += () => OnAddBusandTaxiOnlyBarrierPressed();
+        Debug.LogError("All Buttons Added");
     }
 
 
