@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class EventManager : MonoBehaviour
 {
@@ -104,6 +105,33 @@ public class EventManager : MonoBehaviour
 
         return journeys;
     }
+
+    public void SaveEventListToJson(string filePath)
+    {
+        if (File.Exists(filePath))
+        {
+        string jsonData = JsonUtility.ToJson(eventList);
+        filePath.WriteAllText(filePath, jsonData);
+        Debug.Log("Event list saved to JSON: " + filePath);
+        }
+        else
+        {
+            Debug.Log("There is already an event list JSON file: " + filePath);
+        }
+    }
+
+    public void LoadEventListFromJson(string filePath)
+    {
+        if (File.Exists(filePath))
+        {
+            string jsonData = File.ReadAllText(filePath);
+            eventList = JsonUtility.FromJson<List<Journey>>(jsonData);
+            Debug.Log("Event list loaded from JSON: " + filePath);
+        }
+        else
+        {
+            Debug.LogError("Failed to load event list. JSON file not found: " + filePath);
+        }
 
     // Update is called once per frame
     void Update()
