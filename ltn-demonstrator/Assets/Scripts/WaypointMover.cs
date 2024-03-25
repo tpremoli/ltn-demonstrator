@@ -761,6 +761,18 @@ public class WaypointMover : MonoBehaviour
 
     public void arriveToDestination()
     {
+
+        // TODO This is meant to set withCar of the persistent traveller to the correct value
+        // TODO but I cannot work out which persistent traveller object this should be called on
+        
+        // set with car to false
+        //persistentTraveller.SetWithCar(false);
+
+        // otherwise, if ModeOfTravel is Car, set it to true
+        //if (journey != null && journey.traveller != null && journey.traveller.ModeOfTravel == ModeOfTravel.Car) {
+        //persistentTraveller.SetWithCar(true);
+        //}
+
         Debug.Log("Arrived to destination. Destroying object.");
         if (journey != null) {
             journey.traveller.journeyCompleted(journey);

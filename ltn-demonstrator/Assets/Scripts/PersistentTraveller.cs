@@ -9,6 +9,7 @@ public class PersistentTraveller {
     public string currentLocation;
     public Journey currentJourney;
     public int journeyIndex;
+    private bool withCar;
 
     public PersistentTraveller() {
         //GenerateRandomJourneys();
@@ -127,4 +128,22 @@ public class PersistentTraveller {
             }
         }
     }
+
+    // Method to check if the traveller has a car or is at home
+    public bool HasCar()
+    {
+        return withCar || currentLocation == journeys[0].origin; // Assuming the first journey's origin is the home location
+    }
+
+    // Method to check if the traveller needs a car
+    public bool NeedsCar()
+    {
+        return withCar && currentLocation != journeys[0].origin; // Assuming the first journey's origin is the home location
+    }
+
+    public void SetWithCar(bool withCar)
+    {
+        this.withCar = withCar;
+    }
+
 }
