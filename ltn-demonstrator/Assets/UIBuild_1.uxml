@@ -7,9 +7,8 @@
             <ui:Button text="Cinematic Camera" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CinematicCameraButton" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px;" />
             <ui:Button text="Sensor Cameras" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SensorCamerasButton" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px;" />
             <ui:Button text="More Statistics" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoreStatisticsButton" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px;" />
-            <ui:Label tabindex="-1" text="Statistics:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StatisticsLabel" style="width: 191px;" />
             <ui:Slider picking-mode="Ignore" label="Simulation Speed" value="42" high-value="100" style="height: 37px; width: 684px; position: absolute; top: 54px; left: 4px;">
-                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 80px; -unity-text-align: upper-center; align-items: flex-start; justify-content: flex-end; transform-origin: center; height: 37px;" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SliderLabel" style="width: 80px; -unity-text-align: upper-center; align-items: flex-start; justify-content: flex-end; transform-origin: center; height: 37px;" />
             </ui:Slider>
         </ui:VisualElement>
     </ui:VisualElement>
