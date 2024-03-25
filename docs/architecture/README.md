@@ -42,3 +42,10 @@ The simulation software runs on a local machine, using hardware resources such a
 ## Security Assessment
 
 We can presume each part of the system to be safe within itself, and expect no problems with any of the components to arise. None of the components communicate with any other component not listed here (e.g. the internet, Bluetooth, etc.). Consequently, the system is self contained on the local machine and is considered safe.
+
+## UML Diagram
+
+The following image is a UML diagram of the different components of the LTN simulation. This shows class interactions and some of the attributes of the classes. Some of the lists of attributes are not complete, this is because they have a large nubmer of attributes (more than 20 sometimes), so the list has been shortened for readability.
+On the right hand side of the UML diagram are the visual aspects of the simulation, such as roads, buildings etc., and on the left hand side are the classes that interact to create the behaviour of the traffic and pedestrians.
+
+![System Architecture](UML_Diagram.PNG)
