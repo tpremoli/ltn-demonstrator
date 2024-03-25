@@ -5,7 +5,7 @@ This document explains how to setup a development environment. This can be used 
 ## Prerequisites
 
 Before starting, the following prerequisites must be completed:
-- The user must have hardware capable of operating and developing the software, see the [technical system requirements](/docs/technical-system-requirements.md) for details. Additionally, the user must have at least one of the operating systems listed in the technical system requirements installed.
+- The user must have hardware capable of operating and developing the software, see the [technical system requirements](/docs/technical_system_requirements.md) for details. Additionally, the user must have at least one of the operating systems listed in the technical system requirements installed.
 - The user must create a Unity account with an appropriate plan for their needs, see the [Unity website](https://unity.com/) for details.
 - The user must create a GitHub account and must be granted access to the project GitHub repository.
 
