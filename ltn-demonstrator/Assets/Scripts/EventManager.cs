@@ -77,10 +77,23 @@ public class EventManager : MonoBehaviour
             // Origin is destination of previous journey.
             originID = journeys[journeys.Count - 1].destination;
 
+            // Select destination building.
             chosenType = BuildingProperties.getRandomWeightedDestinationType();
-            Debug.Log("Chosen building type: " + chosenType);
             building = Graph.Instance.getRandomBuildingByType(chosenType);
             destinationID = building.GetComponent<UniqueID>().uniqueID;
+
+            // If destination is same as origin, choose a new building.
+            while (destinationID.Equals(originID)) {
+                // If the selected building type has less than 2 actual buildings in the simulation,
+                // choose a new building type.
+                if (Graph.Instance.buildingsByType[destinationBuildingType].Count <= 1) {
+                    chosenType = BuildingProperties.getRandomWeightedDestinationType();
+                }
+                // Select a new building and get it's ID.
+                building = Graph.Instance.getRandomBuildingByType(chosenType);
+                destinationID = building.GetComponent<UniqueID>().uniqueID;
+            }
+
             time = times[i];
 
             condition = new Condition(originID, time, traveller);
@@ -111,7 +124,7 @@ public class EventManager : MonoBehaviour
         if (File.Exists(filePath))
         {
         string jsonData = JsonUtility.ToJson(eventList);
-        filePath.WriteAllText(filePath, jsonData);
+        File.WriteAllText(filePath, jsonData);
         Debug.Log("Event list saved to JSON: " + filePath);
         }
         else
@@ -132,6 +145,7 @@ public class EventManager : MonoBehaviour
         {
             Debug.LogError("Failed to load event list. JSON file not found: " + filePath);
         }
+    }
 
     // Update is called once per frame
     void Update()
