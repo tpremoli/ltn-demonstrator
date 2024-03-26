@@ -12,7 +12,7 @@ LTNs ([Low Traffic Neighbourhoods](https://en.wikipedia.org/wiki/Low_Traffic_Nei
 
 There is currently a heated debate on LTNs in Exeter, [specifically on a trial being implemented in the Heavitree and Whipton Neighbourhoods](https://www.devon.gov.uk/news/heavitree-and-whipton-active-streets-trial-begins-today). Residents of these neighbourhoods and workers at the Exeter council are largely impacted by this debate, however, we believe that there is a gap in knowledge and understanding of how these sorts of neighbourhoods work. As a result of this, we seek to implement an intuitive, interactive traffic simulation of LTNs. 
 
-This program will simulate a road layout environment in which users interact with permissions such as placing barriers on different streets in the neighbourhood. Upon execution, the simulation should record relevant metrics which will be presented through the user interface, in graphical form. Changes in metrics on the environment can be tracked by the user serving as an education tool regarding the holistic implications of LTNs.
+This program will simulate a road layout environment in which users interact with permissions such as placing barriers on different streets in the neighbourhood. Upon execution, the simulation should record relevant metrics which will be presented through the user interface, in numeric form, with graphical options. Changes in metrics on the environment can be tracked by the user serving as an education tool regarding the holistic implications of LTNs.
 
 The goals of the simulation and this project are:
 - To be an education tool to serve to inform users about LTNs and their impact on a community.
