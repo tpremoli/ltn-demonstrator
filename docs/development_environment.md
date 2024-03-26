@@ -37,7 +37,7 @@ Before starting, the following prerequisites must be completed:
     - `git checkout {branch_name}`
 4. Where branch_name is the name of the branch without any “remotes/origin/” prefix. Alternatively, in the source control tab of VSCode you can also switch branches: 
 5. Your currently active branch can be seen at the bottom left of the screen:
-6. REMEMBER: When developing a new, specific feature, place it in a branch! Branches should relatively self-contained, and contain one main overarching feature or bug fix. To then apply your changes to the main branch, we use pull requests, to avoid the main branch from getting clogged up.
+6. REMEMBER: When developing a new, specific feature, place it in a branch! Branches should be relatively self-contained, and contain one main overarching feature or bug fix. To then apply your changes to the main branch, we use pull requests, to avoid the main branch from getting clogged up.
 7. Create a new branch: To create a new branch from the current branch, use the command 
     - `git checkout -b {branch_name}`
 This will create a new branch based on the branch that you’re currently on, meaning that the code will be based on whatever offshoot you’re on. When creating branches for new features, I’d recommend making sure you’re in the main branch before running this command. 
@@ -49,7 +49,7 @@ Beyond that, it can be helpful to “pull” the latest code from another branch
     - `git merge {other_branch_name}`
 This will essentially pull code from “other_branch_name” and merge it into your currently active branch, and prompt you to resolve any conflicts in the merging that arise. This is particularly useful when trying to merge the branch with the main branch. To ensure you’re following the main branch, it might be useful to use  the command 
     - `git merge main`
-10. Make Changes in VSCode: Now that you can mess around with branches, you can make changes to the code in VSCode and  commit the changes to the repo. To do this, make your changes, and save the file. In the source control section, the changes will be shown. You can click on the files to see the changes, and in the left tab, you can add and remove the files to the commit. (with the + and – to the right of the file names): 
+10. Make Changes in VSCode: Now that you can mess around with branches, you can make changes to the code in VSCode and commit the changes to the repo. To do this, make your changes, and save the file. In the source control section, the changes will be shown. You can click on the files to see the changes, and in the left tab, you can add and remove the files to the commit. (with the + and – to the right of the file names): 
 
 Beyond that, in the tab showing the changes, you can select regions of changes and choose to “stage” and “unstage” specific ranges, which will add certain lines to the commit instead of the whole file: 
 
