@@ -77,6 +77,7 @@ public void ShowUIElement()
         // Set up the buttons for the main UI
         rootVisualElement.Q<Button>("PlayButton").clicked += OnPlayButtonPressed;
         rootVisualElement.Q<Button>("AddBarriersButton").clicked += OnAddBarrierMenuPressed;
+        Debug.Log("Button add barriers Added");
         rootVisualElement.Q<Button>("DeleteBarrierButton").clicked += OnDeleteBarrierPressed;
         rootVisualElement.Q<Button>("DeleteSaveButton").clicked += OnDeleteSavePressed;
         rootVisualElement.Q<Button>("AddSensorsButton").clicked += OnAddSensorPressed;
@@ -86,21 +87,21 @@ public void ShowUIElement()
     {
         addBarrierRoot = addBarrierUIDocument.rootVisualElement;
 
-        Debug.LogError("Start");
-        Debug.LogError(addBarrierRoot);
+        Debug.Log("Start");
+        Debug.Log(addBarrierRoot);
         // Set up the buttons for the add barrier UI
         addBarrierRoot.Q<Button>("BackButton").clicked += () => OnBackButtonPressed();
-        Debug.LogError("Button1 Added");
+        Debug.Log("Button1 Added");
         addBarrierRoot.Q<Button>("BlockAllButton").clicked += () => OnAddBlockAllBarrierPressed();
-        Debug.LogError("Button2 Added");
+        Debug.Log("Button2 Added");
         addBarrierRoot.Q<Button>("BlockMotorVehiclesButton").clicked += () => OnAddBlockAllMotorVehiclesBarrierPressed();
-        Debug.LogError("Button3 Added");
+        Debug.Log("Button3 Added");
         addBarrierRoot.Q<Button>("BlockHeavyButton").clicked += () => OnAddBlockAllMotorVehiclesBarrierPressed();
-        Debug.LogError("Button4 Added");
+        Debug.Log("Button4 Added");
         addBarrierRoot.Q<Button>("AllowBusButton").clicked += () => OnAddBusOnlyBarrierPressed();
-        Debug.LogError("Button5 Added");
+        Debug.Log("Button5 Added");
         addBarrierRoot.Q<Button>("AllowBusTaxiButton").clicked += () => OnAddBusandTaxiOnlyBarrierPressed();
-        Debug.LogError("All Buttons Added");
+        Debug.Log("All Buttons Added");
     }
 
 
@@ -115,9 +116,10 @@ public void ShowUIElement()
     private void OnBackButtonPressed()
     {
         // Activate the Main UI
-        mainUIDocument.gameObject.SetActive(true);
-        addBarrierUIDocument.gameObject.SetActive(false); // Deactivate the Add Barrier UI
-        SetupMainButtons();
+        //mainUIDocument.gameObject.SetActive(true);
+        //addBarrierUIDocument.gameObject.SetActive(false); // Deactivate the Add Barrier UI
+        //SetupMainButtons();
+        OnEnable();
     }
 
     /**
