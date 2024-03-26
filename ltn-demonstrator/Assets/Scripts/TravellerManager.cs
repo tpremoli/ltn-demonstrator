@@ -49,13 +49,13 @@ public class TravellerManager : MonoBehaviour
         filePath = "ltn-demonstator/Saves/eventlist.json"
         if (File.Exists(filePath))
         {
-            EventManager.LoadEventListFromJson(filePath)
+            EventManager.LoadEventListFromJson(filePath);
         }
         else
         {
             // ideally we want to generate the eventlist here
             //eventManager.generateJourneys()
-            eventManager.SaveEventListToJson(filePath)
+            eventManager.SaveEventListToJson(filePath);
         }
             
     }
