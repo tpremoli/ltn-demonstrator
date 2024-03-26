@@ -48,4 +48,4 @@ We can presume each part of the system to be safe within itself, and expect no p
 The following image is a UML diagram of the different components of the LTN simulation. This shows class interactions and some of the attributes of the classes. Some of the lists of attributes are not complete, this is because they have a large nubmer of attributes (more than 20 sometimes), so the list has been shortened for readability.
 On the right hand side of the UML diagram are the visual aspects of the simulation, such as roads, buildings etc., and on the left hand side are the classes that interact to create the behaviour of the traffic and pedestrians.
 
-![System Architecture](UML_Diagram.PNG)
+![UML Diagram](UML_Diagram.PNG)
