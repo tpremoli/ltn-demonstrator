@@ -16,6 +16,7 @@ This program will simulate a road layout environment in which users interact wit
 
 The goals of the simulation and this project are:
 - To be an education tool to serve to inform users about LTNs and their impact on a community.
+- Enable the comparison of neighbourhood configurations (barrier locations).
 - To enhance decision-making regarding implementation of LTNs, while promoting transparency and understanding of people's needs.
 - To reduce conflicts in the debate arising from misinformation, or the lack of information.
 
