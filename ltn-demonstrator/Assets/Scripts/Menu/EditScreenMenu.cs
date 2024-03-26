@@ -5,6 +5,7 @@ using System.IO;
 
 public class EditScreenMenu : MonoBehaviour
 {
+    /**
     
     public GameObject barrierPrefab;
     public TextMeshProUGUI instructionText;
@@ -147,4 +148,5 @@ public class EditScreenMenu : MonoBehaviour
         // Load the MenuProperMapScene scene
         UnityEngine.SceneManagement.SceneManager.LoadScene("PlayMode");
     }
+    **/
 }
