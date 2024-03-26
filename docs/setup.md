@@ -10,6 +10,6 @@ The user must ensure that the requirements listed in the [technical system requi
 
 1. Download the project from the [GitHub repository](https://github.com/2023-24-UoE-ECMM427/ltn-demonstrator) under the Releases tab.
 2. Extract the ZIP file to an appropriate location and open the resulting directory.
-3. Run the 'ltn-demonstrator.exe' program in release directory.
+3. Run the `ltn-demonstrator.exe` program in release directory.
 
 For details on usage, see the [usage guide](/docs/usage.md).
