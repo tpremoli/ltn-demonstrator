@@ -31,6 +31,12 @@ Before starting, the following prerequisites must be completed:
 4. Clone the project repository:
     - From VS Code, bring up the command palette using ctrl+shift+p (cmd+shift+p), search for the command named `Git: Clone`. This should bring up a list of options, including `2023-24-UoE-ECMM427/ltn-demonstrator`. Clone this repository to a suitable location.
   
+5. Continue development. See the following documentation for more support:
+    - https://code.visualstudio.com/docs
+    - https://github.com/microsoft/vscode-docs
+    - https://docs.unity.com/
+
+  
 ### Dealing With Branches
 
 1. With the repo cloned, you should now be in the main branch. You can interact with it using git commands or VSCode. As development happens in branches (To avoid conflicts and keeping the main branch stable), this section will cover that information.
