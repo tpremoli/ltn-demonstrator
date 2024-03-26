@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
-public class Waypoint : MonoBehaviour
+public class Waypoint : MonoBehaviour, ISerializationCallbackReceiver
 {
     // TODO: This is the "adjacent" waypoints, which signifies the mutual connection between two waypoints.
     // We can add a second list of "connections" which are one-way connections, and use that to create one 
@@ -13,6 +13,23 @@ public class Waypoint : MonoBehaviour
     // New attribute to determine if the waypoint is for pedestrians only
     public bool isPedestrianOnly = false;
     public bool isSubdivided = false;
+
+    public void OnBeforeSerialize()
+    {
+    }
+
+    public void OnAfterDeserialize()
+    {
+        if (this.isSubdivided || this.isPedestrianOnly) return;
+        foreach (Waypoint adj in this.adjacentWaypoints)
+        {
+            if (!adj.isSubdivided)
+            {
+                Debug.LogWarning("Waypoint  is adjacent to another but they are not subdivided. Try rerunning sidewalk stuff.");
+            }
+        }
+    }
+
     private void OnDrawGizmos()
     {
         float waypointSize = this.transform.parent.GetComponent<Graph>().WaypointSize;

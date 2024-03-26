@@ -394,11 +394,33 @@ public class PedestrianPathGenerator
         // clearing waypoints
         foreach (Waypoint wp in centersToDelete)
         {
+            foreach (KeyValuePair<ReducedEdge, List<ReducedEdge>> kvp in intersectingEdgesOverride)
+            {
+                if (kvp.Key.startWaypoint == wp || kvp.Key.endWaypoint == wp)
+                {
+                    intersectingEdgesOverride.Remove(kvp.Key);
+                    break;
+                }
+            }
             Object.DestroyImmediate(wp);
         }
 
         // we re-load the edges to update the graph.
         EdgeLoader.LoadEdges(intersectingEdgesOverride);
+
+        // finally, we check the waypoint adjacencies to make sure they're correct
+        foreach (Waypoint wp in Object.FindObjectsOfType<Waypoint>())
+        {
+            if (wp.isSubdivided || wp.isPedestrianOnly) continue;
+
+            foreach (Waypoint adj in wp.adjacentWaypoints)
+            {
+                if (!adj.isSubdivided)
+                {
+                    Debug.LogWarning("Waypoint " + wp.name + " is adjacent to " + adj.name + " but they are not subdivided. Try rerunning sidewalk stuff.");
+                }
+            }
+        }
     }
 
     private static bool TryGetIntersection(Edge pedestrianEdge, Edge roadEdge, out Vector3 intersectionPoint)
