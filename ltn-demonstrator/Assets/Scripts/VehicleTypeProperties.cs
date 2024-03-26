@@ -88,6 +88,8 @@ public class VehicleProperties
                 return 4.8f;
             case VehicleType.Pedestrian:
                 return 1.5f;
+            case VehicleType.Bicycle:
+                return 3.0f;
             default:
                 return 0.0f;
         }
@@ -106,6 +108,8 @@ public class VehicleProperties
                 return 0.2f;
             case VehicleType.Pedestrian:
                 return 0.2f;
+            case VehicleType.Bicycle:
+                return 0.5f;
             default:
                 return 0.0f;
         }
@@ -124,6 +128,8 @@ public class VehicleProperties
                 return 2.0f;
             case VehicleType.Pedestrian:
                 return 1000.0f;
+            case VehicleType.Bicycle:
+                return 2.5f;
             default:
                 return 0.0f;
         }
@@ -142,6 +148,8 @@ public class VehicleProperties
                 return 4.0f;
             case VehicleType.Pedestrian:
                 return 1000.0f;
+            case VehicleType.Bicycle:
+                return 5f;
             default:
                 return 0.0f;
         }
@@ -176,6 +184,8 @@ public class VehicleProperties
                 return 3;
             case VehicleType.Pedestrian:
                 return 1; // lol
+            case VehicleType.Bicycle:
+                return 1;
             default:
                 return 0;
         }

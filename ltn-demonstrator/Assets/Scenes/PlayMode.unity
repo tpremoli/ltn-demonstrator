@@ -45953,6 +45953,8 @@ MonoBehaviour:
     vehicleType: 3
   - vehiclePrefab: {fileID: 100000, guid: 36f453c34cda9cb458647901440ff410, type: 3}
     vehicleType: 4
+  - vehiclePrefab: {fileID: 100000, guid: 36f453c34cda9cb458647901440ff410, type: 3}
+    vehicleType: 5
 --- !u!4 &1412720822
 Transform:
   m_ObjectHideFlags: 0
