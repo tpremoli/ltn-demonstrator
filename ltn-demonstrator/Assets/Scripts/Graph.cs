@@ -180,7 +180,7 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
                 return edge;
             }
         }
-        Debug.LogError("Edge not found: " + a + " - " + b);
+        // Debug.LogWarning("Edge not found: " + a + " - " + b);
         return null;
     }
     public Edge GetEdge(ReducedEdge re)

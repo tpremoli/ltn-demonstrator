@@ -402,7 +402,7 @@ public class PedestrianPathGenerator
                     break;
                 }
             }
-            Object.DestroyImmediate(wp);
+            Object.DestroyImmediate(wp.gameObject);
         }
 
         // we re-load the edges to update the graph.
