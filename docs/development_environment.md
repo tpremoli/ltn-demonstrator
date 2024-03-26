@@ -13,7 +13,7 @@ Before starting, the following prerequisites must be completed:
 
 ### Setting Up Visual Studio Code
 
-1. Download and install the latest version of Visual Studio Code from the official website: https://code.visualstudio.com
+1. Download and install the latest version of Visual Studio Code from the official website: https://code.visualstudio.com, our development used version 1.87, however there should be no issues porting to a more recent release. See [technical system requirements](/docs/technical_system_requirements.md) for more details.
 2. Install the following extensions from the VS Code Marketplace:
     - [Unity](https://marketplace.visualstudio.com/items?itemName=VisualStudioToolsForUnity.vstuc)
     - [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)
@@ -30,6 +30,12 @@ Before starting, the following prerequisites must be completed:
 
 4. Clone the project repository:
     - From VS Code, bring up the command palette using ctrl+shift+p (cmd+shift+p), search for the command named `Git: Clone`. This should bring up a list of options, including `2023-24-UoE-ECMM427/ltn-demonstrator`. Clone this repository to a suitable location.
+  
+5. Continue development. See the following documentation for more support:
+    - https://code.visualstudio.com/docs
+    - https://github.com/microsoft/vscode-docs
+    - https://docs.unity.com/
+
   
 ### Dealing With Branches
 
@@ -103,7 +109,7 @@ The “Unity Project” should contain roughly the following files:
 
 ### Creating Pull Requests
 
-1. Let’s say you’ve made changes to your branch, and the feature is complete, and ready to be merged with the main branch. First, you must run “git merge main” and fix any conflicts, and then you can create a pull request.
+1. Once you’ve made changes to your branch, the feature is complete, and you are ready to be merge with the main branch. First, you must run “git merge main” and fix any conflicts, and then you can create a pull request.
 2. Go to the GitHub icon on the left column, and click the little pull request icon:
 
 ![img12](./images/img12.png)
