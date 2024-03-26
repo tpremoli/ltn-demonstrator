@@ -9,6 +9,12 @@ public class PlayModeButtonClicker : MonoBehaviour
     private Label sliderLabel; // This will hold the reference to the slider label
     private Slider slider; // This will hold the reference to the slider itself
 
+    // References to the camera GameObjects
+    public Camera mainCamera;
+    public Camera cinematicCamera;
+    public Camera sensorCamera;
+
+
     private void OnEnable()
     {
         // Retrieve the root element of the UI document
@@ -16,9 +22,13 @@ public class PlayModeButtonClicker : MonoBehaviour
 
         // Connect the buttons
         rootVisualElement.Q<Button>("EditLTNbutton").clicked += () => OnEditLTNButtonPressed();
-        rootVisualElement.Q<Button>("MainCameraButton").clicked += () => Debug.Log("Main Camera button pressed");
-        rootVisualElement.Q<Button>("CinematicCameraButton").clicked += () => Debug.Log("Cinematic Camera button pressed");
-        rootVisualElement.Q<Button>("SensorCamerasButton").clicked += () => Debug.Log("Sensor Cameras button pressed");
+        rootVisualElement.Q<Button>("MainCameraButton").clicked += () => SwitchToCamera(mainCamera);
+
+        // Connect the Cinematic Camera button
+        rootVisualElement.Q<Button>("CinematicCameraButton").clicked += () => SwitchToCamera(cinematicCamera);
+
+        // Connect the Sensor Cameras button
+        rootVisualElement.Q<Button>("SensorCamerasButton").clicked += () => SwitchToCamera(sensorCamera);
         rootVisualElement.Q<Button>("MoreStatisticsButton").clicked += () => Debug.Log("More Statistics button pressed");
 
         // Connect to the slider and slider label
@@ -71,6 +81,21 @@ public class PlayModeButtonClicker : MonoBehaviour
 
         // Log the message with the time scale and the real delta time
         Debug.Log($"Update called with time scale: {Time.timeScale} | Real Delta Time: {realDeltaTime:F3}");
+    }
+
+    private void SwitchToCamera(Camera cameraToActivate)
+    {
+        Debug.Log("Camera switched to ", cameraToActivate);
+        // Disable all cameras
+        mainCamera.gameObject.SetActive(false);
+        cinematicCamera.gameObject.SetActive(false);
+        sensorCamera.gameObject.SetActive(false);
+
+        // Enable the selected camera
+        cameraToActivate.gameObject.SetActive(true);
+
+        // Log the camera switch
+        Debug.Log(cameraToActivate.name + " is now active.");
     }
 
 }
