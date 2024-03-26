@@ -48,10 +48,12 @@ This section covers the cost of operation and development of this software. Thes
 ### Operation
 
 The costs for operating this project include:
-- Hardward costs relating to procuring hardware to run the project.
+- Hardware costs relating to procuring hardware to run the project.
 - Software costs relating to license keys for operating systems (if they are not preinstalled on the hardware).
 
 An example platform that could run this software would be the [Acer Aspire 3](https://www.currys.co.uk/products/acer-aspire-3-15.6-laptop-intel-core-i3-128-gb-ssd-silver-10226972.html), costing about £299. Note: this cost may vary and can be cheaper/more expensive depending on the individual users requirements.
+
+Alternatively, a system comprised of low-end processors, a unified storage and terminals could be developed. This would have to be a bespoke implementation for the demonstration at the RAMM. This can be evaluated generously at a cost of ~£150 per terminal (simple processor such as a raspberry pi, and a terminal screen and human basic interface), and a set cost for the unified storage location of £100, due the the low space complexity of our data.
 
 Besides the initial setup, there are no anticipated labour costs relating to maintenance or upkeep of the software. The project is entirely self contained and there are no extra components to maintain (see the [architecture documentation](/docs/architecture/README.md) for more details).
 
