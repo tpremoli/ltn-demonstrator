@@ -45,6 +45,16 @@ public class SerialisableWaypoint {
         y = waypoint.transform.position.y;
         z = waypoint.transform.position.z;
     }
+
+
+    //second constructor
+    public SerialisableWaypoint(int id, float x, float y, float z) {
+        this.ID = id;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
 }
 
 

@@ -758,6 +758,7 @@
             DrawEdges(allEdges);
             Debug.LogError("edges drawn");
             List<Cluster> clusters = ClusterWaypoints(allWaypoints, 20);
+            CreateCentroidsForClusters(clusters, allWaypoints);
             Debug.LogError($"waypoints length: {allWaypoints.Count}");
             Debug.LogError($"clusters length: {clusters.Count}");
             //switch tracking variable
@@ -833,6 +834,30 @@
             }
         }
         return clusters;
+    }
+
+    public void CreateCentroidsForClusters(List<Cluster> clusters, List<SerialisableWaypoint> waypoints) {
+        int nextID = waypoints.Count + 1;
+        foreach (var cluster in clusters) {
+            float x = 0;
+            float y = 0;
+            float z = 0;
+            foreach (var waypoint in cluster.Waypoints) {
+                x += waypoint.x;
+                y += waypoint.y;
+                z += waypoint.z;
+            }
+            x /= cluster.Waypoints.Count;
+            y /= cluster.Waypoints.Count;
+            z /= cluster.Waypoints.Count;
+            cluster.centroid = new SerialisableWaypoint(nextID++, x,y,z);
+            Debug.Log($"Centroid for cluster: {cluster.centroid.x}, {cluster.centroid.y}, {cluster.centroid.z}");
+        }
+    }
+
+    public void MakeEdgesForCentriods(List<Cluster> clusters) 
+    {
+        
     }
 
 
