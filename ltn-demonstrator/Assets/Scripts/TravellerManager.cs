@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System.IO;
 
 public class TravellerManager : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public class TravellerManager : MonoBehaviour
         string filePath = "ltn-demonstator/Saves/eventlist.json";
         if (File.Exists(filePath))
         {
-            EventManager.LoadEventListFromJson(filePath);
+            eventManager.LoadEventListFromJson(filePath);
         }
         else
         {
