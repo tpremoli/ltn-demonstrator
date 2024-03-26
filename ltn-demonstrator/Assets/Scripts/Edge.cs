@@ -458,9 +458,9 @@ public class Edge
         float startDistance = convertToPositionAlongEdge(start);
         float destinationDistance = convertToPositionAlongEdge(destination);
 
-        for (int i = 0; i < barriersOnEdge.Count; i++)
+        foreach (Barrier barrier in barriersOnEdge)
         {
-            float barrierDistance = convertToPositionAlongEdge(barriersOnEdge[i].transform.position);
+            float barrierDistance = convertToPositionAlongEdge(barrier.transform.position);
 
             // Check if the barrier is between start and destination
             bool isBarrierBetween = barrierDistance > System.Math.Min(startDistance, destinationDistance) &&
@@ -469,7 +469,7 @@ public class Edge
             if (isBarrierBetween)
             {
                 // Retrieve the list of blocked modes for the barrier's type
-                List<ModeOfTransport> blockedModes = BarrierTypeProperties.GetBlockedModes(barriersOnEdge[i].BarrierType);
+                List<ModeOfTransport> blockedModes = BarrierTypeProperties.GetBlockedModes(barrier.BarrierType);
 
                 // If the current mode of transport is blocked, return true immediately
                 if (blockedModes.Contains(mode))

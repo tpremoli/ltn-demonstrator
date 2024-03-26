@@ -132,6 +132,11 @@ public class WaypointPath
             // Only set distance for the waypoint on the same side of the barrier as beginningPos
             Waypoint accessibleWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos, mode);
 
+            if (accessibleWaypoint == null)
+            {
+                return null; // or any other appropriate response
+            }
+
             dist[accessibleWaypoint] = Vector3.Distance(accessibleWaypoint.transform.position, beginningPos);
             queue.Enqueue(accessibleWaypoint, dist[accessibleWaypoint]);
             mostRecentDistances[accessibleWaypoint] = dist[accessibleWaypoint];

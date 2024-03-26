@@ -11,7 +11,8 @@ public enum VehicleType
     SUV,
     Van,
     Taxi,
-    Pedestrian
+    Pedestrian,
+    Bicycle
 }
 
 public class VehicleProperties
@@ -70,7 +71,7 @@ public class VehicleProperties
     {
         VehicleType type;
         Array values = Enum.GetValues(typeof(VehicleType));
-        type = (VehicleType)values.GetValue(UnityEngine.Random.Range(0, values.Length-1)); // -1 to exclude Pedestrian. TODO: make this more elegant
+        type = (VehicleType)values.GetValue(UnityEngine.Random.Range(0, values.Length-2)); // -2 to exclude Pedestrian & bike. TODO: make this more elegant
         this.Type = type;
     }
     private float getBaseMaxVelocity()

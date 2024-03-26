@@ -51,17 +51,6 @@ public class Graph : MonoBehaviour
             Debug.Log("Building Type: " + t.Key + ", Total: " + t.Value.Count);
         }
 
-
-        // this should be done right after SyncTransforms. this is done in BarrierManager
-        // if (!inEditMode && BarrierManager.Instance.loadBarriersFromSave){
-        //     // Recalculate barriers on edges
-        //     BarrierManager.Instance.RecalcBarriersOnEdges();
-        // }
-
-        // if (!inEditMode && SensorManager.Instance.loadSensorsFromSave){
-        //     SensorManager.Instance.RecalcSensorsOnEdges();
-        // }
-
     }
 
     public Building getRandomBuildingByType(BuildingType buildingType)
