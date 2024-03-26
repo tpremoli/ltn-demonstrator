@@ -11,6 +11,20 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
         {
             Instance = this;
         }
+
+        // finally, we check the waypoint adjacencies to make sure they're correct
+        foreach (Waypoint wp in Object.FindObjectsOfType<Waypoint>())
+        {
+            if (wp.isSubdivided || wp.isPedestrianOnly) continue;
+
+            foreach (Waypoint adj in wp.adjacentWaypoints)
+            {
+                if (!adj.isSubdivided)
+                {
+                    Debug.LogWarning("Waypoint " + wp.name + " is adjacent to " + adj.name + " but they are not subdivided. Try rerunning sidewalk stuff.");
+                }
+            }
+        }
     }
 
     // private waypointsize with getter
