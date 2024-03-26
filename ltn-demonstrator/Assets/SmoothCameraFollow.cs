@@ -16,13 +16,13 @@ public class CameraTarget
 public class SmoothCameraFollow : MonoBehaviour
 {
     private Vector3 _offset;
-    [SerializeField] private float smoothTime = 0.3f;
+    [SerializeField] private float smoothTime = 0.5f;
     private Vector3 _currentVelocity = Vector3.zero;
 
     [SerializeField] private List<CameraTarget> inventory = new List<CameraTarget>();
     private int timeStepCounter = 0;
     private Transform target;
-    [SerializeField] private float verticalDistance = 10f; // Distance above the target
+    [SerializeField] private float verticalDistance = 1000f; // Distance above the target
 
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class SmoothCameraFollow : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref _currentVelocity, smoothTime);
 
         timeStepCounter++;
-        if (timeStepCounter >= 30)
+        if (timeStepCounter >= 300)
         {
             SwitchTarget();
             timeStepCounter = 0;
