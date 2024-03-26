@@ -29,7 +29,21 @@ public class SerialisableEdge {
         length = edge.length;
         isBarricaded = edge.isBarricated;
     }
+
+    public SerialisableEdge(int id, SerialisableWaypoint start, SerialisableWaypoint end, float length, float weight) {
+        this.ID = id;
+        this.length = length;
+        this.startWaypoint = start;
+        this.endWaypoint = end;
+        this.weight = weight;
+    }
+
+    public void IncrementEdgeWeight(float weightIncrement) {
+        weight += weightIncrement;
+    }
 }
+
+
 
 public class SerialisableWaypoint {
     public int ID;
@@ -37,6 +51,7 @@ public class SerialisableWaypoint {
     public float y;
     public float z;
     public GameObject WaypointObject { get; set; }
+
     //whichever other ones are needed
 
     public SerialisableWaypoint(Waypoint waypoint) {
@@ -45,7 +60,6 @@ public class SerialisableWaypoint {
         y = waypoint.transform.position.y;
         z = waypoint.transform.position.z;
     }
-
 
     //second constructor
     public SerialisableWaypoint(int id, float x, float y, float z) {
@@ -61,6 +75,7 @@ public class SerialisableWaypoint {
 public class Cluster {
     public List<SerialisableWaypoint> Waypoints;
     public SerialisableWaypoint centroid;
+    public List<SerialisableEdge> edges = new List<SerialisableEdge>();
 
     public Cluster() {
         Waypoints = new List<SerialisableWaypoint>();

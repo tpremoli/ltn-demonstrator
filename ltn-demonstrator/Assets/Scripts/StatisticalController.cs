@@ -618,7 +618,7 @@
 
 
 
-        public void DrawWaypoints(List<SerialisableWaypoint> waypoints)
+        public void DrawWaypoints(List<SerialisableWaypoint> waypoints, float scale = 1.0f)
         {
             //Transform waypoints so that they are correctly oriented
             CalculateTransform(waypoints);
@@ -632,6 +632,9 @@
                 // Instantiate the waypoint prefab at this position
                 waypoints[i].WaypointObject =  Instantiate(waypointPrefab, waypointPosition, Quaternion.identity);
                 //Debug.Log("Spawned");
+                // Alter the scale of the waypoint object
+                Vector3 scalar = new Vector3(scale, scale, scale); // Set the desired scale here
+                waypoints[i].WaypointObject.transform.localScale = scalar;
 
 
             }
@@ -754,11 +757,14 @@
             ShowWhiteScreen();
             Debug.Log("Drawing Heatmap");
             //draw all waypoints and edges
-            DrawWaypoints(allWaypoints);
-            DrawEdges(allEdges);
-            Debug.LogError("edges drawn");
-            List<Cluster> clusters = ClusterWaypoints(allWaypoints, 20);
+            List<Cluster> clusters = ClusterWaypoints(allWaypoints, 15);
             CreateCentroidsForClusters(clusters, allWaypoints);
+            List<SerialisableWaypoint> waypointsForMap = ExtractCentriods(clusters);
+            DrawWaypoints(allWaypoints, 0.2f);        //make these smaller
+            DrawWaypoints(waypointsForMap, 15f);     //make these bigger, make permanent attribute
+            DrawEdges(allEdges);                //make two sets, one for pollution one for usage
+            Debug.LogError("edges drawn");
+
             Debug.LogError($"waypoints length: {allWaypoints.Count}");
             Debug.LogError($"clusters length: {clusters.Count}");
             //switch tracking variable
@@ -855,9 +861,66 @@
         }
     }
 
-    public void MakeEdgesForCentriods(List<Cluster> clusters) 
+    public List<SerialisableWaypoint> ExtractCentriods (List<Cluster> clusters) {
+        List<SerialisableWaypoint> centroids = new List<SerialisableWaypoint>();
+        foreach (var cluster in clusters) {
+            centroids.Add(cluster.centroid);
+        }
+        return centroids;
+    }
+
+
+    public List<SerialisableEdge> MakeEdgesForCentriods(List<SerialisableEdge> edges, List<Cluster> clusters) 
     {
-        
+        List<SerialisableEdge> newEdges = new List<SerialisableEdge>();
+        int edgeID = edges.Count + 1;
+        // for each edge figure out which cluster it belongs to
+        foreach (var edge in edges) {
+            SerialisableWaypoint start = edge.startWaypoint;
+            SerialisableWaypoint end = edge.endWaypoint;
+            Cluster startCluster = null;
+            Cluster endCluster = null;
+            foreach (var cluster in clusters) {
+                foreach (var waypoint in cluster.Waypoints) {
+                    if (waypoint == start) {
+                        startCluster = cluster;
+                    }
+                    if (waypoint == end) {
+                        endCluster = cluster;
+                    }
+                }
+            }
+            // if both clusters are not null, create a new edge between the two centroids
+            if (startCluster != null && endCluster != null) {
+
+                //check that the edge doesnt already exist
+                bool edgeExists = false;
+                SerialisableEdge edgeN = null;
+                foreach (var edgeC in startCluster.edges) {
+                    if ((edge.startWaypoint == startCluster.centroid && edge.endWaypoint == endCluster.centroid) || 
+                        (edge.startWaypoint == endCluster.centroid && edge.endWaypoint == startCluster.centroid)) 
+                    {
+                        edgeExists = true;
+                        edgeN = edgeC;
+                        break;
+                    }
+                }
+                if (!edgeExists) {
+                    Debug.Log("Creating new edge");
+                    // calculate the length of the edge
+                    float length = Vector3.Distance(new Vector3(start.x, start.y, start.z), new Vector3(end.x, end.y, end.z));
+                    // create a new edge between the two centroids
+                    SerialisableEdge newEdge = new SerialisableEdge(edgeID++, startCluster.centroid, endCluster.centroid, length, edge.weight);
+                    // add the new edge to the list of edges
+                    newEdges.Add(newEdge);
+                }
+                else {
+                    // add their weight to the existing edge
+                    edgeN.IncrementEdgeWeight(edge.weight);
+                }
+            }
+        }
+        return newEdges;
     }
 
 
