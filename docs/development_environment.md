@@ -13,7 +13,7 @@ Before starting, the following prerequisites must be completed:
 
 ### Setting Up Visual Studio Code
 
-1. Download and install the latest version of Visual Studio Code from the official website: https://code.visualstudio.com
+1. Download and install the latest version of Visual Studio Code from the official website: https://code.visualstudio.com, our development used version 1.87, however there should be no issues porting to a more recent release. See [technical system requirements](/docs/technical_system_requirements.md) for more details.
 2. Install the following extensions from the VS Code Marketplace:
     - [Unity](https://marketplace.visualstudio.com/items?itemName=VisualStudioToolsForUnity.vstuc)
     - [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)
