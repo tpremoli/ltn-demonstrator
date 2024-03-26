@@ -109,7 +109,7 @@ The “Unity Project” should contain roughly the following files:
 
 ### Creating Pull Requests
 
-1. Let’s say you’ve made changes to your branch, and the feature is complete, and ready to be merged with the main branch. First, you must run “git merge main” and fix any conflicts, and then you can create a pull request.
+1. Once you’ve made changes to your branch, the feature is complete, and you are ready to be merge with the main branch. First, you must run “git merge main” and fix any conflicts, and then you can create a pull request.
 2. Go to the GitHub icon on the left column, and click the little pull request icon:
 
 ![img12](./images/img12.png)
