@@ -48,6 +48,11 @@ Ethical and legal considerations are vital for this project as it models Low Tra
 4. **Misinterpretation in Educational Contexts:** The risk of misinterpretation in educational contexts is acknowledged, necessitating clear guidelines and supplementary materials to ensure accurate comprehension.
 5. **Responsiveness to Community Feedback:** Ensure there are clear mechanisms to respond to community concerns and feedback. Establish processes to adjust the project based on this input, mitigating any potential negative impacts on the community.
 6. **Liability for Community Misunderstandings:** Address and clarify any misunderstandings that may arise from community engagement sessions, reducing the risk of misinformation and potential liability.
+7. **Community Engagement Statement:** By Addressing the limitations of the project before initiating community engagement, we can help mitigate the risks. An example statement should include the following points:
+   - 2. Incorrect Conclusions from Simulation.
+   - 4. Misinterpretation in Educational Contexts.
+   - 6. Liability for Community Misunderstandings.
+
 
 ## Community Engagement
 
@@ -56,12 +61,14 @@ Ethical and legal considerations are vital for this project as it models Low Tra
 3. **Feedback Mechanisms:** Implement effective mechanisms for collecting and analyzing community feedback, such as surveys, public forums, and online platforms.
 4. **Impact on Modeling:** Detail how community input will influence the LTN simulation, ensuring that the model remains relevant and reflective of community needs.
 
+
 ## Conclusion
-Given the ethical and legal considerations outlined above, most aspects of the project do not require ethical approval (bar conferring with marginalized groups), as they involve minimal risk legally and ethically. If we decide to consult members of marginalized groups (limited mobility, race etc.), then this may change, hence, we will seek ethical approval from the university.
+
+Given the ethical and legal considerations outlined above, most aspects of the project do not require ethical approval (bar conferring with marginalized groups), as they involve minimal risk legally and ethically. If we decide to consult members of marginalized groups (limited mobility, race etc.), then this may change, hence, we will seek ethical approval from the university. Upon conference with our client, they agree with this decision.
+
 
 ## Review
 
-This document was reviewed in January 2024. It was amended in February 2024 to consider the use of the simulation in educational setting, with all sections (Introduction, Legal Considerations and Accountability and Liability) being updated accordingly, with additional focus on
-the misrepresentation or misuse of data and results. Additionally, considerations towards community engagement have been made throughout all sections, and a section regarding our intentions with the community has been added. Otherwise, the review found that there were no changes required to be made to this document and that the information listed here with respect to legal and ethical concerns are still accurate and up-to-date.
+This document was reviewed in January 2024. It was amended in February 2024 to consider the use of the simulation in educational setting, with all sections (Introduction, Legal Considerations and Accountability and Liability) being updated accordingly, with additional focus on the misrepresentation or misuse of data and results. Additionally, considerations towards community engagement have been made throughout all sections, and a section regarding our intentions with the community has been added. Otherwise, the review found that there were no changes required to be made to this document and that the information listed here with respect to legal and ethical concerns are still accurate and up-to-date.
 
 This document was again reviewed in March 2024. The review found that there were no changes required to be made to this document and that the information listed here with respect to legal and ethical concerns are still accurate and up-to-date.
