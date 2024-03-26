@@ -22,6 +22,7 @@ Ethical and legal considerations are vital for this project as it models Low Tra
 11. **Community Involvement:** Active engagement with local communities is essential. This involves seeking their input, addressing their concerns, and incorporating their feedback into the LTN model. Such involvement ensures the model reflects diverse perspectives and real-world scenarios.
 12. **Respect for Community Views:** Recognize and respect the varied views within the community, ensuring that all voices, especially those from marginalized groups, are heard and considered in the simulation's development.
 13. **Consent and Privacy in Engagement:** Obtain informed consent for any data collection during community engagement activities, ensuring adherence to privacy and data protection standards.
+14. **Simulation Veracity to Real Life:** By ensuring that all statistical values used are as similar to real-world values as possible, we can reduce the risk of misinformation. For example, ensuring that a vehicle (car) has emission rates equivilant to real life.
 
  
 ## Legal Considerations
