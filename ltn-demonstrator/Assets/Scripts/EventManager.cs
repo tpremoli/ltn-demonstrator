@@ -123,13 +123,13 @@ public class EventManager : MonoBehaviour
     {
         if (File.Exists(filePath))
         {
-        string jsonData = JsonUtility.ToJson(eventList);
-        File.WriteAllText(filePath, jsonData);
-        Debug.Log("Event list saved to JSON: " + filePath);
+            Debug.Log("There is already an event list JSON file: " + filePath);
         }
         else
         {
-            Debug.Log("There is already an event list JSON file: " + filePath);
+            string jsonData = JsonUtility.ToJson(eventList);
+            File.WriteAllText(filePath, jsonData);
+            Debug.Log("Event list saved to JSON: " + filePath);
         }
     }
 
@@ -137,13 +137,13 @@ public class EventManager : MonoBehaviour
     {
         if (File.Exists(filePath))
         {
-            string jsonData = File.ReadAllText(filePath);
-            eventList = JsonUtility.FromJson<List<Journey>>(jsonData);
-            Debug.Log("Event list loaded from JSON: " + filePath);
+            Debug.LogError("Failed to load event list. JSON file not found: " + filePath);
         }
         else
         {
-            Debug.LogError("Failed to load event list. JSON file not found: " + filePath);
+            string jsonData = File.ReadAllText(filePath);
+            eventList = JsonUtility.FromJson<List<Journey>>(jsonData);
+            Debug.Log("Event list loaded from JSON: " + filePath);
         }
     }
 
