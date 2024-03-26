@@ -625,13 +625,13 @@
             for (int i = 0; i < waypoints.Count; i++)
             {
                 //draw the waypoint
-                Debug.Log($"Waypoint {waypoints[i].ID} drawn at {waypoints[i].x}, {waypoints[i].y}, {waypoints[i].z}");
+                //Debug.Log($"Waypoint {waypoints[i].ID} drawn at {waypoints[i].x}, {waypoints[i].y}, {waypoints[i].z}");
                 //create gameObject in unity for each waypoint and place it at the coordinates
                 // Create the waypoint position from the serialized data
                 Vector3 waypointPosition = new Vector3(waypoints[i].x, waypoints[i].z, -3); //(x,y,z)
                 // Instantiate the waypoint prefab at this position
                 waypoints[i].WaypointObject =  Instantiate(waypointPrefab, waypointPosition, Quaternion.identity);
-                Debug.Log("Spawned");
+                //Debug.Log("Spawned");
 
 
             }
@@ -645,13 +645,13 @@
             for (int i = 0; i < edges.Count; i++)
             {
                 //draw the edge
-                Debug.Log($"Edge {edges[i].ID} drawn from {edges[i].startWaypoint.ID} to {edges[i].endWaypoint.ID}");
+                //Debug.Log($"Edge {edges[i].ID} drawn from {edges[i].startWaypoint.ID} to {edges[i].endWaypoint.ID}");
 
                 Vector3 startPoint = new Vector3(edges[i].startWaypoint.x, edges[i].startWaypoint.z, -1);
                 Vector3 endPoint = new Vector3(edges[i].endWaypoint.x, edges[i].endWaypoint.z, -1);
 
                 DrawLine(edges[i], startPoint, endPoint);   
-                Debug.Log($"Edge weight is {edges[i].weight}");
+                //Debug.Log($"Edge weight is {edges[i].weight}");
             }
         }
 
@@ -757,6 +757,9 @@
             DrawWaypoints(allWaypoints);
             DrawEdges(allEdges);
             Debug.LogError("edges drawn");
+            List<Cluster> clusters = ClusterWaypoints(allWaypoints, 20);
+            Debug.LogError($"waypoints length: {allWaypoints.Count}");
+            Debug.LogError($"clusters length: {clusters.Count}");
             //switch tracking variable
             isHeatMapVisible = true;
         }
@@ -803,6 +806,34 @@
                 }
             }
         }
+
+
+    public List<Cluster> ClusterWaypoints(List<SerialisableWaypoint> waypoints, double threshold) {
+        List<Cluster> clusters = new List<Cluster>();
+        foreach (var waypoint in waypoints) {
+            bool assignedCluster = false;
+            Vector3 waypointPosition = new Vector3(waypoint.x, waypoint.y, waypoint.z); // Convert to Vector3
+            Debug.Log($"Within waypoint loop, length of clusters = {clusters.Count}");
+            foreach (var cluster in clusters) {
+                foreach (var clusterWaypoint in cluster.Waypoints) {
+                    Vector3 clusterWaypointPosition = new Vector3(clusterWaypoint.x, clusterWaypoint.y, clusterWaypoint.z); // Convert to Vector3
+                    if (Vector3.Distance(waypointPosition, clusterWaypointPosition) < threshold) {
+                        Debug.Log("Adding waypoint to cluster");
+                        cluster.Waypoints.Add(waypoint);
+                        assignedCluster = true;
+                        break;
+                    }
+                }
+            }
+            if (!assignedCluster) {
+                Debug.Log("Creating new cluster");
+                Cluster newCluster = new Cluster();
+                newCluster.AddWaypoint(waypoint);
+                clusters.Add(newCluster);
+            }
+        }
+        return clusters;
+    }
 
 
         //---------------------------------STATISTICAL MEASURES------------------------------------------------------------------------------------------
@@ -945,20 +976,28 @@
 //------------------------------------------PHASE TWO PARETO FRONT-------------------------------------------
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void SaveObjectiveValuesToJson () 
+    {
+        //TODO
     }
+
+
+    public List<string> GetFileNameOfNextJson ()
+    {
+        //TODO
+        return new List<string>();
+    }
+
+
+
+
+
+
+
+
+
+
+}
 
 
 

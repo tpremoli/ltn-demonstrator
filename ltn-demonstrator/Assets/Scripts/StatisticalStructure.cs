@@ -46,3 +46,19 @@ public class SerialisableWaypoint {
         z = waypoint.transform.position.z;
     }
 }
+
+
+public class Cluster {
+    public List<SerialisableWaypoint> Waypoints;
+    public SerialisableWaypoint centroid;
+
+    public Cluster() {
+        Waypoints = new List<SerialisableWaypoint>();
+    }
+
+    public void AddWaypoint(SerialisableWaypoint waypoint) {
+        Waypoints.Add(waypoint);
+    }
+}
+
+
