@@ -27,7 +27,7 @@ public class SensorData
     {
         string json = File.ReadAllText(SAVE_FOLDER + "sensor_save.json");
         SensorsContainer data = JsonUtility.FromJson<SensorsContainer>(json);
-
+            
         if (data == null)
         {
             // If the file is empty, create a new SensorsContainer
@@ -40,7 +40,7 @@ public class SensorData
             // create a new list of sensors
             data.sensors = new List<SensorData>();
         }
-
+            
         return data.sensors;
     }
 }

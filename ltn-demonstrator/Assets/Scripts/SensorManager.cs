@@ -19,7 +19,15 @@ public class SensorManager : MonoBehaviour
         allSensors = new List<GameObject>();
     }
 
-    
+    void Update()
+    {
+        // force reload sensors
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            RecalcSensorsOnEdges();
+        }
+        //Debug.Log("sensorPrefabs ", sensorPrefabs.Count);
+    }
 
     private void Awake()
     {
@@ -105,7 +113,22 @@ public class SensorManager : MonoBehaviour
 
 
 
-   
+    public void RecalcSensorsOnEdges()
+    {
+        Graph graph = Graph.Instance;
+
+        Debug.Log("Recalculating sensors on edges");
+
+        /**
+
+        // this is not efficient at all.
+        foreach (Edge edge in graph.edges)
+        {
+            edge.RecheckSensors();
+        }
+        **/
+
+    }
     public List<SensorData> GetAllSensorData()
     {
         // Implement your logic here to return a list of SensorData objects

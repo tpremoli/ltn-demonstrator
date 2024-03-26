@@ -7,7 +7,7 @@ public class CameraTarget
 {
     public GameObject prefab;
 
-    public CameraTarget(GameObject prefab) // Optional parameter with default value
+    public CameraTarget(GameObject prefab) // Constructor
     {
         this.prefab = prefab;
     }
@@ -22,6 +22,7 @@ public class SmoothCameraFollow : MonoBehaviour
     [SerializeField] private List<CameraTarget> inventory = new List<CameraTarget>();
     private int timeStepCounter = 0;
     private Transform target;
+    [SerializeField] private float verticalDistance = 10f; // Distance above the target
 
     private void Awake()
     {
@@ -35,7 +36,8 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         if (target == null) return;
 
-        Vector3 desiredPosition = target.position + _offset.normalized;
+        // Adjust desiredPosition to include verticalDistance in the y-direction
+        Vector3 desiredPosition = target.position + _offset + Vector3.up * verticalDistance;
         transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref _currentVelocity, smoothTime);
 
         timeStepCounter++;
@@ -55,17 +57,16 @@ public class SmoothCameraFollow : MonoBehaviour
         SetTarget(inventory[nextIndex].prefab.transform);
     }
 
-    private float defaultDistance = 10;
-
     private void SetTarget(Transform newTarget)
     {
         target = newTarget;
-        _offset = (transform.position - target.position).normalized * defaultDistance;
+        // Adjust _offset here if you want to include any specific offset adjustments
+        // For now, it's set to zero since we're directly using verticalDistance for elevation
+        _offset = Vector3.zero; 
         Debug.Log("Now following this target: " + target.name);
     }
 
-
-    public void AddToInventory(GameObject prefab) // Optional parameter with default value
+    public void AddToInventory(GameObject prefab)
     {
         if (inventory.Find(item => item.prefab == prefab) == null)
         {
