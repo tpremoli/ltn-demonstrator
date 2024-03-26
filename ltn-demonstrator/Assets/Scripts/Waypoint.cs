@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
 
 public class Waypoint : MonoBehaviour
@@ -32,12 +31,12 @@ public class Waypoint : MonoBehaviour
                 if (adjacent.isPedestrianOnly)
                 {
                     Gizmos.color = Color.green;
-                    Handles.DrawDottedLine(transform.position, adjacent.transform.position, 5f);
+                    Gizmos.DrawLine(transform.position, adjacent.transform.position);
                 }
                 else
                 {
                     // if the adjacent waypoint is selected, draw the line in yellow, and if not, draw it in red
-                    Gizmos.color = Selection.Contains(adjacent.gameObject) ? Color.yellow : Color.red;
+                    Gizmos.color = Color.yellow;
                     Gizmos.DrawLine(transform.position, adjacent.transform.position);
                 }
             }
