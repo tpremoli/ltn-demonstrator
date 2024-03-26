@@ -77,7 +77,6 @@ public void ShowUIElement()
         // Set up the buttons for the main UI
         rootVisualElement.Q<Button>("PlayButton").clicked += OnPlayButtonPressed;
         rootVisualElement.Q<Button>("AddBarriersButton").clicked += OnAddBarrierMenuPressed;
-        Debug.Log("Button add barriers Added");
         rootVisualElement.Q<Button>("DeleteBarrierButton").clicked += OnDeleteBarrierPressed;
         rootVisualElement.Q<Button>("DeleteSaveButton").clicked += OnDeleteSavePressed;
         rootVisualElement.Q<Button>("AddSensorsButton").clicked += OnAddSensorPressed;
@@ -91,17 +90,11 @@ public void ShowUIElement()
         Debug.Log(addBarrierRoot);
         // Set up the buttons for the add barrier UI
         addBarrierRoot.Q<Button>("BackButton").clicked += () => OnBackButtonPressed();
-        Debug.Log("Button1 Added");
         addBarrierRoot.Q<Button>("BlockAllButton").clicked += () => OnAddBlockAllBarrierPressed();
-        Debug.Log("Button2 Added");
         addBarrierRoot.Q<Button>("BlockMotorVehiclesButton").clicked += () => OnAddBlockAllMotorVehiclesBarrierPressed();
-        Debug.Log("Button3 Added");
         addBarrierRoot.Q<Button>("BlockHeavyButton").clicked += () => OnAddBlockAllMotorVehiclesBarrierPressed();
-        Debug.Log("Button4 Added");
         addBarrierRoot.Q<Button>("AllowBusButton").clicked += () => OnAddBusOnlyBarrierPressed();
-        Debug.Log("Button5 Added");
         addBarrierRoot.Q<Button>("AllowBusTaxiButton").clicked += () => OnAddBusandTaxiOnlyBarrierPressed();
-        Debug.Log("All Buttons Added");
     }
 
 

@@ -52,21 +52,21 @@ public class MiniWorld_UI : MonoBehaviour
     }
 
     private void Update()
-{
-    // Assuming sensorUIElements is the list that holds the UI elements for each sensor
-    // and allSensors is the list that holds the actual sensor GameObjects
-    for (int i = 0; i < sensorManager.allSensors.Count; i++)
     {
-        GameObject sensor = sensorManager.allSensors[i];
-        VisualElement sensorUI = sensorUIElements[i];
+        // Assuming sensorUIElements is the list that holds the UI elements for each sensor
+        // and allSensors is the list that holds the actual sensor GameObjects
+        for (int i = 0; i < sensorManager.allSensors.Count; i++)
+        {
+            GameObject sensor = sensorManager.allSensors[i];
+            VisualElement sensorUI = sensorUIElements[i];
 
-        // Convert the world position of the sensor to a screen point for the UI
-        Vector3 screenPoint = Camera.main.WorldToScreenPoint(sensor.transform.position);
+            // Convert the world position of the sensor to a screen point for the UI
+            Vector3 screenPoint = Camera.main.WorldToScreenPoint(sensor.transform.position);
 
-        // Update the style of the sensor UI to position it on the screen
-        sensorUI.style.left = screenPoint.x - (sensorUI.layout.width / 2);
-        sensorUI.style.top = Screen.height - screenPoint.y - 100; // Offset by 100 pixels from the top
+            // Update the style of the sensor UI to position it on the screen
+            sensorUI.style.left = screenPoint.x - (sensorUI.layout.width / 2);
+            sensorUI.style.top = Screen.height - screenPoint.y - 100; // Offset by 100 pixels from the top
+        }
     }
-}
 
 }
