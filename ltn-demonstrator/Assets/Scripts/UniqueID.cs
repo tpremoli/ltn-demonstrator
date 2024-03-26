@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEditor;
-using UnityEditor.SceneManagement;
+//using UnityEditor;
+//using UnityEditor.SceneManagement;
 
 
 /*
@@ -35,8 +35,8 @@ public class UniqueID : MonoBehaviour
         
         if (uniqueID == "" || anotherComponentAlreadyHasGUID) {
             uniqueID = Guid.NewGuid().ToString();
-            EditorUtility.SetDirty(this);
-            EditorSceneManager.MarkSceneDirty(gameObject.scene);
+  //          EditorUtility.SetDirty(this);
+  //          EditorSceneManager.MarkSceneDirty(gameObject.scene);
         }
 
         if (!allGUIDs.ContainsKey(uniqueID)) {
