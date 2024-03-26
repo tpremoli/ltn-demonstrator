@@ -86,7 +86,7 @@ public class EventManager : MonoBehaviour
             while (destinationID.Equals(originID)) {
                 // If the selected building type has less than 2 actual buildings in the simulation,
                 // choose a new building type.
-                if (Graph.Instance.buildingsByType[destinationBuildingType].Count <= 1) {
+                if (Graph.Instance.buildingsByType[chosenType].Count <= 1) {
                     chosenType = BuildingProperties.getRandomWeightedDestinationType();
                 }
                 // Select a new building and get it's ID.
