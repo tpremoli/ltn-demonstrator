@@ -775,6 +775,12 @@ public class WaypointMover : MonoBehaviour
 
         Debug.Log("Arrived to destination. Destroying object.");
         if (journey != null) {
+            if (mode == ModeOfTransport.Car) {
+                journey.traveller.SetWithCar(true);
+            }
+            else {
+                journey.traveller.SetWithCar(false);
+            }
             journey.traveller.journeyCompleted(journey);
         }
         Destroy(this.gameObject);
