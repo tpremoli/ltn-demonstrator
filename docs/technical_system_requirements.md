@@ -8,8 +8,8 @@ This section specifies the minimum hardware required to operate and develop the 
 
 | Component | Minimum Requirement |
 | --- | --- |
-| CPU | Intel Core i5-6300U 2.4 GHz or equivalent |
-| RAM | 8 GB |
+| CPU | Intel Pentium 4 (2004 model) or later |
+| RAM | 4 GB |
 | GPU | DX10, DX11, and DX12 capable |
 | HDD | 8 GB free space |
 
