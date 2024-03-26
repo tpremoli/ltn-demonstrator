@@ -26,8 +26,7 @@ public class Edge
     /// barricadeLocation is the z position of the barrier in the path of the edge. -1 if there is no barrier
     /// </summary>
     public bool isBarricated;
-    public float barrierLocation;
-    public Barrier barrier;
+    public List<Barrier> barriersOnEdge;
 
     public bool isPedestrianOnly;
 
@@ -59,21 +58,19 @@ public class Edge
 
     public void CheckBarriers()
     {
-        this.barrier = getBarrierInPath();
+        this.barriersOnEdge = getBarriersInPath();
         if (this.isPedestrianOnly)
         {
             this.isBarricated = false;
-            this.barrierLocation = -1f;
         }
         else
         {
-            this.isBarricated = barrier != null;
-            this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
+            this.isBarricated = barriersOnEdge.Count > 0;
         }
 
         if (this.isBarricated)
         {
-            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
+            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded by " + barriersOnEdge.Count + " barriers");
         }
     }
 
@@ -261,7 +258,7 @@ public class Edge
         }
     }
 
-    public Barrier getBarrierInPath()
+    public List<Barrier> getBarriersInPath()
     {
         Barrier[] allBarriers;
 
@@ -281,6 +278,8 @@ public class Edge
             }
         }
 
+        List<Barrier> intersectingBarriers = new List<Barrier>();
+
         // we go through the Barrier and check if the edge intersects with any of them
         foreach (Barrier barrier in allBarriers)
         {
@@ -294,10 +293,10 @@ public class Edge
                 // Apply the rotation to the barrier
                 barrier.transform.rotation = Quaternion.Euler(0, angle, 0);
 
-                return barrier;
+                intersectingBarriers.Add(barrier);
             }
         }
-        return null;
+        return intersectingBarriers;
     }
 
     public Waypoint FindNearestWaypoint(Sensor sensor)
@@ -449,31 +448,38 @@ public class Edge
     /// <returns></returns>
     public bool isBarrierBlocking(Vector3 start, Vector3 destination, ModeOfTransport mode = ModeOfTransport.Car)
     {
-        // Check if barricade is active
-        if (!isBarricated)
+        // Check if there is a barrier in the way
+        if (!isBarricated || barriersOnEdge.Count == 0)
         {
-            Debug.LogWarning("Barrier is not between start and destination. this is barricated " + isBarricated);
             return false;
         }
 
         // Convert positions to distances along the edge
         float startDistance = convertToPositionAlongEdge(start);
         float destinationDistance = convertToPositionAlongEdge(destination);
-        float barrierDistance = convertToPositionAlongEdge(barrier.transform.position);
 
-        // Check if the barrier is between start and destination
-        bool isBarrierBetween = barrierDistance > System.Math.Min(startDistance, destinationDistance) &&
-                                barrierDistance < System.Math.Max(startDistance, destinationDistance);
-
-        if (!isBarrierBetween)
+        for (int i = 0; i < barriersOnEdge.Count; i++)
         {
-            return true; // The barrier does not affect the path
+            float barrierDistance = convertToPositionAlongEdge(barriersOnEdge[i].transform.position);
+
+            // Check if the barrier is between start and destination
+            bool isBarrierBetween = barrierDistance > System.Math.Min(startDistance, destinationDistance) &&
+                                    barrierDistance < System.Math.Max(startDistance, destinationDistance);
+
+            if (isBarrierBetween)
+            {
+                // Retrieve the list of blocked modes for the barrier's type
+                List<ModeOfTransport> blockedModes = BarrierTypeProperties.GetBlockedModes(barriersOnEdge[i].BarrierType);
+
+                // If the current mode of transport is blocked, return true immediately
+                if (blockedModes.Contains(mode))
+                {
+                    return true;
+                }
+            }
         }
 
-        // Retrieve the list of blocked modes for the barrier's type
-        List<ModeOfTransport> blockedModes = BarrierTypeProperties.GetBlockedModes(barrier.BarrierType);
-
-        // Check if the current mode of transport is allowed
-        return blockedModes.Contains(mode);
+        // If no barriers are blocking the path, return false
+        return false;
     }
 }
