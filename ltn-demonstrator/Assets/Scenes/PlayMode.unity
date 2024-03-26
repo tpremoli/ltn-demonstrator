@@ -15498,6 +15498,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453099568}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &454279144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 7069c92ff5da0734485f904f3a977904, type: 3}
+  m_PrefabInstance: {fileID: 211020723}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &454834746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16450,6 +16455,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488705515}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &493289439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
+  m_PrefabInstance: {fileID: 1856623115}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &494156010
 GameObject:
   m_ObjectHideFlags: 0
@@ -29924,6 +29934,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 923741041}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &924271100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 6070129c57f4fbb428c55e6d5c3ee568, type: 3}
+  m_PrefabInstance: {fileID: 234550010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &928397966
 GameObject:
   m_ObjectHideFlags: 0
@@ -62904,6 +62919,15 @@ MonoBehaviour:
   smoothTime: 0.3
   inventory:
   - prefab: {fileID: 679939646}
+  - prefab: {fileID: 1692226763}
+  - prefab: {fileID: 1279267444}
+  - prefab: {fileID: 1960957214}
+  - prefab: {fileID: 883918155}
+  - prefab: {fileID: 95928380}
+  - prefab: {fileID: 454279144}
+  - prefab: {fileID: 493289439}
+  - prefab: {fileID: 924271100}
+  verticalDistance: 50
 --- !u!81 &1755936023
 AudioListener:
   m_ObjectHideFlags: 0
@@ -65862,7 +65886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1820101917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65918,6 +65942,7 @@ MonoBehaviour:
   - prefab: {fileID: 100010, guid: b3f4ad6e44f81784ba0ebe95aadf2a7d, type: 3}
   - prefab: {fileID: 100000, guid: 9b25e71fd5b7ac6469539d930c6dc2e6, type: 3}
   - prefab: {fileID: 100000, guid: 36f453c34cda9cb458647901440ff410, type: 3}
+  verticalDistance: 10
 --- !u!81 &1820101918
 AudioListener:
   m_ObjectHideFlags: 0

@@ -1,16 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO; // For reading files
 
 [System.Serializable]
 public class CameraTarget
 {
     public GameObject prefab;
 
-    public CameraTarget(GameObject prefab) // Constructor
+    public CameraTarget(GameObject prefab)
     {
         this.prefab = prefab;
     }
+}
+
+[System.Serializable]
+public class PositionData
+{
+    public List<PositionItem> positions;
+}
+
+[System.Serializable]
+public class PositionItem
+{
+    public float x;
+    public float y;
+    public float z;
 }
 
 public class SmoothCameraFollow : MonoBehaviour
@@ -26,6 +40,7 @@ public class SmoothCameraFollow : MonoBehaviour
 
     private void Awake()
     {
+        LoadPositions();
         if (inventory.Count > 0)
         {
             SetTarget(inventory[0].prefab.transform);
@@ -36,7 +51,6 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         if (target == null) return;
 
-        // Adjust desiredPosition to include verticalDistance in the y-direction
         Vector3 desiredPosition = target.position + _offset + Vector3.up * verticalDistance;
         transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref _currentVelocity, smoothTime);
 
@@ -60,9 +74,7 @@ public class SmoothCameraFollow : MonoBehaviour
     private void SetTarget(Transform newTarget)
     {
         target = newTarget;
-        // Adjust _offset here if you want to include any specific offset adjustments
-        // For now, it's set to zero since we're directly using verticalDistance for elevation
-        _offset = Vector3.zero; 
+        _offset = Vector3.zero;
         Debug.Log("Now following this target: " + target.name);
     }
 
@@ -78,4 +90,28 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         inventory.RemoveAll(item => item.prefab == prefab);
     }
+
+    private static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
+
+    private void LoadPositions()
+    {
+        string filePath = SAVE_FOLDER + "sensor_save.json"; // Full path to the file
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            PositionData positionData = JsonUtility.FromJson<PositionData>(json);
+
+            foreach (var positionItem in positionData.positions)
+            {
+                GameObject prefab = new GameObject("PositionPrefab");
+                prefab.transform.position = new Vector3(positionItem.x, positionItem.y, positionItem.z);
+                AddToInventory(prefab);
+            }
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + filePath);
+        }
+    }
+
 }
