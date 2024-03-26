@@ -2,22 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class CameraTarget
+{
+    public GameObject prefab;
+
+    public CameraTarget(GameObject prefab) // Optional parameter with default value
+    {
+        this.prefab = prefab;
+    }
+}
+
 public class SmoothCameraFollow : MonoBehaviour
 {
     private Vector3 _offset;
     [SerializeField] private float smoothTime = 0.3f;
     private Vector3 _currentVelocity = Vector3.zero;
 
-    [SerializeField] private List<GameObject> inventory = new List<GameObject>(); // This is your "inventory" of prefabs.
+    [SerializeField] private List<CameraTarget> inventory = new List<CameraTarget>();
     private int timeStepCounter = 0;
     private Transform target;
 
     private void Awake()
     {
-        // Set the initial target if the inventory is not empty
         if (inventory.Count > 0)
         {
-            SetTarget(inventory[0].transform);
+            SetTarget(inventory[0].prefab.transform);
         }
     }
 
@@ -25,61 +35,46 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         if (target == null) return;
 
-        // Move the camera smoothly towards the target
-        Vector3 targetPosition = target.position + _offset;
-        transform.position = Vector3.SmoothDamp(current: transform.position, target: targetPosition, ref _currentVelocity, smoothTime);
+        Vector3 desiredPosition = target.position + _offset.normalized;
+        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref _currentVelocity, smoothTime);
 
-        // Increment the time step counter
         timeStepCounter++;
-
-        // Every 30 time steps, switch the target
         if (timeStepCounter >= 30)
         {
             SwitchTarget();
-            timeStepCounter = 0; // Reset the counter
+            timeStepCounter = 0;
         }
     }
 
     private void SwitchTarget()
     {
-        // If inventory is empty or has only one prefab, no need to switch
         if (inventory.Count <= 1) return;
 
-        // Find the current target index
-        int currentIndex = inventory.FindIndex(obj => obj.transform == target);
-
-        // Calculate the next target index
+        int currentIndex = inventory.FindIndex(item => item.prefab.transform == target);
         int nextIndex = (currentIndex + 1) % inventory.Count;
-
-        // Set the next target
-        SetTarget(inventory[nextIndex].transform);
-
-        // Log the switch for debugging
-        Debug.Log("Switched target to: " + target.name);
+        SetTarget(inventory[nextIndex].prefab.transform);
     }
 
-    // Method to set the new target and update the offset
+    private float defaultDistance = 10;
+
     private void SetTarget(Transform newTarget)
     {
         target = newTarget;
-        _offset = transform.position - target.position;
+        _offset = (transform.position - target.position).normalized * defaultDistance;
+        Debug.Log("Now following this target: " + target.name);
     }
 
-    // Call this method to add a new prefab to the inventory
-    public void AddToInventory(GameObject prefab)
+
+    public void AddToInventory(GameObject prefab) // Optional parameter with default value
     {
-        if (!inventory.Contains(prefab))
+        if (inventory.Find(item => item.prefab == prefab) == null)
         {
-            inventory.Add(prefab);
+            inventory.Add(new CameraTarget(prefab));
         }
     }
 
-    // Call this method to remove a prefab from the inventory
     public void RemoveFromInventory(GameObject prefab)
     {
-        if (inventory.Contains(prefab))
-        {
-            inventory.Remove(prefab);
-        }
+        inventory.RemoveAll(item => item.prefab == prefab);
     }
 }

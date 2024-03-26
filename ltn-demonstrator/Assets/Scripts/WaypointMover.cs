@@ -772,7 +772,7 @@ public class WaypointMover : MonoBehaviour
         Debug.Log("Arrived to destination. Destroying object.");
         //update path data
         //find corresponding data struct in statistical controller
-        StatisticsManager.Instance.RecieveEndTime(this.ID, getOriginalEdgePath());
+        //StatisticsManager.Instance.RecieveEndTime(this.ID, getOriginalEdgePath());
         Destroy(this.gameObject);
     }
 

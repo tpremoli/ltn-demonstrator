@@ -22,7 +22,7 @@ public class StatisticsManager : MonoBehaviour
     public static List<PathData> finishPathData { get; private set; }
     //text for stats in the statistical measures screen
     public TMP_Text statsText;
-    public const int TERMINATION_CRITERIA = 10;
+    public const int TERMINATION_CRITERIA = 10000;
     private int finishedPaths;
     private bool endSim;
 

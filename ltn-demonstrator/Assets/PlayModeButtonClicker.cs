@@ -80,7 +80,7 @@ public class PlayModeButtonClicker : MonoBehaviour
         previousRealTime = Time.realtimeSinceStartup;
 
         // Log the message with the time scale and the real delta time
-        Debug.Log($"Update called with time scale: {Time.timeScale} | Real Delta Time: {realDeltaTime:F3}");
+        //Debug.Log($"Update called with time scale: {Time.timeScale} | Real Delta Time: {realDeltaTime:F3}");
     }
 
     private void SwitchToCamera(Camera cameraToActivate)
