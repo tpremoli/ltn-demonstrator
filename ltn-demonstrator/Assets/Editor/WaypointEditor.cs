@@ -55,7 +55,7 @@ public class WaypointEditor : Editor
 
         waypoint.AddAdjacentWaypoint(newWaypoint.GetComponent<Waypoint>());
         // this makes sure the edge loader is up to date
-        EdgeLoader.LoadEdges();
+        // EdgeLoader.LoadEdges();
 
         // add the new waypoint to the graph
         newWaypoint.transform.parent = graphGameObject.transform; 

@@ -70,7 +70,7 @@ public class Sensor : MonoBehaviour
     public Edge FindNearestEdge()
     {
         Graph graph = Graph.Instance;
-        if (graph == null || graph.edges == null)
+        if (graph == null || graph.GetAllEdges() == null)
         {
             Debug.Log("Graph or edges list is null.");
             return null;
@@ -79,7 +79,7 @@ public class Sensor : MonoBehaviour
         Edge nearestEdge = null;
         float minDistance = float.MaxValue;
 
-        foreach (Edge edge in graph.edges)
+        foreach (Edge edge in graph.GetAllEdges())
         {
             if (edge != null)
             {

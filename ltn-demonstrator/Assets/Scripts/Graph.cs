@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Graph : MonoBehaviour
+public class Graph : MonoBehaviour, ISerializationCallbackReceiver
 {
     public static Graph Instance { get; private set; }
 
@@ -11,11 +11,34 @@ public class Graph : MonoBehaviour
         {
             Instance = this;
         }
+
+        // finally, we check the waypoint adjacencies to make sure they're correct
+        foreach (Waypoint wp in Object.FindObjectsOfType<Waypoint>())
+        {
+            if (wp.isSubdivided || wp.isPedestrianOnly) continue;
+
+            foreach (Waypoint adj in wp.adjacentWaypoints)
+            {
+                if (!adj.isSubdivided)
+                {
+                    Debug.LogWarning("Waypoint " + wp.name + " is adjacent to " + adj.name + " but they are not subdivided. Try rerunning sidewalk stuff.");
+                }
+            }
+        }
     }
 
     // private waypointsize with getter
     [Range(0f, 2f)][SerializeField] private float waypointSize = 0.5f;
-    [SerializeField] public List<Edge> edges; // list of edges
+
+    // this contains a simple list of all edges
+    [SerializeField] private List<Edge> allEdges;
+
+    // this contains a list of all reduced edges
+    [SerializeField] private List<ReducedEdge> reducedEdges;
+
+    // this contains a dictionary of all edges, making them a lot faster to access
+    // reduced edge is a simple struct containing two waypoints, so it can be used as a key
+    // private Dictionary<ReducedEdge, Edge> edgesAsDict = new Dictionary<ReducedEdge, Edge>();
 
     public List<Building> allBuildings;
     public Dictionary<BuildingType, List<Building>> buildingsByType = new Dictionary<BuildingType, List<Building>>();
@@ -51,6 +74,30 @@ public class Graph : MonoBehaviour
             Debug.Log("Building Type: " + t.Key + ", Total: " + t.Value.Count);
         }
 
+        if (!inEditMode && BarrierManager.Instance.loadBarriersFromSave)
+        {
+            BarrierManager.Instance.RecalcBarriersOnEdges();
+        }
+
+    }
+
+    // these methods are used to add, get, and reset edges.
+    // we use these methods to ensure that the edgesAsDict dictionary is always up to date,
+    // and that we don't have to worry about it getting out of sync with the allEdges list.
+    public List<Edge> GetAllEdges()
+    {
+        return allEdges;
+    }
+    public void ResetEdges()
+    {
+        allEdges = new List<Edge>();
+    }
+
+    public void AddEdge(Edge edge)
+    {
+        ReducedEdge reducedEdge = edge.Reduce();
+        allEdges.Add(edge);
+        reducedEdges.Add(reducedEdge);
     }
 
     public Building getRandomBuildingByType(BuildingType buildingType)
@@ -63,6 +110,18 @@ public class Graph : MonoBehaviour
         get { return waypointSize; }
     }
 
+    public void OnBeforeSerialize()
+    {
+    }
+
+    public void OnAfterDeserialize()
+    {
+        foreach (Edge edge in allEdges)
+        {
+            edge.BootstrapIntersectingEdges(this);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         if (drawEdgeGizmos) // Check if drawing of edge gizmos is enabled
@@ -70,7 +129,6 @@ public class Graph : MonoBehaviour
             DrawEdgeGizmos();
         }
     }
-
 
     public float CalculateDistance(Waypoint a, Waypoint b)
     {
@@ -89,7 +147,7 @@ public class Graph : MonoBehaviour
         float minDistance = float.MaxValue;
         Vector3 closestPoint = Vector3.zero;
 
-        foreach (Edge edge in edges)
+        foreach (Edge edge in allEdges)
         {
             Vector3 point = edge.GetClosestPoint(buildingPosition);
             float distance = Vector3.Distance(point, buildingPosition);
@@ -106,23 +164,28 @@ public class Graph : MonoBehaviour
 
     private void DrawEdgeGizmos()
     {
-        foreach (Edge edge in edges)
+        if (allEdges == null) return;
+        foreach (Edge edge in allEdges)
         {
             edge.DrawGizmo();
         }
     }
 
-    public Edge getEdge(Waypoint a, Waypoint b)
+    public Edge GetEdge(Waypoint a, Waypoint b)
     {
-        foreach (Edge edge in edges)
+        foreach (Edge edge in allEdges)
         {
             if (edge.StartWaypoint == a && edge.EndWaypoint == b)
             {
                 return edge;
             }
         }
-
+        // Debug.LogWarning("Edge not found: " + a + " - " + b);
         return null;
+    }
+    public Edge GetEdge(ReducedEdge re)
+    {
+        return this.GetEdge(re.startWaypoint, re.endWaypoint);
     }
 
     public Edge getClosetRoadEdge(Vector3 position)
@@ -130,10 +193,11 @@ public class Graph : MonoBehaviour
         Edge closestEdge = null;
         float minDistance = float.MaxValue;
 
-        foreach (Edge edge in edges)
+        foreach (Edge edge in allEdges)
         {
             if (edge.isPedestrianOnly) continue;
-            
+            if (edge.HasIntersecingEdges()) continue;
+
             float distance = edge.DistanceToEdge(position);
 
             if (distance < minDistance)
@@ -151,7 +215,7 @@ public class Graph : MonoBehaviour
         Edge closestEdge = null;
         float minDistance = float.MaxValue;
 
-        foreach (Edge edge in edges)
+        foreach (Edge edge in allEdges)
         {
             if (edge.isPedestrianOnly)
             {
@@ -166,18 +230,5 @@ public class Graph : MonoBehaviour
         }
 
         return closestEdge;
-    }
-
-    public Edge GetEdge(Waypoint startPoint, Waypoint endPoint)
-    {
-        foreach (Edge edge in edges)
-        {
-            if (edge.StartWaypoint == startPoint && edge.EndWaypoint == endPoint)
-            {
-                return edge;
-            }
-        }
-
-        return null;
     }
 }
