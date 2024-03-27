@@ -178,7 +178,7 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
     {
         foreach (Edge edge in allEdges)
         {
-            if (edge.StartWaypoint == a && edge.EndWaypoint == b)
+            if (edge.StartWaypoint == startPoint && edge.EndWaypoint == endPoint)
             {
                 return edge;
             }
