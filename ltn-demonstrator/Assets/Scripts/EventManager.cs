@@ -137,13 +137,14 @@ public class EventManager : MonoBehaviour
     {
         if (File.Exists(filePath))
         {
-            Debug.LogError("Failed to load event list. JSON file not found: " + filePath);
-        }
-        else
-        {
             string jsonData = File.ReadAllText(filePath);
             eventList = JsonUtility.FromJson<List<Journey>>(jsonData);
             Debug.Log("Event list loaded from JSON: " + filePath);
+            
+        }
+        else
+        {
+            Debug.LogWarning("Failed to load event list. JSON file not found: " + filePath);
         }
     }
 
