@@ -1,29 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BarrierManager : MonoBehaviour
 {
 
-    public Edge closestRoadEdge;
-    public Vector3 closestPointOnRoadEdge;
-    private Graph graph;
-    private Waypoint startWaypointLane;
-
-    public Waypoint endWaypoint;
+    /*
+    Current Edits in this branch:
+    - Added a public field for the dropdown
+    - Added a list of barrier prefabs
+    - Added a public field for the barrier prefab
+    - Added a list of all barriers
+    */
+    // Add a public field for the dropdown
+    // The parent transform of the toggles
     public GameObject barrierPrefab; // Prefab for the barrier
+    public GameObject blockAllPrefab;
+    public GameObject blockAllMotorVehiclesPrefab;
+    public GameObject blockHeavyTrafficPrefab;
+    public GameObject busOnlyPrefab;
+    public GameObject busAndTaxiOnlyPrefab;
     public List<GameObject> allBarriers;
 
     public bool loadBarriersFromSave;
 
-
     public static BarrierManager Instance { get; private set; }
 
+    // List of different barrier prefabs
+    public Dictionary<BarrierType, GameObject> barrierPrefabs = new Dictionary<BarrierType, GameObject>();
+
+
+    private void Start()
+    {
+        barrierPrefabs.Add(BarrierType.BlockAll, blockAllPrefab);
+        barrierPrefabs.Add(BarrierType.BlockAllMotorVehicles, blockAllMotorVehiclesPrefab);
+        barrierPrefabs.Add(BarrierType.BlockHeavyTraffic, blockHeavyTrafficPrefab);
+        barrierPrefabs.Add(BarrierType.BusOnly, busOnlyPrefab);
+        barrierPrefabs.Add(BarrierType.BusAndTaxiOnly, busAndTaxiOnlyPrefab);
+    }
+
     void Update()
-    {   
+    {
         // force reload barriers
         if (Input.GetKeyDown(KeyCode.U))
         {
+            Physics.SyncTransforms();
+            Debug.LogWarning("Reloading barriers!");
             RecalcBarriersOnEdges();
         }
     }
@@ -54,22 +77,39 @@ public class BarrierManager : MonoBehaviour
         List<BarrierData> barrierDataList = BarrierData.LoadBarriers();
         foreach (BarrierData barrierData in barrierDataList)
         {
+            // NOTE: this won't load the correct barrier type
             GameObject newBarrier = Instantiate(barrierPrefab);
             newBarrier.transform.position = new Vector3(barrierData.position[0], barrierData.position[1], barrierData.position[2]);
             newBarrier.transform.rotation = Quaternion.Euler(barrierData.rotation[0], barrierData.rotation[1], barrierData.rotation[2]);
+
+            // we also need the barrier type
+            BarrierType spawnedBarrierType = (BarrierType)barrierData.type;
+            newBarrier.GetComponent<Barrier>().BarrierType = spawnedBarrierType;
+            newBarrier.transform.name = spawnedBarrierType.ToString();
+
             newBarrier.transform.parent = transform;
             allBarriers.Add(newBarrier);
 
-            // this essentially reloads colliders so we can use them to generate barriers etc.
-            // this is not efficient at all. HOWEVER, it is only called once on load.
-            Physics.SyncTransforms();
         }
+
+        // this essentially reloads colliders so we can use them to generate barriers etc.
+        // this is not efficient at all. HOWEVER, it is only called once on load.
+        Physics.SyncTransforms();
+        RecalcBarriersOnEdges();
     }
 
-    public void AddBarrier(Vector3 position)
+    public void AddBarrier(Vector3 position, BarrierType selectedBarrierType)
     {
-        GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
+        GameObject newBarrier = Instantiate(barrierPrefabs[selectedBarrierType], position, Quaternion.identity);
+
+        newBarrier.GetComponent<Barrier>().BarrierType = selectedBarrierType;
+
         newBarrier.transform.Rotate(0, 90, 0);
+
+        newBarrier.transform.name = selectedBarrierType.ToString();
+
+        newBarrier.transform.parent = this.transform;
+
         // Rotate the barrier on the y axis 
         Graph graph = Graph.Instance;
 
@@ -96,6 +136,7 @@ public class BarrierManager : MonoBehaviour
         allBarriers.Add(newBarrier);
     }
 
+
     public void RecalcBarriersOnEdges()
     {
         Graph graph = Graph.Instance;
@@ -105,8 +146,7 @@ public class BarrierManager : MonoBehaviour
         // this is not efficient at all.
         foreach (Edge edge in graph.GetAllEdges())
         {
-            edge.RecheckBarriers();
+            edge.CheckBarriers();
         }
-
     }
 }

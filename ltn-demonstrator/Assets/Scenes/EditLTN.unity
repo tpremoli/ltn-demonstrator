@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -261,7 +261,6 @@ MonoBehaviour:
   - {fileID: 945375475}
   - {fileID: 384325137}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &6038009
 Transform:
   m_ObjectHideFlags: 0
@@ -4804,7 +4803,6 @@ MonoBehaviour:
   - {fileID: 1656426714}
   - {fileID: 1047998942}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &162656071
 Transform:
   m_ObjectHideFlags: 0
@@ -4820,6 +4818,139 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2077545152}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &163083664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 163083665}
+  - component: {fileID: 163083668}
+  - component: {fileID: 163083667}
+  - component: {fileID: 163083666}
+  m_Layer: 5
+  m_Name: AddBarrier Bus Only
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &163083665
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163083664}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1235105843}
+  m_Father: {fileID: 312896066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 22.3}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &163083666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163083664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 163083667}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1692891942}
+        m_TargetAssemblyTypeName: EditScreenMenu, Assembly-CSharp
+        m_MethodName: OnAddBusOnlyBarrierPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &163083667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163083664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &163083668
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163083664}
+  m_CullTransparentMesh: 1
 --- !u!1 &163993793
 GameObject:
   m_ObjectHideFlags: 0
@@ -6952,7 +7083,6 @@ MonoBehaviour:
   - {fileID: 162656070}
   - {fileID: 2078090773}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &215935310
 Transform:
   m_ObjectHideFlags: 0
@@ -8733,7 +8863,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -2.9360352, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8763,8 +8893,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 200, y: -68.735}
+  m_SizeDelta: {x: 200, y: 254.734}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &280472302
 GameObject:
@@ -9187,6 +9317,140 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287435046}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &293975864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 293975865}
+  - component: {fileID: 293975867}
+  - component: {fileID: 293975866}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &293975865
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293975864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1532712046}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &293975866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293975864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Block Heavy Vehicles
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 14
+  m_fontSizeBase: 14
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &293975867
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293975864}
+  m_CullTransparentMesh: 1
 --- !u!1 &294017993
 GameObject:
   m_ObjectHideFlags: 0
@@ -10028,6 +10292,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 310630011}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &311257559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 311257561}
+  - component: {fileID: 311257560}
+  m_Layer: 0
+  m_Name: SensorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &311257560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311257559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e560e9c8fddfb4b32817feb1ac850923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensorPrefab: {fileID: 100000, guid: f796062cb1be74bfcb5011dcd7470357, type: 3}
+  allSensors: []
+  loadSensorsFromSave: 0
+--- !u!4 &311257561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311257559}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 319.58334, y: 218.76363, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &312896065
 GameObject:
   m_ObjectHideFlags: 0
@@ -10039,7 +10350,6 @@ GameObject:
   - component: {fileID: 312896066}
   - component: {fileID: 312896068}
   - component: {fileID: 312896067}
-  - component: {fileID: 312896069}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -10061,14 +10371,19 @@ RectTransform:
   m_Children:
   - {fileID: 277417785}
   - {fileID: 1485045117}
+  - {fileID: 1992239086}
+  - {fileID: 1532712046}
+  - {fileID: 694310287}
+  - {fileID: 163083665}
   - {fileID: 557841036}
   - {fileID: 2065610370}
   - {fileID: 1719679436}
+  - {fileID: 1086056751}
   m_Father: {fileID: 1692891946}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -456.8333, y: 142.52725}
+  m_AnchoredPosition: {x: -229, y: 78}
   m_SizeDelta: {x: -1069.0935, y: -500.218}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &312896067
@@ -10109,18 +10424,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 312896065}
   m_CullTransparentMesh: 1
---- !u!114 &312896069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312896065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 282d9d04703b34240bc0e2a867a58a9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &313138102
 GameObject:
   m_ObjectHideFlags: 0
@@ -12696,7 +12999,6 @@ MonoBehaviour:
   - {fileID: 418159636}
   - {fileID: 777480392}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &359278215
 Transform:
   m_ObjectHideFlags: 0
@@ -13409,7 +13711,6 @@ MonoBehaviour:
   - {fileID: 513901382}
   - {fileID: 777480392}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &384325138
 Transform:
   m_ObjectHideFlags: 0
@@ -14720,7 +15021,6 @@ MonoBehaviour:
   - {fileID: 1166107833}
   - {fileID: 359278214}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &418159637
 Transform:
   m_ObjectHideFlags: 0
@@ -17392,7 +17692,6 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 384325137}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &513901383
 Transform:
   m_ObjectHideFlags: 0
@@ -18749,7 +19048,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: 0}
+  m_AnchoredPosition: {x: 211, y: 95}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &557841037
@@ -23705,6 +24004,139 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692881371}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &694310286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 694310287}
+  - component: {fileID: 694310290}
+  - component: {fileID: 694310289}
+  - component: {fileID: 694310288}
+  m_Layer: 5
+  m_Name: AddBarrier Bus and Taxis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &694310287
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694310286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2003578229}
+  m_Father: {fileID: 312896066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -24}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &694310288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694310286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 694310289}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1692891942}
+        m_TargetAssemblyTypeName: EditScreenMenu, Assembly-CSharp
+        m_MethodName: OnAddBusandTaxiOnlyBarrierPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &694310289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694310286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &694310290
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694310286}
+  m_CullTransparentMesh: 1
 --- !u!1 &695351112
 GameObject:
   m_ObjectHideFlags: 0
@@ -26795,7 +27227,6 @@ MonoBehaviour:
   - {fileID: 1951989319}
   - {fileID: 359278214}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &777480393
 Transform:
   m_ObjectHideFlags: 0
@@ -30543,7 +30974,6 @@ MonoBehaviour:
   - {fileID: 6038008}
   - {fileID: 1059548947}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &945375476
 Transform:
   m_ObjectHideFlags: 0
@@ -32346,24 +32776,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220e160f229bb44cd943623072fc6bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barrierTypeContainer: {fileID: 0}
+  barrierTypeDropdown: {fileID: 0}
+  selectedBarrierType: 0
   closestRoadEdge:
-    EdgeID: 0
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 0}
     endWaypoint: {fileID: 0}
     length: 0
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: 0
     barrier: {fileID: 0}
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   closestPointOnRoadEdge: {x: 0, y: 0, z: 0}
   endWaypoint: {fileID: 0}
   barrierPrefab: {fileID: 211012215410212970, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+  blockAllMotorVehiclesPrefab: {fileID: 211012215410212970, guid: 063c1abea95fc4e5b81b91eb7979429c, type: 3}
+  blockAllPrefab: {fileID: 211012215410212970, guid: d81cb60f756b84823a9edfd6994fd25b, type: 3}
+  blockHeavyTrafficPrefab: {fileID: 211012215410212970, guid: 0c98699abc800453994cc07b51f11298, type: 3}
+  busOnlyPrefab: {fileID: 211012215410212970, guid: 91351bcb538e84564b7090ad1de401a4, type: 3}
+  busAndTaxiOnlyPrefab: {fileID: 211012215410212970, guid: 095ecfc8526624dacbdadd74da2c31e4, type: 3}
   allBarriers: []
   loadBarriersFromSave: 0
+  barrierPrefabs: []
 --- !u!4 &1012873308
 Transform:
   m_ObjectHideFlags: 0
@@ -33666,7 +34105,6 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 162656070}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &1047998943
 Transform:
   m_ObjectHideFlags: 0
@@ -34134,7 +34572,6 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 945375475}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &1059548948
 Transform:
   m_ObjectHideFlags: 0
@@ -34360,6 +34797,139 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080119056}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1086056750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1086056751}
+  - component: {fileID: 1086056754}
+  - component: {fileID: 1086056753}
+  - component: {fileID: 1086056752}
+  m_Layer: 5
+  m_Name: AddSensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1086056751
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086056750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1393322615}
+  m_Father: {fileID: 312896066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -206, y: -25.25}
+  m_SizeDelta: {x: 160, y: 210.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1086056752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086056750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1086056753}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1692891942}
+        m_TargetAssemblyTypeName: EditScreenMenu, Assembly-CSharp
+        m_MethodName: OnAddSensorPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1086056753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086056750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1086056754
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086056750}
+  m_CullTransparentMesh: 1
 --- !u!1 &1089385425
 GameObject:
   m_ObjectHideFlags: 0
@@ -35128,7 +35698,6 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 1656426714}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &1108862561
 Transform:
   m_ObjectHideFlags: 0
@@ -37912,7 +38481,6 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 418159636}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &1166107834
 Transform:
   m_ObjectHideFlags: 0
@@ -39078,7 +39646,6 @@ MonoBehaviour:
   - {fileID: 215935309}
   - {fileID: 1243431479}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &1197207153
 Transform:
   m_ObjectHideFlags: 0
@@ -39966,6 +40533,140 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6070129c57f4fbb428c55e6d5c3ee568, type: 3}
   m_PrefabInstance: {fileID: 1234033346}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1235105842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1235105843}
+  - component: {fileID: 1235105845}
+  - component: {fileID: 1235105844}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1235105843
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235105842}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 163083665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1235105844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235105842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Allow Buses Only
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 14
+  m_fontSizeBase: 14
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1235105845
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235105842}
+  m_CullTransparentMesh: 1
 --- !u!1 &1235861733
 GameObject:
   m_ObjectHideFlags: 0
@@ -42530,6 +43231,140 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301507109}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1305134591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1305134592}
+  - component: {fileID: 1305134594}
+  - component: {fileID: 1305134593}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1305134592
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305134591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1992239086}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1305134593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305134591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Block All Motor Vehicles
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 14
+  m_fontSizeBase: 14
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1305134594
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305134591}
+  m_CullTransparentMesh: 1
 --- !u!1 &1305983306
 GameObject:
   m_ObjectHideFlags: 0
@@ -45267,6 +46102,140 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392367832}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1393322614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1393322615}
+  - component: {fileID: 1393322617}
+  - component: {fileID: 1393322616}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1393322615
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393322614}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1086056751}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1393322616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393322614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Add Statistical Sensor
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1393322617
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393322614}
+  m_CullTransparentMesh: 1
 --- !u!1 &1399304373
 GameObject:
   m_ObjectHideFlags: 0
@@ -48660,7 +49629,7 @@ GameObject:
   - component: {fileID: 1485045119}
   - component: {fileID: 1485045118}
   m_Layer: 5
-  m_Name: AddBarrier
+  m_Name: AddBarrierBlockAll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48732,7 +49701,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1692891942}
         m_TargetAssemblyTypeName: EditScreenMenu, Assembly-CSharp
-        m_MethodName: OnAddBarrierPressed
+        m_MethodName: OnAddBlockAllBarrierPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -48979,7 +49948,6 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 1791835527}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &1498694745
 Transform:
   m_ObjectHideFlags: 0
@@ -50045,6 +51013,139 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521151258}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1532712045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1532712046}
+  - component: {fileID: 1532712049}
+  - component: {fileID: 1532712048}
+  - component: {fileID: 1532712047}
+  m_Layer: 5
+  m_Name: AddBarrier Block Heavy Vehicles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1532712046
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532712045}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 293975865}
+  m_Father: {fileID: 312896066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -72.2}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1532712047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532712045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1532712048}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1692891942}
+        m_TargetAssemblyTypeName: EditScreenMenu, Assembly-CSharp
+        m_MethodName: OnAddBlockHeavyTrafficBarrierPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1532712048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532712045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1532712049
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532712045}
+  m_CullTransparentMesh: 1
 --- !u!1 &1532922274
 GameObject:
   m_ObjectHideFlags: 0
@@ -55032,7 +56133,6 @@ MonoBehaviour:
   - {fileID: 162656070}
   - {fileID: 1108862560}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &1656426715
 Transform:
   m_ObjectHideFlags: 0
@@ -56343,8 +57443,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barrierPrefab: {fileID: 211012215410212970, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+  blockAllMotorVehiclesPrefab: {fileID: 211012215410212970, guid: 063c1abea95fc4e5b81b91eb7979429c, type: 3}
+  blockAllPrefab: {fileID: 211012215410212970, guid: d81cb60f756b84823a9edfd6994fd25b, type: 3}
+  blockHeavyTrafficPrefab: {fileID: 211012215410212970, guid: 0c98699abc800453994cc07b51f11298, type: 3}
+  busOnlyPrefab: {fileID: 211012215410212970, guid: 91351bcb538e84564b7090ad1de401a4, type: 3}
+  busAndTaxiOnlyPrefab: {fileID: 211012215410212970, guid: 095ecfc8526624dacbdadd74da2c31e4, type: 3}
   instructionText: {fileID: 277417783}
   barrierManager: {fileID: 1012873307}
+  sensorManager: {fileID: 311257560}
   cameraMovement: {fileID: 1136161528}
 --- !u!114 &1692891943
 MonoBehaviour:
@@ -57224,7 +58330,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: 0}
+  m_AnchoredPosition: {x: -206, y: 164}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1719679437
@@ -58404,7 +59510,6 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 2066951226}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &1763324851
 Transform:
   m_ObjectHideFlags: 0
@@ -59046,7 +60151,6 @@ MonoBehaviour:
   - {fileID: 1498694744}
   - {fileID: 2139523338}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &1791835528
 Transform:
   m_ObjectHideFlags: 0
@@ -63892,7 +64996,6 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 777480392}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &1951989320
 Transform:
   m_ObjectHideFlags: 0
@@ -65268,6 +66371,139 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986633302}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1992239085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1992239086}
+  - component: {fileID: 1992239089}
+  - component: {fileID: 1992239088}
+  - component: {fileID: 1992239087}
+  m_Layer: 5
+  m_Name: AddBarrierBlockAllMotorVehicles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1992239086
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992239085}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1305134592}
+  m_Father: {fileID: 312896066}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -115.5}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1992239087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992239085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1992239088}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1692891942}
+        m_TargetAssemblyTypeName: EditScreenMenu, Assembly-CSharp
+        m_MethodName: OnAddBlockAllMotorVehiclesBarrierPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1992239088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992239085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1992239089
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992239085}
+  m_CullTransparentMesh: 1
 --- !u!1 &1992713461
 GameObject:
   m_ObjectHideFlags: 0
@@ -65583,6 +66819,140 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995772275}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2003578228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2003578229}
+  - component: {fileID: 2003578231}
+  - component: {fileID: 2003578230}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2003578229
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003578228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 694310287}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2003578230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003578228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Allow Buses and Taxis Only
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 12
+  m_fontSizeBase: 12
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &2003578231
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003578228}
+  m_CullTransparentMesh: 1
 --- !u!1 &2025569649
 GameObject:
   m_ObjectHideFlags: 0
@@ -66752,7 +68122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Add Barrier
+  m_text: Block All
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -67285,7 +68655,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: 65}
+  m_AnchoredPosition: {x: 211, y: 164}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2065610371
@@ -67521,7 +68891,6 @@ MonoBehaviour:
   - {fileID: 945375475}
   - {fileID: 1763324850}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &2066951227
 Transform:
   m_ObjectHideFlags: 0
@@ -67800,708 +69169,607 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointSize: 1
-  allEdges:
-  - EdgeID: 0
-    position: {x: 0, y: 0, z: 0}
+  edges:
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 6038008}
     endWaypoint: {fileID: 945375475}
     length: 42.60575
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 1
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 6038008}
     endWaypoint: {fileID: 384325137}
     length: 46.2
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 2
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 162656070}
     endWaypoint: {fileID: 215935309}
     length: 44.61356
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 3
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 162656070}
     endWaypoint: {fileID: 1656426714}
     length: 37.30482
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 4
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 162656070}
     endWaypoint: {fileID: 1047998942}
     length: 30.030329
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 5
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 215935309}
     endWaypoint: {fileID: 1197207152}
     length: 37.110916
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 6
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 215935309}
     endWaypoint: {fileID: 162656070}
     length: 44.61356
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 7
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 215935309}
     endWaypoint: {fileID: 2078090773}
     length: 17.304619
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 8
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 359278214}
     endWaypoint: {fileID: 418159636}
     length: 39.810177
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 9
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 359278214}
     endWaypoint: {fileID: 777480392}
     length: 24.834047
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 10
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 384325137}
     endWaypoint: {fileID: 6038008}
     length: 46.2
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 11
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 384325137}
     endWaypoint: {fileID: 418159636}
     length: 25.612495
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 12
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 384325137}
     endWaypoint: {fileID: 513901382}
     length: 30.100662
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 13
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 384325137}
     endWaypoint: {fileID: 777480392}
     length: 40.30012
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 14
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 418159636}
     endWaypoint: {fileID: 384325137}
     length: 25.612495
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 15
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 418159636}
     endWaypoint: {fileID: 1197207152}
     length: 25.103188
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 16
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 418159636}
     endWaypoint: {fileID: 1166107833}
     length: 43.214
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 17
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 418159636}
     endWaypoint: {fileID: 359278214}
     length: 39.810177
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 18
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 513901382}
     endWaypoint: {fileID: 384325137}
     length: 30.100662
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 19
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 777480392}
     endWaypoint: {fileID: 384325137}
     length: 40.30012
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 20
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 777480392}
     endWaypoint: {fileID: 1951989319}
     length: 55.11534
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 21
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 777480392}
     endWaypoint: {fileID: 359278214}
     length: 24.834047
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 22
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 945375475}
     endWaypoint: {fileID: 2066951226}
     length: 51.30624
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 23
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 945375475}
     endWaypoint: {fileID: 6038008}
     length: 42.60575
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 24
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 945375475}
     endWaypoint: {fileID: 1059548947}
     length: 33.907227
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 25
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1047998942}
     endWaypoint: {fileID: 162656070}
     length: 30.030329
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 26
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1059548947}
     endWaypoint: {fileID: 945375475}
     length: 33.907227
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 27
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1108862560}
     endWaypoint: {fileID: 1656426714}
     length: 49.329296
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 28
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1166107833}
     endWaypoint: {fileID: 418159636}
     length: 43.214
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 29
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1197207152}
     endWaypoint: {fileID: 418159636}
     length: 25.103188
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 30
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1197207152}
     endWaypoint: {fileID: 215935309}
     length: 37.110916
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 31
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1197207152}
     endWaypoint: {fileID: 1243431479}
     length: 44.51359
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 32
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1243431479}
     endWaypoint: {fileID: 1791835527}
     length: 44.71353
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 33
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1243431479}
     endWaypoint: {fileID: 2066951226}
     length: 42.300472
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 34
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1243431479}
     endWaypoint: {fileID: 1197207152}
     length: 44.51359
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 35
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1498694744}
     endWaypoint: {fileID: 1791835527}
     length: 48.200413
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 36
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1656426714}
     endWaypoint: {fileID: 1791835527}
     length: 44.32539
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 37
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1656426714}
     endWaypoint: {fileID: 162656070}
     length: 37.30482
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 38
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1656426714}
     endWaypoint: {fileID: 1108862560}
     length: 49.329296
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 39
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1763324850}
     endWaypoint: {fileID: 2066951226}
     length: 49.608162
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 40
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1791835527}
     endWaypoint: {fileID: 1243431479}
     length: 44.71353
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 41
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1791835527}
     endWaypoint: {fileID: 1656426714}
     length: 44.32539
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 42
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1791835527}
     endWaypoint: {fileID: 1498694744}
     length: 48.200413
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 43
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1791835527}
     endWaypoint: {fileID: 2139523338}
     length: 42.204266
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 44
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1951989319}
     endWaypoint: {fileID: 777480392}
     length: 55.11534
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 45
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2066951226}
     endWaypoint: {fileID: 1243431479}
     length: 42.300472
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 46
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2066951226}
     endWaypoint: {fileID: 945375475}
     length: 51.30624
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 47
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2066951226}
     endWaypoint: {fileID: 1763324850}
     length: 49.608162
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 48
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2078090773}
     endWaypoint: {fileID: 215935309}
     length: 17.304619
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  - EdgeID: 49
-    position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2139523338}
     endWaypoint: {fileID: 1791835527}
     length: 42.204266
     TravellersOnEdge: []
-    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
     barrierLocation: -1
     barrier: {fileID: 0}
     isPedestrianOnly: 0
-  reducedEdges:
-  - startWaypoint: {fileID: 6038008}
-    endWaypoint: {fileID: 945375475}
-  - startWaypoint: {fileID: 6038008}
-    endWaypoint: {fileID: 384325137}
-  - startWaypoint: {fileID: 162656070}
-    endWaypoint: {fileID: 215935309}
-  - startWaypoint: {fileID: 162656070}
-    endWaypoint: {fileID: 1656426714}
-  - startWaypoint: {fileID: 162656070}
-    endWaypoint: {fileID: 1047998942}
-  - startWaypoint: {fileID: 215935309}
-    endWaypoint: {fileID: 1197207152}
-  - startWaypoint: {fileID: 215935309}
-    endWaypoint: {fileID: 162656070}
-  - startWaypoint: {fileID: 215935309}
-    endWaypoint: {fileID: 2078090773}
-  - startWaypoint: {fileID: 359278214}
-    endWaypoint: {fileID: 418159636}
-  - startWaypoint: {fileID: 359278214}
-    endWaypoint: {fileID: 777480392}
-  - startWaypoint: {fileID: 384325137}
-    endWaypoint: {fileID: 6038008}
-  - startWaypoint: {fileID: 384325137}
-    endWaypoint: {fileID: 418159636}
-  - startWaypoint: {fileID: 384325137}
-    endWaypoint: {fileID: 513901382}
-  - startWaypoint: {fileID: 384325137}
-    endWaypoint: {fileID: 777480392}
-  - startWaypoint: {fileID: 418159636}
-    endWaypoint: {fileID: 384325137}
-  - startWaypoint: {fileID: 418159636}
-    endWaypoint: {fileID: 1197207152}
-  - startWaypoint: {fileID: 418159636}
-    endWaypoint: {fileID: 1166107833}
-  - startWaypoint: {fileID: 418159636}
-    endWaypoint: {fileID: 359278214}
-  - startWaypoint: {fileID: 513901382}
-    endWaypoint: {fileID: 384325137}
-  - startWaypoint: {fileID: 777480392}
-    endWaypoint: {fileID: 384325137}
-  - startWaypoint: {fileID: 777480392}
-    endWaypoint: {fileID: 1951989319}
-  - startWaypoint: {fileID: 777480392}
-    endWaypoint: {fileID: 359278214}
-  - startWaypoint: {fileID: 945375475}
-    endWaypoint: {fileID: 2066951226}
-  - startWaypoint: {fileID: 945375475}
-    endWaypoint: {fileID: 6038008}
-  - startWaypoint: {fileID: 945375475}
-    endWaypoint: {fileID: 1059548947}
-  - startWaypoint: {fileID: 1047998942}
-    endWaypoint: {fileID: 162656070}
-  - startWaypoint: {fileID: 1059548947}
-    endWaypoint: {fileID: 945375475}
-  - startWaypoint: {fileID: 1108862560}
-    endWaypoint: {fileID: 1656426714}
-  - startWaypoint: {fileID: 1166107833}
-    endWaypoint: {fileID: 418159636}
-  - startWaypoint: {fileID: 1197207152}
-    endWaypoint: {fileID: 418159636}
-  - startWaypoint: {fileID: 1197207152}
-    endWaypoint: {fileID: 215935309}
-  - startWaypoint: {fileID: 1197207152}
-    endWaypoint: {fileID: 1243431479}
-  - startWaypoint: {fileID: 1243431479}
-    endWaypoint: {fileID: 1791835527}
-  - startWaypoint: {fileID: 1243431479}
-    endWaypoint: {fileID: 2066951226}
-  - startWaypoint: {fileID: 1243431479}
-    endWaypoint: {fileID: 1197207152}
-  - startWaypoint: {fileID: 1498694744}
-    endWaypoint: {fileID: 1791835527}
-  - startWaypoint: {fileID: 1656426714}
-    endWaypoint: {fileID: 1791835527}
-  - startWaypoint: {fileID: 1656426714}
-    endWaypoint: {fileID: 162656070}
-  - startWaypoint: {fileID: 1656426714}
-    endWaypoint: {fileID: 1108862560}
-  - startWaypoint: {fileID: 1763324850}
-    endWaypoint: {fileID: 2066951226}
-  - startWaypoint: {fileID: 1791835527}
-    endWaypoint: {fileID: 1243431479}
-  - startWaypoint: {fileID: 1791835527}
-    endWaypoint: {fileID: 1656426714}
-  - startWaypoint: {fileID: 1791835527}
-    endWaypoint: {fileID: 1498694744}
-  - startWaypoint: {fileID: 1791835527}
-    endWaypoint: {fileID: 2139523338}
-  - startWaypoint: {fileID: 1951989319}
-    endWaypoint: {fileID: 777480392}
-  - startWaypoint: {fileID: 2066951226}
-    endWaypoint: {fileID: 1243431479}
-  - startWaypoint: {fileID: 2066951226}
-    endWaypoint: {fileID: 945375475}
-  - startWaypoint: {fileID: 2066951226}
-    endWaypoint: {fileID: 1763324850}
-  - startWaypoint: {fileID: 2078090773}
-    endWaypoint: {fileID: 215935309}
-  - startWaypoint: {fileID: 2139523338}
-    endWaypoint: {fileID: 1791835527}
+    sensor: {fileID: 0}
+    sensorLocation: 0
   allBuildings: []
   waypoints: []
   drawEdgeGizmos: 1
@@ -68576,7 +69844,6 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 215935309}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &2078090774
 Transform:
   m_ObjectHideFlags: 0
@@ -70429,7 +71696,6 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 1791835527}
   isPedestrianOnly: 0
-  isSubdivided: 0
 --- !u!4 &2139523339
 Transform:
   m_ObjectHideFlags: 0
@@ -70878,3 +72144,4 @@ SceneRoots:
   - {fileID: 2077545152}
   - {fileID: 1299082138}
   - {fileID: 1341900391}
+  - {fileID: 311257561}

@@ -18,23 +18,29 @@ public class EdgeLoader
 
     public static void LoadEdges(Dictionary<ReducedEdge, List<ReducedEdge>> intersectingEdgesOverride = null)
     {
-        Graph graph = Object.FindFirstObjectByType<Graph>();
+        // Find the Graph object in the scene
+        Graph graph = Object.FindObjectOfType<Graph>();
 
+        // If no Graph object is found, log an error and return
         if (graph == null)
         {
             Debug.LogError("No graph found in scene.");
             return;
         }
 
+        // Initialize the edges list in the Graph object
         graph.ResetEdges();
+
+        // Find all Waypoint objects in the scene
         Waypoint[] waypoints = Object.FindObjectsOfType<Waypoint>();
 
+        // For each Waypoint object
         foreach (Waypoint waypoint in waypoints)
         {
+            // For each adjacent waypoint
             foreach (Waypoint adjacentWaypoint in waypoint.adjacentWaypoints)
             {
-                float distance = graph.CalculateDistance(waypoint, adjacentWaypoint);
-                // instantiate edge as empty game object
+                // Create a new Edge object with the waypoint and the adjacent waypoint
                 Edge edge = new Edge(waypoint, adjacentWaypoint);
                 graph.AddEdge(edge);
             }
