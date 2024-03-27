@@ -222,6 +222,12 @@ public class Edge
             makeSmallArrow(edgeColor);
             return;
         }
+        else if ((startWaypoint.isSubdivided && !endWaypoint.isSubdivided) || 
+        (!startWaypoint.isSubdivided && endWaypoint.isSubdivided)){
+            edgeColor = Color.green;
+            makeSmallArrow(edgeColor);
+            return;
+        }
         else
         {
             edgeColor = Color.green;
@@ -240,7 +246,7 @@ public class Edge
         // Debug.Log("Direction of the Road Edge: " + direction);
 
         // Make the arrows shorter by 20%
-        float shortenedMagnitude = direction.magnitude * 0.7f;
+        float shortenedMagnitude = direction.magnitude * 0.8f;
         Vector3 shortenedDirection = direction.normalized * shortenedMagnitude;
 
         // Calculate the middle position
