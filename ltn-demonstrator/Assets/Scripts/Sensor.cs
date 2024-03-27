@@ -50,8 +50,6 @@ public class Sensor : MonoBehaviour
 
 
 
-
-
     // Use this for initialization
     void Start()
     {
@@ -78,7 +76,6 @@ public class Sensor : MonoBehaviour
         {
             Debug.Log("No edges found or edge waypoints are null.");
         }
-
     }
 
     public Edge FindNearestEdge()

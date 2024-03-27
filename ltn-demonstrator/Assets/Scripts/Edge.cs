@@ -26,10 +26,23 @@ public class Edge
     /// barricadeLocation is the z position of the barrier in the path of the edge. -1 if there is no barrier
     /// </summary>
     public bool isBarricated;
-    public float barrierLocation;
-    public Barrier barrier;
+    public List<Barrier> barriersOnEdge;
 
     public bool isPedestrianOnly;
+
+    public Sensor sensor;
+    public float sensorLocation;
+
+    private List<Sensor> sensors = new List<Sensor>();
+
+    public void RegisterSensor(Sensor sensor)
+    {
+        if (sensor != null && !sensors.Contains(sensor))
+        {
+            sensors.Add(sensor);
+        }
+    }
+
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.startWaypoint = startWaypoint;
@@ -38,27 +51,38 @@ public class Edge
 
         this.TravellersOnEdge = new List<WaypointMover>();
 
-        this.barrier = getBarrierInPath();
-        this.isBarricated = barrier != null;
-        this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
-
         this.isPedestrianOnly = startWaypoint.isPedestrianOnly || endWaypoint.isPedestrianOnly;
+
+        CheckBarriers();
+    }
+
+    public void CheckBarriers()
+    {
+        this.barriersOnEdge = getBarriersInPath();
+        if (this.isPedestrianOnly)
+        {
+            this.isBarricated = false;
+        }
+        else
+        {
+            this.isBarricated = barriersOnEdge.Count > 0;
+        }
 
         if (this.isBarricated)
         {
-            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
+            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded by " + barriersOnEdge.Count + " barriers");
         }
     }
 
-    public void RecheckBarriers()
+    public void RecheckSensors()
     {
-        this.barrier = getBarrierInPath();
-        this.isBarricated = barrier != null;
-        this.barrierLocation = barrier != null ? convertToPositionAlongEdge(barrier.transform.position) : -1f;
-        if (this.isBarricated)
-        {
-            Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.barrierLocation);
-        }
+        this.sensor = getSensorInPath();
+        this.sensorLocation = sensor != null ? convertToPositionAlongEdge(sensor.transform.position) : -1f;
+        // this.isBarricated = sensor != null;
+        // if (this.isBarricated)
+        // {
+        //     Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded at " + this.sensorLocation);
+        // }
     }
 
     // converting between distance along edge and distance in world space
@@ -234,7 +258,7 @@ public class Edge
         }
     }
 
-    public Barrier getBarrierInPath()
+    public List<Barrier> getBarriersInPath()
     {
         Barrier[] allBarriers;
 
@@ -254,6 +278,8 @@ public class Edge
             }
         }
 
+        List<Barrier> intersectingBarriers = new List<Barrier>();
+
         // we go through the Barrier and check if the edge intersects with any of them
         foreach (Barrier barrier in allBarriers)
         {
@@ -267,10 +293,79 @@ public class Edge
                 // Apply the rotation to the barrier
                 barrier.transform.rotation = Quaternion.Euler(0, angle, 0);
 
-                return barrier;
+                intersectingBarriers.Add(barrier);
             }
         }
-        return null;
+        return intersectingBarriers;
+    }
+
+    public Waypoint FindNearestWaypoint(Sensor sensor)
+    {
+        Waypoint[] allWaypoints = GameObject.FindObjectsOfType<Waypoint>();
+        Waypoint nearestWaypoint = null;
+        float minDistance = float.MaxValue;
+
+        foreach (Waypoint waypoint in allWaypoints)
+        {
+            float distance = Vector3.Distance(sensor.transform.position, waypoint.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestWaypoint = waypoint;
+            }
+        }
+
+        return nearestWaypoint;
+    }
+
+    public Sensor getSensorInPath()
+    {
+        Sensor[] allSensors;
+
+        if (SensorManager.Instance == null)
+        {
+            allSensors = GameObject.FindObjectsOfType<Sensor>();
+        }
+        else
+        {
+            List<GameObject> allSensorGameObjects;
+            allSensorGameObjects = SensorManager.Instance.allSensors;
+            // get all the Sensor objects from the list of GameObjects
+            allSensors = new Sensor[allSensorGameObjects.Count];
+            for (int i = 0; i < allSensorGameObjects.Count; i++)
+            {
+                allSensors[i] = allSensorGameObjects[i].GetComponent<Sensor>();
+            }
+        }
+
+        foreach (Sensor sensor in allSensors)
+        {
+            if (sensor.isPointInSensor(this.GetClosestPoint(sensor.transform.position)))
+            {
+                Debug.Log("Sensor found at " + sensor.transform.position);
+                // Calculate the angle between the sensor's forward direction and the edge direction
+                Vector3 edgeDirection = this.GetDirection();
+                float angle = Vector3.Angle(sensor.transform.forward, edgeDirection);
+
+                // Apply the rotation to the sensor
+                sensor.transform.rotation = Quaternion.Euler(0, angle, 0);
+
+                // Find the nearest waypoint to the sensor
+                Waypoint nearestWaypoint = FindNearestWaypoint(sensor);
+                if (nearestWaypoint != null)
+                {
+                    Debug.Log("Nearest waypoint to sensor is at " + nearestWaypoint.transform.position);
+                }
+                else
+                {
+                    Debug.Log("No waypoints found.");
+                }
+
+                return sensor;
+            }
+        }
+
+        return null; // return null if no sensor is found in the path
     }
 
     public Waypoint getClosestWaypoint(Vector3 point)
@@ -297,10 +392,14 @@ public class Edge
     /// <summary>
     /// This method returns the closest waypoint that is not blocked by a barrier, given a point.
     /// If both waypoints are blocked, it returns null.
+    /// 
+    /// Beyond that, if we pass in a ModeOfTransport, it will consider the modes of the barriers as well
+    /// when collecting the accessible waypoint.
     /// </summary>
     /// <param name="point">the point we want to check</param>
+    /// <param name="mode">The mode of transport we're checking accessibility for</param>
     /// <returns></returns>
-    public Waypoint getClosestAccesibleWaypoint(Vector3 point)
+    public Waypoint getClosestAccesibleWaypoint(Vector3 point, ModeOfTransport mode = ModeOfTransport.Car)
     {
         float distanceToStart = Vector3.Distance(point, startWaypoint.transform.position);
         float distanceToEnd = Vector3.Distance(point, endWaypoint.transform.position);
@@ -311,12 +410,12 @@ public class Edge
         if (distanceToStart < distanceToEnd)
         {
             // If there is no barrier between the point and the start waypoint, return start waypoint
-            if (!isBarrierBetween(point, startWaypoint.transform.position))
+            if (!isBarrierBlocking(point, startWaypoint.transform.position, mode))
             {
                 return startWaypoint;
             }
             // Otherwise, check if the end waypoint is accessible
-            else if (!isBarrierBetween(point, endWaypoint.transform.position))
+            else if (!isBarrierBlocking(point, endWaypoint.transform.position, mode))
             {
                 return endWaypoint;
             }
@@ -324,12 +423,12 @@ public class Edge
         else
         {
             // If there is no barrier between the point and the end waypoint, return end waypoint
-            if (!isBarrierBetween(point, endWaypoint.transform.position))
+            if (!isBarrierBlocking(point, endWaypoint.transform.position, mode))
             {
                 return endWaypoint;
             }
             // Otherwise, check if the start waypoint is accessible
-            else if (!isBarrierBetween(point, startWaypoint.transform.position))
+            else if (!isBarrierBlocking(point, startWaypoint.transform.position, mode))
             {
                 return startWaypoint;
             }
@@ -341,15 +440,16 @@ public class Edge
     }
 
     /// <summary>
-    /// This checks if there is a barrier between a start point and an end point on the edge
+    /// This checks if the edge is traverasable by the modeoftransport (according to the barrier)
     /// </summary>
     /// <param name="start"></param>
     /// <param name="destination"></param>
+    /// <param name="mode"></param>
     /// <returns></returns>
-    public bool isBarrierBetween(Vector3 start, Vector3 destination)
+    public bool isBarrierBlocking(Vector3 start, Vector3 destination, ModeOfTransport mode = ModeOfTransport.Car)
     {
-        // Check if barricade is active
-        if (!isBarricated)
+        // Check if there is a barrier in the way
+        if (!isBarricated || barriersOnEdge.Count == 0)
         {
             return false;
         }
@@ -357,11 +457,29 @@ public class Edge
         // Convert positions to distances along the edge
         float startDistance = convertToPositionAlongEdge(start);
         float destinationDistance = convertToPositionAlongEdge(destination);
-        float barrierDistance = convertToPositionAlongEdge(barrier.transform.position);
 
-        // Check if the barrier is between start and destination
-        // Assuming lower distance value is closer to the starting point of the edge
-        return barrierDistance > System.Math.Min(startDistance, destinationDistance) &&
-            barrierDistance < System.Math.Max(startDistance, destinationDistance);
+        foreach (Barrier barrier in barriersOnEdge)
+        {
+            float barrierDistance = convertToPositionAlongEdge(barrier.transform.position);
+
+            // Check if the barrier is between start and destination
+            bool isBarrierBetween = barrierDistance > System.Math.Min(startDistance, destinationDistance) &&
+                                    barrierDistance < System.Math.Max(startDistance, destinationDistance);
+
+            if (isBarrierBetween)
+            {
+                // Retrieve the list of blocked modes for the barrier's type
+                List<ModeOfTransport> blockedModes = BarrierTypeProperties.GetBlockedModes(barrier.BarrierType);
+
+                // If the current mode of transport is blocked, return true immediately
+                if (blockedModes.Contains(mode))
+                {
+                    return true;
+                }
+            }
+        }
+
+        // If no barriers are blocking the path, return false
+        return false;
     }
 }

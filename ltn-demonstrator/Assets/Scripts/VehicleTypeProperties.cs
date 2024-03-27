@@ -1,13 +1,18 @@
 using UnityEngine;
 using System;
 
+// NOTE: Similar info is found in ModeOfTransport.cs
+// we need better separation betweeen the classes,
+// as this doesn't really make sense atm.
+// We should get rid of ModeOfTransport.cs
 public enum VehicleType
 {
     PersonalCar,
     SUV,
     Van,
     Taxi,
-    Pedestrian
+    Pedestrian,
+    Bicycle
 }
 
 public class VehicleProperties
@@ -66,7 +71,7 @@ public class VehicleProperties
     {
         VehicleType type;
         Array values = Enum.GetValues(typeof(VehicleType));
-        type = (VehicleType)values.GetValue(UnityEngine.Random.Range(0, values.Length-1)); // -1 to exclude Pedestrian. TODO: make this more elegant
+        type = (VehicleType)values.GetValue(UnityEngine.Random.Range(0, values.Length-2)); // -2 to exclude Pedestrian & bike. TODO: make this more elegant
         this.Type = type;
     }
     private float getBaseMaxVelocity()
@@ -83,6 +88,8 @@ public class VehicleProperties
                 return 4.8f;
             case VehicleType.Pedestrian:
                 return 1.5f;
+            case VehicleType.Bicycle:
+                return 3.0f;
             default:
                 return 0.0f;
         }
@@ -101,6 +108,8 @@ public class VehicleProperties
                 return 0.2f;
             case VehicleType.Pedestrian:
                 return 0.2f;
+            case VehicleType.Bicycle:
+                return 0.5f;
             default:
                 return 0.0f;
         }
@@ -119,6 +128,8 @@ public class VehicleProperties
                 return 2.0f;
             case VehicleType.Pedestrian:
                 return 1000.0f;
+            case VehicleType.Bicycle:
+                return 2.5f;
             default:
                 return 0.0f;
         }
@@ -137,6 +148,8 @@ public class VehicleProperties
                 return 4.0f;
             case VehicleType.Pedestrian:
                 return 1000.0f;
+            case VehicleType.Bicycle:
+                return 5f;
             default:
                 return 0.0f;
         }
@@ -171,6 +184,8 @@ public class VehicleProperties
                 return 3;
             case VehicleType.Pedestrian:
                 return 1; // lol
+            case VehicleType.Bicycle:
+                return 1;
             default:
                 return 0;
         }

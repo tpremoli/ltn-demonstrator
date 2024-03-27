@@ -15,7 +15,7 @@ public class Graph : MonoBehaviour
 
     // private waypointsize with getter
     [Range(0f, 2f)][SerializeField] private float waypointSize = 0.5f;
-    [SerializeField] public List<Edge> edges;
+    [SerializeField] public List<Edge> edges; // list of edges
 
     public List<Building> allBuildings;
     public Dictionary<BuildingType, List<Building>> buildingsByType = new Dictionary<BuildingType, List<Building>>();
@@ -49,10 +49,6 @@ public class Graph : MonoBehaviour
         foreach (KeyValuePair<BuildingType, List<Building>> t in buildingsByType)
         {
             Debug.Log("Building Type: " + t.Key + ", Total: " + t.Value.Count);
-        }
-
-        if (!inEditMode && BarrierManager.Instance.loadBarriersFromSave){
-            BarrierManager.Instance.RecalcBarriersOnEdges();
         }
 
     }

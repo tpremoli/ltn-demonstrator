@@ -63,7 +63,7 @@ public class SensorManager : MonoBehaviour
 
             // this essentially reloads colliders so we can use them to generate sensors etc.
             // this is not efficient at all. HOWEVER, it is only called once on load.
-            Physics.SyncTransforms();
+            // Physics.SyncTransforms();
         }
     }
 

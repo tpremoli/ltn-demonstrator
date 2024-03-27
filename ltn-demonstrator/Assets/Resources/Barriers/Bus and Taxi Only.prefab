@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9117332115373473607}
   - component: {fileID: 7563469548286501685}
   m_Layer: 0
-  m_Name: Barrier
+  m_Name: Bus and Taxi Only
   m_TagString: Draggable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

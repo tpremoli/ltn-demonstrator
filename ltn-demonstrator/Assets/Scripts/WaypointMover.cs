@@ -9,7 +9,7 @@ public class WaypointMover : MonoBehaviour
 
     // Attributes controlling vehicle's type
     public VehicleProperties vType { get; private set; }
-    public ModeOfTransport mode { get; private set; }
+    [SerializeField] public ModeOfTransport mode;
 
     // Statistic measures
     private float totalDistanceMoved;
@@ -90,12 +90,21 @@ public class WaypointMover : MonoBehaviour
             this.vType.Type = VehicleType.Pedestrian; // Set the type to pedestrian TODO: this should be done in pickRandomVehicleType()
             this.gameObject.name = "Pedestrian";
         }
-        else if (this.mode == ModeOfTransport.Car || this.mode == ModeOfTransport.Bicycle)
+        else if (this.mode == ModeOfTransport.Bicycle)
+        {
+            // Set the traveller's position to the closest point on the road edge
+            this.transform.position = this.originBuilding.closestPointOnRoadEdge;
+            this.vType = pickRandomVehicleType();
+            this.vType.Type = VehicleType.Bicycle;
+            this.gameObject.name = "Bicycle";
+        }
+        else if (this.mode == ModeOfTransport.Car)
         {
             // Set the traveller's position to the closest point on the road edge
             this.transform.position = this.originBuilding.closestPointOnRoadEdge;
             this.vType = pickRandomVehicleType();
             this.gameObject.name = vType.Type.ToString();
+
         }
 
         // pick a random model and material
@@ -883,8 +892,15 @@ public class WaypointMover : MonoBehaviour
             MeshRenderer thisMeshRenderer = GetComponent<MeshRenderer>();
             MeshFilter thisMeshFilter = GetComponent<MeshFilter>();
 
-            thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
-            thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
+            try
+            {
+                thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
+                thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
+            }
+            catch (MissingComponentException e)
+            {
+                Debug.LogWarning("A model is missing a component!" + e.StackTrace);
+            }
 
             // this allows us to ensure that pedestrians are the correct size. Should be done with all vehicles,
             // but we have to setup the prefabs correctly first.
