@@ -43,11 +43,6 @@ public class CinematicCamera : MonoBehaviour
         SwitchTarget();
     }
 
-    private void SetTarget(Transform transform)
-    {
-        throw new System.NotImplementedException();
-    }
-
     private void LateUpdate()
     {
         if (target == null) return;
