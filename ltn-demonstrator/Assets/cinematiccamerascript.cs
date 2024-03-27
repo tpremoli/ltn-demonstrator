@@ -30,21 +30,17 @@ public class PositionItem_Cinematic
 public class CinematicCamera : MonoBehaviour
 {
     private Vector3 _offset;
-    [SerializeField] private float smoothTime = 0.5f;
+    [SerializeField] private float smoothTimeCinematic = 0.5f;
     private Vector3 _currentVelocity = Vector3.zero;
 
     private List<CameraTarget_Cinematic> inventory = new List<CameraTarget_Cinematic>();
     private int timeStepCounter = 0;
     private Transform target;
-    [SerializeField] private float verticalDistance = 1000f; // Distance above the target
+    [SerializeField] private float verticalDistanceCinematic = 1000f; // Distance above the target
 
     private void Awake()
     {
-        LoadPositions();
-        if (inventory.Count > 0)
-        {
-            SetTarget(inventory[0].prefab.transform);
-        }
+        SwitchTarget();
     }
 
     private void SetTarget(Transform transform)
@@ -56,8 +52,8 @@ public class CinematicCamera : MonoBehaviour
     {
         if (target == null) return;
 
-        Vector3 desiredPosition = target.position + _offset + Vector3.up * verticalDistance;
-        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref _currentVelocity, smoothTime);
+        Vector3 desiredPosition = target.position + _offset + Vector3.up * verticalDistanceCinematic;
+        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref _currentVelocity, smoothTimeCinematic);
 
         timeStepCounter++;
         if (timeStepCounter >= 300)
@@ -79,10 +75,6 @@ public class CinematicCamera : MonoBehaviour
         target = newTarget.transform;
         _offset = Vector3.zero;
         Debug.Log("Now following this target: " + target.name);
-    }
-
-    private void LoadPositions()
-    {
     }
 
 }
