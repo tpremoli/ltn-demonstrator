@@ -26,6 +26,7 @@ public class BarrierManager : MonoBehaviour
         {
             RecalcBarriersOnEdges();
         }
+        //Debug.Log("barrierPrefabs ", barrierPrefabs.Count);
     }
 
     private void Awake()
@@ -109,4 +110,6 @@ public class BarrierManager : MonoBehaviour
         }
 
     }
+
+
 }
