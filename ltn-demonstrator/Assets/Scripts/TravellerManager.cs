@@ -92,11 +92,11 @@ public class TravellerManager : MonoBehaviour
         if (originBuilding.closestPedestrianEdge == null)
         {
             // we don't have a pedestrian edge, so we can't be a pedestrian (for now)
-            mode = (ModeOfTransport)Random.Range(1, 2);
+            mode = (ModeOfTransport)Random.Range(1, 3);
         }
         else
         {
-            mode = (ModeOfTransport)Random.Range(0, 2);
+            mode = (ModeOfTransport)Random.Range(0, 3);
         }
 
         newTravellerObj.GetComponent<WaypointMover>().Setup(originBuilding, destinationBuilding, mode, journey);
