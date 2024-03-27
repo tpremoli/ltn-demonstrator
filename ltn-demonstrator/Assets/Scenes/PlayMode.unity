@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -65820,9 +65820,7 @@ GameObject:
   - component: {fileID: 1820101920}
   - component: {fileID: 1820101919}
   - component: {fileID: 1820101918}
-  - component: {fileID: 1820101917}
   - component: {fileID: 1820101921}
-  - component: {fileID: 1820101922}
   m_Layer: 0
   m_Name: Cinematic Camera
   m_TagString: MainCamera
@@ -65830,62 +65828,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &1820101917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1820101916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45523f8b576f04031b37424be3f3fda2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  smoothTime: 0.3
-  inventory:
-  - prefab: {fileID: 100000, guid: 993432d7809c9bf489a5a96006618fef, type: 3}
-  - prefab: {fileID: 100014, guid: 1508f459923b7df4889f466e17864ab4, type: 3}
-  - prefab: {fileID: 100014, guid: f119644f5530c1044aa946bb6b18bb13, type: 3}
-  - prefab: {fileID: 100000, guid: e218686c5655fad46a02ebfb004972ee, type: 3}
-  - prefab: {fileID: 100014, guid: 636cb627739652c418fcc4f683a138b1, type: 3}
-  - prefab: {fileID: 100000, guid: cffe1734bc43bcb47b6433ebca05c04c, type: 3}
-  - prefab: {fileID: 100010, guid: fba5e236738a7c940b3a8d031c307794, type: 3}
-  - prefab: {fileID: 100000, guid: 05aec82adc02f16409639716322b1673, type: 3}
-  - prefab: {fileID: 100010, guid: f0ffa104f4ba20b40a0421d7c2b5f098, type: 3}
-  - prefab: {fileID: 100000, guid: 00d77ce56096de34eb6645947a0f8925, type: 3}
-  - prefab: {fileID: 100010, guid: a7cd9ad30e9d4c146986aa1e6694b9e5, type: 3}
-  - prefab: {fileID: 100000, guid: b0ad868427d8c8a4b86144f9786776d3, type: 3}
-  - prefab: {fileID: 100010, guid: 1dabf884aa0716149a1bc775f0b620d8, type: 3}
-  - prefab: {fileID: 100000, guid: 288b117258616aa4f928ba6f91dc47c3, type: 3}
-  - prefab: {fileID: 100010, guid: a7b60e70606f80245b2f8bc7ce2fadb6, type: 3}
-  - prefab: {fileID: 100000, guid: 1af0a2c8773f85c40bdb120f32cd8a8a, type: 3}
-  - prefab: {fileID: 100000, guid: ce2dd4bb67fdc684dac928dc2cfb7a0f, type: 3}
-  - prefab: {fileID: 100000, guid: 81c050d9e127fdd45af1f6b8da476b2b, type: 3}
-  - prefab: {fileID: 100000, guid: 93d0d450ec8b42e46b724bf2bbee330b, type: 3}
-  - prefab: {fileID: 100014, guid: 769aefcca570d1e4ca876e9ca63f486c, type: 3}
-  - prefab: {fileID: 100000, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
-  - prefab: {fileID: 100014, guid: 3badebbd9408775489b3339f9f0836e7, type: 3}
-  - prefab: {fileID: 100000, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
-  - prefab: {fileID: 100014, guid: 19d89298cfb28544c8d4178f158769b9, type: 3}
-  - prefab: {fileID: 100014, guid: 19d89298cfb28544c8d4178f158769b9, type: 3}
-  - prefab: {fileID: 100000, guid: 979de0ac65f6d2b48a89e9088986637f, type: 3}
-  - prefab: {fileID: 100010, guid: 11a57a102cdb5e642899ceab079f1938, type: 3}
-  - prefab: {fileID: 100000, guid: c98da428142c39c42bb62c454958cd1f, type: 3}
-  - prefab: {fileID: 100010, guid: 11a57a102cdb5e642899ceab079f1938, type: 3}
-  - prefab: {fileID: 100000, guid: 81835658bbd378143a0f525b8552f557, type: 3}
-  - prefab: {fileID: 100010, guid: d267fbb9e36c6e4458c9a8756d725a79, type: 3}
-  - prefab: {fileID: 100000, guid: a119eb0fa059db34bbaef286c1af1696, type: 3}
-  - prefab: {fileID: 100010, guid: e1697ef5073defa458e40968ffff2b30, type: 3}
-  - prefab: {fileID: 100000, guid: f269a0a343ed94c4e908a388c940ea06, type: 3}
-  - prefab: {fileID: 100010, guid: 3cfde9a41ff096140a1bfec6f262d0f0, type: 3}
-  - prefab: {fileID: 100000, guid: 79ef5961b86276943ab5da38ae9f2e4b, type: 3}
-  - prefab: {fileID: 100010, guid: de535534204e83f4e84497ac553192eb, type: 3}
-  - prefab: {fileID: 100000, guid: 9500f0cdde0097a4aac35ced7c1935d7, type: 3}
-  - prefab: {fileID: 100010, guid: b3f4ad6e44f81784ba0ebe95aadf2a7d, type: 3}
-  - prefab: {fileID: 100000, guid: 9b25e71fd5b7ac6469539d930c6dc2e6, type: 3}
-  - prefab: {fileID: 100000, guid: 36f453c34cda9cb458647901440ff410, type: 3}
-  verticalDistance: 10
 --- !u!81 &1820101918
 AudioListener:
   m_ObjectHideFlags: 0
@@ -65967,27 +65909,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820101916}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 907272fbdb0044dd6aab141c9c232abb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 1820101919}
-  minY: 0
-  sensitivity: 1
-  canMove: 1
---- !u!114 &1820101922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1820101916}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c24e393142e84949aed9d1605043be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothTimeCinematic: 0.5
+  verticalDistanceCinematic: 1000
 --- !u!1 &1824920647
 GameObject:
   m_ObjectHideFlags: 0
