@@ -88,7 +88,7 @@ public class PlayModeButtonClicker : MonoBehaviour
         Debug.Log("Camera switched to ", cameraToActivate);
         // Disable all cameras
         mainCamera.gameObject.SetActive(false);
-        //cinematicCamera.gameObject.SetActive(false);
+        cinematicCamera.gameObject.SetActive(false);
         sensorCamera.gameObject.SetActive(false);
 
         // Enable the selected camera
