@@ -3,24 +3,24 @@ using UnityEngine;
 using System.IO; // For reading files
 
 [System.Serializable]
-public class CameraTarget
+public class CameraTarget_Cinematic
 {
     public GameObject prefab;
 
-    public CameraTarget(GameObject prefab)
+    public CameraTarget_Cinematic(GameObject prefab)
     {
         this.prefab = prefab;
     }
 }
 
 [System.Serializable]
-public class PositionData
+public class PositionData_Cinematic
 {
-    public List<PositionItem> positions;
+    public List<PositionItem_Cinematic> positions;
 }
 
 [System.Serializable]
-public class PositionItem
+public class PositionItem_Cinematic
 {
     public float x;
     public float y;
@@ -33,7 +33,7 @@ public class CinematicCamera : MonoBehaviour
     [SerializeField] private float smoothTime = 0.5f;
     private Vector3 _currentVelocity = Vector3.zero;
 
-    private List<CameraTarget> inventory = new List<CameraTarget>();
+    private List<CameraTarget_Cinematic> inventory = new List<CameraTarget_Cinematic>();
     private int timeStepCounter = 0;
     private Transform target;
     [SerializeField] private float verticalDistance = 1000f; // Distance above the target
@@ -45,6 +45,11 @@ public class CinematicCamera : MonoBehaviour
         {
             SetTarget(inventory[0].prefab.transform);
         }
+    }
+
+    private void SetTarget(Transform transform)
+    {
+        throw new System.NotImplementedException();
     }
 
     private void LateUpdate()
@@ -65,7 +70,7 @@ public class CinematicCamera : MonoBehaviour
     private void SwitchTarget()
     {
         GameObject travellerManagerObject = travellerManager.Instance.GetManagerObject();
-        int nextIndex = Random.Range(0,travellerManagerObject.childCount)
+        int nextIndex = Random.Range(0, travellerManagerObject.childCount);
         SetTarget(travellerManagerObject.transform.GetChild(nextIndex).gameObject);
     }
 
