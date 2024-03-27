@@ -2,8 +2,57 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
+public class ReducedEdge
+{
+    public Waypoint startWaypoint;
+    public Waypoint endWaypoint;
+
+    public ReducedEdge(Edge edge)
+    {
+        this.startWaypoint = edge.startWaypoint;
+        this.endWaypoint = edge.endWaypoint;
+    }
+    public ReducedEdge(Waypoint startWaypoint, Waypoint endWaypoint)
+    {
+        this.startWaypoint = startWaypoint;
+        this.endWaypoint = endWaypoint;
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null || this.GetType() != obj.GetType())
+            return false;
+
+        ReducedEdge other = (ReducedEdge)obj;
+        return (this.startWaypoint == other.startWaypoint && this.endWaypoint == other.endWaypoint);
+    }
+
+    public override int GetHashCode()
+    {
+        unchecked // Overflow is fine, just wrap
+        {
+            int hash = 17;
+
+            // Order the waypoints to ensure that the hash code is the same for 
+            // ReducedEdge(start, end) and ReducedEdge(end, start) if that symmetry is desired.
+            // If the direction matters, remove the ordering (Min, Max).
+            int startHash = startWaypoint.GetHashCode();
+            int endHash = endWaypoint.GetHashCode();
+
+            hash = hash * 31 + System.Math.Min(startHash, endHash);
+            hash = hash * 31 + System.Math.Max(startHash, endHash);
+            return hash;
+        }
+    }
+}
+
+
+[System.Serializable]
 public class Edge
 {
+    [SerializeField] private static int IDcounter = 0;
+    [SerializeField] private static Dictionary<int, Edge> edgesByID = new Dictionary<int, Edge>();
+    [SerializeField] private int EdgeID;
     public Vector3 position;
     public Vector3 direction;
     public Waypoint startWaypoint;
@@ -18,6 +67,8 @@ public class Edge
     public Waypoint StartWaypoint { get { return startWaypoint; } }
     public Waypoint EndWaypoint { get { return endWaypoint; } }
     public List<WaypointMover> TravellersOnEdge;
+
+    [SerializeField] public List<ReducedEdge> IntersectingEdgesByReducedEdge;
     public float Distance { get { return length; } }
 
     /// <summary>
@@ -26,6 +77,9 @@ public class Edge
     /// barricadeLocation is the z position of the barrier in the path of the edge. -1 if there is no barrier
     /// </summary>
     public bool isBarricated;
+
+    [System.NonSerialized]
+    public List<Edge> IntersectingEdges;
     public List<Barrier> barriersOnEdge;
 
     public bool isPedestrianOnly;
@@ -45,15 +99,22 @@ public class Edge
 
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
+        this.EdgeID = Edge.IDcounter;
+        Edge.IDcounter++;
+
         this.startWaypoint = startWaypoint;
         this.endWaypoint = endWaypoint;
         this.length = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
 
         this.TravellersOnEdge = new List<WaypointMover>();
+        this.IntersectingEdges = new List<Edge>();
+        this.IntersectingEdgesByReducedEdge = new List<ReducedEdge>();
 
         this.isPedestrianOnly = startWaypoint.isPedestrianOnly || endWaypoint.isPedestrianOnly;
 
         CheckBarriers();
+
+        Edge.edgesByID.Add(this.EdgeID, this);
     }
 
     public void CheckBarriers()
@@ -71,6 +132,17 @@ public class Edge
         if (this.isBarricated)
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded by " + barriersOnEdge.Count + " barriers");
+        }
+
+    }
+
+    public void BootstrapIntersectingEdges(Graph graph)
+    {
+        this.IntersectingEdges = new List<Edge>();
+
+        foreach (ReducedEdge r in IntersectingEdgesByReducedEdge)
+        {
+            this.IntersectingEdges.Add(graph.GetEdge(r));
         }
     }
 
@@ -104,14 +176,76 @@ public class Edge
     {
         this.TravellersOnEdge.Remove(trav);
     }
+    public void RegisterIntersectingEdge(Edge e)
+    {
+        this.IntersectingEdges.Add(e);
+        this.IntersectingEdgesByReducedEdge.Add(e.Reduce());
+    }
+    public bool HasIntersecingEdges(){
+        return this.IntersectingEdges.Count>0;
+    }
+    public bool IntersectingEdgesBusy()
+    {
+        foreach (Edge e in this.IntersectingEdges)
+        {
+            if (e.TravellersOnEdge.Count > 0) return true;
+        }
+        return false;
+    }
+
+    private void makeSmallArrow(Color color)
+    {
+        // Draw arrow pointing in the edge's direction
+        Vector3 startpoint = startWaypoint.transform.position;
+        Vector3 endpoint = endWaypoint.transform.position;
+        Vector3 direction = endpoint - startpoint;
+        // Debug.Log("Direction of the Road Edge: " + direction);
+
+        // Make the arrows shorter by 20%
+        float shortenedMagnitude = direction.magnitude * 0.7f; // Reduced from 0.7f to 0.5f for a shorter arrow;
+        Vector3 shortenedDirection = direction.normalized * shortenedMagnitude;
+
+        // Calculate the middle position
+        Vector3 middlePosition = startpoint + direction * 0.5f - shortenedDirection * 0.5f;
+
+        // Shift the middle position slightly to the left
+        Vector3 shiftedMiddlePosition = middlePosition + Vector3.Cross(direction, Vector3.up).normalized * 0.2f; // Reduced from 0.6f to 0.3f
+
+        // Draw the arrow with the shifted middle position and shortened direction
+        DrawArrow.ForGizmo(shiftedMiddlePosition, shortenedDirection, color, 0.3f, 20f); // Reduced size and angle for the arrowhead
+    }
 
     public void DrawGizmo()
     {
-        // drawing the edge would be too much clutter
-        if (isPedestrianOnly)
+
+        Color edgeColor;
+        if (IntersectingEdges.Count > 0)
         {
+            if(IntersectingEdgesBusy()){
+                edgeColor = Color.red;
+            } else {
+                edgeColor = Color.yellow;
+            }
+            
+            makeSmallArrow(edgeColor);
             return;
         }
+        else if ((startWaypoint.isSubdivided && !endWaypoint.isSubdivided) || 
+        (!startWaypoint.isSubdivided && endWaypoint.isSubdivided)){
+            edgeColor = Color.green;
+            makeSmallArrow(edgeColor);
+            return;
+        }
+        else
+        {
+            edgeColor = Color.green;
+            if (isPedestrianOnly)
+            {
+                return;
+            }
+
+        }
+
 
         // Draw arrow pointing in the edge's direction
         Vector3 startpoint = startWaypoint.transform.position;
@@ -120,7 +254,7 @@ public class Edge
         // Debug.Log("Direction of the Road Edge: " + direction);
 
         // Make the arrows shorter by 20%
-        float shortenedMagnitude = direction.magnitude * 0.7f;
+        float shortenedMagnitude = direction.magnitude * 0.8f;
         Vector3 shortenedDirection = direction.normalized * shortenedMagnitude;
 
         // Calculate the middle position
@@ -130,7 +264,7 @@ public class Edge
         Vector3 shiftedMiddlePosition = middlePosition + Vector3.Cross(direction, Vector3.up).normalized * 0.6f;
 
         // Draw the arrow with the shifted middle position and shortened direction
-        DrawArrow.ForGizmo(shiftedMiddlePosition, shortenedDirection, Color.green, 1f, 30f);
+        DrawArrow.ForGizmo(shiftedMiddlePosition, shortenedDirection, edgeColor, 1f, 30f);
     }
 
     public bool isPointOnEdge(Vector3 point)
@@ -481,5 +615,10 @@ public class Edge
 
         // If no barriers are blocking the path, return false
         return false;
+    }
+
+    public ReducedEdge Reduce()
+    {
+        return new ReducedEdge(this.startWaypoint, this.endWaypoint);
     }
 }
