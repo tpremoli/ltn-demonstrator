@@ -88,7 +88,18 @@ public class TravellerManager : MonoBehaviour
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.transform);
         Building originBuilding = Graph.Instance.buildings[journey.origin];
         Building destinationBuilding = Graph.Instance.buildings[journey.destination];
-        newTravellerObj.GetComponent<WaypointMover>().Setup(originBuilding, destinationBuilding, ModeOfTransport.Car, journey);
+        ModeOfTransport mode;
+        if (originBuilding.closestPedestrianEdge == null)
+        {
+            // we don't have a pedestrian edge, so we can't be a pedestrian (for now)
+            mode = (ModeOfTransport)Random.Range(1, 2);
+        }
+        else
+        {
+            mode = (ModeOfTransport)Random.Range(0, 2);
+        }
+
+        newTravellerObj.GetComponent<WaypointMover>().Setup(originBuilding, destinationBuilding, mode, journey);
     }
 
     public void SpawnRandomTraveller() {
