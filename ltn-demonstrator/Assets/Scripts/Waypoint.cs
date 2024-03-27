@@ -11,18 +11,12 @@ public class Waypoint : MonoBehaviour
 
     // New attribute to determine if the waypoint is for pedestrians only
     public bool isPedestrianOnly = false;
-    public bool isSubdivided = false;
-
     private void OnDrawGizmos()
     {
         float waypointSize = this.transform.parent.GetComponent<Graph>().WaypointSize;
         if (this.isPedestrianOnly)
         {
             waypointSize = waypointSize / 2;
-        }
-        else if (this.isSubdivided)
-        {
-            waypointSize = waypointSize / 4;
         }
 
         // Draw the gizmo for this waypoint
@@ -36,13 +30,13 @@ public class Waypoint : MonoBehaviour
             {
                 if (adjacent.isPedestrianOnly)
                 {
-                    Gizmos.color = Color.white;
+                    Gizmos.color = Color.green;
                     Gizmos.DrawLine(transform.position, adjacent.transform.position);
                 }
                 else
                 {
                     // if the adjacent waypoint is selected, draw the line in yellow, and if not, draw it in red
-                    Gizmos.color = Color.red;
+                    Gizmos.color = Color.yellow;
                     Gizmos.DrawLine(transform.position, adjacent.transform.position);
                 }
             }
@@ -55,10 +49,6 @@ public class Waypoint : MonoBehaviour
         if (this.isPedestrianOnly)
         {
             waypointSize = waypointSize / 2;
-        }
-        else if (this.isSubdivided)
-        {
-            waypointSize = waypointSize / 4;
         }
 
 
