@@ -119,11 +119,11 @@ public class Graph : MonoBehaviour
         }
     }
 
-    public Edge getEdge(Waypoint a, Waypoint b)
+    public Edge GetEdge(Waypoint startPoint, Waypoint endPoint)
     {
         foreach (Edge edge in edges)
         {
-            if (edge.StartWaypoint == a && edge.EndWaypoint == b)
+            if (edge.StartWaypoint == startPoint && edge.EndWaypoint == endPoint)
             {
                 return edge;
             }
@@ -173,19 +173,6 @@ public class Graph : MonoBehaviour
         }
 
         return closestEdge;
-    }
-
-    public Edge GetEdge(Waypoint startPoint, Waypoint endPoint)
-    {
-        foreach (Edge edge in edges)
-        {
-            if (edge.StartWaypoint == startPoint && edge.EndWaypoint == endPoint)
-            {
-                return edge;
-            }
-        }
-
-        return null;
     }
 
     public Building pickRandomBuilding() {

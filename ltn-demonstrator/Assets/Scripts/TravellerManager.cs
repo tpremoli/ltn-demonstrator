@@ -47,7 +47,7 @@ public class TravellerManager : MonoBehaviour
 
         
         // saving and loading from json
-        string filePath = "ltn-demonstator/Saves/eventlist.json";
+        string filePath = "Saves/eventlist.json";
         if (File.Exists(filePath))
         {
             eventManager.LoadEventListFromJson(filePath);

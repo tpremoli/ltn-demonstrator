@@ -15,7 +15,7 @@ remain the same.
 public class UniqueID : MonoBehaviour
 {
     static Dictionary<string, UniqueID> allGUIDs = new Dictionary<string, UniqueID>();
-    public string uniqueID;
+    [SerializeField] public string uniqueID;
 
     void Update()
     {
@@ -35,8 +35,8 @@ public class UniqueID : MonoBehaviour
         
         if (uniqueID == "" || anotherComponentAlreadyHasGUID) {
             uniqueID = Guid.NewGuid().ToString();
-  //          EditorUtility.SetDirty(this);
-  //          EditorSceneManager.MarkSceneDirty(gameObject.scene);
+            //EditorUtility.SetDirty(this);
+            //EditorSceneManager.MarkSceneDirty(gameObject.scene);
         }
 
         if (!allGUIDs.ContainsKey(uniqueID)) {
