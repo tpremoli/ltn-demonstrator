@@ -4596,6 +4596,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1678775926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &128833591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 128833593}
+  - component: {fileID: 128833592}
+  m_Layer: 0
+  m_Name: SensorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &128833592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128833591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e560e9c8fddfb4b32817feb1ac850923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensorPrefab: {fileID: 100000, guid: f796062cb1be74bfcb5011dcd7470357, type: 3}
+  allSensors: []
+  loadSensorsFromSave: 1
+  edge:
+    position: {x: 0, y: 0, z: 0}
+    direction: {x: 0, y: 0, z: 0}
+    startWaypoint: {fileID: 0}
+    endWaypoint: {fileID: 0}
+    length: 0
+    TravellersOnEdge: []
+    isBarricated: 0
+    barriersOnEdge: []
+    isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
+--- !u!4 &128833593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128833591}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 319.58334, y: 218.76363, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &128976111
 GameObject:
   m_ObjectHideFlags: 0
@@ -45894,6 +45953,8 @@ MonoBehaviour:
     vehicleType: 3
   - vehiclePrefab: {fileID: 100000, guid: 36f453c34cda9cb458647901440ff410, type: 3}
     vehicleType: 4
+  - vehiclePrefab: {fileID: 100000, guid: 36f453c34cda9cb458647901440ff410, type: 3}
+    vehicleType: 5
 --- !u!4 &1412720822
 Transform:
   m_ObjectHideFlags: 0
@@ -56291,9 +56352,10 @@ MonoBehaviour:
     length: 34.578743
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 5688593}
@@ -56301,9 +56363,10 @@ MonoBehaviour:
     length: 39.660164
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 5688593}
@@ -56311,9 +56374,10 @@ MonoBehaviour:
     length: 5.481173
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 5688593}
@@ -56321,9 +56385,10 @@ MonoBehaviour:
     length: 4.942559
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
@@ -56331,9 +56396,10 @@ MonoBehaviour:
     length: 46.2
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
@@ -56341,9 +56407,10 @@ MonoBehaviour:
     length: 25.612495
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
@@ -56351,9 +56418,10 @@ MonoBehaviour:
     length: 30.100662
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 64477428}
@@ -56361,9 +56429,10 @@ MonoBehaviour:
     length: 40.30012
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
@@ -56371,9 +56440,10 @@ MonoBehaviour:
     length: 42.10296
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
@@ -56381,9 +56451,10 @@ MonoBehaviour:
     length: 39.761806
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
@@ -56391,9 +56462,10 @@ MonoBehaviour:
     length: 5.523691
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 78900478}
@@ -56401,9 +56473,10 @@ MonoBehaviour:
     length: 4.9703236
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 95928381}
@@ -56411,9 +56484,10 @@ MonoBehaviour:
     length: 48.408367
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 95928381}
@@ -56421,9 +56495,10 @@ MonoBehaviour:
     length: 5.1528525
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 105288849}
@@ -56431,9 +56506,10 @@ MonoBehaviour:
     length: 35.388737
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 105288849}
@@ -56441,9 +56517,10 @@ MonoBehaviour:
     length: 5.1528506
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
@@ -56451,9 +56528,10 @@ MonoBehaviour:
     length: 20.15644
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
@@ -56461,9 +56539,10 @@ MonoBehaviour:
     length: 39.758965
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
@@ -56471,9 +56550,10 @@ MonoBehaviour:
     length: 4.9253654
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 111726482}
@@ -56481,9 +56561,10 @@ MonoBehaviour:
     length: 4.942266
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 119660090}
@@ -56491,9 +56572,10 @@ MonoBehaviour:
     length: 25.103188
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 119660090}
@@ -56501,9 +56583,10 @@ MonoBehaviour:
     length: 37.110916
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 119660090}
@@ -56511,9 +56594,10 @@ MonoBehaviour:
     length: 44.51359
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
@@ -56521,9 +56605,10 @@ MonoBehaviour:
     length: 37.788227
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
@@ -56531,9 +56616,10 @@ MonoBehaviour:
     length: 56.577126
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
@@ -56541,9 +56627,10 @@ MonoBehaviour:
     length: 5.5318127
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 156480190}
@@ -56551,9 +56638,10 @@ MonoBehaviour:
     length: 5.4640484
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
@@ -56561,9 +56649,10 @@ MonoBehaviour:
     length: 29.029257
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
@@ -56571,9 +56660,10 @@ MonoBehaviour:
     length: 32.40765
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
@@ -56581,9 +56671,10 @@ MonoBehaviour:
     length: 4.983664
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 177077789}
@@ -56591,9 +56682,10 @@ MonoBehaviour:
     length: 5.4888444
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
@@ -56601,9 +56693,10 @@ MonoBehaviour:
     length: 47.191
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
@@ -56611,9 +56704,10 @@ MonoBehaviour:
     length: 41.194878
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
@@ -56621,9 +56715,10 @@ MonoBehaviour:
     length: 4.9727006
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 206155780}
@@ -56631,9 +56726,10 @@ MonoBehaviour:
     length: 4.9717655
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
@@ -56641,9 +56737,10 @@ MonoBehaviour:
     length: 29.10235
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
@@ -56651,9 +56748,10 @@ MonoBehaviour:
     length: 37.788227
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
@@ -56661,9 +56759,10 @@ MonoBehaviour:
     length: 4.946517
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 242191366}
@@ -56671,9 +56770,10 @@ MonoBehaviour:
     length: 4.978569
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
@@ -56681,9 +56781,10 @@ MonoBehaviour:
     length: 20.157982
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
@@ -56691,9 +56792,10 @@ MonoBehaviour:
     length: 42.067104
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
@@ -56701,9 +56803,10 @@ MonoBehaviour:
     length: 4.9462733
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 245217071}
@@ -56711,9 +56814,10 @@ MonoBehaviour:
     length: 5.530843
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 290847012}
@@ -56721,9 +56825,10 @@ MonoBehaviour:
     length: 31.482168
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 290847012}
@@ -56731,9 +56836,10 @@ MonoBehaviour:
     length: 5.1528573
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
@@ -56741,9 +56847,10 @@ MonoBehaviour:
     length: 32.40765
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
@@ -56751,9 +56858,10 @@ MonoBehaviour:
     length: 48.408367
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
@@ -56761,9 +56869,10 @@ MonoBehaviour:
     length: 5.5442905
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 295954365}
@@ -56771,9 +56880,10 @@ MonoBehaviour:
     length: 4.9188232
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 303305277}
@@ -56781,9 +56891,10 @@ MonoBehaviour:
     length: 29.12173
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 303305277}
@@ -56791,9 +56902,10 @@ MonoBehaviour:
     length: 5.15285
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 332563259}
@@ -56801,9 +56913,10 @@ MonoBehaviour:
     length: 16.37988
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 332563259}
@@ -56811,9 +56924,10 @@ MonoBehaviour:
     length: 5.1528516
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 340646349}
@@ -56821,9 +56935,10 @@ MonoBehaviour:
     length: 30.030329
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 365317387}
@@ -56831,9 +56946,10 @@ MonoBehaviour:
     length: 42.60575
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 365317387}
@@ -56841,9 +56957,10 @@ MonoBehaviour:
     length: 46.2
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
@@ -56851,9 +56968,10 @@ MonoBehaviour:
     length: 48.828377
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
@@ -56861,9 +56979,10 @@ MonoBehaviour:
     length: 48.624054
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
@@ -56871,9 +56990,10 @@ MonoBehaviour:
     length: 4.966165
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 378921275}
@@ -56881,9 +57001,10 @@ MonoBehaviour:
     length: 5.5057397
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 439925891}
@@ -56891,9 +57012,10 @@ MonoBehaviour:
     length: 44.32539
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 439925891}
@@ -56901,9 +57023,10 @@ MonoBehaviour:
     length: 37.30482
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 439925891}
@@ -56911,9 +57034,10 @@ MonoBehaviour:
     length: 49.329296
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
@@ -56921,9 +57045,10 @@ MonoBehaviour:
     length: 20.644459
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
@@ -56931,9 +57056,10 @@ MonoBehaviour:
     length: 34.899918
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
@@ -56941,9 +57067,10 @@ MonoBehaviour:
     length: 4.945698
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 464982270}
@@ -56951,9 +57078,10 @@ MonoBehaviour:
     length: 4.9253654
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 501149561}
@@ -56961,9 +57089,10 @@ MonoBehaviour:
     length: 17.304619
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
@@ -56971,9 +57100,10 @@ MonoBehaviour:
     length: 54.230583
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
@@ -56981,9 +57111,10 @@ MonoBehaviour:
     length: 24.835478
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
@@ -56991,9 +57122,10 @@ MonoBehaviour:
     length: 5.5318127
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 541101200}
@@ -57001,9 +57133,10 @@ MonoBehaviour:
     length: 4.964884
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 547087813}
@@ -57011,9 +57144,10 @@ MonoBehaviour:
     length: 34.899918
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 547087813}
@@ -57021,9 +57155,10 @@ MonoBehaviour:
     length: 19.922989
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 547087813}
@@ -57031,9 +57166,10 @@ MonoBehaviour:
     length: 6.9803343
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 557419713}
@@ -57041,9 +57177,10 @@ MonoBehaviour:
     length: 42.17839
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 557419713}
@@ -57051,9 +57188,10 @@ MonoBehaviour:
     length: 5.15285
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
@@ -57061,9 +57199,10 @@ MonoBehaviour:
     length: 39.34798
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
@@ -57071,9 +57210,10 @@ MonoBehaviour:
     length: 48.2652
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
@@ -57081,9 +57221,10 @@ MonoBehaviour:
     length: 5.475798
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 569206410}
@@ -57091,9 +57232,10 @@ MonoBehaviour:
     length: 4.9188232
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
@@ -57101,9 +57243,10 @@ MonoBehaviour:
     length: 41.805393
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
@@ -57111,9 +57254,10 @@ MonoBehaviour:
     length: 39.761806
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
@@ -57121,9 +57265,10 @@ MonoBehaviour:
     length: 4.919336
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 582245136}
@@ -57131,9 +57276,10 @@ MonoBehaviour:
     length: 4.9183903
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
@@ -57141,9 +57287,10 @@ MonoBehaviour:
     length: 16.37988
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
@@ -57151,9 +57298,10 @@ MonoBehaviour:
     length: 42.165424
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
@@ -57161,9 +57309,10 @@ MonoBehaviour:
     length: 5.5344186
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 626713118}
@@ -57171,9 +57320,10 @@ MonoBehaviour:
     length: 4.942559
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 668685364}
@@ -57181,9 +57331,10 @@ MonoBehaviour:
     length: 42.30165
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 668685364}
@@ -57191,9 +57342,10 @@ MonoBehaviour:
     length: 5.15285
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
@@ -57201,9 +57353,10 @@ MonoBehaviour:
     length: 44.71353
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
@@ -57211,9 +57364,10 @@ MonoBehaviour:
     length: 44.32539
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
@@ -57221,9 +57375,10 @@ MonoBehaviour:
     length: 48.200413
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 679939647}
@@ -57231,9 +57386,10 @@ MonoBehaviour:
     length: 42.204266
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
@@ -57241,9 +57397,10 @@ MonoBehaviour:
     length: 34.590343
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
@@ -57251,9 +57408,10 @@ MonoBehaviour:
     length: 18.793854
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
@@ -57261,9 +57419,10 @@ MonoBehaviour:
     length: 5.5344186
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 685707326}
@@ -57271,9 +57430,10 @@ MonoBehaviour:
     length: 5.481173
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 692326419}
@@ -57281,9 +57441,10 @@ MonoBehaviour:
     length: 42.300472
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 692326419}
@@ -57291,9 +57452,10 @@ MonoBehaviour:
     length: 51.30624
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 692326419}
@@ -57301,9 +57463,10 @@ MonoBehaviour:
     length: 49.608162
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
@@ -57311,9 +57474,10 @@ MonoBehaviour:
     length: 48.828377
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
@@ -57321,9 +57485,10 @@ MonoBehaviour:
     length: 35.388737
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
@@ -57331,9 +57496,10 @@ MonoBehaviour:
     length: 5.511246
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 732809768}
@@ -57341,9 +57507,10 @@ MonoBehaviour:
     length: 5.5094376
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
@@ -57351,9 +57518,10 @@ MonoBehaviour:
     length: 39.774227
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
@@ -57361,9 +57529,10 @@ MonoBehaviour:
     length: 51.079376
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
@@ -57371,9 +57540,10 @@ MonoBehaviour:
     length: 5.5057397
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 748827876}
@@ -57381,9 +57551,10 @@ MonoBehaviour:
     length: 5.5101533
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 750075704}
@@ -57391,9 +57562,10 @@ MonoBehaviour:
     length: 29.10235
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 750075704}
@@ -57401,9 +57573,10 @@ MonoBehaviour:
     length: 5.15285
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 872469780}
@@ -57411,9 +57584,10 @@ MonoBehaviour:
     length: 43.75356
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 872469780}
@@ -57421,9 +57595,10 @@ MonoBehaviour:
     length: 40.156258
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 872469780}
@@ -57431,9 +57606,10 @@ MonoBehaviour:
     length: 4.900003
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 883918156}
@@ -57441,9 +57617,10 @@ MonoBehaviour:
     length: 29.029257
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 883918156}
@@ -57451,9 +57628,10 @@ MonoBehaviour:
     length: 5.1528573
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 902534252}
@@ -57461,9 +57639,10 @@ MonoBehaviour:
     length: 47.262287
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 902534252}
@@ -57471,9 +57650,10 @@ MonoBehaviour:
     length: 5.1528506
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
@@ -57481,9 +57661,10 @@ MonoBehaviour:
     length: 39.779255
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
@@ -57491,9 +57672,10 @@ MonoBehaviour:
     length: 39.774227
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
@@ -57501,9 +57683,10 @@ MonoBehaviour:
     length: 5.4828005
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 938341096}
@@ -57511,9 +57694,10 @@ MonoBehaviour:
     length: 4.9703236
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 966921723}
@@ -57521,9 +57705,10 @@ MonoBehaviour:
     length: 55.11534
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1002765805}
@@ -57531,9 +57716,10 @@ MonoBehaviour:
     length: 56.577126
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1002765805}
@@ -57541,9 +57727,10 @@ MonoBehaviour:
     length: 5.15285
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
@@ -57551,9 +57738,10 @@ MonoBehaviour:
     length: 40.111797
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
@@ -57561,9 +57749,10 @@ MonoBehaviour:
     length: 46.371155
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
@@ -57571,9 +57760,10 @@ MonoBehaviour:
     length: 4.955971
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1016711020}
@@ -57581,9 +57771,10 @@ MonoBehaviour:
     length: 5.5094376
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1096723634}
@@ -57591,9 +57782,10 @@ MonoBehaviour:
     length: 18.793854
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1096723634}
@@ -57601,9 +57793,10 @@ MonoBehaviour:
     length: 5.1528516
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
@@ -57611,9 +57804,10 @@ MonoBehaviour:
     length: 31.482168
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
@@ -57621,9 +57815,10 @@ MonoBehaviour:
     length: 42.165424
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
@@ -57631,9 +57826,10 @@ MonoBehaviour:
     length: 5.515249
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1104895437}
@@ -57641,9 +57837,10 @@ MonoBehaviour:
     length: 5.4888444
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
@@ -57651,9 +57848,10 @@ MonoBehaviour:
     length: 39.34798
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
@@ -57661,9 +57859,10 @@ MonoBehaviour:
     length: 47.262287
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
@@ -57671,9 +57870,10 @@ MonoBehaviour:
     length: 4.9183903
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1148522935}
@@ -57681,9 +57881,10 @@ MonoBehaviour:
     length: 4.9717655
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
@@ -57691,9 +57892,10 @@ MonoBehaviour:
     length: 34.904716
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
@@ -57701,9 +57903,10 @@ MonoBehaviour:
     length: 39.660164
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
@@ -57711,9 +57914,10 @@ MonoBehaviour:
     length: 5.515249
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1175969183}
@@ -57721,9 +57925,10 @@ MonoBehaviour:
     length: 4.983664
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
@@ -57731,9 +57936,10 @@ MonoBehaviour:
     length: 43.75356
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
@@ -57741,9 +57947,10 @@ MonoBehaviour:
     length: 29.12173
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
@@ -57751,9 +57958,10 @@ MonoBehaviour:
     length: 4.946517
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1188097640}
@@ -57761,9 +57969,10 @@ MonoBehaviour:
     length: 4.917961
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1218208234}
@@ -57771,9 +57980,10 @@ MonoBehaviour:
     length: 32.925243
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1218208234}
@@ -57781,9 +57991,10 @@ MonoBehaviour:
     length: 5.1528506
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1222596885}
@@ -57791,9 +58002,10 @@ MonoBehaviour:
     length: 43.214
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
@@ -57801,9 +58013,10 @@ MonoBehaviour:
     length: 41.805393
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
@@ -57811,9 +58024,10 @@ MonoBehaviour:
     length: 34.904716
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
@@ -57821,9 +58035,10 @@ MonoBehaviour:
     length: 5.5442905
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1248166020}
@@ -57831,9 +58046,10 @@ MonoBehaviour:
     length: 5.475798
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1277130997}
@@ -57841,9 +58057,10 @@ MonoBehaviour:
     length: 49.608162
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1279267445}
@@ -57851,9 +58068,10 @@ MonoBehaviour:
     length: 48.200413
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1287622241}
@@ -57861,9 +58079,10 @@ MonoBehaviour:
     length: 41.194878
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1287622241}
@@ -57871,9 +58090,10 @@ MonoBehaviour:
     length: 5.152851
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1312245970}
@@ -57881,9 +58101,10 @@ MonoBehaviour:
     length: 48.624054
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1312245970}
@@ -57891,9 +58112,10 @@ MonoBehaviour:
     length: 5.152851
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1328479508}
@@ -57901,9 +58123,10 @@ MonoBehaviour:
     length: 44.71353
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1328479508}
@@ -57911,9 +58134,10 @@ MonoBehaviour:
     length: 42.300472
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1328479508}
@@ -57921,9 +58145,10 @@ MonoBehaviour:
     length: 44.51359
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1387554582}
@@ -57931,9 +58156,10 @@ MonoBehaviour:
     length: 49.329296
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
@@ -57941,9 +58167,10 @@ MonoBehaviour:
     length: 43.667873
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
@@ -57951,9 +58178,10 @@ MonoBehaviour:
     length: 20.700895
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
@@ -57961,9 +58189,10 @@ MonoBehaviour:
     length: 4.917961
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1388386941}
@@ -57971,9 +58200,10 @@ MonoBehaviour:
     length: 4.9502
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
@@ -57981,9 +58211,10 @@ MonoBehaviour:
     length: 20.157982
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
@@ -57991,9 +58222,10 @@ MonoBehaviour:
     length: 42.17839
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
@@ -58001,9 +58233,10 @@ MonoBehaviour:
     length: 4.962533
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1414880892}
@@ -58011,9 +58244,10 @@ MonoBehaviour:
     length: 4.942266
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
@@ -58021,9 +58255,10 @@ MonoBehaviour:
     length: 25.612495
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
@@ -58031,9 +58266,10 @@ MonoBehaviour:
     length: 25.103188
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
@@ -58041,9 +58277,10 @@ MonoBehaviour:
     length: 43.214
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1450750186}
@@ -58051,9 +58288,10 @@ MonoBehaviour:
     length: 39.810177
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1549056168}
@@ -58061,9 +58299,10 @@ MonoBehaviour:
     length: 51.30624
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1549056168}
@@ -58071,9 +58310,10 @@ MonoBehaviour:
     length: 42.60575
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1549056168}
@@ -58081,9 +58321,10 @@ MonoBehaviour:
     length: 33.907227
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1602942848}
@@ -58091,9 +58332,10 @@ MonoBehaviour:
     length: 54.230583
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1602942848}
@@ -58101,9 +58343,10 @@ MonoBehaviour:
     length: 5.15285
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
@@ -58111,9 +58354,10 @@ MonoBehaviour:
     length: 20.644459
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
@@ -58121,9 +58365,10 @@ MonoBehaviour:
     length: 35.330894
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
@@ -58131,9 +58376,10 @@ MonoBehaviour:
     length: 4.978569
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1611620866}
@@ -58141,9 +58387,10 @@ MonoBehaviour:
     length: 4.9502
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
@@ -58151,9 +58398,10 @@ MonoBehaviour:
     length: 20.700895
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
@@ -58161,9 +58409,10 @@ MonoBehaviour:
     length: 42.30165
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
@@ -58171,9 +58420,10 @@ MonoBehaviour:
     length: 4.945698
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1616635259}
@@ -58181,9 +58431,10 @@ MonoBehaviour:
     length: 4.962533
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
@@ -58191,9 +58442,10 @@ MonoBehaviour:
     length: 42.067104
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
@@ -58201,9 +58453,10 @@ MonoBehaviour:
     length: 39.814766
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
@@ -58211,9 +58464,10 @@ MonoBehaviour:
     length: 5.523691
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1647580529}
@@ -58221,9 +58475,10 @@ MonoBehaviour:
     length: 5.4828005
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
@@ -58231,9 +58486,10 @@ MonoBehaviour:
     length: 39.779255
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
@@ -58241,9 +58497,10 @@ MonoBehaviour:
     length: 41.26726
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
@@ -58251,9 +58508,10 @@ MonoBehaviour:
     length: 4.919336
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1658340891}
@@ -58261,9 +58519,10 @@ MonoBehaviour:
     length: 4.9727006
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1692226764}
@@ -58271,9 +58530,10 @@ MonoBehaviour:
     length: 39.810177
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1692226764}
@@ -58281,9 +58541,10 @@ MonoBehaviour:
     length: 24.834047
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1701784750}
@@ -58291,9 +58552,10 @@ MonoBehaviour:
     length: 39.758965
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1701784750}
@@ -58301,9 +58563,10 @@ MonoBehaviour:
     length: 24.835478
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1701784750}
@@ -58311,9 +58574,10 @@ MonoBehaviour:
     length: 6.9803343
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1708879216}
@@ -58321,9 +58585,10 @@ MonoBehaviour:
     length: 33.907227
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
@@ -58331,9 +58596,10 @@ MonoBehaviour:
     length: 34.578743
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
@@ -58341,9 +58607,10 @@ MonoBehaviour:
     length: 42.10296
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
@@ -58351,9 +58618,10 @@ MonoBehaviour:
     length: 5.530843
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1755818239}
@@ -58361,9 +58629,10 @@ MonoBehaviour:
     length: 5.486436
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1763713852}
@@ -58371,9 +58640,10 @@ MonoBehaviour:
     length: 48.2652
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1763713852}
@@ -58381,9 +58651,10 @@ MonoBehaviour:
     length: 5.1528525
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
@@ -58391,9 +58662,10 @@ MonoBehaviour:
     length: 20.15644
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
@@ -58401,9 +58673,10 @@ MonoBehaviour:
     length: 34.590343
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
@@ -58411,9 +58684,10 @@ MonoBehaviour:
     length: 4.9462733
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1796866495}
@@ -58421,9 +58695,10 @@ MonoBehaviour:
     length: 5.486436
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1835555966}
@@ -58431,9 +58706,10 @@ MonoBehaviour:
     length: 43.667873
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1835555966}
@@ -58441,9 +58717,10 @@ MonoBehaviour:
     length: 40.111797
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1835555966}
@@ -58451,9 +58728,10 @@ MonoBehaviour:
     length: 4.900003
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
@@ -58461,9 +58739,10 @@ MonoBehaviour:
     length: 39.814766
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
@@ -58471,9 +58750,10 @@ MonoBehaviour:
     length: 46.371155
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
@@ -58481,9 +58761,10 @@ MonoBehaviour:
     length: 4.966165
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1853832083}
@@ -58491,9 +58772,10 @@ MonoBehaviour:
     length: 5.5101533
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1886856595}
@@ -58501,9 +58783,10 @@ MonoBehaviour:
     length: 37.110916
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1886856595}
@@ -58511,9 +58794,10 @@ MonoBehaviour:
     length: 44.61356
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1886856595}
@@ -58521,9 +58805,10 @@ MonoBehaviour:
     length: 17.304619
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
@@ -58531,9 +58816,10 @@ MonoBehaviour:
     length: 40.156258
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
@@ -58541,9 +58827,10 @@ MonoBehaviour:
     length: 32.925243
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
@@ -58551,9 +58838,10 @@ MonoBehaviour:
     length: 4.955971
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1908004338}
@@ -58561,9 +58849,10 @@ MonoBehaviour:
     length: 5.511246
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1960957215}
@@ -58571,9 +58860,10 @@ MonoBehaviour:
     length: 42.204266
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1985082742}
@@ -58581,9 +58871,10 @@ MonoBehaviour:
     length: 30.100662
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2041507252}
@@ -58591,9 +58882,10 @@ MonoBehaviour:
     length: 44.61356
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2041507252}
@@ -58601,9 +58893,10 @@ MonoBehaviour:
     length: 37.30482
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2041507252}
@@ -58611,9 +58904,10 @@ MonoBehaviour:
     length: 30.030329
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2076254888}
@@ -58621,9 +58915,10 @@ MonoBehaviour:
     length: 51.079376
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2076254888}
@@ -58631,9 +58926,10 @@ MonoBehaviour:
     length: 5.152851
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
@@ -58641,9 +58937,10 @@ MonoBehaviour:
     length: 35.330894
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
@@ -58651,9 +58948,10 @@ MonoBehaviour:
     length: 19.922989
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
@@ -58661,9 +58959,10 @@ MonoBehaviour:
     length: 5.4640484
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2090414314}
@@ -58671,9 +58970,10 @@ MonoBehaviour:
     length: 4.964884
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2114516592}
@@ -58681,9 +58981,10 @@ MonoBehaviour:
     length: 41.26726
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2114516592}
@@ -58691,9 +58992,10 @@ MonoBehaviour:
     length: 5.152851
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2121232756}
@@ -58701,9 +59003,10 @@ MonoBehaviour:
     length: 47.191
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2121232756}
@@ -58711,9 +59014,10 @@ MonoBehaviour:
     length: 5.1528506
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 1
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2132590382}
@@ -58721,9 +59025,10 @@ MonoBehaviour:
     length: 40.30012
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2132590382}
@@ -58731,9 +59036,10 @@ MonoBehaviour:
     length: 55.11534
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   - position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2132590382}
@@ -58741,9 +59047,10 @@ MonoBehaviour:
     length: 24.834047
     TravellersOnEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   allBuildings: []
   waypoints: []
   drawEdgeGizmos: 1
@@ -67456,20 +67763,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220e160f229bb44cd943623072fc6bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closestRoadEdge:
-    position: {x: 0, y: 0, z: 0}
-    direction: {x: 0, y: 0, z: 0}
-    startWaypoint: {fileID: 0}
-    endWaypoint: {fileID: 0}
-    length: 0
-    TravellersOnEdge: []
-    isBarricated: 0
-    barrierLocation: 0
-    barrier: {fileID: 0}
-    isPedestrianOnly: 0
-  closestPointOnRoadEdge: {x: 0, y: 0, z: 0}
-  endWaypoint: {fileID: 0}
   barrierPrefab: {fileID: 211012215410212970, guid: f54257dada8e8384bb22fbba8da0de6d, type: 3}
+  blockAllPrefab: {fileID: 0}
+  blockAllMotorVehiclesPrefab: {fileID: 0}
+  blockHeavyTrafficPrefab: {fileID: 0}
+  busOnlyPrefab: {fileID: 0}
+  busAndTaxiOnlyPrefab: {fileID: 0}
   allBarriers: []
   loadBarriersFromSave: 1
 --- !u!4 &1917454545
@@ -75321,3 +75620,4 @@ SceneRoots:
   - {fileID: 1988019264}
   - {fileID: 448208387}
   - {fileID: 607104271}
+  - {fileID: 128833593}

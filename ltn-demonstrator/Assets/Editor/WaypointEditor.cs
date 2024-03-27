@@ -26,7 +26,7 @@ public class WaypointEditor : Editor
     {
         // as we've changed the waypoints, we need to reload the edges
         PruneDeletedWaypoints();
-        EdgeLoader.LoadEdges();
+        // EdgeLoader.LoadEdges();
     }
 
     public override void OnInspectorGUI()
