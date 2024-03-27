@@ -901,8 +901,15 @@ public class WaypointMover : MonoBehaviour
             MeshRenderer thisMeshRenderer = GetComponent<MeshRenderer>();
             MeshFilter thisMeshFilter = GetComponent<MeshFilter>();
 
-            thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
-            thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
+            try
+            {
+                thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
+                thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
+            }
+            catch (MissingComponentException e)
+            {
+                Debug.LogWarning("A model is missing a component!" + e.StackTrace);
+            }
 
             // this allows us to ensure that pedestrians are the correct size. Should be done with all vehicles,
             // but we have to setup the prefabs correctly first.

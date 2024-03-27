@@ -16,30 +16,16 @@ public class SensorManager : MonoBehaviour
 
     void Start()
     {
-        if (edge != null)
-        {
-            foreach (GameObject sensorObject in allSensors)
-            {
-                Sensor sensor = sensorObject.GetComponent<Sensor>();
-                if (sensor != null)
-                {
-                    edge.RegisterSensor(sensor);
-                }
-            }
-        }
-        else
-        {
-            Debug.Log("Edge is null.");
-        }
+        allSensors = new List<GameObject>();
     }
 
     void Update()
-    {   
+    {
         // force reload sensors
-        // if (Input.GetKeyDown(KeyCode.U))
-        // {
-        //     RecalcSensorsOnEdges();
-        // }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            RecalcSensorsOnEdges();
+        }
         //Debug.Log("sensorPrefabs ", sensorPrefabs.Count);
     }
 
@@ -107,19 +93,36 @@ public class SensorManager : MonoBehaviour
             // Set the sensor's position to this new position
             newSensor.transform.position = position;
         }
+        else
+        {
+            Debug.Log("Direction from closest point to sensor is zero.");
+        }
+        Edge nearestEdge = graph.getClosetRoadEdge(position);
+        // Register the sensor with the nearest edge
+        // Argument 1: cannot convert from 'UnityEngine.GameObject' to 'Sensor'
 
+        //nearestEdge.RegisterSensor(newSensor);
         // Add the sensor to the list of all sensors
         allSensors.Add(newSensor);
         Debug.Log("Sensor count: " + allSensors.Count.ToString());
         Debug.Log("All sensors: " + string.Join(", ", allSensors.Select(s => s.name)));
-        
-        
+        // log nearest edge
+
     }
 
 
 
-    
+
     public void RecalcSensorsOnEdges()
+    {
+        Graph graph = Graph.Instance;
+
+        Debug.Log("Recalculating sensors on edges");
+
+        /**
+
+        // this is not efficient at all.
+        foreach (Edge edge in graph.edges)
         {
             Graph graph = Graph.Instance;
 
@@ -132,5 +135,12 @@ public class SensorManager : MonoBehaviour
             }
 
         }
+        **/
 
+    }
+    public List<SensorData> GetAllSensorData()
+    {
+        // Implement your logic here to return a list of SensorData objects
+        return new List<SensorData>();
+    }
 }
