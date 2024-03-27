@@ -1,15 +1,13 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using TMPro;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 
-public class EditScreenMenu : MonoBehaviour
+
+public class ButtonClicker : MonoBehaviour
 {
-    
-    public BarrierType selectedBarrierType;
-
-    public TextMeshProUGUI instructionText;
     private bool SpawnBarrier = false;
 
     private bool SpawnSensor = false;
@@ -23,6 +21,118 @@ public class EditScreenMenu : MonoBehaviour
     private Graph graph;
     // Declare the CameraMovement variable
     public CameraMovement cameraMovement;
+    [SerializeField] private UIDocument mainUIDocument;
+    [SerializeField] private UIDocument addBarrierUIDocument;
+    private VisualElement rootVisualElement;
+    private Label instructionLabel;
+
+    public BarrierType selectedBarrierType;
+    private VisualElement addBarrierRoot;
+
+    public CanvasRenderer uiElementRenderer;
+
+public void HideUIElement()
+{
+    // This will hide the UI element without disabling the GameObject
+    uiElementRenderer.SetAlpha(0);
+}
+
+public void ShowUIElement()
+{
+    // This will show the UI element
+    uiElementRenderer.SetAlpha(1);
+}
+
+    private void OnEnable()
+    {
+        if (!mainUIDocument)
+        {
+            Debug.LogError("Main UIDocument is not assigned in the inspector.");
+            return;
+        }
+        if (!addBarrierUIDocument)
+        {
+            Debug.LogError("Add Barrier UIDocument is not assigned in the inspector.");
+            return;
+        }
+
+        mainUIDocument.gameObject.SetActive(true);
+        addBarrierUIDocument.gameObject.SetActive(false);
+
+        rootVisualElement = mainUIDocument.rootVisualElement;
+        addBarrierRoot = addBarrierUIDocument.rootVisualElement;
+        instructionLabel = rootVisualElement.Q<Label>("InstructionLabel");
+        if (instructionLabel == null)
+        {
+            Debug.LogError("Instruction Label is not found in the Main UIDocument.");
+            return;
+        }
+
+        SetupMainButtons();
+    }
+
+
+    private void SetupMainButtons()
+    {
+        // Set up the buttons for the main UI
+        rootVisualElement.Q<Button>("PlayButton").clicked += OnPlayButtonPressed;
+        rootVisualElement.Q<Button>("AddBarriersButton").clicked += OnAddBarrierMenuPressed;
+        rootVisualElement.Q<Button>("DeleteBarrierButton").clicked += OnDeleteBarrierPressed;
+        rootVisualElement.Q<Button>("DeleteSaveButton").clicked += OnDeleteSavePressed;
+        rootVisualElement.Q<Button>("AddSensorsButton").clicked += OnAddSensorPressed;
+    }
+
+    private void SetupAddBarrierButtons()
+    {
+        addBarrierRoot = addBarrierUIDocument.rootVisualElement;
+
+        Debug.Log("Start");
+        Debug.Log(addBarrierRoot);
+        // Set up the buttons for the add barrier UI
+        addBarrierRoot.Q<Button>("BackButton").clicked += () => OnBackButtonPressed();
+        addBarrierRoot.Q<Button>("BlockAllButton").clicked += () => OnAddBlockAllBarrierPressed();
+        addBarrierRoot.Q<Button>("BlockMotorVehiclesButton").clicked += () => OnAddBlockAllMotorVehiclesBarrierPressed();
+        addBarrierRoot.Q<Button>("BlockHeavyButton").clicked += () => OnAddBlockAllMotorVehiclesBarrierPressed();
+        addBarrierRoot.Q<Button>("AllowBusButton").clicked += () => OnAddBusOnlyBarrierPressed();
+        addBarrierRoot.Q<Button>("AllowBusTaxiButton").clicked += () => OnAddBusandTaxiOnlyBarrierPressed();
+    }
+
+
+    private void OnAddBarrierMenuPressed()
+    {
+        // Activate the Add Barrier UI
+        addBarrierUIDocument.gameObject.SetActive(true);
+        mainUIDocument.gameObject.SetActive(false); // Deactivate the main UI
+        SetupAddBarrierButtons();
+    }
+
+    private void OnBackButtonPressed()
+    {
+        // Activate the Main UI
+        //mainUIDocument.gameObject.SetActive(true);
+        //addBarrierUIDocument.gameObject.SetActive(false); // Deactivate the Add Barrier UI
+        //SetupMainButtons();
+        OnEnable();
+    }
+
+    /**
+
+    private void ChangeBarrierType(BarrierType type)
+    {
+        selectedBarrierType = type;
+        UpdateInstructionLabel($"{type} Barrier selected.");
+    }
+    **/
+
+    private void UpdateInstructionLabel(string message)
+    {
+        if (instructionLabel != null)
+        {
+            instructionLabel.text = message;
+        }
+    }
+
+    // Implement the Play, Delete, Save, and Sensor methods similar to the above method templates.
 
     void Start()
     {
@@ -90,13 +200,13 @@ public class EditScreenMenu : MonoBehaviour
 
     public void OnDeleteBarrierPressed()
     {
-        instructionText.text = "Click on desired barrier to delete";
+        UpdateInstructionLabel("Click on desired barrier to delete");
         deleteMode = true;
     }
 
     public void OnDeleteSensorPressed()
     {
-        instructionText.text = "Click on desired sensor to delete";
+        UpdateInstructionLabel("Click on desired sensor to delete");
         deleteMode = true;
     }
 
@@ -115,7 +225,7 @@ public class EditScreenMenu : MonoBehaviour
     public void OnAddSensorPressed()
     {
         sensorManager = SensorManager.Instance;
-        instructionText.text = "Click on desired sensor location";
+        UpdateInstructionLabel("Click on desired sensor location");
         SpawnSensor = true;
     }
 
@@ -124,7 +234,7 @@ public class EditScreenMenu : MonoBehaviour
         // Set the selected barrier type
         this.selectedBarrierType = barrierType;
 
-        instructionText.text = "Click on desired barrier location";
+        UpdateInstructionLabel("Click on desired barrier location");
         SpawnBarrier = true;
     }
     public void OnAddBlockAllBarrierPressed()
@@ -134,17 +244,17 @@ public class EditScreenMenu : MonoBehaviour
 
     public void OnAddBlockAllMotorVehiclesBarrierPressed()
     {
-        OnAddBarrierPressed(BarrierType.BlockAllMotorVehicles);
+        OnAddBarrierPressed(BarrierType.BlockAllMotorVehicles); // Corrected from BlockAllMotorVehicles
+    }
+
+    public void OnAddBusandTaxiOnlyBarrierPressed()
+    {
+        OnAddBarrierPressed(BarrierType.BusAndTaxiOnly); // Corrected from BusAndTaxiOnly
     }
 
     public void OnAddBlockHeavyTrafficBarrierPressed()
     {
         OnAddBarrierPressed(BarrierType.BlockHeavyTraffic);
-    }
-
-    public void OnAddBusandTaxiOnlyBarrierPressed()
-    {
-        OnAddBarrierPressed(BarrierType.BusAndTaxiOnly);
     }
 
     public void OnAddBusOnlyBarrierPressed()
@@ -174,7 +284,7 @@ public class EditScreenMenu : MonoBehaviour
                         Debug.Log("Barrier List size: " + barrierManager.allBarriers.Count);
                         barrierManager.AddBarrier(worldPosition, this.selectedBarrierType);
                         SpawnBarrier = false;
-                        instructionText.text = "To add a barrier, click on the button again. To delete a barrier, click on the delete button.";
+                        UpdateInstructionLabel("To add a barrier, click on the button again. To delete a barrier, click on the delete button.");
                     }
                     else
                     {
@@ -223,7 +333,7 @@ public class EditScreenMenu : MonoBehaviour
                     {
                         sensorManager.AddSensor(worldPosition);
                         SpawnSensor = false;
-                        instructionText.text = "To add a sensor, click on the button again. To delete a sensor, click on the delete button.";
+                        UpdateInstructionLabel("To add a sensor, click on the button again. To delete a sensor, click on the delete button.");
                     }
                     else
                     {

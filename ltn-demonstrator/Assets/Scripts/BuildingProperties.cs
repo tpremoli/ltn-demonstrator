@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public static class BuildingProperties
 {
     public static Dictionary<BuildingType, float> destinationWeights = new Dictionary<BuildingType, float>(){
-            {BuildingType.Generic, 0.1f},
+            {BuildingType.Generic, 1.0f},
             {BuildingType.Residence, 1.0f},
             {BuildingType.Office, 2.0f},
             {BuildingType.Restaurant, 2.5f},

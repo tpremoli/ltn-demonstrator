@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
 
 public class Waypoint : MonoBehaviour
@@ -13,12 +12,18 @@ public class Waypoint : MonoBehaviour
 
     // New attribute to determine if the waypoint is for pedestrians only
     public bool isPedestrianOnly = false;
+    public bool isSubdivided = false;
+
     private void OnDrawGizmos()
     {
         float waypointSize = this.transform.parent.GetComponent<Graph>().WaypointSize;
         if (this.isPedestrianOnly)
         {
             waypointSize = waypointSize / 2;
+        }
+        else if (this.isSubdivided)
+        {
+            waypointSize = waypointSize / 4;
         }
 
         // Draw the gizmo for this waypoint
@@ -32,13 +37,13 @@ public class Waypoint : MonoBehaviour
             {
                 if (adjacent.isPedestrianOnly)
                 {
-                    Gizmos.color = Color.green;
-                    Handles.DrawDottedLine(transform.position, adjacent.transform.position, 5f);
+                    Gizmos.color = Color.white;
+                    Gizmos.DrawLine(transform.position, adjacent.transform.position);
                 }
                 else
                 {
                     // if the adjacent waypoint is selected, draw the line in yellow, and if not, draw it in red
-                    Gizmos.color = Selection.Contains(adjacent.gameObject) ? Color.yellow : Color.red;
+                    Gizmos.color = Color.red;
                     Gizmos.DrawLine(transform.position, adjacent.transform.position);
                 }
             }
@@ -51,6 +56,10 @@ public class Waypoint : MonoBehaviour
         if (this.isPedestrianOnly)
         {
             waypointSize = waypointSize / 2;
+        }
+        else if (this.isSubdivided)
+        {
+            waypointSize = waypointSize / 4;
         }
 
 

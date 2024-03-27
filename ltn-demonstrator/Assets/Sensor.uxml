@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/StyleButton.uss?fileID=7433441132597879392&amp;guid=f21beb806a9f34ea5896a0a450408277&amp;type=3#StyleButton" />
+    <ui:VisualElement style="flex-grow: 1; border-left-color: rgb(9, 8, 8); border-right-color: rgb(9, 8, 8); border-top-color: rgb(9, 8, 8); border-bottom-color: rgb(9, 8, 8); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; background-color: rgba(229, 218, 183, 0.6);">
+        <ui:Label tabindex="-1" text="Sensor Information" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; -unity-font-style: bold;" />
+        <ui:Label tabindex="-1" text="Statistics&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" style="height: 294px;" />
+        <ui:Button text="Camera View" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" style="height: 105px;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -20,7 +20,7 @@ public class SensorManager : MonoBehaviour
     }
 
     void Update()
-    {   
+    {
         // force reload sensors
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -63,7 +63,7 @@ public class SensorManager : MonoBehaviour
 
             // this essentially reloads colliders so we can use them to generate sensors etc.
             // this is not efficient at all. HOWEVER, it is only called once on load.
-            Physics.SyncTransforms();
+            // Physics.SyncTransforms();
         }
     }
 
@@ -100,32 +100,47 @@ public class SensorManager : MonoBehaviour
         Edge nearestEdge = graph.getClosetRoadEdge(position);
         // Register the sensor with the nearest edge
         // Argument 1: cannot convert from 'UnityEngine.GameObject' to 'Sensor'
-        
-        //UNCOMMENT ------------------------------------------------------------------------------------------------------------------------------------------
+
         //nearestEdge.RegisterSensor(newSensor);
         // Add the sensor to the list of all sensors
         allSensors.Add(newSensor);
         Debug.Log("Sensor count: " + allSensors.Count.ToString());
         Debug.Log("All sensors: " + string.Join(", ", allSensors.Select(s => s.name)));
         // log nearest edge
-    
+
     }
 
 
 
-    
+
     public void RecalcSensorsOnEdges()
+    {
+        Graph graph = Graph.Instance;
+
+        Debug.Log("Recalculating sensors on edges");
+
+        /**
+
+        // this is not efficient at all.
+        foreach (Edge edge in graph.edges)
         {
             Graph graph = Graph.Instance;
 
             Debug.Log("Recalculating sensors on edges");
 
             // this is not efficient at all.
-            foreach (Edge edge in graph.edges)
+            foreach (Edge edge in graph.GetAllEdges())
             {
                 edge.RecheckSensors();
             }
 
         }
+        **/
 
+    }
+    public List<SensorData> GetAllSensorData()
+    {
+        // Implement your logic here to return a list of SensorData objects
+        return new List<SensorData>();
+    }
 }

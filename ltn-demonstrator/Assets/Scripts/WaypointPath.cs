@@ -98,7 +98,7 @@ public class WaypointPath
         // Check if start and end are on the same edge to handle this special case
         if (startEdge.isSameEdge(endEdge))
         {
-            if (startEdge.isBarricated && !startEdge.isBarrierBetween(beginningPos, destinationPos))
+            if (startEdge.isBarricated && !startEdge.isBarrierBlocking(beginningPos, destinationPos, mode))
             {
                 // Barrier, but the destination is before the barrier, return a direct path
                 return new List<Waypoint>();
@@ -130,7 +130,12 @@ public class WaypointPath
         if (startEdge.isBarricated)
         {
             // Only set distance for the waypoint on the same side of the barrier as beginningPos
-            Waypoint accessibleWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos);
+            Waypoint accessibleWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos, mode);
+
+            if (accessibleWaypoint == null)
+            {
+                return null; // or any other appropriate response
+            }
 
             dist[accessibleWaypoint] = Vector3.Distance(accessibleWaypoint.transform.position, beginningPos);
             queue.Enqueue(accessibleWaypoint, dist[accessibleWaypoint]);
@@ -168,7 +173,7 @@ public class WaypointPath
                 Edge connectingEdge = graph.GetEdge(current, neighbor);
 
                 // Calculate the alternative distance to this neighbor
-                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
+                if (connectingEdge.isBarrierBlocking(current.transform.position, neighbor.transform.position, mode))
                 {
                     continue;
                 }
@@ -197,7 +202,7 @@ public class WaypointPath
         List<Waypoint> path = new List<Waypoint>();
 
         // Determine the accessible endpoint that leads most directly to the destination
-        Waypoint closerEndpoint = endEdge.getClosestAccesibleWaypoint(destinationPos);
+        Waypoint closerEndpoint = endEdge.getClosestAccesibleWaypoint(destinationPos, mode);
 
         // Check if a path exists to the closer endpoint
         if (!prev.ContainsKey(closerEndpoint))
@@ -251,6 +256,16 @@ public class WaypointPath
         Waypoint nearestStartWaypoint = startEdge.getClosestAccesibleWaypoint(beginningPos, mode);
         Waypoint nearestEndWaypoint = endEdge.getClosestAccesibleWaypoint(destinationPos, mode);
 
+        if (nearestStartWaypoint == null || nearestEndWaypoint == null)
+        {
+            return false;
+        }
+
+        if (nearestStartWaypoint == null || nearestEndWaypoint == null)
+        {
+            return false;
+        }
+
         // Initialize dictionaries for distances and previous waypoints
         Dictionary<Waypoint, float> dist = new Dictionary<Waypoint, float>();
         Dictionary<Waypoint, Waypoint> prev = new Dictionary<Waypoint, Waypoint>();
@@ -298,7 +313,7 @@ public class WaypointPath
                 }
 
                 // Check if the edge is traversable (i.e., no barrier between the waypoints)
-                if (connectingEdge.isBarrierBetween(current.transform.position, neighbor.transform.position))
+                if (connectingEdge.isBarrierBlocking(current.transform.position, neighbor.transform.position, mode))
                 {
                     continue; // Skip to the next neighbor if there is a barrier
                 }
@@ -417,7 +432,7 @@ public class WaypointPath
         {
             old_wp = wp;
             wp = iter.Current;
-            Edge nextOne = this.graph.getEdge(old_wp, wp);
+            Edge nextOne = this.graph.GetEdge(old_wp, wp);
             Debug.Log("Path from: " + old_wp.name + "  to: " + wp.name + "\nEdge: ");
             if (nextOne == null)
             {
@@ -436,7 +451,7 @@ public class WaypointPath
             if (this.startEdge.EndWaypoint != pathAsWaypoints[0])
             {
                 // If the edge does not end in the correct waypoint, look for counterpart
-                this.startEdge = graph.getEdge(this.startEdge.endWaypoint, this.startEdge.startWaypoint);
+                this.startEdge = graph.GetEdge(this.startEdge.endWaypoint, this.startEdge.startWaypoint);
                 // If counterpart does not exist, terminate
                 if (this.startEdge == null)
                 {
@@ -446,7 +461,7 @@ public class WaypointPath
             if (this.endEdge.StartWaypoint != pathAsWaypoints[pathAsWaypoints.Count - 1])
             {
                 // If the edge does not end in the correct waypoint, look for counterpart
-                this.endEdge = graph.getEdge(this.endEdge.endWaypoint, this.endEdge.startWaypoint);
+                this.endEdge = graph.GetEdge(this.endEdge.endWaypoint, this.endEdge.startWaypoint);
                 // If counterpart does not exist, terminate
                 if (this.endEdge == null)
                 {

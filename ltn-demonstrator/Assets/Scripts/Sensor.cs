@@ -1,12 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System.IO;
 
 public class Sensor : MonoBehaviour
 {
     public int sensor_trav_count = 0;
     public Dictionary<WaypointMover, int> sensor_trav_stats = new Dictionary<WaypointMover, int>();
     private Edge edgeAssigned;
+
+
+    public void OnSensorClicked()
+    {
+        Debug.Log("Sensor clicked.");
+    }
+
+
     public bool isPointInSensor(Vector3 point)
     {
         Collider sensorCollider = GetComponent<Collider>();
@@ -38,9 +48,7 @@ public class Sensor : MonoBehaviour
         return nearestWaypoint;
     }
 
-   
-    
-    
+
 
     // Use this for initialization
     void Start()
@@ -68,13 +76,12 @@ public class Sensor : MonoBehaviour
         {
             Debug.Log("No edges found or edge waypoints are null.");
         }
-    
     }
 
     public Edge FindNearestEdge()
     {
         Graph graph = Graph.Instance;
-        if (graph == null || graph.edges == null)
+        if (graph == null || graph.GetAllEdges() == null)
         {
             Debug.Log("Graph or edges list is null.");
             return null;
@@ -83,7 +90,7 @@ public class Sensor : MonoBehaviour
         Edge nearestEdge = null;
         float minDistance = float.MaxValue;
 
-        foreach (Edge edge in graph.edges)
+        foreach (Edge edge in graph.GetAllEdges())
         {
             if (edge != null)
             {
@@ -112,15 +119,17 @@ public class Sensor : MonoBehaviour
         return nearestEdge;
     }
 
-    private void OnDrawGizmosSelected(){
+    private void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.red;
-        Vector3 startPos = this.transform.position+Vector3.up*2;
-        Vector3 startWaypointRef = edgeAssigned.StartWaypoint.transform.position+Vector3.up*2;
-        Vector3 endWaypointRef = edgeAssigned.EndWaypoint.transform.position+Vector3.up*2;
+        Vector3 startPos = this.transform.position + Vector3.up * 2;
+        Vector3 startWaypointRef = edgeAssigned.StartWaypoint.transform.position + Vector3.up * 2;
+        Vector3 endWaypointRef = edgeAssigned.EndWaypoint.transform.position + Vector3.up * 2;
         Gizmos.DrawLine(startPos, startWaypointRef);
         Gizmos.DrawLine(startPos, endWaypointRef);
     }
-    public int CollectDataOnLeave(WaypointMover trav){
+    public int CollectDataOnLeave(WaypointMover trav)
+    {
         // This method is a stub TO BE EXTENDED for collecting data from trav
         // TED ;)
 
@@ -131,10 +140,11 @@ public class Sensor : MonoBehaviour
         // Ted maybe adding other traveller stats here
         //sensor_trav_stats[trav] += trav.
         return sensor_trav_count;
-        
+
 
     }
-    public int CollectDataOnEnter(WaypointMover trav){
+    public int CollectDataOnEnter(WaypointMover trav)
+    {
         // This method is a stub TO BE EXTENDED for collecting data from trav
         // TED ;)
         sensor_trav_count -= 1;

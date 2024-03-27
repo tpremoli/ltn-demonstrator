@@ -3,15 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BarrierType
-{
-    BlockAll,
-    BlockAllMotorVehicles,
-    BlockHeavyTraffic,
-    BusOnly,
-    BusAndTaxiOnly,
-}
-
 public class BarrierManager : MonoBehaviour
 {
 
@@ -54,6 +45,8 @@ public class BarrierManager : MonoBehaviour
         // force reload barriers
         if (Input.GetKeyDown(KeyCode.U))
         {
+            Physics.SyncTransforms();
+            Debug.LogWarning("Reloading barriers!");
             RecalcBarriersOnEdges();
         }
         //Debug.Log("barrierPrefabs ", barrierPrefabs.Count);
@@ -89,21 +82,34 @@ public class BarrierManager : MonoBehaviour
             GameObject newBarrier = Instantiate(barrierPrefab);
             newBarrier.transform.position = new Vector3(barrierData.position[0], barrierData.position[1], barrierData.position[2]);
             newBarrier.transform.rotation = Quaternion.Euler(barrierData.rotation[0], barrierData.rotation[1], barrierData.rotation[2]);
+
+            // we also need the barrier type
+            BarrierType spawnedBarrierType = (BarrierType)barrierData.type;
+            newBarrier.GetComponent<Barrier>().BarrierType = spawnedBarrierType;
+            newBarrier.transform.name = spawnedBarrierType.ToString();
+
             newBarrier.transform.parent = transform;
             allBarriers.Add(newBarrier);
 
-            // this essentially reloads colliders so we can use them to generate barriers etc.
-            // this is not efficient at all. HOWEVER, it is only called once on load.
-            Physics.SyncTransforms();
         }
+
+        // this essentially reloads colliders so we can use them to generate barriers etc.
+        // this is not efficient at all. HOWEVER, it is only called once on load.
+        Physics.SyncTransforms();
+        RecalcBarriersOnEdges();
     }
 
     public void AddBarrier(Vector3 position, BarrierType selectedBarrierType)
     {
         GameObject newBarrier = Instantiate(barrierPrefabs[selectedBarrierType], position, Quaternion.identity);
 
-        //GameObject newBarrier = Instantiate(barrierPrefab, position, Quaternion.identity);
+        newBarrier.GetComponent<Barrier>().BarrierType = selectedBarrierType;
+
         newBarrier.transform.Rotate(0, 90, 0);
+
+        newBarrier.transform.name = selectedBarrierType.ToString();
+
+        newBarrier.transform.parent = this.transform;
 
         // Rotate the barrier on the y axis 
         Graph graph = Graph.Instance;
@@ -133,7 +139,6 @@ public class BarrierManager : MonoBehaviour
 
 
 
-
     public void RecalcBarriersOnEdges()
     {
         Graph graph = Graph.Instance;
@@ -141,11 +146,10 @@ public class BarrierManager : MonoBehaviour
         Debug.Log("Recalculating barriers on edges");
 
         // this is not efficient at all.
-        foreach (Edge edge in graph.edges)
+        foreach (Edge edge in graph.GetAllEdges())
         {
-            edge.RecheckBarriers();
+            edge.CheckBarriers();
         }
-
     }
 
 

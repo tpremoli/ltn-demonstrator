@@ -11,7 +11,7 @@ public class WaypointMover : MonoBehaviour
 
     // Attributes controlling vehicle's type
     public VehicleProperties vType { get; private set; }
-    public ModeOfTransport mode { get; private set; }
+    [SerializeField] public ModeOfTransport mode;
 
     // Statistic measures
     private float totalDistanceMoved;
@@ -56,6 +56,8 @@ public class WaypointMover : MonoBehaviour
     public Building originBuilding { get; private set; }
     [SerializeField] private BuildingType destinationBuildingType;
 
+    public Journey journey;
+
     void Start()
     {
         // Start by making the object unready
@@ -72,6 +74,7 @@ public class WaypointMover : MonoBehaviour
         // Some heuristic to choose what ModeOfTransport to use?
         // vehicleChosen = someHeuristicThatReturnsAModeOfTransport();
         // For now, pick the mode randomly
+        /*
         if (this.originBuilding.closestPedestrianEdge == null)
         {
             // we don't have a pedestrian edge, so we can't be a pedestrian (for now)
@@ -81,6 +84,7 @@ public class WaypointMover : MonoBehaviour
         {
             this.mode = (ModeOfTransport)Random.Range(0, 3);
         }
+        */
 
         // if the mode is pedestrian, set the traveller's position to the closest point on the pedestrian edge
         if (this.mode == ModeOfTransport.Pedestrian)
@@ -92,12 +96,21 @@ public class WaypointMover : MonoBehaviour
             this.vType.Type = VehicleType.Pedestrian; // Set the type to pedestrian TODO: this should be done in pickRandomVehicleType()
             this.gameObject.name = "Pedestrian";
         }
-        else if (this.mode == ModeOfTransport.Car || this.mode == ModeOfTransport.Bicycle)
+        else if (this.mode == ModeOfTransport.Bicycle)
+        {
+            // Set the traveller's position to the closest point on the road edge
+            this.transform.position = this.originBuilding.closestPointOnRoadEdge;
+            this.vType = pickRandomVehicleType();
+            this.vType.Type = VehicleType.Bicycle;
+            this.gameObject.name = "Bicycle";
+        }
+        else if (this.mode == ModeOfTransport.Car)
         {
             // Set the traveller's position to the closest point on the road edge
             this.transform.position = this.originBuilding.closestPointOnRoadEdge;
             this.vType = pickRandomVehicleType();
             this.gameObject.name = vType.Type.ToString();
+
         }
 
         // pick a random model and material
@@ -131,16 +144,18 @@ public class WaypointMover : MonoBehaviour
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        this.destinationBuilding = chooseDestinationBuilding();
+//        this.destinationBuilding = chooseDestinationBuilding();
+        /*
         if (this.destinationBuilding == null)
         {
             Debug.LogWarning("No destination building found. Destroying object.");
             Destroy(this.gameObject);
             return;
         }
+        */
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.originBuilding, destinationBuilding, this.mode);
+        path = new WaypointPath(this.originBuilding, this.destinationBuilding, this.mode);
 
         if (path.pathAsEdges == null)
         {
@@ -155,6 +170,11 @@ public class WaypointMover : MonoBehaviour
             //paths that are destroyed so that the sim can terminate
             StatisticsManager.Instance.BUGFIXincrementFinishedPaths();
             Destroy(this.gameObject);
+
+            if (journey != null) {
+                journey.traveller.journeyAbandoned(journey);
+            }
+            
             return;
         }
         else
@@ -217,6 +237,14 @@ public class WaypointMover : MonoBehaviour
         return vType;
         }
 
+    // Set the origin building, destination building and mode of transport for the agent.
+    public void Setup(Building originBuilding, Building destinationBuilding, ModeOfTransport modeOfTransport, Journey journey) {
+        this.mode = modeOfTransport;
+        this.originBuilding = originBuilding;
+        this.destinationBuilding = destinationBuilding;
+        this.journey = journey;
+    }
+
     public void setOriginBuilding(Building building)
     {
         this.originBuilding = building;
@@ -244,7 +272,7 @@ public class WaypointMover : MonoBehaviour
         else
         {
             // The traveller's direction aligns more with the backward direction, flip the edge
-            Edge flippedEdge = graph.getEdge(currentEdge.endWaypoint, currentEdge.startWaypoint);
+            Edge flippedEdge = graph.GetEdge(currentEdge.endWaypoint, currentEdge.startWaypoint);
             if (flippedEdge != null)
             {
                 return flippedEdge;
@@ -570,6 +598,14 @@ public class WaypointMover : MonoBehaviour
             float TravelledInEdge = proposedMovement - TravelledOverEdges;
 
             // COLLISSION CHECK
+
+            // If the terminal edge is busy, reduce the movement outside of it.
+            if (terminalEdge.IntersectingEdgesBusy()) {
+                proposedMovement-=TravelledInEdge+0.01f;
+                proposalAccepted = false;
+                continue;
+            }
+
             //Calculate position of
             float myFront = TravelledInEdge + hLen + offset;
             float myRear = TravelledInEdge - hLen + offset;
@@ -636,7 +672,28 @@ public class WaypointMover : MonoBehaviour
                 }
             }
             // Do the same for super-terminal edge
-            if (superTerminalEdge != null)
+            if (superTerminalEdge != null){
+                // Check if super-terminal edge is busy.
+                if (superTerminalEdge.IntersectingEdgesBusy()) {
+                    // If only the breaking distance intersects with the busy edge, begin braking
+                    if (myBrDis > terminalEdge.Distance && proposedMovement > movementLowerBound) {
+                        proposedMovement=Mathf.Max(
+                                            this.movementLowerBound,
+                                            proposedMovement-(myBrDis-terminalEdge.Distance)
+                                            );
+                        proposedMovement-= 0.01f;
+                        proposalAccepted=false;
+                        continue;
+                    }
+                    // If the front of the car intersects with the busy edge, reduce movement to prevent colission
+                    if(myFront > terminalEdge.Distance){
+                        proposedMovement-=myFront-terminalEdge.Distance;
+                        proposedMovement-=0.01f;
+                        proposalAccepted=false;
+                        continue;
+                    }
+                }
+                
                 foreach (WaypointMover wp in superTerminalEdge.TravellersOnEdge)
                 {
                     if (wp == this) continue;
@@ -696,7 +753,7 @@ public class WaypointMover : MonoBehaviour
                         break;
                     }
                 }
-
+            }
             // No collision occurred, the proposed movement is accepted
         }
         // Beginning to carry out proposed movement
@@ -757,10 +814,31 @@ public class WaypointMover : MonoBehaviour
 
     public void arriveToDestination()
     {
+
+        // TODO This is meant to set withCar of the persistent traveller to the correct value
+        // TODO but I cannot work out which persistent traveller object this should be called on
+        
+        // set with car to false
+        //persistentTraveller.SetWithCar(false);
+
+        // otherwise, if ModeOfTravel is Car, set it to true
+        //if (journey != null && journey.traveller != null && journey.traveller.ModeOfTravel == ModeOfTravel.Car) {
+        //persistentTraveller.SetWithCar(true);
+        //}
+
         Debug.Log("Arrived to destination. Destroying object.");
         //update path data
         //find corresponding data struct in statistical controller, send vtype
         StatisticsManager.Instance.RecieveEndTime(this.ID, getOriginalEdgePath(), this.vType);
+        if (journey != null) {
+            if (mode == ModeOfTransport.Car) {
+                journey.traveller.SetWithCar(true);
+            }
+            else {
+                journey.traveller.SetWithCar(false);
+            }
+            journey.traveller.journeyCompleted(journey);
+        }
         Destroy(this.gameObject);
     }
 
@@ -785,20 +863,10 @@ public class WaypointMover : MonoBehaviour
         {
             // Draw the destination sphere
             Gizmos.color = Color.magenta;
-            Gizmos.DrawWireSphere(path.destinationPos, 1f);
-
-            if (path.pathAsWaypoints.Count > 0)
-            {
-                // Iterate through the remaining waypoints
-                foreach (var waypoint in path.pathAsWaypoints)
-                {
-                    // Draw a sphere for each waypoint
-                    Gizmos.DrawSphere(waypoint.transform.position, 1f);
-                }
-            }
+            Gizmos.DrawWireSphere(path.destinationPos, 0.5f);
 
             // Draw the path from the agent's current position
-            tracePath(Color.yellow, 1f, 1f);
+            tracePath(Color.yellow, 1f, 0.5f);
 
             if (this.travsBlockedByThisDEBUG.Count > 0)
             {
@@ -816,16 +884,6 @@ public class WaypointMover : MonoBehaviour
             // Draw the destination sphere
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(path.destinationPos, 1f);
-
-            if (path.pathAsWaypoints.Count > 0)
-            {
-                // Iterate through the remaining waypoints
-                foreach (var waypoint in path.pathAsWaypoints)
-                {
-                    // Draw a sphere for each waypoint
-                    Gizmos.DrawSphere(waypoint.transform.position, 1f);
-                }
-            }
 
             // Draw line to vehicles collided with
             Gizmos.color = Color.magenta;
@@ -910,8 +968,15 @@ public class WaypointMover : MonoBehaviour
             MeshRenderer thisMeshRenderer = GetComponent<MeshRenderer>();
             MeshFilter thisMeshFilter = GetComponent<MeshFilter>();
 
-            thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
-            thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
+            try
+            {
+                thisMeshRenderer.material = model.GetComponent<MeshRenderer>().sharedMaterial;
+                thisMeshFilter.mesh = model.GetComponent<MeshFilter>().sharedMesh;
+            }
+            catch (MissingComponentException e)
+            {
+                Debug.LogWarning("A model is missing a component!" + e.StackTrace);
+            }
 
             // this allows us to ensure that pedestrians are the correct size. Should be done with all vehicles,
             // but we have to setup the prefabs correctly first.
