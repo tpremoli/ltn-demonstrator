@@ -73,7 +73,7 @@
                 finishedPaths = 0; 
                 endSim = false; 
                 //speed up simulation
-                Time.timeScale = 5;
+                Time.timeScale = 8;
                 SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
 
             }
@@ -89,7 +89,6 @@
             //--------------------------------------
             //--------------------------------------
             //--------------------------------------
-            Time.timeScale = 10;
             // Get the name of the current active scene
             string currentSceneName = SceneManager.GetActiveScene().name;
             // fix this
@@ -105,6 +104,7 @@
                     //serialise data
                     CreateSerialisableEdgesAndWaypoints();
                     Debug.LogError("SERIALISED EDGES AND WAYPOINTS");
+                    Debug.LogError($"length of alledges = {allEdges.Count}, length of allwaypoints = {allWaypoints.Count}");
                     //SerialisePathDataSave();
                     getAllSerialisedPaths();
                     Debug.Log("Serialised PathData");
@@ -256,7 +256,7 @@
         public void RecieveEndTime (int ID, List<Edge> path, VehicleProperties vType) {
             UpdateEndTimeAndPath(ID, path, vType);
             finishedPaths++;
-            Debug.Log($"finished Paths = {finishedPaths}, term = {TERMINATION_CRITERIA}, num of spawned Travellers = {TravellerManager.Instance.noOfTravellers}");
+            Debug.LogError($"finished Paths = {finishedPaths}, term = {TERMINATION_CRITERIA}, num of spawned Travellers = {TravellerManager.Instance.noOfTravellers}");
             if (finishedPaths >= TERMINATION_CRITERIA) {
                 Debug.Log("ending simulation");
                 endSim = true;
@@ -282,7 +282,7 @@
         //get all edges in the simulation
         private List<Edge> GetAllEdges() {
             if (Graph.Instance != null) {
-                return Graph.Instance.edges;
+                return Graph.Instance.GetAllEdges();
             }
             return new List<Edge>();
         }
@@ -499,6 +499,7 @@
         public void CreateSerialisableEdgesAndWaypoints() {
             allWaypoints = ConvertWaypointsToSerializable(GetAllWaypoints());
             allEdges = ConvertEdgeListToSerializable(GetAllEdges());
+            Debug.LogError($"allEdges length: {allEdges.Count}, allWaypoints length: {allWaypoints.Count}");
            // Debug.LogError($"allEdges length: {allEdges.Count}, allWaypoints length: {allWaypoints.Count}");
         }
 
@@ -506,10 +507,14 @@
         public List<SerialisableEdge> CreateSerialisablePath(List<Edge> path)
         {
             List<SerialisableEdge> serialisablePath = new List<SerialisableEdge>();
+
+
             foreach (Edge edge in path)
             {
+
                 foreach (SerialisableEdge serialisableEdge in allEdges)
                 {
+                   
                     if (serialisableEdge.ID == edge.ID)
                     {
                         serialisablePath.Add(serialisableEdge);
@@ -1119,6 +1124,7 @@
         private string TotalDistance () {
             float totalDistance = 0;
             foreach (var pathData in allPathData) {
+                Debug.LogError($"pathData.serialisablePath length = {pathData.serialisablePath.Count}");
                 foreach (var edge in pathData.serialisablePath) {
                     totalDistance += edge.length;
                 }

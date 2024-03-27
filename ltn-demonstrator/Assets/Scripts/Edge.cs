@@ -226,44 +226,6 @@ public class Edge
         // Draw the arrow with the shifted middle position and shortened direction
         DrawArrow.ForGizmo(shiftedMiddlePosition, shortenedDirection, color, 0.3f, 20f); // Reduced size and angle for the arrowhead
     }
-    public void RegisterIntersectingEdge(Edge e)
-    {
-        this.IntersectingEdges.Add(e);
-        this.IntersectingEdgesByReducedEdge.Add(e.Reduce());
-    }
-    public bool HasIntersecingEdges(){
-        return this.IntersectingEdges.Count>0;
-    }
-    public bool IntersectingEdgesBusy()
-    {
-        foreach (Edge e in this.IntersectingEdges)
-        {
-            if (e.TravellersOnEdge.Count > 0) return true;
-        }
-        return false;
-    }
-
-    private void makeSmallArrow(Color color)
-    {
-        // Draw arrow pointing in the edge's direction
-        Vector3 startpoint = startWaypoint.transform.position;
-        Vector3 endpoint = endWaypoint.transform.position;
-        Vector3 direction = endpoint - startpoint;
-        // Debug.Log("Direction of the Road Edge: " + direction);
-
-        // Make the arrows shorter by 20%
-        float shortenedMagnitude = direction.magnitude * 0.7f; // Reduced from 0.7f to 0.5f for a shorter arrow;
-        Vector3 shortenedDirection = direction.normalized * shortenedMagnitude;
-
-        // Calculate the middle position
-        Vector3 middlePosition = startpoint + direction * 0.5f - shortenedDirection * 0.5f;
-
-        // Shift the middle position slightly to the left
-        Vector3 shiftedMiddlePosition = middlePosition + Vector3.Cross(direction, Vector3.up).normalized * 0.2f; // Reduced from 0.6f to 0.3f
-
-        // Draw the arrow with the shifted middle position and shortened direction
-        DrawArrow.ForGizmo(shiftedMiddlePosition, shortenedDirection, color, 0.3f, 20f); // Reduced size and angle for the arrowhead
-    }
 
     public void DrawGizmo()
     {

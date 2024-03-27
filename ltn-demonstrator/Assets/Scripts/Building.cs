@@ -138,32 +138,7 @@ public class Building : MonoBehaviour
         GameObject travellerManager = TravellerManager.Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, travellerManager.transform);
         newTravellerObj.GetComponent<WaypointMover>().setOriginBuilding(this);
-        //save data
-        SaveTravellerData(newTravellerObj);
         //stops spawning if max number of travellers reached
-        
-        if (TravellerManager.Instance.noOfTravellers >= StatisticsManager.TERMINATION_CRITERIA) {
-            Debug.Log("------------------Max Travellers Spawned");
-            ALLOW_SPAWNING = false;
-        }
-    }
-
-    public void SaveTravellerData (GameObject newTravellerObj) {
-        //assign ID to traveller - although its actually a waypointPath, will need to be reconfigured
-        WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
-        waypointMover.ID = TravellerManager.Instance.noOfTravellers; // Assign ID
-        //make stats structures here 
-
-        //create data struct for traveller information
-        PathData pathData = new PathData();
-        pathData.path = newTravellerObj.GetComponent<WaypointMover>().getEdgePath();//getpath
-        pathData.vType = newTravellerObj.GetComponent<WaypointMover>().vType;
-        Debug.Log("------------------Vehicle Type: " + pathData.vType);
-        pathData.startTime = Time.time;
-        pathData.ID = TravellerManager.Instance.noOfTravellers;
-        pathData.routeChange = false;
-        //store to list
-        StatisticsManager.Instance.AddPathData(pathData);  //finish append
     }
 
 

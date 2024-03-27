@@ -92,6 +92,26 @@ public class TravellerManager : MonoBehaviour
         Building originBuilding = Graph.Instance.buildings[journey.origin];
         Building destinationBuilding = Graph.Instance.buildings[journey.destination];
         newTravellerObj.GetComponent<WaypointMover>().Setup(originBuilding, destinationBuilding, ModeOfTransport.Car, journey);
+        SaveTravellerData(newTravellerObj);
+    }
+
+
+        public void SaveTravellerData (GameObject newTravellerObj) {
+        //assign ID to traveller - although its actually a waypointPath, will need to be reconfigured
+        WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
+        waypointMover.ID = TravellerManager.Instance.noOfTravellers; // Assign ID
+        //make stats structures here 
+
+        //create data struct for traveller information
+        PathData pathData = new PathData();
+        pathData.path = newTravellerObj.GetComponent<WaypointMover>().getEdgePath();//getpath
+        pathData.vType = newTravellerObj.GetComponent<WaypointMover>().vType;
+        Debug.Log("------------------Vehicle Type: " + pathData.vType);
+        pathData.startTime = Time.time;
+        pathData.ID = TravellerManager.Instance.noOfTravellers;
+        pathData.routeChange = false;
+        //store to list
+        StatisticsManager.Instance.AddPathData(pathData);  //finish append
     }
 
     public void SpawnRandomTraveller() {

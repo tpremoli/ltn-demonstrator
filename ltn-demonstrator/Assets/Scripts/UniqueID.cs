@@ -12,6 +12,7 @@ is persistent, so if Unity is closed and opened again, the ID will persist and
 remain the same.
 */
 [ExecuteInEditMode]
+[System.Serializable]
 public class UniqueID : MonoBehaviour
 {
     static Dictionary<string, UniqueID> allGUIDs = new Dictionary<string, UniqueID>();
