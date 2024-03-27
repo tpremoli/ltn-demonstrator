@@ -196,6 +196,7 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
         foreach (Edge edge in allEdges)
         {
             if (edge.isPedestrianOnly) continue;
+            if (edge.HasIntersecingEdges()) continue;
 
             float distance = edge.DistanceToEdge(position);
 

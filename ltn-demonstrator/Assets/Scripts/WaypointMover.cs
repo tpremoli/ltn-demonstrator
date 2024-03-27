@@ -796,20 +796,10 @@ public class WaypointMover : MonoBehaviour
         {
             // Draw the destination sphere
             Gizmos.color = Color.magenta;
-            Gizmos.DrawWireSphere(path.destinationPos, 1f);
-
-            if (path.pathAsWaypoints.Count > 0)
-            {
-                // Iterate through the remaining waypoints
-                foreach (var waypoint in path.pathAsWaypoints)
-                {
-                    // Draw a sphere for each waypoint
-                    Gizmos.DrawSphere(waypoint.transform.position, 1f);
-                }
-            }
+            Gizmos.DrawWireSphere(path.destinationPos, 0.5f);
 
             // Draw the path from the agent's current position
-            tracePath(Color.yellow, 1f, 1f);
+            tracePath(Color.yellow, 1f, 0.5f);
 
             if (this.travsBlockedByThisDEBUG.Count > 0)
             {
@@ -827,16 +817,6 @@ public class WaypointMover : MonoBehaviour
             // Draw the destination sphere
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(path.destinationPos, 1f);
-
-            if (path.pathAsWaypoints.Count > 0)
-            {
-                // Iterate through the remaining waypoints
-                foreach (var waypoint in path.pathAsWaypoints)
-                {
-                    // Draw a sphere for each waypoint
-                    Gizmos.DrawSphere(waypoint.transform.position, 1f);
-                }
-            }
 
             // Draw line to vehicles collided with
             Gizmos.color = Color.magenta;

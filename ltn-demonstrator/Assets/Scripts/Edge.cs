@@ -181,6 +181,9 @@ public class Edge
         this.IntersectingEdges.Add(e);
         this.IntersectingEdgesByReducedEdge.Add(e.Reduce());
     }
+    public bool HasIntersecingEdges(){
+        return this.IntersectingEdges.Count>0;
+    }
     public bool IntersectingEdgesBusy()
     {
         foreach (Edge e in this.IntersectingEdges)
@@ -218,7 +221,12 @@ public class Edge
         Color edgeColor;
         if (IntersectingEdges.Count > 0)
         {
-            edgeColor = Color.yellow;
+            if(IntersectingEdgesBusy()){
+                edgeColor = Color.red;
+            } else {
+                edgeColor = Color.yellow;
+            }
+            
             makeSmallArrow(edgeColor);
             return;
         }
