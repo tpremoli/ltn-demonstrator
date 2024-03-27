@@ -41,4 +41,7 @@ public class TravellerManager : MonoBehaviour
 
         return null; // Or handle this case as needed
     }
+    public GameObject GetManagerObject(){
+        return this.gameObject;
+    }
 }
