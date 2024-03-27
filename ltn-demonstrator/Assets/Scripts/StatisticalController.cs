@@ -21,6 +21,9 @@
         //Used to represent the edges and waypoints in the simulation
         public static List<SerialisableEdge> allEdges { get; private set; }
         public static List<SerialisableWaypoint> allWaypoints { get; private set; }
+        public static List<SerialisableWaypoint> centriods { get; private set; }
+        public static List<SerialisableEdge> emissionEdges { get; private set; }
+        public static List<SerialisableEdge> usageEdges { get; private set; }
 
         //text for stats in the statistical measures screen
         public TMP_Text statsText;
@@ -106,6 +109,10 @@
                     getAllSerialisedPaths();
                     Debug.Log("Serialised PathData");
                     //calculate edge weights
+                    List<Cluster> clusters = ClusterWaypoints(allWaypoints, 15);
+                    CreateCentroidsForClusters(clusters, allWaypoints);
+                    centriods = ExtractCentriods(clusters);
+                    CalcEdgeWeightsByUsage();
                     CalcEdgeWeightsByEmissions();
                     Debug.Log("Calculated Edge Weights");
 
@@ -261,7 +268,7 @@
             {
                 if (pathData.ID == id)
                 {
-                    pathData.endTime = Time.frameCount; 
+                    pathData.endTime = Time.time; 
                     pathData.path = path;
                     pathData.vType = vType;
                     if (path == null) {
@@ -430,7 +437,6 @@
             Debug.Log("BEGINNING SERIALISATION");
             //serialise the waypoints
             List<SerialisableWaypoint> allNewWaypoints = allWaypoints;
-            Debug.LogError($"length of allNewWaypoints: {allNewWaypoints.Count}");
             //get the serialised versions of all edges
             List<SerialisableEdge> allNewEdges = allEdges;
             //for each edge in each path, create a serialisable edge list
@@ -493,7 +499,7 @@
         public void CreateSerialisableEdgesAndWaypoints() {
             allWaypoints = ConvertWaypointsToSerializable(GetAllWaypoints());
             allEdges = ConvertEdgeListToSerializable(GetAllEdges());
-            Debug.LogError($"allEdges length: {allEdges.Count}, allWaypoints length: {allWaypoints.Count}");
+           // Debug.LogError($"allEdges length: {allEdges.Count}, allWaypoints length: {allWaypoints.Count}");
         }
 
 
@@ -553,15 +559,34 @@
                 HideWhiteScreen();
                 //ShowWhiteScreen();
 
-            Button heatmapToggleButton = GameObject.Find("Heatmap Toggle").GetComponent<Button>(); // Replace with your actual button name
-            if (heatmapToggleButton != null) {
-                heatmapToggleButton.onClick.RemoveAllListeners(); // Remove existing listeners to prevent stacking if scene is reloaded
-                heatmapToggleButton.onClick.AddListener(ToggleHeatMap);
-                Debug.Log("Added listener to Heatmap Toggle Button.");
+            Button heatmapToggleButtonU = GameObject.Find("Heatmap Toggle Usage").GetComponent<Button>();
+            if (heatmapToggleButtonU != null) {
+                heatmapToggleButtonU.onClick.RemoveAllListeners(); // Remove existing listeners to prevent stacking if scene is reloaded
+                heatmapToggleButtonU.onClick.AddListener(ToggleHeatMapUsage);
+                Debug.Log("Added listener to Heatmap Toggle Button - Usage.");
             } else {
-                Debug.LogError("Failed to find the Heatmap Toggle Button GameObject.");
+                Debug.LogError("Failed to find the Heatmap Toggle Usage Button GameObject.");
+            }
+            //add second button here----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            Button heatmapToggleButtonE = GameObject.Find("Heatmap Toggle Emission").GetComponent<Button>();
+            if (heatmapToggleButtonE != null) {
+                heatmapToggleButtonE.onClick.RemoveAllListeners(); // Remove existing listeners to prevent stacking if scene is reloaded
+                heatmapToggleButtonE.onClick.AddListener(ToggleHeatMapEmission);
+                Debug.Log("Added listener to Heatmap Toggle Button Emission.");
+            } else {
+                Debug.LogError("Failed to find the Heatmap Emission Toggle Button GameObject.");
+            }
+            //close heatmap button
+            Button heatmapToggleButtonC = GameObject.Find("Heatmap Close").GetComponent<Button>();
+            if (heatmapToggleButtonC != null) {
+                heatmapToggleButtonC.onClick.RemoveAllListeners(); // Remove existing listeners to prevent stacking if scene is reloaded
+                heatmapToggleButtonC.onClick.AddListener(ToggleHeatmapClose);
+                Debug.Log("Added listener to Heatmap Close Toggle Button.");
+            } else {
+                Debug.LogError("Failed to find the Heatmap close Toggle Button GameObject.");
             }
         }
+        
 
 
         public void CalculateTransform(List<SerialisableWaypoint> waypoints, float margin = 0.9f)
@@ -571,7 +596,7 @@
             RectTransform panelRectTransform = panelGameObject.GetComponent<RectTransform>();
             Vector2 panelSize = panelRectTransform.rect.size;
 
-            Debug.LogError($" panelSize = {panelSize}");
+            //Debug.LogError($" panelSize = {panelSize}");
 
             // calculate the scale factor for the x and y coordinates
             float minx = float.MaxValue;
@@ -600,12 +625,12 @@
                 }
             }
 
-            Debug.Log($"minx = {minx}, maxx = {maxx}, minz = {minz}, maxz = {maxz}");
+            //Debug.Log($"minx = {minx}, maxx = {maxx}, minz = {minz}, maxz = {maxz}");
 
             float xStretch = (panelSize.x / (maxx - minx))*margin;
             float zStretch = (panelSize.y / (maxz - minz))*margin;
 
-            Debug.Log($"xStretch = {xStretch}, zStretch = {zStretch}");
+            //Debug.Log($"xStretch = {xStretch}, zStretch = {zStretch}");
 
             //
             foreach (var waypoint in waypoints)
@@ -642,7 +667,7 @@
         }
 
 
-        public void DrawEdges(List<SerialisableEdge> edges)
+        public void DrawEdges(List<SerialisableEdge> edges, bool emissions)
         {
             Debug.LogError("Drawing Edges");
             for (int i = 0; i < edges.Count; i++)
@@ -653,18 +678,24 @@
                 Vector3 startPoint = new Vector3(edges[i].startWaypoint.x, edges[i].startWaypoint.z, -1);
                 Vector3 endPoint = new Vector3(edges[i].endWaypoint.x, edges[i].endWaypoint.z, -1);
 
-                DrawLine(edges[i], startPoint, endPoint);   
+                DrawLine(edges[i], startPoint, endPoint, emissions);   
                 //Debug.Log($"Edge weight is {edges[i].weight}");
             }
         }
 
 
 
-        public void DrawLine(SerialisableEdge edge, Vector3 start, Vector3 end)
+        public void DrawLine(SerialisableEdge edge, Vector3 start, Vector3 end, bool emissions)
         {   
-            Debug.Log($"Edge weight is {edge.weight}");
-            // If you want a really wide line, you can set this directly to a large number
-            float uniformWidth = 1f + (30f*edge.weight); // for example, a very wide line
+            float uniformWidth;
+            if (emissions == true) {
+                // If you want a really wide line, you can set this directly to a large number
+                uniformWidth = 1f + (30f*edge.weightEmissions); // for example, a very wide line
+            }
+            else {
+                // If you want a really wide line, you can set this directly to a large number
+                uniformWidth = 1f + (30f*edge.weightUsage); // for example, a very wide line
+            }
 
             //translate the start and end points to the correct position, set z to -3
             start.z = -3;
@@ -683,7 +714,13 @@
 
             // Adjust color based on weight (you'll replace this part with your own method to get color from weight)
             // Get color from weight
-            Color colorFromWeight = GetColorFromWeight(edge.weight);
+            Color colorFromWeight;
+            if (emissions == true) {
+                colorFromWeight = GetColorFromWeight(edge.weightEmissions);
+            }
+            else {
+                colorFromWeight = GetColorFromWeight(edge.weightUsage);
+            }
             Gradient gradient = new Gradient();
             gradient.SetKeys(
                 new GradientColorKey[] { new GradientColorKey(colorFromWeight, 0.0f), new GradientColorKey(colorFromWeight, 1.0f) },
@@ -724,49 +761,80 @@
             Debug.Log("Hiding Waypoints");
             for (int i = 0; i < waypoints.Count; i++)
             {
-                //hide the waypoint
+                if (waypoints[i] != null && waypoints[i].WaypointObject != null)
+                {
+                    //hide the waypoint
                 waypoints[i].WaypointObject.SetActive(false);
-                
+                }
+                else
+                {
+                    Debug.LogError($"Waypoint or WaypointObject at index {i} is null");
+                }
             }
         }
-
 
         public void HideEdges(List<SerialisableEdge> edges)
         {
             Debug.Log("Hiding Edges");
             for (int i = 0; i < edges.Count; i++)
             {
-                //hide the edge
-                edges[i].EdgeObject.SetActive(false);
+                if (edges[i] != null && edges[i].EdgeObject != null)
+                {
+                    //hide the edge
+                    edges[i].EdgeObject.SetActive(false);
+                }
+                else
+                {
+                    Debug.LogError($"Edge or EdgeObject at index {i} is null");
+                }
             }
         }
 
 
-        public void ToggleHeatMap() {
-            if (isHeatMapVisible) {
+        public void ToggleHeatMapUsage() {
+            //hide all current edges
+            HideEdges(allEdges);
+            HideWaypoints(centriods);
+            HideWaypoints(allWaypoints);
+            DrawHeatMapUsage();
+        }
+
+        public void ToggleHeatMapEmission() {
+            HideEdges(allEdges);
+            HideWaypoints(centriods);
+            HideWaypoints(allWaypoints);
+            DrawHeatMapEmission();
+        }
+
+        public void ToggleHeatmapClose() {
+            if (isHeatMapVisible == true) {
                 HideHeatMap();
-            } else {
-                DrawHeatMap();
             }
         }
 
 
-        public void DrawHeatMap() 
+        public void DrawHeatMapUsage() 
         {
             //draw the white screen
             ShowWhiteScreen();
             Debug.Log("Drawing Heatmap");
             //draw all waypoints and edges
-            List<Cluster> clusters = ClusterWaypoints(allWaypoints, 15);
-            CreateCentroidsForClusters(clusters, allWaypoints);
-            List<SerialisableWaypoint> waypointsForMap = ExtractCentriods(clusters);
             DrawWaypoints(allWaypoints, 0.2f);        //make these smaller
-            DrawWaypoints(waypointsForMap, 15f);     //make these bigger, make permanent attribute
-            DrawEdges(allEdges);                //make two sets, one for pollution one for usage
-            Debug.LogError("edges drawn");
+            DrawWaypoints(centriods, 15f);     //make these bigger, make permanent attribute
+            DrawEdges(allEdges, false);                //make two sets, one for pollution one for usage
+            //switch tracking variable
+            isHeatMapVisible = true;
+        }
 
-            Debug.LogError($"waypoints length: {allWaypoints.Count}");
-            Debug.LogError($"clusters length: {clusters.Count}");
+        public void DrawHeatMapEmission() 
+        {
+            //draw the white screen
+            ShowWhiteScreen();
+            Debug.Log("Drawing Heatmap");
+            //draw all waypoints and edges
+            DrawWaypoints(allWaypoints, 0.2f);        //make these smaller
+            DrawWaypoints(centriods, 15f);     //make these bigger, make permanent attribute
+            DrawEdges(allEdges, true);                //make two sets, one for pollution one for usage
             //switch tracking variable
             isHeatMapVisible = true;
         }
@@ -780,6 +848,7 @@
             Debug.Log("Hiding Heatmap");
             //hide all waypoints and edges
             HideWaypoints(allWaypoints);
+            HideWaypoints(centriods);
             HideEdges(allEdges);
 
             //switch tracking variable
@@ -793,7 +862,7 @@
             foreach (PathData pd in allPathData) {
                 foreach (SerialisableEdge e in pd.serialisablePath) {
                     //increment pathdata weight, normalise the amount
-                    e.weight += 1f / denominator;
+                    e.weightUsage += 1f / denominator;
                 }
             }
         }
@@ -808,8 +877,7 @@
                 foreach (SerialisableEdge e in pd.serialisablePath) {
                     //increment pathdata weight by emission score*path length, normalise the amount
                     float increment = (currentEmission/denominator)*10;
-                    e.weight += increment;
-                    Debug.LogError($"e.weight is {e.weight}");
+                    e.weightEmissions += increment;
                 }
             }
         }
@@ -820,12 +888,12 @@
         foreach (var waypoint in waypoints) {
             bool assignedCluster = false;
             Vector3 waypointPosition = new Vector3(waypoint.x, waypoint.y, waypoint.z); // Convert to Vector3
-            Debug.Log($"Within waypoint loop, length of clusters = {clusters.Count}");
+            //Debug.Log($"Within waypoint loop, length of clusters = {clusters.Count}");
             foreach (var cluster in clusters) {
                 foreach (var clusterWaypoint in cluster.Waypoints) {
                     Vector3 clusterWaypointPosition = new Vector3(clusterWaypoint.x, clusterWaypoint.y, clusterWaypoint.z); // Convert to Vector3
                     if (Vector3.Distance(waypointPosition, clusterWaypointPosition) < threshold) {
-                        Debug.Log("Adding waypoint to cluster");
+                        //Debug.Log("Adding waypoint to cluster");
                         cluster.Waypoints.Add(waypoint);
                         assignedCluster = true;
                         break;
@@ -833,7 +901,7 @@
                 }
             }
             if (!assignedCluster) {
-                Debug.Log("Creating new cluster");
+                //Debug.Log("Creating new cluster");
                 Cluster newCluster = new Cluster();
                 newCluster.AddWaypoint(waypoint);
                 clusters.Add(newCluster);
@@ -857,7 +925,7 @@
             y /= cluster.Waypoints.Count;
             z /= cluster.Waypoints.Count;
             cluster.centroid = new SerialisableWaypoint(nextID++, x,y,z);
-            Debug.Log($"Centroid for cluster: {cluster.centroid.x}, {cluster.centroid.y}, {cluster.centroid.z}");
+            //Debug.Log($"Centroid for cluster: {cluster.centroid.x}, {cluster.centroid.y}, {cluster.centroid.z}");
         }
     }
 
@@ -906,17 +974,17 @@
                     }
                 }
                 if (!edgeExists) {
-                    Debug.Log("Creating new edge");
+                    //Debug.Log("Creating new edge");
                     // calculate the length of the edge
                     float length = Vector3.Distance(new Vector3(start.x, start.y, start.z), new Vector3(end.x, end.y, end.z));
                     // create a new edge between the two centroids
-                    SerialisableEdge newEdge = new SerialisableEdge(edgeID++, startCluster.centroid, endCluster.centroid, length, edge.weight);
+                    SerialisableEdge newEdge = new SerialisableEdge(edgeID++, startCluster.centroid, endCluster.centroid, length, edge.weightEmissions);
                     // add the new edge to the list of edges
                     newEdges.Add(newEdge);
                 }
                 else {
                     // add their weight to the existing edge
-                    edgeN.IncrementEdgeWeight(edge.weight);
+                    edgeN.IncrementEdgeWeight(edge.weightEmissions);
                 }
             }
         }
@@ -935,7 +1003,7 @@
                 //Debug.Log($"{pathData.endTime} - {pathData.startTime} = {pathData.endTime - pathData.startTime}");
             }
             // convert to seconds
-            totalTravelTime = (float)(totalTravelTime*Time.deltaTime);
+            totalTravelTime = (float)(totalTravelTime);
             return totalTravelTime.ToString() ;
         }
 
@@ -960,14 +1028,14 @@
                 
                 if (pd.serialisablePath == null)
                 {
-                    Debug.Log(Time.deltaTime);
+                    //Debug.Log(Time.deltaTime);
                     continue; // Skip this PathData as its path is null
                 }
                 foreach (SerialisableEdge e in pd.serialisablePath)
                 {
                     if (e == null)
                     {
-                        Debug.LogWarning("Edge in path is null");
+                        //Debug.LogWarning("Edge in path is null");
                         continue; // Skip this Edge as it is null
                     }
                     //Debug.Log($"e.length is {e.length}");
@@ -979,8 +1047,8 @@
                 return "0"; // Avoid division by zero
             }
             //Needs delta D conversion, time conversion (Time.deltaTime)
-            float averageVelocity = (totalDistance/Time.deltaTime) / (totalTime * numberOfTravellers);
-            float normalisedAverageVelocity = averageVelocity * 3.6f;
+            float averageVelocity = (totalDistance) / (totalTime * numberOfTravellers);
+            float normalisedAverageVelocity = averageVelocity * 3.6f; //convert to km/h
             return normalisedAverageVelocity.ToString();
         }
 

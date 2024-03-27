@@ -19,7 +19,8 @@ public class SerialisableEdge {
     public bool isBarricaded;
     public SerialisableWaypoint startWaypoint;
     public SerialisableWaypoint endWaypoint;
-    public float weight;
+    public float weightEmissions;
+    public float weightUsage;
     public GameObject EdgeObject { get; set; } 
     //whichever other ones are needed
     
@@ -35,11 +36,12 @@ public class SerialisableEdge {
         this.length = length;
         this.startWaypoint = start;
         this.endWaypoint = end;
-        this.weight = weight;
+
+        this.weightEmissions = weight;
     }
 
     public void IncrementEdgeWeight(float weightIncrement) {
-        weight += weightIncrement;
+        weightEmissions += weightIncrement;
     }
 }
 
