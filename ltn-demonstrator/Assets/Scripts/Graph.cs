@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Graph : MonoBehaviour, ISerializationCallbackReceiver
@@ -27,6 +28,8 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
         }
     }
 
+    public bool IsInitialised { get; private set; }
+
     // private waypointsize with getter
     [Range(0f, 2f)][SerializeField] private float waypointSize = 0.5f;
 
@@ -41,6 +44,7 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
     // private Dictionary<ReducedEdge, Edge> edgesAsDict = new Dictionary<ReducedEdge, Edge>();
 
     public List<Building> allBuildings;
+    public Dictionary<string, Building> buildings = new Dictionary<string, Building>();
     public Dictionary<BuildingType, List<Building>> buildingsByType = new Dictionary<BuildingType, List<Building>>();
 
     public List<Waypoint> waypoints;
@@ -53,6 +57,7 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
     {
         Random.InitState(42); // Set seed for random number generator
         Time.timeScale = 1; // Set time scale to 1
+        IsInitialised = false;
 
         // Initialise buildings dictionary.
         foreach (BuildingType bType in BuildingProperties.buildingTypes)
@@ -67,17 +72,15 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
         foreach (Building b in allBuildings)
         {
             buildingsByType[b.buildingType].Add(b);
-        }
-
-        foreach (KeyValuePair<BuildingType, List<Building>> t in buildingsByType)
-        {
-            Debug.Log("Building Type: " + t.Key + ", Total: " + t.Value.Count);
+            buildings.Add(b.GetComponent<UniqueID>().uniqueID, b);
         }
 
         if (!inEditMode && BarrierManager.Instance.loadBarriersFromSave)
         {
             BarrierManager.Instance.RecalcBarriersOnEdges();
         }
+
+        IsInitialised = true;
 
     }
 
@@ -171,11 +174,11 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
         }
     }
 
-    public Edge GetEdge(Waypoint a, Waypoint b)
+    public Edge GetEdge(Waypoint startPoint, Waypoint endPoint)
     {
         foreach (Edge edge in allEdges)
         {
-            if (edge.StartWaypoint == a && edge.EndWaypoint == b)
+            if (edge.StartWaypoint == startPoint && edge.EndWaypoint == endPoint)
             {
                 return edge;
             }
@@ -230,5 +233,15 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
         }
 
         return closestEdge;
+    }
+
+    public Building pickRandomBuilding() {
+        return buildings.Values.ToList<Building>()[Random.Range(0, buildings.Count - 1)];
+    }
+
+    public string pickRandomBuildingID() {
+        List<string> keys = new List<string>(buildings.Keys);
+        int index = Random.Range(0, keys.Count);
+        return keys[index];
     }
 }

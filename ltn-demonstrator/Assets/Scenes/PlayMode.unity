@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4741,6 +4741,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5754920297517633004, guid: ef4a0b593b7303945be033306da126d8, type: 3}
+      propertyPath: uniqueID
+      value: 771440c1-b056-4df5-99c2-7b6f4af145c4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4810,6 +4814,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065710327314798628, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
+      propertyPath: uniqueID
+      value: 999cc315-7e74-41b7-8726-18b15324a0e8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5953,6 +5961,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: 67908d38-05f4-4810-a140-9cb0b0145f8f
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1
@@ -7110,6 +7122,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6479545830877031946, guid: 7069c92ff5da0734485f904f3a977904, type: 3}
+      propertyPath: uniqueID
+      value: 7ad567dc-2472-4a69-8f61-d05e1c780eee
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8117,6 +8133,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3277567191871153011, guid: 6070129c57f4fbb428c55e6d5c3ee568, type: 3}
+      propertyPath: uniqueID
+      value: ef807865-60cb-4483-a532-e9868c794509
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8297,6 +8317,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3277567191871153011, guid: 6070129c57f4fbb428c55e6d5c3ee568, type: 3}
+      propertyPath: uniqueID
+      value: 7c6796e9-2a2e-402f-a421-a8803551c0fd
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8358,6 +8382,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 7069c92ff5da0734485f904f3a977904, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6479545830877031946, guid: 7069c92ff5da0734485f904f3a977904, type: 3}
+      propertyPath: uniqueID
+      value: 99e7cec5-1508-4f93-974f-f5281d344234
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10476,6 +10504,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: 371b9188-98a0-4fe7-b60f-7725ccabdb26
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1 (2)
@@ -13452,6 +13484,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -7585219955393540173, guid: 4f1f9dd2d6bd3e742a070012fb6bb638, type: 3}
+      propertyPath: uniqueID
+      value: e1c23452-72d2-4b12-8440-a64d55343bd6
+      objectReference: {fileID: 0}
     - target: {fileID: 3535130008212726593, guid: 4f1f9dd2d6bd3e742a070012fb6bb638, type: 3}
       propertyPath: m_LocalPosition.x
       value: 119.40492
@@ -14080,6 +14116,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388646572}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &396160894
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 396160896}
+  - component: {fileID: 396160895}
+  m_Layer: 0
+  m_Name: EventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &396160895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396160894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b0236a6decac946b36f5e166eb4ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfTravellers: 400
+  maxJourneys: 5
+  localTravellerProbability: 0.5
+--- !u!4 &396160896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396160894}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 59.647038, y: -2.8720093, z: -39.238914}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &397793559
 GameObject:
   m_ObjectHideFlags: 0
@@ -15810,6 +15893,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065710327314798628, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
+      propertyPath: uniqueID
+      value: 960f98c1-8ab1-41c4-89c8-84d40e02f333
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18611,6 +18698,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2153315442062143630, guid: 95b7d28c485ced74c86ea5f806cb360c, type: 3}
+      propertyPath: uniqueID
+      value: c53e1e28-a2b0-4cec-8266-ef92c24da077
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18987,6 +19078,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 7069c92ff5da0734485f904f3a977904, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6479545830877031946, guid: 7069c92ff5da0734485f904f3a977904, type: 3}
+      propertyPath: uniqueID
+      value: 7dffbbe9-c99a-42c4-b5e4-b52ee763bef8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19687,6 +19782,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: b02bec67-9394-4e66-b977-1aa4bb46cd7b
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1
@@ -20405,6 +20504,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065710327314798628, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
+      propertyPath: uniqueID
+      value: 659a9031-be81-4348-a951-2d51a1a73796
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24376,6 +24479,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9065710327314798628, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
+      propertyPath: uniqueID
+      value: c9f76bd7-4bc7-4c84-a333-f374b55ecde5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24659,6 +24766,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 7069c92ff5da0734485f904f3a977904, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6479545830877031946, guid: 7069c92ff5da0734485f904f3a977904, type: 3}
+      propertyPath: uniqueID
+      value: e6c4c8ac-8c21-4260-b2d0-dde6d6485a01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26664,6 +26775,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3277567191871153011, guid: 6070129c57f4fbb428c55e6d5c3ee568, type: 3}
+      propertyPath: uniqueID
+      value: 77c8d46e-5116-4626-8027-ee58d34391bd
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28470,6 +28585,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2153315442062143630, guid: 95b7d28c485ced74c86ea5f806cb360c, type: 3}
+      propertyPath: uniqueID
+      value: 73afe790-7a14-4134-82df-5849633cbabd
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30051,6 +30170,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5754920297517633004, guid: ef4a0b593b7303945be033306da126d8, type: 3}
+      propertyPath: uniqueID
+      value: b484a0f5-4c8b-4b99-a0d2-3fb2c2fdb9de
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30279,6 +30402,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: 4f66e893-5475-4e0e-9f26-bdc03acb4957
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1 (4)
@@ -31014,6 +31141,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065710327314798628, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
+      propertyPath: uniqueID
+      value: bd9f76dc-5206-4d02-9350-2c415bc8e73f
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32835,6 +32966,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 6070129c57f4fbb428c55e6d5c3ee568, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3277567191871153011, guid: 6070129c57f4fbb428c55e6d5c3ee568, type: 3}
+      propertyPath: uniqueID
+      value: 76ec38f9-4e67-40d3-b052-e360894460b8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39215,6 +39350,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6479545830877031946, guid: 7069c92ff5da0734485f904f3a977904, type: 3}
+      propertyPath: uniqueID
+      value: caaee980-6fca-454a-8f0e-4266eaf84fa1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -39758,6 +39897,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -7585219955393540173, guid: 4f1f9dd2d6bd3e742a070012fb6bb638, type: 3}
+      propertyPath: uniqueID
+      value: f8691096-64a5-4b38-b4ca-c6711b8377a8
+      objectReference: {fileID: 0}
     - target: {fileID: 3535130008212726593, guid: 4f1f9dd2d6bd3e742a070012fb6bb638, type: 3}
       propertyPath: m_LocalPosition.x
       value: 161.60617
@@ -40488,6 +40631,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 95b7d28c485ced74c86ea5f806cb360c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153315442062143630, guid: 95b7d28c485ced74c86ea5f806cb360c, type: 3}
+      propertyPath: uniqueID
+      value: 13a6ad09-5cc8-4b0d-ad4f-4b83b0df2ef2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44255,6 +44402,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: 1f31def5-c5a1-43c3-b133-7c4b34bfa6d7
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1 (1)
@@ -45519,6 +45670,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: ef4a0b593b7303945be033306da126d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754920297517633004, guid: ef4a0b593b7303945be033306da126d8, type: 3}
+      propertyPath: uniqueID
+      value: e4481a62-0f20-415f-a83e-2481d21a9117
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46979,6 +47134,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: 27f46120-cb9f-4f8c-8bf3-991b83b166b3
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1 (2)
@@ -47915,6 +48074,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff666f853c288ad4eb7243cb1e95ae21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenSpawns: 0
+  spawnProbability: 0
+  nextSpawnTime: 0
+  eventManager: {fileID: 0}
   vehiclePrefabTypePairs:
   - vehiclePrefab: {fileID: 100000, guid: a119eb0fa059db34bbaef286c1af1696, type: 3}
     vehicleType: 0
@@ -50236,6 +50399,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -7585219955393540173, guid: 4f1f9dd2d6bd3e742a070012fb6bb638, type: 3}
+      propertyPath: uniqueID
+      value: c515d64a-7a88-4b1c-b307-994695cc4b6d
+      objectReference: {fileID: 0}
     - target: {fileID: 3535130008212726593, guid: 4f1f9dd2d6bd3e742a070012fb6bb638, type: 3}
       propertyPath: m_LocalPosition.x
       value: -80.99381
@@ -50446,6 +50613,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 95b7d28c485ced74c86ea5f806cb360c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153315442062143630, guid: 95b7d28c485ced74c86ea5f806cb360c, type: 3}
+      propertyPath: uniqueID
+      value: 76541d3b-c17c-4cbd-ba4e-cf5b9e194226
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -51266,6 +51437,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6479545830877031946, guid: 7069c92ff5da0734485f904f3a977904, type: 3}
+      propertyPath: uniqueID
+      value: f13ecf3f-fc51-43fc-8669-6d7b91c1da03
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51914,6 +52089,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: 25ad3362-3337-482d-bdcb-787f4a6dec50
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1 (1)
@@ -62918,6 +63097,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9065710327314798628, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
+      propertyPath: uniqueID
+      value: 003e4d36-9177-42a6-94cf-97280c86cd9b
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -64362,6 +64545,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: 9752592b-f9f6-4178-9166-0283c5288cbd
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1
@@ -65758,6 +65945,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: fdd1c754-abae-4d3c-aa7c-381a49fd3a3c
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1 (3)
@@ -65875,6 +66066,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 95b7d28c485ced74c86ea5f806cb360c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2153315442062143630, guid: 95b7d28c485ced74c86ea5f806cb360c, type: 3}
+      propertyPath: uniqueID
+      value: c080bc10-4098-46f1-8260-93b4d18d99be
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -67091,6 +67286,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065710327314798628, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
+      propertyPath: uniqueID
+      value: a89ba82f-b418-441e-8085-5198a658b6e3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -68466,6 +68665,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2153315442062143630, guid: 95b7d28c485ced74c86ea5f806cb360c, type: 3}
+      propertyPath: uniqueID
+      value: 6c4c4077-d57d-4320-b728-49cb5373bbfb
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -68632,6 +68835,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065710327314798628, guid: 8f6822fd7eb26464993b85535446a4d8, type: 3}
+      propertyPath: uniqueID
+      value: 363f80c6-5328-452d-8f59-e4dc89e2be93
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -69333,6 +69540,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: 60ece1ce-dc6b-4f57-9a5c-3a2b972f1b28
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1 (3)
@@ -71556,6 +71767,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: c886cc98-8799-459b-a988-d2830fbd66bc
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1 (1)
@@ -73955,6 +74170,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5754920297517633004, guid: ef4a0b593b7303945be033306da126d8, type: 3}
+      propertyPath: uniqueID
+      value: 4341538b-bbee-4841-9cd7-3bec7b12aaf9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -75459,6 +75678,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1988019264}
     m_Modifications:
+    - target: {fileID: -1071936305921344970, guid: 8f32771669709ed448367e6825d80b12, type: 3}
+      propertyPath: uniqueID
+      value: d889d8db-f1c9-4d13-aaf3-011a3bafd9f0
+      objectReference: {fileID: 0}
     - target: {fileID: 1108109500680130686, guid: 8f32771669709ed448367e6825d80b12, type: 3}
       propertyPath: m_Name
       value: Residence1 (2)
@@ -77142,6 +77365,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2153315442062143630, guid: 95b7d28c485ced74c86ea5f806cb360c, type: 3}
+      propertyPath: uniqueID
+      value: d0df1b21-0ff4-4793-a583-f1d6da06c1fd
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77170,3 +77397,4 @@ SceneRoots:
   - {fileID: 1621122294}
   - {fileID: 1764810834}
   - {fileID: 611394244}
+  - {fileID: 396160896}

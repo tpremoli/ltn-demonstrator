@@ -54,6 +54,8 @@ public class WaypointMover : MonoBehaviour
     public Building originBuilding { get; private set; }
     [SerializeField] private BuildingType destinationBuildingType;
 
+    public Journey journey;
+
     void Start()
     {
         // Start by making the object unready
@@ -70,6 +72,7 @@ public class WaypointMover : MonoBehaviour
         // Some heuristic to choose what ModeOfTransport to use?
         // vehicleChosen = someHeuristicThatReturnsAModeOfTransport();
         // For now, pick the mode randomly
+        /*
         if (this.originBuilding.closestPedestrianEdge == null)
         {
             // we don't have a pedestrian edge, so we can't be a pedestrian (for now)
@@ -79,6 +82,7 @@ public class WaypointMover : MonoBehaviour
         {
             this.mode = (ModeOfTransport)Random.Range(0, 3);
         }
+        */
 
         // if the mode is pedestrian, set the traveller's position to the closest point on the pedestrian edge
         if (this.mode == ModeOfTransport.Pedestrian)
@@ -134,16 +138,18 @@ public class WaypointMover : MonoBehaviour
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-        this.destinationBuilding = chooseDestinationBuilding();
+//        this.destinationBuilding = chooseDestinationBuilding();
+        /*
         if (this.destinationBuilding == null)
         {
             Debug.LogWarning("No destination building found. Destroying object.");
             Destroy(this.gameObject);
             return;
         }
+        */
 
         // Initialize the path with the starting waypoint
-        path = new WaypointPath(this.originBuilding, destinationBuilding, this.mode);
+        path = new WaypointPath(this.originBuilding, this.destinationBuilding, this.mode);
 
         if (path.pathAsEdges == null)
         {
@@ -155,6 +161,11 @@ public class WaypointMover : MonoBehaviour
             Debug.LogWarning("Path doesn't exist for Traveller " + this.gameObject.name + ". Destroying object.");
             Debug.LogWarning("End edge start: " + endEdge.StartWaypoint.name + " End edge end: " + endEdge.EndWaypoint.name);
             Destroy(this.gameObject);
+
+            if (journey != null) {
+                journey.traveller.journeyAbandoned(journey);
+            }
+            
             return;
         }
         else
@@ -209,6 +220,14 @@ public class WaypointMover : MonoBehaviour
 
         // DEBUG
         //DebugDrawPath();
+    }
+
+    // Set the origin building, destination building and mode of transport for the agent.
+    public void Setup(Building originBuilding, Building destinationBuilding, ModeOfTransport modeOfTransport, Journey journey) {
+        this.mode = modeOfTransport;
+        this.originBuilding = originBuilding;
+        this.destinationBuilding = destinationBuilding;
+        this.journey = journey;
     }
 
     public void setOriginBuilding(Building building)
@@ -780,7 +799,28 @@ public class WaypointMover : MonoBehaviour
 
     public void arriveToDestination()
     {
+
+        // TODO This is meant to set withCar of the persistent traveller to the correct value
+        // TODO but I cannot work out which persistent traveller object this should be called on
+        
+        // set with car to false
+        //persistentTraveller.SetWithCar(false);
+
+        // otherwise, if ModeOfTravel is Car, set it to true
+        //if (journey != null && journey.traveller != null && journey.traveller.ModeOfTravel == ModeOfTravel.Car) {
+        //persistentTraveller.SetWithCar(true);
+        //}
+
         Debug.Log("Arrived to destination. Destroying object.");
+        if (journey != null) {
+            if (mode == ModeOfTransport.Car) {
+                journey.traveller.SetWithCar(true);
+            }
+            else {
+                journey.traveller.SetWithCar(false);
+            }
+            journey.traveller.journeyCompleted(journey);
+        }
         Destroy(this.gameObject);
     }
 
