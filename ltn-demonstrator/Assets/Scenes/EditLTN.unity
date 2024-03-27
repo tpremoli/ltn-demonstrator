@@ -261,6 +261,7 @@ MonoBehaviour:
   - {fileID: 945375475}
   - {fileID: 384325137}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &6038009
 Transform:
   m_ObjectHideFlags: 0
@@ -1709,6 +1710,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60355028}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &60548522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 60548524}
+  - component: {fileID: 60548523}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &60548523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60548522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 563007315}
+  - {fileID: 1354152361}
+  - {fileID: 1336295494}
+  - {fileID: 1720022921}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &60548524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60548522}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -26.571991, y: 0, z: -8.65016}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &64240430
 GameObject:
   m_ObjectHideFlags: 0
@@ -3284,6 +3336,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105779340}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &106135631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 106135633}
+  - component: {fileID: 106135632}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &106135632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106135631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1422491980}
+  - {fileID: 1700328353}
+  - {fileID: 1951863590}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &106135633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106135631}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 97.96908, y: 0, z: -40.904373}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &112105674
 GameObject:
   m_ObjectHideFlags: 0
@@ -3494,6 +3596,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115528376}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &117645858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 117645860}
+  - component: {fileID: 117645859}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &117645859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117645858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1590725686}
+  - {fileID: 1559881534}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &117645860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117645858}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 116.14665, y: 0, z: -11.158647}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &118403600
 GameObject:
   m_ObjectHideFlags: 0
@@ -4754,6 +4905,7 @@ MonoBehaviour:
   - {fileID: 1656426714}
   - {fileID: 1047998942}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &162656071
 Transform:
   m_ObjectHideFlags: 0
@@ -6657,6 +6809,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192908230}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &199353627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 199353629}
+  - component: {fileID: 199353628}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &199353628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199353627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 2103147338}
+  - {fileID: 1926338030}
+  - {fileID: 322629103}
+  - {fileID: 1206059386}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &199353629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199353627}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 57.71634, y: 0, z: -14.86195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &203964110
 GameObject:
   m_ObjectHideFlags: 0
@@ -6901,6 +7104,7 @@ MonoBehaviour:
   - {fileID: 162656070}
   - {fileID: 2078090773}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &215935310
 Transform:
   m_ObjectHideFlags: 0
@@ -8028,6 +8232,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263882445}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &265225580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 265225582}
+  - component: {fileID: 265225581}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &265225581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265225580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1911303954}
+  - {fileID: 712869228}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &265225582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265225580}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 59.723633, y: 0, z: 82.775406}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &265366582
 GameObject:
   m_ObjectHideFlags: 0
@@ -9890,16 +10143,19 @@ MonoBehaviour:
   allSensors: []
   loadSensorsFromSave: 0
   edge:
+    EdgeID: 0
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 0}
     endWaypoint: {fileID: 0}
     length: 0
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: 0
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
 --- !u!1 &313138102
 GameObject:
   m_ObjectHideFlags: 0
@@ -10320,6 +10576,108 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317628864}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &322629102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 322629104}
+  - component: {fileID: 322629103}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &322629103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322629102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1488193669}
+  - {fileID: 891115832}
+  - {fileID: 199353628}
+  - {fileID: 1206059386}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &322629104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322629102}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 62.662567, y: 0, z: -14.88314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &323766958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 323766960}
+  - component: {fileID: 323766959}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &323766959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323766958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1336295494}
+  - {fileID: 1249712465}
+  - {fileID: 336683868}
+  - {fileID: 1589134969}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &323766960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323766958}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -29.849598, y: 0, z: -62.355637}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &328602045
 GameObject:
   m_ObjectHideFlags: 0
@@ -10845,6 +11203,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332861067}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &333022347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 333022349}
+  - component: {fileID: 333022348}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &333022348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333022347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1500625463}
+  - {fileID: 772927542}
+  - {fileID: 517031558}
+  - {fileID: 1700328353}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &333022349
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333022347}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 101.66806, y: 0, z: -65.649796}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &333812244
 GameObject:
   m_ObjectHideFlags: 0
@@ -10950,6 +11359,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333812244}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &336683867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 336683869}
+  - component: {fileID: 336683868}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &336683868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336683867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1702449742}
+  - {fileID: 1774760528}
+  - {fileID: 1589134969}
+  - {fileID: 323766959}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &336683869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336683867}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -24.97145, y: 0, z: -64.9203}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &336813456
 GameObject:
   m_ObjectHideFlags: 0
@@ -12475,6 +12935,7 @@ MonoBehaviour:
   - {fileID: 418159636}
   - {fileID: 777480392}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &359278215
 Transform:
   m_ObjectHideFlags: 0
@@ -13187,6 +13648,7 @@ MonoBehaviour:
   - {fileID: 513901382}
   - {fileID: 777480392}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &384325138
 Transform:
   m_ObjectHideFlags: 0
@@ -13727,6 +14189,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 400499933}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &403040328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 403040330}
+  - component: {fileID: 403040329}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &403040329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403040328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1336295494}
+  - {fileID: 1354152361}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &403040330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403040328}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -77.73399, y: 0, z: -12.749015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &405597315
 GameObject:
   m_ObjectHideFlags: 0
@@ -14462,6 +14973,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416233226}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &417872979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417872981}
+  - component: {fileID: 417872980}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &417872980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417872979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 654201922}
+  - {fileID: 1206059386}
+  - {fileID: 1488193669}
+  - {fileID: 1590725686}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &417872981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417872979}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 94.82759, y: 0, z: -10.828587}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &418159635
 GameObject:
   m_ObjectHideFlags: 0
@@ -14497,6 +15059,7 @@ MonoBehaviour:
   - {fileID: 1166107833}
   - {fileID: 359278214}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &418159637
 Transform:
   m_ObjectHideFlags: 0
@@ -16321,6 +16884,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488939415}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &490012624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 490012626}
+  - component: {fileID: 490012625}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &490012625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490012624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 712869228}
+  - {fileID: 1498103139}
+  - {fileID: 1330811999}
+  - {fileID: 1911303954}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &490012626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490012624}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 56.430134, y: 0, z: 34.368332}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &493071800
 GameObject:
   m_ObjectHideFlags: 0
@@ -17136,6 +17750,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511505775}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &512340157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 512340159}
+  - component: {fileID: 512340158}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &512340158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512340157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1422491980}
+  - {fileID: 1700328353}
+  - {fileID: 1500625463}
+  - {fileID: 1242330856}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &512340159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512340157}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 63.837646, y: 0, z: -60.59122}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &513901381
 GameObject:
   m_ObjectHideFlags: 0
@@ -17168,6 +17833,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 384325137}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &513901383
 Transform:
   m_ObjectHideFlags: 0
@@ -17178,6 +17844,57 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 61.6, y: 0, z: -93.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &517031557
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 517031559}
+  - component: {fileID: 517031558}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &517031558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517031557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1951863590}
+  - {fileID: 1774377653}
+  - {fileID: 333022348}
+  - {fileID: 1700328353}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &517031559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517031557}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 104.131966, y: 0, z: -60.697006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18698,6 +19415,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 562997500}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &563007314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 563007316}
+  - component: {fileID: 563007315}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &563007315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563007314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1893662691}
+  - {fileID: 60548523}
+  - {fileID: 1926338030}
+  - {fileID: 1505283692}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &563007316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563007314}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 13.201729, y: 0, z: -8.850897}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &566659913
 GameObject:
   m_ObjectHideFlags: 0
@@ -21814,6 +22582,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653507707}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &654201921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 654201923}
+  - component: {fileID: 654201922}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &654201922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654201921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 417872980}
+  - {fileID: 1330811999}
+  - {fileID: 1292064990}
+  - {fileID: 721928033}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &654201923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654201921}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 93.7378, y: 0, z: 28.8166}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &654628949
 GameObject:
   m_ObjectHideFlags: 0
@@ -24444,6 +25263,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710744731}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &712869227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712869229}
+  - component: {fileID: 712869228}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &712869228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712869227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 490012625}
+  - {fileID: 265225581}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &712869229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712869227}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 54.57384, y: 0, z: 82.597824}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &720661403
 GameObject:
   m_ObjectHideFlags: 0
@@ -24549,6 +25417,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720661403}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &721928032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721928034}
+  - component: {fileID: 721928033}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &721928033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721928032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1911303954}
+  - {fileID: 889952722}
+  - {fileID: 654201922}
+  - {fileID: 1292064990}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &721928034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721928032}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 93.75109, y: 0, z: 33.800247}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &721932534
 GameObject:
   m_ObjectHideFlags: 0
@@ -26269,6 +27188,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769972444}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &772927541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 772927543}
+  - component: {fileID: 772927542}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &772927542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772927541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 333022348}
+  - {fileID: 1774377653}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &772927543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772927541}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 158.22632, y: 0, z: -67.110794}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &777480391
 GameObject:
   m_ObjectHideFlags: 0
@@ -26303,6 +27271,7 @@ MonoBehaviour:
   - {fileID: 1951989319}
   - {fileID: 359278214}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &777480393
 Transform:
   m_ObjectHideFlags: 0
@@ -27115,6 +28084,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 7069c92ff5da0734485f904f3a977904, type: 3}
   m_PrefabInstance: {fileID: 801516533}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &802309368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 802309370}
+  - component: {fileID: 802309369}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &802309369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802309368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1707650770}
+  - {fileID: 1857419224}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &802309370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802309368}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.847399, y: 0, z: -38.93773}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &803933335
 GameObject:
   m_ObjectHideFlags: 0
@@ -28811,6 +29829,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887649307}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &889952721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 889952723}
+  - component: {fileID: 889952722}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &889952722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889952721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 721928033}
+  - {fileID: 2031697200}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &889952723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889952721}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 93.77053, y: 0, z: 62.8295}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &890276116
 GameObject:
   m_ObjectHideFlags: 0
@@ -28916,6 +29983,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890276116}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &891115831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 891115833}
+  - component: {fileID: 891115832}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &891115832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891115831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1951863590}
+  - {fileID: 322629103}
+  - {fileID: 1422491980}
+  - {fileID: 2103147338}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &891115833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891115831}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 63.081272, y: 0, z: -35.035233}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &892425546
 GameObject:
   m_ObjectHideFlags: 0
@@ -30050,6 +31168,7 @@ MonoBehaviour:
   - {fileID: 6038008}
   - {fileID: 1059548947}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &945375476
 Transform:
   m_ObjectHideFlags: 0
@@ -33162,6 +34281,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 162656070}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1047998943
 Transform:
   m_ObjectHideFlags: 0
@@ -33629,6 +34749,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 945375475}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1059548948
 Transform:
   m_ObjectHideFlags: 0
@@ -34622,6 +35743,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 1656426714}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1108862561
 Transform:
   m_ObjectHideFlags: 0
@@ -37405,6 +38527,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 418159636}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1166107834
 Transform:
   m_ObjectHideFlags: 0
@@ -37945,6 +39068,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182395881}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1184856140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1184856142}
+  - component: {fileID: 1184856141}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1184856141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184856140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1498103139}
+  - {fileID: 2003737368}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1184856142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184856140}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 16.97023, y: 0, z: 83.098175}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1186237072
 GameObject:
   m_ObjectHideFlags: 0
@@ -38570,6 +39742,7 @@ MonoBehaviour:
   - {fileID: 215935309}
   - {fileID: 1243431479}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1197207153
 Transform:
   m_ObjectHideFlags: 0
@@ -38795,6 +39968,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202791360}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1206059385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1206059387}
+  - component: {fileID: 1206059386}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1206059386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206059385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 417872980}
+  - {fileID: 1505283692}
+  - {fileID: 199353628}
+  - {fileID: 322629103}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1206059387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206059385}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 60.259995, y: 0, z: -9.950734}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1211606328
 GameObject:
   m_ObjectHideFlags: 0
@@ -39290,6 +40514,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228698853}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1228728042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1228728044}
+  - component: {fileID: 1228728043}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1228728043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228728042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1505283692}
+  - {fileID: 1330811999}
+  - {fileID: 1893662691}
+  - {fileID: 1498103139}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1228728044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228728042}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 17.059202, y: 0, z: 30.917961}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1233962988
 GameObject:
   m_ObjectHideFlags: 0
@@ -40297,6 +41572,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241137087}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1242330855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1242330857}
+  - component: {fileID: 1242330856}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1242330856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242330855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1427688613}
+  - {fileID: 1707650770}
+  - {fileID: 2045657885}
+  - {fileID: 512340158}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1242330857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242330855}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 58.888, y: 0, z: -60.66527}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1242850662
 GameObject:
   m_ObjectHideFlags: 0
@@ -40596,6 +41922,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4057100712623571992, guid: fc6163aa25dbd9b40b4a39b27084f711, type: 3}
   m_PrefabInstance: {fileID: 1243431478}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1249712464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1249712466}
+  - component: {fileID: 1249712465}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1249712465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249712464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 323766959}
+  - {fileID: 1774760528}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1249712466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249712464}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -30.706585, y: 0, z: -97.73399}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1250686931
 GameObject:
   m_ObjectHideFlags: 0
@@ -41288,6 +42663,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286332467}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1292064989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1292064991}
+  - component: {fileID: 1292064990}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1292064990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292064989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1590725686}
+  - {fileID: 2031697200}
+  - {fileID: 654201922}
+  - {fileID: 721928033}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1292064991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292064989}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 98.64987, y: 0, z: 31.324493}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1295005051
 GameObject:
   m_ObjectHideFlags: 0
@@ -42021,6 +43447,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301507109}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1302212693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1302212695}
+  - component: {fileID: 1302212694}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1302212694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302212693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 2003737368}
+  - {fileID: 1895722163}
+  - {fileID: 1893662691}
+  - {fileID: 1498103139}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1302212695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302212693}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12.138031, y: 0, z: 35.886883}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1305983306
 GameObject:
   m_ObjectHideFlags: 0
@@ -42583,6 +44060,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327098615}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1330811998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1330812000}
+  - component: {fileID: 1330811999}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1330811999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330811998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 654201922}
+  - {fileID: 1228728043}
+  - {fileID: 1911303954}
+  - {fileID: 490012625}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1330812000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330811998}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 58.838844, y: 0, z: 29.450764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1331119342
 GameObject:
   m_ObjectHideFlags: 0
@@ -42898,6 +44426,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335228926}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1336295493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1336295495}
+  - component: {fileID: 1336295494}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1336295494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336295493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 323766959}
+  - {fileID: 403040329}
+  - {fileID: 1720022921}
+  - {fileID: 60548523}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1336295495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336295493}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -29.116259, y: 0, z: -13.532769}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1341900387
 GameObject:
   m_ObjectHideFlags: 0
@@ -43549,6 +45128,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351866492}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1354152360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1354152362}
+  - component: {fileID: 1354152361}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1354152361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354152360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 60548523}
+  - {fileID: 403040329}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1354152362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354152360}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -77.64051, y: 0, z: -7.5970116}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1360065021
 GameObject:
   m_ObjectHideFlags: 0
@@ -45552,6 +47180,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417515567}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1422491979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1422491981}
+  - component: {fileID: 1422491980}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1422491980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422491979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 106135632}
+  - {fileID: 512340158}
+  - {fileID: 1707650770}
+  - {fileID: 891115832}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1422491981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422491979}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 63.081924, y: 0, z: -39.960598}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1422647474
 GameObject:
   m_ObjectHideFlags: 0
@@ -45867,6 +47546,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427632344}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1427688612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1427688614}
+  - component: {fileID: 1427688613}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1427688613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427688612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1589134969}
+  - {fileID: 1242330856}
+  - {fileID: 1702449742}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1427688614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427688612}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.220131, y: 0, z: -60.65008}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1431173682
 GameObject:
   m_ObjectHideFlags: 0
@@ -48274,6 +50003,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483848229}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1488193668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1488193670}
+  - component: {fileID: 1488193669}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1488193669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488193668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 322629103}
+  - {fileID: 1559881534}
+  - {fileID: 1590725686}
+  - {fileID: 417872980}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1488193670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488193668}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 97.242065, y: 0, z: -15.749315}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1491279176
 GameObject:
   m_ObjectHideFlags: 0
@@ -48441,6 +50221,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4468016183441563927, guid: 8f32771669709ed448367e6825d80b12, type: 3}
   m_PrefabInstance: {fileID: 1491867630}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1498103138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1498103140}
+  - component: {fileID: 1498103139}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1498103139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498103138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1184856141}
+  - {fileID: 490012625}
+  - {fileID: 1228728043}
+  - {fileID: 1302212694}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1498103140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498103138}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 17.109537, y: 0, z: 35.836094}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1498694743
 GameObject:
   m_ObjectHideFlags: 0
@@ -48473,6 +50304,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 1791835527}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1498694745
 Transform:
   m_ObjectHideFlags: 0
@@ -48593,6 +50425,108 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499019367}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1500625462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1500625464}
+  - component: {fileID: 1500625463}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1500625463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500625462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 2017492308}
+  - {fileID: 333022348}
+  - {fileID: 2045657885}
+  - {fileID: 512340158}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1500625464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500625462}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 63.879917, y: 0, z: -65.56961}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1505283691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1505283693}
+  - component: {fileID: 1505283692}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1505283692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505283691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1206059386}
+  - {fileID: 1228728043}
+  - {fileID: 1926338030}
+  - {fileID: 563007315}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1505283693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505283691}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 18.172, y: 0, z: -8.828272}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1510226296
 GameObject:
   m_ObjectHideFlags: 0
@@ -50168,6 +52102,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555461105}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1559881533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1559881535}
+  - component: {fileID: 1559881534}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1559881534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559881533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1488193669}
+  - {fileID: 117645859}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1559881535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559881533}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 116.02755, y: 0, z: -16.310122}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1562642936
 GameObject:
   m_ObjectHideFlags: 0
@@ -51806,6 +53789,108 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588025890}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1589134968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1589134970}
+  - component: {fileID: 1589134969}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1589134969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589134968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1427688613}
+  - {fileID: 1720022921}
+  - {fileID: 336683868}
+  - {fileID: 323766959}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1589134970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589134968}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -24.885818, y: 0, z: -59.965073}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1590725685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1590725687}
+  - component: {fileID: 1590725686}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1590725686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590725685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1292064990}
+  - {fileID: 117645859}
+  - {fileID: 1488193669}
+  - {fileID: 417872980}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1590725687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590725685}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 99.77015, y: 0, z: -10.826046}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1591819747
 GameObject:
   m_ObjectHideFlags: 0
@@ -54525,6 +56610,7 @@ MonoBehaviour:
   - {fileID: 162656070}
   - {fileID: 1108862560}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1656426715
 Transform:
   m_ObjectHideFlags: 0
@@ -55802,6 +57888,107 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684996907}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1700328352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1700328354}
+  - component: {fileID: 1700328353}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1700328353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700328352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 106135632}
+  - {fileID: 512340158}
+  - {fileID: 333022348}
+  - {fileID: 517031558}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1700328354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700328352}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 99.16798, y: 0, z: -60.791256}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1702449741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1702449743}
+  - component: {fileID: 1702449742}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1702449742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702449741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 336683868}
+  - {fileID: 2045657885}
+  - {fileID: 1427688613}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1702449743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702449741}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.179869, y: 0, z: -65.54992}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1702784111
 GameObject:
   m_ObjectHideFlags: 0
@@ -56035,6 +58222,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1704572623}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1707650769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1707650771}
+  - component: {fileID: 1707650770}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1707650770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707650769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1242330856}
+  - {fileID: 802309369}
+  - {fileID: 1422491980}
+  - {fileID: 2103147338}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1707650771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707650769}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 58.136257, y: 0, z: -39.97803}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1708214733
 GameObject:
   m_ObjectHideFlags: 0
@@ -56561,6 +58799,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718834092}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1720022920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1720022922}
+  - component: {fileID: 1720022921}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1720022921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720022920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1589134969}
+  - {fileID: 1926338030}
+  - {fileID: 1336295494}
+  - {fileID: 60548523}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1720022922
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720022920}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -24.150545, y: 0, z: -13.599745}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1721079862
 GameObject:
   m_ObjectHideFlags: 0
@@ -57644,6 +59933,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 2066951226}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1763324851
 Transform:
   m_ObjectHideFlags: 0
@@ -57974,6 +60264,104 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773333711}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1774377652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1774377654}
+  - component: {fileID: 1774377653}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1774377653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774377652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 517031558}
+  - {fileID: 772927542}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1774377654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774377652}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 158.34785, y: 0, z: -61.959377}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1774760527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1774760529}
+  - component: {fileID: 1774760528}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1774760528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774760527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 336683868}
+  - {fileID: 1249712465}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1774760529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774760527}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -25.554832, y: 0, z: -97.84038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1781658927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58285,6 +60673,7 @@ MonoBehaviour:
   - {fileID: 1498694744}
   - {fileID: 2139523338}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1791835528
 Transform:
   m_ObjectHideFlags: 0
@@ -59035,6 +61424,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814630590}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1815210814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1815210816}
+  - component: {fileID: 1815210815}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1815210815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815210814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 2045657885}
+  - {fileID: 2017492308}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1815210816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815210814}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 59.033512, y: 0, z: -94.70458}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1816340411
 GameObject:
   m_ObjectHideFlags: 0
@@ -60109,6 +62547,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1855015900}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1857419223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1857419225}
+  - component: {fileID: 1857419224}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1857419224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857419223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 2103147338}
+  - {fileID: 802309369}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1857419225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857419223}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.978563, y: 0, z: -33.78655}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1857708508
 GameObject:
   m_ObjectHideFlags: 0
@@ -61116,6 +63603,106 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6070129c57f4fbb428c55e6d5c3ee568, type: 3}
   m_PrefabInstance: {fileID: 1892129863}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1893662690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1893662692}
+  - component: {fileID: 1893662691}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1893662691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893662690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 563007315}
+  - {fileID: 2055570193}
+  - {fileID: 1228728043}
+  - {fileID: 1302212694}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1893662692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893662690}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12.139868, y: 0, z: 30.914183}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1895722162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1895722164}
+  - component: {fileID: 1895722163}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1895722163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895722162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1302212694}
+  - {fileID: 2055570193}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1895722164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895722162}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -29.050722, y: 0, z: 36.597313}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1899881614
 GameObject:
   m_ObjectHideFlags: 0
@@ -61703,6 +64290,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911243438}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1911303953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1911303955}
+  - component: {fileID: 1911303954}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1911303954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911303953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 721928033}
+  - {fileID: 265225581}
+  - {fileID: 1330811999}
+  - {fileID: 490012625}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1911303955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911303953}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 61.34889, y: 0, z: 34.39433}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1916692815
 GameObject:
   m_ObjectHideFlags: 0
@@ -62123,6 +64761,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924437499}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1926338029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1926338031}
+  - component: {fileID: 1926338030}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1926338030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926338029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 199353628}
+  - {fileID: 1720022921}
+  - {fileID: 1505283692}
+  - {fileID: 563007315}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1926338031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926338029}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15.66394, y: 0, z: -13.749735}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1928061924
 GameObject:
   m_ObjectHideFlags: 0
@@ -62964,6 +65653,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950464736}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1951863589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1951863591}
+  - component: {fileID: 1951863590}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1951863590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951863589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 891115832}
+  - {fileID: 517031558}
+  - {fileID: 106135632}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &1951863591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951863589}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 102.830925, y: 0, z: -35.89563}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1951989318
 GameObject:
   m_ObjectHideFlags: 0
@@ -62996,6 +65735,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 777480392}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &1951989320
 Transform:
   m_ObjectHideFlags: 0
@@ -64686,6 +67426,104 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995772275}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2003737367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2003737369}
+  - component: {fileID: 2003737368}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2003737368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003737367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1302212694}
+  - {fileID: 1184856141}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &2003737369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003737367}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.817424, y: 0, z: 83.0768}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2017492307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2017492309}
+  - component: {fileID: 2017492308}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2017492308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017492307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1500625463}
+  - {fileID: 1815210815}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &2017492309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017492307}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 64.18625, y: 0, z: -94.67035}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2025569649
 GameObject:
   m_ObjectHideFlags: 0
@@ -65106,6 +67944,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030328526}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2031697199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2031697201}
+  - component: {fileID: 2031697200}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2031697200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031697199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1292064990}
+  - {fileID: 889952722}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &2031697201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031697199}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 98.92333, y: 0, z: 62.805473}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2032308040
 GameObject:
   m_ObjectHideFlags: 0
@@ -65588,6 +68475,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042817064}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2045657884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2045657886}
+  - component: {fileID: 2045657885}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2045657885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045657884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1702449742}
+  - {fileID: 1815210815}
+  - {fileID: 1500625463}
+  - {fileID: 1242330856}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &2045657886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045657884}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 58.93342, y: 0, z: -65.58302}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2049630772
 GameObject:
   m_ObjectHideFlags: 0
@@ -65903,6 +68841,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2055343530}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2055570191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2055570192}
+  - component: {fileID: 2055570193}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2055570192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055570191}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -29.123978, y: 0, z: 31.444983}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2055570193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055570191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 1893662691}
+  - {fileID: 1895722163}
+  isPedestrianOnly: 1
+  isSubdivided: 0
 --- !u!1 &2056911156
 GameObject:
   m_ObjectHideFlags: 0
@@ -66357,6 +69344,7 @@ MonoBehaviour:
   - {fileID: 945375475}
   - {fileID: 1763324850}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &2066951227
 Transform:
   m_ObjectHideFlags: 0
@@ -66635,507 +69623,758 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypointSize: 1
-  edges:
-  - position: {x: 0, y: 0, z: 0}
+  allEdges:
+  - EdgeID: 346
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 6038008}
     endWaypoint: {fileID: 945375475}
     length: 42.60575
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 347
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 6038008}
     endWaypoint: {fileID: 384325137}
     length: 46.2
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 348
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 162656070}
     endWaypoint: {fileID: 215935309}
     length: 44.61356
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 349
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 162656070}
     endWaypoint: {fileID: 1656426714}
     length: 37.30482
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 350
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 162656070}
     endWaypoint: {fileID: 1047998942}
     length: 30.030329
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 351
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 215935309}
     endWaypoint: {fileID: 1197207152}
     length: 37.110916
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 352
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 215935309}
     endWaypoint: {fileID: 162656070}
     length: 44.61356
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 353
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 215935309}
     endWaypoint: {fileID: 2078090773}
     length: 17.304619
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 354
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 359278214}
     endWaypoint: {fileID: 418159636}
     length: 39.810177
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 355
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 359278214}
     endWaypoint: {fileID: 777480392}
     length: 24.834047
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 356
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 384325137}
     endWaypoint: {fileID: 6038008}
     length: 46.2
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 357
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 384325137}
     endWaypoint: {fileID: 418159636}
     length: 25.612495
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 358
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 384325137}
     endWaypoint: {fileID: 513901382}
     length: 30.100662
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 359
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 384325137}
     endWaypoint: {fileID: 777480392}
     length: 40.30012
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 360
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 418159636}
     endWaypoint: {fileID: 384325137}
     length: 25.612495
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 361
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 418159636}
     endWaypoint: {fileID: 1197207152}
     length: 25.103188
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 362
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 418159636}
     endWaypoint: {fileID: 1166107833}
     length: 43.214
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 363
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 418159636}
     endWaypoint: {fileID: 359278214}
     length: 39.810177
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 364
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 513901382}
     endWaypoint: {fileID: 384325137}
     length: 30.100662
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 365
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 777480392}
     endWaypoint: {fileID: 384325137}
     length: 40.30012
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 366
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 777480392}
     endWaypoint: {fileID: 1951989319}
     length: 55.11534
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 367
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 777480392}
     endWaypoint: {fileID: 359278214}
     length: 24.834047
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 368
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 945375475}
     endWaypoint: {fileID: 2066951226}
     length: 51.30624
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 369
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 945375475}
     endWaypoint: {fileID: 6038008}
     length: 42.60575
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 370
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 945375475}
     endWaypoint: {fileID: 1059548947}
     length: 33.907227
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 371
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1047998942}
     endWaypoint: {fileID: 162656070}
     length: 30.030329
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 372
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1059548947}
     endWaypoint: {fileID: 945375475}
     length: 33.907227
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 373
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1108862560}
     endWaypoint: {fileID: 1656426714}
     length: 49.329296
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 374
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1166107833}
     endWaypoint: {fileID: 418159636}
     length: 43.214
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 375
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1197207152}
     endWaypoint: {fileID: 418159636}
     length: 25.103188
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 376
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1197207152}
     endWaypoint: {fileID: 215935309}
     length: 37.110916
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 377
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1197207152}
     endWaypoint: {fileID: 1243431479}
     length: 44.51359
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 378
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1243431479}
     endWaypoint: {fileID: 1791835527}
     length: 44.71353
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 379
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1243431479}
     endWaypoint: {fileID: 2066951226}
     length: 42.300472
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 380
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1243431479}
     endWaypoint: {fileID: 1197207152}
     length: 44.51359
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 381
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1498694744}
     endWaypoint: {fileID: 1791835527}
     length: 48.200413
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 382
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1656426714}
     endWaypoint: {fileID: 1791835527}
     length: 44.32539
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 383
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1656426714}
     endWaypoint: {fileID: 162656070}
     length: 37.30482
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 384
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1656426714}
     endWaypoint: {fileID: 1108862560}
     length: 49.329296
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 385
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1763324850}
     endWaypoint: {fileID: 2066951226}
     length: 49.608162
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 386
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1791835527}
     endWaypoint: {fileID: 1243431479}
     length: 44.71353
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 387
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1791835527}
     endWaypoint: {fileID: 1656426714}
     length: 44.32539
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 388
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1791835527}
     endWaypoint: {fileID: 1498694744}
     length: 48.200413
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 389
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1791835527}
     endWaypoint: {fileID: 2139523338}
     length: 42.204266
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 390
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 1951989319}
     endWaypoint: {fileID: 777480392}
     length: 55.11534
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 391
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2066951226}
     endWaypoint: {fileID: 1243431479}
     length: 42.300472
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 392
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2066951226}
     endWaypoint: {fileID: 945375475}
     length: 51.30624
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 393
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2066951226}
     endWaypoint: {fileID: 1763324850}
     length: 49.608162
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 394
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2078090773}
     endWaypoint: {fileID: 215935309}
     length: 17.304619
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
-  - position: {x: 0, y: 0, z: 0}
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  - EdgeID: 395
+    position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 2139523338}
     endWaypoint: {fileID: 1791835527}
     length: 42.204266
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: -1
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
+  reducedEdges:
+  - startWaypoint: {fileID: 6038008}
+    endWaypoint: {fileID: 945375475}
+  - startWaypoint: {fileID: 6038008}
+    endWaypoint: {fileID: 384325137}
+  - startWaypoint: {fileID: 162656070}
+    endWaypoint: {fileID: 215935309}
+  - startWaypoint: {fileID: 162656070}
+    endWaypoint: {fileID: 1656426714}
+  - startWaypoint: {fileID: 162656070}
+    endWaypoint: {fileID: 1047998942}
+  - startWaypoint: {fileID: 215935309}
+    endWaypoint: {fileID: 1197207152}
+  - startWaypoint: {fileID: 215935309}
+    endWaypoint: {fileID: 162656070}
+  - startWaypoint: {fileID: 215935309}
+    endWaypoint: {fileID: 2078090773}
+  - startWaypoint: {fileID: 359278214}
+    endWaypoint: {fileID: 418159636}
+  - startWaypoint: {fileID: 359278214}
+    endWaypoint: {fileID: 777480392}
+  - startWaypoint: {fileID: 384325137}
+    endWaypoint: {fileID: 6038008}
+  - startWaypoint: {fileID: 384325137}
+    endWaypoint: {fileID: 418159636}
+  - startWaypoint: {fileID: 384325137}
+    endWaypoint: {fileID: 513901382}
+  - startWaypoint: {fileID: 384325137}
+    endWaypoint: {fileID: 777480392}
+  - startWaypoint: {fileID: 418159636}
+    endWaypoint: {fileID: 384325137}
+  - startWaypoint: {fileID: 418159636}
+    endWaypoint: {fileID: 1197207152}
+  - startWaypoint: {fileID: 418159636}
+    endWaypoint: {fileID: 1166107833}
+  - startWaypoint: {fileID: 418159636}
+    endWaypoint: {fileID: 359278214}
+  - startWaypoint: {fileID: 513901382}
+    endWaypoint: {fileID: 384325137}
+  - startWaypoint: {fileID: 777480392}
+    endWaypoint: {fileID: 384325137}
+  - startWaypoint: {fileID: 777480392}
+    endWaypoint: {fileID: 1951989319}
+  - startWaypoint: {fileID: 777480392}
+    endWaypoint: {fileID: 359278214}
+  - startWaypoint: {fileID: 945375475}
+    endWaypoint: {fileID: 2066951226}
+  - startWaypoint: {fileID: 945375475}
+    endWaypoint: {fileID: 6038008}
+  - startWaypoint: {fileID: 945375475}
+    endWaypoint: {fileID: 1059548947}
+  - startWaypoint: {fileID: 1047998942}
+    endWaypoint: {fileID: 162656070}
+  - startWaypoint: {fileID: 1059548947}
+    endWaypoint: {fileID: 945375475}
+  - startWaypoint: {fileID: 1108862560}
+    endWaypoint: {fileID: 1656426714}
+  - startWaypoint: {fileID: 1166107833}
+    endWaypoint: {fileID: 418159636}
+  - startWaypoint: {fileID: 1197207152}
+    endWaypoint: {fileID: 418159636}
+  - startWaypoint: {fileID: 1197207152}
+    endWaypoint: {fileID: 215935309}
+  - startWaypoint: {fileID: 1197207152}
+    endWaypoint: {fileID: 1243431479}
+  - startWaypoint: {fileID: 1243431479}
+    endWaypoint: {fileID: 1791835527}
+  - startWaypoint: {fileID: 1243431479}
+    endWaypoint: {fileID: 2066951226}
+  - startWaypoint: {fileID: 1243431479}
+    endWaypoint: {fileID: 1197207152}
+  - startWaypoint: {fileID: 1498694744}
+    endWaypoint: {fileID: 1791835527}
+  - startWaypoint: {fileID: 1656426714}
+    endWaypoint: {fileID: 1791835527}
+  - startWaypoint: {fileID: 1656426714}
+    endWaypoint: {fileID: 162656070}
+  - startWaypoint: {fileID: 1656426714}
+    endWaypoint: {fileID: 1108862560}
+  - startWaypoint: {fileID: 1763324850}
+    endWaypoint: {fileID: 2066951226}
+  - startWaypoint: {fileID: 1791835527}
+    endWaypoint: {fileID: 1243431479}
+  - startWaypoint: {fileID: 1791835527}
+    endWaypoint: {fileID: 1656426714}
+  - startWaypoint: {fileID: 1791835527}
+    endWaypoint: {fileID: 1498694744}
+  - startWaypoint: {fileID: 1791835527}
+    endWaypoint: {fileID: 2139523338}
+  - startWaypoint: {fileID: 1951989319}
+    endWaypoint: {fileID: 777480392}
+  - startWaypoint: {fileID: 2066951226}
+    endWaypoint: {fileID: 1243431479}
+  - startWaypoint: {fileID: 2066951226}
+    endWaypoint: {fileID: 945375475}
+  - startWaypoint: {fileID: 2066951226}
+    endWaypoint: {fileID: 1763324850}
+  - startWaypoint: {fileID: 2078090773}
+    endWaypoint: {fileID: 215935309}
+  - startWaypoint: {fileID: 2139523338}
+    endWaypoint: {fileID: 1791835527}
   allBuildings: []
   waypoints: []
   drawEdgeGizmos: 1
@@ -67176,6 +70415,66 @@ Transform:
   - {fileID: 1108862561}
   - {fileID: 777480393}
   - {fileID: 1951989320}
+  - {fileID: 1427688614}
+  - {fileID: 1702449743}
+  - {fileID: 1292064991}
+  - {fileID: 721928034}
+  - {fileID: 654201923}
+  - {fileID: 1590725687}
+  - {fileID: 417872981}
+  - {fileID: 1488193670}
+  - {fileID: 106135633}
+  - {fileID: 1951863591}
+  - {fileID: 1500625464}
+  - {fileID: 512340159}
+  - {fileID: 1242330857}
+  - {fileID: 2045657886}
+  - {fileID: 1422491981}
+  - {fileID: 891115833}
+  - {fileID: 2103147339}
+  - {fileID: 1707650771}
+  - {fileID: 1815210816}
+  - {fileID: 2017492309}
+  - {fileID: 517031559}
+  - {fileID: 1700328354}
+  - {fileID: 333022349}
+  - {fileID: 336683869}
+  - {fileID: 1589134970}
+  - {fileID: 323766960}
+  - {fileID: 2031697201}
+  - {fileID: 889952723}
+  - {fileID: 1249712466}
+  - {fileID: 1774760529}
+  - {fileID: 265225582}
+  - {fileID: 712869229}
+  - {fileID: 1857419225}
+  - {fileID: 802309370}
+  - {fileID: 322629104}
+  - {fileID: 1206059387}
+  - {fileID: 199353629}
+  - {fileID: 1505283693}
+  - {fileID: 563007316}
+  - {fileID: 1926338031}
+  - {fileID: 1184856142}
+  - {fileID: 2003737369}
+  - {fileID: 1911303955}
+  - {fileID: 490012626}
+  - {fileID: 1330812000}
+  - {fileID: 1354152362}
+  - {fileID: 403040330}
+  - {fileID: 1228728044}
+  - {fileID: 1498103140}
+  - {fileID: 1302212695}
+  - {fileID: 1893662692}
+  - {fileID: 772927543}
+  - {fileID: 1774377654}
+  - {fileID: 1720022922}
+  - {fileID: 60548524}
+  - {fileID: 1336295495}
+  - {fileID: 1559881535}
+  - {fileID: 117645860}
+  - {fileID: 1895722164}
+  - {fileID: 2055570192}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2078090772
@@ -67210,6 +70509,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 215935309}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &2078090774
 Transform:
   m_ObjectHideFlags: 0
@@ -68171,6 +71471,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101359666}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2103147337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2103147339}
+  - component: {fileID: 2103147338}
+  m_Layer: 0
+  m_Name: Pedestrian Waypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2103147338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103147337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce69b4cf4619f2b4e973cec9d9b97587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjacentWaypoints:
+  - {fileID: 199353628}
+  - {fileID: 1857419224}
+  - {fileID: 1707650770}
+  - {fileID: 891115832}
+  isPedestrianOnly: 1
+  isSubdivided: 0
+--- !u!4 &2103147339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103147337}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 58.139046, y: 0, z: -35.0155}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2077545152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2106538140
 GameObject:
   m_ObjectHideFlags: 0
@@ -69062,6 +72413,7 @@ MonoBehaviour:
   adjacentWaypoints:
   - {fileID: 1791835527}
   isPedestrianOnly: 0
+  isSubdivided: 0
 --- !u!4 &2139523339
 Transform:
   m_ObjectHideFlags: 0
