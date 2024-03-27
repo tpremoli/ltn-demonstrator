@@ -11,7 +11,7 @@ public class PlayModeButtonClicker : MonoBehaviour
 
     // References to the camera GameObjects
     public Camera mainCamera;
-    //public Camera cinematicCamera;
+    public Camera cinematicCamera;
     public Camera sensorCamera;
 
 
@@ -25,7 +25,7 @@ public class PlayModeButtonClicker : MonoBehaviour
         rootVisualElement.Q<Button>("MainCameraButton").clicked += () => SwitchToCamera(mainCamera);
 
         // Connect the Cinematic Camera button
-        //rootVisualElement.Q<Button>("CinematicCameraButton").clicked += () => SwitchToCamera(cinematicCamera);
+        rootVisualElement.Q<Button>("CinematicCameraButton").clicked += () => SwitchToCamera(cinematicCamera);
 
         // Connect the Sensor Cameras button
         rootVisualElement.Q<Button>("SensorCamerasButton").clicked += () => SwitchToCamera(sensorCamera);

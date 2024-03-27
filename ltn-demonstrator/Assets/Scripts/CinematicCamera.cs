@@ -66,7 +66,7 @@ public class CinematicCamera : MonoBehaviour
     private void SwitchTarget()
     {
         GameObject travellerManagerObject = TravellerManager.Instance.GetManagerObject();
-        int nextIndex = Random.Range(0, travellerManagerObject.transform.childCount);
+        int nextIndex = 0;
         SetTarget(travellerManagerObject.transform.GetChild(nextIndex).gameObject);
     }
 
