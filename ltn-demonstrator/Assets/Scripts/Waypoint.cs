@@ -36,13 +36,13 @@ public class Waypoint : MonoBehaviour
             {
                 if (adjacent.isPedestrianOnly)
                 {
-                    Gizmos.color = Color.green;
+                    Gizmos.color = Color.white;
                     Gizmos.DrawLine(transform.position, adjacent.transform.position);
                 }
                 else
                 {
                     // if the adjacent waypoint is selected, draw the line in yellow, and if not, draw it in red
-                    Gizmos.color = Color.yellow;
+                    Gizmos.color = Color.red;
                     Gizmos.DrawLine(transform.position, adjacent.transform.position);
                 }
             }

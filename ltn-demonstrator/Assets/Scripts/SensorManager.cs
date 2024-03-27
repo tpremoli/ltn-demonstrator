@@ -126,7 +126,7 @@ public class SensorManager : MonoBehaviour
             Debug.Log("Recalculating sensors on edges");
 
             // this is not efficient at all.
-            foreach (Edge edge in graph.edges)
+            foreach (Edge edge in graph.GetAllEdges())
             {
                 edge.RecheckSensors();
             }
