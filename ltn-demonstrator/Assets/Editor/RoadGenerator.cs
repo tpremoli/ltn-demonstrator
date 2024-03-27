@@ -80,7 +80,7 @@ public class RoadLoader : EditorWindow
     {
         List<Edge> processedEdges = new List<Edge>();
 
-        foreach (Edge currentEdge in graph.edges)
+        foreach (Edge currentEdge in graph.GetAllEdges())
         {
             if (currentEdge.isPedestrianOnly) continue;
 
