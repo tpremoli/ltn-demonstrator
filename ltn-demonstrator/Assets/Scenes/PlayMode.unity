@@ -63654,6 +63654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDocument: {fileID: 1621122293}
   mainCamera: {fileID: 150760786}
+  cinematicCamera: {fileID: 1820101919}
   sensorCamera: {fileID: 1755936024}
 --- !u!4 &1764810834
 Transform:
@@ -65915,7 +65916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothTimeCinematic: 0.5
-  verticalDistanceCinematic: 1000
+  verticalDistanceCinematic: 10
 --- !u!1 &1824920647
 GameObject:
   m_ObjectHideFlags: 0
