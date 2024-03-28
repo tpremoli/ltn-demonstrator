@@ -32,7 +32,7 @@ This project is developed and built using the [Unity](https://unity.com/) game e
 
 ## Usage
 
-Details of how to setup and use the project can be found in the [setup](/docs/setup) and [usage guide](/docs/usage.md).
+Details of how to setup and use the project can be found in the [setup](/docs/setup.md) and [usage guide](/docs/usage.md).
 
 ## Contributing
 
