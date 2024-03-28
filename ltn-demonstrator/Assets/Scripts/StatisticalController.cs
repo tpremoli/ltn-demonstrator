@@ -34,7 +34,7 @@
 
         //public GameObject edgePrefab;
 
-        public const int TERMINATION_CRITERIA = 10;
+        public float TERMINATION_CRITERIA = 5.0f;
         private int finishedPaths;
         private bool endSim;
         private bool isHeatMapVisible = false;       //used to toggle the heatmap on and off
@@ -260,9 +260,8 @@
             UpdateEndTimeAndPath(ID, path, vType);
             finishedPaths++;
             Debug.LogError($"finished Paths = {finishedPaths}, term = {TERMINATION_CRITERIA}, num of spawned Travellers = {TravellerManager.Instance.noOfTravellers}");
-            if (finishedPaths >= TERMINATION_CRITERIA) {
-                Debug.Log("ending simulation");
-                endSim = true;
+            if(tm.FinishedFor(TERMINATION_CRITERIA)){
+                endSim=true;
             }
         }
 
