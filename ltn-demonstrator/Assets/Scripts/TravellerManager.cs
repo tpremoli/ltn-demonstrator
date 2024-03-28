@@ -122,6 +122,7 @@ public class TravellerManager : MonoBehaviour
         pathData.routeChange = false;
         //store to list
         StatisticsManager.Instance.AddPathData(pathData);  //finish append
+        noOfTravellers += 1;
     }
 
     public void SpawnRandomTraveller() {

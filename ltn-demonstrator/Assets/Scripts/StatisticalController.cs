@@ -40,7 +40,7 @@
         private bool isHeatMapVisible = false;       //used to toggle the heatmap on and off
         
 
-        
+        //adadad
         // --------------------------------------SERIALISATION ASSETS------------------------------------------
         //Used for loading and saving data
         [System.Serializable]
@@ -154,9 +154,6 @@
                     // update the statsText with your data.
                     UpdateTextWithStatistics();
                     FindWhiteScreen();
-
-
-                    
                 }
             }
         }
