@@ -816,15 +816,15 @@
 
 
         public void ToggleHeatMapUsage() {
-            Debug.LogError("Toggling Heatmap Usage");
+            //Debug.LogError("Toggling Heatmap Usage");
                 //hide all current edges
                 if (isHeatMapVisible == true) {
                 HideEdges(allEdges);
-                Debug.LogError("Hiding Edges 1");
+                //Debug.LogError("Hiding Edges 1");
                 HideWaypoints(centriods);
-                Debug.LogError("Hiding Edges 2");
+                //Debug.LogError("Hiding Edges 2");
                 HideWaypoints(allWaypoints);
-                Debug.LogError("Hiding waypoints 1");
+                //Debug.LogError("Hiding waypoints 1");
             }
             DrawHeatMapUsage();
             //print off the edges used in each path
@@ -848,7 +848,7 @@
         {
             //draw the white screen
             ShowWhiteScreen();
-            Debug.Log("Drawing Heatmap");
+            //Debug.Log("Drawing Heatmap");
             //draw all waypoints and edges
             DrawWaypoints(allWaypoints, 0.2f);        //make these smaller
             DrawWaypoints(centriods, 15f);     //make these bigger, make permanent attribute
@@ -894,7 +894,7 @@
                 foreach (SerialisableEdge e in pd.serialisablePath) {
                     //increment pathdata weight, normalise the amount
                     e.weightUsage += 1f / denominator;
-                    Debug.LogError($"edge weight usage = {e.weightUsage}");
+                    //Debug.LogError($"edge weight usage = {e.weightUsage}");
                 }
             }
         }
