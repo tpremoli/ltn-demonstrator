@@ -114,7 +114,7 @@
                     centriods = ExtractCentriods(clusters);
                     CalcEdgeWeightsByUsage();
                     CalcEdgeWeightsByEmissions();
-                    Debug.Log("Calculated Edge Weights");
+                    Debug.LogError("Calculated Edge Weights");
 
                     //change scene
                     SceneManager.LoadScene("StatisticsScene");
@@ -249,7 +249,10 @@
         // Method to add PathData to the list.
         public void AddPathData(PathData pathData)
         {
-            allPathData.Add(pathData);
+            if (endSim == false)
+            {
+                allPathData.Add(pathData);
+            }
         }
 
 
@@ -499,7 +502,7 @@
         public void CreateSerialisableEdgesAndWaypoints() {
             allWaypoints = ConvertWaypointsToSerializable(GetAllWaypoints());
             allEdges = ConvertEdgeListToSerializable(GetAllEdges());
-            Debug.LogError($"allEdges length: {allEdges.Count}, allWaypoints length: {allWaypoints.Count}");
+            //Debug.LogError($"allEdges length: {allEdges.Count}, allWaypoints length: {allWaypoints.Count}");
            // Debug.LogError($"allEdges length: {allEdges.Count}, allWaypoints length: {allWaypoints.Count}");
         }
 
@@ -526,7 +529,18 @@
 
         public void getAllSerialisedPaths() {
             foreach (var pathData in allPathData) {
+                //Debug.LogError($"path length is {pathData.path.Count}");
                 pathData.serialisablePath = CreateSerialisablePath(pathData.path);
+                //Debug.LogError($"serialised path length is {pathData.serialisablePath.Count}");
+            }
+            //cleanSerialisableEdgeAndWaypointLists();
+        }
+
+
+        public void cleanSerialisableEdgeAndWaypointLists() {
+            for (int i = 0; i < allEdges.Count; i++) {
+                //allEdges[i].serialisablePath = null;
+                continue;
             }
         }
 
@@ -721,9 +735,11 @@
             // Get color from weight
             Color colorFromWeight;
             if (emissions == true) {
+                Debug.LogError($"edge weight emissions = {edge.weightEmissions}");
                 colorFromWeight = GetColorFromWeight(edge.weightEmissions);
             }
             else {
+                Debug.LogError($"edge weight usage = {edge.weightUsage}");
                 colorFromWeight = GetColorFromWeight(edge.weightUsage);
             }
             Gradient gradient = new Gradient();
@@ -783,25 +799,39 @@
             Debug.Log("Hiding Edges");
             for (int i = 0; i < edges.Count; i++)
             {
-                if (edges[i] != null && edges[i].EdgeObject != null)
+                if (edges[i] != null)
                 {
-                    //hide the edge
-                    edges[i].EdgeObject.SetActive(false);
+                    if (edges[i].EdgeObject != null)
+                    {
+                        //hide the edge
+                        edges[i].EdgeObject.SetActive(false);
+                    }
+                    else
+                    {
+                        Debug.LogError($"EdgeObject at index {i} is null");
+                    }
                 }
                 else
                 {
-                    Debug.LogError($"Edge or EdgeObject at index {i} is null");
+                    Debug.LogError($"Edge at index {i} is null");
                 }
             }
         }
 
 
         public void ToggleHeatMapUsage() {
-            //hide all current edges
-            HideEdges(allEdges);
-            HideWaypoints(centriods);
-            HideWaypoints(allWaypoints);
+            Debug.LogError("Toggling Heatmap Usage");
+                //hide all current edges
+                if (isHeatMapVisible == true) {
+                HideEdges(allEdges);
+                Debug.LogError("Hiding Edges 1");
+                HideWaypoints(centriods);
+                Debug.LogError("Hiding Edges 2");
+                HideWaypoints(allWaypoints);
+                Debug.LogError("Hiding waypoints 1");
+            }
             DrawHeatMapUsage();
+            //print off the edges used in each path
         }
 
         public void ToggleHeatMapEmission() {
@@ -868,6 +898,7 @@
                 foreach (SerialisableEdge e in pd.serialisablePath) {
                     //increment pathdata weight, normalise the amount
                     e.weightUsage += 1f / denominator;
+                    Debug.LogError($"edge weight usage = {e.weightUsage}");
                 }
             }
         }
@@ -1124,7 +1155,7 @@
         private string TotalDistance () {
             float totalDistance = 0;
             foreach (var pathData in allPathData) {
-                Debug.LogError($"pathData.serialisablePath length = {pathData.serialisablePath.Count}");
+                //Debug.LogError($"pathData.serialisablePath length = {pathData.serialisablePath.Count}");
                 foreach (var edge in pathData.serialisablePath) {
                     totalDistance += edge.length;
                 }
