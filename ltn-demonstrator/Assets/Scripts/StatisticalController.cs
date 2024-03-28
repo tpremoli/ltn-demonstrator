@@ -257,7 +257,7 @@
             UpdateEndTimeAndPath(ID, path, vType);
             finishedPaths++;
             Debug.LogError($"finished Paths = {finishedPaths}, term = {TERMINATION_CRITERIA}, num of spawned Travellers = {TravellerManager.Instance.noOfTravellers}");
-            if tm.FinishedFor(TERMINATION_CRITERIA){
+            if(tm.FinishedFor(TERMINATION_CRITERIA)){
                 endSim=true;
             }
         }
