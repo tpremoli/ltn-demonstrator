@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.38000003, y: 0.38000003, z: 0.38000003}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -124,16 +124,19 @@ MonoBehaviour:
   spawnProbability: 0.5
   timeBetweenSpawns: 0
   closestRoadEdge:
+    EdgeID: 0
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 0}
     endWaypoint: {fileID: 0}
     length: 0
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: 0
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   closestPointOnRoadEdge: {x: 0, y: 0, z: 0}
   buildingType: 1
 --- !u!114 &-1071936305921344970
