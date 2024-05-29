@@ -50,16 +50,19 @@ MonoBehaviour:
   spawnProbability: 0.1
   timeBetweenSpawns: 1
   closestRoadEdge:
+    EdgeID: 0
     position: {x: 0, y: 0, z: 0}
     direction: {x: 0, y: 0, z: 0}
     startWaypoint: {fileID: 0}
     endWaypoint: {fileID: 0}
     length: 0
     TravellersOnEdge: []
+    IntersectingEdgesByReducedEdge: []
     isBarricated: 0
-    barrierLocation: 0
-    barrier: {fileID: 0}
+    barriersOnEdge: []
     isPedestrianOnly: 0
+    sensor: {fileID: 0}
+    sensorLocation: 0
   closestPointOnRoadEdge: {x: 0, y: 0, z: 0}
   buildingType: 5
 --- !u!114 &-7585219955393540173
@@ -74,4 +77,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca0c3e2e54177041ab674d285f863d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueID: 
+  uniqueID: 03a059a0-8b98-4bab-9ac6-a5fa9b323d92

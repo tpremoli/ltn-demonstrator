@@ -20,8 +20,8 @@ public class EventManager : MonoBehaviour
     {
         yield return new WaitUntil(() => Graph.Instance.IsInitialised);
 
-        numberOfTravellers = 50;
-        maxJourneys = 8;
+        numberOfTravellers = 200;
+        maxJourneys = 500;
         localTravellerProbability = 0.7f;
 
         for (int i = 0; i < numberOfTravellers; i++) {
