@@ -75,7 +75,7 @@
                 //speed up simulation
                 Time.timeScale = 8;
                 SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
-
+                tm = TravellerManager.Instance;
             }
             else
             {
