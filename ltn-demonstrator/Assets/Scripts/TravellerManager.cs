@@ -101,12 +101,22 @@ public class TravellerManager : MonoBehaviour
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.transform);
         Building originBuilding = Graph.Instance.buildings[journey.origin];
         Building destinationBuilding = Graph.Instance.buildings[journey.destination];
-        newTravellerObj.GetComponent<WaypointMover>().Setup(originBuilding, destinationBuilding, ModeOfTransport.Car, journey);
+        ModeOfTransport mode;
+        if (originBuilding.closestPedestrianEdge == null)
+        {
+            // we don't have a pedestrian edge, so we can't be a pedestrian (for now)
+            mode = (ModeOfTransport)Random.Range(1, 3);
+        }
+        else
+        {
+            mode = (ModeOfTransport)Random.Range(0, 3);
+        }
+
+        newTravellerObj.GetComponent<WaypointMover>().Setup(originBuilding, destinationBuilding, mode, journey);
         SaveTravellerData(newTravellerObj);
     }
 
-
-        public void SaveTravellerData (GameObject newTravellerObj) {
+    public void SaveTravellerData (GameObject newTravellerObj) {
         //assign ID to traveller - although its actually a waypointPath, will need to be reconfigured
         WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
         waypointMover.ID = TravellerManager.Instance.noOfTravellers; // Assign ID
