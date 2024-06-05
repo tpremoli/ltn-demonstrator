@@ -34,9 +34,9 @@ public class CinematicCamera : MonoBehaviour
     {
         // if the button's down, swap to main Camera
         if (Input.GetMouseButtonDown(0)){
-            this.gameObject.SetActive(false);
-            mainCamera.gameObject.SetActive(true);
             MoveMainToCinematic();
+            mainCamera.gameObject.SetActive(true);
+            this.gameObject.SetActive(false);
         }
         // check if the target has been destroyed
         if (target == null || target.gameObject == null)
