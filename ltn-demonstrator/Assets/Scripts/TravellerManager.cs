@@ -112,17 +112,19 @@ public class TravellerManager : MonoBehaviour
     {
         //assign ID to traveller - although its actually a waypointPath, will need to be reconfigured
         WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
-        waypointMover.ID = TravellerManager.Instance.noOfTravellers; // Assign ID
+        waypointMover.ID = Instance.noOfTravellers; // Assign ID
         //make stats structures here 
 
         //create data struct for traveller information
-        PathData pathData = new PathData();
-        pathData.path = newTravellerObj.GetComponent<WaypointMover>().getEdgePath();//getpath
-        pathData.vType = newTravellerObj.GetComponent<WaypointMover>().vType;
+        PathData pathData = new PathData
+        {
+            path = newTravellerObj.GetComponent<WaypointMover>().getEdgePath(),//getpath
+            vType = newTravellerObj.GetComponent<WaypointMover>().vType,
+            startTime = Time.time,
+            ID = Instance.noOfTravellers,
+            routeChange = false
+        };
         Debug.Log("------------------Vehicle Type: " + pathData.vType);
-        pathData.startTime = Time.time;
-        pathData.ID = TravellerManager.Instance.noOfTravellers;
-        pathData.routeChange = false;
         //store to list
         StatisticsManager.Instance.AddPathData(pathData);  //finish append
         noOfTravellers += 1;
