@@ -4,6 +4,7 @@ public class CinematicCamera : MonoBehaviour
 {
     private Vector3 _offset;
     [SerializeField] private float smoothTimeCinematic = 0.5f;
+    [SerializeField] private float lingeringDuration = 15f;
     private Vector3 _currentVelocity = Vector3.zero;
 
     private float timePassed = 0;
@@ -29,7 +30,7 @@ public class CinematicCamera : MonoBehaviour
 
         // get time passed in seconds
         timePassed += Time.unscaledDeltaTime;
-        if (timePassed >= 4.0f) // Compare to a constant value in seconds
+        if (timePassed >= lingeringDuration) // Compare to a constant value in seconds
         {
             SwitchTarget();
             timePassed = 0;
