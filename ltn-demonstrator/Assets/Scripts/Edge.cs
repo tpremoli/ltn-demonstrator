@@ -53,6 +53,7 @@ public class Edge
     [SerializeField] private static int IDcounter = 0;
     [SerializeField] private static Dictionary<int, Edge> edgesByID = new Dictionary<int, Edge>();
     [SerializeField] private int EdgeID;
+    public int ID;
     public Vector3 position;
     public Vector3 direction;
     public Waypoint startWaypoint;
@@ -89,19 +90,14 @@ public class Edge
 
     private List<Sensor> sensors = new List<Sensor>();
 
-    public void RegisterSensor(Sensor sensor)
-    {
-        if (sensor != null && !sensors.Contains(sensor))
-        {
-            sensors.Add(sensor);
-        }
-    }
-
+    
+    
     public Edge(Waypoint startWaypoint, Waypoint endWaypoint)
     {
         this.EdgeID = Edge.IDcounter;
         Edge.IDcounter++;
 
+        this.ID = -1;
         this.startWaypoint = startWaypoint;
         this.endWaypoint = endWaypoint;
         this.length = Vector3.Distance(startWaypoint.transform.position, endWaypoint.transform.position);
@@ -132,6 +128,15 @@ public class Edge
         if (this.isBarricated)
         {
             Debug.Log("Edge between " + startWaypoint.name + " and " + endWaypoint.name + " is barricaded by " + barriersOnEdge.Count + " barriers");
+        }
+        sensors = new List<Sensor>();
+    }
+
+    public void RegisterSensor(Sensor sensor)
+    {
+        if (sensor != null && !sensors.Contains(sensor))
+        {
+            sensors.Add(sensor);
         }
 
     }
@@ -171,10 +176,17 @@ public class Edge
     public void Subscribe(WaypointMover trav)
     {
         this.TravellersOnEdge.Add(trav);
+        // for all sensors call CollectDataOnEnter(WaypointMover trav)
+        foreach (Sensor sensor in sensors)
+        {
+            sensor.CollectDataOnEnter(trav);
+        }
+
     }
     public void Unsubscribe(WaypointMover trav)
     {
         this.TravellersOnEdge.Remove(trav);
+
     }
     public void RegisterIntersectingEdge(Edge e)
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 // This is here for future expansion, but is not currently used
 public enum BuildingType
@@ -128,13 +129,19 @@ public class Building : MonoBehaviour
     public void SpawnTraveller()
     {
         if (!ALLOW_SPAWNING) return;
+        Debug.Log("Spawning traveller");
         // We need a prefab for the traveller. This is a template from which we can create new travellers.
+        //update the traveller count
+        TravellerManager.Instance.noOfTravellers += 1;
         // The prefab should have a Traveller component attached to it.
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject travellerManager = TravellerManager.Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, travellerManager.transform);
-        newTravellerObj.GetComponent<WaypointMover>().Setup(this, graph.pickRandomBuilding(), ModeOfTransport.Car, null);
+        newTravellerObj.GetComponent<WaypointMover>().setOriginBuilding(this);
+        //stops spawning if max number of travellers reached
     }
+
+
 
     // public Vector3 getEdgeLocation()
     // {
