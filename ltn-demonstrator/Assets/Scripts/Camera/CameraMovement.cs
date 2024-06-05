@@ -25,8 +25,8 @@ public class CameraMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!self.gameObject.activeSelf){
-            self.gameObject.SetActive(true);
+        if (!this.gameObject.activeSelf){
+            this.gameObject.SetActive(true);
             cinematicCamera.gameObject.SetActive(false);
             MoveToCinematic();
         }
