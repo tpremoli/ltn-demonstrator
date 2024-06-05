@@ -7,12 +7,6 @@ public static class SaveSystem
     private static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
 
     [System.Serializable]
-    public class BarriersContainer
-    {
-        public List<BarrierData> barriers;
-    }
-
-    [System.Serializable]
     public class SensorsContainer
     {
         public List<SensorData> sensors;
@@ -70,7 +64,7 @@ public static class SaveSystem
         if (File.Exists(SAVE_FOLDER + "save.json"))
         {
             string json = File.ReadAllText(SAVE_FOLDER + "save.json");
-            var data = JsonUtility.FromJson<Root>(json);
+            var data = JsonUtility.FromJson<BarriersContainer>(json);
             return data.barriers;
         }
         else
@@ -95,9 +89,4 @@ public static class SaveSystem
         }
     }
 
-    [System.Serializable]
-    private class Root
-    {
-        public List<BarrierData> barriers;
-    }
 }
