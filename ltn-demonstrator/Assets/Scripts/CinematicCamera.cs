@@ -45,7 +45,12 @@ public class CinematicCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (target == null) return;
+        // check if the target has been destroyed
+        if (target == null || target.gameObject == null)
+        {
+            SwitchTarget();
+            return;
+        }
 
         Vector3 desiredPosition = target.position + _offset + Vector3.up * verticalDistanceCinematic;
         transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref _currentVelocity, smoothTimeCinematic);
