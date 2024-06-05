@@ -12,6 +12,8 @@ public class CameraMovement : MonoBehaviour
 
     [SerializeField]
     float sensitivity = 1;
+    [SerializeField]
+    float scrollSensitivity = 20;
 
     private Vector3 dragOrigin; // Declare dragOrigin here
 
@@ -72,7 +74,7 @@ public class CameraMovement : MonoBehaviour
 
     public void Zoom()
     {
-        var scroll = Input.mouseScrollDelta.y;
+        var scroll = Input.mouseScrollDelta.y * scrollSensitivity;
         zoomLevel += scroll;
         zoomLevel = Mathf.Clamp(zoomLevel, 0, maxZoomLevel);
     }
