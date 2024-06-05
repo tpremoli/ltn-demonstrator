@@ -1,49 +1,43 @@
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 
-    public class HeatmapEdge
+public class HeatmapEdge
+{
+    public int ID;
+    public int start;
+    public int end;
+    public int weight;
+
+    public HeatmapEdge(SerialisableEdge edge)
     {
-        public int ID;
-        public int start;
-        public int end;
-        public int weight;
+        this.ID = edge.ID;
+        this.start = edge.startWaypoint.ID;
+        this.end = edge.endWaypoint.ID;
+        this.weight = 0;
+    }
+}
 
-        public HeatmapEdge(SerialisableEdge edge)
-        {
-            this.ID = edge.ID;
-            this.start = edge.startWaypoint.ID;
-            this.end = edge.endWaypoint.ID;
-            this.weight = 0;
-        }
+public class HeatmapNode
+{
+    public int ID;
+    public PointF location;
+
+    public HeatmapNode(SerialisableWaypoint waypoint)
+    {
+        this.ID = waypoint.ID;
+        this.location = new PointF(waypoint.x, waypoint.y);
     }
 
-    public class HeatmapNode
+    public class Heatmap
     {
-        public int ID;
-        public PointF location;
-
-        public HeatmapNode(SerialisableWaypoint waypoint)
-        {
-            this.ID = waypoint.ID;
-            this.location = new PointF(waypoint.x, waypoint.y);
-    }
-
-
-
-
-
-
-
-
-    public class Heatmap {
         private float scale;
         public List<HeatmapEdge> edges;
         public List<HeatmapNode> nodes;
         public List<PathData> paths;
 
-        public Heatmap (float scale)
+        public Heatmap(float scale)
         {
             this.scale = scale;
             this.edges = new List<HeatmapEdge>();
@@ -76,7 +70,7 @@
         public void getEdgeWeights()
         {
             //gets the weights of the edges
-            for (int path = 0; path < paths.Count; path++) 
+            for (int path = 0; path < paths.Count; path++)
             {
                 //for each edge in the path
                 for (int e = 0; e < paths[path].serialisablePath.Count; e++)
@@ -96,22 +90,17 @@
         }
 
 
-        public string MakeHeatmap (List<SerialisableWaypoint> serialisableNodes, List<SerialisableEdge> serialisableEdges, List<PathData> serialisablePaths) 
+        public string MakeHeatmap(List<SerialisableWaypoint> serialisableNodes, List<SerialisableEdge> serialisableEdges, List<PathData> serialisablePaths)
         {
             //makes the heatmap
             convertNodesToHeatmap(serialisableNodes);
             convertEdgesToHeatmap(serialisableEdges);
             getEdgeWeights();
 
-
-
-
-
-
             return "string to file location of heatmap image";
         }
     }
-    }
+}
 
 
 

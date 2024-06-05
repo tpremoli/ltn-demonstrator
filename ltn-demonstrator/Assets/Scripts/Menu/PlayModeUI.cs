@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 
-public class MiniWorld_UI : MonoBehaviour
+public class PlayModeUI : MonoBehaviour
 {
     VisualElement root;
     private List<VisualElement> sensorUIElements;

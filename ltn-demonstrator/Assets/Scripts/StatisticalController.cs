@@ -6,11 +6,6 @@ using System;
 using System.IO;
 using UnityEngine.UI;
 
-
-
-
-
-
 public class StatisticsManager : MonoBehaviour {
     public static StatisticsManager Instance { get; private set; }
     public static List<PathData> allPathData { get; private set; }

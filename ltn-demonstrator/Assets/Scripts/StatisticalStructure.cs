@@ -46,7 +46,6 @@ public class SerialisableEdge {
 }
 
 
-
 public class SerialisableWaypoint {
     public int ID;
     public float x;
@@ -72,7 +71,6 @@ public class SerialisableWaypoint {
     }
 
 }
-
 
 public class Cluster {
     public List<SerialisableWaypoint> Waypoints;
