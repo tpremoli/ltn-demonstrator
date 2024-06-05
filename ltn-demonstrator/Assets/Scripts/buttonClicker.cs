@@ -13,12 +13,8 @@ public class ButtonClicker : MonoBehaviour
     private bool SpawnSensor = false;
     private bool deleteMode = false;
 
-    Transform barrierParent;
-    private static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
-
     public BarrierManager barrierManager;
     public SensorManager sensorManager;
-    private Graph graph;
     // Declare the CameraMovement variable
     public CameraMovement cameraMovement;
     [SerializeField] private UIDocument mainUIDocument;
@@ -31,17 +27,17 @@ public class ButtonClicker : MonoBehaviour
 
     public CanvasRenderer uiElementRenderer;
 
-public void HideUIElement()
-{
-    // This will hide the UI element without disabling the GameObject
-    uiElementRenderer.SetAlpha(0);
-}
+    public void HideUIElement()
+    {
+        // This will hide the UI element without disabling the GameObject
+        uiElementRenderer.SetAlpha(0);
+    }
 
-public void ShowUIElement()
-{
-    // This will show the UI element
-    uiElementRenderer.SetAlpha(1);
-}
+    public void ShowUIElement()
+    {
+        // This will show the UI element
+        uiElementRenderer.SetAlpha(1);
+    }
 
     private void OnEnable()
     {
@@ -90,11 +86,11 @@ public void ShowUIElement()
         Debug.Log(addBarrierRoot);
         // Set up the buttons for the add barrier UI
         addBarrierRoot.Q<Button>("BackButton").clicked += () => OnBackButtonPressed();
-        addBarrierRoot.Q<Button>("BlockAllButton").clicked += () => OnAddBlockAllBarrierPressed();
-        addBarrierRoot.Q<Button>("BlockMotorVehiclesButton").clicked += () => OnAddBlockAllMotorVehiclesBarrierPressed();
-        addBarrierRoot.Q<Button>("BlockHeavyButton").clicked += () => OnAddBlockAllMotorVehiclesBarrierPressed();
-        addBarrierRoot.Q<Button>("AllowBusButton").clicked += () => OnAddBusOnlyBarrierPressed();
-        addBarrierRoot.Q<Button>("AllowBusTaxiButton").clicked += () => OnAddBusandTaxiOnlyBarrierPressed();
+        addBarrierRoot.Q<Button>("BlockAllButton").clicked += () => OnAddBarrierPressed(BarrierType.BlockAll);
+        addBarrierRoot.Q<Button>("BlockMotorVehiclesButton").clicked += () => OnAddBarrierPressed(BarrierType.BlockAllMotorVehicles);
+        addBarrierRoot.Q<Button>("BlockHeavyButton").clicked += () => OnAddBarrierPressed(BarrierType.BlockHeavyTraffic);
+        addBarrierRoot.Q<Button>("AllowBusButton").clicked += () => OnAddBarrierPressed(BarrierType.BusOnly);
+        addBarrierRoot.Q<Button>("AllowBusTaxiButton").clicked += () => OnAddBarrierPressed(BarrierType.BusAndTaxiOnly);
     }
 
 
@@ -109,20 +105,8 @@ public void ShowUIElement()
     private void OnBackButtonPressed()
     {
         // Activate the Main UI
-        //mainUIDocument.gameObject.SetActive(true);
-        //addBarrierUIDocument.gameObject.SetActive(false); // Deactivate the Add Barrier UI
-        //SetupMainButtons();
         OnEnable();
     }
-
-    /**
-
-    private void ChangeBarrierType(BarrierType type)
-    {
-        selectedBarrierType = type;
-        UpdateInstructionLabel($"{type} Barrier selected.");
-    }
-    **/
 
     private void UpdateInstructionLabel(string message)
     {
@@ -154,7 +138,7 @@ public void ShowUIElement()
 
     public void SaveGame()
     {
-    
+
         if (barrierManager != null)
         {
             List<Barrier> barriers = new List<Barrier>();
@@ -232,34 +216,9 @@ public void ShowUIElement()
     public void OnAddBarrierPressed(BarrierType barrierType)
     {
         // Set the selected barrier type
-        this.selectedBarrierType = barrierType;
-
+        selectedBarrierType = barrierType;
         UpdateInstructionLabel("Click on desired barrier location");
         SpawnBarrier = true;
-    }
-    public void OnAddBlockAllBarrierPressed()
-    {
-        OnAddBarrierPressed(BarrierType.BlockAll);
-    }
-
-    public void OnAddBlockAllMotorVehiclesBarrierPressed()
-    {
-        OnAddBarrierPressed(BarrierType.BlockAllMotorVehicles); // Corrected from BlockAllMotorVehicles
-    }
-
-    public void OnAddBusandTaxiOnlyBarrierPressed()
-    {
-        OnAddBarrierPressed(BarrierType.BusAndTaxiOnly); // Corrected from BusAndTaxiOnly
-    }
-
-    public void OnAddBlockHeavyTrafficBarrierPressed()
-    {
-        OnAddBarrierPressed(BarrierType.BlockHeavyTraffic);
-    }
-
-    public void OnAddBusOnlyBarrierPressed()
-    {
-        OnAddBarrierPressed(BarrierType.BusOnly);
     }
 
     void Update()
@@ -279,8 +238,6 @@ public void ShowUIElement()
                     Debug.Log("Barrier created at " + worldPosition);
                     if (barrierManager != null)
                     {
-                        this.graph = GameObject.Find("Graph").GetComponent<Graph>();
-
                         Debug.Log("Barrier List size: " + barrierManager.allBarriers.Count);
                         barrierManager.AddBarrier(worldPosition, this.selectedBarrierType);
                         SpawnBarrier = false;
@@ -342,7 +299,7 @@ public void ShowUIElement()
                 }
             }
         }
-        
+
 
         // Re-enable camera movement when no mouse button is pressed
         if (!Input.GetMouseButton(0))
@@ -350,7 +307,7 @@ public void ShowUIElement()
             cameraMovement.canMove = true;
         }
     }
-    
+
 
     public void OnPlayButtonPressed()
     {

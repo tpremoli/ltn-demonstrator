@@ -6,8 +6,8 @@
             <ui:Button text="Add Barriers" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddBarriersButton" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px;" />
             <ui:Button text="Delete Barrier" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteBarrierButton" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px;" />
             <ui:Button text="Delete Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteSaveButton" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px;" />
-            <ui:Button text="Add Sensors" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddSensorsButton" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px; position: absolute; top: 51px; left: 101px;" />
-            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="InstructionLabel" style="width: 216px;" />
+            <ui:Button text="Add Sensors" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddSensorsButton" class="button" style="flex-direction: row-reverse; white-space: nowrap; align-items: auto; justify-content: flex-end; -unity-text-align: upper-center; height: 45px; width: 143px; position: absolute; top: 51px; left: 101px; display: none;" />
+            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="InstructionLabel" style="width: 216px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
