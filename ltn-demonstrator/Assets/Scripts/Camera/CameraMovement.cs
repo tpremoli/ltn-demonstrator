@@ -19,21 +19,18 @@ public class CameraMovement : MonoBehaviour
 
     private float zoomLevel;
 
-    public bool canMove = true; // Add this line
+    private int leftToSleep; // Number of frames for which the panning is disabled
 
-    public Camera cinematicCamera;
+    public bool canMove = true; // Add this line
 
     private void Update()
     {
-        if (!this.gameObject.activeSelf){
-            this.gameObject.SetActive(true);
-            cinematicCamera.gameObject.SetActive(false);
-            MoveToCinematic();
-        }
-
         if (canMove) // Add this line
         {
-            PanCamera();
+            if (leftToSleep == 0)
+                PanCamera();
+            else
+                leftToSleep--;
             SetCameraHeight();
             Zoom();
         }
@@ -55,10 +52,6 @@ public class CameraMovement : MonoBehaviour
         var raycastDir = (moseWorldPoint - cam.transform.position).normalized;
 
         return raycastDir;
-    }
-    private void MoveToCinematic(){
-        if (cinematicCamera == null) return;
-        cam.transform.position = cinematicCamera.transform.position;
     }
 
     private void PanCamera()
@@ -89,5 +82,15 @@ public class CameraMovement : MonoBehaviour
         var scroll = Input.mouseScrollDelta.y * scrollSensitivity;
         zoomLevel += scroll;
         zoomLevel = Mathf.Clamp(zoomLevel, 0, maxZoomLevel);
+    }
+
+    public void SetZoomLevel(Vector3 target){
+        float height = target.y;
+        zoomLevel = (1-((height-minY) / (maxY-minY)))*maxZoomLevel;
+        zoomLevel = Mathf.Clamp(zoomLevel, 0, maxZoomLevel);
+    }
+    public void SleepPanningFor(int sleepduriont)
+    {
+        this.leftToSleep = sleepduriont;
     }
 }

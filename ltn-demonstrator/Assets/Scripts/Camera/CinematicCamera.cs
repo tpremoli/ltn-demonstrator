@@ -7,6 +7,8 @@ public class CinematicCamera : MonoBehaviour
     [SerializeField] private float lingeringDuration = 15f;
     private Vector3 _currentVelocity = Vector3.zero;
 
+    public Camera mainCamera;
+
     private float timePassed = 0;
     private Transform target;
     [SerializeField] private float verticalDistanceCinematic = 1000f; // Distance above the target
@@ -16,8 +18,26 @@ public class CinematicCamera : MonoBehaviour
         SwitchTarget();
     }
 
+    private void MoveMainToCinematic(){
+        // move transform to current positon
+        mainCamera.gameObject.transform.position = this.gameObject.transform.position;
+        
+        // get the camera script
+        CameraMovement camScript = mainCamera.GetComponent<CameraMovement>();
+        
+        
+        camScript.SetZoomLevel(this.transform.position); // control zoom
+        camScript.SleepPanningFor(10); // disable panning for a bit
+    }
+
     private void LateUpdate()
     {
+        // if the button's down, swap to main Camera
+        if (Input.GetMouseButtonDown(0)){
+            this.gameObject.SetActive(false);
+            mainCamera.gameObject.SetActive(true);
+            MoveMainToCinematic();
+        }
         // check if the target has been destroyed
         if (target == null || target.gameObject == null)
         {
