@@ -21,8 +21,16 @@ public class CameraMovement : MonoBehaviour
 
     public bool canMove = true; // Add this line
 
+    public Camera cinematicCamera;
+
     private void Update()
     {
+        if (!self.gameObject.activeSelf){
+            self.gameObject.SetActive(true);
+            cinematicCamera.gameObject.SetActive(false);
+            MoveToCinematic();
+        }
+
         if (canMove) // Add this line
         {
             PanCamera();
@@ -47,6 +55,10 @@ public class CameraMovement : MonoBehaviour
         var raycastDir = (moseWorldPoint - cam.transform.position).normalized;
 
         return raycastDir;
+    }
+    private void MoveToCinematic(){
+        if (cinematicCamera == null) return;
+        cam.transform.position = cinematicCamera.transform.position;
     }
 
     private void PanCamera()
