@@ -1,3 +1,4 @@
 {
-    "dotnet.defaultSolution": "ltn-demonstrator/ltn-demonstrator.sln"
+    "dotnet.defaultSolution": "ltn-demonstrator/ltn-demonstrator.sln",
+    "cloudcode.duetAI.inlineSuggestions.enableAuto": false
 }

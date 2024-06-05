@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Utils;
 
 public class WaypointPath
-{
+{   
     private Graph graph;
     private ModeOfTransport mode;
 

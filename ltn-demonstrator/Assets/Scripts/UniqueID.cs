@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 
 [ExecuteInEditMode]
+[System.Serializable]
 public class UniqueID : MonoBehaviour
 {
     static Dictionary<string, UniqueID> allGUIDs = new Dictionary<string, UniqueID>();
