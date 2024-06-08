@@ -33,11 +33,6 @@ public class BarrierManager : MonoBehaviour
 
     private void Start()
     {
-        barrierPrefabs.Add(BarrierType.BlockAll, blockAllPrefab);
-        barrierPrefabs.Add(BarrierType.BlockAllMotorVehicles, blockAllMotorVehiclesPrefab);
-        barrierPrefabs.Add(BarrierType.BlockHeavyTraffic, blockHeavyTrafficPrefab);
-        barrierPrefabs.Add(BarrierType.BusOnly, busOnlyPrefab);
-        barrierPrefabs.Add(BarrierType.BusAndTaxiOnly, busAndTaxiOnlyPrefab);
     }
 
     void Update()
@@ -74,12 +69,18 @@ public class BarrierManager : MonoBehaviour
         }
         allBarriers.Clear();
 
+        barrierPrefabs.Add(BarrierType.BlockAll, blockAllPrefab);
+        barrierPrefabs.Add(BarrierType.BlockAllMotorVehicles, blockAllMotorVehiclesPrefab);
+        barrierPrefabs.Add(BarrierType.BlockHeavyTraffic, blockHeavyTrafficPrefab);
+        barrierPrefabs.Add(BarrierType.BusOnly, busOnlyPrefab);
+        barrierPrefabs.Add(BarrierType.BusAndTaxiOnly, busAndTaxiOnlyPrefab);
+
         // Load new barriers
         List<BarrierData> barrierDataList = BarrierData.LoadBarriers();
         foreach (BarrierData barrierData in barrierDataList)
         {
             // NOTE: this won't load the correct barrier type
-            GameObject newBarrier = Instantiate(barrierPrefab);
+            GameObject newBarrier = Instantiate(barrierPrefabs[barrierData.type]);
             newBarrier.transform.position = new Vector3(barrierData.position[0], barrierData.position[1], barrierData.position[2]);
             newBarrier.transform.rotation = Quaternion.Euler(barrierData.rotation[0], barrierData.rotation[1], barrierData.rotation[2]);
 
