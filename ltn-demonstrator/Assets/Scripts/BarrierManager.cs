@@ -33,6 +33,14 @@ public class BarrierManager : MonoBehaviour
 
     private void Start()
     {
+        if (Graph.Instance.inEditMode)
+        {
+            barrierPrefabs.Add(BarrierType.BlockAll, blockAllPrefab);
+            barrierPrefabs.Add(BarrierType.BlockAllMotorVehicles, blockAllMotorVehiclesPrefab);
+            barrierPrefabs.Add(BarrierType.BlockHeavyTraffic, blockHeavyTrafficPrefab);
+            barrierPrefabs.Add(BarrierType.BusOnly, busOnlyPrefab);
+            barrierPrefabs.Add(BarrierType.BusAndTaxiOnly, busAndTaxiOnlyPrefab);
+        }
     }
 
     void Update()
