@@ -5,6 +5,7 @@ using UnityEngine;
 public class Barrier : MonoBehaviour
 {
     public BarrierType BarrierType;
+    public Vector3 closestPointOnEdge;
 
     public bool isPointInBarrier(Vector3 point)
     {
@@ -18,4 +19,10 @@ public class Barrier : MonoBehaviour
         // Check if the point is within the barrier's collider
         return barrierCollider.bounds.Contains(point);
     }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, closestPointOnEdge);
+    }
+
 }

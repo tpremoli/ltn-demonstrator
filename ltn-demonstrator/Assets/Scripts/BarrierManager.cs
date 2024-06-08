@@ -100,43 +100,33 @@ public class BarrierManager : MonoBehaviour
 
     public void AddBarrier(Vector3 position, BarrierType selectedBarrierType)
     {
+        // Instantiate the new barrier at the given position with no rotation
         GameObject newBarrier = Instantiate(barrierPrefabs[selectedBarrierType], position, Quaternion.identity);
 
+        // Set the barrier type and name
         newBarrier.GetComponent<Barrier>().BarrierType = selectedBarrierType;
-
-        newBarrier.transform.Rotate(0, 90, 0);
-
         newBarrier.transform.name = selectedBarrierType.ToString();
-
         newBarrier.transform.parent = this.transform;
 
-        // Rotate the barrier on the y axis 
+        // Find the closest edge and calculate the closest point on the edge
         Graph graph = Graph.Instance;
-
         Edge closestEdge = graph.getClosetRoadEdge(position);
         Vector3 closestPointOnEdge = closestEdge.GetClosestPoint(position);
-        Vector3 directionFromClosestPointToBarrier = newBarrier.transform.position - closestPointOnEdge; // Calculate direction vector
+        newBarrier.transform.position = closestPointOnEdge;
 
-        if (directionFromClosestPointToBarrier != Vector3.zero)
-        {
-            // Normalize the direction vector
-            Vector3 normalizedDirection = directionFromClosestPointToBarrier.normalized;
+        newBarrier.GetComponent<Barrier>().closestPointOnEdge = closestEdge.startWaypoint.transform.position;
 
-            // rotate barrier horizontal to the road
-            newBarrier.transform.rotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
+        // Calculate the rotation to align with the edge direction
+        Vector3 edgeDirection = (closestPointOnEdge - closestEdge.startWaypoint.transform.position).normalized;
+        Debug.Log("Edge Direction: " + edgeDirection);
+        Quaternion edgeRotation = Quaternion.LookRotation(edgeDirection);
 
-            // rotate 90 degrees
-            newBarrier.transform.Rotate(0, 90, 0);
-
-            // Set the barrier's position to this new position
-            newBarrier.transform.position = position;
-        }
-
+        // Set the rotation directly to align with the edge
+        newBarrier.transform.rotation = edgeRotation;
+        
         // Add the barrier to the list of all barriers
         allBarriers.Add(newBarrier);
     }
-
-
 
     public void RecalcBarriersOnEdges()
     {
