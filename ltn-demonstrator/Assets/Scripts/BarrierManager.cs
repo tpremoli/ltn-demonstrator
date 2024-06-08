@@ -106,7 +106,7 @@ public class BarrierManager : MonoBehaviour
         // Set the barrier type and name
         newBarrier.GetComponent<Barrier>().BarrierType = selectedBarrierType;
         newBarrier.transform.name = selectedBarrierType.ToString();
-        newBarrier.transform.parent = this.transform;
+        newBarrier.transform.parent = transform;
 
         // Find the closest edge and calculate the closest point on the edge
         Graph graph = Graph.Instance;
@@ -123,7 +123,7 @@ public class BarrierManager : MonoBehaviour
 
         // Set the rotation directly to align with the edge
         newBarrier.transform.rotation = edgeRotation;
-        
+
         // Add the barrier to the list of all barriers
         allBarriers.Add(newBarrier);
     }
