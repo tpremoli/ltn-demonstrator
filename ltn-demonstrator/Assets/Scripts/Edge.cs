@@ -432,13 +432,6 @@ public class Edge
             if (barrier.isPointInBarrier(this.GetClosestPoint(barrier.transform.position)))
             {
                 Debug.Log("Barrier found at " + barrier.transform.position);
-                // Calculate the angle between the barrier's forward direction and the edge direction
-                Vector3 edgeDirection = this.GetDirection();
-                float angle = Vector3.Angle(barrier.transform.forward, edgeDirection);
-
-                // Apply the rotation to the barrier
-                barrier.transform.rotation = Quaternion.Euler(0, angle, 0);
-
                 intersectingBarriers.Add(barrier);
             }
         }
@@ -466,52 +459,53 @@ public class Edge
 
     public Sensor getSensorInPath()
     {
-        Sensor[] allSensors;
+        return null;
+        // Sensor[] allSensors;
 
-        if (SensorManager.Instance == null)
-        {
-            allSensors = GameObject.FindObjectsOfType<Sensor>();
-        }
-        else
-        {
-            List<GameObject> allSensorGameObjects;
-            allSensorGameObjects = SensorManager.Instance.allSensors;
-            // get all the Sensor objects from the list of GameObjects
-            allSensors = new Sensor[allSensorGameObjects.Count];
-            for (int i = 0; i < allSensorGameObjects.Count; i++)
-            {
-                allSensors[i] = allSensorGameObjects[i].GetComponent<Sensor>();
-            }
-        }
+        // if (SensorManager.Instance == null)
+        // {
+        //     allSensors = GameObject.FindObjectsOfType<Sensor>();
+        // }
+        // else
+        // {
+        //     List<GameObject> allSensorGameObjects;
+        //     allSensorGameObjects = SensorManager.Instance.allSensors;
+        //     // get all the Sensor objects from the list of GameObjects
+        //     allSensors = new Sensor[allSensorGameObjects.Count];
+        //     for (int i = 0; i < allSensorGameObjects.Count; i++)
+        //     {
+        //         allSensors[i] = allSensorGameObjects[i].GetComponent<Sensor>();
+        //     }
+        // }
 
-        foreach (Sensor sensor in allSensors)
-        {
-            if (sensor.isPointInSensor(this.GetClosestPoint(sensor.transform.position)))
-            {
-                Debug.Log("Sensor found at " + sensor.transform.position);
-                // Calculate the angle between the sensor's forward direction and the edge direction
-                Vector3 edgeDirection = this.GetDirection();
-                float angle = Vector3.Angle(sensor.transform.forward, edgeDirection);
+        // foreach (Sensor sensor in allSensors)
+        // {
+        //     if (sensor.isPointInSensor(this.GetClosestPoint(sensor.transform.position)))
+        //     {
+        //         Debug.Log("Sensor found at " + sensor.transform.position);
+        //         // Calculate the angle between the sensor's forward direction and the edge direction
+        //         Vector3 edgeDirection = this.GetDirection();
+        //         float angle = Vector3.Angle(sensor.transform.forward, edgeDirection);
 
-                // Apply the rotation to the sensor
-                sensor.transform.rotation = Quaternion.Euler(0, angle, 0);
+        //         // Apply the rotation to the sensor
+        //         sensor.transform.rotation = Quaternion.Euler(0, angle, 0);
 
-                // Find the nearest waypoint to the sensor
-                Waypoint nearestWaypoint = FindNearestWaypoint(sensor);
-                if (nearestWaypoint != null)
-                {
-                    Debug.Log("Nearest waypoint to sensor is at " + nearestWaypoint.transform.position);
-                }
-                else
-                {
-                    Debug.Log("No waypoints found.");
-                }
+        //         // Find the nearest waypoint to the sensor
+        //         Waypoint nearestWaypoint = FindNearestWaypoint(sensor);
+        //         if (nearestWaypoint != null)
+        //         {
+        //             Debug.Log("Nearest waypoint to sensor is at " + nearestWaypoint.transform.position);
+        //         }
+        //         else
+        //         {
+        //             Debug.Log("No waypoints found.");
+        //         }
 
-                return sensor;
-            }
-        }
+        //         return sensor;
+        //     }
+        // }
 
-        return null; // return null if no sensor is found in the path
+        // return null; // return null if no sensor is found in the path
     }
 
     public Waypoint getClosestWaypoint(Vector3 point)

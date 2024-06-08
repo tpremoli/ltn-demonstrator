@@ -74,14 +74,13 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
             buildingsByType[b.buildingType].Add(b);
             buildings.Add(b.GetComponent<UniqueID>().uniqueID, b);
         }
-
+        
         if (!inEditMode && BarrierManager.Instance.loadBarriersFromSave)
         {
-            BarrierManager.Instance.RecalcBarriersOnEdges();
+            BarrierManager.Instance.LoadBarriersFromSave();
         }
 
         IsInitialised = true;
-
     }
 
     // these methods are used to add, get, and reset edges.
@@ -235,11 +234,13 @@ public class Graph : MonoBehaviour, ISerializationCallbackReceiver
         return closestEdge;
     }
 
-    public Building pickRandomBuilding() {
+    public Building pickRandomBuilding()
+    {
         return buildings.Values.ToList<Building>()[Random.Range(0, buildings.Count - 1)];
     }
 
-    public string pickRandomBuildingID() {
+    public string pickRandomBuildingID()
+    {
         List<string> keys = new List<string>(buildings.Keys);
         int index = Random.Range(0, keys.Count);
         return keys[index];

@@ -61,10 +61,6 @@ public class BarrierManager : MonoBehaviour
         {
             Instance = this;
         }
-        if (loadBarriersFromSave)
-        {
-            LoadBarriersFromSave();
-        }
     }
 
     public void LoadBarriersFromSave()
