@@ -55,11 +55,11 @@ public class VehicleProperties
             return getRateOfEmmision();
         }
     }
-    public int MaxNumberOfPassangers
+    public int MaxNumberOfPassengers
     {
         get
         {
-            return getMaxNumberOfPassangers();
+            return getMaxNumberOfPassengers();
         }
     }
 
@@ -158,19 +158,20 @@ public class VehicleProperties
     {
         switch (Type)
         {
+            // values in g/m (grams per meter)
             case VehicleType.PersonalCar:
-                return 1.0f;
+                return 0.143f;
             case VehicleType.SUV:
-                return 1.2f;
+                return 0.202f;
             case VehicleType.Van:
-                return 1.4f;
+                return 0.176f;
             case VehicleType.Taxi:
-                return 1.0f;
+                return 0.100f;
             default:
                 return 0.0f;
         }
     }
-    private int getMaxNumberOfPassangers()
+    private int getMaxNumberOfPassengers()
     {
         switch (Type)
         {

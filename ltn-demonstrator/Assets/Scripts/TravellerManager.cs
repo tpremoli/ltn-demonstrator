@@ -13,23 +13,26 @@ public class TravellerManager : MonoBehaviour
         public VehicleType vehicleType;
     }
 
-    public static TravellerManager Instance;
-    public float timeBetweenSpawns;
-    public float spawnProbability;
-    public float nextSpawnTime;
+    public static TravellerManager Instance { get; private set; }
     private Graph graph;
 
     public EventManager eventManager;
 
+    // records teh last time the Traveller Manager spawned a Traveller
+    private float lastSpawn;
+
     // pick random model and material
     [SerializeField]
     public List<VehiclePrefabTypePair> vehiclePrefabTypePairs;
+    public int noOfTravellers;
+
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            noOfTravellers = 0;
         }
         else
         {
@@ -37,15 +40,13 @@ public class TravellerManager : MonoBehaviour
         }
     }
 
-    public void Start() {
-        this.timeBetweenSpawns = 0.5f;
-        this.spawnProbability = 1f;
-        this.nextSpawnTime = Time.time + timeBetweenSpawns;
-        this.graph = Graph.Instance;
-        
+    public void Start()
+    {
+        graph = Graph.Instance;
+
         eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
 
-        
+
         // saving and loading from json
         string filePath = "Saves/eventlist.json";
         if (File.Exists(filePath))
@@ -58,32 +59,36 @@ public class TravellerManager : MonoBehaviour
             //eventManager.generateJourneys()
             eventManager.SaveEventListToJson(filePath);
         }
-            
+        this.lastSpawn = Time.time;
     }
 
-    public void Update() {
-        if (Time.time >= nextSpawnTime) {
-            if (Random.value < spawnProbability) {
-                //Debug.Log("Spawning random traveller...");
-                //SpawnRandomTraveller();
-            }
-
-            nextSpawnTime = Time.time + timeBetweenSpawns;
-        }
-
-        if (eventManager.eventList.Count > 0) {
-            foreach (Journey j in eventManager.eventList) {
-                if (j.status == JourneyStatus.NotStarted) {
+    public void Update()
+    {
+        if (eventManager.eventList.Count > 0)
+        {
+            foreach (Journey j in eventManager.eventList)
+            {
+                if (j.status == JourneyStatus.NotStarted)
+                {
                     Debug.Log("Spawning traveller from event list: " + j.origin + " to " + j.destination + " at time " + j.time + " (current time is " + Time.time + ")");
                     SpawnTraveller(j);
                     j.traveller.journeyStarted(j);
+                    lastSpawn = Time.time;
                 }
                 //eventManager.eventList.Remove(j);
             }
         }
     }
-    
-    public void SpawnTraveller(Journey journey) {
+
+    public bool FinishedFor(float period)
+    {
+        if (transform.childCount > 0) return false;
+        if (lastSpawn + period < Time.time) return true;
+        return false;
+    }
+
+    public void SpawnTraveller(Journey journey)
+    {
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.transform);
         Building originBuilding = Graph.Instance.buildings[journey.origin];
@@ -100,9 +105,33 @@ public class TravellerManager : MonoBehaviour
         }
 
         newTravellerObj.GetComponent<WaypointMover>().Setup(originBuilding, destinationBuilding, mode, journey);
+        SaveTravellerData(newTravellerObj);
     }
 
-    public void SpawnRandomTraveller() {
+    public void SaveTravellerData(GameObject newTravellerObj)
+    {
+        //assign ID to traveller - although its actually a waypointPath, will need to be reconfigured
+        WaypointMover waypointMover = newTravellerObj.GetComponent<WaypointMover>();
+        waypointMover.ID = Instance.noOfTravellers; // Assign ID
+        //make stats structures here 
+
+        //create data struct for traveller information
+        PathData pathData = new PathData
+        {
+            path = newTravellerObj.GetComponent<WaypointMover>().getEdgePath(),//getpath
+            vType = newTravellerObj.GetComponent<WaypointMover>().vType,
+            startTime = Time.time,
+            ID = Instance.noOfTravellers,
+            routeChange = false
+        };
+        Debug.Log("------------------Vehicle Type: " + pathData.vType);
+        //store to list
+        StatisticsManager.Instance.AddPathData(pathData);  //finish append
+        noOfTravellers += 1;
+    }
+
+    public void SpawnRandomTraveller()
+    {
         GameObject travellerPrefab = Resources.Load<GameObject>("Traveller");
         //GameObject travellerManager = Instance.gameObject;
         GameObject newTravellerObj = Instantiate(travellerPrefab, this.transform);
@@ -120,7 +149,8 @@ public class TravellerManager : MonoBehaviour
 
         return null; // Or handle this case as needed
     }
-    public GameObject GetManagerObject(){
+    public GameObject GetManagerObject()
+    {
         return this.gameObject;
     }
 }
