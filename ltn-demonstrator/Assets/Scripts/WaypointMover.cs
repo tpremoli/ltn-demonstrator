@@ -6,7 +6,7 @@ public class WaypointMover : MonoBehaviour
 {
     // Attributes controlling the object state
     bool initialised;   // Controls whether object has been initialised and should begin travelling
-    public int ID {get; set;}
+    public int ID { get; set; }
     public List<Edge> pathOriginal { get; private set; }
 
     // Attributes controlling vehicle's type
@@ -144,7 +144,7 @@ public class WaypointMover : MonoBehaviour
         // Start generating path to be taken
         this.graph = GameObject.Find("Graph").GetComponent<Graph>();
 
-//        this.destinationBuilding = chooseDestinationBuilding();
+        //        this.destinationBuilding = chooseDestinationBuilding();
         /*
         if (this.destinationBuilding == null)
         {
@@ -171,10 +171,11 @@ public class WaypointMover : MonoBehaviour
             StatisticsManager.Instance.BUGFIXincrementFinishedPaths();
             Destroy(this.gameObject);
 
-            if (journey != null) {
+            if (journey != null)
+            {
                 journey.traveller.journeyAbandoned(journey);
             }
-            
+
             return;
         }
         else
@@ -233,12 +234,14 @@ public class WaypointMover : MonoBehaviour
     }
 
 
-    public VehicleProperties getVType() {
+    public VehicleProperties getVType()
+    {
         return vType;
-        }
+    }
 
     // Set the origin building, destination building and mode of transport for the agent.
-    public void Setup(Building originBuilding, Building destinationBuilding, ModeOfTransport modeOfTransport, Journey journey) {
+    public void Setup(Building originBuilding, Building destinationBuilding, ModeOfTransport modeOfTransport, Journey journey)
+    {
         this.mode = modeOfTransport;
         this.originBuilding = originBuilding;
         this.destinationBuilding = destinationBuilding;
@@ -600,8 +603,9 @@ public class WaypointMover : MonoBehaviour
             // COLLISSION CHECK
 
             // If the terminal edge is busy, reduce the movement outside of it.
-            if (terminalEdge.IntersectingEdgesBusy()) {
-                proposedMovement-=TravelledInEdge+0.01f;
+            if (terminalEdge.IntersectingEdgesBusy())
+            {
+                proposedMovement -= TravelledInEdge + 0.01f;
                 proposalAccepted = false;
                 continue;
             }
@@ -672,28 +676,32 @@ public class WaypointMover : MonoBehaviour
                 }
             }
             // Do the same for super-terminal edge
-            if (superTerminalEdge != null){
+            if (superTerminalEdge != null)
+            {
                 // Check if super-terminal edge is busy.
-                if (superTerminalEdge.IntersectingEdgesBusy()) {
+                if (superTerminalEdge.IntersectingEdgesBusy())
+                {
                     // If only the breaking distance intersects with the busy edge, begin braking
-                    if (myBrDis > terminalEdge.Distance && proposedMovement > movementLowerBound) {
-                        proposedMovement=Mathf.Max(
+                    if (myBrDis > terminalEdge.Distance && proposedMovement > movementLowerBound)
+                    {
+                        proposedMovement = Mathf.Max(
                                             this.movementLowerBound,
-                                            proposedMovement-(myBrDis-terminalEdge.Distance)
+                                            proposedMovement - (myBrDis - terminalEdge.Distance)
                                             );
-                        proposedMovement-= 0.01f;
-                        proposalAccepted=false;
+                        proposedMovement -= 0.01f;
+                        proposalAccepted = false;
                         continue;
                     }
                     // If the front of the car intersects with the busy edge, reduce movement to prevent colission
-                    if(myFront > terminalEdge.Distance){
-                        proposedMovement-=myFront-terminalEdge.Distance;
-                        proposedMovement-=0.01f;
-                        proposalAccepted=false;
+                    if (myFront > terminalEdge.Distance)
+                    {
+                        proposedMovement -= myFront - terminalEdge.Distance;
+                        proposedMovement -= 0.01f;
+                        proposalAccepted = false;
                         continue;
                     }
                 }
-                
+
                 foreach (WaypointMover wp in superTerminalEdge.TravellersOnEdge)
                 {
                     if (wp == this) continue;
@@ -817,7 +825,7 @@ public class WaypointMover : MonoBehaviour
 
         // TODO This is meant to set withCar of the persistent traveller to the correct value
         // TODO but I cannot work out which persistent traveller object this should be called on
-        
+
         // set with car to false
         //persistentTraveller.SetWithCar(false);
 
@@ -830,11 +838,14 @@ public class WaypointMover : MonoBehaviour
         //update path data
         //find corresponding data struct in statistical controller, send vtype
         StatisticsManager.Instance.RecieveEndTime(this.ID, getOriginalEdgePath(), this.vType);
-        if (journey != null) {
-            if (mode == ModeOfTransport.Car) {
+        if (journey != null)
+        {
+            if (mode == ModeOfTransport.Car)
+            {
                 journey.traveller.SetWithCar(true);
             }
-            else {
+            else
+            {
                 journey.traveller.SetWithCar(false);
             }
             journey.traveller.journeyCompleted(journey);
@@ -847,7 +858,8 @@ public class WaypointMover : MonoBehaviour
         return this.pathEdges;
     }
 
-    public List<Edge> getOriginalEdgePath() {
+    public List<Edge> getOriginalEdgePath()
+    {
         return this.pathOriginal;
     }
 
@@ -983,6 +995,15 @@ public class WaypointMover : MonoBehaviour
             if (this.vType.Type == VehicleType.Pedestrian)
             {
                 this.transform.localScale = model.transform.localScale;
+            }
+
+            if (this.vType.Type == VehicleType.Bicycle)
+            {
+                // Load all child aspects of the prefab into this GameObject
+                foreach (Transform child in model.transform)
+                {
+                    Instantiate(child.gameObject, transform);
+                }
             }
         }
         else
