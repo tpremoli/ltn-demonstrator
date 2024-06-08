@@ -79,19 +79,9 @@ public class BarrierManager : MonoBehaviour
         List<BarrierData> barrierDataList = BarrierData.LoadBarriers();
         foreach (BarrierData barrierData in barrierDataList)
         {
-            // NOTE: this won't load the correct barrier type
-            GameObject newBarrier = Instantiate(barrierPrefabs[barrierData.type]);
-            newBarrier.transform.position = new Vector3(barrierData.position[0], barrierData.position[1], barrierData.position[2]);
-            newBarrier.transform.rotation = Quaternion.Euler(barrierData.rotation[0], barrierData.rotation[1], barrierData.rotation[2]);
+            Vector3 pos = new Vector3(barrierData.position[0], barrierData.position[1], barrierData.position[2]);
 
-            // we also need the barrier type
-            BarrierType spawnedBarrierType = (BarrierType)barrierData.type;
-            newBarrier.GetComponent<Barrier>().BarrierType = spawnedBarrierType;
-            newBarrier.transform.name = spawnedBarrierType.ToString();
-
-            newBarrier.transform.parent = transform;
-            allBarriers.Add(newBarrier);
-
+            AddBarrier(pos, barrierData.type);
         }
 
         // this essentially reloads colliders so we can use them to generate barriers etc.
