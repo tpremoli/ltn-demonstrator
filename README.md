@@ -49,7 +49,14 @@ This project is licensed under the permissive MIT license. More information can 
 ## Acknowledgements
 
 This project was designed and developed by the LTN team, comprising of:
-- Tomas Premoli Muniagurria
-- Zdenek Plesek
+- Tomas Premoli Muniagurria (Team Lead)
+- Zdenek Plesek (Team Lead)
+
+with support from programmers:
+- Scott Deverinne
+- Ted Proctor
+- Ahmad Hussain
+- Oscar Rilot
+
 
 This project was proposed and supervised by Diogo Pacheco at the University of Exeter.
